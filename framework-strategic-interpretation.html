@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Interpretation Framework | The Employee Playbook</title>
+
+    <!-- ICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+    <style>
+        :root {
+            --primary-white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --medium-gray: #E9ECEF;
+            --dark-gray: #6C757D;
+            --text-dark: #212529;
+            --text-medium: #495057;
+
+            --accent-purple: #7B5FC4;
+            --accent-purple-dark: #5A4496;
+            --light-purple: #E6E0F5;
+            --lighter-purple: #F0EBFA;
+
+            --border-light: rgba(0, 0, 0, 0.08);
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+            --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+            --danger-red: #ef4444;
+            --amber: #f59e0b;
+            --success: #10b981;
+            --info: #3b82f6;
+
+            --category-clarity: #7B5FC4;
+            --category-politics: #3b82f6;
+            --category-hr: #6D28D9;
+            --category-burnout: #f59e0b;
+        }
+
+        .dark-mode {
+            --primary-white: #1a1a1a;
+            --light-gray: #2a2a2a;
+            --medium-gray: #3a3a3a;
+            --dark-gray: #888888;
+            --text-dark: #e0e0e0;
+            --text-medium: #b0b0b0;
+
+            --accent-purple: #9d86e9;
+            --accent-purple-dark: #7b5fc4;
+            --light-purple: rgba(123, 95, 196, 0.2);
+            --lighter-purple: rgba(123, 95, 196, 0.1);
+
+            --border-light: rgba(255, 255, 255, 0.08);
+            --nav-bg: rgba(30, 30, 30, 0.95);
+            --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+            --category-clarity: #9d86e9;
+            --category-politics: #60a5fa;
+            --category-hr: #a78bfa;
+            --category-burnout: #fbbf24;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+        body {
+            background-color: var(--primary-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            min-height: 100vh;
+        }
+        body.loaded { opacity: 1; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+        /* NAV */
+        nav{
+            position: fixed; top: 0; width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            height: 80px;
+        }
+        .nav-container { display:flex; justify-content:space-between; align-items:center; padding:12px 0; height:100%; }
+
+        .logo-img { height: 100px; width:auto; transform: translateX(20%); padding:14px 10px; display:block; min-height:100px; transition: all .3s ease; }
+        .logo-img.fallback{
+            width:200px; height:50px; background: var(--accent-purple); color:#fff;
+            display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px;
+            border-radius:4px; transform: translateX(20%);
+        }
+
+        .nav-links { display:flex; gap:50px; }
+        .nav-link { color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; transition: color .3s ease; }
+        .nav-link:hover { color: var(--accent-purple); }
+        .nav-link-container { position:relative; display:inline-block; }
+        .new-tag{
+            position:absolute; top:-12px; right:-35px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color:#000; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); white-space:nowrap;
+        }
+        .nav-actions{ display:flex; align-items:center; gap:24px; transform: translateX(-20%); }
+        .header-cta{
+            background: var(--accent-purple); color:#fff; padding:8px 20px; border-radius:50px;
+            text-decoration:none; font-weight:600; font-size:14px;
+            transition: all .3s ease; box-shadow: 0 5px 15px rgba(123,95,196,.3);
+        }
+        .header-cta:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(123,95,196,.35); }
+        .sign-in{ color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; }
+        .sign-in:hover{ color: var(--accent-purple); }
+
+        .theme-toggle{
+            background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:16px;
+            width:36px; height:36px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            transition: background-color .3s ease;
+        }
+        .theme-toggle:hover{ background-color: var(--light-gray); }
+
+        .mobile-toggle{
+            display:none;
+            background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:24px;
+            width:40px; height:40px; border-radius:50%;
+            align-items:center; justify-content:center; transition: background-color .3s ease;
+        }
+        .mobile-toggle:hover{ background-color: var(--light-gray); }
+        .mobile-sign-in, .mobile-sign-up { display:none; }
+
+        @media (max-width: 768px){
+            .nav-container{ justify-content:center; position:relative; }
+            .logo{ position:absolute; left:50%; transform: translateX(-50%); display:flex; align-items:center; height:100%; }
+            .logo-img{ height:125px; transform:none; padding:12px 0; }
+            .mobile-toggle{ display:flex; position:absolute; left:20px; }
+            .nav-actions{ transform:none; gap:16px; position:absolute; right:20px; }
+            .nav-actions .sign-in, .nav-actions .header-cta{ display:none; }
+
+            .nav-links{
+                display:none; position:absolute; top:100%; left:0; width:100%;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction:column; padding:20px; gap:20px;
+                border-top: 1px solid var(--border-light);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            .nav-links.active{ display:flex; }
+            .nav-link-container{ display:flex; align-items:center; width:100%; }
+            .new-tag{ position:static; margin-left:8px; }
+            .mobile-sign-in{
+                display:block !important;
+                margin-top:10px;
+                padding:12px 20px;
+                background: var(--primary-white);
+                color: var(--accent-purple);
+                border-radius:8px;
+                text-align:center;
+                font-weight:600;
+                text-decoration:none;
+                border:2px solid var(--accent-purple);
+                transition: all .3s ease;
+            }
+            .mobile-sign-up{
+                display:block !important;
+                margin-top:10px;
+                padding:12px 20px;
+                background: var(--accent-purple);
+                color:#fff;
+                border-radius:8px;
+                text-align:center;
+                font-weight:600;
+                text-decoration:none;
+                border:2px solid var(--accent-purple);
+                transition: all .3s ease;
+            }
+        }
+
+        /* HERO */
+        .tool-hero-section{
+            width:100%;
+            background: var(--hero-bg);
+            padding: 20px 0 30px;
+            margin-top: 110px;
+            position: relative;
+            border-bottom: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+        .tool-hero-section::before{
+            content:'';
+            position:absolute; inset:0;
+            background: linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+            z-index:1;
+        }
+        .dark-mode .tool-hero-section::before{
+            background: linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+        }
+
+        .tool-hero-content{
+            position:relative; z-index:2;
+            max-width:1100px; margin:0 auto; padding: 0 20px 10px;
+            animation: heroFadeUp .45s ease-out;
+        }
+        @keyframes heroFadeUp { from{opacity:0; transform: translateY(18px);} to{opacity:1; transform:none;} }
+
+        .breadcrumb{
+            font-size:10px; text-transform:uppercase; letter-spacing:1px;
+            color: var(--dark-gray);
+            margin-bottom:10px;
+            display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+        }
+        .breadcrumb a{
+            color: var(--text-medium); text-decoration:none !important;
+            font-weight:500; letter-spacing:.5px; transition: color .2s ease;
+        }
+        .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+        .breadcrumb i{ color: var(--dark-gray); opacity:.8; font-size:10px; }
+        .breadcrumb .current{ color: var(--text-dark); font-weight:600; }
+
+        .checklist-name{
+            font-size:20px; font-weight:600; color: var(--accent-purple);
+            text-transform:uppercase; letter-spacing:1.8px;
+            margin-bottom:14px; margin-top:32px; display:block;
+        }
+        .hero-main-heading{
+            font-size:46px; font-weight:600; color: var(--text-dark);
+            line-height:1.1; margin-bottom:20px; max-width:980px;
+        }
+        .hero-subheading{
+            font-size:16px; color: var(--text-medium);
+            line-height:1.6; max-width:920px; margin-bottom:26px;
+        }
+        .hero-disclaimer{
+            margin-top:10px;
+            font-size:12.5px;
+            color: var(--dark-gray);
+            max-width:920px;
+            display:flex;
+            gap:10px;
+            align-items:flex-start;
+        }
+        .hero-disclaimer i{ color: var(--accent-purple); margin-top:2px; }
+
+        .save-btn{
+            position:absolute; top:16px; right:24px; z-index:5;
+            display:inline-flex; align-items:center; gap:6px;
+            padding:6px 12px; font-size:12px; font-weight:500;
+            border-radius:999px;
+            border:1px solid rgba(123,95,196,0.6);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: var(--accent-purple-dark);
+            cursor:pointer; transition: all .2s ease;
+        }
+        .save-btn:hover{ transform: translateY(-1px); box-shadow: 0 4px 10px rgba(123,95,196,0.18); background:#fff; }
+        .dark-mode .save-btn{ background: rgba(20,20,20,0.9); border-color: rgba(157,134,233,0.6); }
+        .save-btn.saved{ background: var(--accent-purple); color:#fff; border-color: transparent; }
+
+        /* CATEGORY PILLS */
+        .category-pills-title{
+            font-size:12px; font-weight:600; color: var(--text-medium);
+            text-transform:uppercase; letter-spacing:1px;
+            margin-bottom:14px; display:block;
+        }
+        .category-pills-grid{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+        .category-pill{
+            display:inline-flex; align-items:center; gap:8px;
+            padding:6px 12px; border-radius:999px;
+            font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.5px;
+            border:1px solid transparent;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-decoration:none;
+            height:32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all .2s ease;
+            white-space:nowrap;
+            cursor:pointer;
+        }
+        .dark-mode .category-pill{ background: rgba(255,255,255,0.08); box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .category-pill:hover{ transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.08); }
+
+        .category-pill.hr{
+            color: var(--category-hr);
+            border-color: rgba(109,40,217,0.22);
+            background: linear-gradient(135deg, rgba(109,40,217,0.10), rgba(109,40,217,0.05));
+        }
+        .category-pill.burnout{
+            color: var(--category-burnout);
+            border-color: rgba(245,158,11,0.22);
+            background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.05));
+        }
+        .category-pill.politics{
+            color: var(--category-politics);
+            border-color: rgba(59,130,246,0.22);
+            background: linear-gradient(135deg, rgba(59,130,246,0.10), rgba(59,130,246,0.05));
+        }
+
+        /* CONTEXT */
+        .context-tips-grid{
+            display:grid; grid-template-columns: 1fr 1fr;
+            gap:32px; width:100%;
+            max-width:1100px; margin: 6px auto 26px;
+            padding: 24px 20px 10px;
+        }
+        .context-card, .tips-card{
+            background: var(--primary-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 28px 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .section-title{
+            font-size:20px; font-weight:600; color: var(--text-dark);
+            margin-bottom:18px; display:flex; align-items:center; gap:10px;
+        }
+        .section-title i { color: var(--accent-purple); }
+        .bullet-list{ list-style:none; }
+        .bullet-list li{
+            color: var(--text-medium);
+            line-height:1.6;
+            margin-bottom:14px;
+            padding-left:26px;
+            position:relative;
+        }
+        .bullet-list li::before{
+            content:"•";
+            position:absolute; left:10px;
+            color: var(--accent-purple);
+            font-size:18px;
+        }
+
+        /* FRAMEWORK */
+        .framework-shell{ max-width:1100px; margin:0 auto; padding: 0 20px 20px; }
+        .framework-header{ margin: 18px 0 16px; }
+        .framework-header h2{
+            font-size:28px; font-weight:700;
+            color: var(--accent-purple-dark);
+            letter-spacing: -0.3px;
+            margin-bottom: 6px;
+        }
+        .framework-header p{
+            color: var(--text-medium);
+            font-size:14px;
+            max-width: 860px;
+        }
+
+        .canvas-grid{
+            display:grid; grid-template-columns: 1.05fr 0.95fr;
+            gap:18px; margin-bottom:22px;
+        }
+
+        .panel{
+            background: var(--primary-white);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+            position:relative;
+            overflow:hidden;
+        }
+        .dark-mode .panel{ box-shadow: 0 6px 22px rgba(0,0,0,0.22); }
+        .panel::before{
+            content:'';
+            position:absolute; top:0; left:0; right:0; height:3px;
+            background: linear-gradient(135deg, rgba(123,95,196,0.9), rgba(90,68,150,0.7));
+            opacity:.9;
+        }
+
+        .panel-title-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
+        .panel-title{
+            font-size:14px; font-weight:600;
+            letter-spacing:.7px; text-transform:uppercase;
+            color: var(--accent-purple-dark);
+            display:flex; align-items:center; gap:10px;
+        }
+        .panel-title i { color: var(--accent-purple); font-size:14px; }
+
+        .panel-sub{
+            color: var(--text-medium);
+            font-size:13px;
+            line-height:1.55;
+            margin-bottom:14px;
+        }
+
+        .field-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+        .field{ display:flex; flex-direction:column; gap:7px; }
+        .span-2{ grid-column: span 2; }
+
+        .label{
+            font-size:12px; font-weight:600;
+            color: var(--text-dark);
+            display:flex; align-items:center; justify-content:space-between; gap:8px;
+        }
+        .label .hint{ font-size:11px; font-weight:600; color: var(--dark-gray); }
+
+        .input, .textarea, .select{
+            width:100%;
+            border:1px solid var(--border-light);
+            background: var(--light-gray);
+            color: var(--text-dark);
+            border-radius:12px;
+            padding:11px 12px;
+            font-size:13.5px;
+            outline:none;
+            transition: box-shadow .2s ease, border-color .2s ease, background-color .2s ease;
+        }
+        .dark-mode .input, .dark-mode .textarea, .dark-mode .select{ background: rgba(255,255,255,0.05); }
+
+        .input:focus, .textarea:focus, .select:focus{
+            border-color: rgba(123,95,196,0.55);
+            box-shadow: 0 0 0 4px rgba(123,95,196,0.14);
+            background: rgba(255,255,255,0.9);
+        }
+        .dark-mode .input:focus, .dark-mode .textarea:focus, .dark-mode .select:focus{
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 0 0 4px rgba(123,95,196,0.20);
+        }
+
+        .textarea{ min-height:110px; resize: vertical; }
+
+        .micro-cards{ display:grid; grid-template-columns:1fr; gap:10px; margin-top:10px; }
+        .micro{
+            border:1px solid var(--border-light);
+            background: linear-gradient(135deg, rgba(123,95,196,0.06), rgba(123,95,196,0.02));
+            border-radius:12px;
+            padding:12px;
+        }
+        .dark-mode .micro{ background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.08)); }
+        .micro h4{
+            font-size:13px; font-weight:600; color: var(--text-dark);
+            margin-bottom:6px; display:flex; align-items:center; gap:8px;
+        }
+        .micro h4 i { color: var(--accent-purple); }
+        .micro p{ font-size:12.8px; color: var(--text-medium); line-height:1.55; }
+        .micro code{
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size:12px;
+            background: rgba(0,0,0,0.04);
+            padding:2px 6px;
+            border-radius:8px;
+            color: var(--text-dark);
+        }
+        .dark-mode .micro code{ background: rgba(255,255,255,0.08); }
+
+        .output-box{
+            border: 1px solid rgba(123,95,196,0.18);
+            background: rgba(123,95,196,0.06);
+            border-radius:14px;
+            padding:14px;
+            margin-top:10px;
+        }
+        .dark-mode .output-box{ background: rgba(123,95,196,0.14); border-color: rgba(123,95,196,0.28); }
+
+        .output-title{
+            display:flex; align-items:center; justify-content:space-between; gap:10px;
+            margin-bottom:8px;
+        }
+        .output-title h4{
+            font-size:12px; font-weight:600; letter-spacing:.8px; text-transform:uppercase;
+            color: var(--accent-purple-dark);
+        }
+        .output-content{
+            font-size:13.5px;
+            color: var(--text-dark);
+            line-height:1.55;
+            white-space: pre-wrap;
+        }
+
+        .mini-btn{
+            border: 1px solid rgba(123,95,196,0.28);
+            background: rgba(255,255,255,0.9);
+            color: var(--accent-purple-dark);
+            border-radius: 10px;
+            padding: 9px 12px;
+            font-size: 12.5px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all .2s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .dark-mode .mini-btn{
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(157,134,233,0.32);
+            color: var(--accent-purple);
+        }
+        .mini-btn:hover{ transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.10); }
+        .mini-btn.primary{
+            background: var(--premium-gradient);
+            color:#fff;
+            border:none;
+            box-shadow: 0 10px 24px rgba(123,95,196,0.18);
+        }
+        .mini-btn.primary:hover{ box-shadow: 0 12px 28px rgba(123,95,196,0.28); }
+
+        /* Confidence badge */
+        .risk-badge{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            padding:6px 10px;
+            border-radius:999px;
+            font-size:12px;
+            font-weight:600;
+            letter-spacing:.3px;
+            border: 1px solid var(--border-light);
+            background: rgba(255,255,255,0.8);
+        }
+        .dark-mode .risk-badge{ background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.10); }
+        .risk-badge .dot{
+            width:10px; height:10px; border-radius:999px;
+            background: var(--medium-gray);
+        }
+        .risk-badge.low .dot{ background: var(--danger-red); }     /* low confidence = red */
+        .risk-badge.medium .dot{ background: var(--amber); }
+        .risk-badge.high .dot{ background: var(--success); }
+        .risk-badge.strong .dot{ background: #16a34a; }
+
+        /* Green tips box */
+        .tip-box{
+            border:1px solid rgba(16,185,129,0.22);
+            background: rgba(16,185,129,0.08);
+            border-radius:12px;
+            padding:12px;
+            margin-top:12px;
+        }
+        .dark-mode .tip-box{ background: rgba(16,185,129,0.14); border-color: rgba(16,185,129,0.26); }
+        .tip-box h4{
+            font-size:12px;
+            font-weight:600;
+            letter-spacing:.8px;
+            text-transform:uppercase;
+            color: var(--text-dark);
+            display:flex; align-items:center; gap:8px;
+            margin-bottom:6px;
+        }
+        .tip-box h4 i{ color: var(--success); }
+        .tip-box ul{ margin:0; padding-left:18px; color: var(--text-medium); font-size:13px; line-height:1.55; }
+        .tip-box li{ margin:6px 0; }
+
+        /* Bottom actions bar */
+        .framework-actions-bottom{
+            margin-top: 16px;
+            display:flex;
+            justify-content:flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 14px 0 4px;
+        }
+
+        /* TIMELINE (now “Signal Log”) */
+        .timeline-table{
+            width:100%;
+            border-collapse: collapse;
+            overflow:hidden;
+            border-radius:12px;
+            border:1px solid var(--border-light);
+            background: var(--primary-white);
+        }
+        .timeline-table th, .timeline-table td{
+            text-align:left;
+            padding:10px;
+            border-bottom:1px solid var(--border-light);
+            vertical-align:top;
+            font-size:13px;
+            color: var(--text-medium);
+        }
+        .timeline-table th{
+            font-size:11px;
+            text-transform:uppercase;
+            letter-spacing:.8px;
+            font-weight:600;
+            color: var(--text-dark);
+            background: rgba(123,95,196,0.06);
+        }
+
+        /* CHECKLIST + SCORE */
+        .checklist-body{ max-width:1100px; margin:0 auto; padding:0 20px 20px; }
+        .checklist-section-title{
+            font-size:22px; font-weight:600; color: var(--accent-purple-dark);
+            margin-bottom:10px; margin-top:16px !important;
+            display:flex; align-items:center; gap:10px;
+        }
+        .checklist-intro{ color: var(--text-medium); font-size:14px; margin-bottom:14px; max-width:920px; }
+        .checklist-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:20px; }
+        .checklist-item{
+            background: var(--primary-white);
+            padding:14px 16px;
+            border-radius:10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            border:1px solid var(--border-light);
+            display:flex;
+            gap:12px;
+            align-items:flex-start;
+            transition: transform .2s ease, box-shadow .2s ease;
+            cursor:pointer;
+            min-height:74px;
+        }
+        .checklist-item:hover{ transform: translateY(-2px); box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+        .checklist-item i{ color: var(--accent-purple); font-size:18px; margin-top:3px; flex-shrink:0; }
+        .checklist-text{ flex:1; color: var(--text-medium); font-size:15px; line-height:1.5; }
+
+        .clarity-score-section{ max-width:1100px; margin:22px auto 34px; padding:0 20px; }
+        .presence-snapshot-header{ margin-bottom:14px; text-align:left; }
+        .presence-snapshot-header h2{ font-size:22px; font-weight:600; color: var(--accent-purple-dark); margin-bottom:6px; }
+        .presence-snapshot-header p{ font-size:14px; color: var(--text-medium); line-height:1.5; }
+
+        .clarity-score-bar{
+            display:flex; align-items:stretch; gap:30px;
+            background: var(--primary-white);
+            border-radius:16px;
+            padding:22px 24px 20px;
+            box-shadow: 0 8px 30px rgba(123,95,196,0.12);
+            border:1px solid rgba(123,95,196,0.15);
+        }
+        .clarity-progress-container{ flex:1.4; }
+        .clarity-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+        .clarity-title{ font-size:20px; font-weight:700; color: var(--accent-purple-dark); }
+        .clarity-percentage{ font-size:28px; font-weight:600; color: var(--accent-purple); }
+        .progress-container{ height:10px; background: var(--light-gray); border-radius:5px; overflow:hidden; margin-bottom:6px; }
+        .progress-fill{ height:100%; background: var(--premium-gradient); width:0%; border-radius:5px; transition: width .8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .progress-labels{ display:flex; justify-content:space-between; font-size:12px; color: var(--dark-gray); }
+
+        .presence-dimensions{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; margin-top:14px; }
+        .presence-dimension-pill{
+            border-radius:10px; padding:8px 10px;
+            border:1px solid var(--border-light);
+            background: var(--light-gray);
+            display:flex; justify-content:space-between; align-items:center;
+            font-size:13px; color: var(--text-medium);
+        }
+        .presence-dimension-pill span.label{ font-weight:600; color: var(--text-dark); }
+        .presence-dimension-pill span.score{ font-weight:600; color: var(--accent-purple); }
+
+        .actions-container{
+            display:flex; gap:12px; flex-shrink:0;
+            flex-direction:column; justify-content:center; align-items:stretch;
+            max-width:260px;
+        }
+        .action-btn{
+            background: var(--premium-gradient);
+            color:#fff;
+            border:none;
+            padding:10px 18px;
+            font-size:13.5px;
+            border-radius:10px;
+            font-weight:600;
+            cursor:pointer;
+            display:flex; align-items:center; gap:8px;
+            transition: all .3s ease;
+            width:100%;
+            justify-content:center;
+        }
+        .action-btn:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(123,95,196,0.3); }
+        .action-btn.secondary{ background: var(--light-purple); color: var(--accent-purple-dark); }
+        .action-btn.secondary:hover{ background: var(--accent-purple); color:#fff; }
+        .action-btn:disabled{ opacity:.5; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+
+        .smart-summary-section{ max-width:1100px; margin:0 auto 60px; padding:0 20px; display:none; }
+        .smart-summary-section.active{ display:block; animation: slideIn .5s ease; }
+        @keyframes slideIn { from{opacity:0; transform: translateY(20px);} to{opacity:1; transform:none;} }
+
+        .summary-header{ text-align:center; margin-bottom:18px; }
+        .summary-title{ font-size:24px; font-weight:700; color: var(--accent-purple-dark); margin-bottom:6px; }
+        .summary-subtitle{ color: var(--text-medium); font-size:16px; margin-bottom:6px; }
+        .summary-insight{ font-size:14px; color: var(--dark-gray); max-width:860px; margin:0 auto; }
+
+        .section-header{
+            font-size:18px; font-weight:600;
+            margin-bottom:18px;
+            display:flex; align-items:center; gap:10px;
+            padding-bottom:10px;
+            border-bottom:2px solid var(--light-gray);
+        }
+        .section-header.red{ color: var(--danger-red); }
+        .section-header.purple{ color: var(--accent-purple-dark); }
+        .section-header.blue{ color: var(--accent-purple); }
+
+        .red-flags-grid, .next-steps-grid, .resources-grid{
+            display:grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:16px;
+            margin-bottom:28px;
+        }
+
+        .red-flag-card, .next-step-card, .resource-card{
+            background: var(--primary-white);
+            border-radius:12px;
+            padding:18px;
+            position:relative;
+            overflow:hidden;
+            display:flex;
+            flex-direction:column;
+            height:100%;
+        }
+        .red-flag-card{ box-shadow: 0 4px 12px rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.1); }
+        .red-flag-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .next-step-card{ box-shadow: 0 4px 12px rgba(123,95,196,0.08); border:1px solid rgba(123,95,196,0.1); }
+        .next-step-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--premium-gradient); }
+        .resource-card{ box-shadow: 0 4px 12px rgba(123,95,196,0.08); border:1px solid rgba(123,95,196,0.1); transition: all .2s ease; }
+        .resource-card:hover{ transform: translateY(-3px); box-shadow: 0 8px 20px rgba(123,95,196,0.16); }
+        .resource-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--premium-gradient); }
+
+        .flag-icon, .step-icon, .resource-icon{
+            font-size:20px; margin-bottom:12px;
+            width:40px; height:40px; border-radius:10px;
+            display:flex; align-items:center; justify-content:center;
+        }
+        .flag-icon{ color:#ef4444; background: rgba(239,68,68,0.1); }
+        .step-icon, .resource-icon{ color: var(--accent-purple); background: var(--lighter-purple); }
+
+        .flag-title, .step-title, .resource-title{ font-size:15px; font-weight:700; color: var(--text-dark); margin-bottom:8px; }
+        .flag-description, .step-description, .resource-description{ color: var(--text-medium); font-size:13.5px; line-height:1.5; flex-grow:1; }
+        .resource-description{ margin-bottom:12px; }
+        .resource-link{
+            color: var(--accent-purple); font-weight:600; text-decoration:none; font-size:13.5px;
+            display:flex; align-items:center; gap:6px; margin-top:auto;
+        }
+        .resource-link:hover{ text-decoration:underline; }
+
+        /* MY PLAYBOOK */
+        .my-playbook-fab{
+            position:fixed; bottom:24px; right:24px; z-index:1200;
+            background: var(--premium-gradient);
+            color:#fff;
+            padding:10px 16px;
+            border-radius:999px;
+            display:inline-flex; align-items:center; gap:8px;
+            cursor:pointer; font-size:13px; font-weight:600;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            transition: all .25s ease;
+        }
+        .my-playbook-fab:hover{ transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.32); }
+
+        .playbook-sidebar-overlay{
+            position:fixed; inset:0;
+            background: rgba(0,0,0,0.45);
+            z-index:1190;
+            opacity:0; pointer-events:none;
+            transition: opacity .25s ease;
+        }
+        .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+        .playbook-sidebar{
+            position:fixed; top:0; right:-380px;
+            width:340px; max-width:90%;
+            height:100%;
+            background: rgba(255,255,255,0.94);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+            z-index:1191;
+            display:flex; flex-direction:column;
+            border-left: 1px solid var(--border-light);
+            transition: right .25s ease;
+        }
+        .dark-mode .playbook-sidebar{ background: rgba(18,18,18,0.96); box-shadow: -4px 0 22px rgba(0,0,0,0.6); }
+        .playbook-sidebar.open{ right:0; }
+        .playbook-sidebar-header{ padding:20px 20px 14px; border-bottom:1px solid var(--border-light); }
+        .playbook-sidebar-header-title-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+        .playbook-sidebar-header h3{ font-size:18px; font-weight:600; color: var(--text-dark); }
+        .playbook-sidebar-header p{ font-size:13px; color: var(--dark-gray); }
+        .playbook-close-btn{
+            background:none; border:none; color: var(--dark-gray);
+            cursor:pointer; font-size:18px; border-radius:999px;
+            width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+            transition: background-color .2s ease;
+        }
+        .playbook-close-btn:hover{ background: var(--light-gray); }
+        .playbook-sidebar-body{
+            padding:14px 18px 20px; padding-bottom:50px;
+            overflow-y:auto; flex:1;
+            display:flex; flex-direction:column; gap:18px;
+        }
+        .saved-items-empty{ font-size:13px; color: var(--dark-gray); line-height:1.6; }
+        .saved-items-list{ list-style:none; margin:0; padding:0; }
+        .saved-item{
+            padding:10px 8px;
+            border-radius:10px;
+            border:1px solid var(--border-light);
+            background: var(--primary-white);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            margin-bottom:10px;
+            display:flex; flex-direction:column; gap:2px;
+        }
+        .saved-item-title-row{ display:flex; justify-content:space-between; align-items:baseline; gap:6px; }
+        .saved-item-title{ font-size:14px; font-weight:600; color: var(--text-dark); }
+        .saved-item-type{ font-size:11px; text-transform:uppercase; letter-spacing:.6px; color: var(--accent-purple-dark); font-weight:600; }
+        .saved-item-meta{ font-size:12px; color: var(--dark-gray); }
+        .saved-item-link{
+            margin-top:6px;
+            font-size:12px;
+            color: var(--accent-purple);
+            text-decoration:none;
+            font-weight:600;
+            display:inline-flex; align-items:center; gap:4px;
+        }
+        .saved-item-link:hover{ text-decoration:underline; }
+
+        .playbook-quick-links{
+            margin-top: 223px;
+            padding-top:10px;
+            border-top:1px solid var(--border-light);
+        }
+        .quick-links-title{
+            font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.8px;
+            color: var(--text-medium);
+        }
+        .playbook-quick-links-list{ display:flex; flex-direction:column; gap:10px; margin-top:6px; }
+        .quick-link-pill{
+            width:50%;
+            padding:4px;
+            border-radius:999px;
+            border:1px solid rgba(123,95,196,0.35);
+            background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+            text-decoration:none;
+            color: var(--accent-purple-dark);
+            font-size:13px;
+            font-weight:600;
+            display:flex; align-items:center; gap:8px;
+        }
+        .quick-link-pill:hover{
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+        }
+
+        footer{
+            background: var(--primary-white);
+            padding:10px 0;
+            border-top:1px solid var(--border-light);
+            margin-top:30px;
+            text-align:center;
+            color: var(--text-medium);
+        }
+
+        @media (max-width: 1024px){
+            .context-tips-grid{ grid-template-columns:1fr; gap:24px; }
+            .canvas-grid{ grid-template-columns:1fr; }
+            .red-flags-grid, .next-steps-grid, .resources-grid{ grid-template-columns: repeat(2, 1fr); }
+            .checklist-grid{ grid-template-columns:1fr; }
+            .clarity-score-bar{ flex-direction:column; }
+            .actions-container{ max-width:100%; flex-direction:row; }
+        }
+        @media (max-width: 768px){
+            .tool-hero-section{ margin-top:100px; }
+            .hero-main-heading{ font-size:36px; }
+            .save-btn{ right:18px; top:10px; }
+            .field-grid{ grid-template-columns:1fr; }
+            .span-2{ grid-column: span 1; }
+            .red-flags-grid, .next-steps-grid, .resources-grid{ grid-template-columns:1fr; }
+            .actions-container{ flex-direction:column; }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="container nav-container">
+        <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+
+        <a href="index.html" class="logo">
+            <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+        </a>
+
+        <div class="nav-links">
+            <a href="the-lens.html" class="nav-link">The Lens</a>
+            <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+            <div class="nav-link-container">
+                <a href="the-coach.html" class="nav-link">The Coach</a>
+                <span class="new-tag">NEW</span>
+            </div>
+            <a href="the-shift.html" class="nav-link">The Shift</a>
+            <a href="the-pricing.html" class="nav-link">The Pricing</a>
+            <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+            <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="create-account.html" class="header-cta">Sign up</a>
+            <a href="sign-in.html" class="sign-in">Sign in</a>
+            <button class="theme-toggle" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+</nav>
+
+<div class="tool-hero-section">
+    <button class="save-btn" id="saveBtn">
+        <i class="far fa-bookmark"></i>
+        <span>Save item</span>
+    </button>
+
+    <div class="tool-hero-content">
+        <div class="breadcrumb">
+            <a href="index.html"><i class="fas fa-house"></i> Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="the-toolkit.html">Toolkit</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="category-workplace-dynamics-and-politics.html">Workplace Dynamics &amp; Politics</a>
+            <i class="fas fa-chevron-right"></i>
+            <span class="current">Strategic Interpretation Framework</span>
+        </div>
+
+        <span class="checklist-name">STRATEGIC INTERPRETATION FRAMEWORK</span>
+
+        <h1 class="hero-main-heading">Turn mixed signals into a clean read,<br>then choose the safest next move</h1>
+
+        <div class="hero-subheading">
+            A premium framework for interpreting workplace behaviour without spiralling: separate signal from noise, map incentives and power,
+            generate competing hypotheses, and pick a low-exposure test that reveals what’s real.
+            <br>Built to help you act with control, not reaction.
+        </div>
+
+        <div class="hero-disclaimer">
+            <i class="fas fa-compass"></i>
+            <div>
+                This tool supports structured thinking and decision-making. It isn’t legal advice and it can’t confirm anyone’s intent.
+                Use it to reduce guesswork, protect your credibility, and choose actions that stand up to daylight.
+            </div>
+        </div>
+
+        <div class="category-pills-container" style="margin-top:14px;">
+            <span class="category-pills-title">Related Categories</span>
+            <div class="category-pills-grid">
+                <a href="category-clarity-priorities-and-direction.html" class="category-pill burnout">
+                    <i class="fas fa-route"></i>
+                    <span>Clarity, Priorities &amp; Direction</span>
+                </a>
+                <a href="category-hr-and-formal-processes.html" class="category-pill hr">
+                    <i class="fas fa-scale-balanced"></i>
+                    <span>HR &amp; Formal Processes</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="context-tips-grid">
+    <div class="context-card">
+        <h3 class="section-title"><i class="fas fa-compass"></i>When to Use This Framework</h3>
+        <ul class="bullet-list">
+            <li>When you’re getting mixed signals (praise + undermining, friendliness + exclusion, “support” + control).</li>
+            <li>When behaviour could mean multiple things and you don’t want to guess wrong.</li>
+            <li>When you suspect politics, agenda, or quiet reputation work — but you need evidence-grade thinking.</li>
+            <li>Before you confront, escalate, or send a message you can’t take back.</li>
+            <li>When you need a “low-exposure test” that reveals reality without drama.</li>
+        </ul>
+    </div>
+
+    <div class="tips-card">
+        <h3 class="section-title"><i class="fas fa-lightbulb"></i>Pro Tips</h3>
+        <ul class="bullet-list">
+            <li><strong>Intent is unknowable; incentives are readable.</strong> Focus on what behaviour protects or achieves.</li>
+            <li><strong>One signal is trivia.</strong> Look for pattern, timing, and repeat conditions.</li>
+            <li><strong>Don’t argue narratives.</strong> Change constraints (written clarity, owners, timelines) and watch what happens.</li>
+            <li><strong>Choose tests that are reversible.</strong> Small moves that create information, not conflict.</li>
+            <li><strong>Assume forwards.</strong> Any line you write should sound calm and procedural if screenshot.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="framework-shell" id="frameworkCanvas">
+    <div class="framework-header">
+        <h2>Framework Canvas</h2>
+        <p>Complete the canvas to generate: an interpretation map, a confidence rating, a low-exposure test plan, and copy-ready framing language.</p>
+    </div>
+
+    <div class="canvas-grid">
+        <!-- 1) Signal Capture -->
+        <div class="panel">
+            <div class="panel-title-row">
+                <div class="panel-title"><i class="fas fa-signal"></i> 1) Signal Capture</div>
+            </div>
+            <div class="panel-sub">Start with “what happened” and the timing. If the signal isn’t concrete, interpretation becomes fantasy.</div>
+
+            <div class="field-grid">
+                <div class="field">
+                    <div class="label">Signal type <span class="hint">what are you reading?</span></div>
+                    <select class="select si-input" data-dimension="signal" id="si_type">
+                        <option value="" selected>Select…</option>
+                        <option value="Undermining / credibility hit">Undermining / credibility hit</option>
+                        <option value="Exclusion / gatekeeping">Exclusion / gatekeeping</option>
+                        <option value="Control / micromanagement">Control / micromanagement</option>
+                        <option value="Credit / visibility capture">Credit / visibility capture</option>
+                        <option value="Moving goalposts / ambiguity">Moving goalposts / ambiguity</option>
+                        <option value="Sudden coldness / withdrawal">Sudden coldness / withdrawal</option>
+                        <option value="Pressure / subtle threat">Pressure / subtle threat</option>
+                        <option value="Resource squeeze (time/headcount)">Resource squeeze (time/headcount)</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="label">Where did it show up? <span class="hint">meeting / chat / decision</span></div>
+                    <select class="select si-input" data-dimension="signal" id="si_channel">
+                        <option value="" selected>Select…</option>
+                        <option value="1:1 meeting">1:1 meeting</option>
+                        <option value="Group meeting">Group meeting</option>
+                        <option value="Teams/Slack/email">Teams/Slack/email</option>
+                        <option value="Decision / allocation">Decision / allocation</option>
+                        <option value="Performance/feedback">Performance/feedback</option>
+                        <option value="Social / informal">Social / informal</option>
+                    </select>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">What happened (facts only) <span class="hint">short, time-bounded</span></div>
+                    <textarea class="textarea si-input" data-dimension="facts" id="si_event" placeholder="E.g., In the team meeting on 12/12, my update was interrupted twice and the decision was made without my input despite owning the workstream."></textarea>
+                </div>
+
+                <div class="field">
+                    <div class="label">Timing trigger <span class="hint">what changed?</span></div>
+                    <select class="select si-input" data-dimension="facts" id="si_trigger">
+                        <option value="" selected>Select…</option>
+                        <option value="After I pushed back / raised a concern">After I pushed back / raised a concern</option>
+                        <option value="After a leadership update / reorg">After a leadership update / reorg</option>
+                        <option value="After a missed deadline / incident">After a missed deadline / incident</option>
+                        <option value="Before a review / promotion / restructure">Before a review / promotion / restructure</option>
+                        <option value="After a new joiner / new manager">After a new joiner / new manager</option>
+                        <option value="No clear trigger">No clear trigger</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="label">Who is central <span class="hint">roles/names</span></div>
+                    <input class="input si-input" data-dimension="people" id="si_who" placeholder="E.g., Manager, senior stakeholder, peer">
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">What’s at stake for you <span class="hint">one priority</span></div>
+                    <select class="select si-input" data-dimension="strategy" id="si_protect">
+                        <option value="" selected>Select…</option>
+                        <option value="Credibility / reputation">Credibility / reputation</option>
+                        <option value="Scope / ownership">Scope / ownership</option>
+                        <option value="Role security / performance standing">Role security / performance standing</option>
+                        <option value="Workload sustainability">Workload sustainability</option>
+                        <option value="Access to information / decisions">Access to information / decisions</option>
+                        <option value="Relationship stability">Relationship stability</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="micro-cards">
+                <div class="micro">
+                    <h4><i class="fas fa-filter"></i> Signal discipline</h4>
+                    <p>Interpretation starts after you can state the signal as a clean sentence: <code>who + did/said + when + where + effect</code>.</p>
+                </div>
+                <div class="micro">
+                    <h4><i class="fas fa-clock"></i> Timing is information</h4>
+                    <p>Most “why” answers live in timing: what changed, what became risky, and what someone is trying to control.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2) Confidence Rating -->
+        <div class="panel">
+            <div class="panel-title-row" style="align-items:flex-start;">
+                <div>
+                    <div class="panel-title"><i class="fas fa-gauge-high"></i> 2) Confidence Rating</div>
+                    <div class="panel-sub" style="margin:8px 0 0;">
+                        This isn’t “how sure you feel”. It’s decision quality: signal strength, incentive clarity, pattern consistency, and your ability to test safely.
+                    </div>
+                </div>
+                <div class="risk-badge" id="confidenceBadge" title="Auto-calculated from your inputs">
+                    <span class="dot"></span>
+                    <span id="confidenceBadgeText">Confidence: Not rated</span>
+                </div>
+            </div>
+
+            <div class="field-grid">
+                <div class="field">
+                    <div class="label">Signal strength <span class="hint">1–5</span></div>
+                    <select class="select si-input" data-dimension="confidence" id="si_signal_strength">
+                        <option value="" selected>Select…</option>
+                        <option value="1">1 — Vague / mostly vibes</option>
+                        <option value="2">2 — Some specifics, still fuzzy</option>
+                        <option value="3">3 — Clear enough to explain neutrally</option>
+                        <option value="4">4 — Concrete + repeatable</option>
+                        <option value="5">5 — Hard evidence (messages/decisions)</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="label">Pattern consistency <span class="hint">1–5</span></div>
+                    <select class="select si-input" data-dimension="confidence" id="si_pattern">
+                        <option value="" selected>Select…</option>
+                        <option value="1">1 — One-off so far</option>
+                        <option value="2">2 — A couple of hints</option>
+                        <option value="3">3 — Same condition repeats</option>
+                        <option value="4">4 — Reliable pattern</option>
+                        <option value="5">5 — Pattern + escalation</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="label">Incentives clarity <span class="hint">1–5</span></div>
+                    <select class="select si-input" data-dimension="confidence" id="si_incentives">
+                        <option value="" selected>Select…</option>
+                        <option value="1">1 — Unknown</option>
+                        <option value="2">2 — Some guesses</option>
+                        <option value="3">3 — Reasonable read</option>
+                        <option value="4">4 — Clear incentives</option>
+                        <option value="5">5 — Incentives proven by behaviour</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="label">Your testability <span class="hint">how easy to test safely</span></div>
+                    <select class="select si-input" data-dimension="confidence" id="si_testability">
+                        <option value="" selected>Select…</option>
+                        <option value="Low">Low (few options / high politics)</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High (easy, low-risk tests)</option>
+                    </select>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">What you can point to <span class="hint">receipts / decisions / outcomes</span></div>
+                    <textarea class="textarea si-input" data-dimension="evidence" id="si_evidence" placeholder="Bullets are fine. Stick to specific moments and outcomes."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">What you’re missing <span class="hint">unknowns that change the read</span></div>
+                    <textarea class="textarea si-input" data-dimension="unknowns" id="si_unknowns" placeholder="E.g., who owns the decision, what the success metric is, whether others see the same behaviour."></textarea>
+                </div>
+            </div>
+
+            <div class="output-box">
+                <div class="output-title">
+                    <h4>Interpretation guardrails (auto)</h4>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <button class="mini-btn" onclick="buildGuardrails()"><i class="fas fa-bolt"></i> Build</button>
+                        <button class="mini-btn" onclick="copyText('si_guardrails_out')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                </div>
+                <div class="output-content" id="si_guardrails_out">Click “Build” to generate what to assume, what to avoid, and what to test next.</div>
+            </div>
+
+            <div class="tip-box">
+                <h4><i class="fas fa-check-circle"></i> What works reliably</h4>
+                <ul>
+                    <li><strong>Stop debating meaning.</strong> Change the structure (owners, dates, written decisions) and watch what happens.</li>
+                    <li><strong>Hold two hypotheses.</strong> One political, one benign — until a test collapses it.</li>
+                    <li><strong>Protect credibility first.</strong> The best read is useless if you look emotional or accusatory.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="canvas-grid">
+        <!-- 3) Incentives & Power -->
+        <div class="panel">
+            <div class="panel-title-row">
+                <div class="panel-title"><i class="fas fa-sitemap"></i> 3) Incentives &amp; Power</div>
+            </div>
+            <div class="panel-sub">Interpretation gets clean when you map what people are optimising for — and what they can control.</div>
+
+            <div class="field-grid">
+                <div class="field">
+                    <div class="label">Decision zone <span class="hint">where the game is</span></div>
+                    <select class="select si-input" data-dimension="power" id="si_zone">
+                        <option value="" selected>Select…</option>
+                        <option value="Performance / ratings">Performance / ratings</option>
+                        <option value="Scope / ownership">Scope / ownership</option>
+                        <option value="Resourcing / headcount">Resourcing / headcount</option>
+                        <option value="Visibility / leadership narrative">Visibility / leadership narrative</option>
+                        <option value="Priorities / roadmap">Priorities / roadmap</option>
+                        <option value="Process / compliance">Process / compliance</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="label">Who benefits if this continues? <span class="hint">most likely</span></div>
+                    <input class="input si-input" data-dimension="power" id="si_benefit" placeholder="E.g., manager, peer, another team">
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">What each key party is optimising for <span class="hint">speed / optics / control / risk</span></div>
+                    <textarea class="textarea si-input" data-dimension="power" id="si_optimising" placeholder="E.g., Manager: control + face-saving. Leadership: optics + delivery. Peer: visibility + promotion narrative."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">What they can control <span class="hint">levers</span></div>
+                    <textarea class="textarea si-input" data-dimension="power" id="si_levers" placeholder="E.g., meeting access, who speaks, assignment of work, sign-off, who gets credit, what’s written down."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Your leverage (quiet) <span class="hint">what you control</span></div>
+                    <textarea class="textarea si-input" data-dimension="power" id="si_leverage" placeholder="E.g., written status, stakeholder updates, clarity documents, escalation routes, delivery dependency, receipts."></textarea>
+                </div>
+            </div>
+
+            <div class="micro-cards">
+                <div class="micro">
+                    <h4><i class="fas fa-magnifying-glass"></i> The simplest power test</h4>
+                    <p>If you add clarity (owners/dates/written decisions) and someone resists hard, that resistance is usually the signal.</p>
+                </div>
+                <div class="micro">
+                    <h4><i class="fas fa-chess"></i> Leverage doesn’t mean confrontation</h4>
+                    <p>Leverage often looks like process: calm updates, meeting notes, and default transparency.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4) Hypotheses & Low-Exposure Tests -->
+        <div class="panel">
+            <div class="panel-title-row">
+                <div class="panel-title"><i class="fas fa-route"></i> 4) Hypotheses &amp; Low-Exposure Tests</div>
+            </div>
+            <div class="panel-sub">You’re not here to “call it out”. You’re here to create information safely, then act with precision.</div>
+
+            <div class="field-grid">
+                <div class="field span-2">
+                    <div class="label">Hypothesis A (benign) <span class="hint">could be true</span></div>
+                    <input class="input si-input" data-dimension="hypotheses" id="si_hyp_a" placeholder="E.g., They’re under pressure and cutting corners, not targeting me personally.">
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Hypothesis B (political) <span class="hint">could also be true</span></div>
+                    <input class="input si-input" data-dimension="hypotheses" id="si_hyp_b" placeholder="E.g., They’re reducing my visibility to own the narrative / protect their standing.">
+                </div>
+
+                <div class="field">
+                    <div class="label">Your safest test <span class="hint">reversible move</span></div>
+                    <select class="select si-input" data-dimension="tests" id="si_test">
+                        <option value="" selected>Select…</option>
+                        <option value="Written recap habit">Written recap habit</option>
+                        <option value="Ask for owners + dates">Ask for owners + dates</option>
+                        <option value="Pre-wire a stakeholder">Pre-wire a stakeholder</option>
+                        <option value="Propose a decision log">Propose a decision log</option>
+                        <option value="Move updates to a shared channel">Move updates to a shared channel</option>
+                        <option value="Ask a procedural question">Ask a procedural question</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="label">Time horizon <span class="hint">for the test</span></div>
+                    <select class="select si-input" data-dimension="tests" id="si_horizon">
+                        <option value="" selected>Select…</option>
+                        <option value="Next 24–48 hours">Next 24–48 hours</option>
+                        <option value="Next 7 days">Next 7 days</option>
+                        <option value="Next 30 days">Next 30 days</option>
+                    </select>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">What would confirm A vs B <span class="hint">observable outcomes</span></div>
+                    <textarea class="textarea si-input" data-dimension="tests" id="si_confirm" placeholder="E.g., If they accept clarity and include me → A. If they resist transparency, reframe me as difficult, or bypass me → B."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Your neutral message (copy-ready) <span class="hint">procedural, calm</span></div>
+                    <input class="input si-input" data-dimension="comms" id="si_oneliner" placeholder="E.g., ‘To keep this clean, can we confirm owner, timeline, and decision criteria in writing?’">
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Your specific ask <span class="hint">one request</span></div>
+                    <input class="input si-input" data-dimension="comms" id="si_request" placeholder="E.g., ‘Please share the decision criteria and confirm who signs off.’">
+                </div>
+            </div>
+
+            <div class="output-box">
+                <div class="output-title">
+                    <h4>Low-exposure test plan (auto)</h4>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <button class="mini-btn" onclick="buildTestPlan()"><i class="fas fa-bolt"></i> Build</button>
+                        <button class="mini-btn" onclick="copyText('si_test_out')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                </div>
+                <div class="output-content" id="si_test_out">Click “Build” to generate: what to do, what to watch, and what it means.</div>
+            </div>
+
+            <div class="tip-box">
+                <h4><i class="fas fa-check-circle"></i> What not to do</h4>
+                <ul>
+                    <li><strong>Don’t accuse.</strong> Accusations invite denial and counter-attack. Tests create proof.</li>
+                    <li><strong>Don’t over-explain.</strong> Long narratives give opponents handles. Keep it procedural.</li>
+                    <li><strong>Don’t chase closure.</strong> You’re after control and clarity, not emotional resolution.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SIGNAL LOG -->
+    <div class="panel" style="margin-bottom:18px;">
+        <div class="panel-title-row">
+            <div class="panel-title"><i class="fas fa-timeline"></i> Signal Log (optional, but revealing)</div>
+        </div>
+        <div class="panel-sub">Log 3–6 signals. Patterns appear when you track: trigger → behaviour → consequence → who benefits.</div>
+
+        <table class="timeline-table" id="timelineTable">
+            <thead>
+                <tr>
+                    <th style="width: 16%;">Date</th>
+                    <th style="width: 34%;">Signal (fact)</th>
+                    <th style="width: 22%;">Consequence</th>
+                    <th style="width: 28%;">Who benefited / what shifted</th>
+                </tr>
+            </thead>
+            <tbody id="timelineBody">
+                <tr>
+                    <td><input class="input si-input" data-dimension="facts" placeholder="DD/MM/YYYY"></td>
+                    <td><input class="input si-input" data-dimension="facts" placeholder="What happened (specific)"></td>
+                    <td><input class="input si-input" data-dimension="facts" placeholder="What changed (decision/visibility)"></td>
+                    <td><input class="input si-input" data-dimension="power" placeholder="Who gained control / what was protected"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+            <button class="mini-btn" onclick="addTimelineRow()"><i class="fas fa-plus"></i> Add row</button>
+            <button class="mini-btn" onclick="removeTimelineRow()"><i class="fas fa-minus"></i> Remove row</button>
+        </div>
+    </div>
+
+    <!-- EXECUTIVE OUTPUTS -->
+    <div class="panel">
+        <div class="panel-title-row">
+            <div class="panel-title"><i class="fas fa-file-lines"></i> Executive Outputs</div>
+        </div>
+        <div class="panel-sub">Copy-ready language you can use for a meeting recap, a stakeholder pre-wire, or a calm “structure reset”.</div>
+
+        <div class="output-box">
+            <div class="output-title">
+                <h4>Interpretation map (one paragraph)</h4>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="mini-btn" onclick="copyText('out_map')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+            </div>
+            <div class="output-content" id="out_map">Complete the canvas, then click “Generate outputs”.</div>
+        </div>
+
+        <div class="output-box">
+            <div class="output-title">
+                <h4>Safest next move (low exposure)</h4>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="mini-btn" onclick="copyText('out_next')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+            </div>
+            <div class="output-content" id="out_next">—</div>
+        </div>
+
+        <div class="output-box">
+            <div class="output-title">
+                <h4>Neutral message opener (procedural)</h4>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="mini-btn" onclick="copyText('out_opener')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+            </div>
+            <div class="output-content" id="out_opener">—</div>
+        </div>
+
+        <div class="output-box">
+            <div class="output-title">
+                <h4>Follow-up recap (locks clarity)</h4>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="mini-btn" onclick="copyText('out_recap')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+            </div>
+            <div class="output-content" id="out_recap">—</div>
+        </div>
+    </div>
+
+    <!-- ACTIONS MOVED TO BOTTOM -->
+    <div class="framework-actions-bottom">
+        <button class="mini-btn" onclick="resetCanvas()"><i class="fas fa-rotate-left"></i> Reset</button>
+        <button class="mini-btn" onclick="copyOutputs()"><i class="far fa-copy"></i> Copy outputs</button>
+        <button class="mini-btn primary" onclick="generateOutputs()"><i class="fas fa-wand-magic-sparkles"></i> Generate outputs</button>
+    </div>
+</div>
+
+<!-- QUICK CHECKLIST -->
+<div class="checklist-body" id="checklistText">
+    <h2 class="checklist-section-title"><i class="fas fa-list-check"></i> Quick Interpretation Checklist</h2>
+    <div class="checklist-intro">
+        The canvas is the framework. This checklist is your final audit: it catches the mistakes that cause bad reads, messy messages, or unnecessary escalation.
+    </div>
+
+    <div class="checklist-grid">
+        <div class="checklist-item" data-category="signal">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">My signal is concrete (who/what/when/where) — not a story about motives.</div>
+        </div>
+        <div class="checklist-item" data-category="facts">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I’ve captured the timing trigger (what changed) and the consequence (what shifted).</div>
+        </div>
+        <div class="checklist-item" data-category="confidence">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I’ve rated confidence using signal, pattern, incentives, and testability — not emotion.</div>
+        </div>
+        <div class="checklist-item" data-category="evidence">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I can point to receipts (messages/decisions/outcomes) or I know what proof I need next.</div>
+        </div>
+
+        <div class="checklist-item" data-category="power">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I’ve mapped incentives and levers (what they optimise for + what they control).</div>
+        </div>
+        <div class="checklist-item" data-category="hypotheses">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I’m holding two hypotheses (benign + political) until a test collapses one.</div>
+        </div>
+        <div class="checklist-item" data-category="tests">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">My next step is a low-exposure test that creates information — not a confrontation.</div>
+        </div>
+        <div class="checklist-item" data-category="comms">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">My language is procedural and calm — safe if forwarded or screenshot.</div>
+        </div>
+    </div>
+</div>
+
+<!-- SCORE -->
+<div class="clarity-score-section">
+    <div class="presence-snapshot-header">
+        <h2>Your Interpretation Readiness Snapshot</h2>
+        <p>This score reflects whether your interpretation is complete enough to act cleanly: test, message, and protect your position without drama.</p>
+    </div>
+
+    <div class="clarity-score-bar">
+        <div class="clarity-progress-container">
+            <div class="clarity-header">
+                <div class="clarity-title">Framework Completion Score</div>
+                <div class="clarity-percentage" id="clarityPercentage">0%</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="progress-labels">
+                <span>Loose</span><span>Reasonable</span><span>Defensible</span>
+            </div>
+
+            <div class="presence-dimensions">
+                <div class="presence-dimension-pill"><span class="label">Signal & Facts</span><span class="score" id="scoreVoice">0%</span></div>
+                <div class="presence-dimension-pill"><span class="label">Confidence Inputs</span><span class="score" id="scoreStructure">0%</span></div>
+                <div class="presence-dimension-pill"><span class="label">Incentives & Power</span><span class="score" id="scoreNonverbal">0%</span></div>
+                <div class="presence-dimension-pill"><span class="label">Tests & Comms</span><span class="score" id="scoreChallenge">0%</span></div>
+            </div>
+        </div>
+
+        <div class="actions-container">
+            <button class="action-btn" onclick="generateSmartSummary()" id="generateBtn" disabled>
+                <i class="fas fa-magic"></i> Generate summary
+            </button>
+            <button class="action-btn secondary" onclick="copyFramework()" id="copyBtn">
+                <i class="far fa-copy"></i> Copy framework
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="smart-summary-section" id="smartSummary">
+    <div class="summary-header">
+        <h2 class="summary-title">Your Smart Interpretation Summary</h2>
+        <p class="summary-subtitle">Based on your completion score of <span id="summaryScore">0%</span></p>
+        <p class="summary-insight">Highlights your biggest interpretation traps, the cleanest next test, and the safest language to regain control.</p>
+    </div>
+
+    <h3 class="section-header red"><i class="fas fa-triangle-exclamation"></i> Interpretation Traps to Watch</h3>
+    <div class="red-flags-grid" id="redFlagsGrid"></div>
+
+    <h3 class="section-header purple"><i class="fas fa-forward"></i> Next Moves That Create Information</h3>
+    <div class="next-steps-grid" id="nextStepsGrid"></div>
+
+    <h3 class="section-header blue"><i class="fas fa-tools"></i> Recommended Tools to Support You</h3>
+    <div class="resources-grid" id="resourcesGrid"></div>
+</div>
+
+<!-- MY PLAYBOOK -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+    <div class="playbook-sidebar" id="playbookSidebar">
+        <div class="playbook-sidebar-header">
+            <div class="playbook-sidebar-header-title-row">
+                <h3>My Playbook</h3>
+                <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p>Saved items</p>
+        </div>
+
+        <div class="playbook-sidebar-body">
+            <div id="savedItemsContainer">
+                <p class="saved-items-empty" id="savedItemsEmpty">
+                    You haven’t saved anything yet. Use <strong>Save item</strong> on tools you want quick access to.
+                </p>
+                <ul class="saved-items-list" id="savedItemsList"></ul>
+            </div>
+
+            <div class="playbook-quick-links">
+                <div class="playbook-quick-links-header">
+                    <span class="quick-links-title">Quick links</span>
+                </div>
+                <div class="playbook-quick-links-list">
+                    <a href="dashboard.html" class="quick-link-pill"><i class="fas fa-gauge"></i> The Dashboard</a>
+                    <a href="the-lens.html" class="quick-link-pill"><i class="fas fa-search"></i> The Lens</a>
+                    <a href="the-toolkit.html" class="quick-link-pill"><i class="fas fa-toolbox"></i> The Toolkit</a>
+                    <a href="the-coach.html" class="quick-link-pill"><i class="fas fa-comments"></i> The Coach</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+    <i class="fas fa-book-open"></i>
+    <span>My Playbook</span>
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2025 The Employee Playbook. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
+
+    initializeChecklist();
+    initializeThemeToggle();
+    initializeMobileNav();
+    initializePlaybook();
+
+    bindCanvasListeners();
+    resetDefaultSelectsToBlank();
+    updateFrameworkScore();
+    updateConfidenceBadge();
+});
+
+/* MOBILE NAV */
+function initializeMobileNav() {
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (!mobileToggle || !navLinks) return;
+
+    mobileToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('active');
+        const icon = this.querySelector('i');
+        if (icon) { icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); }
+    });
+
+    document.addEventListener('click', function(event) {
+        if (navLinks.classList.contains('active') &&
+            !navLinks.contains(event.target) &&
+            !mobileToggle.contains(event.target)) {
+            navLinks.classList.remove('active');
+            const icon = mobileToggle.querySelector('i');
+            if (icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+        }
+    });
+}
+
+/* THEME */
+function initializeThemeToggle() {
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    if (!themeToggleBtn) return;
+
+    const themeIcon = themeToggleBtn.querySelector('i');
+    const logoImg = document.getElementById('mainLogo');
+
+    function getLogoPath(filename) {
+        if (window.location.protocol === 'file:') {
+            const currentPath = window.location.pathname;
+            const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+            return basePath + 'assets/img/' + filename;
+        } else {
+            return './assets/img/' + filename;
+        }
+    }
+
+    function createFallbackLogo() {
+        if (!logoImg) return;
+        logoImg.classList.add('fallback');
+        const logoText = document.createElement('div');
+        logoText.textContent = 'THE EMPLOYEE PLAYBOOK';
+        logoText.style.fontSize = '14px';
+        logoText.style.fontWeight = '700';
+        logoText.style.letterSpacing = '1px';
+        logoImg.src = '';
+        logoImg.alt = 'The Employee Playbook';
+        logoImg.style.display = 'flex';
+        logoImg.style.alignItems = 'center';
+        logoImg.style.justifyContent = 'center';
+        logoImg.innerHTML = '';
+        logoImg.appendChild(logoText);
+    }
+
+    function updateLogoForTheme(isDarkMode) {
+        if (!logoImg) return;
+        logoImg.classList.remove('fallback');
+        logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+        logoImg.alt = 'The Employee Playbook';
+    }
+
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+    } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        if (isDarkMode) {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+            if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+            updateLogoForTheme(false);
+        } else {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+            if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+            updateLogoForTheme(true);
+        }
+    });
+
+    if (logoImg) {
+        logoImg.addEventListener('error', function() {
+            if (this.src.includes('logo-dark.png')) this.src = getLogoPath('logo.png');
+            else createFallbackLogo();
+        });
+    }
+}
+
+/* Ensure score starts at 0% (no draft autoload) */
+function resetDefaultSelectsToBlank(){
+    document.querySelectorAll('select.si-input').forEach(sel => {
+        if (!sel.dataset.userChanged) sel.value = '';
+    });
+}
+
+/* Bind inputs once */
+function bindCanvasListeners(){
+    document.querySelectorAll('.si-input').forEach(el => {
+        if (el.dataset.bound === '1') return;
+        el.dataset.bound = '1';
+
+        el.addEventListener('input', () => {
+            el.dataset.userChanged = '1';
+            updateFrameworkScore();
+            updateConfidenceBadge();
+        });
+        el.addEventListener('change', () => {
+            el.dataset.userChanged = '1';
+            updateFrameworkScore();
+            updateConfidenceBadge();
+        });
+    });
+}
+
+/* SIGNAL LOG */
+function addTimelineRow() {
+    const body = document.getElementById('timelineBody');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td><input class="input si-input" data-dimension="facts" placeholder="DD/MM/YYYY"></td>
+        <td><input class="input si-input" data-dimension="facts" placeholder="What happened (specific)"></td>
+        <td><input class="input si-input" data-dimension="facts" placeholder="What changed (decision/visibility)"></td>
+        <td><input class="input si-input" data-dimension="power" placeholder="Who gained control / what was protected"></td>
+    `;
+    body.appendChild(tr);
+    bindCanvasListeners();
+    updateFrameworkScore();
+}
+
+function removeTimelineRow() {
+    const body = document.getElementById('timelineBody');
+    if (body.children.length > 1) body.removeChild(body.lastElementChild);
+    updateFrameworkScore();
+}
+
+/* CHECKLIST */
+let checkedItems = [];
+let itemCategories = [];
+
+/* Dimensions mapped into the existing four score slots (keeps the UI clean) */
+const dimensionConfig = {
+    voice: ['signal', 'facts'],                 // Signal & Facts
+    structure: ['confidence', 'evidence', 'unknowns'], // Confidence inputs
+    nonverbal: ['power', 'people', 'strategy'], // Incentives & Power
+    challenge: ['hypotheses', 'tests', 'comms'] // Tests & Comms
+};
+
+function initializeChecklist() {
+    const checklistContainers = document.querySelectorAll('.checklist-item');
+    checkedItems = new Array(checklistContainers.length).fill(false);
+    itemCategories = [];
+
+    checklistContainers.forEach((container, index) => {
+        const icon = container.querySelector('i');
+        const category = container.getAttribute('data-category');
+        itemCategories[index] = category;
+
+        container.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON') return;
+
+            if (icon.classList.contains('fa-square')) {
+                icon.classList.remove('fa-square');
+                icon.classList.add('fa-check-square');
+                icon.style.color = '#5A4496';
+                checkedItems[index] = true;
+            } else {
+                icon.classList.remove('fa-check-square');
+                icon.classList.add('fa-square');
+                icon.style.color = '#7B5FC4';
+                checkedItems[index] = false;
+            }
+            updateFrameworkScore();
+        });
+    });
+}
+
+/* SCORE */
+function updateFrameworkScore() {
+    const inputs = Array.from(document.querySelectorAll('.si-input'));
+    const completedInputs = inputs.filter(el => ((el.value || '').toString().trim().length > 0)).length;
+    const checklistCompleted = checkedItems.filter(Boolean).length;
+
+    const totalUnits = inputs.length + checkedItems.length;
+    const completedUnits = completedInputs + checklistCompleted;
+
+    const score = totalUnits ? Math.round((completedUnits / totalUnits) * 100) : 0;
+
+    document.getElementById('clarityPercentage').textContent = score + '%';
+    document.getElementById('progressFill').style.width = score + '%';
+
+    document.getElementById('generateBtn').disabled = (completedUnits === 0);
+
+    const dimScores = {
+        voice: { checked: 0, total: 0 },
+        structure: { checked: 0, total: 0 },
+        nonverbal: { checked: 0, total: 0 },
+        challenge: { checked: 0, total: 0 }
+    };
+
+    inputs.forEach(el => {
+        const cat = el.getAttribute('data-dimension');
+        Object.keys(dimensionConfig).forEach(dim => {
+            if (dimensionConfig[dim].includes(cat)) {
+                dimScores[dim].total += 1;
+                if (((el.value || '').toString().trim().length > 0)) dimScores[dim].checked += 1;
+            }
+        });
+    });
+
+    itemCategories.forEach((cat, idx) => {
+        Object.keys(dimensionConfig).forEach(dim => {
+            if (dimensionConfig[dim].includes(cat)) {
+                dimScores[dim].total += 1;
+                if (checkedItems[idx]) dimScores[dim].checked += 1;
+            }
+        });
+    });
+
+    const pct = d => d.total ? Math.round((d.checked / d.total) * 100) : 0;
+    document.getElementById('scoreVoice').textContent = pct(dimScores.voice) + '%';
+    document.getElementById('scoreStructure').textContent = pct(dimScores.structure) + '%';
+    document.getElementById('scoreNonverbal').textContent = pct(dimScores.nonverbal) + '%';
+    document.getElementById('scoreChallenge').textContent = pct(dimScores.challenge) + '%';
+}
+
+/* HELPERS */
+function val(id) {
+    const el = document.getElementById(id);
+    return el ? (el.value || '').trim() : '';
+}
+function shorten(text, max) {
+    const t = (text || '').replace(/\s+/g, ' ').trim();
+    if (!t) return '';
+    return t.length > max ? t.slice(0, max - 1) + '…' : t;
+}
+function copyText(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    navigator.clipboard.writeText(el.textContent || '');
+}
+
+/* CONFIDENCE RATING */
+function computeConfidence() {
+    const s = parseInt(val('si_signal_strength'), 10);
+    const p = parseInt(val('si_pattern'), 10);
+    const i = parseInt(val('si_incentives'), 10);
+    const t = val('si_testability'); // Low/Medium/High
+
+    if (!s || !p || !i || !t) {
+        return { band: '', score: 0, title: 'Not rated', note: 'Select signal, pattern, incentives, and testability.' };
+    }
+
+    const tScore = (t === 'High') ? 5 : (t === 'Medium') ? 3 : 1;
+
+    // 4-factor average scaled to 25 (keeps it consistent with your badge style)
+    const avg = (s + p + i + tScore) / 4;
+    const score = Math.round((avg / 5) * 25);
+
+    let band = 'low', title = 'Low';
+    if (avg >= 4.2) { band = 'strong'; title = 'Strong'; }
+    else if (avg >= 3.2) { band = 'high'; title = 'High'; }
+    else if (avg >= 2.3) { band = 'medium'; title = 'Medium'; }
+
+    const note =
+        (band === 'low') ? 'You’re at risk of story-making. Tighten the signal and run a small test first.'
+        : (band === 'medium') ? 'Good enough to test. Keep two hypotheses and use procedural language.'
+        : (band === 'high') ? 'You can act with confidence: structure, transparency, and a clean test should reveal truth fast.'
+        : 'Very strong read. Your priority is now execution: protect credibility and lock clarity in writing.';
+
+    return { band, score, title, note };
+}
+
+function updateConfidenceBadge() {
+    const badge = document.getElementById('confidenceBadge');
+    const text = document.getElementById('confidenceBadgeText');
+    if (!badge || !text) return;
+
+    const c = computeConfidence();
+    badge.classList.remove('low','medium','high','strong');
+    if (c.band) badge.classList.add(c.band);
+
+    text.textContent = (c.title === 'Not rated') ? 'Confidence: Not rated' : `Confidence: ${c.title} (${c.score}/25)`;
+}
+
+/* BUILDERS */
+function buildGuardrails() {
+    const c = computeConfidence();
+    const type = val('si_type');
+    const protect = val('si_protect');
+    const evidence = val('si_evidence');
+    const unknowns = val('si_unknowns');
+    const testability = val('si_testability');
+
+    const lines = [];
+    lines.push(`Confidence rating: ${c.title}${c.title !== 'Not rated' ? ` (${c.score}/25)` : ''} — ${c.note}`);
+    if (type) lines.push(`Signal category: ${type}.`);
+    if (protect) lines.push(`Priority to protect: ${protect}.`);
+
+    const avoid = [];
+    avoid.push('Assuming intent');
+    avoid.push('Confronting without a test');
+    avoid.push('Long emotional narratives');
+    lines.push(`Avoid: ${avoid.join(', ')}.`);
+
+    const doNow = [];
+    doNow.push('Convert the signal into a single witness sentence (facts + consequence)');
+    doNow.push('Hold two hypotheses (benign + political) until a test collapses one');
+    doNow.push('Choose a reversible test that increases transparency (owners/dates/written decisions)');
+    if (testability) doNow.push(`Testability: ${testability} — pick the smallest move that creates information.`);
+    lines.push(`Do now: ${doNow.join('; ')}.`);
+
+    if (evidence) lines.push(`Receipts you can point to: ${shorten(evidence, 260)}`);
+    if (unknowns) lines.push(`Unknowns to resolve: ${shorten(unknowns, 240)}`);
+
+    document.getElementById('si_guardrails_out').textContent = lines.join('\n');
+}
+
+function buildTestPlan() {
+    const c = computeConfidence();
+    const hypA = val('si_hyp_a');
+    const hypB = val('si_hyp_b');
+    const test = val('si_test');
+    const horizon = val('si_horizon');
+    const confirm = val('si_confirm');
+    const oneliner = val('si_oneliner');
+    const request = val('si_request');
+
+    const plan = [];
+
+    plan.push(`Confidence rating: ${c.title}${c.title !== 'Not rated' ? ` (${c.score}/25)` : ''}.`);
+    if (hypA) plan.push(`Hypothesis A (benign): ${hypA}`);
+    if (hypB) plan.push(`Hypothesis B (political): ${hypB}`);
+
+    if (test) {
+        const how =
+            (test === 'Written recap habit') ? 'After any interaction, send a short recap: understanding + next steps. Watch for pushback or reframing.'
+            : (test === 'Ask for owners + dates') ? 'Ask calmly for owner, timeline, and decision criteria. Watch who resists clarity and why.'
+            : (test === 'Pre-wire a stakeholder') ? 'Share a brief factual update with a relevant stakeholder to align on scope/criteria. Watch if someone tries to isolate you.'
+            : (test === 'Propose a decision log') ? 'Suggest a simple decision log (what/why/owner/date). Watch if decisions become evasive.'
+            : (test === 'Move updates to a shared channel') ? 'Move updates to a shared channel for transparency. Watch who tries to pull it back into private.'
+            : 'Ask a procedural question that forces clarity (process, owners, criteria). Watch for evasion.';
+        plan.push(`Safest test: ${test}.`);
+        plan.push(`How to run it: ${how}`);
+    }
+
+    if (horizon) plan.push(`Time horizon: ${horizon}.`);
+    if (confirm) plan.push(`What to watch for (A vs B): ${shorten(confirm, 260)}`);
+
+    const msg = oneliner ? `“${oneliner}”` : `“To keep this clean, can we confirm owner, timeline, and decision criteria?”`;
+    plan.push(`Neutral message: ${msg}`);
+    if (request) plan.push(`Specific ask: ${request}`);
+
+    plan.push('');
+    plan.push('Interpretation rule: if clarity is welcomed → A becomes more likely. If transparency is resisted + you’re reframed as “difficult” → B becomes more likely.');
+
+    document.getElementById('si_test_out').textContent = plan.join('\n');
+}
+
+function generateOutputs() {
+    const c = computeConfidence();
+
+    const type = val('si_type');
+    const channel = val('si_channel');
+    const eventTxt = val('si_event');
+    const trigger = val('si_trigger');
+    const who = val('si_who');
+    const protect = val('si_protect');
+
+    const zone = val('si_zone');
+    const benefit = val('si_benefit');
+    const optimising = val('si_optimising');
+    const levers = val('si_levers');
+    const leverage = val('si_leverage');
+
+    const hypA = val('si_hyp_a');
+    const hypB = val('si_hyp_b');
+    const test = val('si_test');
+    const horizon = val('si_horizon');
+    const oneliner = val('si_oneliner');
+    const request = val('si_request');
+    const confirm = val('si_confirm');
+
+    // Interpretation map
+    const map = [];
+    map.push(eventTxt ? shorten(eventTxt, 520) : 'Signal not yet defined.');
+    if (type || channel) map.push(`Signal: ${[type, channel].filter(Boolean).join(' | ')}.`);
+    if (trigger) map.push(`Timing trigger: ${trigger}.`);
+    if (who) map.push(`Central parties: ${who}.`);
+    if (protect) map.push(`Priority to protect: ${protect}.`);
+    if (zone) map.push(`Decision zone: ${zone}.`);
+    if (benefit) map.push(`Likely beneficiary if unchanged: ${benefit}.`);
+    map.push(`Confidence: ${c.title}${c.title !== 'Not rated' ? ` (${c.score}/25)` : ''}.`);
+
+    document.getElementById('out_map').textContent = map.join(' ');
+
+    // Safest next move
+    const next = [];
+    if (test) next.push(`Next move: run the “${test}” test${horizon ? ` (${horizon})` : ''}.`);
+    else next.push('Next move: choose one low-exposure test (written recap / owners+dates / shared updates).');
+    if (confirm) next.push(`Watch for: ${shorten(confirm, 260)}`);
+    if (optimising) next.push(`Interpret through incentives: ${shorten(optimising, 200)}`);
+    if (levers) next.push(`Power levers in play: ${shorten(levers, 200)}`);
+    if (leverage) next.push(`Your leverage (quiet): ${shorten(leverage, 200)}`);
+    document.getElementById('out_next').textContent = next.join('\n');
+
+    // Opener
+    const opener = oneliner ? `“${oneliner}”` : `“To keep this clean, can we confirm owner, timeline, and decision criteria in writing?”`;
+    const openerLines = [];
+    openerLines.push(opener);
+    if (request) openerLines.push(`Request: ${request}`);
+    document.getElementById('out_opener').textContent = openerLines.join('\n');
+
+    // Recap
+    const recapLines = [];
+    recapLines.push(`Subject: Confirming scope / owner / next steps`);
+    recapLines.push('');
+    recapLines.push(`Hi [Name],`);
+    recapLines.push('');
+    recapLines.push(`Thanks for the conversation today. I’m sending a short recap to make sure we’re aligned and decisions stay clear.`);
+    recapLines.push('');
+    recapLines.push(`- Signal / current state (facts): ${eventTxt ? shorten(eventTxt, 260) : '[Add factual summary]'}`);
+    if (protect) recapLines.push(`- Priority to protect: ${protect}`);
+    if (request) recapLines.push(`- Request: ${request}`);
+    recapLines.push(`- Next steps: Please confirm owner, timeline, and decision criteria. I’ll align my work accordingly.`);
+    recapLines.push('');
+    recapLines.push(`Kind regards,`);
+    recapLines.push(`[Your name]`);
+    document.getElementById('out_recap').textContent = recapLines.join('\n');
+
+    buildGuardrails();
+    buildTestPlan();
+}
+
+function copyOutputs() {
+    const blocks = [
+        'STRATEGIC INTERPRETATION FRAMEWORK',
+        '=================================',
+        '',
+        'INTERPRETATION MAP',
+        document.getElementById('out_map').textContent,
+        '',
+        'SAFEST NEXT MOVE',
+        document.getElementById('out_next').textContent,
+        '',
+        'NEUTRAL OPENER',
+        document.getElementById('out_opener').textContent,
+        '',
+        'FOLLOW-UP RECAP',
+        document.getElementById('out_recap').textContent,
+        '',
+        'TEST PLAN',
+        document.getElementById('si_test_out').textContent,
+        '',
+        'GUARDRAILS',
+        document.getElementById('si_guardrails_out').textContent
+    ];
+    navigator.clipboard.writeText(blocks.join('\n'));
+}
+
+function resetCanvas() {
+    document.querySelectorAll('.si-input').forEach(el => {
+        el.value = '';
+        delete el.dataset.userChanged;
+    });
+
+    document.querySelectorAll('.checklist-item').forEach((container, index) => {
+        const icon = container.querySelector('i');
+        if (!icon) return;
+        icon.classList.remove('fa-check-square');
+        icon.classList.add('fa-square');
+        icon.style.color = '#7B5FC4';
+        checkedItems[index] = false;
+    });
+
+    document.getElementById('si_guardrails_out').textContent = 'Click “Build” to generate what to assume, what to avoid, and what to test next.';
+    document.getElementById('si_test_out').textContent = 'Click “Build” to generate: what to do, what to watch, and what it means.';
+    document.getElementById('out_map').textContent = 'Complete the canvas, then click “Generate outputs”.';
+    document.getElementById('out_next').textContent = '—';
+    document.getElementById('out_opener').textContent = '—';
+    document.getElementById('out_recap').textContent = '—';
+
+    document.getElementById('smartSummary').classList.remove('active');
+
+    resetDefaultSelectsToBlank();
+    updateFrameworkScore();
+    updateConfidenceBadge();
+}
+
+/* SMART SUMMARY */
+function generateSmartSummary() {
+    const scoreText = document.getElementById('clarityPercentage').textContent || '0%';
+    const score = parseInt(scoreText.replace('%',''), 10) || 0;
+
+    document.getElementById('summaryScore').textContent = score + '%';
+
+    const summarySection = document.getElementById('smartSummary');
+    summarySection.classList.add('active');
+    summarySection.scrollIntoView({ behavior: 'smooth' });
+
+    generateRedFlags(score);
+    generateNextSteps(score);
+    generateRecommendedResources(score);
+}
+
+function missingSignals() {
+    const hasSignal = !!val('si_type') && !!val('si_channel');
+    const hasEvent = !!val('si_event');
+    const hasConfidenceInputs = !!val('si_signal_strength') && !!val('si_pattern') && !!val('si_incentives') && !!val('si_testability');
+    const hasPower = !!val('si_zone') || !!val('si_optimising') || !!val('si_levers');
+    const hasHyp = !!val('si_hyp_a') || !!val('si_hyp_b');
+    const hasTest = !!val('si_test') || !!val('si_oneliner');
+
+    return {
+        signalWeak: !(hasSignal && hasEvent),
+        confidenceWeak: !hasConfidenceInputs,
+        powerWeak: !hasPower,
+        hypWeak: !hasHyp,
+        testWeak: !hasTest
+    };
+}
+
+function generateRedFlags(score) {
+    const grid = document.getElementById('redFlagsGrid');
+    grid.innerHTML = '';
+
+    const miss = missingSignals();
+    const c = computeConfidence();
+    const redFlags = [];
+
+    if (c.band === 'low') {
+        redFlags.push({
+            title: 'Story risk (low confidence)',
+            description: 'Right now, it’s easy to over-interpret. Tighten the signal and run a small test that creates information.',
+            icon: 'fas fa-cloud'
+        });
+    }
+
+    if (miss.signalWeak) {
+        redFlags.push({
+            title: 'Signal isn’t concrete yet',
+            description: 'If the signal can’t be stated neutrally (facts + consequence), your read will drift into motives and drama.',
+            icon: 'fas fa-signal'
+        });
+    }
+    if (miss.confidenceWeak) {
+        redFlags.push({
+            title: 'Confidence inputs missing',
+            description: 'Without signal/pattern/incentives/testability, you’ll swing between minimising and catastrophising.',
+            icon: 'fas fa-gauge-high'
+        });
+    }
+    if (miss.powerWeak) {
+        redFlags.push({
+            title: 'Incentives not mapped',
+            description: 'If you don’t know what people optimise for, you’ll misread behaviour and pick the wrong move.',
+            icon: 'fas fa-sitemap'
+        });
+    }
+    if (miss.hypWeak) {
+        redFlags.push({
+            title: 'Single-hypothesis trap',
+            description: 'Holding only one explanation makes you brittle. Keep a benign and political hypothesis until tested.',
+            icon: 'fas fa-code-branch'
+        });
+    }
+    if (miss.testWeak) {
+        redFlags.push({
+            title: 'No low-exposure test',
+            description: 'Without a test, the next step becomes confrontation or silence. Tests are safer and more revealing.',
+            icon: 'fas fa-route'
+        });
+    }
+
+    while (redFlags.length < 3) {
+        redFlags.push({
+            title: 'Language exposure',
+            description: 'If your wording implies blame, you invite denial and counter-attack. Keep it procedural and clarity-led.',
+            icon: 'fas fa-pen-nib'
+        });
+    }
+
+    redFlags.slice(0,3).forEach(flag => {
+        const card = document.createElement('div');
+        card.className = 'red-flag-card';
+        card.innerHTML = `
+            <div class="flag-icon"><i class="${flag.icon}"></i></div>
+            <h4 class="flag-title">${flag.title}</h4>
+            <p class="flag-description">${flag.description}</p>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function generateNextSteps(score) {
+    const grid = document.getElementById('nextStepsGrid');
+    grid.innerHTML = '';
+
+    const miss = missingSignals();
+    const c = computeConfidence();
+    const steps = [];
+
+    if (miss.signalWeak) {
+        steps.push({
+            title: 'Write the witness sentence',
+            description: 'One line: who + did/said + when/where + consequence. Strip motives. Make it screenshot-safe.',
+            icon: 'fas fa-pen-to-square'
+        });
+    } else {
+        steps.push({
+            title: 'Lock clarity with structure',
+            description: 'Ask for owner, timeline, and decision criteria. Clarity is a pressure test for politics.',
+            icon: 'fas fa-layer-group'
+        });
+    }
+
+    if (miss.powerWeak) {
+        steps.push({
+            title: 'Map incentives and levers',
+            description: 'Write what each person optimises for and what they can control. That’s your interpretation engine.',
+            icon: 'fas fa-sitemap'
+        });
+    } else {
+        steps.push({
+            title: 'Choose your quiet leverage',
+            description: 'Pick one controllable lever (written updates, decision log, stakeholder alignment) and use it consistently.',
+            icon: 'fas fa-chess'
+        });
+    }
+
+    if (miss.testWeak) {
+        steps.push({
+            title: 'Pick one reversible test',
+            description: 'Written recap, shared channel updates, procedural questions. A good test creates information without conflict.',
+            icon: 'fas fa-route'
+        });
+    } else if (c.band === 'low') {
+        steps.push({
+            title: 'Test before you interpret further',
+            description: 'Run the smallest test that increases transparency. Your read should sharpen quickly after.',
+            icon: 'fas fa-flask'
+        });
+    } else {
+        steps.push({
+            title: 'Execute and document cleanly',
+            description: 'Run the test, watch the reaction, then adjust. Keep language neutral and procedural.',
+            icon: 'fas fa-file-signature'
+        });
+    }
+
+    steps.slice(0,3).forEach(step => {
+        const card = document.createElement('div');
+        card.className = 'next-step-card';
+        card.innerHTML = `
+            <div class="step-icon"><i class="${step.icon}"></i></div>
+            <h4 class="step-title">${step.title}</h4>
+            <p class="step-description">${step.description}</p>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function generateRecommendedResources(score) {
+    const grid = document.getElementById('resourcesGrid');
+    grid.innerHTML = '';
+
+    const resources = [
+        {
+            title: 'Political Landscape Map',
+            description: 'Identify who really owns decisions, where influence sits, and how to act without triggering resistance.',
+            icon: 'fas fa-chess-board',
+            link: 'power-structure-decoder.html'
+        },
+        {
+            title: 'Stakeholder Mapping Grid',
+            description: 'Map allies, blockers, and swing stakeholders — then choose messaging that protects credibility.',
+            icon: 'fas fa-project-diagram',
+            link: 'stakeholder-mapping-grid.html'
+        },
+        {
+            title: 'Strategic Interpretation Framework',
+            description: 'Spot whether the situation is safe to challenge, needs documentation, or requires a quieter route.',
+            icon: 'fas fa-eye',
+            link: 'hidden-agendas-identifier.html'
+        }
+    ];
+
+    resources.slice(0,3).forEach(r => {
+        const card = document.createElement('div');
+        card.className = 'resource-card';
+        card.innerHTML = `
+            <div class="resource-icon"><i class="${r.icon}"></i></div>
+            <h4 class="resource-title">${r.title}</h4>
+            <p class="resource-description">${r.description}</p>
+            <a href="${r.link}" class="resource-link">Access tool <i class="fas fa-arrow-right"></i></a>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+/* COPY FRAMEWORK */
+function copyFramework() {
+    const c = computeConfidence();
+
+    const blocks = [];
+    blocks.push('STRATEGIC INTERPRETATION FRAMEWORK');
+    blocks.push('===============================');
+    blocks.push('');
+    blocks.push('SIGNAL CAPTURE');
+    blocks.push(`- Signal type: ${val('si_type')}`);
+    blocks.push(`- Channel: ${val('si_channel')}`);
+    blocks.push(`- Facts: ${val('si_event')}`);
+    blocks.push(`- Trigger: ${val('si_trigger')}`);
+    blocks.push(`- Central parties: ${val('si_who')}`);
+    blocks.push(`- Protect: ${val('si_protect')}`);
+    blocks.push('');
+    blocks.push('CONFIDENCE RATING');
+    blocks.push(`- Confidence: ${c.title}${c.title !== 'Not rated' ? ` (${c.score}/25)` : ''}`);
+    blocks.push(`- Signal strength: ${val('si_signal_strength')}/5`);
+    blocks.push(`- Pattern: ${val('si_pattern')}/5`);
+    blocks.push(`- Incentives: ${val('si_incentives')}/5`);
+    blocks.push(`- Testability: ${val('si_testability')}`);
+    blocks.push(`- Evidence: ${val('si_evidence')}`);
+    blocks.push(`- Unknowns: ${val('si_unknowns')}`);
+    blocks.push('');
+    blocks.push('INCENTIVES & POWER');
+    blocks.push(`- Decision zone: ${val('si_zone')}`);
+    blocks.push(`- Beneficiary if unchanged: ${val('si_benefit')}`);
+    blocks.push(`- Optimising for: ${val('si_optimising')}`);
+    blocks.push(`- Levers: ${val('si_levers')}`);
+    blocks.push(`- Your leverage: ${val('si_leverage')}`);
+    blocks.push('');
+    blocks.push('HYPOTHESES & TEST');
+    blocks.push(`- Hypothesis A: ${val('si_hyp_a')}`);
+    blocks.push(`- Hypothesis B: ${val('si_hyp_b')}`);
+    blocks.push(`- Safest test: ${val('si_test')}`);
+    blocks.push(`- Horizon: ${val('si_horizon')}`);
+    blocks.push(`- Confirm A vs B: ${val('si_confirm')}`);
+    blocks.push('');
+    blocks.push('COMMS');
+    blocks.push(`- Neutral message: ${val('si_oneliner')}`);
+    blocks.push(`- Specific ask: ${val('si_request')}`);
+    blocks.push('');
+    blocks.push('EXECUTIVE OUTPUTS');
+    blocks.push(`- Interpretation map: ${document.getElementById('out_map').textContent}`);
+    blocks.push(`- Safest next move: ${document.getElementById('out_next').textContent}`);
+    blocks.push(`- Opener: ${document.getElementById('out_opener').textContent}`);
+    blocks.push(`- Recap: ${document.getElementById('out_recap').textContent}`);
+
+    navigator.clipboard.writeText(blocks.join('\n'));
+
+    const btn = document.getElementById('copyBtn');
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+    btn.style.background = '#10b981';
+
+    setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+    }, 2000);
+}
+
+/* MY PLAYBOOK */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'strategic-interpretation-framework';
+const CURRENT_TOOL_TITLE = 'Strategic Interpretation Framework';
+const CURRENT_TOOL_TYPE = 'Framework';
+
+function getSavedItems() {
+    try {
+        const raw = localStorage.getItem(PLAYBOOK_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (e) { return []; }
+}
+function setSavedItems(items) {
+    try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); } catch (e) {}
+}
+function initializePlaybook() {
+    const overlay = document.getElementById('playbookOverlay');
+    const sidebar = document.getElementById('playbookSidebar');
+    const button = document.getElementById('myPlaybookButton');
+    const closeBtn = document.getElementById('closePlaybook');
+    const saveItemBtn = document.getElementById('saveBtn');
+    if (!overlay || !sidebar || !button || !closeBtn || !saveItemBtn) return;
+
+    renderSavedItems();
+
+    const savedItems = getSavedItems();
+    const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+    updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+    saveItemBtn.addEventListener('click', () => {
+        const items = getSavedItems();
+        const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+        let nowSaved;
+
+        if (index === -1) {
+            const toolLink = window.location.pathname.split('/').pop() || 'strategic-interpretation-framework.html';
+            items.push({
+                id: CURRENT_TOOL_ID,
+                title: CURRENT_TOOL_TITLE,
+                type: CURRENT_TOOL_TYPE,
+                link: toolLink,
+                savedAt: new Date().toISOString()
+            });
+            nowSaved = true;
+        } else {
+            items.splice(index, 1);
+            nowSaved = false;
+        }
+
+        setSavedItems(items);
+        updateSaveButtonState(saveItemBtn, nowSaved);
+        renderSavedItems();
+    });
+
+    button.addEventListener('click', () => { overlay.classList.add('open'); sidebar.classList.add('open'); });
+    closeBtn.addEventListener('click', () => { overlay.classList.remove('open'); sidebar.classList.remove('open'); });
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) { overlay.classList.remove('open'); sidebar.classList.remove('open'); }
+    });
+}
+function updateSaveButtonState(button, isSaved) {
+    const icon = button.querySelector('i');
+    const label = button.querySelector('span');
+    if (isSaved) {
+        button.classList.add('saved');
+        if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+        if (label) label.textContent = 'Saved';
+    } else {
+        button.classList.remove('saved');
+        if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+        if (label) label.textContent = 'Save item';
+    }
+}
+function renderSavedItems() {
+    const listEl = document.getElementById('savedItemsList');
+    const emptyEl = document.getElementById('savedItemsEmpty');
+    if (!listEl || !emptyEl) return;
+
+    const items = getSavedItems();
+    listEl.innerHTML = '';
+
+    if (!items.length) { emptyEl.style.display = 'block'; return; }
+    emptyEl.style.display = 'none';
+
+    items.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'saved-item';
+        const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+        const dateText = savedDate ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+        li.innerHTML = `
+            <div class="saved-item-title-row">
+                <span class="saved-item-title">${item.title}</span>
+                <span class="saved-item-type">${item.type}</span>
+            </div>
+            <div class="saved-item-meta">${dateText ? `Saved on ${dateText}` : ''}</div>
+            <a class="saved-item-link" href="${item.link}">Open <i class="fas fa-arrow-right"></i></a>
+        `;
+        listEl.appendChild(li);
+    });
+}
+</script>
+
+</body>
+</html>

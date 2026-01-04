@@ -1,0 +1,3102 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priority Audit Worksheet | The Employee Playbook</title>
+
+  <!-- THEME PRELOAD (prevents flash + keeps toggle consistent) -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('theme'); // "dark" | "light" | null
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const useDark = saved ? saved === 'dark' : prefersDark;
+        document.documentElement.classList.toggle('dark-mode', useDark);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand + Category Pills System)
+    =========================== */
+    :root{
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+      --text-dark:#212529;
+      --text-medium:#495057;
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+      --success-green:#10b981;
+      --warning-orange:#f59e0b;
+      --danger-red:#ef4444;
+      --info-blue:#3b82f6;
+
+      /* ===========================
+         CATEGORY COLORS (Your 7)
+      =========================== */
+      --category-clarity: #7B5FC4;
+      --category-burnout: #f59e0b;
+      --category-manager: #10b981;
+      --category-politics: #3b82f6;
+      --category-hr: #6D28D9;
+      --category-confidence: #ef4444;
+      --category-career: #800020;
+
+      /* ===========================
+         PILL STYLES (Light mode)
+      =========================== */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.08), rgba(123, 95, 196, 0.04));
+      --pill-clarity-border: rgba(123, 95, 196, 0.2);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.12), rgba(123, 95, 196, 0.08));
+      --pill-clarity-hover-border: rgba(123, 95, 196, 0.3);
+
+      --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.04));
+      --pill-manager-border: rgba(16, 185, 129, 0.2);
+      --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.08));
+      --pill-manager-hover-border: rgba(16, 185, 129, 0.3);
+
+      --pill-hr-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.08), rgba(109, 40, 217, 0.04));
+      --pill-hr-border: rgba(109, 40, 217, 0.2);
+      --pill-hr-hover-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.12), rgba(109, 40, 217, 0.08));
+      --pill-hr-hover-border: rgba(109, 40, 217, 0.3);
+
+      --pill-politics-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.04));
+      --pill-politics-border: rgba(59, 130, 246, 0.2);
+      --pill-politics-hover-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.08));
+      --pill-politics-hover-border: rgba(59, 130, 246, 0.3);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.04));
+      --pill-burnout-border: rgba(245, 158, 11, 0.2);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(245, 158, 11, 0.08));
+      --pill-burnout-hover-border: rgba(245, 158, 11, 0.3);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.04));
+      --pill-confidence-border: rgba(239, 68, 68, 0.2);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.08));
+      --pill-confidence-hover-border: rgba(239, 68, 68, 0.3);
+
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.08), rgba(128, 0, 32, 0.04));
+      --pill-career-border: rgba(128, 0, 32, 0.2);
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.12), rgba(128, 0, 32, 0.08));
+      --pill-career-hover-border: rgba(128, 0, 32, 0.3);
+    }
+
+    /* ===========================
+       DARK MODE VARIABLES
+    =========================== */
+    .dark-mode{
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#888888;
+      --text-dark:#e0e0e0;
+      --text-medium:#b0b0b0;
+
+      --accent-purple:#9d86e9;
+      --accent-purple-dark:#7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.2);
+      --lighter-purple: rgba(123, 95, 196, 0.1);
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+      --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      /* Dark mode category colors */
+      --category-clarity: #9d86e9;
+      --category-burnout: #fbbf24;
+      --category-manager: #34d399;
+      --category-politics: #60a5fa;
+      --category-hr: #8B5CF6;
+      --category-confidence: #f87171;
+      --category-career: #B03060;
+
+      /* Dark mode pill styles */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.15), rgba(123, 95, 196, 0.08));
+      --pill-clarity-border: rgba(157, 134, 233, 0.3);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.2), rgba(123, 95, 196, 0.12));
+      --pill-clarity-hover-border: rgba(157, 134, 233, 0.4);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08));
+      --pill-burnout-border: rgba(251, 191, 36, 0.3);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.12));
+      --pill-burnout-hover-border: rgba(251, 191, 36, 0.4);
+
+      --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
+      --pill-manager-border: rgba(52, 211, 153, 0.3);
+      --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.12));
+      --pill-manager-hover-border: rgba(52, 211, 153, 0.4);
+
+      --pill-politics-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08));
+      --pill-politics-border: rgba(96, 165, 250, 0.3);
+      --pill-politics-hover-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.12));
+      --pill-politics-hover-border: rgba(96, 165, 250, 0.4);
+
+      --pill-hr-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.15), rgba(109, 40, 217, 0.08));
+      --pill-hr-border: rgba(139, 92, 246, 0.3);
+      --pill-hr-hover-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.2), rgba(109, 40, 217, 0.12));
+      --pill-hr-hover-border: rgba(139, 92, 246, 0.4);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.08));
+      --pill-confidence-border: rgba(248, 113, 113, 0.3);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.12));
+      --pill-confidence-hover-border: rgba(248, 113, 113, 0.4);
+
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.15), rgba(128, 0, 32, 0.08));
+      --pill-career-border: rgba(176, 48, 96, 0.3);
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.2), rgba(128, 0, 32, 0.12));
+      --pill-career-hover-border: rgba(176, 48, 96, 0.4);
+    }
+
+    /* ===========================
+       GLOBAL
+    =========================== */
+    *{
+      margin:0; padding:0; box-sizing:border-box;
+      font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    body{
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      min-height: 100vh;
+    }
+    body.loaded{ opacity: 1; }
+    .container{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===========================
+       NAVIGATION
+    =========================== */
+    nav{
+      position: fixed;
+      top:0;
+      width:100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      height: 80px;
+    }
+    .nav-container{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 12px 0;
+      height: 100%;
+    }
+    .logo{
+      display:inline-flex;
+      align-items:center;
+      height: 100%;
+    }
+    .logo-img{
+      height:100px;
+      width:auto;
+      transform: translateX(20%);
+      padding: 14px 10px;
+      transition: all 0.3s ease;
+      display:block;
+      min-height:100px;
+    }
+    .logo-fallback{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      height:48px;
+      padding: 0 14px;
+      border-radius: 10px;
+      background: var(--premium-gradient);
+      color:#fff;
+      font-weight:700;
+      letter-spacing: 0.8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      transform: translateX(20%);
+    }
+    .nav-links{ display:flex; gap:50px; }
+    .nav-link{
+      color: var(--text-dark);
+      text-decoration:none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-size: 17px;
+    }
+    .nav-link:hover{ color: var(--accent-purple); }
+
+    .nav-link-container{ position: relative; display:inline-block; }
+    .new-tag{
+      position:absolute;
+      top:-12px;
+      right:-35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color:#000;
+      font-size:10px;
+      font-weight:600;
+      padding:2px 6px;
+      border-radius:4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index:10;
+      white-space:nowrap;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      transform: translateX(-20%);
+    }
+    .header-cta{
+      background: var(--accent-purple);
+      color:#fff;
+      padding: 8px 20px;
+      border-radius: 50px;
+      text-decoration:none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(123,95,196,0.3);
+    }
+    .header-cta:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(123,95,196,0.35);
+    }
+    .sign-in{
+      color: var(--text-dark);
+      text-decoration:none;
+      font-weight:500;
+      font-size:17px;
+    }
+    .sign-in:hover{ color: var(--accent-purple); }
+
+    .theme-toggle{
+      background:none;
+      border:none;
+      color: var(--text-dark);
+      cursor:pointer;
+      font-size:16px;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .theme-toggle:hover{ background-color: var(--light-gray); }
+
+    .mobile-toggle{
+      display:none;
+      background:none;
+      border:none;
+      color: var(--text-dark);
+      cursor:pointer;
+      font-size:24px;
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .mobile-toggle:hover{ background-color: var(--light-gray); }
+    .mobile-sign-in, .mobile-sign-up { display:none; }
+
+    @media (max-width: 768px){
+      .nav-container{ justify-content:center; position:relative; }
+
+      .logo{
+        position:absolute;
+        left:50%;
+        transform: translateX(-50%);
+        display:flex;
+        align-items:center;
+        height:100%;
+      }
+      .logo-img{ height:125px; transform:none; padding: 12px 0; }
+      .logo-fallback{ transform:none; }
+
+      .mobile-toggle{
+        display:flex;
+        position:absolute;
+        left:20px;
+        align-items:center;
+      }
+      .nav-actions{
+        transform:none;
+        gap:16px;
+        position:absolute;
+        right:20px;
+        align-items:center;
+      }
+      .nav-actions .sign-in,
+      .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding:20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        gap:20px;
+      }
+      .nav-links.active{ display:flex; }
+
+      .nav-link-container{
+        display:flex;
+        align-items:center;
+        justify-content:flex-start;
+        width:100%;
+      }
+      .new-tag{ position:static; margin-left:8px; }
+
+      .mobile-sign-in{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--primary-white);
+        color: var(--accent-purple);
+        border-radius:10px;
+        text-align:center;
+        font-weight:700;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+      .mobile-sign-up{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--accent-purple);
+        color:#fff;
+        border-radius:10px;
+        text-align:center;
+        font-weight:700;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .tool-hero-section{
+      width:100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow:hidden;
+    }
+    .tool-hero-section::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+      z-index:1;
+    }
+    .dark-mode .tool-hero-section::before{
+      background: linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+    }
+    .tool-hero-content{
+      position:relative;
+      z-index:2;
+      max-width:1100px;
+      margin:0 auto;
+      padding: 0 20px 10px;
+      animation: heroFadeUp 0.45s ease-out;
+    }
+    @keyframes heroFadeUp{
+      from{ opacity:0; transform: translateY(18px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .breadcrumb{
+      font-size:10px;
+      text-transform: uppercase;
+      letter-spacing:1px;
+      color: var(--dark-gray);
+      margin-bottom:10px;
+      display:flex;
+      gap:6px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .breadcrumb a{
+      color: var(--text-medium);
+      text-decoration:none !important;
+      font-weight:600;
+      letter-spacing:0.6px;
+      transition: color 0.2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+    }
+    .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+    .breadcrumb i{ font-size:10px; opacity:0.7; }
+    .breadcrumb .current{ color: var(--text-dark); font-weight:600; }
+
+    .checklist-name{
+      font-size:14px;
+      font-weight:700;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing:1.8px;
+      margin: 18px 0 12px;
+      display:block;
+    }
+
+    .hero-main-heading{
+      font-size:46px;
+      font-weight:650;
+      color: var(--text-dark);
+      line-height:1.1;
+      margin-bottom:18px;
+      max-width: 920px;
+    }
+    .hero-subheading{
+      font-size:16px;
+      color: var(--text-medium);
+      line-height:1.6;
+      max-width: 980px;
+      margin-bottom: 16px;
+    }
+
+    /* ===========================
+       RELATED CATEGORIES
+    =========================== */
+    .related-row{
+      display:flex;
+      flex-direction: column;
+      align-items:flex-start;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .related-label{
+      font-size: 12px;
+      font-weight:600;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: var(--text-medium);
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .related-pills{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+    }
+    .category-pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      height: 32px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration:none;
+    }
+    .dark-mode .category-pill{ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
+    .category-pill:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+    .dark-mode .category-pill:hover{ box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3); }
+
+    .category-pill.clarity{
+      color: var(--category-clarity);
+      border-color: var(--pill-clarity-border);
+      background: var(--pill-clarity-bg);
+    }
+    .category-pill.clarity:hover{
+      background: var(--pill-clarity-hover-bg);
+      border-color: var(--pill-clarity-hover-border);
+    }
+    .category-pill.manager{
+      color: var(--category-manager);
+      border-color: var(--pill-manager-border);
+      background: var(--pill-manager-bg);
+    }
+    .category-pill.manager:hover{
+      background: var(--pill-manager-hover-bg);
+      border-color: var(--pill-manager-hover-border);
+    }
+    .category-pill.burnout{
+      color: var(--category-burnout);
+      border-color: var(--pill-burnout-border);
+      background: var(--pill-burnout-bg);
+    }
+    .category-pill.burnout:hover{
+      background: var(--pill-burnout-hover-bg);
+      border-color: var(--pill-burnout-hover-border);
+    }
+
+    /* Save button */
+    .save-btn{
+      position:absolute;
+      top:16px;
+      right:24px;
+      z-index:5;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 12px;
+      font-size:12px;
+      font-weight:600;
+      border-radius:999px;
+      border: 1px solid rgba(123,95,196,0.6);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--accent-purple-dark);
+      cursor:pointer;
+      transition: all 0.2s ease;
+    }
+    .save-btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(123,95,196,0.18);
+      background: #fff;
+    }
+    .dark-mode .save-btn{
+      background: rgba(20,20,20,0.9);
+      border-color: rgba(157,134,233,0.6);
+    }
+    .save-btn.saved{
+      background: var(--accent-purple);
+      color:#fff;
+      border-color: transparent;
+    }
+
+    /* ===========================
+       CONTEXT + HOW IT WORKS
+    =========================== */
+    .context-tips-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      width:100%;
+      max-width:1100px;
+      margin: 0 auto 18px;
+      padding: 24px 20px 10px;
+      margin-top: 6px;
+    }
+    .context-card, .tips-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius:14px;
+      padding: 26px 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .section-title{
+      font-size:18px;
+      font-weight:700;
+      color: var(--text-dark);
+      margin-bottom:16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .section-title i{ color: var(--accent-purple); }
+
+    .bullet-list{ list-style:none; margin:0; padding:0; }
+    .bullet-list li{
+      color: var(--text-medium);
+      line-height:1.65;
+      margin-bottom:12px;
+      padding-left: 26px;
+      position:relative;
+      font-size:14.5px;
+      font-weight:450;
+    }
+    .bullet-list li::before{
+      content:"•";
+      position:absolute;
+      left:10px;
+      color: var(--accent-purple);
+      font-size:18px;
+    }
+    .inline-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.18);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.03));
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-purple-dark);
+      margin-top: 10px;
+    }
+    .dark-mode .inline-badge{
+      border-color: rgba(157,134,233,0.25);
+      background: linear-gradient(135deg, rgba(123,95,196,0.22), rgba(123,95,196,0.12));
+      color: var(--accent-purple);
+    }
+
+    /* ===========================
+       WORKSPACE
+    =========================== */
+    .workspace-wrap{
+      max-width:1100px;
+      margin: 0 auto;
+      padding: 0 20px 10px;
+    }
+
+    .workspace-header{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 18px 0 14px;
+    }
+    .workspace-title{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width: 0;
+    }
+    .workspace-title h2{
+      font-size: 26px;
+      font-weight: 750;
+      color: var(--accent-purple-dark);
+      line-height: 1.2;
+    }
+    .workspace-title p{
+      font-size: 14px;
+      color: var(--text-medium);
+      font-weight: 450;
+      max-width: 900px;
+    }
+
+    .workspace-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .workspace-actions.bottom{
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      justify-content: flex-end;
+    }
+    .dark-mode .workspace-actions.bottom{
+      border-top-color: rgba(255,255,255,0.10);
+    }
+
+    .btn{
+      border:none;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn.primary{
+      background: var(--premium-gradient);
+      color:#fff;
+      box-shadow: 0 12px 26px rgba(123,95,196,0.22);
+    }
+    .btn.primary:hover{ transform: translateY(-1px); box-shadow: 0 16px 30px rgba(123,95,196,0.28); }
+    .btn.secondary{
+      background: var(--light-purple);
+      color: var(--accent-purple-dark);
+    }
+    .dark-mode .btn.secondary{
+      background: rgba(123,95,196,0.22);
+      color: var(--accent-purple);
+    }
+    .btn.secondary:hover{
+      transform: translateY(-1px);
+      background: rgba(123,95,196,0.18);
+    }
+    .btn:disabled{
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform:none !important;
+      box-shadow:none !important;
+    }
+
+    /* --- Cards row for audit inputs --- */
+    .audit-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .audit-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 16px 16px 14px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+      position: relative;
+      overflow: hidden;
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 260px;
+    }
+    .dark-mode .audit-card{
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+    }
+    .audit-card::before{
+      content:'';
+      position:absolute;
+      left:0; right:0; top:0;
+      height: 3px;
+      background: var(--premium-gradient);
+      opacity: 0.95;
+    }
+
+    .card-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .card-chip{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .card-num{
+      width: 30px;
+      height: 30px;
+      border-radius: 12px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 600;
+      font-size: 12px;
+      color:#fff;
+      background: var(--premium-gradient);
+      box-shadow: 0 12px 22px rgba(123,95,196,0.18);
+      flex-shrink: 0;
+    }
+    .card-title{
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .card-title h3{
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .card-title p{
+      font-size: 12.5px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .field{
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .field label{
+      font-size: 12px;
+      color: var(--text-medium);
+      font-weight: 750;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .field label i{ color: var(--accent-purple); opacity: 0.95; }
+
+    .input, .select, .textarea{
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      padding: 10px 12px;
+      color: var(--text-dark);
+      font-size: 13.5px;
+      line-height: 1.45;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 500;
+    }
+    .dark-mode .input, .dark-mode .select, .dark-mode .textarea{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.10);
+    }
+    .input:focus, .select:focus, .textarea:focus{
+      border-color: rgba(123,95,196,0.35);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.10);
+    }
+    .textarea{
+      resize: none;
+      min-height: 120px;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .meta-row{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: -2px;
+    }
+    .count{
+      font-size: 12px;
+      color: var(--dark-gray);
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    .mini-tag{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.20);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent-purple-dark);
+      white-space: nowrap;
+    }
+    .mini-tag i{ opacity: 0.9; }
+    .mini-tag.orange{
+      border-color: rgba(245,158,11,0.22);
+      background: linear-gradient(135deg, rgba(245,158,11,0.10), rgba(245,158,11,0.03));
+      color: #a16207;
+    }
+    .dark-mode .mini-tag.orange{ color: #fbbf24; }
+    .mini-tag.red{
+      border-color: rgba(239,68,68,0.22);
+      background: linear-gradient(135deg, rgba(239,68,68,0.10), rgba(239,68,68,0.03));
+      color: #991b1b;
+    }
+    .dark-mode .mini-tag.red{ color: #f87171; }
+    .mini-tag.green{
+      border-color: rgba(16,185,129,0.22);
+      background: linear-gradient(135deg, rgba(16,185,129,0.10), rgba(16,185,129,0.03));
+      color: #065f46;
+    }
+    .dark-mode .mini-tag.green{ color: #34d399; }
+
+    /* ===========================
+       TASK INVENTORY (Score + Sort) — FULL VISIBILITY FIX
+       Key changes: no clipping, horizontal scroll, sticky header + sticky first column,
+       optional "Show more columns" toggle, mobile cards.
+    =========================== */
+    .task-inventory{
+      margin-top: 16px;
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+      overflow: hidden; /* ok because inner wrap scrolls, not clipped */
+    }
+    .dark-mode .task-inventory{
+      box-shadow: 0 18px 34px rgba(0,0,0,0.32);
+      border-color: rgba(255,255,255,0.10);
+    }
+
+    .ti-header{
+      padding: 16px 18px 14px;
+      border-bottom: 1px solid var(--border-light);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+    }
+    .dark-mode .ti-header{
+      background: linear-gradient(135deg, rgba(123,95,196,0.18), rgba(123,95,196,0.08));
+      border-bottom-color: rgba(255,255,255,0.10);
+    }
+
+    .ti-header-row{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .ti-title{
+      display:flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+    .ti-title h3{
+      margin:0;
+      font-size: 16px;
+      font-weight: 850;
+      color: var(--text-dark);
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .ti-title h3 i{ color: var(--accent-purple); }
+    .ti-title p{
+      margin:0;
+      font-size: 13px;
+      color: var(--text-medium);
+      font-weight: 450;
+      line-height: 1.55;
+      max-width: 920px;
+    }
+
+    .ti-controls{
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .ti-controls .btn{
+      padding: 9px 12px;
+      border-radius: 12px;
+      font-size: 12.5px;
+    }
+
+    .col-toggle{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.22);
+      background: rgba(255,255,255,0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--accent-purple-dark);
+      font-size: 12px;
+      font-weight: 750;
+      cursor:pointer;
+      user-select:none;
+    }
+    .dark-mode .col-toggle{
+      background: rgba(20,20,20,0.6);
+      border-color: rgba(157,134,233,0.28);
+      color: var(--accent-purple);
+    }
+    .col-toggle .dot{
+      width: 28px;
+      height: 16px;
+      border-radius: 999px;
+      background: rgba(123,95,196,0.18);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .col-toggle .dot::after{
+      content:"";
+      position:absolute;
+      top: 2px;
+      left: 2px;
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--premium-gradient);
+      transition: transform 0.18s ease;
+    }
+    .col-toggle.on .dot{ background: rgba(16,185,129,0.18); }
+    .col-toggle.on .dot::after{ transform: translateX(12px); }
+
+    /* IMPORTANT: The scroll container. This is what makes the full section visible. */
+    .ti-table-wrap{
+      width: 100%;
+      overflow-x: auto; /* ✅ full visibility */
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      border-top: 1px solid rgba(0,0,0,0.02);
+    }
+    .dark-mode .ti-table-wrap{
+      border-top-color: rgba(255,255,255,0.06);
+    }
+
+    /* Table must be wide enough to avoid squashing */
+    .ti-table{
+      width: 100%;
+      min-width: 1280px; /* ✅ guarantees columns are accessible via scroll */
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .ti-table thead th{
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: var(--primary-white);
+      border-bottom: 1px solid var(--border-light);
+      padding: 12px 12px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--text-medium);
+      font-weight: 850;
+      white-space: nowrap;
+    }
+    .dark-mode .ti-table thead th{
+      background: rgba(18,18,18,0.98);
+      border-bottom-color: rgba(255,255,255,0.10);
+    }
+
+    .ti-table tbody td{
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 10px 12px;
+      vertical-align: top;
+      background: var(--primary-white);
+    }
+    .dark-mode .ti-table tbody td{
+      background: rgba(18,18,18,0.85);
+      border-bottom-color: rgba(255,255,255,0.08);
+    }
+
+    .ti-table tbody tr:hover td{
+      background: rgba(123,95,196,0.05);
+    }
+    .dark-mode .ti-table tbody tr:hover td{
+      background: rgba(123,95,196,0.12);
+    }
+
+    /* Sticky first column so you never lose the task name while scrolling */
+    .ti-sticky-col{
+      position: sticky;
+      left: 0;
+      z-index: 6;
+      box-shadow: 8px 0 18px rgba(0,0,0,0.06);
+      background: inherit;
+    }
+    .dark-mode .ti-sticky-col{
+      box-shadow: 8px 0 22px rgba(0,0,0,0.35);
+    }
+
+    .ti-task-title{
+      display:flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 320px;
+    }
+    .ti-mini{
+      font-size: 12px;
+      color: var(--dark-gray);
+      font-weight: 600;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .ti-mini .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.20);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent-purple-dark);
+      white-space: nowrap;
+    }
+    .dark-mode .ti-mini .badge{
+      border-color: rgba(157,134,233,0.28);
+      background: linear-gradient(135deg, rgba(123,95,196,0.22), rgba(123,95,196,0.12));
+      color: var(--accent-purple);
+    }
+
+    .ti-num{ width: 78px; text-align: center; }
+    .ti-select{ min-width: 190px; }
+
+    .ti-advanced{ display: none; }
+    .ti-show-advanced .ti-advanced{ display: table-cell; }
+
+    .th-sort{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .th-sort i{
+      font-size: 12px;
+      opacity: 0.65;
+    }
+    .th-sort.active i{
+      opacity: 1;
+      color: var(--accent-purple);
+    }
+
+    /* Mobile cards (optional but helpful) */
+    .ti-mobile-cards{
+      display:none;
+      padding: 12px 14px 16px;
+      border-top: 1px solid var(--border-light);
+      background: var(--primary-white);
+    }
+    .dark-mode .ti-mobile-cards{
+      background: rgba(18,18,18,0.88);
+      border-top-color: rgba(255,255,255,0.10);
+    }
+    .ti-card{
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 14px;
+      margin-bottom: 12px;
+      background: var(--primary-white);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    }
+    .dark-mode .ti-card{
+      background: rgba(18,18,18,0.92);
+      box-shadow: 0 16px 30px rgba(0,0,0,0.35);
+      border-color: rgba(255,255,255,0.10);
+    }
+    .ti-card h4{
+      margin:0 0 8px;
+      font-size: 14px;
+      font-weight: 850;
+    }
+    .ti-card .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    /* ===========================
+       GENERATED OUTPUT
+    =========================== */
+    .pack-section{
+      max-width:1100px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      display:none;
+    }
+    .pack-section.active{
+      display:block;
+      animation: slideIn 0.5s ease;
+    }
+    @keyframes slideIn{
+      from{ opacity:0; transform: translateY(20px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .pack-header{
+      text-align:center;
+      margin: 18px 0 22px;
+    }
+    .pack-title{
+      font-size: 24px;
+      font-weight: 850;
+      color: var(--accent-purple-dark);
+      margin-bottom: 6px;
+    }
+    .pack-subtitle{
+      color: var(--text-medium);
+      font-size: 14.5px;
+      font-weight: 450;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .pack-bar{
+      background: var(--primary-white);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 14px 40px rgba(123,95,196,0.12);
+      border: 1px solid rgba(123,95,196,0.15);
+      display:flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .pack-metrics{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+    }
+    .metric-row{
+      display:flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .metric-title{
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent-purple-dark);
+      letter-spacing: 0.2px;
+    }
+    .metric-score{
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--accent-purple);
+      white-space: nowrap;
+    }
+    .mini-progress{
+      height: 10px;
+      background: var(--light-gray);
+      border-radius: 6px;
+      overflow:hidden;
+    }
+    .dark-mode .mini-progress{ background: rgba(255,255,255,0.12); }
+    .mini-fill{
+      height:100%;
+      width:0%;
+      border-radius: 6px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: var(--premium-gradient);
+    }
+
+    .pack-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+      flex-shrink: 0;
+    }
+
+    .section-header{
+      font-size: 18px;
+      font-weight: 850;
+      margin: 18px 0 14px;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-gray);
+    }
+    .section-header.purple{ color: var(--accent-purple-dark); }
+    .section-header.orange{ color: var(--warning-orange); }
+    .section-header.blue{ color: var(--accent-purple); }
+
+    .pack-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .pack-card{
+      background: var(--primary-white);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+    }
+    .dark-mode .pack-card{
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.32);
+    }
+    .pack-card::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height:3px;
+      background: var(--premium-gradient);
+    }
+
+    .pc-ico{
+      font-size: 18px;
+      margin-bottom: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--accent-purple);
+      background: var(--lighter-purple);
+    }
+    .pc-title{
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .pc-body{
+      color: var(--text-medium);
+      font-size: 13.5px;
+      line-height: 1.6;
+      font-weight: 450;
+      white-space: pre-wrap;
+      flex: 1;
+    }
+
+    .pack-output{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+      margin-bottom: 12px;
+    }
+    .dark-mode .pack-output{ box-shadow: 0 18px 34px rgba(0,0,0,0.32); }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12.8px;
+      color: var(--text-medium);
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR
+    =========================== */
+    .my-playbook-fab{
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1200;
+      background: var(--premium-gradient);
+      color:#fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      cursor:pointer;
+      font-size: 13px;
+      font-weight: 750;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+    .my-playbook-fab:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+    }
+
+    .playbook-sidebar-overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1190;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity 0.25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position: fixed;
+      top:0;
+      right: -380px;
+      width: 340px;
+      max-width: 90%;
+      height: 100%;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index: 1191;
+      display:flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border-light);
+      transition: right 0.25s ease;
+    }
+    .dark-mode .playbook-sidebar{
+      background: rgba(18,18,18,0.96);
+      box-shadow: -4px 0 22px rgba(0,0,0,0.6);
+    }
+    .playbook-sidebar.open{ right:0; }
+
+    .playbook-sidebar-header{
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .playbook-sidebar-header-title-row{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      margin-bottom: 4px;
+    }
+    .playbook-sidebar-header h3{
+      font-size:18px;
+      font-weight:700;
+      color: var(--text-dark);
+    }
+    .playbook-sidebar-header p{
+      font-size: 13px;
+      color: var(--dark-gray);
+    }
+    .playbook-close-btn{
+      background:none;
+      border:none;
+      color: var(--dark-gray);
+      cursor:pointer;
+      font-size: 18px;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.2s ease;
+    }
+    .playbook-close-btn:hover{ background: var(--light-gray); }
+
+    .playbook-sidebar-body{
+      padding: 14px 18px 20px;
+      padding-bottom: 50px;
+      overflow-y: auto;
+      flex:1;
+      display:flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .saved-items-empty{
+      font-size: 13px;
+      color: var(--dark-gray);
+      line-height: 1.6;
+    }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+
+    .saved-item{
+      padding: 10px 10px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom: 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .saved-item-title-row{
+      display:flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .saved-item-title{
+      font-size: 14px;
+      font-weight: 850;
+      color: var(--text-dark);
+    }
+    .saved-item-type{
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent-purple-dark);
+      font-weight: 600;
+    }
+    .saved-item-meta{
+      font-size: 12px;
+      color: var(--dark-gray);
+    }
+    .saved-item-link{
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--accent-purple);
+      text-decoration:none;
+      font-weight: 850;
+      display:inline-flex;
+      align-items:center;
+      gap: 4px;
+    }
+    .saved-item-link:hover{ text-decoration: underline; }
+
+    .playbook-quick-links{
+      margin-top: 185px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+    }
+    .quick-links-title{
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-medium);
+    }
+    .playbook-quick-links-list{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .quick-link-pill{
+      width: 56%;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.35);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      text-decoration:none;
+      color: var(--accent-purple-dark);
+      font-size: 13px;
+      font-weight: 600;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .quick-link-pill:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+    }
+    .dark-mode .quick-link-pill{
+      border-color: rgba(157,134,233,0.55);
+      background: linear-gradient(135deg, rgba(123,95,196,0.26), rgba(123,95,196,0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer{
+      background: var(--primary-white);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 30px;
+      text-align:center;
+      color: var(--text-medium);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px){
+      .context-tips-grid{ grid-template-columns: 1fr; gap: 24px; }
+      .audit-grid{ grid-template-columns: 1fr; }
+      .pack-grid{ grid-template-columns: repeat(2, 1fr); }
+      .pack-bar{ flex-direction: column; align-items: stretch; }
+      .pack-actions{ justify-content: flex-start; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+    }
+    @media (max-width: 768px){
+      .tool-hero-section{ margin-top: 100px; }
+      .hero-main-heading{ font-size: 36px; }
+      .save-btn{ right: 18px; top: 10px; }
+      .my-playbook-fab{ bottom: 18px; right: 18px; }
+      .pack-grid{ grid-template-columns: 1fr; }
+      .ti-mobile-cards{ display:block; } /* show cards on small screens */
+      .ti-table{ min-width: 1180px; }     /* keep scrollable */
+    }
+    @media (max-width: 480px){
+      .hero-main-heading{ font-size: 32px; }
+      .checklist-name{ font-size: 13px; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .pack-actions{ justify-content: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===========================
+     NAVIGATION
+=========================== -->
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo" aria-label="The Employee Playbook">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      <div class="logo-fallback" id="logoFallback">The Employee Playbook</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<div class="tool-hero-section">
+  <button class="save-btn" id="saveBtn">
+    <i class="far fa-bookmark"></i>
+    <span>Save item</span>
+  </button>
+
+  <div class="tool-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-house"></i> Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="the-toolkit.html">The Toolkit</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="category-clarity-priorities-and-direction.html">Clarity, Priorities &amp; Direction</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Priority Audit Worksheet</span>
+    </div>
+
+    <span class="checklist-name">PRIORITY AUDIT WORKSHEET</span>
+
+    <h1 class="hero-main-heading">
+      Stop “everything is urgent” and rebuild a priority system that survives real life
+    </h1>
+
+    <div class="hero-subheading">
+      This worksheet forces clarity under pressure: what you’re doing, what it costs, what’s actually due, and what deserves focus.
+      It gives you an evidence-led way to reset expectations with your manager without sounding dramatic — just organised.
+      <br><br>
+      Use it when your day is being eaten by reactive work, unclear requests, or “quiet scope creep” that never gets formally agreed.
+    </div>
+
+    <div class="related-row" aria-label="Related categories">
+      <span class="related-label">Related categories</span>
+
+      <div class="related-pills">
+        <a class="category-pill clarity" href="category-clarity-priorities-and-direction.html" title="Clarity, Priorities & Direction">
+          <i class="fas fa-bullseye"></i>
+          <span>Clarity, Priorities &amp; Direction</span>
+        </a>
+
+        <a class="category-pill manager" href="category-manager-relationship-and-leadership-style.html" title="Manager Relationship & Leadership Style">
+          <i class="fas fa-people-arrows"></i>
+          <span>Manager Relationship &amp; Leadership Style</span>
+        </a>
+
+        <a class="category-pill burnout" href="category-expectations-burnout-and-capacity.html" title="Expectations, Burnout & Capacity">
+          <i class="fas fa-battery-half"></i>
+          <span>Expectations, Burnout &amp; Capacity</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     CONTEXT & PRO TIPS
+=========================== -->
+<div class="context-tips-grid">
+  <div class="context-card">
+    <h3 class="section-title"><i class="fas fa-compass"></i>When to Use This Worksheet</h3>
+    <ul class="bullet-list">
+      <li>When you’re doing too much, but can’t explain it cleanly.</li>
+      <li>When priorities change daily and “trade-offs” never get agreed.</li>
+      <li>When your workload is being shaped by the loudest request, not the highest value.</li>
+      <li>When you need a calm reset conversation with your manager, grounded in reality.</li>
+      <li>When you need a list that’s credible enough to survive scrutiny.</li>
+    </ul>
+    <div class="inline-badge"><i class="fas fa-shield"></i> Clarity beats hustle. Evidence beats “feelings”.</div>
+  </div>
+
+  <div class="tips-card">
+    <h3 class="section-title"><i class="fas fa-bolt"></i>How It Works</h3>
+    <ul class="bullet-list">
+      <li>Capture your current work and score it with a simple model: urgency + impact, adjusted by effort and risk.</li>
+      <li>Sort by score to reveal what is actually driving outcomes vs what is just noise.</li>
+      <li>Identify <strong>3 focus moves</strong>: what to do, what to defer, what to delegate or stop.</li>
+      <li>Generate a Priority Audit Pack you can paste into an email or use in a reset meeting.</li>
+      <li>Keep it tight: the goal is a decision, not a debate.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===========================
+     WORKSPACE
+=========================== -->
+<div class="workspace-wrap" id="workspace">
+  <div class="workspace-header">
+    <div class="workspace-title">
+      <h2>Run your priority audit</h2>
+      <p>
+        Step 1: set your context. Step 2: build a task inventory. Step 3: generate a reset pack (focus, trade-offs, and a clean ask).
+      </p>
+    </div>
+  </div>
+
+  <!-- Audit context -->
+  <div class="audit-grid" id="auditGrid">
+    <div class="audit-card">
+      <div class="card-top">
+        <div class="card-chip">
+          <div class="card-num">1</div>
+          <div class="card-title">
+            <h3>Audit context</h3>
+            <p>Anchor this to a real week, real constraints, real decision points.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="audit_week"><i class="fas fa-calendar"></i> Week / period</label>
+        <input class="input" id="audit_week" type="text" placeholder="e.g., Week commencing 06 Jan 2026">
+        <div class="meta-row">
+          <div class="mini-tag"><i class="fas fa-location-dot"></i> Specific is credible</div>
+          <div class="count" id="count_audit_week">0 chars</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="capacity"><i class="fas fa-hourglass-half"></i> Real capacity available</label>
+        <input class="input" id="capacity" type="text" placeholder="e.g., 28 hours (meetings + BAU fixed)">
+        <div class="meta-row">
+          <div class="mini-tag orange"><i class="fas fa-triangle-exclamation"></i> No fantasy hours</div>
+          <div class="count" id="count_capacity">0 chars</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="audit-card">
+      <div class="card-top">
+        <div class="card-chip">
+          <div class="card-num">2</div>
+          <div class="card-title">
+            <h3>Pressure signals</h3>
+            <p>These shape how strong your reset ask needs to be.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="pressure"><i class="fas fa-gauge-high"></i> Priority chaos index (0–10)</label>
+        <input class="input" id="pressure" type="number" min="0" max="10" step="1" value="0">
+        <div class="meta-row">
+          <div class="mini-tag" id="pressureTag"><i class="fas fa-circle"></i> —</div>
+          <div class="count" id="count_pressure">0 chars</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="constraint"><i class="fas fa-ban"></i> Top constraint this week</label>
+        <textarea class="textarea" id="constraint" placeholder="e.g., back-to-back meetings + reactive stakeholder demands + unclear decision rights"></textarea>
+        <div class="meta-row">
+          <div class="mini-tag"><i class="fas fa-link"></i> Name the blocker</div>
+          <div class="count" id="count_constraint">0 chars</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Task inventory section (full visibility, scrollable) -->
+  <section class="task-inventory" id="taskInventory">
+    <div class="ti-header">
+      <div class="ti-header-row">
+        <div class="ti-title">
+          <h3><i class="fas fa-list-check"></i> Task inventory (score and sort)</h3>
+          <p>
+            This section is designed to be <strong>fully visible</strong>. It scrolls horizontally instead of clipping.
+            The first column stays sticky so you don’t lose context while you scroll.
+          </p>
+        </div>
+
+        <div class="ti-controls">
+          <div class="col-toggle" id="advancedToggle" role="button" tabindex="0" aria-pressed="false">
+            <div class="dot" aria-hidden="true"></div>
+            <span>Show more columns</span>
+          </div>
+
+          <button class="btn secondary" id="addTaskRowBtn"><i class="fas fa-plus"></i> Add task</button>
+          <button class="btn secondary" id="sortByScoreBtn"><i class="fas fa-arrow-down-wide-short"></i> Sort by score</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ti-table-wrap">
+      <table class="ti-table" aria-label="Task inventory table">
+        <thead>
+          <tr>
+            <th class="ti-sticky-col">
+              <span class="th-sort" id="sortByName">
+                Task
+                <i class="fas fa-sort"></i>
+              </span>
+            </th>
+
+            <th>
+              <span class="th-sort active" id="sortByScore">
+                Priority score
+                <i class="fas fa-sort-down"></i>
+              </span>
+            </th>
+
+            <th>Due</th>
+            <th>Owner</th>
+
+            <th>Urgency (0–5)</th>
+            <th>Impact (0–5)</th>
+
+            <th class="ti-advanced">Effort (0–5)</th>
+            <th class="ti-advanced">Visibility risk (0–5)</th>
+            <th class="ti-advanced">Delegatable?</th>
+            <th class="ti-advanced">Notes</th>
+
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="taskTbody"></tbody>
+      </table>
+    </div>
+
+    <div class="ti-mobile-cards" id="tiMobileCards" aria-label="Task cards (mobile)"></div>
+  </section>
+
+  <div class="workspace-actions bottom" aria-label="Draft actions">
+    <button class="btn secondary" id="copyDraftBtn"><i class="far fa-copy"></i> Copy draft</button>
+    <button class="btn secondary" id="clearDraftBtn"><i class="fas fa-eraser"></i> Clear</button>
+    <button class="btn primary" id="generatePackBtn" disabled><i class="fas fa-wand-magic-sparkles"></i> Generate Priority Audit Pack</button>
+  </div>
+</div>
+
+<!-- ===========================
+     GENERATED PACK
+=========================== -->
+<div class="pack-section" id="packSection">
+  <div class="pack-header">
+    <h2 class="pack-title">Your Priority Audit Pack</h2>
+    <p class="pack-subtitle">
+      A clean summary you can paste into an email or use in a reset meeting: top priorities, trade-offs, risks, and a calm ask.
+    </p>
+  </div>
+
+  <div class="pack-bar">
+    <div class="pack-metrics">
+      <div class="metric-row">
+        <div class="metric-title">Audit completeness</div>
+        <div class="metric-score" id="completenessScore">0%</div>
+      </div>
+      <div class="mini-progress"><div class="mini-fill" id="miniFill"></div></div>
+      <div class="metric-row" style="margin-top:2px;">
+        <div class="metric-title">Clarity signal</div>
+        <div class="metric-score" id="strengthSignal">—</div>
+      </div>
+    </div>
+
+    <div class="pack-actions">
+      <button class="btn primary" id="copyPackBtn"><i class="far fa-copy"></i> Copy pack</button>
+      <button class="btn secondary" id="downloadPackBtn"><i class="fas fa-download"></i> Download .txt</button>
+      <button class="btn secondary" id="printPackBtn"><i class="fas fa-print"></i> Print</button>
+    </div>
+  </div>
+
+  <h3 class="section-header purple"><i class="fas fa-file-lines"></i> One-page summary</h3>
+  <div class="pack-output">
+    <div class="mono" id="onePageOutput"></div>
+  </div>
+
+  <h3 class="section-header orange"><i class="fas fa-triangle-exclamation"></i> Risks + trade-offs</h3>
+  <div class="pack-grid" id="riskGrid"></div>
+
+  <h3 class="section-header blue"><i class="fas fa-comments"></i> Scripts (reset ask)</h3>
+  <div class="pack-grid" id="scriptsGrid"></div>
+</div>
+
+<!-- ===========================
+     MY PLAYBOOK SIDEBAR (Right)
+=========================== -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven’t saved anything yet. Use <strong>Save item</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <div class="playbook-quick-links-header">
+          <span class="quick-links-title">Quick links</span>
+        </div>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill">
+            <i class="fas fa-gauge"></i> The Dashboard
+          </a>
+          <a href="the-lens.html" class="quick-link-pill">
+            <i class="fas fa-search"></i> The Lens
+          </a>
+          <a href="the-toolkit.html" class="quick-link-pill">
+            <i class="fas fa-toolbox"></i> The Toolkit
+          </a>
+          <a href="the-coach.html" class="quick-link-pill">
+            <i class="fas fa-comments"></i> The Coach
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ===========================
+   BOOT
+=========================== */
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('loaded');
+
+  initializeThemeToggle();
+  initializeMobileNav();
+  initializePlaybook();
+
+  initPriorityAudit();
+  loadDraft();
+  wireDraftHandlers();
+  refreshGenerateState();
+});
+
+/* ===========================
+   MOBILE NAV
+=========================== */
+function initializeMobileNav() {
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (!mobileToggle || !navLinks) return;
+
+  mobileToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('active');
+    const icon = this.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    }
+  });
+
+  document.addEventListener('click', function(event) {
+    if (navLinks.classList.contains('active') &&
+        !navLinks.contains(event.target) &&
+        !mobileToggle.contains(event.target)) {
+      navLinks.classList.remove('active');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) {
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+      }
+    }
+  });
+}
+
+/* ===========================
+   THEME TOGGLE + LOGO
+=========================== */
+function initializeThemeToggle() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (!themeToggleBtn) return;
+
+  const themeIcon = themeToggleBtn.querySelector('i');
+  const logoImg = document.getElementById('mainLogo');
+  const logoFallback = document.getElementById('logoFallback');
+
+  function getLogoPath(filename) {
+    if (window.location.protocol === 'file:') {
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+      return basePath + 'assets/img/' + filename;
+    } else {
+      return './assets/img/' + filename;
+    }
+  }
+
+  function showFallbackLogo() {
+    if (logoImg) logoImg.style.display = 'none';
+    if (logoFallback) logoFallback.style.display = 'inline-flex';
+  }
+
+  function showImageLogo() {
+    if (logoFallback) logoFallback.style.display = 'none';
+    if (logoImg) logoImg.style.display = 'block';
+  }
+
+  function updateLogoForTheme(isDarkMode) {
+    if (!logoImg) return;
+    showImageLogo();
+    logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+    logoImg.alt = 'The Employee Playbook';
+  }
+
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const savedTheme = localStorage.getItem('theme');
+  const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches);
+
+  if (shouldUseDark) {
+    document.body.classList.add('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+    updateLogoForTheme(true);
+  } else {
+    document.body.classList.remove('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+    updateLogoForTheme(false);
+  }
+
+  themeToggleBtn.addEventListener('click', function() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+
+    if (isDarkMode) {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+      updateLogoForTheme(false);
+    } else {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+      updateLogoForTheme(true);
+    }
+  });
+
+  prefersDarkScheme.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      if (e.matches) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      }
+    }
+  });
+
+  if (logoImg) {
+    logoImg.addEventListener('error', function() {
+      if (this.src.includes('logo-dark.png')) {
+        this.src = getLogoPath('logo.png');
+      } else {
+        showFallbackLogo();
+      }
+    });
+  }
+}
+
+/* ===========================
+   PRIORITY AUDIT DATA + STORAGE
+=========================== */
+const DRAFT_KEY = 'tepPriorityAuditDraft_v1';
+
+function getDraft(){
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch(e){
+    return {};
+  }
+}
+function setDraft(d){
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); }
+  catch(e){ console.warn('Draft save failed:', e); }
+}
+function setDraftValue(key, value){
+  const d = getDraft();
+  d[key] = value;
+  setDraft(d);
+}
+
+/* ===========================
+   INIT PRIORITY AUDIT
+=========================== */
+function initPriorityAudit(){
+  // Wire context inputs
+  ['audit_week','capacity','pressure','constraint'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.addEventListener('input', () => {
+      setDraftValue(id, el.value);
+      updateCount(id);
+      updatePressureTag();
+      refreshGenerateState();
+    });
+    el.addEventListener('change', () => {
+      setDraftValue(id, el.value);
+      updateCount(id);
+      updatePressureTag();
+      refreshGenerateState();
+    });
+  });
+
+  // Task inventory wiring
+  initTaskInventory();
+
+  // Counts initial
+  ['audit_week','capacity','pressure','constraint'].forEach(updateCount);
+  updatePressureTag();
+}
+
+/* ===========================
+   COUNTERS
+=========================== */
+function updateCount(id){
+  const el = document.getElementById(id);
+  const count = document.getElementById(`count_${id}`);
+  if (!el || !count) return;
+  count.textContent = `${(String(el.value || '')).length} chars`;
+}
+
+/* ===========================
+   PRESSURE TAG UI
+=========================== */
+function updatePressureTag(){
+  const d = getDraft();
+  const v = clampNum(Number(d.pressure || 0), 0, 10);
+  const tag = document.getElementById('pressureTag');
+  if (!tag) return;
+
+  let label = '—';
+  let cls = 'mini-tag';
+
+  if (v <= 2) { label = `Low (${v}/10)`; cls = 'mini-tag green'; }
+  else if (v <= 6) { label = `Medium (${v}/10)`; cls = 'mini-tag orange'; }
+  else { label = `High (${v}/10)`; cls = 'mini-tag red'; }
+
+  tag.className = cls;
+  tag.innerHTML = `<i class="fas fa-circle"></i> ${label}`;
+}
+
+/* ===========================
+   LOAD / APPLY DRAFT
+=========================== */
+function loadDraft(){
+  const d = getDraft();
+
+  // Apply fields
+  ['audit_week','capacity','pressure','constraint'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.value = d[id] || (id === 'pressure' ? 0 : '');
+  });
+
+  // Tasks
+  const tasks = Array.isArray(d.tasks) ? d.tasks : [];
+  hydrateTaskTable(tasks.length ? tasks : [
+    { task:'', due:'', owner:'', urgency:0, impact:0, effort:0, risk:0, delegate:'No', notes:'' }
+  ]);
+
+  // Advanced toggle remembered
+  const adv = !!d.showAdvanced;
+  setAdvanced(adv);
+
+  // Counts
+  ['audit_week','capacity','pressure','constraint'].forEach(updateCount);
+  updatePressureTag();
+  refreshGenerateState();
+}
+
+/* ===========================
+   TASK INVENTORY
+=========================== */
+let taskSortDesc = true;
+let nameSortAsc = true;
+
+function initTaskInventory(){
+  const addBtn = document.getElementById('addTaskRowBtn');
+  const sortScoreBtn = document.getElementById('sortByScoreBtn');
+  const sortByScoreHead = document.getElementById('sortByScore');
+  const sortByNameHead = document.getElementById('sortByName');
+
+  if (addBtn) addBtn.addEventListener('click', () => {
+    addTaskRow({});
+    persistTasks();
+    refreshGenerateState();
+  });
+
+  if (sortScoreBtn) sortScoreBtn.addEventListener('click', () => {
+    sortByScore(true);
+    persistTasks();
+  });
+
+  if (sortByScoreHead) sortByScoreHead.addEventListener('click', () => {
+    taskSortDesc = !taskSortDesc;
+    sortByScore(taskSortDesc);
+    persistTasks();
+    setSortHeadActive('score', taskSortDesc);
+  });
+
+  if (sortByNameHead) sortByNameHead.addEventListener('click', () => {
+    nameSortAsc = !nameSortAsc;
+    sortByName(nameSortAsc);
+    persistTasks();
+    setSortHeadActive('name', nameSortAsc);
+  });
+
+  // Advanced toggle
+  const advancedToggle = document.getElementById('advancedToggle');
+  if (advancedToggle){
+    advancedToggle.addEventListener('click', () => {
+      const on = !document.getElementById('taskInventory').classList.contains('ti-show-advanced');
+      setAdvanced(on);
+      setDraftValue('showAdvanced', on);
+    });
+    advancedToggle.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const on = !document.getElementById('taskInventory').classList.contains('ti-show-advanced');
+        setAdvanced(on);
+        setDraftValue('showAdvanced', on);
+      }
+    });
+  }
+}
+
+function setAdvanced(on){
+  const invWrap = document.getElementById('taskInventory');
+  const toggle = document.getElementById('advancedToggle');
+  if (!invWrap) return;
+  invWrap.classList.toggle('ti-show-advanced', !!on);
+  if (toggle){
+    toggle.classList.toggle('on', !!on);
+    toggle.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+}
+
+function hydrateTaskTable(tasks){
+  const tbody = document.getElementById('taskTbody');
+  if (!tbody) return;
+  tbody.innerHTML = '';
+  tasks.forEach(t => addTaskRow(t, true));
+  renderMobileCards();
+}
+
+function addTaskRow(data = {}, skipPersist){
+  const tbody = document.getElementById('taskTbody');
+  if (!tbody) return;
+
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td class="ti-sticky-col">
+      <div class="ti-task-title">
+        <input class="input" type="text" data-k="task" placeholder="e.g., Finalise scope + get trade-offs in writing" value="${escapeHtml(data.task || '')}">
+        <div class="ti-mini">
+          <span class="badge"><i class="fas fa-bullseye"></i> Specific</span>
+          <span class="badge"><i class="fas fa-clock"></i> Time-boxed</span>
+        </div>
+      </div>
+    </td>
+
+    <td>
+      <input class="input ti-num" type="number" data-k="score" value="0" min="0" step="1" readonly>
+    </td>
+
+    <td><input class="input" type="date" data-k="due" value="${escapeHtml(data.due || '')}"></td>
+    <td><input class="input" type="text" data-k="owner" placeholder="You / name" value="${escapeHtml(data.owner || '')}"></td>
+
+    <td><input class="input ti-num" type="number" data-k="urgency" value="${numOr0(data.urgency)}" min="0" max="5"></td>
+    <td><input class="input ti-num" type="number" data-k="impact" value="${numOr0(data.impact)}" min="0" max="5"></td>
+
+    <td class="ti-advanced"><input class="input ti-num" type="number" data-k="effort" value="${numOr0(data.effort)}" min="0" max="5"></td>
+    <td class="ti-advanced"><input class="input ti-num" type="number" data-k="risk" value="${numOr0(data.risk)}" min="0" max="5"></td>
+
+    <td class="ti-advanced">
+      <select class="select ti-select" data-k="delegate">
+        <option value="No" ${String(data.delegate||'No')==='No'?'selected':''}>No</option>
+        <option value="Maybe" ${String(data.delegate||'No')==='Maybe'?'selected':''}>Maybe</option>
+        <option value="Yes" ${String(data.delegate||'No')==='Yes'?'selected':''}>Yes</option>
+      </select>
+    </td>
+
+    <td class="ti-advanced">
+      <textarea class="textarea" style="min-height: 44px; max-height: 88px;" data-k="notes" placeholder="Constraints, dependencies, politics, risks…">${escapeHtml(data.notes || '')}</textarea>
+    </td>
+
+    <td>
+      <button class="btn secondary" data-act="delete" aria-label="Delete task"><i class="fas fa-trash"></i></button>
+    </td>
+  `;
+
+  // Wire recalculation + persistence
+  tr.querySelectorAll('[data-k]').forEach(el => {
+    el.addEventListener('input', () => {
+      recalcRow(tr);
+      persistTasks();
+      renderMobileCards();
+      refreshGenerateState();
+    });
+    el.addEventListener('change', () => {
+      recalcRow(tr);
+      persistTasks();
+      renderMobileCards();
+      refreshGenerateState();
+    });
+  });
+
+  const del = tr.querySelector('[data-act="delete"]');
+  if (del){
+    del.addEventListener('click', () => {
+      tr.remove();
+      persistTasks();
+      renderMobileCards();
+      refreshGenerateState();
+    });
+  }
+
+  tbody.appendChild(tr);
+  recalcRow(tr);
+
+  if (!skipPersist){
+    persistTasks();
+    renderMobileCards();
+  }
+}
+
+function recalcRow(tr){
+  const getNum = (k) => {
+    const el = tr.querySelector(`[data-k="${k}"]`);
+    const v = el ? Number(el.value || 0) : 0;
+    return isNaN(v) ? 0 : v;
+  };
+  const getStr = (k) => {
+    const el = tr.querySelector(`[data-k="${k}"]`);
+    return el ? String(el.value || '') : '';
+  };
+
+  const urgency = clampNum(getNum('urgency'), 0, 5);
+  const impact  = clampNum(getNum('impact'), 0, 5);
+  const effort  = clampNum(getNum('effort'), 0, 5);
+  const risk    = clampNum(getNum('risk'), 0, 5);
+  const delegate = getStr('delegate');
+
+  // Model (simple, explainable):
+  // (Urgency + Impact) * 2  - Effort  + VisibilityRisk  - DelegationAdjustment
+  let score = ((urgency + impact) * 2) - effort + risk;
+
+  if (delegate === 'Yes') score -= 2;
+  if (delegate === 'Maybe') score -= 1;
+
+  score = Math.max(0, Math.round(score));
+
+  const scoreEl = tr.querySelector('[data-k="score"]');
+  if (scoreEl) scoreEl.value = String(score);
+}
+
+function persistTasks(){
+  const d = getDraft();
+  d.tasks = readTasksFromTable();
+  setDraft(d);
+}
+
+function readTasksFromTable(){
+  const tbody = document.getElementById('taskTbody');
+  if (!tbody) return [];
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  return rows.map(tr => ({
+    task: (tr.querySelector('[data-k="task"]')?.value || '').trim(),
+    due: (tr.querySelector('[data-k="due"]')?.value || ''),
+    owner: (tr.querySelector('[data-k="owner"]')?.value || '').trim(),
+    urgency: Number(tr.querySelector('[data-k="urgency"]')?.value || 0),
+    impact: Number(tr.querySelector('[data-k="impact"]')?.value || 0),
+    effort: Number(tr.querySelector('[data-k="effort"]')?.value || 0),
+    risk: Number(tr.querySelector('[data-k="risk"]')?.value || 0),
+    delegate: (tr.querySelector('[data-k="delegate"]')?.value || 'No'),
+    notes: (tr.querySelector('[data-k="notes"]')?.value || '').trim(),
+    score: Number(tr.querySelector('[data-k="score"]')?.value || 0),
+  }));
+}
+
+function sortByScore(desc){
+  const tbody = document.getElementById('taskTbody');
+  if (!tbody) return;
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+
+  rows.sort((a,b) => {
+    const av = Number(a.querySelector('[data-k="score"]')?.value || 0);
+    const bv = Number(b.querySelector('[data-k="score"]')?.value || 0);
+    return desc ? (bv - av) : (av - bv);
+  });
+
+  rows.forEach(r => tbody.appendChild(r));
+  renderMobileCards();
+}
+
+function sortByName(asc){
+  const tbody = document.getElementById('taskTbody');
+  if (!tbody) return;
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+
+  rows.sort((a,b) => {
+    const av = String(a.querySelector('[data-k="task"]')?.value || '').toLowerCase();
+    const bv = String(b.querySelector('[data-k="task"]')?.value || '').toLowerCase();
+    return asc ? av.localeCompare(bv) : bv.localeCompare(av);
+  });
+
+  rows.forEach(r => tbody.appendChild(r));
+  renderMobileCards();
+}
+
+function setSortHeadActive(which, dir){
+  const s = document.getElementById('sortByScore');
+  const n = document.getElementById('sortByName');
+  if (!s || !n) return;
+
+  s.classList.toggle('active', which === 'score');
+  n.classList.toggle('active', which === 'name');
+
+  if (which === 'score'){
+    s.querySelector('i').className = dir ? 'fas fa-sort-down' : 'fas fa-sort-up';
+  }
+  if (which === 'name'){
+    n.querySelector('i').className = dir ? 'fas fa-sort-up' : 'fas fa-sort-down';
+  }
+}
+
+function renderMobileCards(){
+  const cardsWrap = document.getElementById('tiMobileCards');
+  if (!cardsWrap) return;
+
+  const tasks = readTasksFromTable().filter(t => (t.task || '').trim().length);
+  cardsWrap.innerHTML = '';
+
+  tasks.slice(0, 6).forEach(t => {
+    const div = document.createElement('div');
+    div.className = 'ti-card';
+    div.innerHTML = `
+      <h4>${escapeHtml(t.task)}</h4>
+      <div class="row">
+        <div><span class="mini-tag"><i class="fas fa-star"></i> Score: ${Number(t.score||0)}</span></div>
+        <div><span class="mini-tag orange"><i class="fas fa-calendar"></i> Due: ${(t.due||'—')}</span></div>
+      </div>
+      <div style="margin-top:10px; color: var(--text-medium); font-size: 13px; font-weight: 450;">
+        Urgency: ${numOr0(t.urgency)} • Impact: ${numOr0(t.impact)} • Effort: ${numOr0(t.effort)} • Risk: ${numOr0(t.risk)} • Delegate: ${escapeHtml(t.delegate||'No')}
+      </div>
+    `;
+    cardsWrap.appendChild(div);
+  });
+}
+
+/* ===========================
+   GENERATE ENABLE/DISABLE
+=========================== */
+function refreshGenerateState(){
+  const btn = document.getElementById('generatePackBtn');
+  if (!btn) return;
+
+  const d = getDraft();
+  const tasks = Array.isArray(d.tasks) ? d.tasks : [];
+
+  const filledSignals = [
+    (d.audit_week||'').trim().length > 0,
+    tasks.some(t => (t.task||'').trim().length > 0),
+    (d.constraint||'').trim().length > 0
+  ].filter(Boolean).length;
+
+  btn.disabled = filledSignals < 2;
+}
+
+/* ===========================
+   COPY / CLEAR / GENERATE
+=========================== */
+function wireDraftHandlers(){
+  const copyDraftBtn = document.getElementById('copyDraftBtn');
+  const clearDraftBtn = document.getElementById('clearDraftBtn');
+  const generateBtn = document.getElementById('generatePackBtn');
+
+  if (copyDraftBtn) copyDraftBtn.addEventListener('click', copyDraft);
+  if (clearDraftBtn) clearDraftBtn.addEventListener('click', clearDraft);
+  if (generateBtn) generateBtn.addEventListener('click', generatePriorityPack);
+
+  const copyPackBtn = document.getElementById('copyPackBtn');
+  const downloadPackBtn = document.getElementById('downloadPackBtn');
+  const printPackBtn = document.getElementById('printPackBtn');
+
+  if (copyPackBtn) copyPackBtn.addEventListener('click', () => {
+    const text = buildPackText();
+    copyText(text, copyPackBtn, 'Pack copied');
+  });
+
+  if (downloadPackBtn) downloadPackBtn.addEventListener('click', () => {
+    const text = buildPackText();
+    downloadText(text, 'priority-audit-pack.txt');
+  });
+
+  if (printPackBtn) printPackBtn.addEventListener('click', () => window.print());
+}
+
+function copyDraft(){
+  const text = buildDraftText();
+  const btn = document.getElementById('copyDraftBtn');
+  copyText(text, btn, 'Draft copied');
+}
+
+function clearDraft(){
+  const ok = confirm('Clear the full draft? This cannot be undone.');
+  if (!ok) return;
+
+  localStorage.removeItem(DRAFT_KEY);
+  loadDraft();
+  refreshGenerateState();
+
+  const pack = document.getElementById('packSection');
+  if (pack) pack.classList.remove('active');
+}
+
+function copyText(text, buttonEl, successLabel){
+  navigator.clipboard.writeText(text);
+
+  if (!buttonEl) return;
+  const originalHTML = buttonEl.innerHTML;
+  const originalBg = buttonEl.style.background;
+  const originalColor = buttonEl.style.color;
+
+  buttonEl.innerHTML = `<i class="fas fa-check"></i> ${successLabel}`;
+  buttonEl.style.background = '#10b981';
+  buttonEl.style.color = '#ffffff';
+
+  setTimeout(() => {
+    buttonEl.innerHTML = originalHTML;
+    buttonEl.style.background = originalBg;
+    buttonEl.style.color = originalColor;
+  }, 1800);
+}
+
+function downloadText(text, filename){
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ===========================
+   PACK GENERATION
+=========================== */
+function generatePriorityPack(){
+  // persist current tasks + context before generating
+  persistTasks();
+  ['audit_week','capacity','pressure','constraint'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) setDraftValue(id, el.value);
+  });
+
+  const d = getDraft();
+  const packSection = document.getElementById('packSection');
+  const onePageOutput = document.getElementById('onePageOutput');
+  const riskGrid = document.getElementById('riskGrid');
+  const scriptsGrid = document.getElementById('scriptsGrid');
+
+  if (!packSection || !onePageOutput || !riskGrid || !scriptsGrid) return;
+
+  const completeness = calcCompleteness(d);
+  const signal = calcClaritySignal(d, completeness);
+
+  document.getElementById('completenessScore').textContent = `${completeness}%`;
+  document.getElementById('strengthSignal').textContent = signal.label;
+
+  const fill = document.getElementById('miniFill');
+  fill.style.width = `${completeness}%`;
+
+  onePageOutput.textContent = buildOnePageSummary(d);
+
+  riskGrid.innerHTML = '';
+  buildRiskCards(d, riskGrid);
+
+  scriptsGrid.innerHTML = '';
+  buildScriptCards(d, scriptsGrid);
+
+  packSection.classList.add('active');
+  packSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+function calcCompleteness(d){
+  const keys = ['audit_week','capacity','pressure','constraint'];
+  const base = keys.filter(k => ((d[k] || '').trim().length > 0)).length;
+
+  const tasks = Array.isArray(d.tasks) ? d.tasks : [];
+  const tasksFilled = tasks.filter(t => (t.task||'').trim().length > 0).length;
+
+  // 4 context fields + tasks
+  const max = 4 + 6; // cap tasks contribution
+  const filled = base + Math.min(tasksFilled, 6);
+  return Math.round((filled / max) * 100);
+}
+
+function calcClaritySignal(d, completeness){
+  const tasks = (Array.isArray(d.tasks) ? d.tasks : []).filter(t => (t.task||'').trim().length);
+  const pressure = clampNum(Number(d.pressure||0), 0, 10);
+
+  if (tasks.length >= 6 && completeness >= 70 && pressure <= 6) return { label: 'Strong (controlled)', cls:'high' };
+  if (tasks.length >= 3 && completeness >= 45) return { label: 'Developing (tighten trade-offs)', cls:'medium' };
+  if (pressure >= 7) return { label: 'High pressure (needs reset ask)', cls:'medium' };
+  return { label: 'Weak (too vague)', cls:'low' };
+}
+
+function topTasks(d, n=5){
+  const tasks = (Array.isArray(d.tasks) ? d.tasks : []).filter(t => (t.task||'').trim().length);
+  tasks.sort((a,b) => (Number(b.score||0) - Number(a.score||0)));
+  return tasks.slice(0, n);
+}
+
+function buildOnePageSummary(d){
+  const safe = (s) => (s || '').trim() || '—';
+  const now = new Date();
+  const date = now.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+
+  const pressure = clampNum(Number(d.pressure || 0), 0, 10);
+  const pressureLabel = pressure <= 2 ? 'Low' : (pressure <= 6 ? 'Medium' : 'High');
+
+  const tasks = (Array.isArray(d.tasks) ? d.tasks : []);
+  const filledTasks = tasks.filter(t => (t.task||'').trim().length);
+  const top = topTasks(d, 5);
+
+  const out = [];
+  out.push(`PRIORITY AUDIT PACK (One-page)`);
+  out.push(`Date created: ${date}`);
+  out.push(``);
+  out.push(`CONTEXT`);
+  out.push(`• Period: ${safe(d.audit_week)}`);
+  out.push(`• Real capacity: ${safe(d.capacity)}`);
+  out.push(`• Priority chaos index: ${pressureLabel} (${pressure}/10)`);
+  out.push(``);
+  out.push(`TOP CONSTRAINT (what is breaking the system)`);
+  out.push(indentBlock(safe(d.constraint)));
+  out.push(``);
+  out.push(`TASK INVENTORY SNAPSHOT`);
+  out.push(`• Tasks captured: ${filledTasks.length}`);
+  out.push(`• Scoring model: (Urgency + Impact) * 2  - Effort + Risk  (- delegation adjustment)`);
+  out.push(``);
+  out.push(`TOP PRIORITIES (by score)`);
+  if (!top.length){
+    out.push(`   — Add tasks to generate ranked priorities.`);
+  } else {
+    top.forEach((t, i) => {
+      out.push(`   ${i+1}. ${safe(t.task)}  (Score: ${Number(t.score||0)})  Due: ${t.due || '—'}  Owner: ${safe(t.owner || 'You')}`);
+    });
+  }
+  out.push(``);
+  out.push(`DECISION ASK (what must be clarified)`);
+  out.push(indentBlock(buildDecisionAsk(d)));
+  out.push(``);
+  out.push(`TRADE-OFF LINE (to stop drift)`);
+  out.push(indentBlock(`If new work is added, we confirm what is removed or delayed — in writing.`));
+
+  return out.join('\n');
+}
+
+function buildDecisionAsk(d){
+  const top = topTasks(d, 3);
+  if (!top.length){
+    return `Confirm the top 3 priorities and the trade-offs.\nRight now the work is being prioritised by noise, not impact.`;
+  }
+  return `Confirm that the top priorities for this period are:\n` +
+    top.map((t,i) => `• ${i+1}) ${t.task}`).join('\n') +
+    `\n\nThen confirm what is explicitly deprioritised/deferred so delivery is realistic.`;
+}
+
+function buildRiskCards(d, grid){
+  const tasks = (Array.isArray(d.tasks) ? d.tasks : []).filter(t => (t.task||'').trim());
+  const pressure = clampNum(Number(d.pressure||0), 0, 10);
+
+  const cards = [
+    {
+      title: 'Delivery risk (quality drift)',
+      icon: 'fas fa-chart-line',
+      body: `When priorities are unclear, response work crowds out deep work.\nQuality declines first — then timelines slip.`
+    },
+    {
+      title: 'Credibility risk (silent under-delivery)',
+      icon: 'fas fa-user-shield',
+      body: `Without explicit trade-offs, you’re set up to “fail quietly”.\nThis pack creates a record that you flagged capacity honestly.`
+    },
+    {
+      title: 'Burnout risk (compounding)',
+      icon: 'fas fa-heart-pulse',
+      body: `If recovery windows disappear, stress becomes the default baseline.\nThe work feels heavier and decision-making degrades.`
+    },
+    {
+      title: 'Priority drift risk (everything stays urgent)',
+      icon: 'fas fa-compass',
+      body: `If you don’t lock the rules, your workload is shaped by the loudest request.\nThe fix is decision rights + trade-offs, not “work harder”.`
+    },
+    {
+      title: 'Manager reset trigger (what to ask for)',
+      icon: 'fas fa-handshake',
+      body: `Ask for:\n• Top priorities confirmed\n• Trade-offs documented\n• A review date\nThis is how you regain control without conflict.`
+    },
+    {
+      title: pressure >= 7 ? 'High pressure indicator' : 'Audit gap (tighten clarity)',
+      icon: pressure >= 7 ? 'fas fa-triangle-exclamation' : 'fas fa-magnifying-glass',
+      body: pressure >= 7
+        ? `Your chaos index is high. That’s a timing signal.\nAct while you can still set the terms — before the situation sets them for you.`
+        : (tasks.length < 3 ? `Capture at least 3 tasks and score them.\nA short list with scores beats a long list with feelings.` : `Your audit is in motion.\nNow turn the list into decisions (trade-offs + owners + dates).`)
+    }
+  ];
+
+  cards.slice(0, 6).forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'pack-card';
+    card.innerHTML = `
+      <div class="pc-ico"><i class="${c.icon}"></i></div>
+      <div class="pc-title">${escapeHtml(c.title)}</div>
+      <div class="pc-body">${escapeHtml(c.body).replaceAll('\n','<br>')}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function buildScriptCards(d, grid){
+  const period = (d.audit_week||'this period').trim() || 'this period';
+  const top = topTasks(d, 3);
+  const topLine = top.length
+    ? top.map((t,i)=>`• ${i+1}) ${t.task}`).join('\n')
+    : `• [Add 3 priorities here]`;
+
+  const scripts = [
+    {
+      title: 'Manager email opener (calm reset)',
+      icon: 'fas fa-envelope',
+      body:
+`Subject: Priority reset — ${period}
+
+Hi [Name],
+
+I’ve done a quick priority audit to make delivery realistic and avoid “do it all” drift.
+Here are the top priorities I’m currently carrying (ranked):
+
+${topLine}
+
+To deliver these well, I need explicit trade-offs if new work is added.
+Can we confirm the top priorities and what is deprioritised, in writing, for this period?
+
+Thanks,
+[Your name]`
+    },
+    {
+      title: 'In-meeting line (trade-offs)',
+      icon: 'fas fa-shield',
+      body:
+`“I can deliver the top priorities — but I can’t deliver everything.
+If we add something, we need to remove or delay something else.
+Let’s agree the trade-offs now so we don’t drift back into overload.”`
+    },
+    {
+      title: 'Follow-up note (locks decisions)',
+      icon: 'fas fa-pen-to-square',
+      body:
+`Subject: Summary — priorities and trade-offs (${period})
+
+Thanks for the discussion today. My understanding is:
+
+• Confirmed priorities:
+${topLine}
+
+• Deprioritised / deferred:
+• [Item A]
+• [Item B]
+
+• Review date: [date]
+• Rule: If new work is added, trade-offs will be confirmed in writing.
+
+If anything above is incorrect, please reply with amendments. Otherwise I’ll proceed on this basis.`
+    }
+  ];
+
+  scripts.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'pack-card';
+    card.innerHTML = `
+      <div class="pc-ico"><i class="${s.icon}"></i></div>
+      <div class="pc-title">${escapeHtml(s.title)}</div>
+      <div class="pc-body">${escapeHtml(s.body).replaceAll('\n','<br>')}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function buildDraftText(){
+  const d = getDraft();
+  const tasks = Array.isArray(d.tasks) ? d.tasks : [];
+  const filled = tasks.filter(t => (t.task||'').trim().length);
+
+  const out = [];
+  out.push('PRIORITY AUDIT WORKSHEET (Draft)');
+  out.push('===============================');
+  out.push('');
+  out.push(`Period: ${(d.audit_week||'—').trim() || '—'}`);
+  out.push(`Capacity: ${(d.capacity||'—').trim() || '—'}`);
+  out.push(`Chaos index: ${clampNum(Number(d.pressure||0), 0, 10)}/10`);
+  out.push('');
+  out.push('Constraint:');
+  out.push((d.constraint||'—').trim() || '—');
+  out.push('');
+  out.push(`Tasks captured: ${filled.length}`);
+  out.push('');
+  filled.forEach((t,i) => {
+    out.push(`${i+1}. ${t.task} | Score: ${Number(t.score||0)} | Due: ${t.due || '—'} | Owner: ${(t.owner||'You').trim() || 'You'}`);
+  });
+
+  return out.join('\n');
+}
+
+function buildPackText(){
+  const d = getDraft();
+  const onePage = buildOnePageSummary(d);
+
+  const risks = [
+    '1) Delivery risk: unclear priorities cause quality drift and missed commitments.',
+    '2) Credibility risk: without trade-offs you can be blamed for “not managing time”.',
+    '3) Burnout risk: constant urgency erodes recovery and decision-making.',
+    '4) Fix: confirm priorities + trade-offs + review date (in writing).'
+  ].join('\n');
+
+  const out = [];
+  out.push(onePage);
+  out.push('\n\nRISKS + TRADE-OFFS\n=================\n');
+  out.push(risks);
+  out.push('\n\nSCRIPTS\n=======\n');
+  out.push('Use the scripts in the page UI (copy/paste) for manager reset.');
+
+  return out.join('');
+}
+
+/* ===========================
+   UTIL
+=========================== */
+function clampNum(n, min, max){ return Math.max(min, Math.min(max, n)); }
+function numOr0(v){ const n = Number(v||0); return isNaN(n) ? 0 : n; }
+function indentBlock(text){
+  return (text || '—').split('\n').map(l => `   ${l}`).join('\n');
+}
+function escapeHtml(str){
+  return (str || '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
+/* ===========================
+   MY PLAYBOOK (LOCALSTORAGE)
+=========================== */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'priority-audit-worksheet';
+const CURRENT_TOOL_TITLE = 'Priority Audit Worksheet';
+const CURRENT_TOOL_TYPE = 'Worksheet';
+
+function getSavedItems(){
+  try {
+    const raw = localStorage.getItem(PLAYBOOK_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch(e){
+    console.warn('Error reading saved items:', e);
+    return [];
+  }
+}
+function setSavedItems(items){
+  try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+  catch(e){ console.warn('Error saving items:', e); }
+}
+
+function initializePlaybook(){
+  const playbookOverlay = document.getElementById('playbookOverlay');
+  const playbookSidebar = document.getElementById('playbookSidebar');
+  const playbookButton = document.getElementById('myPlaybookButton');
+  const closeBtn = document.getElementById('closePlaybook');
+  const saveItemBtn = document.getElementById('saveBtn');
+
+  if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+  renderSavedItems();
+
+  const savedItems = getSavedItems();
+  const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+  updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+  saveItemBtn.addEventListener('click', () => {
+    const items = getSavedItems();
+    const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+    let nowSaved;
+
+    if (index === -1) {
+      const toolLink = window.location.pathname.split('/').pop() || 'priority-audit-worksheet.html';
+      items.push({
+        id: CURRENT_TOOL_ID,
+        title: CURRENT_TOOL_TITLE,
+        type: CURRENT_TOOL_TYPE,
+        link: toolLink,
+        savedAt: new Date().toISOString()
+      });
+      nowSaved = true;
+    } else {
+      items.splice(index, 1);
+      nowSaved = false;
+    }
+
+    setSavedItems(items);
+    updateSaveButtonState(saveItemBtn, nowSaved);
+    renderSavedItems();
+  });
+
+  playbookButton.addEventListener('click', () => {
+    playbookOverlay.classList.add('open');
+    playbookSidebar.classList.add('open');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    playbookOverlay.classList.remove('open');
+    playbookSidebar.classList.remove('open');
+  });
+
+  playbookOverlay.addEventListener('click', (e) => {
+    if (e.target === playbookOverlay) {
+      playbookOverlay.classList.remove('open');
+      playbookSidebar.classList.remove('open');
+    }
+  });
+}
+
+function updateSaveButtonState(button, isSaved){
+  if (!button) return;
+  const icon = button.querySelector('i');
+  const label = button.querySelector('span');
+
+  if (isSaved) {
+    button.classList.add('saved');
+    if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+    if (label) label.textContent = 'Saved';
+  } else {
+    button.classList.remove('saved');
+    if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+    if (label) label.textContent = 'Save item';
+  }
+}
+
+function renderSavedItems(){
+  const listEl = document.getElementById('savedItemsList');
+  const emptyEl = document.getElementById('savedItemsEmpty');
+  if (!listEl || !emptyEl) return;
+
+  const items = getSavedItems();
+  listEl.innerHTML = '';
+
+  if (!items.length) {
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+
+  items.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'saved-item';
+
+    const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+    const dateText = savedDate
+      ? savedDate.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
+      : '';
+
+    li.innerHTML = `
+      <div class="saved-item-title-row">
+        <span class="saved-item-title">${escapeHtml(item.title)}</span>
+        <span class="saved-item-type">${escapeHtml(item.type)}</span>
+      </div>
+      <div class="saved-item-meta">
+        ${dateText ? `Saved on ${dateText}` : ``}
+      </div>
+      <a class="saved-item-link" href="${escapeHtml(item.link)}">
+        Open <i class="fas fa-arrow-right"></i>
+      </a>
+    `;
+    listEl.appendChild(li);
+  });
+}
+</script>
+
+</body>
+</html>

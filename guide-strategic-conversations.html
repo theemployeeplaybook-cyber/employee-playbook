@@ -1,0 +1,2502 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategic Conversations Guide | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    :root {
+      --primary-white: #FFFFFF;
+      --light-gray: #F8F9FA;
+      --medium-gray: #E9ECEF;
+      --dark-gray: #6C757D;
+      --text-dark: #212529;
+      --text-medium: #495057;
+
+      --accent-purple: #7B5FC4;
+      --accent-purple-dark: #5A4496;
+      --light-purple: #E6E0F5;
+      --lighter-purple: #F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+
+      /* HERO: premium aurora (purple family + subtle gold) */
+      --hero-bg: linear-gradient(135deg,
+        rgba(123, 95, 196, 0.18) 0%,
+        rgba(123, 95, 196, 0.08) 55%,
+        rgba(123, 95, 196, 0.04) 100%
+      );
+
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+      --danger-red: #ef4444;
+
+      /* Category colours (TEP scheme — known) */
+      --category-clarity: #7B5FC4;
+      --category-burnout: #f59e0b;
+      --category-manager: #10b981;
+      --category-politics: #3b82f6;
+      --category-hr: #6D28D9;
+      --category-confidence: #ef4444;
+      --category-career: #800020;
+
+      /* Additional category tokens (for newer 9-category system) */
+      --category-boundaries: #0ea5e9; /* Boundaries & Overextension */
+      --category-team: #6366f1;       /* Team Issues (fallback) */
+      --category-decision: #800020;   /* Decision Making & Career Path aligns with career */
+    }
+
+    .dark-mode {
+      --primary-white: #1a1a1a;
+      --light-gray: #2a2a2a;
+      --medium-gray: #3a3a3a;
+      --dark-gray: #888888;
+      --text-dark: #e0e0e0;
+      --text-medium: #b0b0b0;
+
+      --accent-purple: #9d86e9;
+      --accent-purple-dark: #7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.2);
+      --lighter-purple: rgba(123, 95, 196, 0.1);
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+
+      --hero-bg: linear-gradient(135deg,
+        rgba(157, 134, 233, 0.18) 0%,
+        rgba(157, 134, 233, 0.10) 55%,
+        rgba(157, 134, 233, 0.06) 100%
+      );
+
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      --category-clarity: #9d86e9;
+      --category-burnout: #fbbf24;
+      --category-manager: #34d399;
+      --category-politics: #60a5fa;
+      --category-hr: #8B5CF6;
+      --category-confidence: #f87171;
+      --category-career: #B03060;
+
+      --category-boundaries: #38bdf8;
+      --category-team: #818cf8;
+      --category-decision: #B03060;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+    body {
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      min-height: 100vh;
+    }
+    body.loaded { opacity: 1; }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+    /* NAV */
+    nav{
+      position: fixed; top: 0; width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      height: 80px;
+    }
+    .nav-container { display:flex; justify-content:space-between; align-items:center; padding:12px 0; height:100%; }
+
+    .logo-img { height: 100px; width:auto; transform: translateX(20%); padding:14px 10px; display:block; min-height:100px; transition: all .3s ease; }
+    .logo-img.fallback{
+      width:200px; height:50px; background: var(--accent-purple); color:#fff;
+      display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px;
+      border-radius:4px; transform: translateX(20%);
+    }
+
+    .nav-links { display:flex; gap:50px; }
+    .nav-link { color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; transition: color .3s ease; }
+    .nav-link:hover { color: var(--accent-purple); }
+    .nav-link-container { position:relative; display:inline-block; }
+    .new-tag{
+      position:absolute; top:-12px; right:-35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color:#000; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2); white-space:nowrap;
+    }
+    .nav-actions{ display:flex; align-items:center; gap:24px; transform: translateX(-20%); }
+    .header-cta{
+      background: var(--accent-purple); color:#fff; padding:8px 20px; border-radius:50px;
+      text-decoration:none; font-weight:600; font-size:14px;
+      transition: all .3s ease; box-shadow: 0 5px 15px rgba(123,95,196,.3);
+    }
+    .header-cta:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(123,95,196,.35); }
+    .sign-in{ color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; }
+    .sign-in:hover{ color: var(--accent-purple); }
+
+    .theme-toggle{
+      background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:16px;
+      width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition: background-color .3s ease;
+    }
+    .theme-toggle:hover{ background-color: var(--light-gray); }
+
+    .mobile-toggle{
+      display:none;
+      background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:24px;
+      width:40px; height:40px; border-radius:50%;
+      align-items:center; justify-content:center; transition: background-color .3s ease;
+    }
+    .mobile-toggle:hover{ background-color: var(--light-gray); }
+    .mobile-sign-in, .mobile-sign-up { display:none; }
+
+    @media (max-width: 768px){
+      .nav-container{ justify-content:center; position:relative; }
+      .logo{ position:absolute; left:50%; transform: translateX(-50%); display:flex; align-items:center; height:100%; }
+      .logo-img{ height:125px; transform:none; padding:12px 0; }
+      .mobile-toggle{ display:flex; position:absolute; left:20px; }
+      .nav-actions{ transform:none; gap:16px; position:absolute; right:20px; }
+      .nav-actions .sign-in, .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none; position:absolute; top:100%; left:0; width:100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction:column; padding:20px; gap:20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
+      .nav-links.active{ display:flex; }
+      .nav-link-container{ display:flex; align-items:center; width:100%; }
+      .new-tag{ position:static; margin-left:8px; }
+      .mobile-sign-in{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--primary-white);
+        color: var(--accent-purple);
+        border-radius:8px;
+        text-align:center;
+        font-weight:600;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all .3s ease;
+      }
+      .mobile-sign-up{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--accent-purple);
+        color:#fff;
+        border-radius:8px;
+        text-align:center;
+        font-weight:600;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all .3s ease;
+      }
+    }
+
+    /* HERO */
+    .tool-hero-section{
+      width:100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+
+    /* Premium overlay/pattern: aurora + subtle grid + gold shimmer */
+    .tool-hero-section::before{
+      content:'';
+      position:absolute; inset:0;
+      background:
+        radial-gradient(1000px 420px at 12% 35%, rgba(123,95,196,0.18), transparent 60%),
+        radial-gradient(900px 420px at 72% 10%, rgba(123,95,196,0.14), transparent 65%),
+        radial-gradient(900px 520px at 88% 78%, rgba(123,95,196,0.10), transparent 60%);
+      z-index:1;
+      opacity: 0.9;
+    }
+    .dark-mode .tool-hero-section::before{
+      background:
+        radial-gradient(1000px 420px at 12% 35%, rgba(157,134,233,0.18), transparent 60%),
+        radial-gradient(900px 420px at 72% 10%, rgba(157,134,233,0.14), transparent 65%),
+        radial-gradient(900px 520px at 88% 78%, rgba(157,134,233,0.10), transparent 60%);
+      opacity: 0.95;
+    }
+
+    .tool-hero-content{
+      position:relative; z-index:2;
+      max-width:1100px; margin:0 auto; padding: 0 20px 10px;
+      animation: heroFadeUp .45s ease-out;
+      text-align:left;
+    }
+    @keyframes heroFadeUp { from{opacity:0; transform: translateY(18px);} to{opacity:1; transform:none;} }
+
+    .breadcrumb{
+      font-size:10px; text-transform:uppercase; letter-spacing:1px;
+      color: var(--dark-gray);
+      margin-bottom:10px;
+      display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+    }
+    .breadcrumb a{
+      color: var(--text-medium); text-decoration:none !important;
+      font-weight:500; letter-spacing:.5px; transition: color .2s ease;
+    }
+    .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+    .breadcrumb i{ color: var(--dark-gray); opacity:.8; font-size:10px; }
+    .breadcrumb .current{ color: var(--text-dark); font-weight:600; }
+
+    .checklist-name{
+      font-size:20px; font-weight:600; color: var(--accent-purple);
+      text-transform:uppercase; letter-spacing:1.8px;
+      margin-bottom:14px; margin-top:32px; display:block;
+    }
+
+    .hero-main-heading{
+      font-size:46px; font-weight:650; color: var(--text-dark);
+      line-height:1.1; margin-bottom:16px; max-width:960px;
+      letter-spacing: -0.3px;
+    }
+
+    .hero-main-heading i{
+      background: transparent !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      border: none !important;
+      margin-right: 10px;
+      color: var(--accent-purple-dark);
+      font-size: 39px;
+    }
+
+    .hero-subheading{
+      font-size:16px; color: var(--text-medium);
+      line-height:1.6; max-width:960px; margin-bottom:18px;
+    }
+
+    .hero-disclaimer{
+      margin-top: 12px;
+      max-width: 960px;
+      font-size: 12.5px;
+      color: var(--dark-gray);
+      line-height: 1.55;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--accent-purple) 18%, transparent);
+      background: color-mix(in srgb, var(--accent-purple) 8%, transparent);
+    }
+    .dark-mode .hero-disclaimer{
+      border-color: color-mix(in srgb, var(--accent-purple) 28%, transparent);
+      background: color-mix(in srgb, var(--accent-purple) 14%, transparent);
+    }
+    .hero-disclaimer strong{ color: var(--text-dark); }
+
+    .save-btn{
+      position:absolute; top:16px; right:24px; z-index:5;
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 12px; font-size:12px; font-weight:500;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.6);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--accent-purple-dark);
+      cursor:pointer; transition: all .2s ease;
+    }
+    .save-btn:hover{ transform: translateY(-1px); box-shadow: 0 4px 10px rgba(123,95,196,0.18); background:#fff; }
+    .dark-mode .save-btn{ background: rgba(20,20,20,0.9); border-color: rgba(157,134,233,0.6); }
+    .save-btn.saved{ background: var(--accent-purple); color:#fff; border-color: transparent; }
+
+    /* HERO CATEGORY PILLS */
+    .category-pills-title{
+      font-size:12px; font-weight:600; color: var(--text-medium);
+      text-transform:uppercase; letter-spacing:1px;
+      margin-bottom:14px; display:block;
+    }
+    .category-pills-grid{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+
+    .category-pill{
+      --pill-color: var(--accent-purple);
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 12px; border-radius:999px;
+      font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.55px;
+      text-decoration:none;
+      height:32px;
+      white-space:nowrap;
+      cursor:pointer;
+
+      color: var(--pill-color);
+      border: 1px solid color-mix(in srgb, var(--pill-color) 32%, transparent);
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--pill-color) 12%, transparent),
+        color-mix(in srgb, var(--pill-color) 6%, transparent)
+      );
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: all .2s ease;
+    }
+    .category-pill i{ color: var(--pill-color); }
+    .category-pill:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.10);
+      border-color: color-mix(in srgb, var(--pill-color) 45%, transparent);
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--pill-color) 16%, transparent),
+        color-mix(in srgb, var(--pill-color) 10%, transparent)
+      );
+    }
+    .dark-mode .category-pill{
+      border-color: color-mix(in srgb, var(--pill-color) 42%, transparent);
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--pill-color) 22%, transparent),
+        color-mix(in srgb, var(--pill-color) 12%, transparent)
+      );
+      box-shadow: 0 1px 3px rgba(0,0,0,0.35);
+    }
+    .dark-mode .category-pill:hover{
+      border-color: color-mix(in srgb, var(--pill-color) 60%, transparent);
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--pill-color) 28%, transparent),
+        color-mix(in srgb, var(--pill-color) 16%, transparent)
+      );
+      box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+    }
+
+    /* CONTEXT */
+    .context-tips-grid{
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap:32px; width:100%;
+      max-width:1100px; margin: 6px auto 26px;
+      padding: 24px 20px 10px;
+    }
+    .context-card, .tips-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 28px 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .section-title{
+      font-size:20px; font-weight:600; color: var(--text-dark);
+      margin-bottom:18px; display:flex; align-items:center; gap:10px;
+    }
+    .section-title i { color: var(--accent-purple); }
+
+    .tip-badges{ display:flex; gap:10px; flex-wrap:wrap; margin: -2px 0 14px; }
+    .tip-badge{
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      border: 1px solid color-mix(in srgb, var(--accent-purple) 30%, transparent);
+      background: color-mix(in srgb, var(--accent-purple) 10%, transparent);
+      color: var(--accent-purple-dark);
+    }
+    .dark-mode .tip-badge{
+      border-color: color-mix(in srgb, var(--accent-purple) 45%, transparent);
+      background: color-mix(in srgb, var(--accent-purple) 18%, transparent);
+      color: var(--accent-purple);
+    }
+
+    .bullet-list{ list-style:none; }
+    .bullet-list li{
+      color: var(--text-medium);
+      line-height:1.6;
+      margin-bottom:14px;
+      padding-left:26px;
+      position:relative;
+    }
+    .bullet-list li::before{
+      content:"•";
+      position:absolute; left:10px;
+      color: var(--accent-purple);
+      font-size:18px;
+    }
+
+    /* FRAMEWORK */
+    .framework-shell{ max-width:1100px; margin:0 auto; padding: 0 20px 20px; }
+    .framework-header{ margin: 18px 0 16px; }
+    .framework-header h2{
+      font-size:28px; font-weight:600;
+      color: var(--accent-purple-dark);
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+    }
+    .framework-header p{
+      color: var(--text-medium);
+      font-size:14px;
+      max-width: 900px;
+    }
+
+    .canvas-grid{
+      display:grid; grid-template-columns: 1.05fr 0.95fr;
+      gap:18px; margin-bottom:22px;
+    }
+
+    .panel{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+      position:relative;
+      overflow:hidden;
+    }
+    .dark-mode .panel{ box-shadow: 0 6px 22px rgba(0,0,0,0.22); }
+    .panel::before{
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:3px;
+      background: linear-gradient(135deg, rgba(123,95,196,0.9), rgba(90,68,150,0.7));
+      opacity:.9;
+    }
+
+    .panel-title-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
+    .panel-title{
+      font-size:14px; font-weight:700;
+      letter-spacing:.7px; text-transform:uppercase;
+      color: var(--accent-purple-dark);
+      display:flex; align-items:center; gap:10px;
+    }
+    .panel-title i { color: var(--accent-purple); font-size:14px; }
+
+    .panel-sub{
+      color: var(--text-medium);
+      font-size:13px;
+      line-height:1.55;
+      margin-bottom:14px;
+    }
+
+    .field-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .field{ display:flex; flex-direction:column; gap:7px; }
+    .span-2{ grid-column: span 2; }
+
+    .label{
+      font-size:12px; font-weight:600;
+      color: var(--text-dark);
+      display:flex; align-items:center; justify-content:space-between; gap:8px;
+    }
+    .label .hint{ font-size:11px; font-weight:600; color: var(--dark-gray); }
+
+    .input, .textarea, .select{
+      width:100%;
+      border:1px solid var(--border-light);
+      background: var(--light-gray);
+      color: var(--text-dark);
+      border-radius:12px;
+      padding:11px 12px;
+      font-size:13.5px;
+      outline:none;
+      transition: box-shadow .2s ease, border-color .2s ease, background-color .2s ease;
+    }
+    .dark-mode .input, .dark-mode .textarea, .dark-mode .select{ background: rgba(255,255,255,0.05); }
+
+    .input:focus, .textarea:focus, .select:focus{
+      border-color: rgba(123,95,196,0.55);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.14);
+      background: rgba(255,255,255,0.9);
+    }
+    .dark-mode .input:focus, .dark-mode .textarea:focus, .dark-mode .select:focus{
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.20);
+    }
+
+    .textarea{ min-height:110px; resize: vertical; }
+
+    .micro-cards{ display:grid; grid-template-columns:1fr; gap:10px; margin-top:10px; }
+    .micro{
+      border:1px solid var(--border-light);
+      background: linear-gradient(135deg, rgba(123,95,196,0.06), rgba(123,95,196,0.02));
+      border-radius:12px;
+      padding:12px;
+    }
+    .dark-mode .micro{ background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.08)); }
+    .micro h4{
+      font-size:13px; font-weight:700; color: var(--text-dark);
+      margin-bottom:6px; display:flex; align-items:center; gap:8px;
+    }
+    .micro h4 i { color: var(--accent-purple); }
+    .micro p{ font-size:12.8px; color: var(--text-medium); line-height:1.55; }
+    .micro code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12px;
+      background: rgba(0,0,0,0.04);
+      padding:2px 6px;
+      border-radius:8px;
+      color: var(--text-dark);
+    }
+    .dark-mode .micro code{ background: rgba(255,255,255,0.08); }
+
+    .output-box{
+      border: 1px solid rgba(123,95,196,0.18);
+      background: rgba(123,95,196,0.06);
+      border-radius:14px;
+      padding:14px;
+      margin-top:10px;
+    }
+    .dark-mode .output-box{ background: rgba(123,95,196,0.14); border-color: rgba(123,95,196,0.28); }
+
+    .output-title{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom:8px;
+    }
+    .output-title h4{
+      font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase;
+      color: var(--accent-purple-dark);
+    }
+    .output-content{
+      font-size:13.5px;
+      color: var(--text-dark);
+      line-height:1.55;
+      white-space: pre-wrap;
+    }
+
+    .mini-btn{
+      border: 1px solid rgba(123,95,196,0.28);
+      background: rgba(255,255,255,0.9);
+      color: var(--accent-purple-dark);
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .2s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .dark-mode .mini-btn{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(157,134,233,0.32);
+      color: var(--accent-purple);
+    }
+    .mini-btn:hover{ transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.10); }
+    .mini-btn.primary{
+      background: var(--premium-gradient);
+      color:#fff;
+      border:none;
+      box-shadow: 0 10px 24px rgba(123,95,196,0.18);
+    }
+    .mini-btn.primary:hover{ box-shadow: 0 12px 28px rgba(123,95,196,0.28); }
+
+    .framework-actions-bottom{
+      margin-top: 16px;
+      display:flex;
+      justify-content:flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 14px 0 4px;
+    }
+
+    /* TIMELINE */
+    .timeline-table{
+      width:100%;
+      border-collapse: collapse;
+      overflow:hidden;
+      border-radius:12px;
+      border:1px solid var(--border-light);
+      background: var(--primary-white);
+    }
+    .timeline-table th, .timeline-table td{
+      text-align:left;
+      padding:10px;
+      border-bottom:1px solid var(--border-light);
+      vertical-align:top;
+      font-size:13px;
+      color: var(--text-medium);
+    }
+    .timeline-table th{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      font-weight:700;
+      color: var(--text-dark);
+      background: rgba(123,95,196,0.06);
+    }
+
+    /* CHECKLIST + SCORE */
+    .checklist-body{ max-width:1100px; margin:0 auto; padding:0 20px 20px; }
+    .checklist-section-title{
+      font-size:22px; font-weight:700; color: var(--accent-purple-dark);
+      margin-bottom:10px; margin-top:16px !important;
+      display:flex; align-items:center; gap:10px;
+    }
+    .checklist-intro{ color: var(--text-medium); font-size:14px; margin-bottom:14px; max-width:900px; }
+    .checklist-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:20px; }
+    .checklist-item{
+      background: var(--primary-white);
+      padding:14px 16px;
+      border-radius:10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      border:1px solid var(--border-light);
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      transition: transform .2s ease, box-shadow .2s ease;
+      cursor:pointer;
+      min-height:74px;
+    }
+    .checklist-item:hover{ transform: translateY(-2px); box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+    .checklist-item i{ color: var(--accent-purple); font-size:18px; margin-top:3px; flex-shrink:0; }
+    .checklist-text{ flex:1; color: var(--text-medium); font-size:15px; line-height:1.5; }
+
+    .clarity-score-section{ max-width:1100px; margin:22px auto 34px; padding:0 20px; }
+    .presence-snapshot-header{ margin-bottom:14px; text-align:left; }
+    .presence-snapshot-header h2{ font-size:22px; font-weight:700; color: var(--accent-purple-dark); margin-bottom:6px; }
+    .presence-snapshot-header p{ font-size:14px; color: var(--text-medium); line-height:1.5; }
+
+    .clarity-score-bar{
+      display:flex; align-items:stretch; gap:30px;
+      background: var(--primary-white);
+      border-radius:16px;
+      padding:22px 24px 20px;
+      box-shadow: 0 8px 30px rgba(123,95,196,0.12);
+      border:1px solid rgba(123,95,196,0.15);
+    }
+    .clarity-progress-container{ flex:1.4; }
+    .clarity-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+    .clarity-title{ font-size:20px; font-weight:700; color: var(--accent-purple-dark); }
+    .clarity-percentage{ font-size:28px; font-weight:700; color: var(--accent-purple); }
+
+    .progress-container{ height:10px; background: var(--light-gray); border-radius:6px; overflow:hidden; margin-bottom:6px; }
+
+    /* PROGRESS FILL (as requested) */
+    .mini-fill{
+      height:100%;
+      width:0%;
+      border-radius: 6px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: var(--premium-gradient);
+    }
+    .mini-fill.high{ background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .mini-fill.medium{ background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .mini-fill.low{ background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+    .progress-labels{ display:flex; justify-content:space-between; font-size:12px; color: var(--dark-gray); }
+
+    .presence-dimensions{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; margin-top:14px; }
+    .presence-dimension-pill{
+      border-radius:10px; padding:8px 10px;
+      border:1px solid var(--border-light);
+      background: var(--light-gray);
+      display:flex; justify-content:space-between; align-items:center;
+      font-size:13px; color: var(--text-medium);
+    }
+    .presence-dimension-pill span.label{ font-weight:600; color: var(--text-dark); }
+    .presence-dimension-pill span.score{ font-weight:700; color: var(--accent-purple); }
+
+    .actions-container{
+      display:flex; gap:12px; flex-shrink:0;
+      flex-direction:column; justify-content:center; align-items:stretch;
+      max-width:260px;
+    }
+    .action-btn{
+      background: var(--premium-gradient);
+      color:#fff;
+      border:none;
+      padding:10px 18px;
+      font-size:13.5px;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+      display:flex; align-items:center; gap:8px;
+      transition: all .3s ease;
+      width:100%;
+      justify-content:center;
+    }
+    .action-btn:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(123,95,196,0.3); }
+    .action-btn.secondary{ background: var(--light-purple); color: var(--accent-purple-dark); }
+    .action-btn.secondary:hover{ background: var(--accent-purple); color:#fff; }
+    .action-btn:disabled{ opacity:.5; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+
+    .smart-summary-section{ max-width:1100px; margin:0 auto 60px; padding:0 20px; display:none; }
+    .smart-summary-section.active{ display:block; animation: slideIn .5s ease; }
+    @keyframes slideIn { from{opacity:0; transform: translateY(20px);} to{opacity:1; transform:none;} }
+
+    .summary-header{ text-align:center; margin-bottom:18px; }
+    .summary-title{ font-size:24px; font-weight:700; color: var(--accent-purple-dark); margin-bottom:6px; }
+    .summary-subtitle{ color: var(--text-medium); font-size:16px; margin-bottom:6px; }
+    .summary-insight{ font-size:14px; color: var(--dark-gray); max-width:820px; margin:0 auto; }
+
+    .section-header{
+      font-size:18px; font-weight:700;
+      margin-bottom:18px;
+      display:flex; align-items:center; gap:10px;
+      padding-bottom:10px;
+      border-bottom:2px solid var(--light-gray);
+    }
+    .section-header.red{ color: var(--danger-red); }
+    .section-header.purple{ color: var(--accent-purple-dark); }
+    .section-header.blue{ color: var(--accent-purple); }
+
+    .red-flags-grid, .next-steps-grid, .resources-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+      margin-bottom:28px;
+    }
+
+    .red-flag-card, .next-step-card, .resource-card{
+      background: var(--primary-white);
+      border-radius:12px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      height:100%;
+    }
+    .red-flag-card{ box-shadow: 0 4px 12px rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.1); }
+    .red-flag-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+    .next-step-card{ box-shadow: 0 4px 12px rgba(123,95,196,0.08); border:1px solid rgba(123,95,196,0.1); }
+    .next-step-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--premium-gradient); }
+    .resource-card{ box-shadow: 0 4px 12px rgba(123,95,196,0.08); border:1px solid rgba(123,95,196,0.1); transition: all .2s ease; }
+    .resource-card:hover{ transform: translateY(-3px); box-shadow: 0 8px 20px rgba(123,95,196,0.16); }
+    .resource-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--premium-gradient); }
+
+    .flag-icon, .step-icon, .resource-icon{
+      font-size:20px; margin-bottom:12px;
+      width:40px; height:40px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .flag-icon{ color:#ef4444; background: rgba(239,68,68,0.1); }
+    .step-icon, .resource-icon{ color: var(--accent-purple); background: var(--lighter-purple); }
+
+    .flag-title, .step-title, .resource-title{ font-size:15px; font-weight:700; color: var(--text-dark); margin-bottom:8px; }
+    .flag-description, .step-description, .resource-description{ color: var(--text-medium); font-size:13.5px; line-height:1.5; flex-grow:1; }
+    .resource-description{ margin-bottom:12px; }
+    .resource-link{
+      color: var(--accent-purple); font-weight:700; text-decoration:none; font-size:13.5px;
+      display:flex; align-items:center; gap:6px; margin-top:auto;
+    }
+    .resource-link:hover{ text-decoration:underline; }
+
+    /* MY PLAYBOOK */
+    .my-playbook-fab{
+      position:fixed; bottom:24px; right:24px; z-index:1200;
+      background: var(--premium-gradient);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      display:inline-flex; align-items:center; gap:8px;
+      cursor:pointer; font-size:13px; font-weight:700;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all .25s ease;
+    }
+    .my-playbook-fab:hover{ transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.32); }
+
+    .playbook-sidebar-overlay{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,0.45);
+      z-index:1190;
+      opacity:0; pointer-events:none;
+      transition: opacity .25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position:fixed; top:0; right:-380px;
+      width:340px; max-width:90%;
+      height:100%;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index:1191;
+      display:flex; flex-direction:column;
+      border-left: 1px solid var(--border-light);
+      transition: right .25s ease;
+    }
+    .dark-mode .playbook-sidebar{ background: rgba(18,18,18,0.96); box-shadow: -4px 0 22px rgba(0,0,0,0.6); }
+    .playbook-sidebar.open{ right:0; }
+    .playbook-sidebar-header{ padding:20px 20px 14px; border-bottom:1px solid var(--border-light); }
+    .playbook-sidebar-header-title-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+    .playbook-sidebar-header h3{ font-size:18px; font-weight:700; color: var(--text-dark); }
+    .playbook-sidebar-header p{ font-size:13px; color: var(--dark-gray); }
+    .playbook-close-btn{
+      background:none; border:none; color: var(--dark-gray);
+      cursor:pointer; font-size:18px; border-radius:999px;
+      width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+      transition: background-color .2s ease;
+    }
+    .playbook-close-btn:hover{ background: var(--light-gray); }
+    .playbook-sidebar-body{
+      padding:14px 18px 20px; padding-bottom:50px;
+      overflow-y:auto; flex:1;
+      display:flex; flex-direction:column; gap:18px;
+    }
+    .saved-items-empty{ font-size:13px; color: var(--dark-gray); line-height:1.6; }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+    .saved-item{
+      padding:10px 8px;
+      border-radius:10px;
+      border:1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom:10px;
+      display:flex; flex-direction:column; gap:2px;
+    }
+    .saved-item-title-row{ display:flex; justify-content:space-between; align-items:baseline; gap:6px; }
+    .saved-item-title{ font-size:14px; font-weight:700; color: var(--text-dark); }
+    .saved-item-type{ font-size:11px; text-transform:uppercase; letter-spacing:.6px; color: var(--accent-purple-dark); font-weight:700; }
+    .saved-item-meta{ font-size:12px; color: var(--dark-gray); }
+    .saved-item-link{
+      margin-top:6px;
+      font-size:12px;
+      color: var(--accent-purple);
+      text-decoration:none;
+      font-weight:700;
+      display:inline-flex; align-items:center; gap:4px;
+    }
+    .saved-item-link:hover{ text-decoration:underline; }
+
+    .playbook-quick-links{
+      margin-top: 223px;
+      padding-top:10px;
+      border-top:1px solid var(--border-light);
+    }
+    .quick-links-title{
+      font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.8px;
+      color: var(--text-medium);
+    }
+    .playbook-quick-links-list{ display:flex; flex-direction:column; gap:10px; margin-top:6px; }
+    .quick-link-pill{
+      width:50%;
+      padding:4px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.35);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      text-decoration:none;
+      color: var(--accent-purple-dark);
+      font-size:13px;
+      font-weight:600;
+      display:flex; align-items:center; gap:8px;
+    }
+    .quick-link-pill:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+    }
+
+    footer{
+      background: var(--primary-white);
+      padding:10px 0;
+      border-top:1px solid var(--border-light);
+      margin-top:30px;
+      text-align:center;
+      color: var(--text-medium);
+    }
+
+    @media (max-width: 1024px){
+      .context-tips-grid{ grid-template-columns:1fr; gap:24px; }
+      .canvas-grid{ grid-template-columns:1fr; }
+      .red-flags-grid, .next-steps-grid, .resources-grid{ grid-template-columns: repeat(2, 1fr); }
+      .checklist-grid{ grid-template-columns:1fr; }
+      .clarity-score-bar{ flex-direction:column; }
+      .actions-container{ max-width:100%; flex-direction:row; }
+    }
+    @media (max-width: 768px){
+      .tool-hero-section{ margin-top:100px; }
+      .hero-main-heading{ font-size:36px; }
+      .save-btn{ right:18px; top:10px; }
+      .field-grid{ grid-template-columns:1fr; }
+      .span-2{ grid-column: span 1; }
+      .red-flags-grid, .next-steps-grid, .resources-grid{ grid-template-columns:1fr; }
+      .actions-container{ flex-direction:column; }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+    </a>
+
+    <div class="nav-links">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="tool-hero-section">
+  <!-- DO NOT MOVE: Save button placement unchanged -->
+  <button class="save-btn" id="saveBtn">
+    <i class="far fa-bookmark"></i>
+    <span>Save item</span>
+  </button>
+
+  <div class="tool-hero-content">
+    <!-- DO NOT MOVE: Breadcrumb placement unchanged -->
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-house"></i> Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="the-toolkit.html">Toolkit</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="category-confidence-and-influence.html">Confidence & Influence</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Strategic Conversations Guide</span>
+    </div>
+
+    <span class="checklist-name">STRATEGIC CONVERSATIONS GUIDE</span>
+
+    <h1 class="hero-main-heading">
+      <i class="fas fa-comments"></i>
+      Make important conversations work for you and your career
+    </h1>
+
+    <div class="hero-subheading">
+      A high-leverage, outcome-led guide for the moments that quietly decide careers: scope resets, pushback, performance tension, stakeholder conflict, promotion conversations, and “we need to talk” meetings.
+      Build your frame, control the questions, and land a clean decision — with minimal drama and maximum credibility.
+    </div>
+
+    <div class="category-pills-container">
+      <span class="category-pills-title">Related Categories</span>
+      <div class="category-pills-grid">
+        <a href="category-confidence-and-influence.html" class="category-pill" style="--pill-color: var(--category-confidence);">
+          <i class="fas fa-bullseye"></i>
+          <span>Confidence & Influence</span>
+        </a>
+        <a href="category-workplace-dynamics-and-politics.html" class="category-pill" style="--pill-color: var(--category-politics);">
+          <i class="fas fa-people-group"></i>
+          <span>Workplace Dynamics & Politics</span>
+        </a>
+        <a href="category-manager-relationship-and-leadership-style.html" class="category-pill" style="--pill-color: var(--category-manager);">
+          <i class="fas fa-user-shield"></i>
+          <span>Manager Behaviour</span>
+        </a>
+        <a href="category-decision-making-and-career-path.html" class="category-pill" style="--pill-color: var(--category-career);">
+          <i class="fas fa-chess"></i>
+          <span>Decision Making & Career Path</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-disclaimer">
+      <strong>Disclaimer:</strong> This guide is for practical conversation planning and workplace positioning. It does not replace your employer’s policies, HR support, union/representative advice, or tailored legal advice. If there are harassment/discrimination concerns or you feel unsafe, seek appropriate support promptly.
+    </div>
+  </div>
+</div>
+
+<div class="context-tips-grid">
+  <div class="context-card">
+    <h3 class="section-title"><i class="fas fa-compass"></i>When to Use This Guide</h3>
+    <ul class="bullet-list">
+      <li>When you need a decision, not a “nice chat” that later gets reinterpreted.</li>
+      <li>When someone is vague, slippery, or keeps moving the goalposts.</li>
+      <li>When you’re about to push back on workload, scope, deadlines, or responsibility.</li>
+      <li>When a stakeholder is blocking, stalling, or quietly undermining your work.</li>
+      <li>When a performance conversation is brewing and you want facts, not vibes.</li>
+      <li>When you need to ask for something senior people hate giving: time, headcount, budget, or a clear call.</li>
+    </ul>
+  </div>
+
+  <div class="tips-card">
+    <h3 class="section-title"><i class="fas fa-lightbulb"></i>Underrated Conversation Hacks</h3>
+
+    <div class="tip-badges">
+      <span class="tip-badge">Decision framing</span>
+      <span class="tip-badge">Pre-wire</span>
+      <span class="tip-badge">Silence leverage</span>
+      <span class="tip-badge">The recap trap</span>
+    </div>
+
+    <ul class="bullet-list">
+      <li><strong>Ask for the decision type first:</strong> “Is this a decision, a discussion, or an update?” It stops time-wasting and forces clarity.</li>
+      <li><strong>Pre-wire beats persuasion:</strong> the meeting is rarely where influence happens — it’s where it becomes official.</li>
+      <li><strong>Use “two-lane options”:</strong> present two clean paths (both acceptable). People feel in control, and you avoid begging.</li>
+      <li><strong>Use silence as a tool:</strong> ask a precise question, then stop talking. Most people fill silence with the truth.</li>
+      <li><strong>Win with the recap:</strong> if you do nothing else, write a calm recap that fixes the facts. That’s how careers stay clean.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="framework-shell" id="frameworkBlueprint">
+  <div class="framework-header">
+    <h2>Conversation Blueprint</h2>
+    <p>Complete the blueprint to generate: a crisp opening frame, a question ladder, a decision request, and a follow-up recap that’s hard to misread.</p>
+  </div>
+
+  <div class="canvas-grid">
+    <!-- 1) Conversation Target -->
+    <div class="panel">
+      <div class="panel-title-row">
+        <div class="panel-title"><i class="fas fa-bullseye"></i> 1) Target the Conversation</div>
+      </div>
+      <div class="panel-sub">Make it specific: who owns the decision, what “done” looks like, and what happens if this stays fuzzy.</div>
+
+      <div class="field-grid">
+        <div class="field">
+          <div class="label">Who is the decision owner? <span class="hint">name / role</span></div>
+          <input class="input sa-input" data-dimension="read" id="x_who" placeholder="E.g., Line manager / Director / Key stakeholder">
+        </div>
+
+        <div class="field">
+          <div class="label">Relationship type <span class="hint">context</span></div>
+          <select class="select sa-input" data-dimension="read" id="x_reltype">
+            <option value="" selected>Select…</option>
+            <option value="Manager (direct line)">Manager (direct line)</option>
+            <option value="Senior leader (skip-level)">Senior leader (skip-level)</option>
+            <option value="Peer / colleague">Peer / colleague</option>
+            <option value="Cross-functional partner">Cross-functional partner</option>
+            <option value="Direct report">Direct report</option>
+            <option value="Client / external stakeholder">Client / external stakeholder</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Conversation setting <span class="hint">arena</span></div>
+          <select class="select sa-input" data-dimension="read" id="x_where">
+            <option value="" selected>Select…</option>
+            <option value="1:1 (private)">1:1 (private)</option>
+            <option value="Meeting (multiple people)">Meeting (multiple people)</option>
+            <option value="Skip-level / senior forum">Skip-level / senior forum</option>
+            <option value="Message (Teams/Slack)">Message (Teams/Slack)</option>
+            <option value="Email (evidence-friendly)">Email (evidence-friendly)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Timing pressure <span class="hint">urgency</span></div>
+          <select class="select sa-input" data-dimension="impact" id="x_freq">
+            <option value="" selected>Select…</option>
+            <option value="Low (can wait)">Low (can wait)</option>
+            <option value="Medium (this week)">Medium (this week)</option>
+            <option value="High (next 48 hours)">High (next 48 hours)</option>
+            <option value="Critical (today)">Critical (today)</option>
+          </select>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Current reality (facts) <span class="hint">no storytelling</span></div>
+          <textarea class="textarea sa-input" data-dimension="read" id="x_facts" placeholder="E.g., Scope has expanded without a deadline move. Feedback is broad but not tied to examples. A stakeholder is blocking sign-off without stating criteria."></textarea>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">What’s at stake? <span class="hint">impact if unclear</span></div>
+          <textarea class="textarea sa-input" data-dimension="impact" id="x_impact" placeholder="E.g., Missed deadlines, reputational risk, burnout, a narrative that you're 'not delivering', or work becoming unmanageable."></textarea>
+        </div>
+
+        <div class="field">
+          <div class="label">Priority outcome <span class="hint">protect</span></div>
+          <select class="select sa-input" data-dimension="impact" id="x_protect">
+            <option value="" selected>Select…</option>
+            <option value="Role security / performance standing">Role security / performance standing</option>
+            <option value="Reputation / credibility">Reputation / credibility</option>
+            <option value="Workload sustainability">Workload sustainability</option>
+            <option value="Progression / visibility">Progression / visibility</option>
+            <option value="Delivery quality / team stability">Delivery quality / team stability</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Conversation aim <span class="hint">one focus</span></div>
+          <select class="select sa-input" data-dimension="read" id="x_goal">
+            <option value="" selected>Select…</option>
+            <option value="Get a decision (yes/no/criteria)">Get a decision (yes/no/criteria)</option>
+            <option value="Reset scope / expectations">Reset scope / expectations</option>
+            <option value="Push back (time/capacity)">Push back (time/capacity)</option>
+            <option value="Clarify performance concerns">Clarify performance concerns</option>
+            <option value="Negotiate (trade-offs)">Negotiate (trade-offs)</option>
+            <option value="Escalate (formal route / HR)">Escalate (formal route / HR)</option>
+          </select>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Success definition <span class="hint">observable</span></div>
+          <input class="input sa-input" data-dimension="read" id="x_better" placeholder="E.g., Clear decision + criteria, owners and deadlines written, scope trade-off agreed, or a formal next step confirmed.">
+        </div>
+      </div>
+
+      <div class="micro-cards">
+        <div class="micro">
+          <h4><i class="fas fa-sitemap"></i> The “decision type” question</h4>
+          <p>Start with: <strong>“Before we get into details — is this a decision, a discussion, or an update?”</strong> It quietly forces structure and exposes avoidance.</p>
+        </div>
+        <div class="micro">
+          <h4><i class="fas fa-pen-to-square"></i> The recap trap (your safety net)</h4>
+          <p>If someone later rewrites the conversation, your calm recap becomes reality. Keep it boring: <code>decision • criteria • owner • deadline</code>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2) Power & Obstacle Diagnostic -->
+    <div class="panel">
+      <div class="panel-title-row">
+        <div class="panel-title"><i class="fas fa-chess"></i> 2) Power & Obstacle Diagnostic</div>
+      </div>
+      <div class="panel-sub">Identify what’s really happening. Then pick a move that creates a decision without creating a fight.</div>
+
+      <div class="field-grid">
+        <div class="field">
+          <div class="label">Obstacle pattern <span class="hint">closest match</span></div>
+          <select class="select sa-input" data-dimension="impact" id="p_pattern">
+            <option value="" selected>Select…</option>
+            <option value="Vagueness (no criteria, no specifics)">Vagueness (no criteria, no specifics)</option>
+            <option value="Stalling (delays, ‘let’s see’, no timeline)">Stalling (delays, ‘let’s see’, no timeline)</option>
+            <option value="Scope creep (more asks, same deadline)">Scope creep (more asks, same deadline)</option>
+            <option value="Goalpost shifting (criteria keeps changing)">Goalpost shifting (criteria keeps changing)</option>
+            <option value="Political veto (unspoken objections)">Political veto (unspoken objections)</option>
+            <option value="Blame drift (positioning you as the issue)">Blame drift (positioning you as the issue)</option>
+            <option value="Control play (micromanage / gatekeep)">Control play (micromanage / gatekeep)</option>
+            <option value="Performance fog (vibes, not evidence)">Performance fog (vibes, not evidence)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Their power source <span class="hint">what they control</span></div>
+          <select class="select sa-input" data-dimension="impact" id="p_power">
+            <option value="" selected>Select…</option>
+            <option value="Performance narrative / ratings">Performance narrative / ratings</option>
+            <option value="Work allocation / scope">Work allocation / scope</option>
+            <option value="Budget / headcount">Budget / headcount</option>
+            <option value="Stakeholder influence">Stakeholder influence</option>
+            <option value="Gatekeeping (approval / sign-off)">Gatekeeping (approval / sign-off)</option>
+            <option value="Expertise / authority">Expertise / authority</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Blowback risk <span class="hint">be real</span></div>
+          <select class="select sa-input" data-dimension="safeguards" id="p_retaliation">
+            <option value="" selected>Select…</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Stakes level <span class="hint">today</span></div>
+          <select class="select sa-input" data-dimension="impact" id="p_severity">
+            <option value="" selected>Select…</option>
+            <option value="1 - Low (mostly alignment)">1 - Low (mostly alignment)</option>
+            <option value="2 - Medium (delivery risk)">2 - Medium (delivery risk)</option>
+            <option value="3 - High (credibility risk)">3 - High (credibility risk)</option>
+            <option value="4 - Critical (performance / exit risk)">4 - Critical (performance / exit risk)</option>
+          </select>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Your typical mistake under pressure <span class="hint">spot it</span></div>
+          <input class="input sa-input" data-dimension="read" id="p_trigger" placeholder="E.g., Over-explain, apologise too early, argue details, get emotional, chase approval, go vague back.">
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Your strategic one-liner <span class="hint">opening frame</span></div>
+          <input class="input sa-input" data-dimension="behaviours" id="p_counter" placeholder="E.g., ‘Happy to adjust — we’ll need to choose the trade-off: scope, timeline, or resources.’">
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Question ladder (3–5) <span class="hint">force clarity</span></div>
+          <textarea class="textarea sa-input" data-dimension="behaviours" id="p_questions" placeholder="E.g., ‘What does good look like, specifically?’ ‘What’s the decision needed today?’ ‘What criteria would change your mind?’ ‘Who else needs to be comfortable with this?’"></textarea>
+        </div>
+      </div>
+
+      <div class="output-box">
+        <div class="output-title">
+          <h4>Opening frame (auto)</h4>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="mini-btn" onclick="buildResponseLine()"><i class="fas fa-bolt"></i> Build</button>
+            <button class="mini-btn" onclick="copyText('resp_line_out')"><i class="far fa-copy"></i> Copy</button>
+          </div>
+        </div>
+        <div class="output-content" id="resp_line_out">Click “Build” to generate a crisp opening frame you can say out loud — without sounding defensive.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="canvas-grid">
+    <!-- 3) Script & Move Plan -->
+    <div class="panel">
+      <div class="panel-title-row">
+        <div class="panel-title"><i class="fas fa-route"></i> 3) Script & Move Plan</div>
+      </div>
+      <div class="panel-sub">The goal is not to “win”. It’s to land a clean decision while staying credible.</div>
+
+      <div class="field-grid">
+        <div class="field span-2">
+          <div class="label">Your ask / boundary <span class="hint">clear and calm</span></div>
+          <input class="input sa-input" data-dimension="behaviours" id="r_boundary" placeholder="E.g., ‘I can deliver A by Friday. If you want B as well, we’ll need to move the date or drop C.’">
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Your fallback (if they refuse) <span class="hint">non-dramatic</span></div>
+          <input class="input sa-input" data-dimension="behaviours" id="r_consequence" placeholder="E.g., ‘If we can’t agree criteria today, I’ll send two options with trade-offs and ask you to choose by tomorrow.’">
+        </div>
+
+        <div class="field">
+          <div class="label">Preferred channel <span class="hint">lowest chaos</span></div>
+          <select class="select sa-input" data-dimension="behaviours" id="r_channel">
+            <option value="" selected>Select…</option>
+            <option value="Live (meeting)">Live (meeting)</option>
+            <option value="1:1 (private)">1:1 (private)</option>
+            <option value="Message (Teams/Slack)">Message (Teams/Slack)</option>
+            <option value="Email (evidence-friendly)">Email (evidence-friendly)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Tone target <span class="hint">discipline</span></div>
+          <select class="select sa-input" data-dimension="behaviours" id="r_tone">
+            <option value="" selected>Select…</option>
+            <option value="Neutral (facts only)">Neutral (facts only)</option>
+            <option value="Warm-firm (respect + line)">Warm-firm (respect + line)</option>
+            <option value="Formal (policy-safe)">Formal (policy-safe)</option>
+          </select>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Your pre-wire move (before the meeting) <span class="hint">one step ahead</span></div>
+          <input class="input sa-input" data-dimension="behaviours" id="r_first" placeholder="E.g., Send a one-page options note; align with a friendly stakeholder; confirm decision criteria; share evidence examples upfront.">
+        </div>
+
+        <div class="field span-2">
+          <div class="label">What you will stop doing <span class="hint">remove fuel</span></div>
+          <textarea class="textarea sa-input" data-dimension="behaviours" id="r_stop" placeholder="E.g., Stop defending every detail, stop over-talking, stop reacting to tone, stop agreeing to fuzzy work, stop leaving decisions unwritten."></textarea>
+        </div>
+      </div>
+
+      <div class="micro-cards">
+        <div class="micro">
+          <h4><i class="fas fa-arrows-left-right"></i> Two-lane options (quiet power move)</h4>
+          <p>Offer <strong>two workable paths</strong> (both acceptable). Example: “Option A meets quality and date. Option B meets date but reduces scope.” You’re not asking — you’re structuring.</p>
+        </div>
+        <div class="micro">
+          <h4><i class="fas fa-pause"></i> The five-second rule</h4>
+          <p>After your key question, pause. If you fill the silence, you often negotiate against yourself.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4) Evidence & Follow-through Guardrails -->
+    <div class="panel">
+      <div class="panel-title-row">
+        <div class="panel-title"><i class="fas fa-shield-halved"></i> 4) Evidence & Follow-through Guardrails (UK)</div>
+      </div>
+      <div class="panel-sub">If things turn political, your protection is a clean record and a clean recap.</div>
+
+      <div class="field-grid">
+        <div class="field span-2">
+          <div class="label">Your proof points <span class="hint">examples + evidence</span></div>
+          <textarea class="textarea sa-input" data-dimension="safeguards" id="e_document" placeholder="E.g., Delivered X on date; stakeholder feedback; data; email trails; agreed requirements; risk log; decisions already made."></textarea>
+        </div>
+
+        <div class="field">
+          <div class="label">Formal route (if needed) <span class="hint">UK</span></div>
+          <select class="select sa-input" data-dimension="safeguards" id="e_policy">
+            <option value="" selected>Select…</option>
+            <option value="Informal resolution / manager conversation">Informal resolution / manager conversation</option>
+            <option value="HR advice (confidential guidance)">HR advice (confidential guidance)</option>
+            <option value="Grievance process">Grievance process</option>
+            <option value="Performance process (if initiated)">Performance process (if initiated)</option>
+            <option value="Union / employee representative">Union / employee representative</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Ally / sponsor <span class="hint">support</span></div>
+          <select class="select sa-input" data-dimension="safeguards" id="e_support">
+            <option value="" selected>Select…</option>
+            <option value="Trusted senior sponsor">Trusted senior sponsor</option>
+            <option value="Peer ally (influential)">Peer ally (influential)</option>
+            <option value="Union rep / companion">Union rep / companion</option>
+            <option value="HR business partner">HR business partner</option>
+            <option value="Occupational Health (if relevant)">Occupational Health (if relevant)</option>
+          </select>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Your red lines <span class="hint">non-negotiables</span></div>
+          <textarea class="textarea sa-input" data-dimension="safeguards" id="e_redlines" placeholder="E.g., Vague performance criticism without examples; repeated goalpost shifts; public undermining; threats; decisions being rewritten after the fact."></textarea>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Escalation trigger <span class="hint">objective criteria</span></div>
+          <input class="input sa-input" data-dimension="safeguards" id="e_trigger" placeholder="E.g., If criteria stay vague after two attempts OR scope increases again without trade-off, I escalate with options + impact + proposed decision.">
+        </div>
+      </div>
+
+      <div class="output-box">
+        <div class="output-title">
+          <h4>14-day momentum plan (auto)</h4>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="mini-btn" onclick="build14DayStabilisation()"><i class="fas fa-bolt"></i> Build</button>
+            <button class="mini-btn" onclick="copyText('stabilise14_out')"><i class="far fa-copy"></i> Copy</button>
+          </div>
+        </div>
+        <div class="output-content" id="stabilise14_out">Click “Build” to generate a 14-day sequence: pre-wire → run the conversation → recap → follow-through.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conversation Log -->
+  <div class="panel" style="margin-bottom:18px;">
+    <div class="panel-title-row">
+      <div class="panel-title"><i class="fas fa-clipboard-list"></i> Conversation Log (optional, but powerful)</div>
+    </div>
+    <div class="panel-sub">This is the quietly elite move: date, decision, criteria, next step. You’re building a clean record — not a diary.</div>
+
+    <table class="timeline-table" id="timelineTable">
+      <thead>
+        <tr>
+          <th style="width: 16%;">Date</th>
+          <th style="width: 34%;">What was discussed (fact)</th>
+          <th style="width: 22%;">Decision / criteria</th>
+          <th style="width: 14%;">Attendees</th>
+          <th style="width: 14%;">Evidence</th>
+        </tr>
+      </thead>
+      <tbody id="timelineBody">
+        <tr>
+          <td><input class="input sa-input" data-dimension="safeguards" placeholder="DD/MM/YYYY"></td>
+          <td><input class="input sa-input" data-dimension="read" placeholder="Key points only"></td>
+          <td><input class="input sa-input" data-dimension="impact" placeholder="Decision, criteria, or next step"></td>
+          <td><input class="input sa-input" data-dimension="safeguards" placeholder="Names"></td>
+          <td>
+            <select class="select sa-input" data-dimension="safeguards">
+              <option value="" selected>Select…</option>
+              <option value="Email / message">Email / message</option>
+              <option value="Meeting notes">Meeting notes</option>
+              <option value="Ticket / system log">Ticket / system log</option>
+              <option value="Document / deck">Document / deck</option>
+              <option value="Other">Other</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+      <button class="mini-btn" onclick="addTimelineRow()"><i class="fas fa-plus"></i> Add row</button>
+      <button class="mini-btn" onclick="removeTimelineRow()"><i class="fas fa-minus"></i> Remove row</button>
+    </div>
+  </div>
+
+  <!-- Executive Outputs -->
+  <div class="panel">
+    <div class="panel-title-row">
+      <div class="panel-title"><i class="fas fa-file-lines"></i> Executive Outputs</div>
+    </div>
+    <div class="panel-sub">Copy/paste ready: a one-paragraph brief, a meeting opener, and a recap email that pins the facts without sounding petty.</div>
+
+    <div class="output-box">
+      <div class="output-title">
+        <h4>Conversation brief (one paragraph)</h4>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="mini-btn" onclick="copyText('out_summary')"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+      <div class="output-content" id="out_summary">Complete the blueprint, then click “Generate outputs”.</div>
+    </div>
+
+    <div class="output-box">
+      <div class="output-title">
+        <h4>Power & risk snapshot</h4>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="mini-btn" onclick="copyText('out_risk')"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+      <div class="output-content" id="out_risk">—</div>
+    </div>
+
+    <div class="output-box">
+      <div class="output-title">
+        <h4>Meeting opener + question ladder</h4>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="mini-btn" onclick="copyText('out_opener')"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+      <div class="output-content" id="out_opener">—</div>
+    </div>
+
+    <div class="output-box">
+      <div class="output-title">
+        <h4>Follow-up recap email (hard to misread)</h4>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="mini-btn" onclick="copyText('out_followup')"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+      <div class="output-content" id="out_followup">—</div>
+    </div>
+  </div>
+
+  <div class="framework-actions-bottom">
+    <button class="mini-btn" onclick="resetBlueprint()"><i class="fas fa-rotate-left"></i> Reset</button>
+    <button class="mini-btn" onclick="copyOutputs()"><i class="far fa-copy"></i> Copy outputs</button>
+    <button class="mini-btn primary" onclick="generateOutputs()"><i class="fas fa-wand-magic-sparkles"></i> Generate outputs</button>
+  </div>
+</div>
+
+<!-- QUICK CHECKLIST -->
+<div class="checklist-body" id="checklistText">
+  <h2 class="checklist-section-title"><i class="fas fa-list-check"></i> Quick Coverage Checklist</h2>
+  <div class="checklist-intro">Final audit: if you tick these, you’re walking in calm, clear, and hard to shake.</div>
+
+  <div class="checklist-grid">
+    <div class="checklist-item" data-category="read">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I can state the current reality in facts (not tone, blame, or guessing motives).</div>
+    </div>
+    <div class="checklist-item" data-category="read">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I’ve defined the decision I need (or the criteria I need) in one sentence.</div>
+    </div>
+    <div class="checklist-item" data-category="impact">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I know what’s at stake and can explain impact clearly (delivery / credibility / workload).</div>
+    </div>
+    <div class="checklist-item" data-category="impact">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I’ve identified the obstacle pattern (vagueness, stalling, scope creep, political veto, etc.).</div>
+    </div>
+
+    <div class="checklist-item" data-category="behaviours">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I have an opening frame that sets structure without sounding defensive.</div>
+    </div>
+    <div class="checklist-item" data-category="behaviours">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I have a short question ladder that forces clarity and exposes avoidance.</div>
+    </div>
+    <div class="checklist-item" data-category="behaviours">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I’m using trade-offs (two-lane options) rather than asking for permission.</div>
+    </div>
+    <div class="checklist-item" data-category="safeguards">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I have proof points ready (examples/evidence) in case this gets political.</div>
+    </div>
+
+    <div class="checklist-item" data-category="safeguards">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I know my red lines and what would trigger escalation (objective criteria).</div>
+    </div>
+    <div class="checklist-item" data-category="behaviours">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I have a pre-wire move to reduce surprises before the meeting.</div>
+    </div>
+    <div class="checklist-item" data-category="safeguards">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I will send a calm recap that locks decision/criteria/owners/deadlines in writing.</div>
+    </div>
+    <div class="checklist-item" data-category="impact">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I’m protecting a priority outcome (role security, reputation, workload, progression).</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCORE -->
+<div class="clarity-score-section">
+  <div class="presence-snapshot-header">
+    <h2>Your Strategic Conversation Snapshot</h2>
+    <p>This score reflects your <strong>checklist completion only</strong> — a simple coverage gauge you control. (The blueprint still powers the outputs below.)</p>
+  </div>
+
+  <div class="clarity-score-bar">
+    <div class="clarity-progress-container">
+      <div class="clarity-header">
+        <div class="clarity-title">Conversation Readiness Score</div>
+        <div class="clarity-percentage" id="clarityPercentage">0%</div>
+      </div>
+
+      <div class="progress-container">
+        <div class="mini-fill low" id="progressFill"></div>
+      </div>
+
+      <div class="progress-labels">
+        <span>Loose</span><span>Developing</span><span>Solid</span>
+      </div>
+
+      <div class="presence-dimensions">
+        <div class="presence-dimension-pill"><span class="label">Objective & Context</span><span class="score" id="scoreVoice">0%</span></div>
+        <div class="presence-dimension-pill"><span class="label">Power & Stakes</span><span class="score" id="scoreStructure">0%</span></div>
+        <div class="presence-dimension-pill"><span class="label">Script & Questions</span><span class="score" id="scoreChallenge">0%</span></div>
+        <div class="presence-dimension-pill"><span class="label">Follow-through</span><span class="score" id="scoreNonverbal">0%</span></div>
+      </div>
+    </div>
+
+    <div class="actions-container">
+      <button class="action-btn" onclick="generateSmartSummary()" id="generateBtn" disabled>
+        <i class="fas fa-magic"></i> Generate summary
+      </button>
+      <button class="action-btn secondary" onclick="copyFramework()" id="copyBtn">
+        <i class="far fa-copy"></i> Copy framework
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="smart-summary-section" id="smartSummary">
+  <div class="summary-header">
+    <h2 class="summary-title">Your Smart Conversation Summary</h2>
+    <p class="summary-subtitle">Based on your readiness score of <span id="summaryScore">0%</span></p>
+    <p class="summary-insight">Highlights what’s missing, what’s risky, and the cleanest next move — so you walk in calm and walk out with something written.</p>
+  </div>
+
+  <h3 class="section-header red"><i class="fas fa-exclamation-triangle"></i> Red Flags in Your Plan</h3>
+  <div class="red-flags-grid" id="redFlagsGrid"></div>
+
+  <h3 class="section-header purple"><i class="fas fa-forward"></i> Next Moves (Controlled + Effective)</h3>
+  <div class="next-steps-grid" id="nextStepsGrid"></div>
+
+  <h3 class="section-header blue"><i class="fas fa-tools"></i> Recommended Tools to Support You</h3>
+  <div class="resources-grid" id="resourcesGrid"></div>
+</div>
+
+<!-- MY PLAYBOOK -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven’t saved anything yet. Use <strong>Save item</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <div class="playbook-quick-links-header">
+          <span class="quick-links-title">Quick links</span>
+        </div>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill"><i class="fas fa-gauge"></i> The Dashboard</a>
+          <a href="the-lens.html" class="quick-link-pill"><i class="fas fa-search"></i> The Lens</a>
+          <a href="the-toolkit.html" class="quick-link-pill"><i class="fas fa-toolbox"></i> The Toolkit</a>
+          <a href="the-coach.html" class="quick-link-pill"><i class="fas fa-comments"></i> The Coach</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('loaded');
+
+  initializeChecklist();
+  initializeThemeToggle();
+  initializeMobileNav();
+  initializePlaybook();
+
+  bindBlueprintListeners();
+  resetDefaultSelectsToBlank();
+
+  // Score reflects CHECKLIST ONLY
+  updateFrameworkScore();
+});
+
+/* MOBILE NAV */
+function initializeMobileNav() {
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (!mobileToggle || !navLinks) return;
+
+  mobileToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('active');
+    const icon = this.querySelector('i');
+    if (icon) { icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); }
+  });
+
+  document.addEventListener('click', function(event) {
+    if (navLinks.classList.contains('active') &&
+      !navLinks.contains(event.target) &&
+      !mobileToggle.contains(event.target)) {
+      navLinks.classList.remove('active');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+    }
+  });
+}
+
+/* THEME */
+function initializeThemeToggle() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (!themeToggleBtn) return;
+
+  const themeIcon = themeToggleBtn.querySelector('i');
+  const logoImg = document.getElementById('mainLogo');
+
+  function getLogoPath(filename) {
+    if (window.location.protocol === 'file:') {
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+      return basePath + 'assets/img/' + filename;
+    } else {
+      return './assets/img/' + filename;
+    }
+  }
+
+  function createFallbackLogo() {
+    if (!logoImg) return;
+    logoImg.classList.add('fallback');
+    const logoText = document.createElement('div');
+    logoText.textContent = 'THE EMPLOYEE PLAYBOOK';
+    logoText.style.fontSize = '14px';
+    logoText.style.fontWeight = '700';
+    logoText.style.letterSpacing = '1px';
+    logoImg.src = '';
+    logoImg.alt = 'The Employee Playbook';
+    logoImg.style.display = 'flex';
+    logoImg.style.alignItems = 'center';
+    logoImg.style.justifyContent = 'center';
+    logoImg.innerHTML = '';
+    logoImg.appendChild(logoText);
+  }
+
+  function updateLogoForTheme(isDarkMode) {
+    if (!logoImg) return;
+    logoImg.classList.remove('fallback');
+    logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+    logoImg.alt = 'The Employee Playbook';
+  }
+
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const savedTheme = localStorage.getItem('theme');
+
+  if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+    document.body.classList.add('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+    updateLogoForTheme(true);
+  } else {
+    document.body.classList.remove('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+    updateLogoForTheme(false);
+  }
+
+  themeToggleBtn.addEventListener('click', function() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    if (isDarkMode) {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+      updateLogoForTheme(false);
+    } else {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+      updateLogoForTheme(true);
+    }
+  });
+
+  if (logoImg) {
+    logoImg.addEventListener('error', function() {
+      if (this.src.includes('logo-dark.png')) this.src = getLogoPath('logo.png');
+      else createFallbackLogo();
+    });
+  }
+}
+
+/* ensure selects start blank */
+function resetDefaultSelectsToBlank(){
+  document.querySelectorAll('select.sa-input').forEach(sel => {
+    if (!sel.dataset.userChanged) sel.value = '';
+  });
+}
+
+/* Keep blueprint listeners (outputs need them), but score won't move */
+function bindBlueprintListeners(){
+  document.querySelectorAll('.sa-input').forEach(el => {
+    if (el.dataset.bound === '1') return;
+    el.dataset.bound = '1';
+
+    el.addEventListener('input', () => { el.dataset.userChanged = '1'; /* score is checklist-only */ });
+    el.addEventListener('change', () => { el.dataset.userChanged = '1'; /* score is checklist-only */ });
+  });
+}
+
+/* TIMELINE */
+function addTimelineRow() {
+  const body = document.getElementById('timelineBody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><input class="input sa-input" data-dimension="safeguards" placeholder="DD/MM/YYYY"></td>
+    <td><input class="input sa-input" data-dimension="read" placeholder="Key points only"></td>
+    <td><input class="input sa-input" data-dimension="impact" placeholder="Decision, criteria, or next step"></td>
+    <td><input class="input sa-input" data-dimension="safeguards" placeholder="Names"></td>
+    <td>
+      <select class="select sa-input" data-dimension="safeguards">
+        <option value="" selected>Select…</option>
+        <option value="Email / message">Email / message</option>
+        <option value="Meeting notes">Meeting notes</option>
+        <option value="Ticket / system log">Ticket / system log</option>
+        <option value="Document / deck">Document / deck</option>
+        <option value="Other">Other</option>
+      </select>
+    </td>
+  `;
+  body.appendChild(tr);
+  bindBlueprintListeners();
+}
+
+function removeTimelineRow() {
+  const body = document.getElementById('timelineBody');
+  if (body.children.length > 1) body.removeChild(body.lastElementChild);
+}
+
+/* CHECKLIST */
+let checkedItems = [];
+let itemCategories = [];
+
+/* 4 dimensions (kept ids for UI) */
+const dimensionConfig = {
+  voice: ['read'],
+  structure: ['impact'],
+  challenge: ['behaviours'],
+  nonverbal: ['safeguards']
+};
+
+function initializeChecklist() {
+  const checklistContainers = document.querySelectorAll('.checklist-item');
+  checkedItems = new Array(checklistContainers.length).fill(false);
+  itemCategories = [];
+
+  checklistContainers.forEach((container, index) => {
+    const icon = container.querySelector('i');
+    const category = container.getAttribute('data-category');
+    itemCategories[index] = category;
+
+    container.addEventListener('click', function(e) {
+      if (e.target.tagName === 'BUTTON') return;
+
+      if (icon.classList.contains('fa-square')) {
+        icon.classList.remove('fa-square');
+        icon.classList.add('fa-check-square');
+        icon.style.color = '#5A4496';
+        checkedItems[index] = true;
+      } else {
+        icon.classList.remove('fa-check-square');
+        icon.classList.add('fa-square');
+        icon.style.color = '#7B5FC4';
+        checkedItems[index] = false;
+      }
+      updateFrameworkScore();
+    });
+  });
+}
+
+/* SCORE (CHECKLIST ONLY) */
+function updateFrameworkScore() {
+  const checklistCompleted = checkedItems.filter(Boolean).length;
+  const checklistTotal = checkedItems.length || 0;
+
+  const score = checklistTotal ? Math.round((checklistCompleted / checklistTotal) * 100) : 0;
+
+  const pctEl = document.getElementById('clarityPercentage');
+  if (pctEl) pctEl.textContent = score + '%';
+
+  const fill = document.getElementById('progressFill');
+  if (fill) {
+    fill.style.width = score + '%';
+
+    fill.classList.remove('low','medium','high');
+    if (score >= 67) fill.classList.add('high');
+    else if (score >= 34) fill.classList.add('medium');
+    else fill.classList.add('low');
+  }
+
+  const genBtn = document.getElementById('generateBtn');
+  if (genBtn) genBtn.disabled = (checklistCompleted === 0);
+
+  const dimScores = {
+    voice: { checked: 0, total: 0 },
+    structure: { checked: 0, total: 0 },
+    nonverbal: { checked: 0, total: 0 },
+    challenge: { checked: 0, total: 0 }
+  };
+
+  itemCategories.forEach((cat, idx) => {
+    Object.keys(dimensionConfig).forEach(dim => {
+      if (dimensionConfig[dim].includes(cat)) {
+        dimScores[dim].total += 1;
+        if (checkedItems[idx]) dimScores[dim].checked += 1;
+      }
+    });
+  });
+
+  const pct = d => d.total ? Math.round((d.checked / d.total) * 100) : 0;
+
+  const v = document.getElementById('scoreVoice');
+  const s = document.getElementById('scoreStructure');
+  const n = document.getElementById('scoreNonverbal');
+  const c = document.getElementById('scoreChallenge');
+
+  if (v) v.textContent = pct(dimScores.voice) + '%';
+  if (s) s.textContent = pct(dimScores.structure) + '%';
+  if (n) n.textContent = pct(dimScores.nonverbal) + '%';
+  if (c) c.textContent = pct(dimScores.challenge) + '%';
+}
+
+/* HELPERS */
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? (el.value || '').trim() : '';
+}
+function shorten(text, max) {
+  const t = (text || '').replace(/\s+/g, ' ').trim();
+  if (!t) return '';
+  return t.length > max ? t.slice(0, max - 1) + '…' : t;
+}
+function copyText(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent || '');
+}
+
+/* BUILDERS */
+function buildResponseLine() {
+  const pattern = val('p_pattern');
+  const goal = val('x_goal');
+  const facts = val('x_facts');
+  const counter = val('p_counter');
+  const boundary = val('r_boundary');
+  const tone = val('r_tone');
+
+  const lines = [];
+  if (tone) lines.push(`Tone: ${tone}.`);
+
+  // The “career game changer” frame: decision > discussion
+  const aim = goal || 'Get a clean decision (or clear criteria) without turning it into a debate';
+  lines.push(`Aim: ${aim}.`);
+
+  if (pattern) lines.push(`Obstacle: ${pattern}.`);
+  if (facts) lines.push(`Reality check: ${shorten(facts, 170)}`);
+
+  if (counter) {
+    lines.push(`Opening frame: “${counter}”`);
+  } else if (boundary) {
+    lines.push(`Opening frame: “${boundary}”`);
+  } else {
+    lines.push(`Opening frame: “Before we go into details — is this a decision, a discussion, or an update? I want to make sure we land something clear today.”`);
+  }
+
+  lines.push(`Next move: ask one precise question, then pause.`);
+
+  document.getElementById('resp_line_out').textContent = lines.join('\n');
+}
+
+function build14DayStabilisation() {
+  const first = val('r_first');
+  const stop = val('r_stop');
+  const boundary = val('r_boundary');
+  const consequence = val('r_consequence');
+  const doc = val('e_document');
+  const trigger = val('e_trigger');
+  const policy = val('e_policy');
+
+  const prewire = [];
+  const meetingDay = [];
+  const follow = [];
+
+  prewire.push(first ? `Pre-wire move: ${first}` : `Pre-wire move: share a one-page note with two options + trade-offs, and ask what criteria matters.`);
+  if (doc) prewire.push(`Proof points ready: ${shorten(doc, 180)}`);
+  prewire.push(`Identify your “one sentence” aim, then write it at the top of your notes.`);
+
+  meetingDay.push(boundary ? `Ask/boundary: ${boundary}` : `Ask/boundary: present two-lane options and ask for the decision or criteria.`);
+  meetingDay.push(`Use your question ladder. Pause after questions. Don’t fill silence.`);
+  if (consequence) meetingDay.push(`Fallback if they refuse: ${consequence}`);
+
+  follow.push(`Send recap within 2 hours: decision/criteria • owner • deadline • next step.`);
+  if (stop) follow.push(`Stop doing (removes fuel): ${shorten(stop, 200)}`);
+  if (trigger) follow.push(`Escalation trigger: ${trigger}`);
+  if (policy) follow.push(`If escalation is needed: ${policy}`);
+
+  document.getElementById('stabilise14_out').textContent =
+`DAYS 1–3 (PRE-WIRE)
+- ${prewire.join('\n- ')}
+
+DAY 4 (THE CONVERSATION)
+- ${meetingDay.join('\n- ')}
+
+DAYS 5–14 (FOLLOW-THROUGH)
+- ${follow.join('\n- ')}`;
+}
+
+function generateOutputs() {
+  const who = val('x_who');
+  const rel = val('x_reltype');
+  const where = val('x_where');
+  const freq = val('x_freq');
+  const facts = val('x_facts');
+  const impact = val('x_impact');
+  const protect = val('x_protect');
+  const goal = val('x_goal');
+  const better = val('x_better');
+
+  const pattern = val('p_pattern');
+  const power = val('p_power');
+  const retaliation = val('p_retaliation');
+  const severity = val('p_severity');
+  const trigger = val('p_trigger');
+
+  const boundary = val('r_boundary');
+  const consequence = val('r_consequence');
+  const channel = val('r_channel');
+  const tone = val('r_tone');
+  const first = val('r_first');
+  const stop = val('r_stop');
+
+  const doc = val('e_document');
+  const policy = val('e_policy');
+  const support = val('e_support');
+  const redlines = val('e_redlines');
+  const escTrigger = val('e_trigger');
+
+  // Brief
+  const summaryParts = [];
+  summaryParts.push(goal ? `Aim: ${goal}.` : `Aim: get a clean decision or clear criteria without turning it into a debate.`);
+  if (who || rel) summaryParts.push(`Decision owner: ${who || 'Person'}${rel ? ` (${rel})` : ''}.`);
+  if (where || freq) summaryParts.push(`Setting/timing: ${[where, freq].filter(Boolean).join(' • ') || 'not set'}.`);
+  if (pattern) summaryParts.push(`Obstacle: ${pattern}.`);
+  if (facts) summaryParts.push(`Reality: ${shorten(facts, 200)}`);
+  if (impact) summaryParts.push(`Stakes: ${shorten(impact, 160)}`);
+  if (protect) summaryParts.push(`Protecting: ${protect}.`);
+  if (better) summaryParts.push(`Success looks like: ${better}.`);
+
+  document.getElementById('out_summary').textContent = summaryParts.join(' ');
+
+  // Power + risk snapshot
+  const riskLines = [];
+  const riskBits = [];
+  if (severity) riskBits.push(`Stakes: ${severity}`);
+  if (power) riskBits.push(`Their power: ${power}`);
+  if (retaliation) riskBits.push(`Blowback risk: ${retaliation}`);
+  if (riskBits.length) riskLines.push(`Read: ${riskBits.join(' | ')}`);
+
+  if (trigger) riskLines.push(`Your pressure trap: ${trigger}`);
+  if (doc) riskLines.push(`Proof points: ${shorten(doc, 190)}`);
+  if (redlines) riskLines.push(`Red lines: ${shorten(redlines, 170)}`);
+  if (escTrigger) riskLines.push(`Escalation trigger: ${escTrigger}`);
+  if (policy || support) riskLines.push(`Support/route: ${[support, policy].filter(Boolean).join(' | ')}`);
+
+  document.getElementById('out_risk').textContent = riskLines.length ? riskLines.join('\n\n') : 'Add power + proof points to generate a useful snapshot.';
+
+  // Opener + ladder
+  const ladder = val('p_questions');
+  const opening = val('p_counter') || (boundary ? boundary : 'Before we get into details — is this a decision, a discussion, or an update? I want to make sure we land something clear.');
+  const askLine = boundary || 'Here are two options with trade-offs. Which one are we choosing?';
+  const fallback = consequence || 'If we can’t decide today, I’ll send a short options note and ask you to choose by tomorrow based on agreed criteria.';
+
+  const openerText =
+`Tone: ${tone || 'Neutral'}.
+Channel: ${channel || 'Choose the lowest-chaos channel'}.
+
+Opening:
+“${opening}”
+
+Ask:
+“${askLine}”
+
+Question ladder:
+${ladder ? `- ${ladder.split('\n').map(s=>s.trim()).filter(Boolean).join('\n- ')}` : `- What does “good” look like, specifically?\n- What decision do you want made today?\n- What criteria would change your mind?\n- Who else needs to be comfortable with this?\n- By when do you want this resolved?`}
+
+Fallback (if they avoid the decision):
+“${fallback}”`;
+
+  document.getElementById('out_opener').textContent = openerText;
+
+  // Follow-up recap email
+  const success = better || 'a clear decision / criteria, owner, and timeline';
+  const decisionOwner = who || 'you';
+  const setting = where || 'our conversation';
+  const prewireMove = first ? `Pre-wire: ${first}` : '';
+  const keyProof = doc ? `Proof points: ${shorten(doc, 170)}` : '';
+  const nextStep = `Next step: please confirm the decision/criteria by (date/time) so I can proceed cleanly.`;
+
+  const subject = `Subject: Recap — decision, criteria and next steps`;
+  const email =
+`${subject}
+
+Hi ${decisionOwner},
+
+Thanks for ${setting}. Quick recap to keep us aligned and avoid any later confusion:
+
+- Purpose: ${goal || 'land a clear decision / criteria'}
+- Current reality: ${facts ? shorten(facts, 180) : '—'}
+- Decision/criteria agreed today: ${success}
+- Owners: ${decisionOwner} (decision) • Me (delivery)
+- Timeline: ${freq || '—'}
+- Risks / impact (if unchanged): ${impact ? shorten(impact, 160) : '—'}
+
+${keyProof ? `\n${keyProof}\n` : ''}${prewireMove ? `\n${prewireMove}\n` : ''}
+
+${nextStep}
+
+Thanks,
+[Your name]`;
+
+  document.getElementById('out_followup').textContent = email;
+
+  buildResponseLine();
+  build14DayStabilisation();
+}
+
+function copyOutputs() {
+  const blocks = [
+    'STRATEGIC CONVERSATIONS GUIDE',
+    '============================',
+    '',
+    'CONVERSATION BRIEF',
+    document.getElementById('out_summary').textContent,
+    '',
+    'POWER & RISK SNAPSHOT',
+    document.getElementById('out_risk').textContent,
+    '',
+    'MEETING OPENER + QUESTION LADDER',
+    document.getElementById('out_opener').textContent,
+    '',
+    'FOLLOW-UP RECAP EMAIL',
+    document.getElementById('out_followup').textContent,
+    '',
+    'OPENING FRAME',
+    document.getElementById('resp_line_out').textContent,
+    '',
+    '14-DAY MOMENTUM PLAN',
+    document.getElementById('stabilise14_out').textContent
+  ];
+  navigator.clipboard.writeText(blocks.join('\n'));
+}
+
+function resetBlueprint() {
+  document.querySelectorAll('.sa-input').forEach(el => {
+    el.value = '';
+    delete el.dataset.userChanged;
+  });
+
+  document.querySelectorAll('.checklist-item').forEach((container, index) => {
+    const icon = container.querySelector('i');
+    if (!icon) return;
+    icon.classList.remove('fa-check-square');
+    icon.classList.add('fa-square');
+    icon.style.color = '#7B5FC4';
+    checkedItems[index] = false;
+  });
+
+  document.getElementById('resp_line_out').textContent = 'Click “Build” to generate a crisp opening frame you can say out loud — without sounding defensive.';
+  document.getElementById('stabilise14_out').textContent = 'Click “Build” to generate a 14-day sequence: pre-wire → run the conversation → recap → follow-through.';
+  document.getElementById('out_summary').textContent = 'Complete the blueprint, then click “Generate outputs”.';
+  document.getElementById('out_risk').textContent = '—';
+  document.getElementById('out_opener').textContent = '—';
+  document.getElementById('out_followup').textContent = '—';
+
+  document.getElementById('smartSummary').classList.remove('active');
+
+  resetDefaultSelectsToBlank();
+  updateFrameworkScore();
+}
+
+/* SMART SUMMARY */
+function generateSmartSummary() {
+  const scoreText = document.getElementById('clarityPercentage').textContent || '0%';
+  const score = parseInt(scoreText.replace('%',''), 10) || 0;
+
+  document.getElementById('summaryScore').textContent = score + '%';
+
+  const summarySection = document.getElementById('smartSummary');
+  summarySection.classList.add('active');
+  summarySection.scrollIntoView({ behavior: 'smooth' });
+
+  generateRedFlags(score);
+  generateNextSteps(score);
+  generateRecommendedResources(score);
+}
+
+function collectMissingSignals() {
+  const hasWho = !!val('x_who') || !!val('x_reltype');
+  const hasFacts = !!val('x_facts');
+  const hasBetter = !!val('x_better');
+
+  const hasImpact = !!val('x_impact') || !!val('x_freq');
+  const hasPattern = !!val('p_pattern') || !!val('p_severity') || !!val('p_power');
+
+  const hasBehaviours = !!val('r_boundary') || !!val('p_counter') || !!val('p_questions') || !!val('r_first');
+  const hasGuardrails = !!val('e_document') || !!val('e_redlines') || !!val('e_trigger');
+
+  return {
+    readWeak: !(hasWho && hasFacts && hasBetter),
+    diagnosisWeak: !(hasImpact && hasPattern),
+    behavioursWeak: !hasBehaviours,
+    guardrailsWeak: !hasGuardrails
+  };
+}
+
+function generateRedFlags(score) {
+  const grid = document.getElementById('redFlagsGrid');
+  grid.innerHTML = '';
+
+  const missing = collectMissingSignals();
+  const redFlags = [];
+
+  if (missing.readWeak) {
+    redFlags.push({
+      title: 'You don’t yet have a decision in one sentence',
+      description: 'If you can’t say what you need, you’ll get dragged into details and leave with nothing concrete.',
+      icon: 'fas fa-bullseye'
+    });
+  }
+  if (missing.diagnosisWeak) {
+    redFlags.push({
+      title: 'The obstacle pattern isn’t named',
+      description: 'Vagueness and stalling require different moves. Name the pattern to choose the right lever.',
+      icon: 'fas fa-chess'
+    });
+  }
+  if (missing.behavioursWeak) {
+    redFlags.push({
+      title: 'No repeatable opening frame + question ladder',
+      description: 'Without structure, you’ll improvise under pressure — and that’s where you give away leverage.',
+      icon: 'fas fa-comments'
+    });
+  }
+  if (missing.guardrailsWeak) {
+    redFlags.push({
+      title: 'Follow-through is not locked',
+      description: 'If you don’t recap, the facts become negotiable later. A calm recap is protective, not petty.',
+      icon: 'fas fa-file-lines'
+    });
+  }
+
+  while (redFlags.length < 3) {
+    redFlags.push({
+      title: 'Don’t negotiate against yourself',
+      description: 'Ask a precise question, then pause. Silence is a tool.',
+      icon: 'fas fa-pause'
+    });
+  }
+
+  redFlags.slice(0,3).forEach(flag => {
+    const card = document.createElement('div');
+    card.className = 'red-flag-card';
+    card.innerHTML = `
+      <div class="flag-icon"><i class="${flag.icon}"></i></div>
+      <h4 class="flag-title">${flag.title}</h4>
+      <p class="flag-description">${flag.description}</p>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function generateNextSteps(score) {
+  const grid = document.getElementById('nextStepsGrid');
+  grid.innerHTML = '';
+
+  const missing = collectMissingSignals();
+  const steps = [];
+
+  if (missing.readWeak) {
+    steps.push({
+      title: 'Write your “one sentence” decision',
+      description: 'What do you need by the end? Decision/criteria/owner/date. Keep it short and observable.',
+      icon: 'fas fa-pen-to-square'
+    });
+  } else {
+    steps.push({
+      title: 'Open with structure (decision type first)',
+      description: '“Decision, discussion, or update?” It forces the meeting into a useful shape.',
+      icon: 'fas fa-sitemap'
+    });
+  }
+
+  if (missing.diagnosisWeak) {
+    steps.push({
+      title: 'Name the obstacle pattern',
+      description: 'Vagueness → ask for criteria. Stalling → ask for timeline. Scope creep → trade-offs.',
+      icon: 'fas fa-chess'
+    });
+  } else {
+    steps.push({
+      title: 'Use two-lane options',
+      description: 'Offer two workable paths with trade-offs. You stop begging and start structuring.',
+      icon: 'fas fa-arrows-left-right'
+    });
+  }
+
+  if (missing.guardrailsWeak) {
+    steps.push({
+      title: 'Draft the recap before the meeting',
+      description: 'If you already have the recap template, you’ll send it fast and clean — and it will hold.',
+      icon: 'fas fa-file-lines'
+    });
+  } else {
+    steps.push({
+      title: 'Run the 14-day momentum plan',
+      description: 'Pre-wire → conversation → recap → follow-through. You’re building credibility through consistency.',
+      icon: 'fas fa-forward'
+    });
+  }
+
+  steps.slice(0,3).forEach(step => {
+    const card = document.createElement('div');
+    card.className = 'next-step-card';
+    card.innerHTML = `
+      <div class="step-icon"><i class="${step.icon}"></i></div>
+      <h4 class="step-title">${step.title}</h4>
+      <p class="step-description">${step.description}</p>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function generateRecommendedResources(score) {
+  const grid = document.getElementById('resourcesGrid');
+  grid.innerHTML = '';
+
+  const resources = [
+    {
+      title: 'Stakeholder Map',
+      description: 'Map who influences the decision, who blocks it, and who can quietly unlock it.',
+      icon: 'fas fa-diagram-project',
+      link: 'stakeholder-power-map.html'
+    },
+    {
+      title: 'Negotiation Framework',
+      description: 'Turn pushback into options: scope vs time vs quality vs resource — without sounding difficult.',
+      icon: 'fas fa-scale-balanced',
+      link: 'negotiation-tradeoff-planner.html'
+    },
+    {
+      title: 'Escalation Documentation Form',
+      description: 'If things turn formal, convert incidents into a clean timeline with impact and evidence.',
+      icon: 'fas fa-file-signature',
+      link: 'escalation-documentation-form.html'
+    }
+  ];
+
+  resources.slice(0,3).forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'resource-card';
+    card.innerHTML = `
+      <div class="resource-icon"><i class="${r.icon}"></i></div>
+      <h4 class="resource-title">${r.title}</h4>
+      <p class="resource-description">${r.description}</p>
+      <a href="${r.link}" class="resource-link">Access tool <i class="fas fa-arrow-right"></i></a>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* COPY FRAMEWORK */
+function copyFramework() {
+  const blocks = [];
+  blocks.push('STRATEGIC CONVERSATIONS GUIDE');
+  blocks.push('==============================');
+  blocks.push('');
+  blocks.push('1) TARGET THE CONVERSATION');
+  blocks.push(`- Decision owner: ${val('x_who')} (${val('x_reltype')})`);
+  blocks.push(`- Setting/timing: ${val('x_where')} | ${val('x_freq')}`);
+  blocks.push(`- Aim: ${val('x_goal')}`);
+  blocks.push(`- Reality: ${val('x_facts')}`);
+  blocks.push(`- Stakes: ${val('x_impact')}`);
+  blocks.push(`- Protect: ${val('x_protect')}`);
+  blocks.push(`- Success: ${val('x_better')}`);
+  blocks.push('');
+  blocks.push('2) POWER & OBSTACLE DIAGNOSTIC');
+  blocks.push(`- Obstacle: ${val('p_pattern')}`);
+  blocks.push(`- Power: ${val('p_power')} | Blowback: ${val('p_retaliation')} | Stakes: ${val('p_severity')}`);
+  blocks.push(`- Pressure trap: ${val('p_trigger')}`);
+  blocks.push(`- Opening frame: ${val('p_counter')}`);
+  blocks.push(`- Question ladder: ${val('p_questions')}`);
+  blocks.push('');
+  blocks.push('3) SCRIPT & MOVE PLAN');
+  blocks.push(`- Ask/boundary: ${val('r_boundary')}`);
+  blocks.push(`- Fallback: ${val('r_consequence')}`);
+  blocks.push(`- Channel: ${val('r_channel')} | Tone: ${val('r_tone')}`);
+  blocks.push(`- Pre-wire move: ${val('r_first')}`);
+  blocks.push(`- Stop doing: ${val('r_stop')}`);
+  blocks.push('');
+  blocks.push('4) FOLLOW-THROUGH GUARDRAILS');
+  blocks.push(`- Proof points: ${val('e_document')}`);
+  blocks.push(`- Support/route: ${val('e_support')} | ${val('e_policy')}`);
+  blocks.push(`- Red lines: ${val('e_redlines')}`);
+  blocks.push(`- Escalation trigger: ${val('e_trigger')}`);
+  blocks.push('');
+  blocks.push('EXECUTIVE OUTPUTS');
+  blocks.push(`- Brief: ${document.getElementById('out_summary').textContent}`);
+  blocks.push(`- Power/risk: ${document.getElementById('out_risk').textContent}`);
+  blocks.push(`- Opener: ${document.getElementById('out_opener').textContent}`);
+  blocks.push(`- Recap email: ${document.getElementById('out_followup').textContent}`);
+  blocks.push(`- Opening frame: ${document.getElementById('resp_line_out').textContent}`);
+  blocks.push(`- 14-day plan: ${document.getElementById('stabilise14_out').textContent}`);
+
+  navigator.clipboard.writeText(blocks.join('\n'));
+
+  const btn = document.getElementById('copyBtn');
+  const originalHTML = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+  btn.style.background = '#10b981';
+
+  setTimeout(() => {
+    btn.innerHTML = originalHTML;
+    btn.style.background = '';
+  }, 2000);
+}
+
+/* MY PLAYBOOK */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'strategic-conversations-guide';
+const CURRENT_TOOL_TITLE = 'Strategic Conversations Guide';
+const CURRENT_TOOL_TYPE = 'Guide';
+
+function getSavedItems() {
+  try {
+    const raw = localStorage.getItem(PLAYBOOK_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) { return []; }
+}
+function setSavedItems(items) {
+  try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); } catch (e) {}
+}
+function initializePlaybook() {
+  const overlay = document.getElementById('playbookOverlay');
+  const sidebar = document.getElementById('playbookSidebar');
+  const button = document.getElementById('myPlaybookButton');
+  const closeBtn = document.getElementById('closePlaybook');
+  const saveItemBtn = document.getElementById('saveBtn');
+  if (!overlay || !sidebar || !button || !closeBtn || !saveItemBtn) return;
+
+  renderSavedItems();
+
+  const savedItems = getSavedItems();
+  const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+  updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+  saveItemBtn.addEventListener('click', () => {
+    const items = getSavedItems();
+    const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+    let nowSaved;
+
+    if (index === -1) {
+      const toolLink = window.location.pathname.split('/').pop() || 'strategic-conversations-guide.html';
+      items.push({
+        id: CURRENT_TOOL_ID,
+        title: CURRENT_TOOL_TITLE,
+        type: CURRENT_TOOL_TYPE,
+        link: toolLink,
+        savedAt: new Date().toISOString()
+      });
+      nowSaved = true;
+    } else {
+      items.splice(index, 1);
+      nowSaved = false;
+    }
+
+    setSavedItems(items);
+    updateSaveButtonState(saveItemBtn, nowSaved);
+    renderSavedItems();
+  });
+
+  button.addEventListener('click', () => { overlay.classList.add('open'); sidebar.classList.add('open'); });
+  closeBtn.addEventListener('click', () => { overlay.classList.remove('open'); sidebar.classList.remove('open'); });
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) { overlay.classList.remove('open'); sidebar.classList.remove('open'); }
+  });
+}
+function updateSaveButtonState(button, isSaved) {
+  const icon = button.querySelector('i');
+  const label = button.querySelector('span');
+  if (isSaved) {
+    button.classList.add('saved');
+    if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+    if (label) label.textContent = 'Saved';
+  } else {
+    button.classList.remove('saved');
+    if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+    if (label) label.textContent = 'Save item';
+  }
+}
+function renderSavedItems() {
+  const listEl = document.getElementById('savedItemsList');
+  const emptyEl = document.getElementById('savedItemsEmpty');
+  if (!listEl || !emptyEl) return;
+
+  const items = getSavedItems();
+  listEl.innerHTML = '';
+
+  if (!items.length) { emptyEl.style.display = 'block'; return; }
+  emptyEl.style.display = 'none';
+
+  items.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'saved-item';
+    const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+    const dateText = savedDate ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+    li.innerHTML = `
+      <div class="saved-item-title-row">
+        <span class="saved-item-title">${item.title}</span>
+        <span class="saved-item-type">${item.type}</span>
+      </div>
+      <div class="saved-item-meta">${dateText ? `Saved on ${dateText}` : ''}</div>
+      <a class="saved-item-link" href="${item.link}">Open <i class="fas fa-arrow-right"></i></a>
+    `;
+    listEl.appendChild(li);
+  });
+}
+</script>
+
+</body>
+</html>

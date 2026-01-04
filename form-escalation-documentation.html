@@ -1,0 +1,2885 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Escalation Documentation Form | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand + Category Pills System)
+       Categories updated to match your pills reference (7 categories)
+    =========================== */
+    :root{
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+      --text-dark:#212529;
+      --text-medium:#495057;
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+      --success-green:#10b981;
+      --warning-orange:#f59e0b;
+      --danger-red:#ef4444;
+      --info-blue:#3b82f6;
+
+      /* ===========================
+         CATEGORY COLORS (Your 7)
+      =========================== */
+      --category-clarity: #7B5FC4;
+      --category-burnout: #f59e0b;
+      --category-manager: #10b981;
+      --category-politics: #3b82f6;
+      --category-hr: #6D28D9;
+      --category-confidence: #ef4444;
+      --category-career: #800020;
+
+      /* ===========================
+         PILL STYLES (Light mode)
+      =========================== */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.08), rgba(123, 95, 196, 0.04));
+      --pill-clarity-border: rgba(123, 95, 196, 0.2);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.12), rgba(123, 95, 196, 0.08));
+      --pill-clarity-hover-border: rgba(123, 95, 196, 0.3);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.04));
+      --pill-burnout-border: rgba(245, 158, 11, 0.2);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(245, 158, 11, 0.08));
+      --pill-burnout-hover-border: rgba(245, 158, 11, 0.3);
+
+      --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.04));
+      --pill-manager-border: rgba(16, 185, 129, 0.2);
+      --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.08));
+      --pill-manager-hover-border: rgba(16, 185, 129, 0.3);
+
+      --pill-politics-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.04));
+      --pill-politics-border: rgba(59, 130, 246, 0.2);
+      --pill-politics-hover-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.08));
+      --pill-politics-hover-border: rgba(59, 130, 246, 0.3);
+
+      --pill-hr-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.08), rgba(109, 40, 217, 0.04));
+      --pill-hr-border: rgba(109, 40, 217, 0.2);
+      --pill-hr-hover-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.12), rgba(109, 40, 217, 0.08));
+      --pill-hr-hover-border: rgba(109, 40, 217, 0.3);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.04));
+      --pill-confidence-border: rgba(239, 68, 68, 0.2);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.08));
+      --pill-confidence-hover-border: rgba(239, 68, 68, 0.3);
+
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.08), rgba(128, 0, 32, 0.04));
+      --pill-career-border: rgba(128, 0, 32, 0.2);
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.12), rgba(128, 0, 32, 0.08));
+      --pill-career-hover-border: rgba(128, 0, 32, 0.3);
+    }
+
+    /* ===========================
+       DARK MODE VARIABLES
+    =========================== */
+    .dark-mode{
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#888888;
+      --text-dark:#e0e0e0;
+      --text-medium:#b0b0b0;
+
+      --accent-purple:#9d86e9;
+      --accent-purple-dark:#7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.2);
+      --lighter-purple: rgba(123, 95, 196, 0.1);
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+      --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      /* Dark mode category colors */
+      --category-clarity: #9d86e9;
+      --category-burnout: #fbbf24;
+      --category-manager: #34d399;
+      --category-politics: #60a5fa;
+      --category-hr: #8B5CF6;
+      --category-confidence: #f87171;
+      --category-career: #B03060;
+
+      /* Dark mode pill styles */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.15), rgba(123, 95, 196, 0.08));
+      --pill-clarity-border: rgba(157, 134, 233, 0.3);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.2), rgba(123, 95, 196, 0.12));
+      --pill-clarity-hover-border: rgba(157, 134, 233, 0.4);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08));
+      --pill-burnout-border: rgba(251, 191, 36, 0.3);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.12));
+      --pill-burnout-hover-border: rgba(251, 191, 36, 0.4);
+
+      --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
+      --pill-manager-border: rgba(52, 211, 153, 0.3);
+      --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.12));
+      --pill-manager-hover-border: rgba(52, 211, 153, 0.4);
+
+      --pill-politics-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08));
+      --pill-politics-border: rgba(96, 165, 250, 0.3);
+      --pill-politics-hover-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.12));
+      --pill-politics-hover-border: rgba(96, 165, 250, 0.4);
+
+      --pill-hr-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.15), rgba(109, 40, 217, 0.08));
+      --pill-hr-border: rgba(139, 92, 246, 0.3);
+      --pill-hr-hover-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.2), rgba(109, 40, 217, 0.12));
+      --pill-hr-hover-border: rgba(139, 92, 246, 0.4);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.08));
+      --pill-confidence-border: rgba(248, 113, 113, 0.3);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.12));
+      --pill-confidence-hover-border: rgba(248, 113, 113, 0.4);
+
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.15), rgba(128, 0, 32, 0.08));
+      --pill-career-border: rgba(176, 48, 96, 0.3);
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.2), rgba(128, 0, 32, 0.12));
+      --pill-career-hover-border: rgba(176, 48, 96, 0.4);
+    }
+
+    /* ===========================
+       GLOBAL
+    =========================== */
+    *{
+      margin:0; padding:0; box-sizing:border-box;
+      font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    body{
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      min-height: 100vh;
+    }
+    body.loaded{ opacity: 1; }
+    .container{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===========================
+       NAVIGATION
+    =========================== */
+    nav{
+      position: fixed;
+      top:0;
+      width:100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      height: 80px;
+    }
+    .nav-container{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 12px 0;
+      height: 100%;
+    }
+    .logo{
+      display:inline-flex;
+      align-items:center;
+      height: 100%;
+    }
+    .logo-img{
+      height:100px;
+      width:auto;
+      transform: translateX(20%);
+      padding: 14px 10px;
+      transition: all 0.3s ease;
+      display:block;
+      min-height:100px;
+    }
+    .logo-fallback{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      height:48px;
+      padding: 0 14px;
+      border-radius: 10px;
+      background: var(--premium-gradient);
+      color:#fff;
+      font-weight:700;
+      letter-spacing: 0.8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      transform: translateX(20%);
+    }
+    .nav-links{ display:flex; gap:50px; }
+    .nav-link{
+      color: var(--text-dark);
+      text-decoration:none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-size: 17px;
+    }
+    .nav-link:hover{ color: var(--accent-purple); }
+
+    .nav-link-container{ position: relative; display:inline-block; }
+    .new-tag{
+      position:absolute;
+      top:-12px;
+      right:-35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color:#000;
+      font-size:10px;
+      font-weight:600;
+      padding:2px 6px;
+      border-radius:4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index:10;
+      white-space:nowrap;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      transform: translateX(-20%);
+    }
+    .header-cta{
+      background: var(--accent-purple);
+      color:#fff;
+      padding: 8px 20px;
+      border-radius: 50px;
+      text-decoration:none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(123,95,196,0.3);
+    }
+    .header-cta:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(123,95,196,0.35);
+    }
+    .sign-in{
+      color: var(--text-dark);
+      text-decoration:none;
+      font-weight:500;
+      font-size:17px;
+    }
+    .sign-in:hover{ color: var(--accent-purple); }
+
+    .theme-toggle{
+      background:none;
+      border:none;
+      color: var(--text-dark);
+      cursor:pointer;
+      font-size:16px;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .theme-toggle:hover{ background-color: var(--light-gray); }
+
+    .mobile-toggle{
+      display:none;
+      background:none;
+      border:none;
+      color: var(--text-dark);
+      cursor:pointer;
+      font-size:24px;
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .mobile-toggle:hover{ background-color: var(--light-gray); }
+
+    .mobile-sign-in, .mobile-sign-up { display:none; }
+
+    @media (max-width: 768px){
+      .nav-container{ justify-content:center; position:relative; }
+
+      .logo{
+        position:absolute;
+        left:50%;
+        transform: translateX(-50%);
+        display:flex;
+        align-items:center;
+        height:100%;
+      }
+      .logo-img{ height:125px; transform:none; padding: 12px 0; }
+      .logo-fallback{ transform:none; }
+
+      .mobile-toggle{
+        display:flex;
+        position:absolute;
+        left:20px;
+        align-items:center;
+      }
+      .nav-actions{
+        transform:none;
+        gap:16px;
+        position:absolute;
+        right:20px;
+        align-items:center;
+      }
+      .nav-actions .sign-in,
+      .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding:20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        gap:20px;
+      }
+      .nav-links.active{ display:flex; }
+
+      .nav-link-container{
+        display:flex;
+        align-items:center;
+        justify-content:flex-start;
+        width:100%;
+      }
+      .new-tag{ position:static; margin-left:8px; }
+
+      .mobile-sign-in{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--primary-white);
+        color: var(--accent-purple);
+        border-radius:10px;
+        text-align:center;
+        font-weight:700;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+      .mobile-sign-up{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--accent-purple);
+        color:#fff;
+        border-radius:10px;
+        text-align:center;
+        font-weight:700;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .tool-hero-section{
+      width:100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow:hidden;
+    }
+    .tool-hero-section::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+      z-index:1;
+    }
+    .dark-mode .tool-hero-section::before{
+      background: linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+    }
+    .tool-hero-content{
+      position:relative;
+      z-index:2;
+      max-width:1100px;
+      margin:0 auto;
+      padding: 0 20px 10px;
+      animation: heroFadeUp 0.45s ease-out;
+    }
+    @keyframes heroFadeUp{
+      from{ opacity:0; transform: translateY(18px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .breadcrumb{
+      font-size:10px;
+      text-transform: uppercase;
+      letter-spacing:1px;
+      color: var(--dark-gray);
+      margin-bottom:10px;
+      display:flex;
+      gap:6px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .breadcrumb a{
+      color: var(--text-medium);
+      text-decoration:none !important;
+      font-weight:600;
+      letter-spacing:0.6px;
+      transition: color 0.2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+    }
+    .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+    .breadcrumb i{ font-size:10px; opacity:0.7; }
+    .breadcrumb .current{ color: var(--text-dark); font-weight:600; }
+
+    .checklist-name{
+      font-size:14px;
+      font-weight:700;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing:1.8px;
+      margin: 18px 0 12px;
+      display:block;
+    }
+
+    .hero-main-heading{
+      font-size:46px;
+      font-weight:650;
+      color: var(--text-dark);
+      line-height:1.1;
+      margin-bottom:18px;
+      max-width: 920px;
+    }
+    .hero-subheading{
+      font-size:16px;
+      color: var(--text-medium);
+      line-height:1.6;
+      max-width: 980px;
+      margin-bottom: 16px;
+    }
+
+    /* ===========================
+       RELATED CATEGORIES
+    =========================== */
+    .related-row{
+      display:flex;
+      flex-direction: column;
+      align-items:flex-start;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .related-label{
+      font-size: 12px;
+      font-weight:600;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: var(--text-medium);
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .related-pills{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+    }
+    .category-pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      height: 32px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration:none;
+    }
+    .dark-mode .category-pill{ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
+    .category-pill:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+    .dark-mode .category-pill:hover{ box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3); }
+
+    .category-pill.clarity{
+      color: var(--category-clarity);
+      border-color: var(--pill-clarity-border);
+      background: var(--pill-clarity-bg);
+    }
+    .category-pill.clarity:hover{
+      background: var(--pill-clarity-hover-bg);
+      border-color: var(--pill-clarity-hover-border);
+    }
+    .category-pill.hr{
+      color: var(--category-hr);
+      border-color: var(--pill-hr-border);
+      background: var(--pill-hr-bg);
+    }
+    .category-pill.hr:hover{
+      background: var(--pill-hr-hover-bg);
+      border-color: var(--pill-hr-hover-border);
+    }
+    .category-pill.manager{
+      color: var(--category-manager);
+      border-color: var(--pill-manager-border);
+      background: var(--pill-manager-bg);
+    }
+    .category-pill.manager:hover{
+      background: var(--pill-manager-hover-bg);
+      border-color: var(--pill-manager-hover-border);
+    }
+
+    /* Save button */
+    .save-btn{
+      position:absolute;
+      top:16px;
+      right:24px;
+      z-index:5;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 12px;
+      font-size:12px;
+      font-weight:600;
+      border-radius:999px;
+      border: 1px solid rgba(123,95,196,0.6);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--accent-purple-dark);
+      cursor:pointer;
+      transition: all 0.2s ease;
+    }
+    .save-btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(123,95,196,0.18);
+      background: #fff;
+    }
+    .dark-mode .save-btn{
+      background: rgba(20,20,20,0.9);
+      border-color: rgba(157,134,233,0.6);
+    }
+    .save-btn.saved{
+      background: var(--accent-purple);
+      color:#fff;
+      border-color: transparent;
+    }
+
+    /* ===========================
+       CONTEXT + HOW IT WORKS
+    =========================== */
+    .context-tips-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      width:100%;
+      max-width:1100px;
+      margin: 0 auto 18px;
+      padding: 24px 20px 10px;
+      margin-top: 6px;
+    }
+    .context-card, .tips-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius:14px;
+      padding: 26px 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .section-title{
+      font-size:18px;
+      font-weight:700;
+      color: var(--text-dark);
+      margin-bottom:16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .section-title i{ color: var(--accent-purple); }
+
+    .bullet-list{ list-style:none; margin:0; padding:0; }
+    .bullet-list li{
+      color: var(--text-medium);
+      line-height:1.65;
+      margin-bottom:12px;
+      padding-left: 26px;
+      position:relative;
+      font-size:14.5px;
+      font-weight:450;
+    }
+    .bullet-list li::before{
+      content:"•";
+      position:absolute;
+      left:10px;
+      color: var(--accent-purple);
+      font-size:18px;
+    }
+    .inline-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.18);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.03));
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-purple-dark);
+      margin-top: 10px;
+    }
+    .dark-mode .inline-badge{
+      border-color: rgba(157,134,233,0.25);
+      background: linear-gradient(135deg, rgba(123,95,196,0.22), rgba(123,95,196,0.12));
+      color: var(--accent-purple);
+    }
+
+    /* ===========================
+       WORKSPACE
+    =========================== */
+    .workspace-wrap{
+      max-width:1100px;
+      margin: 0 auto;
+      padding: 0 20px 10px;
+    }
+
+    .workspace-header{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 18px 0 14px;
+    }
+    .workspace-title{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width: 0;
+    }
+    .workspace-title h2{
+      font-size: 26px;
+      font-weight: 750;
+      color: var(--accent-purple-dark);
+      line-height: 1.2;
+    }
+    .workspace-title p{
+      font-size: 14px;
+      color: var(--text-medium);
+      font-weight: 450;
+      max-width: 900px;
+    }
+
+    .workspace-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .workspace-actions.bottom{
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      justify-content: flex-end;
+    }
+    .dark-mode .workspace-actions.bottom{
+      border-top-color: rgba(255,255,255,0.10);
+    }
+
+    .btn{
+      border:none;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn.primary{
+      background: var(--premium-gradient);
+      color:#fff;
+      box-shadow: 0 12px 26px rgba(123,95,196,0.22);
+    }
+    .btn.primary:hover{ transform: translateY(-1px); box-shadow: 0 16px 30px rgba(123,95,196,0.28); }
+    .btn.secondary{
+      background: var(--light-purple);
+      color: var(--accent-purple-dark);
+    }
+    .dark-mode .btn.secondary{
+      background: rgba(123,95,196,0.22);
+      color: var(--accent-purple);
+    }
+    .btn.secondary:hover{
+      transform: translateY(-1px);
+      background: rgba(123,95,196,0.18);
+    }
+    .btn:disabled{
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform:none !important;
+      box-shadow:none !important;
+    }
+
+    /* --- Form layout (premium, less scroll) --- */
+    .form-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .form-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 16px 16px 14px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+      position: relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+      min-height: 420px;
+    }
+    .dark-mode .form-card{
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+    }
+    .form-card::before{
+      content:'';
+      position:absolute;
+      left:0; right:0; top:0;
+      height: 3px;
+      background: var(--premium-gradient);
+      opacity: 0.95;
+    }
+
+    .card-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .card-chip{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .card-num{
+      width: 30px;
+      height: 30px;
+      border-radius: 12px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 600;
+      font-size: 12px;
+      color:#fff;
+      background: var(--premium-gradient);
+      box-shadow: 0 12px 22px rgba(123,95,196,0.18);
+      flex-shrink: 0;
+    }
+    .card-title{
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .card-title h3{
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .card-title p{
+      font-size: 12.5px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .field-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .field{
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .field label{
+      font-size: 12px;
+      color: var(--text-medium);
+      font-weight: 750;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .field label i{ color: var(--accent-purple); opacity: 0.95; }
+
+    .input, .select, .textarea{
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      padding: 10px 12px;
+      color: var(--text-dark);
+      font-size: 13.5px;
+      line-height: 1.45;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 500;
+    }
+    .dark-mode .input, .dark-mode .select, .dark-mode .textarea{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.10);
+    }
+    .input:focus, .select:focus, .textarea:focus{
+      border-color: rgba(123,95,196,0.35);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.10);
+    }
+    .textarea{
+      resize: none;
+      min-height: 210px;
+      overflow: hidden;
+      flex: 1;
+    }
+    .textarea.tall{ min-height: 250px; }
+
+    .meta-row{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: -2px;
+    }
+    .count{
+      font-size: 12px;
+      color: var(--dark-gray);
+      font-weight: 650;
+      white-space: nowrap;
+    }
+    .mini-tag{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.20);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent-purple-dark);
+      white-space: nowrap;
+    }
+    .mini-tag i{ opacity: 0.9; }
+    .mini-tag.orange{
+      border-color: rgba(245,158,11,0.22);
+      background: linear-gradient(135deg, rgba(245,158,11,0.10), rgba(245,158,11,0.03));
+      color: #a16207;
+    }
+    .dark-mode .mini-tag.orange{ color: #fbbf24; }
+    .mini-tag.red{
+      border-color: rgba(239,68,68,0.22);
+      background: linear-gradient(135deg, rgba(239,68,68,0.10), rgba(239,68,68,0.03));
+      color: #991b1b;
+    }
+    .dark-mode .mini-tag.red{ color: #f87171; }
+    .mini-tag.green{
+      border-color: rgba(16,185,129,0.22);
+      background: linear-gradient(135deg, rgba(16,185,129,0.10), rgba(16,185,129,0.03));
+      color: #065f46;
+    }
+    .dark-mode .mini-tag.green{ color: #34d399; }
+
+    .severity-row{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .slider-wrap{
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      border-radius: 14px;
+      padding: 12px 12px;
+      box-shadow: 0 12px 26px rgba(0,0,0,0.04);
+    }
+    .dark-mode .slider-wrap{
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.25);
+    }
+    .slider-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .slider-top .left{
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .slider-top .left .title{
+      font-size: 13px;
+      font-weight: 850;
+      color: var(--accent-purple-dark);
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .slider-top .left .sub{
+      font-size: 12.5px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .range{
+      width: 100%;
+      -webkit-appearance:none;
+      appearance:none;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--light-gray);
+      outline:none;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .dark-mode .range{
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.08);
+    }
+    .range::-webkit-slider-thumb{
+      -webkit-appearance:none;
+      appearance:none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--premium-gradient);
+      cursor:pointer;
+      box-shadow: 0 10px 20px rgba(123,95,196,0.25);
+      border: 2px solid rgba(255,255,255,0.85);
+    }
+    .range::-moz-range-thumb{
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-purple);
+      cursor:pointer;
+      border: 2px solid rgba(255,255,255,0.85);
+    }
+    .scale{
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--dark-gray);
+      font-weight: 600;
+    }
+
+    /* ===========================
+       GENERATED PACK
+    =========================== */
+    .pack-section{
+      max-width:1100px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      display:none;
+    }
+    .pack-section.active{
+      display:block;
+      animation: slideIn 0.5s ease;
+    }
+    @keyframes slideIn{
+      from{ opacity:0; transform: translateY(20px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .pack-header{
+      text-align:center;
+      margin: 18px 0 22px;
+    }
+    .pack-title{
+      font-size: 24px;
+      font-weight: 850;
+      color: var(--accent-purple-dark);
+      margin-bottom: 6px;
+    }
+    .pack-subtitle{
+      color: var(--text-medium);
+      font-size: 14.5px;
+      font-weight: 450;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .pack-bar{
+      background: var(--primary-white);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 14px 40px rgba(123,95,196,0.12);
+      border: 1px solid rgba(123,95,196,0.15);
+      display:flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .pack-metrics{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+    }
+    .metric-row{
+      display:flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .metric-title{
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent-purple-dark);
+      letter-spacing: 0.2px;
+    }
+    .metric-score{
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--accent-purple);
+      white-space: nowrap;
+    }
+    .mini-progress{
+      height: 10px;
+      background: var(--light-gray);
+      border-radius: 6px;
+      overflow:hidden;
+    }
+    .dark-mode .mini-progress{ background: rgba(255,255,255,0.12); }
+    .mini-fill{
+      height:100%;
+      width:0%;
+      border-radius: 6px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: var(--premium-gradient);
+    }
+    .mini-fill.high{ background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .mini-fill.medium{ background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .mini-fill.low{ background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+    .pack-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+      flex-shrink: 0;
+    }
+
+    .section-header{
+      font-size: 18px;
+      font-weight: 850;
+      margin: 18px 0 14px;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-gray);
+    }
+    .section-header.purple{ color: var(--accent-purple-dark); }
+    .section-header.orange{ color: var(--warning-orange); }
+    .section-header.blue{ color: var(--accent-purple); }
+
+    .pack-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .pack-card{
+      background: var(--primary-white);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+    }
+    .dark-mode .pack-card{
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.32);
+    }
+    .pack-card::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height:3px;
+      background: var(--premium-gradient);
+    }
+
+    .pc-ico{
+      font-size: 18px;
+      margin-bottom: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--accent-purple);
+      background: var(--lighter-purple);
+    }
+    .pc-title{
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .pc-body{
+      color: var(--text-medium);
+      font-size: 13.5px;
+      line-height: 1.6;
+      font-weight: 450;
+      white-space: pre-wrap;
+      flex: 1;
+    }
+
+    .pack-output{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+      margin-bottom: 12px;
+    }
+    .dark-mode .pack-output{ box-shadow: 0 18px 34px rgba(0,0,0,0.32); }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12.8px;
+      color: var(--text-medium);
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR
+    =========================== */
+    .my-playbook-fab{
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1200;
+      background: var(--premium-gradient);
+      color:#fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      cursor:pointer;
+      font-size: 13px;
+      font-weight: 750;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+    .my-playbook-fab:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+    }
+
+    .playbook-sidebar-overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1190;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity 0.25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position: fixed;
+      top:0;
+      right: -380px;
+      width: 340px;
+      max-width: 90%;
+      height: 100%;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index: 1191;
+      display:flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border-light);
+      transition: right 0.25s ease;
+    }
+    .dark-mode .playbook-sidebar{
+      background: rgba(18,18,18,0.96);
+      box-shadow: -4px 0 22px rgba(0,0,0,0.6);
+    }
+    .playbook-sidebar.open{ right:0; }
+
+    .playbook-sidebar-header{
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .playbook-sidebar-header-title-row{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      margin-bottom: 4px;
+    }
+    .playbook-sidebar-header h3{
+      font-size:18px;
+      font-weight:700;
+      color: var(--text-dark);
+    }
+    .playbook-sidebar-header p{
+      font-size: 13px;
+      color: var(--dark-gray);
+    }
+    .playbook-close-btn{
+      background:none;
+      border:none;
+      color: var(--dark-gray);
+      cursor:pointer;
+      font-size: 18px;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.2s ease;
+    }
+    .playbook-close-btn:hover{ background: var(--light-gray); }
+
+    .playbook-sidebar-body{
+      padding: 14px 18px 20px;
+      padding-bottom: 50px;
+      overflow-y: auto;
+      flex:1;
+      display:flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .saved-items-empty{
+      font-size: 13px;
+      color: var(--dark-gray);
+      line-height: 1.6;
+    }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+
+    .saved-item{
+      padding: 10px 10px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom: 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .saved-item-title-row{
+      display:flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .saved-item-title{
+      font-size: 14px;
+      font-weight: 850;
+      color: var(--text-dark);
+    }
+    .saved-item-type{
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent-purple-dark);
+      font-weight: 600;
+    }
+    .saved-item-meta{
+      font-size: 12px;
+      color: var(--dark-gray);
+    }
+    .saved-item-link{
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--accent-purple);
+      text-decoration:none;
+      font-weight: 850;
+      display:inline-flex;
+      align-items:center;
+      gap: 4px;
+    }
+    .saved-item-link:hover{ text-decoration: underline; }
+
+    .playbook-quick-links{
+      margin-top: 185px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+    }
+    .quick-links-title{
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-medium);
+    }
+    .playbook-quick-links-list{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .quick-link-pill{
+      width: 56%;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.35);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      text-decoration:none;
+      color: var(--accent-purple-dark);
+      font-size: 13px;
+      font-weight: 600;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .quick-link-pill:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+    }
+    .dark-mode .quick-link-pill{
+      border-color: rgba(157,134,233,0.55);
+      background: linear-gradient(135deg, rgba(123,95,196,0.26), rgba(123,95,196,0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer{
+      background: var(--primary-white);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 30px;
+      text-align:center;
+      color: var(--text-medium);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px){
+      .context-tips-grid{ grid-template-columns: 1fr; gap: 24px; }
+      .form-grid{ grid-template-columns: 1fr; }
+      .pack-grid{ grid-template-columns: repeat(2, 1fr); }
+      .pack-bar{ flex-direction: column; align-items: stretch; }
+      .pack-actions{ justify-content: flex-start; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .form-card{ min-height: 440px; }
+    }
+    @media (max-width: 768px){
+      .tool-hero-section{ margin-top: 100px; }
+      .hero-main-heading{ font-size: 36px; }
+      .save-btn{ right: 18px; top: 10px; }
+      .my-playbook-fab{ bottom: 18px; right: 18px; }
+      .pack-grid{ grid-template-columns: 1fr; }
+      .field-grid{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px){
+      .hero-main-heading{ font-size: 32px; }
+      .checklist-name{ font-size: 13px; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .pack-actions{ justify-content: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===========================
+     NAVIGATION
+=========================== -->
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo" aria-label="The Employee Playbook">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      <div class="logo-fallback" id="logoFallback">The Employee Playbook</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<div class="tool-hero-section">
+  <button class="save-btn" id="saveBtn">
+    <i class="far fa-bookmark"></i>
+    <span>Save</span>
+  </button>
+
+  <div class="tool-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-house"></i> Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="the-toolkit.html">The Toolkit</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="category-hr-and-formal-processes.html">HR &amp; Formal Processes</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Escalation Documentation Form</span>
+    </div>
+
+    <span class="checklist-name">ESCALATION DOCUMENTATION FORM</span>
+
+    <h1 class="hero-main-heading">
+      Capture facts, evidence, and decisions so your escalation stays calm, credible, and hard to dismiss
+    </h1>
+
+    <div class="hero-subheading">
+      This form is your “case file” for workplace escalations: workload collapse, repeated boundary breaches, unsafe conduct, policy issues, or formal process risks.
+      It helps you separate <strong>facts from feelings</strong>, lock <strong>dates and outcomes</strong>, and produce a clean escalation pack you can use with your manager, HR, or Occupational Health.
+      <br><br>
+      Fill in what you know. Generate your pack when you’ve captured enough to be taken seriously without over-explaining.
+    </div>
+
+    <div class="related-row" aria-label="Related categories">
+      <span class="related-label">Related categories</span>
+
+      <div class="related-pills">
+        <a class="category-pill clarity" href="category-clarity-priorities-and-direction.html" title="Clarity, Priorities & Direction">
+          <i class="fas fa-bullseye"></i>
+          <span>Clarity, Priorities &amp; Direction</span>
+        </a>
+
+        <a class="category-pill manager" href="category-manager-relationship-and-leadership-style.html" title="Manager Relationship & Leadership Style">
+          <i class="fas fa-people-arrows"></i>
+          <span>Manager Relationship &amp; Leadership Style</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     CONTEXT & PRO TIPS
+=========================== -->
+<div class="context-tips-grid">
+  <div class="context-card">
+    <h3 class="section-title"><i class="fas fa-compass"></i>When to Use This Form</h3>
+    <ul class="bullet-list">
+      <li>When informal chats have not changed behaviour, expectations, or workload.</li>
+      <li>When you need a written record of incidents, decisions, or boundary breaches.</li>
+      <li>When the risk is <strong>credibility</strong>, <strong>health</strong>, or <strong>formal process</strong> (performance, conduct, grievance).</li>
+      <li>When you want to escalate without sounding dramatic — just accurate.</li>
+      <li>When you need a clean timeline that holds up under scrutiny.</li>
+    </ul>
+    <div class="inline-badge"><i class="fas fa-shield"></i> Bias-resistant documentation beats “passionate” arguments.</div>
+  </div>
+
+  <div class="tips-card">
+    <h3 class="section-title"><i class="fas fa-bolt"></i>How to Use It (fast)</h3>
+    <ul class="bullet-list">
+      <li>Write like you’re preparing for a neutral reviewer: date, quote, outcome, evidence.</li>
+      <li>Keep it <strong>specific</strong>: “On Tue 12:40, X said… then Y happened.”</li>
+      <li>Always capture your <strong>attempted fixes</strong> (what you tried, who you told, what changed).</li>
+      <li>Separate: <strong>incident</strong> → <strong>impact</strong> → <strong>risk</strong> → <strong>ask</strong>.</li>
+      <li>Your pack includes scripts that keep tone calm and UK-friendly.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===========================
+     WORKSPACE
+=========================== -->
+<div class="workspace-wrap" id="workspace">
+  <div class="workspace-header">
+    <div class="workspace-title">
+      <h2>Draft your escalation documentation</h2>
+      <p>
+        Four focused sections: (1) what happened, (2) evidence and timeline, (3) impact and risk, (4) your ask and escalation route.
+        Generate your Escalation Pack when the narrative is clear and evidence-led.
+      </p>
+    </div>
+  </div>
+
+  <div class="form-grid" id="formGrid">
+    <!-- Cards injected by JS -->
+  </div>
+
+  <div class="workspace-actions bottom" aria-label="Draft actions">
+    <button class="btn secondary" id="copyDraftBtn"><i class="far fa-copy"></i> Copy draft</button>
+    <button class="btn secondary" id="clearDraftBtn"><i class="fas fa-eraser"></i> Clear</button>
+    <button class="btn primary" id="generatePackBtn" disabled><i class="fas fa-wand-magic-sparkles"></i> Generate Escalation Pack</button>
+  </div>
+</div>
+
+<!-- ===========================
+     GENERATED PACK
+=========================== -->
+<div class="pack-section" id="packSection">
+  <div class="pack-header">
+    <h2 class="pack-title">Your Escalation Pack</h2>
+    <p class="pack-subtitle">
+      A structured output you can use immediately: one-page case summary, timeline entries you can paste into email/HR systems,
+      risk framing (why this is not “just a bad week”), and scripts that keep your tone calm and credible.
+    </p>
+  </div>
+
+  <div class="pack-bar">
+    <div class="pack-metrics">
+      <div class="metric-row">
+        <div class="metric-title">Draft completeness</div>
+        <div class="metric-score" id="completenessScore">0%</div>
+      </div>
+      <div class="mini-progress"><div class="mini-fill" id="miniFill"></div></div>
+      <div class="metric-row" style="margin-top:2px;">
+        <div class="metric-title">Escalation strength</div>
+        <div class="metric-score" id="strengthSignal">—</div>
+      </div>
+    </div>
+
+    <div class="pack-actions">
+      <button class="btn primary" id="copyPackBtn"><i class="far fa-copy"></i> Copy pack</button>
+      <button class="btn secondary" id="downloadPackBtn"><i class="fas fa-download"></i> Download .txt</button>
+      <button class="btn secondary" id="printPackBtn"><i class="fas fa-print"></i> Print</button>
+    </div>
+  </div>
+
+  <h3 class="section-header purple"><i class="fas fa-file-lines"></i> One-page case summary</h3>
+  <div class="pack-output">
+    <div class="mono" id="onePageOutput"></div>
+  </div>
+
+  <h3 class="section-header orange"><i class="fas fa-triangle-exclamation"></i> Risk framing (what this puts at risk)</h3>
+  <div class="pack-grid" id="riskGrid"></div>
+
+  <h3 class="section-header blue"><i class="fas fa-comments"></i> Scripts (clear, calm, UK-friendly)</h3>
+  <div class="pack-grid" id="scriptsGrid"></div>
+</div>
+
+<!-- ===========================
+     MY PLAYBOOK SIDEBAR (Right)
+=========================== -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven’t saved anything yet. Use <strong>Save</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <div class="playbook-quick-links-header">
+          <span class="quick-links-title">Quick links</span>
+        </div>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill">
+            <i class="fas fa-gauge"></i> The Dashboard
+          </a>
+          <a href="the-lens.html" class="quick-link-pill">
+            <i class="fas fa-search"></i> The Lens
+          </a>
+          <a href="the-toolkit.html" class="quick-link-pill">
+            <i class="fas fa-toolbox"></i> The Toolkit
+          </a>
+          <a href="the-coach.html" class="quick-link-pill">
+            <i class="fas fa-comments"></i> The Coach
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ===========================
+   BOOT
+=========================== */
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('loaded');
+
+  initializeThemeToggle();
+  initializeMobileNav();
+  initializePlaybook();
+
+  buildFormCards();
+  loadDraft();
+  wireDraftHandlers();
+
+  refreshGenerateState();
+});
+
+/* ===========================
+   MOBILE NAV
+=========================== */
+function initializeMobileNav() {
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (!mobileToggle || !navLinks) return;
+
+  mobileToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('active');
+    const icon = this.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    }
+  });
+
+  document.addEventListener('click', function(event) {
+    if (navLinks.classList.contains('active') &&
+        !navLinks.contains(event.target) &&
+        !mobileToggle.contains(event.target)) {
+      navLinks.classList.remove('active');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) {
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+      }
+    }
+  });
+}
+
+/* ===========================
+   THEME TOGGLE + LOGO
+=========================== */
+function initializeThemeToggle() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (!themeToggleBtn) return;
+
+  const themeIcon = themeToggleBtn.querySelector('i');
+  const logoImg = document.getElementById('mainLogo');
+  const logoFallback = document.getElementById('logoFallback');
+
+  function getLogoPath(filename) {
+    if (window.location.protocol === 'file:') {
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+      return basePath + 'assets/img/' + filename;
+    } else {
+      return './assets/img/' + filename;
+    }
+  }
+
+  function showFallbackLogo() {
+    if (logoImg) logoImg.style.display = 'none';
+    if (logoFallback) logoFallback.style.display = 'inline-flex';
+  }
+
+  function showImageLogo() {
+    if (logoFallback) logoFallback.style.display = 'none';
+    if (logoImg) logoImg.style.display = 'block';
+  }
+
+  function updateLogoForTheme(isDarkMode) {
+    if (!logoImg) return;
+    showImageLogo();
+    logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+    logoImg.alt = 'The Employee Playbook';
+  }
+
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const savedTheme = localStorage.getItem('theme');
+  const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches);
+
+  if (shouldUseDark) {
+    document.body.classList.add('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+    updateLogoForTheme(true);
+  } else {
+    document.body.classList.remove('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+    updateLogoForTheme(false);
+  }
+
+  themeToggleBtn.addEventListener('click', function() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+
+    if (isDarkMode) {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+      updateLogoForTheme(false);
+    } else {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+      updateLogoForTheme(true);
+    }
+  });
+
+  prefersDarkScheme.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      if (e.matches) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      }
+    }
+  });
+
+  if (logoImg) {
+    logoImg.addEventListener('error', function() {
+      if (this.src.includes('logo-dark.png')) {
+        this.src = getLogoPath('logo.png');
+      } else {
+        showFallbackLogo();
+      }
+    });
+  }
+}
+
+/* ===========================
+   FORM DEFINITION
+=========================== */
+const DRAFT_KEY = 'tepEscalationDocumentationDraft_v1';
+
+const formCards = [
+  {
+    id: 'case_meta',
+    title: 'Case details (what this is about)',
+    hint: 'Give this escalation a clean name and scope.',
+    kind: 'mixed',
+    fields: [
+      { id:'case_title', label:'Case title', icon:'fas fa-tag', type:'text', placeholder:'e.g., Repeated workload override without trade-offs' },
+      { id:'case_type', label:'Escalation type', icon:'fas fa-diagram-project', type:'select', options:[
+        'Workload / capacity risk',
+        'Manager behaviour / conduct',
+        'Team conflict / bullying / harassment',
+        'Policy breach / compliance risk',
+        'Performance process risk',
+        'Wellbeing / health impact',
+        'Other (describe)'
+      ]},
+      { id:'start_date', label:'When it started', icon:'fas fa-calendar', type:'date' },
+      { id:'scope', label:'Scope (what is included / excluded)', icon:'fas fa-circle-nodes', type:'textarea', placeholder:
+`Included:
+• …
+Excluded (to avoid drift):
+• …
+
+This keeps the escalation clean.` }
+    ]
+  },
+  {
+    id: 'facts_timeline',
+    title: 'Facts + timeline (what happened)',
+    hint: 'Date, quote, action, outcome. Keep it neutral.',
+    kind: 'timeline',
+    fields: [
+      { id:'timeline', label:'Timeline entries', icon:'fas fa-list-ol', type:'textarea', tall:true, placeholder:
+`Use this format:
+
+[DD Mon YYYY, time] — Event
+What happened:
+• …
+Evidence:
+• Email / Slack / calendar / doc link / witness
+Outcome:
+• What changed (or didn’t)
+
+Add 3–8 entries. Quality beats quantity.` }
+    ]
+  },
+  {
+    id: 'evidence_impact',
+    title: 'Evidence + impact (why this matters)',
+    hint: 'Impact on delivery, health, relationships, and risk.',
+    kind: 'impact',
+    fields: [
+      { id:'evidence', label:'Evidence you have', icon:'fas fa-paperclip', type:'textarea', placeholder:
+`List evidence you can point to:
+• Emails / messages
+• Calendar invites / cancellations
+• Work artefacts (tickets, docs)
+• Policy references
+• Witnesses (only if necessary)
+
+Keep it factual — no interpretation.`},
+      { id:'impact', label:'Impact (observable)', icon:'fas fa-wave-square', type:'textarea', placeholder:
+`Be concrete:
+• Delivery: missed deadlines / rework / errors / delays
+• Capacity: extended hours / no recovery window
+• Health: sleep disruption / anxiety spikes / GP/OH triggers (if relevant)
+• Relationship: trust damage / escalation tension
+
+Avoid exaggeration. Understatement with evidence wins.`}
+    ]
+  },
+  {
+    id: 'ask_route',
+    title: 'Your ask + escalation route',
+    hint: 'What you want to happen, by when, and who owns it.',
+    kind: 'route',
+    fields: [
+      { id:'attempts', label:'What you have already tried', icon:'fas fa-rotate', type:'textarea', placeholder:
+`List attempts to resolve informally:
+• Conversations held (date + outcome)
+• Actions you took
+• Agreements made (and what broke)
+
+This proves reasonableness and prevents “why didn’t you say earlier?”`},
+      { id:'ask', label:'Your clean ask (the change you need)', icon:'fas fa-handshake', type:'textarea', placeholder:
+`Write 3–5 crisp asks, e.g.:
+• Confirm top priorities and explicit trade-offs (in writing)
+• Agree workload cap / meeting controls
+• Set decision rights
+• Put adjustments in place for X weeks (review date)
+
+End with: “If this cannot be supported, I’m asking for HR/OH guidance on next steps.”`},
+      { id:'route', label:'Where you are escalating to', icon:'fas fa-route', type:'select', options:[
+        'Manager (reset conversation + written trade-offs)',
+        'Skip-level manager / Head of function',
+        'HR case management / employee relations',
+        'Occupational Health / wellbeing route',
+        'Formal grievance route (last resort)',
+        'Other (describe)'
+      ]}
+    ]
+  }
+];
+
+function buildFormCards(){
+  const grid = document.getElementById('formGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  formCards.forEach((c, idx) => {
+    const card = document.createElement('div');
+    card.className = 'form-card';
+
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="card-chip">
+          <div class="card-num">${idx + 1}</div>
+          <div class="card-title">
+            <h3>${escapeHtml(c.title)}</h3>
+            <p>${escapeHtml(c.hint)}</p>
+          </div>
+        </div>
+      </div>
+
+      ${renderCardFields(c)}
+    `;
+
+    grid.appendChild(card);
+  });
+
+  // wire severity slider after DOM
+  const sev = document.getElementById('severity');
+  if (sev) {
+    sev.addEventListener('input', () => {
+      setDraftValue('severity', String(sev.value));
+      updateSeverityUI();
+      refreshGenerateState();
+      updateCountsAll();
+    });
+  }
+
+  // wire all inputs
+  wireAllInputs();
+  updateSeverityUI();
+  updateCountsAll();
+}
+
+function renderCardFields(card){
+  if (card.id === 'facts_timeline') {
+    return `
+      <div class="severity-row">
+        <div class="slider-wrap">
+          <div class="slider-top">
+            <div class="left">
+              <div class="title"><i class="fas fa-gauge-high"></i> Escalation Pressure Index</div>
+              <div class="sub">Your quick “how hot is this?” dial. Used to shape scripts and risk framing.</div>
+            </div>
+            <div class="mini-tag" id="severityTag"><i class="fas fa-circle"></i> —</div>
+          </div>
+          <input class="range" id="severity" type="range" min="0" max="10" step="1" value="0" aria-label="Escalation Pressure Index">
+          <div class="scale">
+            <span>0 calm</span>
+            <span>5 pressured</span>
+            <span>10 critical</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="timeline"><i class="fas fa-list-ol"></i> Timeline entries</label>
+        <textarea class="textarea tall" id="timeline" placeholder="${escapeHtml(card.fields[0].placeholder)}"></textarea>
+        <div class="meta-row">
+          <div class="mini-tag orange"><i class="fas fa-lock"></i> Stick to dates + outcomes</div>
+          <div class="count" id="count_timeline">0 chars</div>
+        </div>
+      </div>
+    `;
+  }
+
+  // default rendering
+  const allFields = card.fields || [];
+  const firstRow = [];
+  const secondRow = [];
+
+  // two-column grid for small fields, textareas full width
+  allFields.forEach(f => {
+    if (f.type === 'textarea') return;
+    firstRow.push(f);
+  });
+  allFields.forEach(f => {
+    if (f.type !== 'textarea') return;
+    secondRow.push(f);
+  });
+
+  const smallFieldsHtml = firstRow.length
+    ? `<div class="field-grid">${firstRow.map(f => renderField(f)).join('')}</div>`
+    : '';
+
+  const bigFieldsHtml = secondRow.map(f => `<div class="field">${renderField(f, true)}</div>`).join('');
+
+  // case_meta has scope textarea and other fields; evidence_impact has two textareas; ask_route has textarea+textarea+select
+  return `
+    ${smallFieldsHtml}
+    ${bigFieldsHtml}
+  `;
+}
+
+function renderField(f, isBig){
+  const id = f.id;
+  const icon = f.icon || 'fas fa-pen';
+  const label = escapeHtml(f.label || id);
+
+  if (f.type === 'select') {
+    const opts = (f.options || []).map(o => `<option value="${escapeHtml(o)}">${escapeHtml(o)}</option>`).join('');
+    return `
+      <label for="${id}"><i class="${icon}"></i> ${label}</label>
+      <select class="select" id="${id}">
+        ${opts}
+      </select>
+      <div class="meta-row">
+        <div class="mini-tag"><i class="fas fa-check"></i> Keep it simple</div>
+        <div class="count" id="count_${id}">0 chars</div>
+      </div>
+    `;
+  }
+
+  if (f.type === 'date') {
+    return `
+      <label for="${id}"><i class="${icon}"></i> ${label}</label>
+      <input class="input" id="${id}" type="date" />
+      <div class="meta-row">
+        <div class="mini-tag"><i class="fas fa-calendar-check"></i> Anchor the record</div>
+        <div class="count" id="count_${id}">0 chars</div>
+      </div>
+    `;
+  }
+
+  if (f.type === 'textarea') {
+    const tall = f.tall ? 'tall' : '';
+    const ph = escapeHtml(f.placeholder || '');
+    return `
+      <label for="${id}"><i class="${icon}"></i> ${label}</label>
+      <textarea class="textarea ${tall}" id="${id}" placeholder="${ph}"></textarea>
+      <div class="meta-row">
+        <div class="mini-tag"><i class="fas fa-bullseye"></i> Facts → impact → ask</div>
+        <div class="count" id="count_${id}">0 chars</div>
+      </div>
+    `;
+  }
+
+  // text default
+  const ph = escapeHtml(f.placeholder || '');
+  return `
+    <div class="field">
+      <label for="${id}"><i class="${icon}"></i> ${label}</label>
+      <input class="input" id="${id}" type="text" placeholder="${ph}">
+      <div class="meta-row">
+        <div class="mini-tag"><i class="fas fa-pen"></i> Keep it crisp</div>
+        <div class="count" id="count_${id}">0 chars</div>
+      </div>
+    </div>
+  `;
+}
+
+/* ===========================
+   DRAFT STORAGE
+=========================== */
+function getDraft(){
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch(e){
+    return {};
+  }
+}
+function setDraft(d){
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); }
+  catch(e){ console.warn('Draft save failed:', e); }
+}
+
+function setDraftValue(key, value){
+  const d = getDraft();
+  d[key] = value;
+  setDraft(d);
+}
+
+function loadDraft(){
+  const d = getDraft();
+
+  // defaults
+  const defaultSelects = { case_type: 'Workload / capacity risk', route: 'Manager (reset conversation + written trade-offs)' };
+  Object.keys(defaultSelects).forEach(k => {
+    if (!d[k]) d[k] = defaultSelects[k];
+  });
+
+  // apply to fields
+  const allIds = getAllFieldIds();
+  allIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    if (el.tagName === 'SELECT') {
+      el.value = d[id] || el.value || '';
+    } else if (el.type === 'date') {
+      el.value = d[id] || '';
+    } else {
+      el.value = d[id] || '';
+    }
+  });
+
+  // slider
+  const sev = document.getElementById('severity');
+  if (sev) sev.value = d.severity ? Number(d.severity) : 0;
+
+  updateSeverityUI();
+  updateCountsAll();
+}
+
+function getAllFieldIds(){
+  const ids = new Set(['severity','timeline']);
+  formCards.forEach(c => (c.fields||[]).forEach(f => ids.add(f.id)));
+  ids.delete('timeline'); // already included
+  ids.delete('severity'); // slider handled separately
+  // timeline exists as explicit
+  ids.add('timeline');
+  return Array.from(ids);
+}
+
+function wireAllInputs(){
+  const ids = getAllFieldIds();
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    if (id === 'severity') return;
+
+    el.addEventListener('input', () => {
+      setDraftValue(id, el.value);
+      updateCount(id);
+      refreshGenerateState();
+    });
+
+    // for select change
+    el.addEventListener('change', () => {
+      setDraftValue(id, el.value);
+      updateCount(id);
+      refreshGenerateState();
+    });
+  });
+}
+
+function wireDraftHandlers(){
+  const copyDraftBtn = document.getElementById('copyDraftBtn');
+  const clearDraftBtn = document.getElementById('clearDraftBtn');
+  const generateBtn = document.getElementById('generatePackBtn');
+
+  if (copyDraftBtn) copyDraftBtn.addEventListener('click', copyDraft);
+  if (clearDraftBtn) clearDraftBtn.addEventListener('click', clearDraft);
+  if (generateBtn) generateBtn.addEventListener('click', generateEscalationPack);
+
+  const copyPackBtn = document.getElementById('copyPackBtn');
+  const downloadPackBtn = document.getElementById('downloadPackBtn');
+  const printPackBtn = document.getElementById('printPackBtn');
+
+  if (copyPackBtn) copyPackBtn.addEventListener('click', () => {
+    const text = buildPackText();
+    copyText(text, copyPackBtn, 'Pack copied');
+  });
+
+  if (downloadPackBtn) downloadPackBtn.addEventListener('click', () => {
+    const text = buildPackText();
+    downloadText(text, 'escalation-documentation-pack.txt');
+  });
+
+  if (printPackBtn) printPackBtn.addEventListener('click', () => window.print());
+}
+
+function updateCountsAll(){
+  getAllFieldIds().forEach(id => updateCount(id));
+}
+
+function updateCount(id){
+  const el = document.getElementById(id);
+  const count = document.getElementById(`count_${id}`);
+  if (!el || !count) return;
+  count.textContent = `${(el.value || '').length} chars`;
+}
+
+function refreshGenerateState(){
+  const btn = document.getElementById('generatePackBtn');
+  if (!btn) return;
+
+  const d = getDraft();
+  const filledSignals = [
+    (d.case_title||'').trim().length > 0,
+    (d.timeline||'').trim().length > 0,
+    (d.evidence||'').trim().length > 0,
+    (d.ask||'').trim().length > 0
+  ].filter(Boolean).length;
+
+  btn.disabled = filledSignals < 2; // same logic as your other tools: enough to generate something useful
+}
+
+/* ===========================
+   PRESSURE INDEX UI
+=========================== */
+function updateSeverityUI(){
+  const d = getDraft();
+  const v = Number(d.severity || 0);
+
+  const tag = document.getElementById('severityTag');
+  if (!tag) return;
+
+  let label = '—';
+  let cls = 'mini-tag';
+
+  if (v <= 2) { label = `Low (${v}/10)`; cls = 'mini-tag green'; }
+  else if (v <= 6) { label = `Medium (${v}/10)`; cls = 'mini-tag orange'; }
+  else { label = `High (${v}/10)`; cls = 'mini-tag red'; }
+
+  tag.className = cls;
+  tag.innerHTML = `<i class="fas fa-circle"></i> ${label}`;
+}
+
+/* ===========================
+   COPY / CLEAR
+=========================== */
+function copyDraft(){
+  const text = buildDraftText();
+  const btn = document.getElementById('copyDraftBtn');
+  copyText(text, btn, 'Draft copied');
+}
+
+function clearDraft(){
+  const ok = confirm('Clear the full draft? This cannot be undone.');
+  if (!ok) return;
+
+  localStorage.removeItem(DRAFT_KEY);
+  loadDraft();
+  refreshGenerateState();
+
+  const pack = document.getElementById('packSection');
+  if (pack) pack.classList.remove('active');
+}
+
+function copyText(text, buttonEl, successLabel){
+  navigator.clipboard.writeText(text);
+
+  if (!buttonEl) return;
+  const originalHTML = buttonEl.innerHTML;
+  const originalBg = buttonEl.style.background;
+  const originalColor = buttonEl.style.color;
+
+  buttonEl.innerHTML = `<i class="fas fa-check"></i> ${successLabel}`;
+  buttonEl.style.background = '#10b981';
+  buttonEl.style.color = '#ffffff';
+
+  setTimeout(() => {
+    buttonEl.innerHTML = originalHTML;
+    buttonEl.style.background = originalBg;
+    buttonEl.style.color = originalColor;
+  }, 1800);
+}
+
+function downloadText(text, filename){
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ===========================
+   PACK GENERATION
+=========================== */
+function generateEscalationPack(){
+  const d = getDraft();
+
+  const packSection = document.getElementById('packSection');
+  const onePageOutput = document.getElementById('onePageOutput');
+  const riskGrid = document.getElementById('riskGrid');
+  const scriptsGrid = document.getElementById('scriptsGrid');
+
+  if (!packSection || !onePageOutput || !riskGrid || !scriptsGrid) return;
+
+  const completeness = calcCompleteness(d);
+  const strength = calcStrengthSignal(d, completeness);
+
+  document.getElementById('completenessScore').textContent = `${completeness}%`;
+  document.getElementById('strengthSignal').textContent = strength.label;
+
+  const fill = document.getElementById('miniFill');
+  fill.style.width = `${completeness}%`;
+  fill.classList.remove('high','medium','low');
+  fill.classList.add(strength.fillClass);
+
+  onePageOutput.textContent = buildOnePageSummary(d);
+
+  riskGrid.innerHTML = '';
+  buildRiskCards(d, riskGrid, strength);
+
+  scriptsGrid.innerHTML = '';
+  buildScriptCards(d, scriptsGrid, strength);
+
+  packSection.classList.add('active');
+  packSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+function calcCompleteness(d){
+  const keys = ['case_title','case_type','start_date','scope','timeline','evidence','impact','attempts','ask','route'];
+  const filled = keys.filter(k => ((d[k] || '').trim().length > 0)).length;
+  return Math.round((filled / keys.length) * 100);
+}
+
+function calcStrengthSignal(d, completeness){
+  // Strength hinges on: timeline + evidence + ask + impact + attempts
+  const anchors = [
+    ((d.timeline||'').trim().length > 0),
+    ((d.evidence||'').trim().length > 0),
+    ((d.ask||'').trim().length > 0),
+    ((d.impact||'').trim().length > 0),
+    ((d.attempts||'').trim().length > 0)
+  ].filter(Boolean).length;
+
+  const pressure = Number(d.severity || 0);
+
+  if (anchors >= 4 && completeness >= 70) return { label: 'Strong (evidence-led)', fillClass: 'high', pressure };
+  if (anchors >= 2 && completeness >= 40) return { label: 'Developing (add 1–2 anchors)', fillClass: 'medium', pressure };
+  return { label: 'Weak (too easy to dismiss)', fillClass: 'low', pressure };
+}
+
+function buildOnePageSummary(d){
+  const safe = (s) => (s || '').trim() || '—';
+  const now = new Date();
+  const date = now.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+
+  const pressure = Number(d.severity || 0);
+  const pressureLabel = pressure <= 2 ? 'Low' : (pressure <= 6 ? 'Medium' : 'High');
+
+  const out = [];
+  out.push(`ESCALATION DOCUMENTATION PACK (One-page)`);
+  out.push(`Date created: ${date}`);
+  out.push(``);
+  out.push(`CASE`);
+  out.push(`• Title: ${safe(d.case_title)}`);
+  out.push(`• Type: ${safe(d.case_type)}`);
+  out.push(`• Started: ${safe(d.start_date)}`);
+  out.push(`• Pressure index: ${pressureLabel} (${pressure}/10)`);
+  out.push(``);
+  out.push(`SCOPE (included / excluded)`);
+  out.push(indentBlock(safe(d.scope)));
+  out.push(``);
+  out.push(`FACTS + TIMELINE (selected entries)`);
+  out.push(indentBlock(safe(d.timeline)));
+  out.push(``);
+  out.push(`EVIDENCE (what I can point to)`);
+  out.push(indentBlock(safe(d.evidence)));
+  out.push(``);
+  out.push(`IMPACT (observable)`);
+  out.push(indentBlock(safe(d.impact)));
+  out.push(``);
+  out.push(`ATTEMPTS TO RESOLVE INFORMALLY`);
+  out.push(indentBlock(safe(d.attempts)));
+  out.push(``);
+  out.push(`MY ASK (what I need, by when)`);
+  out.push(indentBlock(safe(d.ask)));
+  out.push(``);
+  out.push(`ESCALATION ROUTE`);
+  out.push(indentBlock(`Escalating to: ${safe(d.route)}\nPreferred next step: ${buildNextStep(d)}`));
+  out.push(``);
+  out.push(`BOUNDARY / DECISION LOCK (so this cannot drift)`);
+  out.push(indentBlock(buildLockLine(d)));
+
+  return out.join('\n');
+}
+
+function buildNextStep(d){
+  const route = (d.route||'').trim();
+  if (route.toLowerCase().includes('occupational')) return 'Request OH assessment + recommendations + agreed adjustments.';
+  if (route.toLowerCase().includes('hr')) return 'Request case owner, acknowledgement, and documented action plan with review date.';
+  if (route.toLowerCase().includes('skip')) return 'Request decision on priorities, trade-offs, and manager behaviour expectations.';
+  if (route.toLowerCase().includes('grievance')) return 'Request formal grievance guidance and protected documentation route.';
+  return 'Request reset meeting + written confirmation of trade-offs and boundaries.';
+}
+
+function buildLockLine(d){
+  const base = [];
+  base.push('If priorities change, trade-offs must be confirmed in writing (no “do it all” drift).');
+  base.push('If behaviour continues after being raised, escalation moves from informal to formal route.');
+  base.push('If health or safety risk escalates, urgency increases and OH/HR involvement is non-optional.');
+  if (!((d.timeline||'').trim())) base.push('Timeline entries are currently missing — add 3–5 dated entries for credibility.');
+  return base.join('\n');
+}
+
+function indentBlock(text){
+  return (text || '—').split('\n').map(l => `   ${l}`).join('\n');
+}
+
+function buildRiskCards(d, grid, strength){
+  const cards = getRiskCards(d, strength).slice(0, 6);
+  cards.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'pack-card';
+    card.innerHTML = `
+      <div class="pc-ico"><i class="${c.icon}"></i></div>
+      <div class="pc-title">${escapeHtml(c.title)}</div>
+      <div class="pc-body">${escapeCardText(c.body)}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function getRiskCards(d, strength){
+  const pressure = Number(d.severity || 0);
+
+  const missingTimeline = !((d.timeline||'').trim());
+  const missingEvidence = !((d.evidence||'').trim());
+  const missingAsk = !((d.ask||'').trim());
+  const missingAttempts = !((d.attempts||'').trim());
+
+  const base = [
+    {
+      title: 'Credibility risk (how narratives form)',
+      icon: 'fas fa-user-shield',
+      body:
+`If the situation continues, a narrative can form without your input.
+Documentation prevents “it was never raised” and keeps the record anchored to facts and dates.`
+    },
+    {
+      title: 'Delivery risk (silent performance drift)',
+      icon: 'fas fa-chart-line',
+      body:
+`When pressure rises, response time and quality typically degrade first.
+This is why escalation is sometimes delivery protection, not conflict.`
+    },
+    {
+      title: 'Health / recovery risk (compounding)',
+      icon: 'fas fa-heart-pulse',
+      body:
+`If recovery is consistently impaired, the baseline stress level stays elevated.
+That makes ordinary workload feel heavier and increases reactivity and mistakes.`
+    },
+    {
+      title: 'Formal process risk (performance / conduct)',
+      icon: 'fas fa-file-signature',
+      body:
+`When organisations move into formal processes, documentation matters.
+You want a clean record showing reasonableness, attempts to resolve, and clear asks.`
+    },
+    {
+      title: 'Boundary risk (if violations are normalised)',
+      icon: 'fas fa-shield-halved',
+      body:
+`If boundaries are repeatedly overridden without trade-offs, the workload is not self-manageable.
+That requires structural decisions, not “better self-management”.`
+    },
+    {
+      title: 'Escalation drift risk (too broad, too emotional)',
+      icon: 'fas fa-compass',
+      body:
+`Escalations fail when they become a dump of frustrations.
+Keep scope tight: incident → impact → evidence → ask.`
+    }
+  ];
+
+  if (pressure >= 7) {
+    base[0] = {
+      title: 'High-pressure indicator (timing matters)',
+      icon: 'fas fa-triangle-exclamation',
+      body:
+`Your pressure index is high. That’s a timing signal, not a weakness.
+Act while you can still set terms (trade-offs, boundaries, record) — before the situation sets them for you.`
+    };
+  }
+
+  if (strength.fillClass === 'low') {
+    base.push({
+      title: 'Missing anchors (why it can be dismissed)',
+      icon: 'fas fa-anchor',
+      body:
+`The pack is currently easy to hand-wave unless you anchor it with:
+• 3–5 dated timeline entries
+• Evidence list
+• A clean ask
+This is what flips “complaint” into “case”.`
+    });
+  }
+
+  if (missingTimeline) base.push({ title:'Timeline gap', icon:'fas fa-list-ol', body:'Add 3–5 dated entries. Without dates/outcomes, it reads like opinion.' });
+  if (missingEvidence) base.push({ title:'Evidence gap', icon:'fas fa-paperclip', body:'List what you can point to (emails, messages, calendar, artefacts). Evidence does the heavy lifting.' });
+  if (missingAsk) base.push({ title:'Ask gap', icon:'fas fa-handshake', body:'Write 3–5 crisp asks with a review date. Escalations without asks become debates.' });
+  if (missingAttempts) base.push({ title:'Resolution attempts gap', icon:'fas fa-rotate', body:'Add what you tried. It prevents “why didn’t you say earlier?” and proves reasonableness.' });
+
+  // Always return a premium, tight set
+  return base.slice(0, 6);
+}
+
+function buildScriptCards(d, grid, strength){
+  const scripts = getScripts(d, strength);
+  scripts.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'pack-card';
+    card.innerHTML = `
+      <div class="pc-ico"><i class="${s.icon}"></i></div>
+      <div class="pc-title">${escapeHtml(s.title)}</div>
+      <div class="pc-body">${escapeCardText(s.body)}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function getScripts(d, strength){
+  const title = (d.case_title||'this issue').trim() || 'this issue';
+  const route = (d.route||'').trim();
+  const pressure = Number(d.severity || 0);
+
+  const toneLine = pressure >= 7
+    ? 'I’m raising this now because the risk is escalating.'
+    : 'I’m raising this early so we can address it cleanly.';
+
+  const askLine = ((d.ask||'').trim())
+    ? 'I’m asking for the changes listed below, with a review date.'
+    : 'I’m asking for a clear decision on priorities, trade-offs, and a documented plan.';
+
+  const routeLine = route ? `Route: ${route}.` : 'Route: Manager/HR as appropriate.';
+
+  return [
+    {
+      title: 'Manager email opener (facts-first)',
+      icon: 'fas fa-envelope',
+      body:
+`Subject: Escalation documentation — ${title}
+
+Hi [Name],
+
+${toneLine} I’ve captured a factual summary and timeline so we can stay specific and solution-focused.
+
+What I need:
+${askLine}
+
+I’m happy to talk it through, but I also want the outcomes confirmed in writing so there’s no drift.
+
+Thanks,
+[Your name]`
+    },
+    {
+      title: 'In-meeting line (calm boundary)',
+      icon: 'fas fa-shield',
+      body:
+`“I want to keep this factual and resolvable. I’m not here to argue intent — I’m here to agree the change.
+
+If we add new work, we need explicit trade-offs. If we can’t agree trade-offs, this isn’t manageable at my level.”`
+    },
+    {
+      title: 'HR handover (case framing)',
+      icon: 'fas fa-file-signature',
+      body:
+`“I’m requesting HR support to address ${title}. I’ve attempted informal resolution and documented timeline/evidence/impact.
+
+I’m seeking:
+• Acknowledgement of receipt
+• Named case owner
+• Documented action plan and review date
+• Guidance on next steps if behaviour/workload continues
+
+${routeLine}”`
+    },
+    {
+      title: 'Follow-up note (locks decisions)',
+      icon: 'fas fa-pen-to-square',
+      body:
+`Subject: Summary — decisions and next steps
+
+Thanks for the discussion today. My understanding is:
+
+• Issue in scope: ${title}
+• Agreed actions: [A], [B]
+• Owner(s): [Name]
+• Timeline: [date]
+• Review date: [date]
+• If not resolved: escalation route to [HR/OH/skip-level]
+
+If anything above is incorrect, please reply with amendments. Otherwise I’ll proceed on this basis.`
+    },
+    {
+      title: 'If pressure is high (protect credibility)',
+      icon: 'fas fa-triangle-exclamation',
+      body:
+`“I’m flagging a capacity/credibility risk. If we continue as-is, delivery and quality will be affected.
+I’m asking we agree immediate trade-offs and a short stabilisation period, then review.”`
+    },
+    {
+      title: 'Occupational Health / wellbeing route (non-dramatic)',
+      icon: 'fas fa-heart-pulse',
+      body:
+`“I’m requesting an Occupational Health / wellbeing assessment to support sustainable adjustments.
+I’m still committed to delivering — I’m asking for structural changes so delivery is sustainable and risk is reduced.”`
+    }
+  ];
+}
+
+function buildDraftText(){
+  const d = getDraft();
+  const out = [];
+  out.push('ESCALATION DOCUMENTATION FORM (Draft)');
+  out.push('====================================');
+  out.push('');
+
+  out.push('1) Case details');
+  out.push(`Case title: ${(d.case_title||'—').trim() || '—'}`);
+  out.push(`Escalation type: ${(d.case_type||'—').trim() || '—'}`);
+  out.push(`When it started: ${(d.start_date||'—').trim() || '—'}`);
+  out.push('');
+  out.push('Scope');
+  out.push((d.scope||'—').trim() || '—');
+  out.push('');
+
+  out.push('2) Pressure index');
+  out.push(`${Number(d.severity||0)}/10`);
+  out.push('');
+
+  out.push('3) Facts + timeline');
+  out.push((d.timeline||'—').trim() || '—');
+  out.push('');
+
+  out.push('4) Evidence');
+  out.push((d.evidence||'—').trim() || '—');
+  out.push('');
+
+  out.push('5) Impact');
+  out.push((d.impact||'—').trim() || '—');
+  out.push('');
+
+  out.push('6) Attempts to resolve');
+  out.push((d.attempts||'—').trim() || '—');
+  out.push('');
+
+  out.push('7) Ask + route');
+  out.push('Ask:');
+  out.push((d.ask||'—').trim() || '—');
+  out.push('');
+  out.push(`Route: ${(d.route||'—').trim() || '—'}`);
+
+  return out.join('\n');
+}
+
+function buildPackText(){
+  const d = getDraft();
+  const completeness = calcCompleteness(d);
+  const strength = calcStrengthSignal(d, completeness);
+
+  const onePage = buildOnePageSummary(d);
+
+  const risks = getRiskCards(d, strength)
+    .map((r, i) => `${i+1}. ${r.title}\n   ${r.body}`)
+    .join('\n\n');
+
+  const scripts = getScripts(d, strength)
+    .map((s, i) => `${i+1}. ${s.title}\n${s.body}`)
+    .join('\n\n');
+
+  const out = [];
+  out.push(onePage);
+  out.push('\n\nRISK FRAMING\n===========\n');
+  out.push(risks);
+  out.push('\n\nSCRIPTS\n=======\n');
+  out.push(scripts);
+
+  return out.join('');
+}
+
+/* ===========================
+   UTIL
+=========================== */
+function escapeHtml(str){
+  return (str || '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+function escapeCardText(str){
+  return escapeHtml(str).replaceAll('\n', '<br>');
+}
+
+/* ===========================
+   MY PLAYBOOK (LOCALSTORAGE)
+=========================== */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'escalation-documentation-form';
+const CURRENT_TOOL_TITLE = 'Escalation Documentation Form';
+const CURRENT_TOOL_TYPE = 'Form';
+
+function getSavedItems(){
+  try {
+    const raw = localStorage.getItem(PLAYBOOK_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch(e){
+    console.warn('Error reading saved items:', e);
+    return [];
+  }
+}
+function setSavedItems(items){
+  try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+  catch(e){ console.warn('Error saving items:', e); }
+}
+
+function initializePlaybook(){
+  const playbookOverlay = document.getElementById('playbookOverlay');
+  const playbookSidebar = document.getElementById('playbookSidebar');
+  const playbookButton = document.getElementById('myPlaybookButton');
+  const closeBtn = document.getElementById('closePlaybook');
+  const saveItemBtn = document.getElementById('saveBtn');
+
+  if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+  renderSavedItems();
+
+  const savedItems = getSavedItems();
+  const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+  updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+  saveItemBtn.addEventListener('click', () => {
+    const items = getSavedItems();
+    const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+    let nowSaved;
+
+    if (index === -1) {
+      const toolLink = window.location.pathname.split('/').pop() || 'escalation-documentation-form.html';
+      items.push({
+        id: CURRENT_TOOL_ID,
+        title: CURRENT_TOOL_TITLE,
+        type: CURRENT_TOOL_TYPE,
+        link: toolLink,
+        savedAt: new Date().toISOString()
+      });
+      nowSaved = true;
+    } else {
+      items.splice(index, 1);
+      nowSaved = false;
+    }
+
+    setSavedItems(items);
+    updateSaveButtonState(saveItemBtn, nowSaved);
+    renderSavedItems();
+  });
+
+  playbookButton.addEventListener('click', () => {
+    playbookOverlay.classList.add('open');
+    playbookSidebar.classList.add('open');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    playbookOverlay.classList.remove('open');
+    playbookSidebar.classList.remove('open');
+  });
+
+  playbookOverlay.addEventListener('click', (e) => {
+    if (e.target === playbookOverlay) {
+      playbookOverlay.classList.remove('open');
+      playbookSidebar.classList.remove('open');
+    }
+  });
+}
+
+function updateSaveButtonState(button, isSaved){
+  if (!button) return;
+  const icon = button.querySelector('i');
+  const label = button.querySelector('span');
+
+  if (isSaved) {
+    button.classList.add('saved');
+    if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+    if (label) label.textContent = 'Saved';
+  } else {
+    button.classList.remove('saved');
+    if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+    if (label) label.textContent = 'Save item';
+  }
+}
+
+function renderSavedItems(){
+  const listEl = document.getElementById('savedItemsList');
+  const emptyEl = document.getElementById('savedItemsEmpty');
+  if (!listEl || !emptyEl) return;
+
+  const items = getSavedItems();
+  listEl.innerHTML = '';
+
+  if (!items.length) {
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+
+  items.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'saved-item';
+
+    const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+    const dateText = savedDate
+      ? savedDate.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
+      : '';
+
+    li.innerHTML = `
+      <div class="saved-item-title-row">
+        <span class="saved-item-title">${escapeHtml(item.title)}</span>
+        <span class="saved-item-type">${escapeHtml(item.type)}</span>
+      </div>
+      <div class="saved-item-meta">
+        ${dateText ? `Saved on ${dateText}` : ``}
+      </div>
+      <a class="saved-item-link" href="${escapeHtml(item.link)}">
+        Open <i class="fas fa-arrow-right"></i>
+      </a>
+    `;
+    listEl.appendChild(li);
+  });
+}
+</script>
+
+</body>
+</html>

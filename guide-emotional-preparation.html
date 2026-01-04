@@ -1,0 +1,2760 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Emotional Preparation Guide | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    :root {
+      --primary-white: #FFFFFF;
+      --light-gray: #F8F9FA;
+      --medium-gray: #E9ECEF;
+      --dark-gray: #6C757D;
+      --text-dark: #212529;
+      --text-medium: #495057;
+
+      --accent-purple: #7B5FC4;
+      --accent-purple-dark: #5A4496;
+      --light-purple: #E6E0F5;
+      --lighter-purple: #F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+
+      /* HERO */
+      --hero-bg: linear-gradient(135deg,
+        rgba(123, 95, 196, 0.18) 0%,
+        rgba(123, 95, 196, 0.08) 55%,
+        rgba(123, 95, 196, 0.04) 100%
+      );
+
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+      --danger-red: #ef4444;
+
+      /* Category colours (core 7) */
+      --category-clarity: #7B5FC4;     /* Workload Clarity & Direction */
+      --category-burnout: #f59e0b;     /* Burnout & Capacity */
+      --category-manager: #10b981;     /* Manager Behaviour */
+      --category-politics: #3b82f6;    /* Workplace Dynamics & Politics */
+      --category-hr: #6D28D9;          /* HR & Performance */
+      --category-confidence: #ef4444;  /* Confidence & Influence */
+      --category-career: #800020;      /* Decision Making & Career Path */
+
+      /* Additional (for 9-category system completeness) */
+      --category-boundaries: #0ea5e9;  /* Boundaries & Overextension */
+      --category-team: #6366f1;        /* Team Issues */
+      --category-decision: #800020;    /* aligns with career token */
+    }
+
+    .dark-mode {
+      --primary-white: #1a1a1a;
+      --light-gray: #2a2a2a;
+      --medium-gray: #3a3a3a;
+      --dark-gray: #888888;
+      --text-dark: #e0e0e0;
+      --text-medium: #b0b0b0;
+
+      --accent-purple: #9d86e9;
+      --accent-purple-dark: #7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.2);
+      --lighter-purple: rgba(123, 95, 196, 0.1);
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+
+      --hero-bg: linear-gradient(135deg,
+        rgba(157, 134, 233, 0.18) 0%,
+        rgba(157, 134, 233, 0.10) 55%,
+        rgba(157, 134, 233, 0.06) 100%
+      );
+
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      --category-clarity: #9d86e9;
+      --category-burnout: #fbbf24;
+      --category-manager: #34d399;
+      --category-politics: #60a5fa;
+      --category-hr: #8B5CF6;
+      --category-confidence: #f87171;
+      --category-career: #B03060;
+
+      --category-boundaries: #38bdf8;
+      --category-team: #818cf8;
+      --category-decision: #B03060;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+    body {
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      min-height: 100vh;
+    }
+    body.loaded { opacity: 1; }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+    /* NAV */
+    nav{
+      position: fixed; top: 0; width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      height: 80px;
+    }
+    .nav-container { display:flex; justify-content:space-between; align-items:center; padding:12px 0; height:100%; }
+
+    .logo { position: relative; display: inline-flex; align-items: center; height: 100%; }
+
+    .logo-img {
+      height: 100px; width:auto;
+      transform: translateX(20%);
+      padding:14px 10px;
+      display:block;
+      min-height:100px;
+      transition: all .3s ease;
+    }
+
+    /* Robust fallback: a real element (not injected into <img>) */
+    .logo-fallback{
+      display:none;
+      width:200px; height:50px;
+      background: var(--accent-purple);
+      color:#fff;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      font-size:14px;
+      letter-spacing:1px;
+      border-radius:6px;
+      transform: translateX(20%);
+      padding: 0 12px;
+      text-align:center;
+      box-shadow: 0 10px 22px rgba(123,95,196,0.22);
+    }
+
+    .nav-links { display:flex; gap:50px; }
+    .nav-link { color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; transition: color .3s ease; }
+    .nav-link:hover { color: var(--accent-purple); }
+    .nav-link-container { position:relative; display:inline-block; }
+    .new-tag{
+      position:absolute; top:-12px; right:-35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color:#000; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2); white-space:nowrap;
+    }
+    .nav-actions{ display:flex; align-items:center; gap:24px; transform: translateX(-20%); }
+    .header-cta{
+      background: var(--accent-purple); color:#fff; padding:8px 20px; border-radius:50px;
+      text-decoration:none; font-weight:600; font-size:14px;
+      transition: all .3s ease; box-shadow: 0 5px 15px rgba(123,95,196,.3);
+    }
+    .header-cta:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(123,95,196,.35); }
+    .sign-in{ color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; }
+    .sign-in:hover{ color: var(--accent-purple); }
+
+    .theme-toggle{
+      background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:16px;
+      width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition: background-color .3s ease;
+    }
+    .theme-toggle:hover{ background-color: var(--light-gray); }
+
+    .mobile-toggle{
+      display:none;
+      background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:24px;
+      width:40px; height:40px; border-radius:50%;
+      align-items:center; justify-content:center; transition: background-color .3s ease;
+    }
+    .mobile-toggle:hover{ background-color: var(--light-gray); }
+    .mobile-sign-in, .mobile-sign-up { display:none; }
+
+    @media (max-width: 768px){
+      .nav-container{ justify-content:center; position:relative; }
+      .logo{ position:absolute; left:50%; transform: translateX(-50%); display:flex; align-items:center; height:100%; }
+      .logo-img{ height:125px; transform:none; padding:12px 0; }
+      .logo-fallback{ transform:none; }
+      .mobile-toggle{ display:flex; position:absolute; left:20px; }
+      .nav-actions{ transform:none; gap:16px; position:absolute; right:20px; }
+      .nav-actions .sign-in, .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none; position:absolute; top:100%; left:0; width:100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction:column; padding:20px; gap:20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
+      .nav-links.active{ display:flex; }
+      .nav-link-container{ display:flex; align-items:center; width:100%; }
+      .new-tag{ position:static; margin-left:8px; }
+      .mobile-sign-in{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--primary-white);
+        color: var(--accent-purple);
+        border-radius:8px;
+        text-align:center;
+        font-weight:600;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all .3s ease;
+      }
+      .mobile-sign-up{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--accent-purple);
+        color:#fff;
+        border-radius:8px;
+        text-align:center;
+        font-weight:600;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all .3s ease;
+      }
+    }
+
+    /* HERO */
+    .tool-hero-section{
+      width:100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+
+    .tool-hero-section::before{
+      content:'';
+      position:absolute; inset:0;
+      background:
+        radial-gradient(1000px 420px at 12% 35%, rgba(123,95,196,0.18), transparent 60%),
+        radial-gradient(900px 420px at 72% 10%, rgba(123,95,196,0.14), transparent 65%),
+        radial-gradient(900px 520px at 88% 78%, rgba(123,95,196,0.10), transparent 60%);
+      z-index:1;
+      opacity: 0.9;
+    }
+    .dark-mode .tool-hero-section::before{
+      background:
+        radial-gradient(1000px 420px at 12% 35%, rgba(157,134,233,0.18), transparent 60%),
+        radial-gradient(900px 420px at 72% 10%, rgba(157,134,233,0.14), transparent 65%),
+        radial-gradient(900px 520px at 88% 78%, rgba(157,134,233,0.10), transparent 60%);
+      opacity: 0.95;
+    }
+
+    .tool-hero-content{
+      position:relative; z-index:2;
+      max-width:1100px; margin:0 auto; padding: 0 20px 10px;
+      animation: heroFadeUp .45s ease-out;
+      text-align:left;
+    }
+    @keyframes heroFadeUp { from{opacity:0; transform: translateY(18px);} to{opacity:1; transform:none;} }
+
+    .breadcrumb{
+      font-size:10px; text-transform:uppercase; letter-spacing:1px;
+      color: var(--dark-gray);
+      margin-bottom:10px;
+      display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+    }
+    .breadcrumb a{
+      color: var(--text-medium); text-decoration:none !important;
+      font-weight:500; letter-spacing:.5px; transition: color .2s ease;
+    }
+    .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+    .breadcrumb i{ color: var(--dark-gray); opacity:.8; font-size:10px; }
+    .breadcrumb .current{ color: var(--text-dark); font-weight:600; }
+
+    .checklist-name{
+      font-size:20px; font-weight:600; color: var(--accent-purple);
+      text-transform:uppercase; letter-spacing:1.8px;
+      margin-bottom:14px; margin-top:32px; display:block;
+    }
+
+    .hero-main-heading{
+      font-size:46px; font-weight:650; color: var(--text-dark);
+      line-height:1.1; margin-bottom:16px; max-width:960px;
+      letter-spacing: -0.3px;
+    }
+
+    .hero-main-heading i{
+      background: transparent !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      border: none !important;
+      margin-right: 10px;
+      color: var(--accent-purple-dark);
+      font-size: 0.8em;
+    }
+
+    .hero-subheading{
+      font-size:16px; color: var(--text-medium);
+      line-height:1.6; max-width:960px; margin-bottom:18px;
+    }
+
+    .hero-disclaimer{
+      margin-top: 12px;
+      max-width: 960px;
+      font-size: 12.5px;
+      color: var(--dark-gray);
+      line-height: 1.55;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid color-mix(in srgb, var(--accent-purple) 18%, transparent);
+      background: color-mix(in srgb, var(--accent-purple) 8%, transparent);
+    }
+    .dark-mode .hero-disclaimer{
+      border-color: color-mix(in srgb, var(--accent-purple) 28%, transparent);
+      background: color-mix(in srgb, var(--accent-purple) 14%, transparent);
+    }
+    .hero-disclaimer strong{ color: var(--text-dark); }
+
+    .save-btn{
+      position:absolute; top:16px; right:24px; z-index:5;
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 12px; font-size:12px; font-weight:500;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.6);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--accent-purple-dark);
+      cursor:pointer; transition: all .2s ease;
+    }
+    .save-btn:hover{ transform: translateY(-1px); box-shadow: 0 4px 10px rgba(123,95,196,0.18); background:#fff; }
+    .dark-mode .save-btn{ background: rgba(20,20,20,0.9); border-color: rgba(157,134,233,0.6); }
+    .save-btn.saved{ background: var(--accent-purple); color:#fff; border-color: transparent; }
+
+    /* HERO CATEGORY PILLS */
+    .category-pills-title{
+      font-size:12px; font-weight:600; color: var(--text-medium);
+      text-transform:uppercase; letter-spacing:1px;
+      margin-bottom:14px; display:block;
+    }
+    .category-pills-grid{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+
+    .category-pills-grid.compact{
+      flex-wrap: nowrap;
+      gap: 8px;
+      overflow: hidden;
+    }
+    .category-pills-grid.compact .category-pill{
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 650;
+      letter-spacing: .4px;
+      height: 30px;
+    }
+    .category-pills-grid.compact .category-pill i{ font-size: 12px; }
+
+    .category-pill{
+      --pill-color: var(--accent-purple);
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 12px; border-radius:999px;
+      font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.55px;
+      text-decoration:none;
+      height:32px;
+      white-space:nowrap;
+      cursor:pointer;
+
+      color: var(--pill-color);
+      border: 1px solid color-mix(in srgb, var(--pill-color) 32%, transparent);
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--pill-color) 12%, transparent),
+        color-mix(in srgb, var(--pill-color) 6%, transparent)
+      );
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: all .2s ease;
+    }
+    .category-pill i{ color: var(--pill-color); }
+    .category-pill:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.10);
+      border-color: color-mix(in srgb, var(--pill-color) 45%, transparent);
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--pill-color) 16%, transparent),
+        color-mix(in srgb, var(--pill-color) 10%, transparent)
+      );
+    }
+    .dark-mode .category-pill{
+      border-color: color-mix(in srgb, var(--pill-color) 42%, transparent);
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--pill-color) 22%, transparent),
+        color-mix(in srgb, var(--pill-color) 12%, transparent)
+      );
+      box-shadow: 0 1px 3px rgba(0,0,0,0.35);
+    }
+    .dark-mode .category-pill:hover{
+      border-color: color-mix(in srgb, var(--pill-color) 60%, transparent);
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--pill-color) 28%, transparent),
+        color-mix(in srgb, var(--pill-color) 16%, transparent)
+      );
+      box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+    }
+
+    /* CONTEXT */
+    .context-tips-grid{
+      display:grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:32px; width:100%;
+      max-width:1100px; margin: 6px auto 26px;
+      padding: 24px 20px 10px;
+    }
+    .context-card, .tips-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 28px 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .section-title{
+      font-size:20px; font-weight:600; color: var(--text-dark);
+      margin-bottom:18px; display:flex; align-items:center; gap:10px;
+    }
+    .section-title i { color: var(--accent-purple); }
+
+    .tip-badges{ display:flex; gap:8px; flex-wrap:nowrap; margin: -2px 0 14px; overflow:hidden; }
+    .tip-badge{
+      padding: 4px 7px;
+      border-radius: 999px;
+      font-size: 10.2px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .55px;
+      border: 1px solid color-mix(in srgb, var(--accent-purple) 26%, transparent);
+      background: color-mix(in srgb, var(--accent-purple) 8%, transparent);
+      color: var(--accent-purple-dark);
+      white-space:nowrap;
+    }
+    .dark-mode .tip-badge{
+      border-color: color-mix(in srgb, var(--accent-purple) 40%, transparent);
+      background: color-mix(in srgb, var(--accent-purple) 16%, transparent);
+      color: var(--accent-purple);
+    }
+
+    .bullet-list{ list-style:none; }
+    .bullet-list li{
+      color: var(--text-medium);
+      line-height:1.6;
+      margin-bottom:14px;
+      padding-left:26px;
+      position:relative;
+    }
+    .bullet-list li::before{
+      content:"•";
+      position:absolute; left:10px;
+      color: var(--accent-purple);
+      font-size:18px;
+    }
+
+    /* WOW INSIGHT SECTION */
+    .insight-shell{ max-width:1100px; margin:0 auto 10px; padding: 0 20px 18px; }
+    .insight-header{
+      margin: 4px 0 12px;
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      flex-wrap:wrap;
+    }
+    .insight-header h2{
+      font-size:22px;
+      font-weight:700;
+      color: var(--accent-purple-dark);
+      letter-spacing:-0.2px;
+    }
+    .insight-header p{
+      max-width: 760px;
+      color: var(--text-medium);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .insight-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .insight-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.05);
+      position:relative;
+      overflow:hidden;
+    }
+    .dark-mode .insight-card{ box-shadow: 0 6px 22px rgba(0,0,0,0.22); }
+    .insight-card::before{
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:3px;
+      background: linear-gradient(135deg, rgba(123,95,196,0.9), rgba(90,68,150,0.7));
+      opacity:.85;
+    }
+    .insight-top{
+      display:flex; align-items:center; gap:10px;
+      margin-bottom:8px;
+    }
+    .insight-icon{
+      width:40px; height:40px;
+      border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      background: var(--lighter-purple);
+      color: var(--accent-purple);
+      flex-shrink:0;
+    }
+    .insight-title{
+      font-size:14px;
+      font-weight:700;
+      color: var(--text-dark);
+      line-height:1.25;
+    }
+    .insight-body{
+      color: var(--text-medium);
+      font-size:13.3px;
+      line-height:1.55;
+    }
+    .insight-body strong{ color: var(--text-dark); }
+
+    /* FRAMEWORK */
+    .framework-shell{ max-width:1100px; margin:0 auto; padding: 0 20px 20px; }
+    .framework-header{ margin: 18px 0 16px; }
+    .framework-header h2{
+      font-size:28px; font-weight:700;
+      color: var(--accent-purple-dark);
+      letter-spacing: -0.3px;
+      margin-bottom: 6px;
+    }
+    .framework-header p{
+      color: var(--text-medium);
+      font-size:14px;
+      max-width: 600px;
+    }
+
+    .blueprint-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:18px; margin-bottom:22px;
+    }
+
+    .panel{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+      position:relative;
+      overflow:hidden;
+    }
+    .dark-mode .panel{ box-shadow: 0 6px 22px rgba(0,0,0,0.22); }
+    .panel::before{
+      content:'';
+      position:absolute; top:0; left:0; right:0; height:3px;
+      background: linear-gradient(135deg, rgba(123,95,196,0.9), rgba(90,68,150,0.7));
+      opacity:.9;
+    }
+
+    .panel-title-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
+    .panel-title{
+      font-size:14px; font-weight:700;
+      letter-spacing:.7px; text-transform:uppercase;
+      color: var(--accent-purple-dark);
+      display:flex; align-items:center; gap:10px;
+    }
+    .panel-title i { color: var(--accent-purple); font-size:14px; }
+
+    .panel-sub{
+      color: var(--text-medium);
+      font-size:13px;
+      line-height:1.55;
+      margin-bottom:14px;
+    }
+
+    .field-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .field{ display:flex; flex-direction:column; gap:7px; }
+    .span-2{ grid-column: span 2; }
+
+    .label{
+      font-size:12px; font-weight:600;
+      color: var(--text-dark);
+      display:flex; align-items:center; justify-content:space-between; gap:8px;
+    }
+    .label .hint{ font-size:11px; font-weight:600; color: var(--dark-gray); }
+
+    .input, .textarea, .select{
+      width:100%;
+      border:1px solid var(--border-light);
+      background: var(--light-gray);
+      color: var(--text-dark);
+      border-radius:12px;
+      padding:11px 12px;
+      font-size:13.5px;
+      outline:none;
+      transition: box-shadow .2s ease, border-color .2s ease, background-color .2s ease;
+    }
+    .dark-mode .input, .dark-mode .textarea, .dark-mode .select{ background: rgba(255,255,255,0.05); }
+
+    .input:focus, .textarea:focus, .select:focus{
+      border-color: rgba(123,95,196,0.55);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.14);
+      background: rgba(255,255,255,0.9);
+    }
+    .dark-mode .input:focus, .dark-mode .textarea:focus, .dark-mode .select:focus{
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.20);
+    }
+
+    .textarea{ min-height:110px; resize: vertical; }
+
+    .micro-cards{ display:grid; grid-template-columns:1fr; gap:10px; margin-top:10px; }
+    .micro{
+      border:1px solid var(--border-light);
+      background: linear-gradient(135deg, rgba(123,95,196,0.06), rgba(123,95,196,0.02));
+      border-radius:12px;
+      padding:12px;
+    }
+    .dark-mode .micro{ background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.08)); }
+    .micro h4{
+      font-size:13px; font-weight:700; color: var(--text-dark);
+      margin-bottom:6px; display:flex; align-items:center; gap:8px;
+    }
+    .micro h4 i { color: var(--accent-purple); }
+    .micro p{ font-size:12.8px; color: var(--text-medium); line-height:1.55; }
+    .micro code{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size:12px;
+      background: rgba(0,0,0,0.04);
+      padding:2px 6px;
+      border-radius:8px;
+      color: var(--text-dark);
+    }
+    .dark-mode .micro code{ background: rgba(255,255,255,0.08); }
+
+    .output-box{
+      border: 1px solid rgba(123,95,196,0.18);
+      background: rgba(123,95,196,0.06);
+      border-radius:14px;
+      padding:14px;
+      margin-top:10px;
+    }
+    .dark-mode .output-box{ background: rgba(123,95,196,0.14); border-color: rgba(123,95,196,0.28); }
+
+    .output-title{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom:8px;
+    }
+    .output-title h4{
+      font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase;
+      color: var(--accent-purple-dark);
+    }
+    .output-content{
+      font-size:13.5px;
+      color: var(--text-dark);
+      line-height:1.55;
+      white-space: pre-wrap;
+    }
+
+    .mini-btn{
+      border: 1px solid rgba(123,95,196,0.28);
+      background: rgba(255,255,255,0.9);
+      color: var(--accent-purple-dark);
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all .2s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .dark-mode .mini-btn{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(157,134,233,0.32);
+      color: var(--accent-purple);
+    }
+    .mini-btn:hover{ transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.10); }
+    .mini-btn.primary{
+      background: var(--premium-gradient);
+      color:#fff;
+      border:none;
+      box-shadow: 0 10px 24px rgba(123,95,196,0.18);
+    }
+    .mini-btn.primary:hover{ box-shadow: 0 12px 28px rgba(123,95,196,0.28); }
+
+    .framework-actions-bottom{
+      margin-top: 16px;
+      display:flex;
+      justify-content:flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding: 14px 0 4px;
+    }
+
+    /* TIMELINE */
+    .timeline-table{
+      width:100%;
+      border-collapse: collapse;
+      overflow:hidden;
+      border-radius:12px;
+      border:1px solid var(--border-light);
+      background: var(--primary-white);
+    }
+    .timeline-table th, .timeline-table td{
+      text-align:left;
+      padding:10px;
+      border-bottom:1px solid var(--border-light);
+      vertical-align:top;
+      font-size:13px;
+      color: var(--text-medium);
+    }
+    .timeline-table th{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      font-weight:600;
+      color: var(--text-dark);
+      background: rgba(123,95,196,0.06);
+    }
+
+    /* CHECKLIST + SCORE */
+    .checklist-body{ max-width:1100px; margin:0 auto; padding:0 20px 20px; }
+    .checklist-section-title{
+      font-size:22px; font-weight:700; color: var(--accent-purple-dark);
+      margin-bottom:10px; margin-top:16px !important;
+      display:flex; align-items:center; gap:10px;
+    }
+    .checklist-intro{ color: var(--text-medium); font-size:14px; margin-bottom:14px; max-width:900px; }
+    .checklist-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:20px; }
+    .checklist-item{
+      background: var(--primary-white);
+      padding:14px 16px;
+      border-radius:10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      border:1px solid var(--border-light);
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      transition: transform .2s ease, box-shadow .2s ease;
+      cursor:pointer;
+      min-height:74px;
+    }
+    .checklist-item:hover{ transform: translateY(-2px); box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+    .checklist-item i{ color: var(--accent-purple); font-size:18px; margin-top:3px; flex-shrink:0; }
+    .checklist-text{ flex:1; color: var(--text-medium); font-size:15px; line-height:1.5; }
+
+    .clarity-score-section{ max-width:1100px; margin:22px auto 34px; padding:0 20px; }
+    .presence-snapshot-header{ margin-bottom:14px; text-align:left; }
+    .presence-snapshot-header h2{ font-size:22px; font-weight:700; color: var(--accent-purple-dark); margin-bottom:6px; }
+    .presence-snapshot-header p{ font-size:14px; color: var(--text-medium); line-height:1.5; }
+
+    .clarity-score-bar{
+      display:flex; align-items:stretch; gap:30px;
+      background: var(--primary-white);
+      border-radius:16px;
+      padding:22px 24px 20px;
+      box-shadow: 0 8px 30px rgba(123,95,196,0.12);
+      border:1px solid rgba(123,95,196,0.15);
+    }
+    .clarity-progress-container{ flex:1.4; }
+    .clarity-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+    .clarity-title{ font-size:20px; font-weight:700; color: var(--accent-purple-dark); }
+    .clarity-percentage{ font-size:28px; font-weight:600; color: var(--accent-purple); }
+
+    /* Progress bars */
+    .mini-progress{
+      height:10px;
+      background: var(--light-gray);
+      border-radius:6px;
+      overflow:hidden;
+      margin-bottom:6px;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .dark-mode .mini-progress{ border-color: rgba(255,255,255,0.06); }
+    .mini-fill{
+      height:100%;
+      width:0%;
+      border-radius: 6px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: var(--premium-gradient);
+    }
+    .mini-fill.high{ background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .mini-fill.medium{ background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .mini-fill.low{ background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+    .progress-labels{ display:flex; justify-content:space-between; font-size:12px; color: var(--dark-gray); }
+
+    .presence-dimensions{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+    .presence-dimension-pill{
+      border-radius:10px; padding:10px 10px 10px;
+      border:1px solid var(--border-light);
+      background: var(--light-gray);
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      font-size:13px; color: var(--text-medium);
+    }
+    .dimension-top{
+      display:flex; justify-content:space-between; align-items:center;
+      gap:10px;
+    }
+    .presence-dimension-pill span.label{ font-weight:600; color: var(--text-dark); }
+    .presence-dimension-pill span.score{ font-weight:600; color: var(--accent-purple); }
+    .dimension-bar-row{ display:flex; gap:10px; align-items:center; }
+    .dimension-bar-row .mini-progress{ flex:1; margin:0; height:8px; }
+    .dimension-note{ font-size:12px; color: var(--dark-gray); line-height:1.4; }
+
+    .actions-container{
+      display:flex; gap:12px; flex-shrink:0;
+      flex-direction:column; justify-content:center; align-items:stretch;
+      max-width:260px;
+    }
+    .action-btn{
+      background: var(--premium-gradient);
+      color:#fff;
+      border:none;
+      padding:10px 18px;
+      font-size:13.5px;
+      border-radius:10px;
+      font-weight:600;
+      cursor:pointer;
+      display:flex; align-items:center; gap:8px;
+      transition: all .3s ease;
+      width:100%;
+      justify-content:center;
+    }
+    .action-btn:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(123,95,196,0.3); }
+    .action-btn.secondary{ background: var(--light-purple); color: var(--accent-purple-dark); }
+    .action-btn.secondary:hover{ background: var(--accent-purple); color:#fff; }
+    .action-btn:disabled{ opacity:.5; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+
+    .smart-summary-section{ max-width:1100px; margin:0 auto 60px; padding:0 20px; display:none; }
+    .smart-summary-section.active{ display:block; animation: slideIn .5s ease; }
+    @keyframes slideIn { from{opacity:0; transform: translateY(20px);} to{opacity:1; transform:none;} }
+
+    .summary-header{ text-align:center; margin-bottom:18px; }
+    .summary-title{ font-size:24px; font-weight:700; color: var(--accent-purple-dark); margin-bottom:6px; }
+    .summary-subtitle{ color: var(--text-medium); font-size:16px; margin-bottom:6px; }
+    .summary-insight{ font-size:14px; color: var(--dark-gray); max-width:820px; margin:0 auto; }
+
+    .section-header{
+      font-size:18px; font-weight:700;
+      margin-bottom:18px;
+      display:flex; align-items:center; gap:10px;
+      padding-bottom:10px;
+      border-bottom:2px solid var(--light-gray);
+    }
+    .section-header.red{ color: var(--danger-red); }
+    .section-header.purple{ color: var(--accent-purple-dark); }
+    .section-header.blue{ color: var(--accent-purple); }
+
+    .red-flags-grid, .next-steps-grid, .resources-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+      margin-bottom:28px;
+    }
+
+    .red-flag-card, .next-step-card, .resource-card{
+      background: var(--primary-white);
+      border-radius:12px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      height:100%;
+    }
+    .red-flag-card{ box-shadow: 0 4px 12px rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.1); }
+    .red-flag-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+    .next-step-card{ box-shadow: 0 4px 12px rgba(123,95,196,0.08); border:1px solid rgba(123,95,196,0.1); }
+    .next-step-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--premium-gradient); }
+    .resource-card{ box-shadow: 0 4px 12px rgba(123,95,196,0.08); border:1px solid rgba(123,95,196,0.1); transition: all .2s ease; }
+    .resource-card:hover{ transform: translateY(-3px); box-shadow: 0 8px 20px rgba(123,95,196,0.16); }
+    .resource-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--premium-gradient); }
+
+    .flag-icon, .step-icon, .resource-icon{
+      font-size:20px; margin-bottom:12px;
+      width:40px; height:40px; border-radius:10px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .flag-icon{ color:#ef4444; background: rgba(239,68,68,0.1); }
+    .step-icon, .resource-icon{ color: var(--accent-purple); background: var(--lighter-purple); }
+
+    .flag-title, .step-title, .resource-title{ font-size:15px; font-weight:700; color: var(--text-dark); margin-bottom:8px; }
+    .flag-description, .step-description, .resource-description{ color: var(--text-medium); font-size:13.5px; line-height:1.5; flex-grow:1; }
+    .resource-description{ margin-bottom:12px; }
+    .resource-link{
+      color: var(--accent-purple); font-weight:600; text-decoration:none; font-size:13.5px;
+      display:flex; align-items:center; gap:6px; margin-top:auto;
+    }
+    .resource-link:hover{ text-decoration:underline; }
+
+    /* MY PLAYBOOK */
+    .my-playbook-fab{
+      position:fixed; bottom:24px; right:24px; z-index:1200;
+      background: var(--premium-gradient);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      display:inline-flex; align-items:center; gap:8px;
+      cursor:pointer; font-size:13px; font-weight:700;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all .25s ease;
+    }
+    .my-playbook-fab:hover{ transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.32); }
+
+    .playbook-sidebar-overlay{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,0.45);
+      z-index:1190;
+      opacity:0; pointer-events:none;
+      transition: opacity .25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position:fixed; top:0; right:-380px;
+      width:340px; max-width:90%;
+      height:100%;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index:1191;
+      display:flex; flex-direction:column;
+      border-left: 1px solid var(--border-light);
+      transition: right .25s ease;
+    }
+    .dark-mode .playbook-sidebar{ background: rgba(18,18,18,0.96); box-shadow: -4px 0 22px rgba(0,0,0,0.6); }
+    .playbook-sidebar.open{ right:0; }
+    .playbook-sidebar-header{ padding:20px 20px 14px; border-bottom:1px solid var(--border-light); }
+    .playbook-sidebar-header-title-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+    .playbook-sidebar-header h3{ font-size:18px; font-weight:700; color: var(--text-dark); }
+    .playbook-sidebar-header p{ font-size:13px; color: var(--dark-gray); }
+    .playbook-close-btn{
+      background:none; border:none; color: var(--dark-gray);
+      cursor:pointer; font-size:18px; border-radius:999px;
+      width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+      transition: background-color .2s ease;
+    }
+    .playbook-close-btn:hover{ background: var(--light-gray); }
+    .playbook-sidebar-body{
+      padding:14px 18px 20px; padding-bottom:50px;
+      overflow-y:auto; flex:1;
+      display:flex; flex-direction:column; gap:18px;
+    }
+    .saved-items-empty{ font-size:13px; color: var(--dark-gray); line-height:1.6; }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+    .saved-item{
+      padding:10px 8px;
+      border-radius:10px;
+      border:1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom:10px;
+      display:flex; flex-direction:column; gap:2px;
+    }
+    .saved-item-title-row{ display:flex; justify-content:space-between; align-items:baseline; gap:6px; }
+    .saved-item-title{ font-size:14px; font-weight:700; color: var(--text-dark); }
+    .saved-item-type{ font-size:11px; text-transform:uppercase; letter-spacing:.6px; color: var(--accent-purple-dark); font-weight:600; }
+    .saved-item-meta{ font-size:12px; color: var(--dark-gray); }
+    .saved-item-link{
+      margin-top:6px;
+      font-size:12px;
+      color: var(--accent-purple);
+      text-decoration:none;
+      font-weight:600;
+      display:inline-flex; align-items:center; gap:4px;
+    }
+    .saved-item-link:hover{ text-decoration:underline; }
+
+    /* Changed: push Quick links to the bottom reliably (no brittle hard-coded margin) */
+    .playbook-quick-links{
+      margin-top:auto;
+      padding-top:10px;
+      border-top:1px solid var(--border-light);
+    }
+
+    .quick-links-title{
+      font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.8px;
+      color: var(--text-medium);
+    }
+    .playbook-quick-links-list{ display:flex; flex-direction:column; gap:12px; margin-top:6px; }
+    .quick-link-pill{
+      width: 50%;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.35);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      text-decoration:none;
+      color: var(--accent-purple-dark);
+      font-size:13px;
+      font-weight:600;
+      display:flex; align-items:center; gap:8px;
+      transition: all .2s ease;
+    }
+    .quick-link-pill:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+    }
+
+    footer{
+      background: var(--primary-white);
+      padding:10px 0;
+      border-top:1px solid var(--border-light);
+      margin-top:30px;
+      text-align:center;
+      color: var(--text-medium);
+    }
+
+    @media (max-width: 1024px){
+      .context-tips-grid{ grid-template-columns:1fr; gap:24px; }
+      .blueprint-grid{ grid-template-columns:1fr; }
+      .red-flags-grid, .next-steps-grid, .resources-grid{ grid-template-columns: repeat(2, 1fr); }
+      .checklist-grid{ grid-template-columns:1fr; }
+      .clarity-score-bar{ flex-direction:column; }
+      .actions-container{ max-width:100%; flex-direction:row; }
+      .insight-grid{ grid-template-columns: 1fr; }
+      .category-pills-grid.compact{ flex-wrap:wrap; }
+    }
+    @media (max-width: 768px){
+      .tool-hero-section{ margin-top:100px; }
+      .hero-main-heading{ font-size:36px; }
+      .save-btn{ right:18px; top:10px; }
+      .field-grid{ grid-template-columns:1fr; }
+      .span-2{ grid-column: span 1; }
+      .red-flags-grid, .next-steps-grid, .resources-grid{ grid-template-columns:1fr; }
+      .actions-container{ flex-direction:column; }
+      .insight-header{ align-items:flex-start; }
+      .tip-badges{ flex-wrap:wrap; }
+      .presence-dimensions{ grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      <div class="logo-fallback" id="logoFallback">THE EMPLOYEE PLAYBOOK</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="tool-hero-section">
+  <!-- DO NOT MOVE: Save button placement unchanged -->
+  <button class="save-btn" id="saveBtn">
+    <i class="far fa-bookmark"></i>
+    <span>Save item</span>
+  </button>
+
+  <div class="tool-hero-content">
+    <!-- DO NOT MOVE: Breadcrumb placement unchanged -->
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-house"></i> Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="the-toolkit.html">Toolkit</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="category-confidence-presence-influence.html">Confidence, Presence &amp; Influence</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Emotional Preparation Guide</span>
+    </div>
+
+    <span class="checklist-name">EMOTIONAL PREPARATION GUIDE</span>
+
+    <h1 class="hero-main-heading">
+      <i class="fas fa-heart-pulse"></i>
+      Stay steady when it matters. Prepare your nervous system, your words, and your boundaries, before the moment
+    </h1>
+
+    <div class="hero-subheading">
+      A practical, work-safe guide to help you prepare emotionally for high-stakes moments: a difficult 1:1, performance chat, conflict, escalation, interview, redundancy risk, or a meeting you’re dreading.
+      You’ll build a <strong>steady plan</strong>, a <strong>calm script pack</strong>, and a <strong>recovery routine</strong> so the moment doesn’t hijack you.
+    </div>
+
+    <div class="category-pills-container">
+      <span class="category-pills-title">Related Categories</span>
+      <div class="category-pills-grid compact">
+        <a href="category-expectation-burnout-and-capacity.html" class="category-pill" style="--pill-color: var(--category-burnout);">
+          <i class="fas fa-battery-three-quarters"></i>
+          <span>Expectation, Burnout &amp; Capacity</span>
+        </a>
+        <a href="category-manager-relationship-and-leadership-style.html" class="category-pill" style="--pill-color: var(--category-manager);">
+          <i class="fas fa-user-shield"></i>
+          <span>Manager Relationship &amp; Leadership Style </span>
+        </a>
+        <a href="category-workplace-dynamics-and-politics.html" class="category-pill" style="--pill-color: var(--category-politics);">
+          <i class="fas fa-network-wired"></i>
+          <span>Workplace Dynamics &amp; Politics</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-disclaimer">
+      <strong>Disclaimer:</strong> This guide provides general workplace preparation, communication strategy, and self-management tools. It is <strong>not legal advice</strong> and is <strong>not a substitute for medical or mental health care</strong>.
+      If you feel unsafe, are being harassed or discriminated against, or you’re experiencing severe distress, seek appropriate support promptly (your GP, a qualified clinician, your union/rep, or specialist services).
+    </div>
+  </div>
+</div>
+
+<div class="context-tips-grid">
+  <div class="context-card">
+    <h3 class="section-title"><i class="fas fa-compass"></i>When to Use This Guide</h3>
+    <ul class="bullet-list">
+      <li>You’re walking into a meeting and you can feel the <strong>adrenaline building</strong>.</li>
+      <li>You keep replaying conversations and imagining worst-case outcomes.</li>
+      <li>You’re worried you’ll <strong>cry / freeze / snap</strong> (or apologise too much).</li>
+      <li>You’re facing a power dynamic and you need <strong>self-control without self-silencing</strong>.</li>
+      <li>You want to leave the room thinking: <strong>“I handled that well.”</strong></li>
+    </ul>
+  </div>
+
+  <div class="tips-card">
+    <h3 class="section-title"><i class="fas fa-brain"></i>How Emotional Preparation Actually Works</h3>
+
+    <div class="tip-badges">
+      <span class="tip-badge">Nervous system first</span>
+      <span class="tip-badge">Words second</span>
+      <span class="tip-badge">Recovery planned</span>
+    </div>
+
+    <ul class="bullet-list">
+      <li><strong>Don’t aim for “no emotions”.</strong> Aim for <strong>enough calm</strong> to stay coherent and credible.</li>
+      <li><strong>Name it to tame it:</strong> a clean label (“I’m anxious / embarrassed / angry”) often reduces intensity.</li>
+      <li><strong>Make the moment smaller:</strong> focus on the next 60 seconds — the opening line — not the whole outcome.</li>
+      <li><strong>Use an If-Then plan:</strong> “If I feel my throat tighten, then I pause, sip water, and ask a clarifying question.”</li>
+      <li><strong>Close the loop afterwards:</strong> without a closure routine, your brain keeps trying to “solve” it at 2am.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- WOW INSIGHTS -->
+<div class="insight-shell">
+  <div class="insight-header">
+    <h2>Modern insight: why you spiral (and how to stop)</h2>
+    <p>
+      Your brain treats social threat (status, rejection, humiliation) like physical threat.
+      The goal isn’t bravery theatre — it’s <strong>stability</strong>, <strong>clarity</strong>, and <strong>repeatable control</strong>.
+    </p>
+  </div>
+
+  <div class="insight-grid">
+    <div class="insight-card">
+      <div class="insight-top">
+        <div class="insight-icon"><i class="fas fa-tag"></i></div>
+        <div class="insight-title">Affect-labelling lowers intensity</div>
+      </div>
+      <div class="insight-body">
+        Quietly naming the emotion (“I’m anxious / I’m angry”) reduces limbic noise.
+        That’s why <strong>one clean label</strong> can steady you more than ten pep talks.
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-top">
+        <div class="insight-icon"><i class="fas fa-wind"></i></div>
+        <div class="insight-title">Breath hacks are not fluff</div>
+      </div>
+      <div class="insight-body">
+        A short downshift (slow exhale / physiological sigh) can move your body out of “fight-flight”.
+        Then your words land <strong>calm-firm</strong>, not frantic.
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-top">
+        <div class="insight-icon"><i class="fas fa-shield-halved"></i></div>
+        <div class="insight-title">Guardrails beat willpower</div>
+      </div>
+      <div class="insight-body">
+        Willpower collapses under threat. Guardrails don’t.
+        Your plan should include a <strong>pause move</strong>, a <strong>boundary line</strong>, and a <strong>closing line</strong>.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="framework-shell" id="frameworkBlueprint">
+  <div class="framework-header">
+    <h2>Emotional Preparation Blueprint</h2>
+    <p>
+      Complete the blueprint to generate: a calm opening, a trigger plan, a work-safe boundary pack, and a 48-hour recovery routine.
+      Built to be <strong>emotionally intelligent</strong> (not performative), and <strong>work-defensible</strong> if read later.
+    </p>
+  </div>
+
+  <div class="blueprint-grid">
+    <!-- 1) Emotional Snapshot -->
+    <div class="panel">
+      <div class="panel-title-row">
+        <div class="panel-title"><i class="fas fa-bullseye"></i> 1) Emotional Snapshot</div>
+      </div>
+      <div class="panel-sub">Define the moment, the stakes, and your aim. Clarity lowers panic. Vagueness fuels it.</div>
+
+      <div class="field-grid">
+        <div class="field">
+          <div class="label">What are you walking into? <span class="hint">one line</span></div>
+          <input class="input sa-input" data-dimension="read" id="e_event" placeholder="E.g., 1:1 with manager, performance chat, escalation meeting, interview">
+        </div>
+
+        <div class="field">
+          <div class="label">Who’s involved? <span class="hint">roles/names</span></div>
+          <input class="input sa-input" data-dimension="read" id="e_who" placeholder="E.g., Manager + HR, stakeholder, team lead">
+        </div>
+
+        <div class="field">
+          <div class="label">When is it? <span class="hint">timing</span></div>
+          <select class="select sa-input" data-dimension="impact" id="e_when">
+            <option value="" selected>Select…</option>
+            <option value="Today">Today</option>
+            <option value="Tomorrow">Tomorrow</option>
+            <option value="This week">This week</option>
+            <option value="Next week">Next week</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Intensity <span class="hint">how charged?</span></div>
+          <select class="select sa-input" data-dimension="impact" id="e_intensity">
+            <option value="" selected>Select…</option>
+            <option value="Low (annoying)">Low (annoying)</option>
+            <option value="Medium (uncomfortable)">Medium (uncomfortable)</option>
+            <option value="High (dreading it)">High (dreading it)</option>
+            <option value="Very high (panic / rage risk)">Very high (panic / rage risk)</option>
+          </select>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Your aim (what “good” looks like) <span class="hint">outcome + behaviour</span></div>
+          <textarea class="textarea sa-input" data-dimension="impact" id="e_aim" placeholder="E.g., ‘Get clarity on expectations and a timeline. Stay calm-firm. Leave with next steps in writing.’"></textarea>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">What are you worried might happen? <span class="hint">be honest</span></div>
+          <textarea class="textarea sa-input" data-dimension="impact" id="e_worry" placeholder="E.g., ‘I’ll get blamed’, ‘I’ll freeze’, ‘They’ll twist my words’, ‘I’ll cry’, ‘I’ll get cornered’…"></textarea>
+        </div>
+
+        <div class="field">
+          <div class="label">Your non-negotiable <span class="hint">minimum standard</span></div>
+          <input class="input sa-input" data-dimension="behaviours" id="e_nonneg" placeholder="E.g., ‘I won’t agree to vague criticism without examples.’">
+        </div>
+
+        <div class="field">
+          <div class="label">Your flexibility <span class="hint">what can move</span></div>
+          <input class="input sa-input" data-dimension="behaviours" id="e_flex" placeholder="E.g., wording, sequencing, timing, options, next steps">
+        </div>
+      </div>
+
+      <div class="micro-cards">
+        <div class="micro">
+          <h4><i class="fas fa-compass"></i> The “60-second job”</h4>
+          <p>Your real job is to deliver the <strong>first minute</strong> well: calm opening, one aim, one question. Everything improves after that.</p>
+        </div>
+        <div class="micro">
+          <h4><i class="fas fa-file-signature"></i> Work-defensible mindset</h4>
+          <p>Assume your notes could be read later. Stick to <strong>facts</strong>, <strong>impact</strong>, and <strong>requests</strong> — not motive-guessing.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2) Trigger + Regulation Plan -->
+    <div class="panel">
+      <div class="panel-title-row">
+        <div class="panel-title"><i class="fas fa-sliders"></i> 2) Trigger + Regulation Plan</div>
+      </div>
+      <div class="panel-sub">You don’t need to “be strong”. You need a plan for your body’s threat response.</div>
+
+      <div class="field-grid">
+        <div class="field">
+          <div class="label">Likely emotion <span class="hint">primary</span></div>
+          <select class="select sa-input" data-dimension="read" id="r_emotion">
+            <option value="" selected>Select…</option>
+            <option value="Anxiety / dread">Anxiety / dread</option>
+            <option value="Anger / injustice">Anger / injustice</option>
+            <option value="Shame / embarrassment">Shame / embarrassment</option>
+            <option value="Sadness / overwhelm">Sadness / overwhelm</option>
+            <option value="Fear of conflict">Fear of conflict</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Body signal <span class="hint">first sign</span></div>
+          <select class="select sa-input" data-dimension="read" id="r_body">
+            <option value="" selected>Select…</option>
+            <option value="Tight throat / voice wobble">Tight throat / voice wobble</option>
+            <option value="Fast heart / shaky hands">Fast heart / shaky hands</option>
+            <option value="Hot face / jaw tension">Hot face / jaw tension</option>
+            <option value="Blank mind / freeze">Blank mind / freeze</option>
+            <option value="Tears">Tears</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Trigger pattern <span class="hint">closest match</span></div>
+          <select class="select sa-input" data-dimension="impact" id="r_trigger">
+            <option value="" selected>Select…</option>
+            <option value="Blame / criticism">Blame / criticism</option>
+            <option value="Being interrupted / talked over">Being interrupted / talked over</option>
+            <option value="Vagueness / ‘just improve’">Vagueness / ‘just improve’</option>
+            <option value="Threats / veiled consequences">Threats / veiled consequences</option>
+            <option value="Unfairness / double standards">Unfairness / double standards</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Regulation move <span class="hint">your go-to</span></div>
+          <select class="select sa-input" data-dimension="behaviours" id="r_move">
+            <option value="" selected>Select…</option>
+            <option value="Physiological sigh (2 inhales, slow exhale)">Physiological sigh (2 inhales, slow exhale)</option>
+            <option value="Slow exhale (in 4, out 6)">Slow exhale (in 4, out 6)</option>
+            <option value="Grounding (feet, chair, 5 things you see)">Grounding (feet, chair, 5 things you see)</option>
+            <option value="Label + pause (‘I need a moment’)">Label + pause (‘I need a moment’)</option>
+            <option value="Note-taking (buys time + control)">Note-taking (buys time + control)</option>
+          </select>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Your “If-Then” plan <span class="hint">life hack</span></div>
+          <input class="input sa-input" data-dimension="behaviours" id="r_ifthen" placeholder="E.g., ‘If I feel my throat tighten, then I sip water, look down, and ask: “Can you give a specific example?”’">
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Your anchor phrase <span class="hint">quietly in your head</span></div>
+          <input class="input sa-input" data-dimension="safeguards" id="r_anchor" placeholder="E.g., ‘Slow is smooth.’ ‘Facts, not feelings.’ ‘One question at a time.’">
+        </div>
+      </div>
+
+      <div class="output-box">
+        <div class="output-title">
+          <h4>Regulation script (auto)</h4>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="mini-btn" onclick="buildRegulationScript()"><i class="fas fa-bolt"></i> Build</button>
+            <button class="mini-btn" onclick="copyText('reg_out')"><i class="far fa-copy"></i> Copy</button>
+          </div>
+        </div>
+        <div class="output-content" id="reg_out">Click “Build” to generate a short, work-safe regulation script you can use in the moment (without sounding dramatic).</div>
+      </div>
+
+      <div class="micro-cards">
+        <div class="micro">
+          <h4><i class="fas fa-lightbulb"></i> The sneaky power move</h4>
+          <p><strong>Note-taking</strong> is regulation disguised as professionalism. It buys time, reduces reactivity, and makes you harder to steamroll.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="blueprint-grid">
+    <!-- 3) Calm Script Pack -->
+    <div class="panel">
+      <div class="panel-title-row">
+        <div class="panel-title"><i class="fas fa-pen-fancy"></i> 3) Calm Script Pack</div>
+      </div>
+      <div class="panel-sub">This is where emotional intelligence becomes words. Not performative. Not passive. Just clean, calm, and hard to argue with.</div>
+
+      <div class="field-grid">
+        <div class="field">
+          <div class="label">Context <span class="hint">pick one</span></div>
+          <select class="select sa-input" data-dimension="read" id="s_context">
+            <option value="" selected>Select…</option>
+            <option value="Difficult 1:1">Difficult 1:1</option>
+            <option value="Performance conversation">Performance conversation</option>
+            <option value="Conflict / tension">Conflict / tension</option>
+            <option value="Escalation / HR present">Escalation / HR present</option>
+            <option value="Interview / panel">Interview / panel</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Tone target <span class="hint">discipline</span></div>
+          <select class="select sa-input" data-dimension="behaviours" id="s_tone">
+            <option value="" selected>Select…</option>
+            <option value="Neutral (facts + questions)">Neutral (facts + questions)</option>
+            <option value="Warm-firm (respect + line)">Warm-firm (respect + line)</option>
+            <option value="Formal (policy-safe)">Formal (policy-safe)</option>
+          </select>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Your opening aim line <span class="hint">one sentence</span></div>
+          <input class="input sa-input" data-dimension="behaviours" id="s_open" placeholder="E.g., ‘I want to understand what “good” looks like and agree next steps in writing.’">
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Your key question <span class="hint">forces clarity</span></div>
+          <input class="input sa-input" data-dimension="behaviours" id="s_question" placeholder="E.g., ‘Can you give a specific example and the impact it had?’">
+        </div>
+
+        <div class="field span-2">
+          <div class="label">Your boundary line <span class="hint">work-safe</span></div>
+          <input class="input sa-input" data-dimension="safeguards" id="s_boundary" placeholder="E.g., ‘I’m happy to discuss this, but I need examples and expectations to be specific.’">
+        </div>
+      </div>
+
+      <div class="output-box">
+        <div class="output-title">
+          <h4>Script pack (auto)</h4>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="mini-btn" onclick="buildScriptPack()"><i class="fas fa-bolt"></i> Build</button>
+            <button class="mini-btn" onclick="copyText('script_out')"><i class="far fa-copy"></i> Copy</button>
+          </div>
+        </div>
+        <div class="output-content" id="script_out">Click “Build” to generate: opening, clarifier, interruption line, boundary, and closing line.</div>
+      </div>
+
+      <div class="micro-cards">
+        <div class="micro">
+          <h4><i class="fas fa-scissors"></i> One-sentence rule</h4>
+          <p>If you can’t say it in one sentence, you’re probably trying to process mid-conversation. Write it now. Use it later.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4) Recovery + Rumination Break -->
+    <div class="panel">
+      <div class="panel-title-row">
+        <div class="panel-title"><i class="fas fa-shield-halved"></i> 4) Recovery + Rumination Break</div>
+      </div>
+      <div class="panel-sub">This is where most people fail: they “get through it” then spend the next 48 hours reliving it. We stop that.</div>
+
+      <div class="field-grid">
+        <div class="field">
+          <div class="label">After the meeting <span class="hint">first 10 mins</span></div>
+          <select class="select sa-input" data-dimension="safeguards" id="a_10min">
+            <option value="" selected>Select…</option>
+            <option value="Walk + slow exhale">Walk + slow exhale</option>
+            <option value="Quiet reset (toilet break + water)">Quiet reset (toilet break + water)</option>
+            <option value="Notes + send recap">Notes + send recap</option>
+            <option value="Call a safe person">Call a safe person</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <div class="label">Your closure move <span class="hint">rumination stopper</span></div>
+          <select class="select sa-input" data-dimension="safeguards" id="a_closure">
+            <option value="" selected>Select…</option>
+            <option value="3-line closure log">3-line closure log</option>
+            <option value="Send a factual recap email">Send a factual recap email</option>
+            <option value="Park it list (tomorrow actions)">Park it list (tomorrow actions)</option>
+            <option value="Short decompression routine">Short decompression routine</option>
+          </select>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">What you will document <span class="hint">facts only</span></div>
+          <textarea class="textarea sa-input" data-dimension="safeguards" id="a_document" placeholder="E.g., what was said, what was agreed, any actions/owners/timelines. Keep it neutral."></textarea>
+        </div>
+
+        <div class="field span-2">
+          <div class="label">One supportive action for you <span class="hint">practical</span></div>
+          <input class="input sa-input" data-dimension="safeguards" id="a_support" placeholder="E.g., early night, decent meal, a walk, time with someone safe, no doom-scrolling.">
+        </div>
+
+        <div class="field span-2">
+          <div class="label">If it goes badly… your next move <span class="hint">controlled</span></div>
+          <input class="input sa-input" data-dimension="safeguards" id="a_nextmove" placeholder="E.g., ‘Send recap, request clarity in writing, consider union/rep support, use escalation form.’">
+        </div>
+      </div>
+
+      <div class="output-box">
+        <div class="output-title">
+          <h4>48-hour recovery plan (auto)</h4>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="mini-btn" onclick="buildRecoveryPlan()"><i class="fas fa-bolt"></i> Build</button>
+            <button class="mini-btn" onclick="copyText('rec_out')"><i class="far fa-copy"></i> Copy</button>
+          </div>
+        </div>
+        <div class="output-content" id="rec_out">Click “Build” to generate a simple recovery plan that stops the mental replay loop.</div>
+      </div>
+
+      <div class="micro-cards">
+        <div class="micro">
+          <h4><i class="fas fa-clipboard-check"></i> The 3-line closure log</h4>
+          <p><strong>What happened</strong> (facts). <strong>What I need</strong> (request). <strong>What I’ll do next</strong> (action). Then you stop thinking.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Emotion Log -->
+  <div class="panel" style="margin-bottom:18px;">
+    <div class="panel-title-row">
+      <div class="panel-title"><i class="fas fa-clipboard-list"></i> Emotion Log (optional, but powerful)</div>
+    </div>
+    <div class="panel-sub">A neutral record that helps you spot patterns: what triggers you, what steadies you, and what you want to do differently next time.</div>
+
+    <table class="timeline-table" id="timelineTable">
+      <thead>
+        <tr>
+          <th style="width: 16%;">Date</th>
+          <th style="width: 30%;">Situation (fact)</th>
+          <th style="width: 18%;">Emotion</th>
+          <th style="width: 22%;">What I did (response)</th>
+          <th style="width: 14%;">Outcome</th>
+        </tr>
+      </thead>
+      <tbody id="timelineBody">
+        <tr>
+          <td><input class="input sa-input" data-dimension="safeguards" placeholder="DD/MM/YYYY"></td>
+          <td><input class="input sa-input" data-dimension="read" placeholder="What happened (neutral)?"></td>
+          <td>
+            <select class="select sa-input" data-dimension="read">
+              <option value="" selected>Select…</option>
+              <option value="Anxiety">Anxiety</option>
+              <option value="Anger">Anger</option>
+              <option value="Shame">Shame</option>
+              <option value="Sadness">Sadness</option>
+              <option value="Freeze">Freeze</option>
+            </select>
+          </td>
+          <td><input class="input sa-input" data-dimension="behaviours" placeholder="Pause, question, boundary, notes, exit…"></td>
+          <td>
+            <select class="select sa-input" data-dimension="impact">
+              <option value="" selected>Select…</option>
+              <option value="Better than expected">Better than expected</option>
+              <option value="Fine / manageable">Fine / manageable</option>
+              <option value="Not great">Not great</option>
+              <option value="Rough">Rough</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+      <button class="mini-btn" onclick="addTimelineRow()"><i class="fas fa-plus"></i> Add row</button>
+      <button class="mini-btn" onclick="removeTimelineRow()"><i class="fas fa-minus"></i> Remove row</button>
+    </div>
+  </div>
+
+  <!-- Executive Outputs -->
+  <div class="panel">
+    <div class="panel-title-row">
+      <div class="panel-title"><i class="fas fa-file-lines"></i> Executive Outputs</div>
+    </div>
+    <div class="panel-sub">Copy/paste-ready: a brief, a calm script pack, and a recovery plan you can actually follow.</div>
+
+    <div class="output-box">
+      <div class="output-title">
+        <h4>Preparation brief (one paragraph)</h4>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="mini-btn" onclick="copyText('out_summary')"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+      <div class="output-content" id="out_summary">Complete the blueprint, then click “Generate outputs”.</div>
+    </div>
+
+    <div class="output-box">
+      <div class="output-title">
+        <h4>In-the-moment regulation + boundary</h4>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="mini-btn" onclick="copyText('out_reg')"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+      <div class="output-content" id="out_reg">—</div>
+    </div>
+
+    <div class="output-box">
+      <div class="output-title">
+        <h4>Script pack (opening → closing)</h4>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="mini-btn" onclick="copyText('out_scripts')"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+      <div class="output-content" id="out_scripts">—</div>
+    </div>
+
+    <div class="output-box">
+      <div class="output-title">
+        <h4>48-hour recovery plan</h4>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="mini-btn" onclick="copyText('out_recovery')"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+      <div class="output-content" id="out_recovery">—</div>
+    </div>
+  </div>
+
+  <div class="framework-actions-bottom">
+    <button class="mini-btn" onclick="resetBlueprint()"><i class="fas fa-rotate-left"></i> Reset</button>
+    <button class="mini-btn" onclick="copyOutputs()"><i class="far fa-copy"></i> Copy outputs</button>
+    <button class="mini-btn primary" onclick="generateOutputs()"><i class="fas fa-wand-magic-sparkles"></i> Generate outputs</button>
+  </div>
+</div>
+
+<!-- QUICK CHECKLIST -->
+<div class="checklist-body" id="checklistText">
+  <h2 class="checklist-section-title"><i class="fas fa-list-check"></i> Quick Coverage Checklist</h2>
+  <div class="checklist-intro">Final audit: you’re aiming for calm control, clear asks, and a clean exit — not perfection.</div>
+
+  <div class="checklist-grid">
+    <div class="checklist-item" data-category="read">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I can name what I’m walking into in one sentence.</div>
+    </div>
+    <div class="checklist-item" data-category="read">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I know who’s involved and what power dynamic exists.</div>
+    </div>
+    <div class="checklist-item" data-category="impact">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I’ve defined what “good” looks like (aim + next steps).</div>
+    </div>
+    <div class="checklist-item" data-category="impact">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I’ve acknowledged my main fear (so it doesn’t run the show).</div>
+    </div>
+
+    <div class="checklist-item" data-category="behaviours">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I know my first body signal and my regulation move.</div>
+    </div>
+    <div class="checklist-item" data-category="behaviours">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I have an If-Then plan for when I feel triggered.</div>
+    </div>
+    <div class="checklist-item" data-category="safeguards">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I have a boundary line that is work-safe and specific.</div>
+    </div>
+    <div class="checklist-item" data-category="safeguards">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I know how I’ll close the conversation cleanly if needed.</div>
+    </div>
+
+    <div class="checklist-item" data-category="safeguards">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I’ve planned a factual recap / documentation approach.</div>
+    </div>
+    <div class="checklist-item" data-category="behaviours">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I have an opening aim line and one key clarifying question.</div>
+    </div>
+    <div class="checklist-item" data-category="safeguards">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I have a 10-minute aftercare plan (so I don’t spiral).</div>
+    </div>
+    <div class="checklist-item" data-category="impact">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">I know my non-negotiable and what I can flex.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SCORE -->
+<div class="clarity-score-section">
+  <div class="presence-snapshot-header">
+    <h2>Your Emotional Readiness Snapshot</h2>
+    <p>This score reflects how complete your preparation is (blueprint + checklist). Higher means more control and less reactivity — not “less emotion”.</p>
+  </div>
+
+  <div class="clarity-score-bar">
+    <div class="clarity-progress-container">
+      <div class="clarity-header">
+        <div class="clarity-title">Emotional Readiness Score</div>
+        <div class="clarity-percentage" id="clarityPercentage">0%</div>
+      </div>
+
+      <div class="mini-progress">
+        <div class="mini-fill" id="progressFill"></div>
+      </div>
+
+      <div class="progress-labels">
+        <span>Wobbly</span><span>Steadying</span><span>Grounded</span>
+      </div>
+
+      <div class="presence-dimensions">
+        <div class="presence-dimension-pill">
+          <div class="dimension-top">
+            <span class="label">Clarity of Aim</span>
+            <span class="score" id="scoreVoice">0%</span>
+          </div>
+          <div class="dimension-bar-row">
+            <div class="mini-progress"><div class="mini-fill" id="miniFillVoice"></div></div>
+          </div>
+          <div class="dimension-note">Can you name the moment + your aim cleanly?</div>
+        </div>
+
+        <div class="presence-dimension-pill">
+          <div class="dimension-top">
+            <span class="label">Trigger Awareness</span>
+            <span class="score" id="scoreStructure">0%</span>
+          </div>
+          <div class="dimension-bar-row">
+            <div class="mini-progress"><div class="mini-fill" id="miniFillStructure"></div></div>
+          </div>
+          <div class="dimension-note">Do you know what sets you off (and why)?</div>
+        </div>
+
+        <div class="presence-dimension-pill">
+          <div class="dimension-top">
+            <span class="label">Regulation Plan</span>
+            <span class="score" id="scoreChallenge">0%</span>
+          </div>
+          <div class="dimension-bar-row">
+            <div class="mini-progress"><div class="mini-fill" id="miniFillChallenge"></div></div>
+          </div>
+          <div class="dimension-note">Do you have an If-Then plan you’ll actually use?</div>
+        </div>
+
+        <div class="presence-dimension-pill">
+          <div class="dimension-top">
+            <span class="label">Guardrails + Aftercare</span>
+            <span class="score" id="scoreNonverbal">0%</span>
+          </div>
+          <div class="dimension-bar-row">
+            <div class="mini-progress"><div class="mini-fill" id="miniFillNonverbal"></div></div>
+          </div>
+          <div class="dimension-note">Boundary line + closure + recovery routine.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions-container">
+      <button class="action-btn" onclick="generateSmartSummary()" id="generateBtn" disabled>
+        <i class="fas fa-magic"></i> Generate summary
+      </button>
+      <button class="action-btn secondary" onclick="copyFramework()" id="copyBtn">
+        <i class="far fa-copy"></i> Copy blueprint
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="smart-summary-section" id="smartSummary">
+  <div class="summary-header">
+    <h2 class="summary-title">Your Smart Preparation Summary</h2>
+    <p class="summary-subtitle">Based on your readiness score of <span id="summaryScore">0%</span></p>
+    <p class="summary-insight">Highlights what’s missing, what’s risky, and your calmest next move — without pretending you’re fine.</p>
+  </div>
+
+  <h3 class="section-header red"><i class="fas fa-exclamation-triangle"></i> Risk Flags in Your Preparation</h3>
+  <div class="red-flags-grid" id="redFlagsGrid"></div>
+
+  <h3 class="section-header purple"><i class="fas fa-forward"></i> Next Moves (Simple + Controlled)</h3>
+  <div class="next-steps-grid" id="nextStepsGrid"></div>
+
+  <h3 class="section-header blue"><i class="fas fa-tools"></i> Recommended Tools to Support You</h3>
+  <div class="resources-grid" id="resourcesGrid"></div>
+</div>
+
+<!-- MY PLAYBOOK -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven’t saved anything yet. Use <strong>Save item</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <div class="playbook-quick-links-header">
+          <span class="quick-links-title">Quick links</span>
+        </div>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill"><i class="fas fa-gauge"></i> The Dashboard</a>
+          <a href="the-lens.html" class="quick-link-pill"><i class="fas fa-search"></i> The Lens</a>
+          <a href="the-toolkit.html" class="quick-link-pill"><i class="fas fa-toolbox"></i> The Toolkit</a>
+          <a href="the-coach.html" class="quick-link-pill"><i class="fas fa-comments"></i> The Coach</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('loaded');
+
+  initializeChecklist();
+  initializeThemeToggle();
+  initializeMobileNav();
+  initializePlaybook();
+
+  bindBlueprintListeners();
+  resetDefaultSelectsToBlank();
+  updateFrameworkScore();
+});
+
+/* MOBILE NAV (more reliable icon switching) */
+function initializeMobileNav() {
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (!mobileToggle || !navLinks) return;
+
+  function setIcon(open){
+    const icon = mobileToggle.querySelector('i');
+    if (!icon) return;
+    icon.classList.remove('fa-bars','fa-times');
+    icon.classList.add(open ? 'fa-times' : 'fa-bars');
+  }
+
+  mobileToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('active');
+    setIcon(navLinks.classList.contains('active'));
+  });
+
+  document.addEventListener('click', function(event) {
+    const open = navLinks.classList.contains('active');
+    if (open && !navLinks.contains(event.target) && !mobileToggle.contains(event.target)) {
+      navLinks.classList.remove('active');
+      setIcon(false);
+    }
+  });
+}
+
+/* THEME */
+function initializeThemeToggle() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (!themeToggleBtn) return;
+
+  const themeIcon = themeToggleBtn.querySelector('i');
+  const logoImg = document.getElementById('mainLogo');
+  const fallback = document.getElementById('logoFallback');
+
+  function getLogoPath(filename) {
+    if (window.location.protocol === 'file:') {
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+      return basePath + 'assets/img/' + filename;
+    } else {
+      return './assets/img/' + filename;
+    }
+  }
+
+  function showFallback() {
+    if (logoImg) logoImg.style.display = 'none';
+    if (fallback) fallback.style.display = 'flex';
+  }
+
+  function showImage() {
+    if (fallback) fallback.style.display = 'none';
+    if (logoImg) logoImg.style.display = 'block';
+  }
+
+  function updateLogoForTheme(isDarkMode) {
+    if (!logoImg) return;
+    showImage();
+    logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+    logoImg.alt = 'The Employee Playbook';
+  }
+
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const savedTheme = localStorage.getItem('theme');
+
+  const startDark = (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches));
+  if (startDark) {
+    document.body.classList.add('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+    updateLogoForTheme(true);
+  } else {
+    document.body.classList.remove('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+    updateLogoForTheme(false);
+  }
+
+  themeToggleBtn.addEventListener('click', function() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    if (isDarkMode) {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+      updateLogoForTheme(false);
+    } else {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+      updateLogoForTheme(true);
+    }
+  });
+
+  if (logoImg) {
+    logoImg.addEventListener('error', function() {
+      // Try the light logo if dark one missing, otherwise use fallback block
+      if ((logoImg.src || '').includes('logo-dark.png')) {
+        logoImg.src = getLogoPath('logo.png');
+        return;
+      }
+      showFallback();
+    });
+
+    logoImg.addEventListener('load', function(){
+      showImage();
+    });
+  }
+}
+
+/* ensure score starts at 0% */
+function resetDefaultSelectsToBlank(){
+  document.querySelectorAll('select.sa-input').forEach(sel => {
+    if (!sel.dataset.userChanged) sel.value = '';
+  });
+}
+
+/* Bind inputs once */
+function bindBlueprintListeners(){
+  document.querySelectorAll('.sa-input').forEach(el => {
+    if (el.dataset.bound === '1') return;
+    el.dataset.bound = '1';
+
+    el.addEventListener('input', () => {
+      el.dataset.userChanged = '1';
+      updateFrameworkScore();
+    });
+    el.addEventListener('change', () => {
+      el.dataset.userChanged = '1';
+      updateFrameworkScore();
+    });
+  });
+}
+
+/* TIMELINE */
+function addTimelineRow() {
+  const body = document.getElementById('timelineBody');
+  const tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td><input class="input sa-input" data-dimension="safeguards" placeholder="DD/MM/YYYY"></td>
+    <td><input class="input sa-input" data-dimension="read" placeholder="What happened (neutral)?"></td>
+    <td>
+      <select class="select sa-input" data-dimension="read">
+        <option value="" selected>Select…</option>
+        <option value="Anxiety">Anxiety</option>
+        <option value="Anger">Anger</option>
+        <option value="Shame">Shame</option>
+        <option value="Sadness">Sadness</option>
+        <option value="Freeze">Freeze</option>
+      </select>
+    </td>
+    <td><input class="input sa-input" data-dimension="behaviours" placeholder="Pause, question, boundary, notes, exit…"></td>
+    <td>
+      <select class="select sa-input" data-dimension="impact">
+        <option value="" selected>Select…</option>
+        <option value="Better than expected">Better than expected</option>
+        <option value="Fine / manageable">Fine / manageable</option>
+        <option value="Not great">Not great</option>
+        <option value="Rough">Rough</option>
+      </select>
+    </td>
+  `;
+  body.appendChild(tr);
+  bindBlueprintListeners();
+  updateFrameworkScore();
+}
+
+function removeTimelineRow() {
+  const body = document.getElementById('timelineBody');
+  if (body.children.length > 1) body.removeChild(body.lastElementChild);
+  updateFrameworkScore();
+}
+
+/* CHECKLIST */
+let checkedItems = [];
+let itemCategories = [];
+
+/* 4 dimensions (kept ids for UI) */
+const dimensionConfig = {
+  voice: ['read'],            // Clarity of Aim
+  structure: ['impact'],      // Trigger Awareness
+  challenge: ['behaviours'],  // Regulation Plan
+  nonverbal: ['safeguards']   // Guardrails + Aftercare
+};
+
+function initializeChecklist() {
+  const checklistContainers = document.querySelectorAll('.checklist-item');
+  checkedItems = new Array(checklistContainers.length).fill(false);
+  itemCategories = [];
+
+  checklistContainers.forEach((container, index) => {
+    const icon = container.querySelector('i');
+    const category = container.getAttribute('data-category');
+    itemCategories[index] = category;
+
+    container.addEventListener('click', function(e) {
+      if (e.target.tagName === 'BUTTON') return;
+
+      if (icon.classList.contains('fa-square')) {
+        icon.classList.remove('fa-square');
+        icon.classList.add('fa-check-square');
+        icon.style.color = 'var(--accent-purple-dark)';
+        checkedItems[index] = true;
+      } else {
+        icon.classList.remove('fa-check-square');
+        icon.classList.add('fa-square');
+        icon.style.color = 'var(--accent-purple)';
+        checkedItems[index] = false;
+      }
+      updateFrameworkScore();
+    });
+  });
+}
+
+/* PROGRESS COLOUR CLASSING */
+function applyFillClass(el, pct){
+  if (!el) return;
+  el.classList.remove('high','medium','low');
+  if (pct >= 70) el.classList.add('high');
+  else if (pct >= 40) el.classList.add('medium');
+  else el.classList.add('low');
+}
+
+/* SCORE */
+function updateFrameworkScore() {
+  // Changed: progress reflects CHECKLIST ONLY
+  const checklistCompleted = checkedItems.filter(Boolean).length;
+  const totalUnits = checkedItems.length;
+  const score = totalUnits ? Math.round((checklistCompleted / totalUnits) * 100) : 0;
+
+  document.getElementById('clarityPercentage').textContent = score + '%';
+
+  const fill = document.getElementById('progressFill');
+  fill.style.width = score + '%';
+  applyFillClass(fill, score);
+
+  document.getElementById('generateBtn').disabled = (checklistCompleted === 0);
+
+  const dimScores = {
+    voice: { checked: 0, total: 0 },
+    structure: { checked: 0, total: 0 },
+    nonverbal: { checked: 0, total: 0 },
+    challenge: { checked: 0, total: 0 }
+  };
+
+  // Changed: dimension scores reflect CHECKLIST ONLY
+  itemCategories.forEach((cat, idx) => {
+    Object.keys(dimensionConfig).forEach(dim => {
+      if (dimensionConfig[dim].includes(cat)) {
+        dimScores[dim].total += 1;
+        if (checkedItems[idx]) dimScores[dim].checked += 1;
+      }
+    });
+  });
+
+  const pct = d => d.total ? Math.round((d.checked / d.total) * 100) : 0;
+
+  const pVoice = pct(dimScores.voice);
+  const pStructure = pct(dimScores.structure);
+  const pNonverbal = pct(dimScores.nonverbal);
+  const pChallenge = pct(dimScores.challenge);
+
+  document.getElementById('scoreVoice').textContent = pVoice + '%';
+  document.getElementById('scoreStructure').textContent = pStructure + '%';
+  document.getElementById('scoreNonverbal').textContent = pNonverbal + '%';
+  document.getElementById('scoreChallenge').textContent = pChallenge + '%';
+
+  const fV = document.getElementById('miniFillVoice');
+  const fS = document.getElementById('miniFillStructure');
+  const fC = document.getElementById('miniFillChallenge');
+  const fN = document.getElementById('miniFillNonverbal');
+
+  if (fV) { fV.style.width = pVoice + '%'; applyFillClass(fV, pVoice); }
+  if (fS) { fS.style.width = pStructure + '%'; applyFillClass(fS, pStructure); }
+  if (fC) { fC.style.width = pChallenge + '%'; applyFillClass(fC, pChallenge); }
+  if (fN) { fN.style.width = pNonverbal + '%'; applyFillClass(fN, pNonverbal); }
+}
+
+/* HELPERS */
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? (el.value || '').trim() : '';
+}
+function shorten(text, max) {
+  const t = (text || '').replace(/\s+/g, ' ').trim();
+  if (!t) return '';
+  return t.length > max ? t.slice(0, max - 1) + '…' : t;
+}
+
+/* Copy helper with fallback (fixes clipboard failures on some file:// setups) */
+function writeClipboard(text){
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  return new Promise((resolve, reject) => {
+    try{
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      ta.style.top = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      ok ? resolve() : reject(new Error('Copy failed'));
+    } catch(e){ reject(e); }
+  });
+}
+
+function copyText(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  writeClipboard(el.textContent || '');
+}
+
+/* BUILDERS */
+function buildRegulationScript() {
+  const emotion = val('r_emotion');
+  const body = val('r_body');
+  const trigger = val('r_trigger');
+  const move = val('r_move');
+  const ifthen = val('r_ifthen');
+  const anchor = val('r_anchor');
+
+  const lines = [];
+  lines.push('IN-THE-MOMENT SCRIPT (quiet, professional, effective)');
+  lines.push('----------------------------------------------------');
+  if (emotion) lines.push(`Label (in your head): “This is ${emotion.toLowerCase()}.”`);
+  if (body) lines.push(`Body signal: ${body}. (That’s the cue — not the crisis.)`);
+  if (trigger) lines.push(`Likely trigger: ${trigger}.`);
+  lines.push('');
+
+  lines.push('1) PAUSE MOVE (2–6 seconds)');
+  lines.push(`- Use: ${move || 'Slow exhale (in 4, out 6)'}.`);
+  lines.push('- Look down briefly / take notes / sip water (buys time without drama).');
+
+  lines.push('\n2) CLARIFY (facts > vibes)');
+  lines.push('- “Can you give a specific example?”');
+  lines.push('- “What does ‘good’ look like in practice?”');
+
+  lines.push('\n3) CONTAIN (stay in your lane)');
+  lines.push('- “I want to understand clearly, so I can respond properly.”');
+
+  if (ifthen) {
+    lines.push('\nIF-THEN PLAN');
+    lines.push(`- ${ifthen}`);
+  }
+
+  if (anchor) {
+    lines.push('\nANCHOR PHRASE');
+    lines.push(`- ${anchor}`);
+  }
+
+  lines.push('\nNote: You don’t need to win the moment. You need to leave it coherent.');
+
+  document.getElementById('reg_out').textContent = lines.join('\n');
+}
+
+function buildScriptPack() {
+  const context = val('s_context');
+  const tone = val('s_tone');
+  const open = val('s_open');
+  const question = val('s_question');
+  const boundary = val('s_boundary');
+
+  const contextHint = context ? `Context: ${context}` : 'Context: (choose one)';
+  const toneHint = tone ? `Tone: ${tone}` : 'Tone: Neutral (facts + questions)';
+
+  const opening = open || '“I want to understand expectations clearly and agree next steps.”';
+  const clarifier = question || '“Can you give a specific example and the impact it had?”';
+  const interrupt = '“Let me finish this point, then I’ll come back to that.”';
+  const boundaryLine = boundary || '“I’m happy to discuss this, but I need examples and specific expectations.”';
+
+  const close = (context && context.includes('Interview'))
+    ? '“Thanks — is there anything else you need from me to make a confident decision?”'
+    : '“To close this out: can we confirm next steps and who owns what, in writing?”';
+
+  const lines = [];
+  lines.push(`${contextHint} | ${toneHint}`);
+  lines.push('');
+  lines.push('OPENING (aim)');
+  lines.push(`- ${opening}`);
+  lines.push('');
+  lines.push('CLARIFIER (forces specificity)');
+  lines.push(`- ${clarifier}`);
+  lines.push('');
+  lines.push('IF INTERRUPTED / STEAMROLLED');
+  lines.push(`- ${interrupt}`);
+  lines.push('');
+  lines.push('BOUNDARY (work-safe)');
+  lines.push(`- ${boundaryLine}`);
+  lines.push('');
+  lines.push('CLOSING (clean exit)');
+  lines.push(`- ${close}`);
+  lines.push('');
+  lines.push('Life hack: write these on a sticky note. Use them. That’s the whole point.');
+
+  document.getElementById('script_out').textContent = lines.join('\n');
+}
+
+function buildRecoveryPlan() {
+  const ten = val('a_10min');
+  const closure = val('a_closure');
+  const doc = val('a_document');
+  const support = val('a_support');
+  const nextmove = val('a_nextmove');
+
+  const lines = [];
+  lines.push('48-HOUR RECOVERY PLAN (no spiral, no replay loop)');
+  lines.push('-----------------------------------------------');
+
+  lines.push('\n0–10 MINUTES AFTER');
+  lines.push(`- Do: ${ten || 'Walk + slow exhale'}.`);
+  lines.push('- Avoid: immediate texting rage / doom-scrolling / “I should’ve said…” loops.');
+
+  lines.push('\n10–30 MINUTES');
+  lines.push(`- Closure move: ${closure || '3-line closure log'}.`);
+  lines.push('- Write the 3 lines, then stop thinking.');
+
+  lines.push('\nWITHIN 2 HOURS');
+  lines.push(`- Document (facts only): ${doc ? shorten(doc, 220) : 'What was said, what was agreed, any actions/owners/timelines.'}`);
+  lines.push('- If needed, send a factual recap email while it’s fresh.');
+
+  lines.push('\nTONIGHT');
+  lines.push(`- One supportive action: ${support || 'Eat properly + a short walk + early night.'}`);
+  lines.push('- Rule: no analysing in bed. Park it on paper.');
+
+  lines.push('\nTOMORROW');
+  lines.push(`- Next move if needed: ${nextmove || 'Follow up in writing, request clarity, use the escalation form, consider rep support.'}`);
+  lines.push('- Keep it controlled: facts, requests, timelines.');
+
+  document.getElementById('rec_out').textContent = lines.join('\n');
+}
+
+function generateOutputs() {
+  const event = val('e_event');
+  const who = val('e_who');
+  const when = val('e_when');
+  const intensity = val('e_intensity');
+  const aim = val('e_aim');
+  const worry = val('e_worry');
+  const nonneg = val('e_nonneg');
+  const flex = val('e_flex');
+
+  const emotion = val('r_emotion');
+  const body = val('r_body');
+  const trigger = val('r_trigger');
+  const move = val('r_move');
+  const ifthen = val('r_ifthen');
+  const anchor = val('r_anchor');
+
+  const context = val('s_context');
+  const tone = val('s_tone');
+  const open = val('s_open');
+  const question = val('s_question');
+  const boundary = val('s_boundary');
+
+  const ten = val('a_10min');
+  const closure = val('a_closure');
+  const doc = val('a_document');
+  const support = val('a_support');
+  const nextmove = val('a_nextmove');
+
+  // ensure per-panel outputs are up to date
+  buildRegulationScript();
+  buildScriptPack();
+  buildRecoveryPlan();
+
+  const summaryParts = [];
+  summaryParts.push(event ? `Situation: ${event}.` : `Situation: (name the moment in one sentence).`);
+  if (who) summaryParts.push(`People: ${who}.`);
+  if (when) summaryParts.push(`Timing: ${when}.`);
+  if (intensity) summaryParts.push(`Intensity: ${intensity}.`);
+  if (aim) summaryParts.push(`Aim: ${shorten(aim, 200)}`);
+  if (worry) summaryParts.push(`Worry: ${shorten(worry, 160)}`);
+  if (nonneg) summaryParts.push(`Non-negotiable: ${nonneg}.`);
+  if (flex) summaryParts.push(`Flex: ${flex}.`);
+
+  document.getElementById('out_summary').textContent = summaryParts.join(' ');
+
+  const regLines = [];
+  if (emotion || body || trigger) {
+    regLines.push(`Likely emotion: ${emotion || '(select)'} | Body signal: ${body || '(select)'} | Trigger: ${trigger || '(select)'}`);
+  }
+  regLines.push(`Regulation move: ${move || 'Slow exhale (in 4, out 6)'}.`);
+  if (ifthen) regLines.push(`If-Then: ${ifthen}`);
+  if (anchor) regLines.push(`Anchor: ${anchor}`);
+  regLines.push(`Boundary line: ${boundary || '“I’m happy to discuss this, but I need examples and specific expectations.”'}`);
+
+  document.getElementById('out_reg').textContent = regLines.join('\n');
+
+  const scriptsBlock = [];
+  scriptsBlock.push(`Context: ${context || '(choose)'} | Tone: ${tone || 'Neutral'}`);
+  scriptsBlock.push('');
+  scriptsBlock.push(`Opening: ${open || '“I want to understand expectations clearly and agree next steps.”'}`);
+  scriptsBlock.push(`Clarifier: ${question || '“Can you give a specific example and the impact it had?”'}`);
+  scriptsBlock.push(`Interruption line: “Let me finish this point, then I’ll come back to that.”`);
+  scriptsBlock.push(`Boundary: ${boundary || '“I’m happy to discuss this, but I need examples and specific expectations.”'}`);
+  scriptsBlock.push(`Closing: “To close this out: can we confirm next steps and who owns what, in writing?”`);
+
+  document.getElementById('out_scripts').textContent = scriptsBlock.join('\n');
+
+  const recLines = [];
+  recLines.push(`0–10 mins: ${ten || 'Walk + slow exhale'}.`);
+  recLines.push(`Closure: ${closure || '3-line closure log'}.`);
+  recLines.push(`Document: ${doc ? shorten(doc, 220) : 'facts only: what was said, what was agreed, actions/owners/timelines.'}`);
+  recLines.push(`Support: ${support || 'Eat properly + a short walk + early night.'}`);
+  recLines.push(`If it goes badly: ${nextmove || 'Follow up in writing, request clarity, use escalation form, consider rep support.'}`);
+
+  document.getElementById('out_recovery').textContent = recLines.join('\n');
+}
+
+function copyOutputs() {
+  const blocks = [
+    'EMOTIONAL PREPARATION GUIDE',
+    '==========================',
+    '',
+    'PREPARATION BRIEF',
+    document.getElementById('out_summary').textContent,
+    '',
+    'REGULATION + BOUNDARY',
+    document.getElementById('out_reg').textContent,
+    '',
+    'SCRIPT PACK',
+    document.getElementById('out_scripts').textContent,
+    '',
+    'RECOVERY PLAN',
+    document.getElementById('out_recovery').textContent
+  ];
+  writeClipboard(blocks.join('\n'));
+}
+
+function resetBlueprint() {
+  document.querySelectorAll('.sa-input').forEach(el => {
+    el.value = '';
+    delete el.dataset.userChanged;
+  });
+
+  document.querySelectorAll('.checklist-item').forEach((container, index) => {
+    const icon = container.querySelector('i');
+    if (!icon) return;
+    icon.classList.remove('fa-check-square');
+    icon.classList.add('fa-square');
+    icon.style.color = 'var(--accent-purple)';
+    checkedItems[index] = false;
+  });
+
+  document.getElementById('reg_out').textContent = 'Click “Build” to generate a short, work-safe regulation script you can use in the moment (without sounding dramatic).';
+  document.getElementById('script_out').textContent = 'Click “Build” to generate: opening, clarifier, interruption line, boundary, and closing line.';
+  document.getElementById('rec_out').textContent = 'Click “Build” to generate a simple recovery plan that stops the mental replay loop.';
+
+  document.getElementById('out_summary').textContent = 'Complete the blueprint, then click “Generate outputs”.';
+  document.getElementById('out_reg').textContent = '—';
+  document.getElementById('out_scripts').textContent = '—';
+  document.getElementById('out_recovery').textContent = '—';
+
+  document.getElementById('smartSummary').classList.remove('active');
+
+  resetDefaultSelectsToBlank();
+  updateFrameworkScore();
+}
+
+/* SMART SUMMARY */
+function generateSmartSummary() {
+  const scoreText = document.getElementById('clarityPercentage').textContent || '0%';
+  const score = parseInt(scoreText.replace('%',''), 10) || 0;
+
+  document.getElementById('summaryScore').textContent = score + '%';
+
+  const summarySection = document.getElementById('smartSummary');
+  summarySection.classList.add('active');
+  summarySection.scrollIntoView({ behavior: 'smooth' });
+
+  generateRedFlags(score);
+  generateNextSteps(score);
+  generateRecommendedResources(score);
+}
+
+function collectMissingSignals() {
+  const hasEvent = !!val('e_event');
+  const hasWho = !!val('e_who');
+  const hasAim = !!val('e_aim');
+
+  const hasTrigger = !!val('r_emotion') || !!val('r_body') || !!val('r_trigger');
+  const hasPlan = !!val('r_move') || !!val('r_ifthen') || !!val('r_anchor');
+
+  const hasScripts = !!val('s_open') || !!val('s_question') || !!val('s_boundary') || ((document.getElementById('script_out').textContent || '').includes('OPENING'));
+  const hasAftercare = !!val('a_10min') || !!val('a_closure') || !!val('a_document') || !!val('a_support') || !!val('a_nextmove');
+
+  return {
+    clarityWeak: !(hasEvent && hasWho && hasAim),
+    triggerWeak: !(hasTrigger && hasPlan),
+    scriptsWeak: !hasScripts,
+    aftercareWeak: !hasAftercare
+  };
+}
+
+function generateRedFlags(score) {
+  const grid = document.getElementById('redFlagsGrid');
+  grid.innerHTML = '';
+
+  const missing = collectMissingSignals();
+  const redFlags = [];
+
+  if (missing.clarityWeak) {
+    redFlags.push({
+      title: 'The moment is still vague',
+      description: 'Vagueness fuels panic. Name the situation, who’s involved, and your aim in one sentence.',
+      icon: 'fas fa-bullseye'
+    });
+  }
+  if (missing.triggerWeak) {
+    redFlags.push({
+      title: 'No trigger plan',
+      description: 'If you don’t plan for your body response, the conversation will drive you. Add your first signal + If-Then.',
+      icon: 'fas fa-sliders'
+    });
+  }
+  if (missing.scriptsWeak) {
+    redFlags.push({
+      title: 'No calm script pack',
+      description: 'Under pressure, you won’t invent perfect words. Prepare opening, clarifier, boundary, and closing.',
+      icon: 'fas fa-pen-fancy'
+    });
+  }
+  if (missing.aftercareWeak) {
+    redFlags.push({
+      title: 'Recovery isn’t planned',
+      description: 'Without a closure routine, your brain replays it for days. Plan 10 minutes + documentation + one supportive action.',
+      icon: 'fas fa-shield-halved'
+    });
+  }
+
+  while (redFlags.length < 3) {
+    redFlags.push({
+      title: 'You’re allowed to pause',
+      description: 'A calm pause is professionalism. It’s not weakness — it’s control.',
+      icon: 'fas fa-pause'
+    });
+  }
+
+  redFlags.slice(0,3).forEach(flag => {
+    const card = document.createElement('div');
+    card.className = 'red-flag-card';
+    card.innerHTML = `
+      <div class="flag-icon"><i class="${flag.icon}"></i></div>
+      <h4 class="flag-title">${flag.title}</h4>
+      <p class="flag-description">${flag.description}</p>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function generateNextSteps(score) {
+  const grid = document.getElementById('nextStepsGrid');
+  grid.innerHTML = '';
+
+  const missing = collectMissingSignals();
+  const steps = [];
+
+  if (missing.clarityWeak) {
+    steps.push({
+      title: 'Write the one-sentence aim',
+      description: 'Situation + aim + next step. That’s the anchor for the whole conversation.',
+      icon: 'fas fa-bullseye'
+    });
+  } else {
+    steps.push({
+      title: 'Make the first minute solid',
+      description: 'Use your opening line + one clarifying question. Don’t try to solve everything at once.',
+      icon: 'fas fa-stopwatch'
+    });
+  }
+
+  if (missing.triggerWeak) {
+    steps.push({
+      title: 'Add your If-Then',
+      description: 'If your body spikes, you’ll do one specific move (pause + water + question).',
+      icon: 'fas fa-bolt'
+    });
+  } else {
+    steps.push({
+      title: 'Practise the pause move once',
+      description: 'Do one slow exhale now. Your body learns by repetition, not theory.',
+      icon: 'fas fa-wind'
+    });
+  }
+
+  if (missing.aftercareWeak) {
+    steps.push({
+      title: 'Plan the closure routine',
+      description: '3-line closure log + factual recap if needed. Then you stop thinking.',
+      icon: 'fas fa-clipboard-check'
+    });
+  } else {
+    steps.push({
+      title: 'Protect your recovery window',
+      description: 'After the meeting, don’t “process” for hours. Do your plan and reclaim your evening.',
+      icon: 'fas fa-shield'
+    });
+  }
+
+  steps.slice(0,3).forEach(step => {
+    const card = document.createElement('div');
+    card.className = 'next-step-card';
+    card.innerHTML = `
+      <div class="step-icon"><i class="${step.icon}"></i></div>
+      <h4 class="step-title">${step.title}</h4>
+      <p class="step-description">${step.description}</p>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function generateRecommendedResources(score) {
+  const grid = document.getElementById('resourcesGrid');
+  grid.innerHTML = '';
+
+  const resources = [
+    {
+      title: 'Script Library',
+      description: 'Calm, articulate scripts for difficult conversations (without corporate waffle).',
+      icon: 'fas fa-comments',
+      link: 'script-library.html'
+    },
+    {
+      title: 'Toxic Behaviour Response Guide',
+      description: 'If the issue is behaviour, not misunderstanding: responses + boundaries + documentation.',
+      icon: 'fas fa-triangle-exclamation',
+      link: 'toxic-behaviour-response-guide.html'
+    },
+    {
+      title: 'Escalation Documentation Form',
+      description: 'A structured way to capture facts, dates, impact, and requests — neutrally.',
+      icon: 'fas fa-file-circle-check',
+      link: 'escalation-documentation-form.html'
+    }
+  ];
+
+  resources.slice(0,3).forEach(r => {
+    const card = document.createElement('div');
+    card.className = 'resource-card';
+    card.innerHTML = `
+      <div class="resource-icon"><i class="${r.icon}"></i></div>
+      <h4 class="resource-title">${r.title}</h4>
+      <p class="resource-description">${r.description}</p>
+      <a href="${r.link}" class="resource-link">Access tool <i class="fas fa-arrow-right"></i></a>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* COPY BLUEPRINT */
+function copyFramework() {
+  const blocks = [];
+  blocks.push('EMOTIONAL PREPARATION GUIDE');
+  blocks.push('==========================');
+  blocks.push('');
+  blocks.push('1) EMOTIONAL SNAPSHOT');
+  blocks.push(`- Situation: ${val('e_event')}`);
+  blocks.push(`- People: ${val('e_who')} | When: ${val('e_when')} | Intensity: ${val('e_intensity')}`);
+  blocks.push(`- Aim: ${val('e_aim')}`);
+  blocks.push(`- Worry: ${val('e_worry')}`);
+  blocks.push(`- Non-negotiable: ${val('e_nonneg')} | Flex: ${val('e_flex')}`);
+  blocks.push('');
+  blocks.push('2) TRIGGER + REGULATION');
+  blocks.push(`- Emotion: ${val('r_emotion')} | Body signal: ${val('r_body')} | Trigger: ${val('r_trigger')}`);
+  blocks.push(`- Move: ${val('r_move')} | If-Then: ${val('r_ifthen')}`);
+  blocks.push(`- Anchor: ${val('r_anchor')}`);
+  blocks.push('');
+  blocks.push('3) CALM SCRIPT PACK');
+  blocks.push(`- Context: ${val('s_context')} | Tone: ${val('s_tone')}`);
+  blocks.push(`- Opening: ${val('s_open')}`);
+  blocks.push(`- Key question: ${val('s_question')}`);
+  blocks.push(`- Boundary: ${val('s_boundary')}`);
+  blocks.push('');
+  blocks.push('4) RECOVERY + RUMINATION BREAK');
+  blocks.push(`- 10 mins after: ${val('a_10min')} | Closure: ${val('a_closure')}`);
+  blocks.push(`- Document: ${val('a_document')}`);
+  blocks.push(`- Support: ${val('a_support')}`);
+  blocks.push(`- If it goes badly: ${val('a_nextmove')}`);
+  blocks.push('');
+  blocks.push('EXECUTIVE OUTPUTS');
+  blocks.push(`- Brief: ${document.getElementById('out_summary').textContent}`);
+  blocks.push(`- Regulation + boundary: ${document.getElementById('out_reg').textContent}`);
+  blocks.push(`- Scripts: ${document.getElementById('out_scripts').textContent}`);
+  blocks.push(`- Recovery: ${document.getElementById('out_recovery').textContent}`);
+
+  writeClipboard(blocks.join('\n'));
+
+  const btn = document.getElementById('copyBtn');
+  const originalHTML = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+  btn.style.background = '#10b981';
+
+  setTimeout(() => {
+    btn.innerHTML = originalHTML;
+    btn.style.background = '';
+  }, 2000);
+}
+
+/* MY PLAYBOOK */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'emotional-preparation-guide';
+const CURRENT_TOOL_TITLE = 'Emotional Preparation Guide';
+const CURRENT_TOOL_TYPE = 'Guide';
+
+function getSavedItems() {
+  try {
+    const raw = localStorage.getItem(PLAYBOOK_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) { return []; }
+}
+function setSavedItems(items) {
+  try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); } catch (e) {}
+}
+function initializePlaybook() {
+  const overlay = document.getElementById('playbookOverlay');
+  const sidebar = document.getElementById('playbookSidebar');
+  const button = document.getElementById('myPlaybookButton');
+  const closeBtn = document.getElementById('closePlaybook');
+  const saveItemBtn = document.getElementById('saveBtn');
+  if (!overlay || !sidebar || !button || !closeBtn || !saveItemBtn) return;
+
+  renderSavedItems();
+
+  const savedItems = getSavedItems();
+  const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+  updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+  saveItemBtn.addEventListener('click', () => {
+    const items = getSavedItems();
+    const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+    let nowSaved;
+
+    if (index === -1) {
+      const toolLink = window.location.pathname.split('/').pop() || 'emotional-preparation-guide.html';
+      items.push({
+        id: CURRENT_TOOL_ID,
+        title: CURRENT_TOOL_TITLE,
+        type: CURRENT_TOOL_TYPE,
+        link: toolLink,
+        savedAt: new Date().toISOString()
+      });
+      nowSaved = true;
+    } else {
+      items.splice(index, 1);
+      nowSaved = false;
+    }
+
+    setSavedItems(items);
+    updateSaveButtonState(saveItemBtn, nowSaved);
+    renderSavedItems();
+  });
+
+  button.addEventListener('click', () => { overlay.classList.add('open'); sidebar.classList.add('open'); });
+  closeBtn.addEventListener('click', () => { overlay.classList.remove('open'); sidebar.classList.remove('open'); });
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) { overlay.classList.remove('open'); sidebar.classList.remove('open'); }
+  });
+}
+function updateSaveButtonState(button, isSaved) {
+  const icon = button.querySelector('i');
+  const label = button.querySelector('span');
+  if (isSaved) {
+    button.classList.add('saved');
+    if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+    if (label) label.textContent = 'Saved';
+  } else {
+    button.classList.remove('saved');
+    if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+    if (label) label.textContent = 'Save item';
+  }
+}
+function renderSavedItems() {
+  const listEl = document.getElementById('savedItemsList');
+  const emptyEl = document.getElementById('savedItemsEmpty');
+  if (!listEl || !emptyEl) return;
+
+  const items = getSavedItems();
+  listEl.innerHTML = '';
+
+  if (!items.length) { emptyEl.style.display = 'block'; return; }
+  emptyEl.style.display = 'none';
+
+  items.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'saved-item';
+    const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+    const dateText = savedDate ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+    li.innerHTML = `
+      <div class="saved-item-title-row">
+        <span class="saved-item-title">${item.title}</span>
+        <span class="saved-item-type">${item.type}</span>
+      </div>
+      <div class="saved-item-meta">${dateText ? `Saved on ${dateText}` : ''}</div>
+      <a class="saved-item-link" href="${item.link}">Open <i class="fas fa-arrow-right"></i></a>
+    `;
+    listEl.appendChild(li);
+  });
+}
+</script>
+
+</body>
+</html>

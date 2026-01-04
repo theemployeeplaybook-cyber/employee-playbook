@@ -1,0 +1,3083 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Time Blocking Template | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand + Category Pills System)
+       Categories updated to match your pills reference (7 categories)
+    =========================== */
+    :root{
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+      --text-dark:#212529;
+      --text-medium:#495057;
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+      --success-green:#10b981;
+      --warning-orange:#f59e0b;
+      --danger-red:#ef4444;
+      --info-blue:#3b82f6;
+
+      /* ===========================
+         CATEGORY COLORS (Your 7)
+      =========================== */
+      --category-clarity: #7B5FC4;
+      --category-burnout: #f59e0b;
+      --category-manager: #10b981;
+      --category-politics: #3b82f6;
+      --category-hr: #6D28D9;
+      --category-confidence: #ef4444;
+      --category-career: #800020;
+
+      /* ===========================
+         PILL STYLES (Light mode)
+      =========================== */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.08), rgba(123, 95, 196, 0.04));
+      --pill-clarity-border: rgba(123, 95, 196, 0.2);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.12), rgba(123, 95, 196, 0.08));
+      --pill-clarity-hover-border: rgba(123, 95, 196, 0.3);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.04));
+      --pill-burnout-border: rgba(245, 158, 11, 0.2);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(245, 158, 11, 0.08));
+      --pill-burnout-hover-border: rgba(245, 158, 11, 0.3);
+
+      --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.04));
+      --pill-manager-border: rgba(16, 185, 129, 0.2);
+      --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.08));
+      --pill-manager-hover-border: rgba(16, 185, 129, 0.3);
+
+      --pill-politics-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.04));
+      --pill-politics-border: rgba(59, 130, 246, 0.2);
+      --pill-politics-hover-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.08));
+      --pill-politics-hover-border: rgba(59, 130, 246, 0.3);
+
+      --pill-hr-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.08), rgba(109, 40, 217, 0.04));
+      --pill-hr-border: rgba(109, 40, 217, 0.2);
+      --pill-hr-hover-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.12), rgba(109, 40, 217, 0.08));
+      --pill-hr-hover-border: rgba(109, 40, 217, 0.3);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.04));
+      --pill-confidence-border: rgba(239, 68, 68, 0.2);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.08));
+      --pill-confidence-hover-border: rgba(239, 68, 68, 0.3);
+
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.08), rgba(128, 0, 32, 0.04));
+      --pill-career-border: rgba(128, 0, 32, 0.2);
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.12), rgba(128, 0, 32, 0.08));
+      --pill-career-hover-border: rgba(128, 0, 32, 0.3);
+    }
+
+    /* ===========================
+       DARK MODE VARIABLES
+    =========================== */
+    .dark-mode{
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#888888;
+      --text-dark:#e0e0e0;
+      --text-medium:#b0b0b0;
+
+      --accent-purple:#9d86e9;
+      --accent-purple-dark:#7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.2);
+      --lighter-purple: rgba(123, 95, 196, 0.1);
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+      --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      /* Dark mode category colors */
+      --category-clarity: #9d86e9;
+      --category-burnout: #fbbf24;
+      --category-manager: #34d399;
+      --category-politics: #60a5fa;
+      --category-hr: #8B5CF6;
+      --category-confidence: #f87171;
+      --category-career: #B03060;
+
+      /* Dark mode pill styles */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.15), rgba(123, 95, 196, 0.08));
+      --pill-clarity-border: rgba(157, 134, 233, 0.3);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.2), rgba(123, 95, 196, 0.12));
+      --pill-clarity-hover-border: rgba(157, 134, 233, 0.4);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08));
+      --pill-burnout-border: rgba(251, 191, 36, 0.3);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.12));
+      --pill-burnout-hover-border: rgba(251, 191, 36, 0.4);
+
+      --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
+      --pill-manager-border: rgba(52, 211, 153, 0.3);
+      --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.12));
+      --pill-manager-hover-border: rgba(52, 211, 153, 0.4);
+
+      --pill-politics-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08));
+      --pill-politics-border: rgba(96, 165, 250, 0.3);
+      --pill-politics-hover-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.12));
+      --pill-politics-hover-border: rgba(96, 165, 250, 0.4);
+
+      --pill-hr-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.15), rgba(109, 40, 217, 0.08));
+      --pill-hr-border: rgba(139, 92, 246, 0.3);
+      --pill-hr-hover-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.2), rgba(109, 40, 217, 0.12));
+      --pill-hr-hover-border: rgba(139, 92, 246, 0.4);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.08));
+      --pill-confidence-border: rgba(248, 113, 113, 0.3);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.12));
+      --pill-confidence-hover-border: rgba(248, 113, 113, 0.4);
+
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.15), rgba(128, 0, 32, 0.08));
+      --pill-career-border: rgba(176, 48, 96, 0.3);
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.2), rgba(128, 0, 32, 0.12));
+      --pill-career-hover-border: rgba(176, 48, 96, 0.4);
+    }
+
+    /* ===========================
+       GLOBAL
+    =========================== */
+    *{
+      margin:0; padding:0; box-sizing:border-box;
+      font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    body{
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      min-height: 100vh;
+    }
+    body.loaded{ opacity: 1; }
+    .container{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===========================
+       NAVIGATION
+    =========================== */
+    nav{
+      position: fixed;
+      top:0;
+      width:100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      height: 80px;
+    }
+    .nav-container{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 12px 0;
+      height: 100%;
+    }
+    .logo{
+      display:inline-flex;
+      align-items:center;
+      height: 100%;
+    }
+    .logo-img{
+      height:100px;
+      width:auto;
+      transform: translateX(20%);
+      padding: 14px 10px;
+      transition: all 0.3s ease;
+      display:block;
+      min-height:100px;
+    }
+    .logo-fallback{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      height:48px;
+      padding: 0 14px;
+      border-radius: 10px;
+      background: var(--premium-gradient);
+      color:#fff;
+      font-weight:700;
+      letter-spacing: 0.8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      transform: translateX(20%);
+    }
+    .nav-links{ display:flex; gap:50px; }
+    .nav-link{
+      color: var(--text-dark);
+      text-decoration:none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-size: 17px;
+    }
+    .nav-link:hover{ color: var(--accent-purple); }
+
+    .nav-link-container{ position: relative; display:inline-block; }
+    .new-tag{
+      position:absolute;
+      top:-12px;
+      right:-35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color:#000;
+      font-size:10px;
+      font-weight:600;
+      padding:2px 6px;
+      border-radius:4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index:10;
+      white-space:nowrap;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      transform: translateX(-20%);
+    }
+    .header-cta{
+      background: var(--accent-purple);
+      color:#fff;
+      padding: 8px 20px;
+      border-radius: 50px;
+      text-decoration:none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(123,95,196,0.3);
+    }
+    .header-cta:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(123,95,196,0.35);
+    }
+    .sign-in{
+      color: var(--text-dark);
+      text-decoration:none;
+      font-weight:500;
+      font-size:17px;
+    }
+    .sign-in:hover{ color: var(--accent-purple); }
+
+    .theme-toggle{
+      background:none;
+      border:none;
+      color: var(--text-dark);
+      cursor:pointer;
+      font-size:16px;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .theme-toggle:hover{ background-color: var(--light-gray); }
+
+    .mobile-toggle{
+      display:none;
+      background:none;
+      border:none;
+      color: var(--text-dark);
+      cursor:pointer;
+      font-size:24px;
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .mobile-toggle:hover{ background-color: var(--light-gray); }
+
+    .mobile-sign-in, .mobile-sign-up { display:none; }
+
+    @media (max-width: 768px){
+      .nav-container{ justify-content:center; position:relative; }
+
+      .logo{
+        position:absolute;
+        left:50%;
+        transform: translateX(-50%);
+        display:flex;
+        align-items:center;
+        height:100%;
+      }
+      .logo-img{ height:125px; transform:none; padding: 12px 0; }
+      .logo-fallback{ transform:none; }
+
+      .mobile-toggle{
+        display:flex;
+        position:absolute;
+        left:20px;
+        align-items:center;
+      }
+      .nav-actions{
+        transform:none;
+        gap:16px;
+        position:absolute;
+        right:20px;
+        align-items:center;
+      }
+      .nav-actions .sign-in,
+      .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding:20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        gap:20px;
+      }
+      .nav-links.active{ display:flex; }
+
+      .nav-link-container{
+        display:flex;
+        align-items:center;
+        justify-content:flex-start;
+        width:100%;
+      }
+      .new-tag{ position:static; margin-left:8px; }
+
+      .mobile-sign-in{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--primary-white);
+        color: var(--accent-purple);
+        border-radius:10px;
+        text-align:center;
+        font-weight:700;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+      .mobile-sign-up{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--accent-purple);
+        color:#fff;
+        border-radius:10px;
+        text-align:center;
+        font-weight:700;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .tool-hero-section{
+      width:100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow:hidden;
+    }
+    .tool-hero-section::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+      z-index:1;
+    }
+    .dark-mode .tool-hero-section::before{
+      background: linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+    }
+    .tool-hero-content{
+      position:relative;
+      z-index:2;
+      max-width:1100px;
+      margin:0 auto;
+      padding: 0 20px 10px;
+      animation: heroFadeUp 0.45s ease-out;
+    }
+    @keyframes heroFadeUp{
+      from{ opacity:0; transform: translateY(18px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .breadcrumb{
+      font-size:10px;
+      text-transform: uppercase;
+      letter-spacing:1px;
+      color: var(--dark-gray);
+      margin-bottom:10px;
+      display:flex;
+      gap:6px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .breadcrumb a{
+      color: var(--text-medium);
+      text-decoration:none !important;
+      font-weight:600;
+      letter-spacing:0.6px;
+      transition: color 0.2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+    }
+    .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+    .breadcrumb i{ font-size:10px; opacity:0.7; }
+    .breadcrumb .current{ color: var(--text-dark); font-weight:600; }
+
+    .checklist-name{
+      font-size:14px;
+      font-weight:700;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing:1.8px;
+      margin: 18px 0 12px;
+      display:block;
+    }
+
+    .hero-main-heading{
+      font-size:46px;
+      font-weight:650;
+      color: var(--text-dark);
+      line-height:1.1;
+      margin-bottom:18px;
+      max-width: 920px;
+    }
+    .hero-subheading{
+      font-size:16px;
+      color: var(--text-medium);
+      line-height:1.6;
+      max-width: 980px;
+      margin-bottom: 16px;
+    }
+
+    /* ===========================
+       RELATED CATEGORIES
+    =========================== */
+    .related-row{
+      display:flex;
+      flex-direction: column;
+      align-items:flex-start;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .related-label{
+      font-size: 12px;
+      font-weight:600;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: var(--text-medium);
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .related-pills{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+    }
+    .category-pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      height: 32px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration:none;
+    }
+    .dark-mode .category-pill{ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
+    .category-pill:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+    .dark-mode .category-pill:hover{ box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3); }
+
+    .category-pill.clarity{
+      color: var(--category-clarity);
+      border-color: var(--pill-clarity-border);
+      background: var(--pill-clarity-bg);
+    }
+    .category-pill.clarity:hover{
+      background: var(--pill-clarity-hover-bg);
+      border-color: var(--pill-clarity-hover-border);
+    }
+    .category-pill.burnout{
+      color: var(--category-burnout);
+      border-color: var(--pill-burnout-border);
+      background: var(--pill-burnout-bg);
+    }
+    .category-pill.burnout:hover{
+      background: var(--pill-burnout-hover-bg);
+      border-color: var(--pill-burnout-hover-border);
+    }
+
+    /* Save button */
+    .save-btn{
+      position:absolute;
+      top:16px;
+      right:24px;
+      z-index:5;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 12px;
+      font-size:12px;
+      font-weight:600;
+      border-radius:999px;
+      border: 1px solid rgba(123,95,196,0.6);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--accent-purple-dark);
+      cursor:pointer;
+      transition: all 0.2s ease;
+    }
+    .save-btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(123,95,196,0.18);
+      background: #fff;
+    }
+    .dark-mode .save-btn{
+      background: rgba(20,20,20,0.9);
+      border-color: rgba(157,134,233,0.6);
+    }
+    .save-btn.saved{
+      background: var(--accent-purple);
+      color:#fff;
+      border-color: transparent;
+    }
+
+    /* ===========================
+       CONTEXT + PRO TIPS
+    =========================== */
+    .context-tips-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      width:100%;
+      max-width:1100px;
+      margin: 0 auto 18px;
+      padding: 24px 20px 10px;
+      margin-top: 6px;
+    }
+    .context-card, .tips-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius:14px;
+      padding: 26px 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .section-title{
+      font-size:18px;
+      font-weight:700;
+      color: var(--text-dark);
+      margin-bottom:16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .section-title i{ color: var(--accent-purple); }
+
+    .bullet-list{ list-style:none; margin:0; padding:0; }
+    .bullet-list li{
+      color: var(--text-medium);
+      line-height:1.65;
+      margin-bottom:12px;
+      padding-left: 26px;
+      position:relative;
+      font-size:14.5px;
+      font-weight:450;
+    }
+    .bullet-list li::before{
+      content:"•";
+      position:absolute;
+      left:10px;
+      color: var(--accent-purple);
+      font-size:18px;
+    }
+    .inline-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.18);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.03));
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-purple-dark);
+      margin-top: 10px;
+    }
+    .dark-mode .inline-badge{
+      border-color: rgba(157,134,233,0.25);
+      background: linear-gradient(135deg, rgba(123,95,196,0.22), rgba(123,95,196,0.12));
+      color: var(--accent-purple);
+    }
+
+    /* ===========================
+       WORKSPACE
+    =========================== */
+    .workspace-wrap{
+      max-width:1100px;
+      margin: 0 auto;
+      padding: 0 20px 10px;
+    }
+
+    .workspace-header{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 18px 0 14px;
+    }
+    .workspace-title{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width: 0;
+    }
+    .workspace-title h2{
+      font-size: 26px;
+      font-weight: 750;
+      color: var(--accent-purple-dark);
+      line-height: 1.2;
+    }
+    .workspace-title p{
+      font-size: 14px;
+      color: var(--text-medium);
+      font-weight: 450;
+      max-width: 900px;
+    }
+
+    .workspace-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .workspace-actions.bottom{
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      justify-content: flex-end;
+    }
+    .dark-mode .workspace-actions.bottom{
+      border-top-color: rgba(255,255,255,0.10);
+    }
+
+    .btn{
+      border:none;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn.primary{
+      background: var(--premium-gradient);
+      color:#fff;
+      box-shadow: 0 12px 26px rgba(123,95,196,0.22);
+    }
+    .btn.primary:hover{ transform: translateY(-1px); box-shadow: 0 16px 30px rgba(123,95,196,0.28); }
+    .btn.secondary{
+      background: var(--light-purple);
+      color: var(--accent-purple-dark);
+    }
+    .dark-mode .btn.secondary{
+      background: rgba(123,95,196,0.22);
+      color: var(--accent-purple);
+    }
+    .btn.secondary:hover{
+      transform: translateY(-1px);
+      background: rgba(123,95,196,0.18);
+    }
+
+    /* ===========================
+       TIME BLOCKING LAYOUT
+    =========================== */
+    .planner-grid{
+      display:grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+      align-items:start;
+    }
+
+    .panel{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+      position: relative;
+      overflow:hidden;
+    }
+    .dark-mode .panel{ box-shadow: 0 14px 30px rgba(0,0,0,0.35); }
+    .panel::before{
+      content:'';
+      position:absolute;
+      left:0; right:0; top:0;
+      height: 3px;
+      background: var(--premium-gradient);
+      opacity: 0.95;
+    }
+
+    .panel-head{
+      display:flex;
+      justify-content: space-between;
+      align-items:flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .panel-title{
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .panel-title h3{
+      font-size: 14px;
+      font-weight: 850;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+    .panel-title p{
+      font-size: 12.5px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .mini-chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.20);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--accent-purple-dark);
+      white-space: nowrap;
+      user-select:none;
+    }
+    .mini-chip i{ opacity: 0.9; }
+    .mini-chip.green{
+      border-color: rgba(16,185,129,0.22);
+      background: linear-gradient(135deg, rgba(16,185,129,0.10), rgba(16,185,129,0.03));
+      color: #065f46;
+    }
+    .dark-mode .mini-chip.green{ color: #34d399; }
+
+    .field-row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .field{
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .field label{
+      font-size: 12px;
+      color: var(--text-medium);
+      font-weight: 750;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .field label i{ color: var(--accent-purple); opacity: 0.95; }
+
+    .input, .select, .textarea{
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      padding: 10px 12px;
+      color: var(--text-dark);
+      font-size: 13.5px;
+      line-height: 1.45;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 500;
+    }
+    .dark-mode .input, .dark-mode .select, .dark-mode .textarea{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.10);
+    }
+    .input:focus, .select:focus, .textarea:focus{
+      border-color: rgba(123,95,196,0.35);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.10);
+    }
+
+    .helper-row{
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: baseline;
+      margin-top: -2px;
+      margin-bottom: 8px;
+    }
+    .helper{
+      font-size: 12px;
+      color: var(--dark-gray);
+      font-weight: 650;
+    }
+    .count{
+      font-size: 12px;
+      color: var(--dark-gray);
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    /* Timeline */
+    .timeline{
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      overflow:hidden;
+      background: var(--primary-white);
+      box-shadow: 0 12px 26px rgba(0,0,0,0.04);
+    }
+    .dark-mode .timeline{
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.25);
+    }
+
+    .timeline-header{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 12px 12px 10px;
+      background: linear-gradient(135deg, rgba(123,95,196,0.10), rgba(123,95,196,0.04));
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .dark-mode .timeline-header{
+      border-bottom-color: rgba(255,255,255,0.08);
+      background: linear-gradient(135deg, rgba(123,95,196,0.22), rgba(123,95,196,0.10));
+    }
+
+    .timeline-header .left{
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .timeline-header .title{
+      font-size: 13px;
+      font-weight: 850;
+      color: var(--accent-purple-dark);
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .timeline-header .sub{
+      font-size: 12.5px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .timeline-rows{
+      max-height: 620px;
+      overflow:auto;
+    }
+
+    .time-row{
+      display:grid;
+      grid-template-columns: 88px 1fr;
+      gap: 10px;
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      align-items:start;
+    }
+    .dark-mode .time-row{
+      border-bottom-color: rgba(255,255,255,0.08);
+    }
+    .time-row:last-child{ border-bottom: none; }
+
+    .time-stamp{
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-dark);
+      letter-spacing: 0.2px;
+      padding-top: 6px;
+      white-space: nowrap;
+    }
+
+    .block{
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 14px;
+      background: var(--primary-white);
+      overflow:hidden;
+      position: relative;
+      min-height: 52px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .dark-mode .block{
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: 0 1px 6px rgba(0,0,0,0.22);
+    }
+
+    .block-bar{
+      height: 4px;
+      width: 100%;
+      background: rgba(123,95,196,0.25);
+    }
+    .block-body{
+      padding: 10px 12px 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .block-topline{
+      display:flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items:center;
+      min-width:0;
+    }
+    .block-title{
+      font-size: 13.5px;
+      font-weight: 850;
+      color: var(--text-dark);
+      line-height: 1.2;
+      min-width:0;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .block-meta{
+      display:flex;
+      gap: 8px;
+      align-items:center;
+      flex-shrink:0;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 850;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+      user-select:none;
+      white-space: nowrap;
+    }
+    .pill.clarity{ color: var(--category-clarity); background: var(--pill-clarity-bg); border-color: var(--pill-clarity-border); }
+    .pill.burnout{ color: var(--category-burnout); background: var(--pill-burnout-bg); border-color: var(--pill-burnout-border); }
+    .pill.manager{ color: var(--category-manager); background: var(--pill-manager-bg); border-color: var(--pill-manager-border); }
+    .pill.politics{ color: var(--category-politics); background: var(--pill-politics-bg); border-color: var(--pill-politics-border); }
+    .pill.hr{ color: var(--category-hr); background: var(--pill-hr-bg); border-color: var(--pill-hr-border); }
+    .pill.confidence{ color: var(--category-confidence); background: var(--pill-confidence-bg); border-color: var(--pill-confidence-border); }
+    .pill.career{ color: var(--category-career); background: var(--pill-career-bg); border-color: var(--pill-career-border); }
+
+    .pill.deep{
+      border-color: rgba(16,185,129,0.22);
+      background: linear-gradient(135deg, rgba(16,185,129,0.10), rgba(16,185,129,0.03));
+      color: #065f46;
+    }
+    .dark-mode .pill.deep{ color:#34d399; }
+
+    .pill.admin{
+      border-color: rgba(59,130,246,0.22);
+      background: linear-gradient(135deg, rgba(59,130,246,0.10), rgba(59,130,246,0.03));
+      color: #1d4ed8;
+    }
+    .dark-mode .pill.admin{ color:#60a5fa; }
+
+    .pill.buffer{
+      border-color: rgba(245,158,11,0.22);
+      background: linear-gradient(135deg, rgba(245,158,11,0.10), rgba(245,158,11,0.03));
+      color: #a16207;
+    }
+    .dark-mode .pill.buffer{ color:#fbbf24; }
+
+    .pill.meet{
+      border-color: rgba(239,68,68,0.22);
+      background: linear-gradient(135deg, rgba(239,68,68,0.10), rgba(239,68,68,0.03));
+      color: #991b1b;
+    }
+    .dark-mode .pill.meet{ color:#f87171; }
+
+    .pill.break{
+      border-color: rgba(123,95,196,0.18);
+      background: linear-gradient(135deg, rgba(123,95,196,0.07), rgba(123,95,196,0.02));
+      color: var(--accent-purple-dark);
+    }
+    .dark-mode .pill.break{ color: var(--accent-purple); }
+
+    .block-notes{
+      font-size: 12.8px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+
+    .block-actions{
+      display:flex;
+      gap: 8px;
+      justify-content:flex-end;
+      padding-top: 2px;
+    }
+    .icon-btn{
+      border:none;
+      background: transparent;
+      color: var(--dark-gray);
+      cursor:pointer;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    }
+    .icon-btn:hover{
+      background: var(--light-gray);
+      transform: translateY(-1px);
+      color: var(--text-dark);
+    }
+    .dark-mode .icon-btn:hover{ background: rgba(255,255,255,0.08); }
+
+    /* Insights box */
+    .insights{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .insight-card{
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 14px;
+      background: var(--primary-white);
+      padding: 12px;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.05);
+    }
+    .dark-mode .insight-card{
+      border-color: rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.28);
+    }
+    .insight-title{
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--accent-purple-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .insight-body{
+      font-size: 13px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    /* Generated Output */
+    .pack-section{
+      max-width:1100px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      display:none;
+    }
+    .pack-section.active{
+      display:block;
+      animation: slideIn 0.5s ease;
+    }
+    @keyframes slideIn{
+      from{ opacity:0; transform: translateY(20px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .pack-header{
+      text-align:center;
+      margin: 18px 0 22px;
+    }
+    .pack-title{
+      font-size: 24px;
+      font-weight: 850;
+      color: var(--accent-purple-dark);
+      margin-bottom: 6px;
+    }
+    .pack-subtitle{
+      color: var(--text-medium);
+      font-size: 14.5px;
+      font-weight: 450;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .pack-bar{
+      background: var(--primary-white);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 14px 40px rgba(123,95,196,0.12);
+      border: 1px solid rgba(123,95,196,0.15);
+      display:flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .pack-metrics{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      min-width: 0;
+    }
+    .metric-row{
+      display:flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .metric-title{
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent-purple-dark);
+      letter-spacing: 0.2px;
+    }
+    .metric-score{
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--accent-purple);
+      white-space: nowrap;
+    }
+    .mini-progress{
+      height: 10px;
+      background: var(--light-gray);
+      border-radius: 6px;
+      overflow:hidden;
+    }
+    .dark-mode .mini-progress{ background: rgba(255,255,255,0.12); }
+    .mini-fill{
+      height:100%;
+      width:0%;
+      border-radius: 6px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: var(--premium-gradient);
+    }
+    .mini-fill.high{ background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .mini-fill.medium{ background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .mini-fill.low{ background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+    .pack-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+      flex-shrink: 0;
+    }
+
+    .pack-output{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+      margin-bottom: 12px;
+    }
+    .dark-mode .pack-output{ box-shadow: 0 18px 34px rgba(0,0,0,0.32); }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12.8px;
+      color: var(--text-medium);
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR
+    =========================== */
+    .my-playbook-fab{
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1200;
+      background: var(--premium-gradient);
+      color:#fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      cursor:pointer;
+      font-size: 13px;
+      font-weight: 750;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+    .my-playbook-fab:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+    }
+
+    .playbook-sidebar-overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1190;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity 0.25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position: fixed;
+      top:0;
+      right: -380px;
+      width: 340px;
+      max-width: 90%;
+      height: 100%;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index: 1191;
+      display:flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border-light);
+      transition: right 0.25s ease;
+    }
+    .dark-mode .playbook-sidebar{
+      background: rgba(18,18,18,0.96);
+      box-shadow: -4px 0 22px rgba(0,0,0,0.6);
+    }
+    .playbook-sidebar.open{ right:0; }
+
+    .playbook-sidebar-header{
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .playbook-sidebar-header-title-row{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      margin-bottom: 4px;
+    }
+    .playbook-sidebar-header h3{
+      font-size:18px;
+      font-weight:700;
+      color: var(--text-dark);
+    }
+    .playbook-sidebar-header p{
+      font-size: 13px;
+      color: var(--dark-gray);
+    }
+    .playbook-close-btn{
+      background:none;
+      border:none;
+      color: var(--dark-gray);
+      cursor:pointer;
+      font-size: 18px;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.2s ease;
+    }
+    .playbook-close-btn:hover{ background: var(--light-gray); }
+
+    .playbook-sidebar-body{
+      padding: 14px 18px 20px;
+      padding-bottom: 50px;
+      overflow-y: auto;
+      flex:1;
+      display:flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .saved-items-empty{
+      font-size: 13px;
+      color: var(--dark-gray);
+      line-height: 1.6;
+    }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+
+    .saved-item{
+      padding: 10px 10px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom: 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .saved-item-title-row{
+      display:flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .saved-item-title{
+      font-size: 14px;
+      font-weight: 850;
+      color: var(--text-dark);
+    }
+    .saved-item-type{
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent-purple-dark);
+      font-weight: 600;
+    }
+    .saved-item-meta{
+      font-size: 12px;
+      color: var(--dark-gray);
+    }
+    .saved-item-link{
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--accent-purple);
+      text-decoration:none;
+      font-weight: 850;
+      display:inline-flex;
+      align-items:center;
+      gap: 4px;
+    }
+    .saved-item-link:hover{ text-decoration: underline; }
+
+    .playbook-quick-links{
+      margin-top: 185px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+    }
+    .quick-links-title{
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-medium);
+    }
+    .playbook-quick-links-list{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .quick-link-pill{
+      width: 56%;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.35);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      text-decoration:none;
+      color: var(--accent-purple-dark);
+      font-size: 13px;
+      font-weight: 600;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .quick-link-pill:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+    }
+    .dark-mode .quick-link-pill{
+      border-color: rgba(157,134,233,0.55);
+      background: linear-gradient(135deg, rgba(123,95,196,0.26), rgba(123,95,196,0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer{
+      background: var(--primary-white);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 30px;
+      text-align:center;
+      color: var(--text-medium);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px){
+      .context-tips-grid{ grid-template-columns: 1fr; gap: 24px; }
+      .planner-grid{ grid-template-columns: 1fr; }
+      .pack-bar{ flex-direction: column; align-items: stretch; }
+      .pack-actions{ justify-content: flex-start; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .timeline-rows{ max-height: none; }
+    }
+    @media (max-width: 768px){
+      .tool-hero-section{ margin-top: 100px; }
+      .hero-main-heading{ font-size: 36px; }
+      .save-btn{ right: 18px; top: 10px; }
+      .my-playbook-fab{ bottom: 18px; right: 18px; }
+      .field-row{ grid-template-columns: 1fr; }
+      .time-row{ grid-template-columns: 80px 1fr; }
+    }
+    @media (max-width: 480px){
+      .hero-main-heading{ font-size: 32px; }
+      .checklist-name{ font-size: 13px; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .pack-actions{ justify-content: flex-start; }
+      .time-stamp{ font-size: 11px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===========================
+     NAVIGATION
+=========================== -->
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo" aria-label="The Employee Playbook">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      <div class="logo-fallback" id="logoFallback">The Employee Playbook</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<div class="tool-hero-section">
+  <button class="save-btn" id="saveBtn">
+    <i class="far fa-bookmark"></i>
+    <span>Save</span>
+  </button>
+
+  <div class="tool-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-house"></i> Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="the-toolkit.html">The Toolkit</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="category-clarity-priorities-and-direction.html">Clarity, Priorities &amp; Direction</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Time Blocking Template</span>
+    </div>
+
+    <span class="checklist-name">TIME BLOCKING TEMPLATE</span>
+
+    <h1 class="hero-main-heading">
+      Build a day that protects your priorities and makes “urgent” compete for space
+    </h1>
+
+    <div class="hero-subheading">
+      Time blocking turns your calendar into a strategy tool. You decide <strong>what wins</strong>, <strong>when you do deep work</strong>,
+      and where you’ll place <strong>admin, meetings, and buffers</strong> so your day doesn’t get hijacked.
+      <br><br>
+      Plan your blocks, then generate a clean daily plan and a boundary script you can use to defend it.
+    </div>
+
+    <div class="related-row" aria-label="Related categories">
+      <span class="related-label">Related categories</span>
+
+      <div class="related-pills">
+
+        <a class="category-pill burnout" href="category-expectation-burnout-and-capacity.html" title="Burnout & Capacity">
+          <i class="fas fa-battery-half"></i>
+          <span>Expectation, Burnout &amp; Capacity</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     CONTEXT & PRO TIPS
+=========================== -->
+<div class="context-tips-grid">
+  <div class="context-card">
+    <h3 class="section-title"><i class="fas fa-compass"></i>When to Use This</h3>
+    <ul class="bullet-list">
+      <li>When your day gets eaten by other people’s urgency.</li>
+      <li>When you need protected focus blocks for high-value work.</li>
+      <li>When meetings are multiplying and deep work is disappearing.</li>
+      <li>When you’re doing “reactive work” all day and pushing priorities to evenings.</li>
+      <li>When you want a calmer day without losing output.</li>
+    </ul>
+    <div class="inline-badge"><i class="fas fa-lock"></i> If it isn’t on the calendar, it gets sacrificed first.</div>
+  </div>
+
+  <div class="tips-card">
+    <h3 class="section-title"><i class="fas fa-bolt"></i>How to Use It (fast)</h3>
+    <ul class="bullet-list">
+      <li>Pick <strong>1–3 real priorities</strong>. Everything else is “fit it in”.</li>
+      <li>Place <strong>deep work</strong> blocks first. Guard them like meetings.</li>
+      <li>Add <strong>buffers</strong> (15–30 mins) after meetings and before deadlines.</li>
+      <li>Batch admin into one block so it doesn’t leak into focus time.</li>
+      <li>Use the generated boundary script to push back politely.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===========================
+     WORKSPACE
+=========================== -->
+<div class="workspace-wrap" id="workspace">
+  <div class="workspace-header">
+    <div class="workspace-title">
+      <h2>Plan your day (time blocks)</h2>
+      <p>
+        Build a realistic schedule with protected focus time, buffers, and a clean shutdown. You can add blocks, drag them up/down,
+        and generate a daily plan you can paste into your calendar notes.
+      </p>
+    </div>
+  </div>
+
+  <div class="planner-grid">
+    <!-- LEFT: BLOCK BUILDER -->
+    <div class="panel" aria-label="Block builder">
+      <div class="panel-head">
+        <div class="panel-title">
+          <h3>Block builder</h3>
+          <p>Create a block, then add it to your day. Keep blocks clean and outcome-led.</p>
+        </div>
+        <span class="mini-chip" id="dayScoreChip"><i class="fas fa-gauge"></i> Day quality: —</span>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="planDate"><i class="fas fa-calendar"></i> Date</label>
+          <input class="input" id="planDate" type="date" />
+        </div>
+        <div class="field">
+          <label for="timeWindow"><i class="fas fa-clock"></i> Day window</label>
+          <select class="select" id="timeWindow">
+            <option value="standard">Standard (08:00–18:00)</option>
+            <option value="early">Early (07:00–17:00)</option>
+            <option value="late">Late (09:00–19:00)</option>
+            <option value="custom">Custom</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row" id="customWindowRow" style="display:none;">
+        <div class="field">
+          <label for="dayStart"><i class="fas fa-hourglass-start"></i> Start</label>
+          <input class="input" id="dayStart" type="time" value="08:00" />
+        </div>
+        <div class="field">
+          <label for="dayEnd"><i class="fas fa-hourglass-end"></i> End</label>
+          <input class="input" id="dayEnd" type="time" value="18:00" />
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="blockType"><i class="fas fa-layer-group"></i> Block type</label>
+          <select class="select" id="blockType">
+            <option value="deep">Deep work</option>
+            <option value="meet">Meeting</option>
+            <option value="admin">Admin / comms</option>
+            <option value="buffer">Buffer</option>
+            <option value="break">Break / reset</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="categoryTag"><i class="fas fa-tags"></i> Category tag</label>
+          <select class="select" id="categoryTag">
+            <option value="clarity">Clarity</option>
+            <option value="burnout">Burnout</option>
+            <option value="manager">Manager</option>
+            <option value="politics">Politics</option>
+            <option value="hr">HR</option>
+            <option value="confidence">Confidence</option>
+            <option value="career">Career</option>
+            <option value="none">None</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="blockStart"><i class="fas fa-play"></i> Start time</label>
+          <input class="input" id="blockStart" type="time" value="09:00" />
+        </div>
+        <div class="field">
+          <label for="blockDuration"><i class="fas fa-stopwatch"></i> Duration</label>
+          <select class="select" id="blockDuration">
+            <option value="15">15 mins</option>
+            <option value="30">30 mins</option>
+            <option value="45">45 mins</option>
+            <option value="60" selected>60 mins</option>
+            <option value="90">90 mins</option>
+            <option value="120">2 hours</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="blockTitle"><i class="fas fa-pen"></i> Block title (outcome-led)</label>
+        <input class="input" id="blockTitle" type="text" placeholder="e.g., Finish draft — send for review">
+        <div class="helper-row">
+          <span class="helper">Tip: a verb + deliverable beats “work on X”.</span>
+          <span class="count" id="count_blockTitle">0 chars</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="blockNotes"><i class="fas fa-note-sticky"></i> Notes (optional)</label>
+        <textarea class="textarea" id="blockNotes" placeholder="Constraints, prep items, definition of done, dependencies..."></textarea>
+        <div class="helper-row">
+          <span class="helper">Keep notes short. Your calendar should stay readable.</span>
+          <span class="count" id="count_blockNotes">0 chars</span>
+        </div>
+      </div>
+
+      <div class="workspace-actions" style="justify-content:flex-start; margin-top: 10px;">
+        <button class="btn secondary" id="addBlockBtn"><i class="fas fa-plus"></i> Add block</button>
+        <button class="btn secondary" id="autoBuildBtn"><i class="fas fa-wand-magic-sparkles"></i> Auto-build day</button>
+        <button class="btn secondary" id="clearDayBtn"><i class="fas fa-eraser"></i> Clear day</button>
+      </div>
+
+      <div class="insights" aria-label="Insights">
+        <div class="insight-card">
+          <div class="insight-title"><i class="fas fa-eye"></i> Reality check</div>
+          <div class="insight-body" id="realityCheck">
+            Add blocks to see time pressure, focus protection, and buffer coverage.
+          </div>
+        </div>
+        <div class="insight-card">
+          <div class="insight-title"><i class="fas fa-shield-halved"></i> Boundary script</div>
+          <div class="insight-body" id="boundaryScript">
+            Generate your plan to get a ready-to-send boundary line.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: DAY TIMELINE -->
+    <div class="panel" aria-label="Day timeline">
+      <div class="panel-head">
+        <div class="panel-title">
+          <h3>Day timeline</h3>
+          <p>Your schedule view. Add blocks, then reorder or delete them.</p>
+        </div>
+        <span class="mini-chip green" id="savedChip" style="display:none;"><i class="fas fa-check"></i> Saved</span>
+      </div>
+
+      <div class="timeline" aria-label="Timeline">
+        <div class="timeline-header">
+          <div class="left">
+            <div class="title"><i class="fas fa-list"></i> Blocks for the day</div>
+            <div class="sub" id="timelineSub">No blocks yet.</div>
+          </div>
+          <div class="mini-chip" id="hoursChip"><i class="fas fa-hourglass"></i> 0h planned</div>
+        </div>
+
+        <div class="timeline-rows" id="timelineRows">
+          <!-- rows injected -->
+        </div>
+      </div>
+
+      <div class="workspace-actions bottom" aria-label="Draft actions">
+        <button class="btn secondary" id="copyPlanBtn"><i class="far fa-copy"></i> Copy plan</button>
+        <button class="btn secondary" id="downloadPlanBtn"><i class="fas fa-download"></i> Download .txt</button>
+        <button class="btn primary" id="generateBtn" disabled><i class="fas fa-file-lines"></i> Generate daily plan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     GENERATED PLAN
+=========================== -->
+<div class="pack-section" id="packSection">
+  <div class="pack-header">
+    <h2 class="pack-title">Your daily plan</h2>
+    <p class="pack-subtitle">
+      A clean output you can paste into your calendar notes or send to your manager as your planned focus blocks and boundaries.
+      Includes a short boundary script to defend protected time.
+    </p>
+  </div>
+
+  <div class="pack-bar">
+    <div class="pack-metrics">
+      <div class="metric-row">
+        <div class="metric-title">Plan quality</div>
+        <div class="metric-score" id="planQuality">—</div>
+      </div>
+      <div class="mini-progress"><div class="mini-fill" id="miniFill"></div></div>
+      <div class="metric-row" style="margin-top:2px;">
+        <div class="metric-title">Focus protection</div>
+        <div class="metric-score" id="focusSignal">—</div>
+      </div>
+    </div>
+
+    <div class="pack-actions">
+      <button class="btn primary" id="copyPackBtn"><i class="far fa-copy"></i> Copy</button>
+      <button class="btn secondary" id="downloadPackBtn"><i class="fas fa-download"></i> Download .txt</button>
+      <button class="btn secondary" id="printPackBtn"><i class="fas fa-print"></i> Print</button>
+    </div>
+  </div>
+
+  <div class="pack-output">
+    <div class="mono" id="planOutput"></div>
+  </div>
+</div>
+
+<!-- ===========================
+     MY PLAYBOOK SIDEBAR (Right)
+=========================== -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven’t saved anything yet. Use <strong>Save</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <div class="playbook-quick-links-header">
+          <span class="quick-links-title">Quick links</span>
+        </div>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill">
+            <i class="fas fa-gauge"></i> The Dashboard
+          </a>
+          <a href="the-lens.html" class="quick-link-pill">
+            <i class="fas fa-search"></i> The Lens
+          </a>
+          <a href="the-toolkit.html" class="quick-link-pill">
+            <i class="fas fa-toolbox"></i> The Toolkit
+          </a>
+          <a href="the-coach.html" class="quick-link-pill">
+            <i class="fas fa-comments"></i> The Coach
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ===========================
+   BOOT
+=========================== */
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('loaded');
+
+  initializeThemeToggle();
+  initializeMobileNav();
+  initializePlaybook();
+
+  initializePlanner();
+});
+
+/* ===========================
+   MOBILE NAV
+=========================== */
+function initializeMobileNav() {
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (!mobileToggle || !navLinks) return;
+
+  mobileToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('active');
+    const icon = this.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    }
+  });
+
+  document.addEventListener('click', function(event) {
+    if (navLinks.classList.contains('active') &&
+        !navLinks.contains(event.target) &&
+        !mobileToggle.contains(event.target)) {
+      navLinks.classList.remove('active');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) {
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+      }
+    }
+  });
+}
+
+/* ===========================
+   THEME TOGGLE + LOGO
+=========================== */
+function initializeThemeToggle() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (!themeToggleBtn) return;
+
+  const themeIcon = themeToggleBtn.querySelector('i');
+  const logoImg = document.getElementById('mainLogo');
+  const logoFallback = document.getElementById('logoFallback');
+
+  function getLogoPath(filename) {
+    if (window.location.protocol === 'file:') {
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+      return basePath + 'assets/img/' + filename;
+    } else {
+      return './assets/img/' + filename;
+    }
+  }
+
+  function showFallbackLogo() {
+    if (logoImg) logoImg.style.display = 'none';
+    if (logoFallback) logoFallback.style.display = 'inline-flex';
+  }
+
+  function showImageLogo() {
+    if (logoFallback) logoFallback.style.display = 'none';
+    if (logoImg) logoImg.style.display = 'block';
+  }
+
+  function updateLogoForTheme(isDarkMode) {
+    if (!logoImg) return;
+    showImageLogo();
+    logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+    logoImg.alt = 'The Employee Playbook';
+  }
+
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const savedTheme = localStorage.getItem('theme');
+  const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches);
+
+  if (shouldUseDark) {
+    document.body.classList.add('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+    updateLogoForTheme(true);
+  } else {
+    document.body.classList.remove('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+    updateLogoForTheme(false);
+  }
+
+  themeToggleBtn.addEventListener('click', function() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+
+    if (isDarkMode) {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+      updateLogoForTheme(false);
+    } else {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+      updateLogoForTheme(true);
+    }
+  });
+
+  prefersDarkScheme.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      if (e.matches) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      }
+    }
+  });
+
+  if (logoImg) {
+    logoImg.addEventListener('error', function() {
+      if (this.src.includes('logo-dark.png')) {
+        this.src = getLogoPath('logo.png');
+      } else {
+        showFallbackLogo();
+      }
+    });
+  }
+}
+
+/* ===========================
+   TIME BLOCKING PLANNER
+=========================== */
+const TB_KEY = 'tepTimeBlockingTemplate_v1';
+
+const CATEGORY_LABELS = {
+  clarity: 'Clarity',
+  burnout: 'Burnout',
+  manager: 'Manager',
+  politics: 'Politics',
+  hr: 'HR',
+  confidence: 'Confidence',
+  career: 'Career',
+  none: 'None'
+};
+
+const TYPE_LABELS = {
+  deep: 'Deep work',
+  meet: 'Meeting',
+  admin: 'Admin',
+  buffer: 'Buffer',
+  break: 'Break'
+};
+
+function initializePlanner(){
+  // Defaults
+  const today = new Date();
+  const planDate = document.getElementById('planDate');
+  if (planDate && !planDate.value) planDate.value = toISODate(today);
+
+  // window selector
+  const timeWindow = document.getElementById('timeWindow');
+  const customRow = document.getElementById('customWindowRow');
+  if (timeWindow && customRow){
+    timeWindow.addEventListener('change', () => {
+      const isCustom = timeWindow.value === 'custom';
+      customRow.style.display = isCustom ? 'grid' : 'none';
+      savePlannerState();
+      renderTimeline();
+    });
+  }
+
+  // counters
+  const blockTitle = document.getElementById('blockTitle');
+  const blockNotes = document.getElementById('blockNotes');
+  if (blockTitle){
+    blockTitle.addEventListener('input', () => {
+      updateCount('blockTitle');
+      savePlannerState();
+    });
+  }
+  if (blockNotes){
+    blockNotes.addEventListener('input', () => {
+      updateCount('blockNotes');
+      savePlannerState();
+    });
+  }
+
+  // buttons
+  const addBtn = document.getElementById('addBlockBtn');
+  const autoBtn = document.getElementById('autoBuildBtn');
+  const clearBtn = document.getElementById('clearDayBtn');
+  const genBtn = document.getElementById('generateBtn');
+  const copyPlanBtn = document.getElementById('copyPlanBtn');
+  const downloadPlanBtn = document.getElementById('downloadPlanBtn');
+
+  if (addBtn) addBtn.addEventListener('click', addBlockFromBuilder);
+  if (autoBtn) autoBtn.addEventListener('click', autoBuildDay);
+  if (clearBtn) clearBtn.addEventListener('click', clearDay);
+
+  if (genBtn) genBtn.addEventListener('click', generatePlan);
+  if (copyPlanBtn) copyPlanBtn.addEventListener('click', () => {
+    const txt = buildPlanText();
+    copyText(txt, copyPlanBtn, 'Plan copied');
+  });
+  if (downloadPlanBtn) downloadPlanBtn.addEventListener('click', () => {
+    const txt = buildPlanText();
+    downloadText(txt, 'time-blocking-plan.txt');
+  });
+
+  // pack buttons
+  const copyPackBtn = document.getElementById('copyPackBtn');
+  const downloadPackBtn = document.getElementById('downloadPackBtn');
+  const printPackBtn = document.getElementById('printPackBtn');
+
+  if (copyPackBtn) copyPackBtn.addEventListener('click', () => {
+    const txt = buildPlanText(true);
+    copyText(txt, copyPackBtn, 'Copied');
+  });
+  if (downloadPackBtn) downloadPackBtn.addEventListener('click', () => {
+    const txt = buildPlanText(true);
+    downloadText(txt, 'time-blocking-plan.txt');
+  });
+  if (printPackBtn) printPackBtn.addEventListener('click', () => window.print());
+
+  // Load state + render
+  loadPlannerState();
+  updateCount('blockTitle');
+  updateCount('blockNotes');
+  renderTimeline();
+}
+
+function getPlannerState(){
+  try{
+    const raw = localStorage.getItem(TB_KEY);
+    if (!raw) return { blocks: [], settings: {} };
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return { blocks: [], settings: {} };
+    parsed.blocks = Array.isArray(parsed.blocks) ? parsed.blocks : [];
+    parsed.settings = parsed.settings && typeof parsed.settings === 'object' ? parsed.settings : {};
+    return parsed;
+  }catch(e){
+    return { blocks: [], settings: {} };
+  }
+}
+
+function setPlannerState(state){
+  try{ localStorage.setItem(TB_KEY, JSON.stringify(state)); }
+  catch(e){ console.warn('Save failed', e); }
+}
+
+function savePlannerState(){
+  const state = getPlannerState();
+  state.settings = collectBuilderSettings();
+  setPlannerState(state);
+  showSavedTick();
+}
+
+function loadPlannerState(){
+  const state = getPlannerState();
+
+  // apply builder settings
+  const s = state.settings || {};
+
+  setValue('planDate', s.planDate || document.getElementById('planDate')?.value || '');
+  setValue('timeWindow', s.timeWindow || 'standard');
+  setValue('dayStart', s.dayStart || '08:00');
+  setValue('dayEnd', s.dayEnd || '18:00');
+
+  const timeWindow = document.getElementById('timeWindow');
+  const customRow = document.getElementById('customWindowRow');
+  if (timeWindow && customRow){
+    customRow.style.display = timeWindow.value === 'custom' ? 'grid' : 'none';
+  }
+
+  setValue('blockType', s.blockType || 'deep');
+  setValue('categoryTag', s.categoryTag || 'clarity');
+  setValue('blockStart', s.blockStart || '09:00');
+  setValue('blockDuration', s.blockDuration || '60');
+  setValue('blockTitle', s.blockTitle || '');
+  setValue('blockNotes', s.blockNotes || '');
+}
+
+function collectBuilderSettings(){
+  return {
+    planDate: getValue('planDate'),
+    timeWindow: getValue('timeWindow'),
+    dayStart: getValue('dayStart'),
+    dayEnd: getValue('dayEnd'),
+    blockType: getValue('blockType'),
+    categoryTag: getValue('categoryTag'),
+    blockStart: getValue('blockStart'),
+    blockDuration: getValue('blockDuration'),
+    blockTitle: getValue('blockTitle'),
+    blockNotes: getValue('blockNotes')
+  };
+}
+
+function addBlockFromBuilder(){
+  const title = (getValue('blockTitle') || '').trim();
+  const notes = (getValue('blockNotes') || '').trim();
+  const type = getValue('blockType') || 'deep';
+  const category = getValue('categoryTag') || 'clarity';
+
+  const start = getValue('blockStart') || '09:00';
+  const durationMins = Number(getValue('blockDuration') || 60);
+  const end = addMinutesToTime(start, durationMins);
+
+  if (!title){
+    alert('Add a block title (outcome-led).');
+    return;
+  }
+
+  const state = getPlannerState();
+  state.blocks.push({
+    id: cryptoSafeId(),
+    title,
+    notes,
+    type,
+    category,
+    start,
+    end,
+    durationMins
+  });
+
+  // sort by start time
+  state.blocks.sort((a,b) => timeToMinutes(a.start) - timeToMinutes(b.start));
+  state.settings = collectBuilderSettings();
+  setPlannerState(state);
+
+  // small UX: keep title, clear notes optionally
+  setValue('blockTitle', '');
+  setValue('blockNotes', '');
+
+  updateCount('blockTitle');
+  updateCount('blockNotes');
+
+  renderTimeline();
+  showSavedTick();
+}
+
+function autoBuildDay(){
+  const state = getPlannerState();
+
+  const existing = state.blocks || [];
+  const ok = existing.length ? confirm('Auto-build will replace your current blocks. Continue?') : true;
+  if (!ok) return;
+
+  const windowInfo = getDayWindow();
+  const startM = timeToMinutes(windowInfo.start);
+  const endM = timeToMinutes(windowInfo.end);
+  if (endM <= startM + 60){
+    alert('Your day window is too small. Increase start/end times.');
+    return;
+  }
+
+  // Simple, high-signal default:
+  // - Morning focus 90
+  // - Buffer 15
+  // - Admin 30
+  // - Meeting block 60
+  // - Lunch 30
+  // - Deep work 90
+  // - Buffer 15
+  // - Admin 30
+  // - Shutdown 15
+  const blocks = [];
+  let cursor = startM + 60; // leave first hour for ramp-up / inbox / stand-up
+
+  blocks.push(makeBlock(cursor - 60, 30, 'Admin triage (inbox + plan)', 'admin', 'clarity', 'Decide what wins today. Delete/decline quickly.'));
+  blocks.push(makeBlock(cursor - 30, 30, 'Quick alignment (top 3 outcomes)', 'meet', 'manager', 'Confirm priorities + trade-offs if needed.'));
+
+  blocks.push(makeBlock(cursor, 90, 'Deep work (priority #1)', 'deep', 'clarity', 'Phone away. Single task. Definition of done.'));
+  cursor += 90;
+
+  blocks.push(makeBlock(cursor, 15, 'Buffer (reset + transition)', 'buffer', 'burnout', 'Stand, water, short reset. Protect focus rhythm.'));
+  cursor += 15;
+
+  blocks.push(makeBlock(cursor, 30, 'Admin batch (comms + small tasks)', 'admin', 'clarity', 'Batch replies; avoid context switching all day.'));
+  cursor += 30;
+
+  blocks.push(makeBlock(cursor, 60, 'Meeting block (clustered)', 'meet', 'politics', 'If you must meet, cluster meetings together.'));
+  cursor += 60;
+
+  blocks.push(makeBlock(cursor, 30, 'Break (lunch / walk)', 'break', 'burnout', 'Recovery is part of output.'));
+  cursor += 30;
+
+  blocks.push(makeBlock(cursor, 90, 'Deep work (priority #2)', 'deep', 'clarity', 'Second protected focus block.'));
+  cursor += 90;
+
+  blocks.push(makeBlock(cursor, 15, 'Buffer (capture notes + next steps)', 'buffer', 'clarity', 'Turn work into decisions and next actions.'));
+  cursor += 15;
+
+  blocks.push(makeBlock(cursor, 30, 'Admin (follow-ups + scheduling)', 'admin', 'hr', 'Send follow-ups. Lock decisions in writing.'));
+  cursor += 30;
+
+  blocks.push(makeBlock(Math.min(cursor, endM - 15), 15, 'Shutdown (tomorrow setup)', 'break', 'burnout', 'Write tomorrow’s first block + close loops.'));
+
+  // filter blocks to within day window
+  const clipped = blocks
+    .map(b => clipBlockToWindow(b, startM, endM))
+    .filter(Boolean);
+
+  state.blocks = clipped;
+  state.settings = collectBuilderSettings();
+  setPlannerState(state);
+
+  renderTimeline();
+  showSavedTick();
+}
+
+function makeBlock(startMins, duration, title, type, category, notes){
+  const start = minutesToTime(startMins);
+  const end = minutesToTime(startMins + duration);
+  return {
+    id: cryptoSafeId(),
+    title,
+    notes: notes || '',
+    type,
+    category,
+    start,
+    end,
+    durationMins: duration
+  };
+}
+
+function clipBlockToWindow(block, windowStartM, windowEndM){
+  const s = timeToMinutes(block.start);
+  const e = timeToMinutes(block.end);
+  const ns = Math.max(s, windowStartM);
+  const ne = Math.min(e, windowEndM);
+  if (ne <= ns) return null;
+
+  return {
+    ...block,
+    start: minutesToTime(ns),
+    end: minutesToTime(ne),
+    durationMins: ne - ns
+  };
+}
+
+function clearDay(){
+  const ok = confirm('Clear all blocks for this day? This cannot be undone.');
+  if (!ok) return;
+
+  const state = getPlannerState();
+  state.blocks = [];
+  state.settings = collectBuilderSettings();
+  setPlannerState(state);
+
+  renderTimeline();
+
+  const pack = document.getElementById('packSection');
+  if (pack) pack.classList.remove('active');
+}
+
+function renderTimeline(){
+  const state = getPlannerState();
+  const rows = document.getElementById('timelineRows');
+  const sub = document.getElementById('timelineSub');
+  const hoursChip = document.getElementById('hoursChip');
+  const generateBtn = document.getElementById('generateBtn');
+
+  if (!rows || !sub || !hoursChip || !generateBtn) return;
+
+  const blocks = Array.isArray(state.blocks) ? state.blocks : [];
+  rows.innerHTML = '';
+
+  if (!blocks.length){
+    sub.textContent = 'No blocks yet.';
+    hoursChip.innerHTML = `<i class="fas fa-hourglass"></i> 0h planned`;
+    generateBtn.disabled = true;
+
+    updateInsights();
+    updateDayScoreChip();
+    return;
+  }
+
+  // render each
+  blocks.forEach((b, idx) => {
+    const row = document.createElement('div');
+    row.className = 'time-row';
+
+    const stamp = document.createElement('div');
+    stamp.className = 'time-stamp';
+    stamp.textContent = `${b.start}–${b.end}`;
+
+    const block = document.createElement('div');
+    block.className = 'block';
+
+    const catPill = b.category && b.category !== 'none'
+      ? `<span class="pill ${escapeHtml(b.category)}"><i class="fas fa-tag"></i> ${escapeHtml(CATEGORY_LABELS[b.category] || 'Tag')}</span>`
+      : '';
+
+    const typePill = `<span class="pill ${typePillClass(b.type)}"><i class="fas fa-layer-group"></i> ${escapeHtml(TYPE_LABELS[b.type] || 'Block')}</span>`;
+
+    block.innerHTML = `
+      <div class="block-bar" style="background:${barColourForType(b.type)}"></div>
+      <div class="block-body">
+        <div class="block-topline">
+          <div class="block-title" title="${escapeHtml(b.title)}">${escapeHtml(b.title)}</div>
+          <div class="block-meta">
+            ${typePill}
+            ${catPill}
+          </div>
+        </div>
+        ${b.notes ? `<div class="block-notes">${escapeHtml(b.notes)}</div>` : ``}
+        <div class="block-actions" aria-label="Block actions">
+          <button class="icon-btn" title="Move up" aria-label="Move up" data-action="up" data-id="${escapeHtml(b.id)}"><i class="fas fa-arrow-up"></i></button>
+          <button class="icon-btn" title="Move down" aria-label="Move down" data-action="down" data-id="${escapeHtml(b.id)}"><i class="fas fa-arrow-down"></i></button>
+          <button class="icon-btn" title="Edit" aria-label="Edit" data-action="edit" data-id="${escapeHtml(b.id)}"><i class="fas fa-pen-to-square"></i></button>
+          <button class="icon-btn" title="Delete" aria-label="Delete" data-action="delete" data-id="${escapeHtml(b.id)}"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    `;
+
+    row.appendChild(stamp);
+    row.appendChild(block);
+    rows.appendChild(row);
+
+    // actions
+    row.querySelectorAll('.icon-btn').forEach(btn => {
+      btn.addEventListener('click', () => handleBlockAction(btn.dataset.action, btn.dataset.id));
+    });
+  });
+
+  // totals + guardrails
+  const minsPlanned = blocks.reduce((sum, b) => sum + Number(b.durationMins || 0), 0);
+  const hours = minsPlanned / 60;
+  const display = hours >= 1 ? `${hours.toFixed(1)}h` : `${minsPlanned}m`;
+  hoursChip.innerHTML = `<i class="fas fa-hourglass"></i> ${display} planned`;
+
+  sub.textContent = buildTimelineSubtitle(blocks);
+
+  generateBtn.disabled = blocks.length < 2;
+
+  updateInsights();
+  updateDayScoreChip();
+  savePlannerState(); // keeps settings fresh
+}
+
+function buildTimelineSubtitle(blocks){
+  const deepM = blocks.filter(b => b.type === 'deep').reduce((s,b) => s + b.durationMins, 0);
+  const meetM = blocks.filter(b => b.type === 'meet').reduce((s,b) => s + b.durationMins, 0);
+  const bufM  = blocks.filter(b => b.type === 'buffer').reduce((s,b) => s + b.durationMins, 0);
+
+  const deep = deepM ? `Deep work: ${(deepM/60).toFixed(1)}h` : 'Deep work: 0h';
+  const meet = meetM ? `Meetings: ${(meetM/60).toFixed(1)}h` : 'Meetings: 0h';
+  const buf  = bufM ? `Buffers: ${bufM}m` : 'Buffers: 0m';
+
+  return `${deep} • ${meet} • ${buf}`;
+}
+
+function handleBlockAction(action, id){
+  const state = getPlannerState();
+  const blocks = state.blocks || [];
+  const idx = blocks.findIndex(b => b.id === id);
+  if (idx === -1) return;
+
+  if (action === 'up' && idx > 0){
+    [blocks[idx-1], blocks[idx]] = [blocks[idx], blocks[idx-1]];
+  }
+  if (action === 'down' && idx < blocks.length - 1){
+    [blocks[idx+1], blocks[idx]] = [blocks[idx], blocks[idx+1]];
+  }
+  if (action === 'delete'){
+    const ok = confirm('Delete this block?');
+    if (!ok) return;
+    blocks.splice(idx, 1);
+  }
+  if (action === 'edit'){
+    editBlock(blocks[idx]);
+  }
+
+  state.blocks = blocks;
+  setPlannerState(state);
+  renderTimeline();
+  showSavedTick();
+}
+
+function editBlock(block){
+  const title = prompt('Edit block title:', block.title || '');
+  if (title === null) return;
+
+  const notes = prompt('Edit notes (optional):', block.notes || '');
+  if (notes === null) return;
+
+  const start = prompt('Edit start time (HH:MM):', block.start || '09:00');
+  if (start === null) return;
+
+  const duration = prompt('Edit duration in minutes:', String(block.durationMins || 60));
+  if (duration === null) return;
+
+  const dur = Math.max(5, Math.min(360, Number(duration) || 60));
+  const end = addMinutesToTime(start, dur);
+
+  const state = getPlannerState();
+  const idx = state.blocks.findIndex(b => b.id === block.id);
+  if (idx === -1) return;
+
+  state.blocks[idx] = {
+    ...state.blocks[idx],
+    title: (title || '').trim() || state.blocks[idx].title,
+    notes: (notes || '').trim(),
+    start: normalizeTime(start || state.blocks[idx].start),
+    end: normalizeTime(end),
+    durationMins: dur
+  };
+
+  // sort
+  state.blocks.sort((a,b) => timeToMinutes(a.start) - timeToMinutes(b.start));
+  setPlannerState(state);
+}
+
+function updateInsights(){
+  const state = getPlannerState();
+  const blocks = state.blocks || [];
+
+  const rc = document.getElementById('realityCheck');
+  const bs = document.getElementById('boundaryScript');
+
+  if (!rc || !bs) return;
+
+  const w = getDayWindow();
+  const windowMins = Math.max(0, timeToMinutes(w.end) - timeToMinutes(w.start));
+
+  const planned = blocks.reduce((s,b) => s + (Number(b.durationMins)||0), 0);
+
+  const deep = blocks.filter(b => b.type === 'deep').reduce((s,b) => s + b.durationMins, 0);
+  const meet = blocks.filter(b => b.type === 'meet').reduce((s,b) => s + b.durationMins, 0);
+  const admin = blocks.filter(b => b.type === 'admin').reduce((s,b) => s + b.durationMins, 0);
+  const buffer = blocks.filter(b => b.type === 'buffer').reduce((s,b) => s + b.durationMins, 0);
+  const breaks = blocks.filter(b => b.type === 'break').reduce((s,b) => s + b.durationMins, 0);
+
+  const utilisation = windowMins ? Math.round((planned / windowMins) * 100) : 0;
+
+  const overlap = findOverlaps(blocks);
+  const gaps = computeGaps(blocks, w);
+
+  const deepSignal = deep >= 90 ? 'Protected' : (deep >= 45 ? 'Thin' : 'Missing');
+  const bufferSignal = buffer >= 30 ? 'Covered' : (buffer >= 15 ? 'Light' : 'None');
+
+  const riskLines = [];
+  if (utilisation > 90) riskLines.push('• Your day is over-packed (>90% filled). Expect spillover.');
+  if (meet > (windowMins * 0.45)) riskLines.push('• Meetings are consuming the day. Cluster or decline low-value invites.');
+  if (deep < 60) riskLines.push('• Deep work is too small. Priorities will leak into evenings.');
+  if (buffer < 15) riskLines.push('• No buffers. Any delay will cascade.');
+  if (overlap.count) riskLines.push(`• You have ${overlap.count} overlap(s). Fix start/end times.`);
+  if (gaps.total >= 60) riskLines.push('• You have large gaps. That’s fine — but decide what they’re for (buffer vs admin).');
+
+  const rcText = [];
+  rcText.push(`Day window: ${w.start}–${w.end} (${Math.round(windowMins/60*10)/10}h)`);
+  rcText.push(`Planned: ${Math.round(planned/60*10)/10}h (${utilisation}% utilisation)`);
+  rcText.push(`Deep work: ${Math.round(deep/60*10)/10}h (${deepSignal})`);
+  rcText.push(`Meetings: ${Math.round(meet/60*10)/10}h • Admin: ${Math.round(admin/60*10)/10}h • Buffers: ${buffer}m (${bufferSignal}) • Breaks: ${breaks}m`);
+  if (riskLines.length){
+    rcText.push('');
+    rcText.push('Watch-outs:');
+    rcText.push(riskLines.join('\n'));
+  } else {
+    rcText.push('');
+    rcText.push('Looks balanced. Your calendar is working for you, not against you.');
+  }
+
+  rc.textContent = rcText.join('\n');
+
+  const script = buildBoundaryScript(blocks, w, deepSignal, bufferSignal);
+  bs.textContent = script;
+}
+
+function buildBoundaryScript(blocks, w, deepSignal, bufferSignal){
+  const topDeep = blocks.filter(b => b.type === 'deep').slice(0, 2);
+  const deepLine = topDeep.length
+    ? `I’ve blocked ${topDeep.map(b => `${b.start}–${b.end}`).join(' and ')} for priority delivery (protected focus).`
+    : `I’m adding a protected focus block today to protect delivery.`;
+
+  const bufferLine = bufferSignal === 'None'
+    ? `I’ll add a short buffer after meetings to prevent knock-on delays.`
+    : `I’ve left small buffers to keep timing realistic.`;
+
+  return [
+    `“Sharing my plan for today so expectations stay clean.”`,
+    ``,
+    deepLine,
+    bufferLine,
+    ``,
+    `If something urgent comes in, I can take it — but I’ll need an explicit trade-off (what drops / moves).`,
+    `If there’s no trade-off, the risk is missed delivery rather than “busyness”.`
+  ].join('\n');
+}
+
+function updateDayScoreChip(){
+  const chip = document.getElementById('dayScoreChip');
+  if (!chip) return;
+
+  const state = getPlannerState();
+  const blocks = state.blocks || [];
+  if (!blocks.length){
+    chip.innerHTML = `<i class="fas fa-gauge"></i> Day quality: —`;
+    chip.className = 'mini-chip';
+    return;
+  }
+
+  const w = getDayWindow();
+  const windowMins = Math.max(0, timeToMinutes(w.end) - timeToMinutes(w.start));
+  const planned = blocks.reduce((s,b) => s + (Number(b.durationMins)||0), 0);
+  const utilisation = windowMins ? (planned / windowMins) : 0;
+
+  const deep = blocks.filter(b => b.type === 'deep').reduce((s,b) => s + b.durationMins, 0);
+  const buffer = blocks.filter(b => b.type === 'buffer').reduce((s,b) => s + b.durationMins, 0);
+  const overlaps = findOverlaps(blocks).count;
+
+  // scoring
+  let score = 100;
+  if (utilisation > 0.92) score -= 18;
+  if (utilisation > 1.00) score -= 25;
+  if (deep < 60) score -= 20;
+  if (deep >= 120) score += 6;
+  if (buffer < 15) score -= 10;
+  if (buffer >= 30) score += 6;
+  if (overlaps) score -= 25;
+
+  score = Math.max(0, Math.min(100, score));
+
+  let label = 'Strong';
+  let cls = 'mini-chip green';
+
+  if (score < 55){ label = 'Fragile'; cls = 'mini-chip'; }
+  else if (score < 75){ label = 'OK'; cls = 'mini-chip'; }
+
+  chip.className = cls;
+  chip.innerHTML = `<i class="fas fa-gauge"></i> Day quality: ${label} (${score}/100)`;
+}
+
+function generatePlan(){
+  const pack = document.getElementById('packSection');
+  const planOutput = document.getElementById('planOutput');
+  if (!pack || !planOutput) return;
+
+  const text = buildPlanText(true);
+  planOutput.textContent = text;
+
+  const metrics = calcPlanMetrics();
+  setMetricUI(metrics);
+
+  pack.classList.add('active');
+  pack.scrollIntoView({ behavior: 'smooth' });
+}
+
+function calcPlanMetrics(){
+  const state = getPlannerState();
+  const blocks = state.blocks || [];
+
+  const w = getDayWindow();
+  const windowMins = Math.max(0, timeToMinutes(w.end) - timeToMinutes(w.start));
+  const planned = blocks.reduce((s,b) => s + (Number(b.durationMins)||0), 0);
+  const utilisation = windowMins ? planned / windowMins : 0;
+
+  const deep = blocks.filter(b => b.type === 'deep').reduce((s,b) => s + b.durationMins, 0);
+  const buffer = blocks.filter(b => b.type === 'buffer').reduce((s,b) => s + b.durationMins, 0);
+  const overlaps = findOverlaps(blocks).count;
+
+  let score = 100;
+  if (utilisation > 0.92) score -= 18;
+  if (utilisation > 1.00) score -= 25;
+  if (deep < 60) score -= 20;
+  if (deep >= 120) score += 6;
+  if (buffer < 15) score -= 10;
+  if (buffer >= 30) score += 6;
+  if (overlaps) score -= 25;
+
+  score = Math.max(0, Math.min(100, score));
+
+  let qualityLabel = score >= 80 ? 'Strong' : (score >= 60 ? 'OK' : 'Fragile');
+  let fillClass = score >= 80 ? 'high' : (score >= 60 ? 'medium' : 'low');
+
+  const focusSignal =
+    deep >= 120 ? 'Protected (2+ focus blocks)' :
+    deep >= 60 ? 'Protected (1 focus block)' :
+    deep >= 30 ? 'Thin (needs more)' :
+    'Missing (risk of reactive day)';
+
+  return { score, qualityLabel, fillClass, focusSignal, utilisation, deep, buffer, overlaps, windowMins, planned };
+}
+
+function setMetricUI(m){
+  const planQuality = document.getElementById('planQuality');
+  const focusSignal = document.getElementById('focusSignal');
+  const fill = document.getElementById('miniFill');
+
+  if (planQuality) planQuality.textContent = `${m.qualityLabel} (${m.score}/100)`;
+  if (focusSignal) focusSignal.textContent = m.focusSignal;
+
+  if (fill){
+    fill.style.width = `${m.score}%`;
+    fill.classList.remove('high','medium','low');
+    fill.classList.add(m.fillClass);
+  }
+}
+
+function buildPlanText(includeScript){
+  const state = getPlannerState();
+  const blocks = (state.blocks || []).slice().sort((a,b) => timeToMinutes(a.start) - timeToMinutes(b.start));
+  const settings = state.settings || {};
+  const date = settings.planDate || getValue('planDate') || toISODate(new Date());
+
+  const w = getDayWindow();
+  const overlaps = findOverlaps(blocks);
+
+  const out = [];
+  out.push(`TIME BLOCKING PLAN`);
+  out.push(`Date: ${formatUKDate(date)}`);
+  out.push(`Window: ${w.start}–${w.end}`);
+  out.push(``);
+
+  if (!blocks.length){
+    out.push(`No blocks yet.`);
+    return out.join('\n');
+  }
+
+  if (overlaps.count){
+    out.push(`WARNING: ${overlaps.count} overlap(s) detected. Fix times for a clean plan.`);
+    out.push(``);
+  }
+
+  out.push(`SCHEDULE`);
+  blocks.forEach(b => {
+    const type = TYPE_LABELS[b.type] || 'Block';
+    const cat = b.category && b.category !== 'none' ? ` • Tag: ${CATEGORY_LABELS[b.category] || b.category}` : '';
+    out.push(`• ${b.start}–${b.end} — ${b.title} (${type}${cat})`);
+    if (b.notes) out.push(`  Notes: ${b.notes}`);
+  });
+
+  if (includeScript){
+    out.push(``);
+    out.push(`BOUNDARY SCRIPT (UK-friendly)`);
+    out.push(`“Sharing my plan for today so expectations stay clean.”`);
+
+    const deepBlocks = blocks.filter(b => b.type === 'deep').slice(0,2);
+    if (deepBlocks.length){
+      out.push(`I’ve blocked ${deepBlocks.map(b => `${b.start}–${b.end}`).join(' and ')} for priority delivery (protected focus).`);
+    } else {
+      out.push(`I’m adding a protected focus block today to protect delivery.`);
+    }
+
+    const buffers = blocks.filter(b => b.type === 'buffer').reduce((s,b) => s + b.durationMins, 0);
+    out.push(buffers >= 15
+      ? `I’ve left small buffers to keep timing realistic.`
+      : `I’ll add a short buffer after meetings to prevent knock-on delays.`);
+
+    out.push(`If something urgent comes in, I can take it — but I’ll need an explicit trade-off (what drops / moves).`);
+    out.push(`If there’s no trade-off, the risk is missed delivery rather than “busyness”.`);
+  }
+
+  out.push(``);
+  out.push(`NOTES TO SELF`);
+  out.push(`• Deep work wins first. Protect it like a meeting.`);
+  out.push(`• If new work arrives: ask “what moves?” (trade-off, in writing if needed).`);
+
+  return out.join('\n');
+}
+
+/* ===========================
+   WINDOW + TIME UTIL
+=========================== */
+function getDayWindow(){
+  const preset = getValue('timeWindow') || 'standard';
+  if (preset === 'early') return { start:'07:00', end:'17:00' };
+  if (preset === 'late') return { start:'09:00', end:'19:00' };
+  if (preset === 'custom'){
+    return { start: normalizeTime(getValue('dayStart') || '08:00'), end: normalizeTime(getValue('dayEnd') || '18:00') };
+  }
+  return { start:'08:00', end:'18:00' };
+}
+
+function timeToMinutes(t){
+  const [hh, mm] = String(t || '00:00').split(':').map(n => parseInt(n, 10));
+  const h = Number.isFinite(hh) ? hh : 0;
+  const m = Number.isFinite(mm) ? mm : 0;
+  return (h * 60) + m;
+}
+function minutesToTime(mins){
+  const m = Math.max(0, Math.round(mins));
+  const hh = Math.floor(m / 60) % 24;
+  const mm = m % 60;
+  return `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
+}
+function addMinutesToTime(time, mins){
+  return minutesToTime(timeToMinutes(time) + Number(mins || 0));
+}
+function normalizeTime(t){
+  const parts = String(t || '').trim().split(':');
+  if (parts.length < 2) return '09:00';
+  const hh = Math.max(0, Math.min(23, parseInt(parts[0], 10) || 0));
+  const mm = Math.max(0, Math.min(59, parseInt(parts[1], 10) || 0));
+  return `${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
+}
+
+function computeGaps(blocks, w){
+  const sorted = blocks.slice().sort((a,b) => timeToMinutes(a.start) - timeToMinutes(b.start));
+  let cursor = timeToMinutes(w.start);
+  const end = timeToMinutes(w.end);
+
+  let total = 0;
+  sorted.forEach(b => {
+    const s = timeToMinutes(b.start);
+    const e = timeToMinutes(b.end);
+    if (s > cursor){
+      total += (s - cursor);
+      cursor = e;
+    } else {
+      cursor = Math.max(cursor, e);
+    }
+  });
+  if (cursor < end) total += (end - cursor);
+  return { total };
+}
+
+function findOverlaps(blocks){
+  const sorted = blocks.slice().sort((a,b) => timeToMinutes(a.start) - timeToMinutes(b.start));
+  let overlaps = 0;
+  for (let i=1; i<sorted.length; i++){
+    const prevEnd = timeToMinutes(sorted[i-1].end);
+    const curStart = timeToMinutes(sorted[i].start);
+    if (curStart < prevEnd) overlaps++;
+  }
+  return { count: overlaps };
+}
+
+function typePillClass(type){
+  if (type === 'deep') return 'deep';
+  if (type === 'admin') return 'admin';
+  if (type === 'buffer') return 'buffer';
+  if (type === 'meet') return 'meet';
+  return 'break';
+}
+
+function barColourForType(type){
+  if (type === 'deep') return 'rgba(16,185,129,0.35)';
+  if (type === 'meet') return 'rgba(239,68,68,0.30)';
+  if (type === 'admin') return 'rgba(59,130,246,0.30)';
+  if (type === 'buffer') return 'rgba(245,158,11,0.30)';
+  return 'rgba(123,95,196,0.22)';
+}
+
+/* ===========================
+   SMALL UI HELPERS
+=========================== */
+function updateCount(id){
+  const el = document.getElementById(id);
+  const count = document.getElementById(`count_${id}`);
+  if (!el || !count) return;
+  count.textContent = `${(el.value || '').length} chars`;
+}
+
+function showSavedTick(){
+  const chip = document.getElementById('savedChip');
+  if (!chip) return;
+  chip.style.display = 'inline-flex';
+  setTimeout(() => { chip.style.display = 'none'; }, 900);
+}
+
+/* ===========================
+   COPY / DOWNLOAD
+=========================== */
+function copyText(text, buttonEl, successLabel){
+  navigator.clipboard.writeText(text);
+
+  if (!buttonEl) return;
+  const originalHTML = buttonEl.innerHTML;
+  const originalBg = buttonEl.style.background;
+  const originalColor = buttonEl.style.color;
+
+  buttonEl.innerHTML = `<i class="fas fa-check"></i> ${successLabel}`;
+  buttonEl.style.background = '#10b981';
+  buttonEl.style.color = '#ffffff';
+
+  setTimeout(() => {
+    buttonEl.innerHTML = originalHTML;
+    buttonEl.style.background = originalBg;
+    buttonEl.style.color = originalColor;
+  }, 1800);
+}
+
+function downloadText(text, filename){
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ===========================
+   DATE UTIL
+=========================== */
+function toISODate(d){
+  const yr = d.getFullYear();
+  const mo = String(d.getMonth()+1).padStart(2,'0');
+  const da = String(d.getDate()).padStart(2,'0');
+  return `${yr}-${mo}-${da}`;
+}
+function formatUKDate(iso){
+  try{
+    const [y,m,d] = String(iso).split('-').map(n => parseInt(n,10));
+    const dt = new Date(y, (m||1)-1, d||1);
+    return dt.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+  }catch(e){
+    return iso || '';
+  }
+}
+
+/* ===========================
+   VALUE UTIL
+=========================== */
+function getValue(id){
+  const el = document.getElementById(id);
+  return el ? el.value : '';
+}
+function setValue(id, v){
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.value = v;
+}
+
+/* ===========================
+   UTIL
+=========================== */
+function escapeHtml(str){
+  return (str || '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
+function cryptoSafeId(){
+  // Avoid relying on crypto in older browsers; still unique enough for local tools.
+  try{
+    if (window.crypto && crypto.getRandomValues){
+      const a = new Uint32Array(2);
+      crypto.getRandomValues(a);
+      return `b_${a[0].toString(16)}${a[1].toString(16)}`;
+    }
+  }catch(e){}
+  return `b_${Math.random().toString(16).slice(2)}${Date.now().toString(16)}`;
+}
+
+/* ===========================
+   MY PLAYBOOK (LOCALSTORAGE)
+=========================== */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'time-blocking-template';
+const CURRENT_TOOL_TITLE = 'Time Blocking Template';
+const CURRENT_TOOL_TYPE = 'Template';
+
+function getSavedItems(){
+  try {
+    const raw = localStorage.getItem(PLAYBOOK_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch(e){
+    console.warn('Error reading saved items:', e);
+    return [];
+  }
+}
+function setSavedItems(items){
+  try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+  catch(e){ console.warn('Error saving items:', e); }
+}
+
+function initializePlaybook(){
+  const playbookOverlay = document.getElementById('playbookOverlay');
+  const playbookSidebar = document.getElementById('playbookSidebar');
+  const playbookButton = document.getElementById('myPlaybookButton');
+  const closeBtn = document.getElementById('closePlaybook');
+  const saveItemBtn = document.getElementById('saveBtn');
+
+  if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+  renderSavedItems();
+
+  const savedItems = getSavedItems();
+  const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+  updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+  saveItemBtn.addEventListener('click', () => {
+    const items = getSavedItems();
+    const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+    let nowSaved;
+
+    if (index === -1) {
+      const toolLink = window.location.pathname.split('/').pop() || 'time-blocking-template.html';
+      items.push({
+        id: CURRENT_TOOL_ID,
+        title: CURRENT_TOOL_TITLE,
+        type: CURRENT_TOOL_TYPE,
+        link: toolLink,
+        savedAt: new Date().toISOString()
+      });
+      nowSaved = true;
+    } else {
+      items.splice(index, 1);
+      nowSaved = false;
+    }
+
+    setSavedItems(items);
+    updateSaveButtonState(saveItemBtn, nowSaved);
+    renderSavedItems();
+  });
+
+  playbookButton.addEventListener('click', () => {
+    playbookOverlay.classList.add('open');
+    playbookSidebar.classList.add('open');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    playbookOverlay.classList.remove('open');
+    playbookSidebar.classList.remove('open');
+  });
+
+  playbookOverlay.addEventListener('click', (e) => {
+    if (e.target === playbookOverlay) {
+      playbookOverlay.classList.remove('open');
+      playbookSidebar.classList.remove('open');
+    }
+  });
+}
+
+function updateSaveButtonState(button, isSaved){
+  if (!button) return;
+  const icon = button.querySelector('i');
+  const label = button.querySelector('span');
+
+  if (isSaved) {
+    button.classList.add('saved');
+    if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+    if (label) label.textContent = 'Saved';
+  } else {
+    button.classList.remove('saved');
+    if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+    if (label) label.textContent = 'Save item';
+  }
+}
+
+function renderSavedItems(){
+  const listEl = document.getElementById('savedItemsList');
+  const emptyEl = document.getElementById('savedItemsEmpty');
+  if (!listEl || !emptyEl) return;
+
+  const items = getSavedItems();
+  listEl.innerHTML = '';
+
+  if (!items.length) {
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+
+  items.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'saved-item';
+
+    const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+    const dateText = savedDate
+      ? savedDate.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
+      : '';
+
+    li.innerHTML = `
+      <div class="saved-item-title-row">
+        <span class="saved-item-title">${escapeHtml(item.title)}</span>
+        <span class="saved-item-type">${escapeHtml(item.type)}</span>
+      </div>
+      <div class="saved-item-meta">
+        ${dateText ? `Saved on ${dateText}` : ``}
+      </div>
+      <a class="saved-item-link" href="${escapeHtml(item.link)}">
+        Open <i class="fas fa-arrow-right"></i>
+      </a>
+    `;
+    listEl.appendChild(li);
+  });
+}
+</script>
+
+</body>
+</html>

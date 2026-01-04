@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="About The Employee Playbook. Strategic guidance for workplace decisions. Not legal advice.">
+    <title>About Us | The Employee Playbook</title>
+    
+    <!-- Font Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --medium-gray: #E9ECEF;
+            --dark-gray: #6C757D;
+            --text-dark: #212529;
+            --text-medium: #495057;
+            --accent-purple: #7B5FC4;
+            --accent-purple-dark: #5A4496;
+            --light-purple: #E6E0F5;
+            --lighter-purple: #F0EBFA;
+            --border-light: rgba(0, 0, 0, 0.08);
+            --hero-gray: #f5f7fa;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --sidebar-bg: #fafbfc;
+            --chat-bg: #ffffff;
+            --online-green: #10B981;
+            --hero-purple: #5A4496;
+            --user-msg-bg: #7B5FC4;
+            --bot-msg-bg: #F1F3F9;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+            --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+            --premium-card-shadow: 0 6px 20px rgba(123, 95, 196, 0.12);
+            
+            /* Simplified Color Scheme */
+            --neutral-bg: #F8F9FA;
+            --crisis-red: #FF6B6B;
+        }
+
+        .dark-mode {
+            --primary-white: #121212;
+            --light-gray: #1E1E1E;
+            --medium-gray: #2D2D2D;
+            --dark-gray: #8A8A8A;
+            --text-dark: #F5F5F5;
+            --text-medium: #CCCCCC;
+            --accent-purple: #8B6CE6;
+            --accent-purple-dark: #6A4FC4;
+            --light-purple: #2A1E4A;
+            --lighter-purple: #1E1A2E;
+            --border-light: rgba(255, 255, 255, 0.08);
+            --hero-gray: #1a1a1a;
+            --nav-bg: rgba(18, 18, 18, 0.95);
+            --sidebar-bg: #1a1a1a;
+            --chat-bg: #1e1e1e;
+            --user-msg-bg: #8B6CE6;
+            --bot-msg-bg: #2D2D2D;
+            --shadow: 0 2px 8px rgba(0,0,0,0.2);
+            --premium-card-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            
+            /* Simplified Dark Mode Colors */
+            --neutral-bg: #1E1E1E;
+            --crisis-red: #FF5252;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            height: 80px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            height: 100%;
+        }
+
+        /* Logo Styles */
+        .logo-img {
+            height: 100px;
+            width: auto;
+            transform: translateX(20%);
+            padding: 14px 10px;
+            transition: all 0.3s ease;
+            display: block;
+            min-height: 100px;
+        }
+
+        .dark-mode .logo-img {
+            content: url('assets/img/logo-dark.png');
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 17px;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-purple);
+        }
+
+        .nav-link.active {
+            color: var(--text-dark);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -7px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-purple);
+            border-radius: 2px 2px 0 0;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            transform: translateX(-20%);
+        }
+
+        .sign-in {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 17px;
+        }
+
+        .header-cta {
+            background: var(--accent-purple);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(123, 95, 196, 0.25);
+        }
+
+        .header-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(123, 95, 196, 0.35);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* New Tag for The Coach */
+        .nav-link-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .new-tag {
+            position: absolute;
+            top: -12px;
+            right: -35px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        /* NEW: Mobile CTA Tab */
+        .mobile-cta-tab {
+            display: none;
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%) rotate(-90deg);
+            transform-origin: right bottom;
+            background: var(--accent-purple);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px 8px 0 0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 5px 15px rgba(123, 95, 196, 0.4);
+            z-index: 998;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .mobile-cta-tab:hover {
+            background: var(--accent-purple-dark);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 80px 30px 30px;
+            display: flex;
+            min-height: calc(100vh - 160px);
+        }
+
+        .content-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* About Hero Section */
+        .about-hero {
+            background: var(--light-purple);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 0 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(123, 95, 196, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 20%, rgba(123, 95, 196, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .about-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-hero-title {
+            font-size: 3.7rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+            line-height: 1.1;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .about-hero-subtitle {
+            font-size: 20px;
+            color: var(--text-medium);
+            max-width: 700px;
+            margin: 0 auto 20px;
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent-purple);
+            color: white;
+            padding: 18px 42px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 17px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(123, 95, 196, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(123, 95, 196, 0.4);
+        }
+
+        .animated-underline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-purple);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.5s ease;
+        }
+
+        .animated-underline:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* About Content Sections */
+        .about-content {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .section-subtitle {
+            font-size: 20px;
+            color: var(--text-medium);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .text-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-medium);
+        }
+
+        .text-content p {
+            margin-bottom: 24px;
+        }
+
+        .highlight-box {
+            background: var(--light-purple);
+            border-left: 4px solid var(--accent-purple);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 40px 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        /* Why We Exist Section */
+        .why-section {
+            background-color: var(--light-gray);
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .problem-card {
+            background: var(--primary-white);
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .problem-icon {
+            font-size: 42px;
+            margin-bottom: 24px;
+            color: var(--accent-purple);
+        }
+
+        .problem-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-dark);
+            text-align: center;
+        }
+
+        .problem-description {
+            color: var(--text-medium);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Story Section */
+        .story-section {
+            background-color: var(--primary-white);
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .story-content {
+            padding-right: 40px;
+        }
+
+        .story-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .strategy-visual {
+            width: 100%;
+            max-width: 400px;
+            height: 300px;
+            background: var(--light-purple);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .strategy-visual::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                var(--accent-purple),
+                rgba(123, 95, 196, 0.7),
+                rgba(123, 95, 196, 0.5),
+                rgba(123, 95, 196, 0.3),
+                var(--accent-purple)
+            );
+            animation: rotate 10s linear infinite;
+            z-index: 1;
+        }
+
+        .strategy-visual-content {
+            position: relative;
+            z-index: 2;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Approach Section */
+        .approach-section {
+            background-color: var(--light-gray);
+        }
+
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .approach-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .approach-icon {
+            background: var(--accent-purple);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .approach-content h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .approach-content p {
+            color: var(--text-medium);
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        /* What We're Not Section */
+        .not-section {
+            background-color: var(--primary-white);
+        }
+
+        .not-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .not-card {
+            background: var(--primary-white);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .not-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .not-icon {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: var(--accent-purple);
+        }
+
+        .not-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .not-description {
+            color: var(--text-medium);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Safety Section */
+        .safety-section {
+            background-color: var(--light-gray);
+            text-align: center;
+        }
+
+        .safety-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--primary-white);
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-light);
+        }
+
+        .safety-icon {
+            font-size: 48px;
+            margin-bottom: 30px;
+            color: var(--accent-purple);
+        }
+
+        /* CTA Section */
+        .about-cta {
+            background: var(--light-purple);
+            text-align: center;
+            padding: 100px 0 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 70% 30%, rgba(123, 95, 196, 0.2) 0%, transparent 50%);
+            z-index: 1;
+        }
+
+        .about-cta-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Footer - UPDATED with The Company next to The Playbook */
+        footer {
+            background-color: var(--primary-white);
+            padding: 35px 0 20px;
+            color: var(--text-medium);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 70px;
+            margin-bottom: 35px;
+            align-items: start;
+        }
+
+        .footer-about {
+            max-width: 400px;
+            padding-left: 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo-img {
+            height: 100px;
+            width: auto;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .footer-logo-img {
+            content: url('assets/img/logo-dark.png');
+        }
+
+        .footer-description {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .footer-heading {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: var(--text-dark);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 8px;
+        }
+
+        .footer-link a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link a:hover {
+            color: var(--accent-purple);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-light);
+            font-size: 14px;
+        }
+
+        .footer-nav {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        .footer-nav-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+        }
+
+        .footer-newsletter {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+            text-align: center;
+        }
+
+        .footer-newsletter-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .footer-newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-newsletter-input {
+            padding: 12px 16px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 14px;
+            background: var(--primary-white);
+            color: var(--text-dark);
+        }
+
+        .footer-newsletter-button {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-newsletter-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(123, 95, 196, 0.25);
+        }
+
+        /* Logo Fallback */
+        .logo-fallback {
+            display: none;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        /* Mobile Sign In Button */
+        .mobile-sign-in {
+            display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                gap: 30px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .about-hero-title {
+                font-size: 48px;
+            }
+
+            .section-title {
+                font-size: 36px;
+            }
+
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .story-content {
+                padding-right: 0;
+            }
+
+            .approach-grid, .not-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-hero {
+                padding: 160px 0 0 0;
+            }
+            
+            .about-hero-title {
+                font-size: 36px;
+            }
+
+            .about-hero-subtitle {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+            
+            /* Mobile Navigation Changes */
+            .nav-container {
+                justify-content: center;
+                position: relative;
+            }
+            
+            .logo {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            /* INCREASED: Mobile header logo size by 25% */
+            .logo-img {
+                height: 122px;
+                transform: none;
+                padding: 12px 0;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+                position: absolute;
+                left: 20px;
+            }
+            
+            .header-cta {
+                display: none;
+            }
+            
+            .nav-actions {
+                transform: none;
+                gap: 16px;
+                position: absolute;
+                right: 20px;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px);
+                -webkit-backface-visibility: blur(10px);
+                flex-direction: column;
+                padding: 20px;
+                border-top: 1px solid var(--border-light);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                gap: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+            
+            /* Move The Coach to the left and New tag next to it */
+            .nav-link-container {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+            }
+            
+            .new-tag {
+                position: static;
+                margin-left: 8px;
+                top: auto;
+                right: auto;
+            }
+            
+            /* Move sign-in button to mobile menu */
+            .nav-actions .sign-in {
+                display: none;
+            }
+            
+            .mobile-sign-in {
+                display: block !important;
+                margin-top: 10px;
+                padding: 12px 20px;
+                background: var(--accent-purple);
+                color: white;
+                border-radius: 8px;
+                text-align: center;
+                font-weight: 600;
+                text-decoration: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-nav-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            .footer-newsletter-form {
+                flex-direction: column;
+            }
+            
+            .footer-logo-img {
+                height: 120px;
+            }
+            
+            /* NEW: Mobile CTA Tab */
+            .mobile-cta-tab {
+                display: block;
+            }
+            
+            /* Adjust section padding for mobile */
+            section {
+                padding: 60px 0;
+            }
+            
+            /* Adjust hero padding */
+            .about-hero {
+                padding-top: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-img {
+                height: 100px;
+            }
+            
+            .footer-logo-img {
+                height: 100px;
+            }
+            
+            .logo-fallback {
+                font-size: 18px;
+            }
+            
+            .about-hero-title {
+                font-size: 2rem;
+            }
+            
+            .about-hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .footer-nav-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NEW: Mobile CTA Tab -->
+<a href="create-account.html" class="mobile-cta-tab">Sign Up</a>
+
+<!-- Navigation -->
+<nav>
+    <div class="container nav-container">
+        <!-- Hamburger menu on the left for mobile -->
+        <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+        
+        <!-- Logo centered for mobile -->
+        <a href="index.html" class="logo">
+            <img src="assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="logo"
+                 onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+            <div class="logo-fallback" id="logo-fallback">THE EMPLOYEE PLAYBOOK</div>
+        </a>
+        
+        <!-- Navigation links with mobile sign-in -->
+        <div class="nav-links">
+            <a href="the-lens.html" class="nav-link">The Lens</a>
+            <a href="the-tools.html" class="nav-link">The Toolkit</a>
+            <div class="nav-link-container">
+                <a href="the-coach.html" class="nav-link">The Coach</a>
+                <span class="new-tag">NEW</span>
+            </div>
+            <a href="the-shift.html" class="nav-link">The Shift</a>
+            <a href="the-pricing.html" class="nav-link">The Pricing</a>
+            <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+        </div>
+        
+        <!-- Desktop actions (hidden on mobile) -->
+        <div class="nav-actions">
+            <a href="create-account.html" class="header-cta">Sign up</a>
+            <a href="sign-in.html" class="sign-in">Sign in</a>
+            <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+</nav>
+
+<!-- About Hero Section -->
+<section class="about-hero">
+    <div class="about-hero-content">
+        <h1 class="about-hero-title">Built from real workplace <span class="animated-underline">battlefields</span></h1>
+        <p class="about-hero-subtitle">We've seen too many talented professionals lose leverage because they didn't have access to strategic clarity when it mattered most.</p>
+        <a href="#why" class="cta-button">Discover Our Story</a>
+    </div>
+</section>
+
+<!-- Why We Exist Section -->
+<section class="about-content why-section" id="why">
+    <div class="container">
+        <h2 class="section-title">Why we exist</h2>
+        <div class="text-content">
+            <p>The modern workplace is fundamentally broken. While organizations invest in HR departments, legal teams, and strategic advisors, employees are left navigating complex situations with Google searches and well-meaning but unqualified advice.</p>
+            
+            <div class="highlight-box">
+                We exist because the system is stacked against employees who lack strategic insight into how decisions are really made.
+            </div>
+            
+            <p>This imbalance costs careers, mental health, and financial security. We've watched talented professionals lose promotions, accept unfair terms, and burn bridges—not because they lacked skill, but because they lacked strategy in critical moments.</p>
+        </div>
+        
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3 class="problem-title">Distrust of HR</h3>
+                <p class="problem-description">57% of UK workers don't trust HR to handle their concerns fairly. HR's primary responsibility is to protect the organization, not individual employees.</p>
+            </div>
+            
+            <div class="problem-card">
+                <div class="problem-icon">
+                    <i class="fas fa-eye-slash"></i>
+                </div>
+                <h3 class="problem-title">Lack of Transparency</h3>
+                <p class="problem-description">Critical decisions about careers happen behind closed doors. Employees rarely understand the real criteria for promotions, pay rises, or role changes.</p>
+            </div>
+            
+            <div class="problem-card">
+                <div class="problem-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3 class="problem-title">Knowledge Gap</h3>
+                <p class="problem-description">No one teaches workplace strategy. Schools prepare you for technical skills, but leave you unprepared for the politics and dynamics that determine success.</p>
+            </div>
+        </div>
+        
+        <div class="text-content" style="margin-top: 60px;">
+            <p>The Employee Playbook exists to level the playing field. We provide the strategic clarity that organizations reserve for themselves, giving you the insight to navigate workplace challenges with confidence and precision.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Story Section -->
+<section class="about-content story-section">
+    <div class="container">
+        <h2 class="section-title">Our founding story</h2>
+        <div class="story-grid">
+            <div class="story-content">
+                <div class="text-content">
+                    <p>We're people who have lived through workplace challenges firsthand. We've been in the rooms where careers were decided based on perception, politics, and positioning—not just performance.</p>
+                    <p>We've watched talented people lose opportunities because they didn't understand the unwritten rules of organizational dynamics. We've seen how the system works when the doors close.</p>
+                    <p>That hard-won insight—what really happens when the door closes—became the foundation of The Employee Playbook. Not to game the system, but to ensure the system doesn't game you.</p>
+                    <p>We've distilled years of behind-the-scenes knowledge into frameworks, scripts, and strategies that give you the clarity to navigate any workplace challenge with confidence.</p>
+                </div>
+            </div>
+            <div class="story-visual">
+                <div class="strategy-visual">
+                    <div class="strategy-visual-content">
+                        <i class="fas fa-chess-knight" style="font-size: 48px; color: #7B5FC4; margin-bottom: 20px;"></i>
+                        <h3>Strategic Advantage</h3>
+                        <p>When moments matter most</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Approach Section -->
+<section class="about-content approach-section">
+    <div class="container">
+        <h2 class="section-title">Our approach</h2>
+        <p class="section-subtitle">We believe in strategy that works when emotions run high</p>
+        
+        <div class="approach-grid">
+            <div class="approach-item">
+                <div class="approach-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <div class="approach-content">
+                    <h3>ACAS-aligned insight, not legal advice</h3>
+                    <p>We translate employment frameworks into actionable strategy without pretending to be lawyers. Our guidance respects established workplace protocols while giving you strategic advantage.</p>
+                </div>
+            </div>
+            
+            <div class="approach-item">
+                <div class="approach-icon">
+                    <i class="fas fa-chess"></i>
+                </div>
+                <div class="approach-content">
+                    <h3>Strategy before emotion</h3>
+                    <p>High-stakes moments trigger fight-or-flight responses. We provide the clarity to override panic with precision, turning emotional reactions into strategic actions.</p>
+                </div>
+            </div>
+            
+            <div class="approach-item">
+                <div class="approach-icon">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div class="approach-content">
+                    <h3>Privacy before performance</h3>
+                    <p>Your strategic moves stay between us. No employer access, no stored conversations, no digital footprint. Your privacy enables your strategic freedom.</p>
+                </div>
+            </div>
+            
+            <div class="approach-item">
+                <div class="approach-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="approach-content">
+                    <h3>One smart move beats 10 reactive ones</h3>
+                    <p>We focus on the single most strategic action that changes the entire dynamic, not a checklist of generic advice. Precision over volume.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What We're Not Section -->
+<section class="about-content not-section">
+    <div class="container">
+        <h2 class="section-title">What we're not</h2>
+        <p class="section-subtitle">Clarity about our boundaries creates trust in our guidance</p>
+        
+        <div class="not-grid">
+            <div class="not-card">
+                <div class="not-icon">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <h3 class="not-title">Not legal representatives</h3>
+                <p class="not-description">We don't provide legal advice or representation. We provide strategic clarity within employment frameworks.</p>
+            </div>
+            
+            <div class="not-card">
+                <div class="not-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3 class="not-title">Not a union</h3>
+                <p class="not-description">We don't collectively bargain or represent groups. We focus on your individual strategic advantage.</p>
+            </div>
+            
+            <div class="not-card">
+                <div class="not-icon">
+                    <i class="fas fa-comment-dots"></i>
+                </div>
+                <h3 class="not-title">Not emotional ventilation</h3>
+                <p class="not-description">We're not here to just listen. We're here to transform frustration into strategic action.</p>
+            </div>
+            
+            <div class="not-card">
+                <div class="not-icon">
+                    <i class="fas fa-chess-queen"></i>
+                </div>
+                <h3 class="not-title">Not about winning battles</h3>
+                <p class="not-description">We help you respond strategically—because what you say next still matters, regardless of the outcome.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Safety & Privacy Section -->
+<section class="about-content safety-section">
+    <div class="container">
+        <div class="safety-content">
+            <div class="safety-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h2 class="section-title">Your privacy is non-negotiable</h2>
+            <div class="text-content">
+                <p>We believe strategic guidance requires absolute confidentiality. Nothing you share with us is stored long-term. No employer has access to our conversations. No data is sold or shared.</p>
+                <p>Your strategic moves stay between us—because leverage disappears when strategy becomes public. We're your private strategic partner, not another corporate database.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA Section -->
+<section class="about-cta">
+    <div class="container about-cta-content">
+        <h2 class="cta-title">Take back your power</h2>
+        <p class="section-subtitle">Stop reacting. Start strategizing.</p>
+        
+        <!-- Removed the two CTA buttons -->
+    </div>
+</section>
+
+<!-- Footer - UPDATED with The Company next to The Playbook -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/img/logo.png" alt="The Employee Playbook" class="footer-logo-img" id="footer-logo"
+                             onerror="this.style.display='none'; document.getElementById('footer-logo-fallback').style.display='block';">
+                        <div class="logo-fallback" id="footer-logo-fallback" style="font-size: 28px;">THE EMPLOYEE PLAYBOOK</div>
+                    </a>
+                </div>
+                <p class="footer-description">A private strategy system giving employees clarity and advantage in the moments that matter most.</p>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h3 class="footer-newsletter-title">Stay updated with strategic insights</h3>
+                <form class="footer-newsletter-form">
+                    <input type="email" class="footer-newsletter-input" placeholder="Your email" required>
+                    <button type="submit" class="footer-newsletter-button">Subscribe</button>
+                </form>
+            </div>
+            
+            <div class="footer-nav">
+                <div class="footer-nav-grid">
+                    <div class="footer-nav-section">
+                        <h3 class="footer-heading">The Playbook</h3>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="the-lens.html">The Lens</a></li>
+                            <li class="footer-link"><a href="the-tools.html">The Toolkit</a></li>
+                            <li class="footer-link"><a href="the-coach.html">The Coach</a></li>
+                            <li class="footer-link"><a href="the-shift.html">The Shift</a></li>
+                            <li class="footer-link"><a href="the-pricing.html">The Pricing</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- UPDATED: The Company next to The Playbook -->
+                    <div class="footer-nav-section">
+                        <h3 class="footer-heading">The Company</h3>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="about-us.html">About</a></li>
+                            <li class="footer-link"><a href="#">Privacy</a></li>
+                            <li class="footer-link"><a href="terms-and-conditions.html">Terms</a></li>
+                            <li class="footer-link"><a href="#">Security</a></li>
+                            <li class="footer-link"><a href="#">Help Centre</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2023 The Employee Playbook. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mark page as loaded to prevent FOUC
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('loaded');
+        
+        // Dark mode toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        const themeIcon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            
+            // Update icon
+            themeIcon.classList.toggle('fa-moon');
+            themeIcon.classList.toggle('fa-sun');
+            
+            // Save theme preference
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            
+            // Update logo for dark mode
+            const logo = document.getElementById('logo');
+            const footerLogo = document.getElementById('footer-logo');
+            if (isDarkMode) {
+                logo.src = 'assets/img/logo-dark.png';
+                footerLogo.src = 'assets/img/logo-dark.png';
+            } else {
+                logo.src = 'assets/img/logo.png';
+                footerLogo.src = 'assets/img/logo.png';
+            }
+        });
+
+        // Mobile navigation toggle
+        document.querySelector('.mobile-toggle').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Smooth scrolling with offset for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 96;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.mobile-toggle i').classList.add('fa-bars');
+                    document.querySelector('.mobile-toggle i').classList.remove('fa-times');
+                }
+            });
+        });
+
+        // Simple animation for the strategy visual
+        const strategyVisual = document.querySelector('.strategy-visual');
+        
+        // Add intersection observer for animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    strategyVisual.style.animationPlayState = 'running';
+                } else {
+                    strategyVisual.style.animationPlayState = 'paused';
+                }
+            });
+        });
+        
+        if (strategyVisual) {
+            observer.observe(strategyVisual);
+        }
+    });
+</script>
+
+</body>
+</html>

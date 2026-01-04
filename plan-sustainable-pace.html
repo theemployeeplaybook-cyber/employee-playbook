@@ -1,0 +1,3499 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sustainable Pace Plan | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand + Category Pills System)
+       Categories updated to match your pills reference (7 categories)
+    =========================== */
+    :root{
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+      --text-dark:#212529;
+      --text-medium:#495057;
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+      --success-green:#10b981;
+      --warning-orange:#f59e0b;
+      --danger-red:#ef4444;
+      --info-blue:#3b82f6;
+
+      /* ===========================
+         CATEGORY COLORS (Your 7)
+      =========================== */
+      --category-clarity: #7B5FC4;
+      --category-burnout: #f59e0b;
+      --category-manager: #10b981;
+      --category-politics: #3b82f6;
+      --category-hr: #6D28D9;
+      --category-confidence: #ef4444;
+      --category-career: #800020;
+
+      /* ===========================
+         PILL STYLES (Light mode)
+      =========================== */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.08), rgba(123, 95, 196, 0.04));
+      --pill-clarity-border: rgba(123, 95, 196, 0.2);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.12), rgba(123, 95, 196, 0.08));
+      --pill-clarity-hover-border: rgba(123, 95, 196, 0.3);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.04));
+      --pill-burnout-border: rgba(245, 158, 11, 0.2);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(245, 158, 11, 0.08));
+      --pill-burnout-hover-border: rgba(245, 158, 11, 0.3);
+
+      --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.04));
+      --pill-manager-border: rgba(16, 185, 129, 0.2);
+      --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.08));
+      --pill-manager-hover-border: rgba(16, 185, 129, 0.3);
+
+      --pill-politics-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.04));
+      --pill-politics-border: rgba(59, 130, 246, 0.2);
+      --pill-politics-hover-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.08));
+      --pill-politics-hover-border: rgba(59, 130, 246, 0.3);
+
+      --pill-hr-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.08), rgba(109, 40, 217, 0.04));
+      --pill-hr-border: rgba(109, 40, 217, 0.2);
+      --pill-hr-hover-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.12), rgba(109, 40, 217, 0.08));
+      --pill-hr-hover-border: rgba(109, 40, 217, 0.3);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.04));
+      --pill-confidence-border: rgba(239, 68, 68, 0.2);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.08));
+      --pill-confidence-hover-border: rgba(239, 68, 68, 0.3);
+
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.08), rgba(128, 0, 32, 0.04));
+      --pill-career-border: rgba(128, 0, 32, 0.2);
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.12), rgba(128, 0, 32, 0.08));
+      --pill-career-hover-border: rgba(128, 0, 32, 0.3);
+    }
+
+    /* ===========================
+       DARK MODE VARIABLES
+    =========================== */
+    .dark-mode{
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#888888;
+      --text-dark:#e0e0e0;
+      --text-medium:#b0b0b0;
+
+      --accent-purple:#9d86e9;
+      --accent-purple-dark:#7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.2);
+      --lighter-purple: rgba(123, 95, 196, 0.1);
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+      --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      /* Dark mode category colors */
+      --category-clarity: #9d86e9;
+      --category-burnout: #fbbf24;
+      --category-manager: #34d399;
+      --category-politics: #60a5fa;
+      --category-hr: #8B5CF6;
+      --category-confidence: #f87171;
+      --category-career: #B03060;
+
+      /* Dark mode pill styles */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.15), rgba(123, 95, 196, 0.08));
+      --pill-clarity-border: rgba(157, 134, 233, 0.3);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.2), rgba(123, 95, 196, 0.12));
+      --pill-clarity-hover-border: rgba(157, 134, 233, 0.4);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08));
+      --pill-burnout-border: rgba(251, 191, 36, 0.3);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.12));
+      --pill-burnout-hover-border: rgba(251, 191, 36, 0.4);
+
+      --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
+      --pill-manager-border: rgba(52, 211, 153, 0.3);
+      --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.12));
+      --pill-manager-hover-border: rgba(52, 211, 153, 0.4);
+
+      --pill-politics-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08));
+      --pill-politics-border: rgba(96, 165, 250, 0.3);
+      --pill-politics-hover-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.12));
+      --pill-politics-hover-border: rgba(96, 165, 250, 0.4);
+
+      --pill-hr-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.15), rgba(109, 40, 217, 0.08));
+      --pill-hr-border: rgba(139, 92, 246, 0.3);
+      --pill-hr-hover-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.2), rgba(109, 40, 217, 0.12));
+      --pill-hr-hover-border: rgba(139, 92, 246, 0.4);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.08));
+      --pill-confidence-border: rgba(248, 113, 113, 0.3);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.12));
+      --pill-confidence-hover-border: rgba(248, 113, 113, 0.4);
+
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.15), rgba(128, 0, 32, 0.08));
+      --pill-career-border: rgba(176, 48, 96, 0.3);
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.2), rgba(128, 0, 32, 0.12));
+      --pill-career-hover-border: rgba(176, 48, 96, 0.4);
+    }
+
+    /* ===========================
+       GLOBAL
+    =========================== */
+    *{
+      margin:0; padding:0; box-sizing:border-box;
+      font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    body{
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      min-height: 100vh;
+    }
+    body.loaded{ opacity: 1; }
+    .container{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===========================
+       NAVIGATION
+    =========================== */
+    nav{
+      position: fixed;
+      top:0;
+      width:100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      height: 80px;
+    }
+    .nav-container{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 12px 0;
+      height: 100%;
+    }
+    .logo{
+      display:inline-flex;
+      align-items:center;
+      height: 100%;
+    }
+    .logo-img{
+      height:100px;
+      width:auto;
+      transform: translateX(20%);
+      padding: 14px 10px;
+      transition: all 0.3s ease;
+      display:block;
+      min-height:100px;
+    }
+    .logo-fallback{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      height:48px;
+      padding: 0 14px;
+      border-radius: 10px;
+      background: var(--premium-gradient);
+      color:#fff;
+      font-weight:700;
+      letter-spacing: 0.8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      transform: translateX(20%);
+    }
+    .nav-links{
+      display:flex;
+      gap:50px;
+    }
+    .nav-link{
+      color: var(--text-dark);
+      text-decoration:none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-size: 17px;
+    }
+    .nav-link:hover{ color: var(--accent-purple); }
+
+    .nav-link-container{ position: relative; display:inline-block; }
+    .new-tag{
+      position:absolute;
+      top:-12px;
+      right:-35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color:#000;
+      font-size:10px;
+      font-weight:600;
+      padding:2px 6px;
+      border-radius:4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index:10;
+      white-space:nowrap;
+    }
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      transform: translateX(-20%);
+    }
+    .header-cta{
+      background: var(--accent-purple);
+      color:#fff;
+      padding: 8px 20px;
+      border-radius: 50px;
+      text-decoration:none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(123,95,196,0.3);
+    }
+    .header-cta:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(123,95,196,0.35);
+    }
+    .sign-in{
+      color: var(--text-dark);
+      text-decoration:none;
+      font-weight:500;
+      font-size:17px;
+    }
+    .sign-in:hover{ color: var(--accent-purple); }
+
+    .theme-toggle{
+      background:none;
+      border:none;
+      color: var(--text-dark);
+      cursor:pointer;
+      font-size:16px;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .theme-toggle:hover{ background-color: var(--light-gray); }
+
+    .mobile-toggle{
+      display:none;
+      background:none;
+      border:none;
+      color: var(--text-dark);
+      cursor:pointer;
+      font-size:24px;
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .mobile-toggle:hover{ background-color: var(--light-gray); }
+
+    .mobile-sign-in, .mobile-sign-up { display:none; }
+
+    @media (max-width: 768px){
+      .nav-container{ justify-content:center; position:relative; }
+
+      .logo{
+        position:absolute;
+        left:50%;
+        transform: translateX(-50%);
+        display:flex;
+        align-items:center;
+        height:100%;
+      }
+      .logo-img{ height:125px; transform:none; padding: 12px 0; }
+      .logo-fallback{ transform:none; }
+
+      .mobile-toggle{
+        display:flex;
+        position:absolute;
+        left:20px;
+        align-items:center;
+      }
+      .nav-actions{
+        transform:none;
+        gap:16px;
+        position:absolute;
+        right:20px;
+        align-items:center;
+      }
+      .nav-actions .sign-in,
+      .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding:20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        gap:20px;
+      }
+      .nav-links.active{ display:flex; }
+
+      .nav-link-container{
+        display:flex;
+        align-items:center;
+        justify-content:flex-start;
+        width:100%;
+      }
+      .new-tag{ position:static; margin-left:8px; }
+
+      .mobile-sign-in{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--primary-white);
+        color: var(--accent-purple);
+        border-radius:10px;
+        text-align:center;
+        font-weight:700;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+      .mobile-sign-up{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--accent-purple);
+        color:#fff;
+        border-radius:10px;
+        text-align:center;
+        font-weight:700;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .tool-hero-section{
+      width:100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow:hidden;
+    }
+    .tool-hero-section::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+      z-index:1;
+    }
+    .dark-mode .tool-hero-section::before{
+      background: linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+    }
+    .tool-hero-content{
+      position:relative;
+      z-index:2;
+      max-width:1100px;
+      margin:0 auto;
+      padding: 0 20px 10px;
+      animation: heroFadeUp 0.45s ease-out;
+    }
+    @keyframes heroFadeUp{
+      from{ opacity:0; transform: translateY(18px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .breadcrumb{
+      font-size:10px;
+      text-transform: uppercase;
+      letter-spacing:1px;
+      color: var(--dark-gray);
+      margin-bottom:10px;
+      display:flex;
+      gap:6px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .breadcrumb a{
+      color: var(--text-medium);
+      text-decoration:none !important;
+      font-weight:500;
+      letter-spacing:0.6px;
+      transition: color 0.2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+    }
+    .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+    .breadcrumb i{ font-size:10px; opacity:0.7; }
+    .breadcrumb .current{ color: var(--text-dark); font-weight:600; }
+
+    .checklist-name{
+      font-size:14px;
+      font-weight:700;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing:1.8px;
+      margin: 18px 0 12px;
+      display:block;
+    }
+
+    .hero-main-heading{
+      font-size:46px;
+      font-weight:650;
+      color: var(--text-dark);
+      line-height:1.1;
+      margin-bottom:18px;
+      max-width: 900px;
+    }
+    .hero-subheading{
+      font-size:16px;
+      color: var(--text-medium);
+      line-height:1.6;
+      max-width: 950px;
+      margin-bottom: 16px;
+    }
+
+    /* ===========================
+       RELATED CATEGORIES
+    =========================== */
+    .related-row{
+      display:flex;
+      flex-direction: column;
+      align-items:flex-start;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .related-label{
+      font-size: 12px;
+      font-weight:600;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: var(--text-medium);
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .related-pills{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+    }
+
+    .category-pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      height: 36px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration:none;
+    }
+    .dark-mode .category-pill{
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    .category-pill:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+    .dark-mode .category-pill:hover{
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+    .category-icon{
+      font-size: 12px;
+      opacity: 0.9;
+      flex-shrink: 0;
+    }
+
+    .category-pill.clarity{
+      color: var(--category-clarity);
+      border-color: var(--pill-clarity-border);
+      background: var(--pill-clarity-bg);
+    }
+    .category-pill.clarity:hover{
+      background: var(--pill-clarity-hover-bg);
+      border-color: var(--pill-clarity-hover-border);
+    }
+
+    .category-pill.burnout{
+      color: var(--category-burnout);
+      border-color: var(--pill-burnout-border);
+      background: var(--pill-burnout-bg);
+    }
+    .category-pill.burnout:hover{
+      background: var(--pill-burnout-hover-bg);
+      border-color: var(--pill-burnout-hover-border);
+    }
+
+    .category-pill.manager{
+      color: var(--category-manager);
+      border-color: var(--pill-manager-border);
+      background: var(--pill-manager-bg);
+    }
+    .category-pill.manager:hover{
+      background: var(--pill-manager-hover-bg);
+      border-color: var(--pill-manager-hover-border);
+    }
+
+    .category-pill.politics{
+      color: var(--category-politics);
+      border-color: var(--pill-politics-border);
+      background: var(--pill-politics-bg);
+    }
+    .category-pill.politics:hover{
+      background: var(--pill-politics-hover-bg);
+      border-color: var(--pill-politics-hover-border);
+    }
+
+    .category-pill.hr{
+      color: var(--category-hr);
+      border-color: var(--pill-hr-border);
+      background: var(--pill-hr-bg);
+    }
+    .category-pill.hr:hover{
+      background: var(--pill-hr-hover-bg);
+      border-color: var(--pill-hr-hover-border);
+    }
+
+    .category-pill.confidence{
+      color: var(--category-confidence);
+      border-color: var(--pill-confidence-border);
+      background: var(--pill-confidence-bg);
+    }
+    .category-pill.confidence:hover{
+      background: var(--pill-confidence-hover-bg);
+      border-color: var(--pill-confidence-hover-border);
+    }
+
+    .category-pill.career{
+      color: var(--category-career);
+      border-color: var(--pill-career-border);
+      background: var(--pill-career-bg);
+    }
+    .category-pill.career:hover{
+      background: var(--pill-career-hover-bg);
+      border-color: var(--pill-career-hover-border);
+    }
+
+    .save-btn{
+      position:absolute;
+      top:16px;
+      right:24px;
+      z-index:5;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 12px;
+      font-size:12px;
+      font-weight:600;
+      border-radius:999px;
+      border: 1px solid rgba(123,95,196,0.6);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--accent-purple-dark);
+      cursor:pointer;
+      transition: all 0.2s ease;
+    }
+    .save-btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(123,95,196,0.18);
+      background: #fff;
+    }
+    .dark-mode .save-btn{
+      background: rgba(20,20,20,0.9);
+      border-color: rgba(157,134,233,0.6);
+    }
+    .save-btn.saved{
+      background: var(--accent-purple);
+      color:#fff;
+      border-color: transparent;
+    }
+
+    /* ===========================
+       CONTEXT + HOW IT WORKS
+    =========================== */
+    .context-tips-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      width:100%;
+      max-width:1100px;
+      margin: 0 auto 10px;
+      padding: 24px 20px 10px;
+      margin-top: 6px;
+    }
+    .context-card, .tips-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius:14px;
+      padding: 26px 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .section-title{
+      font-size:18px;
+      font-weight:700;
+      color: var(--text-dark);
+      margin-bottom:16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .section-title i{ color: var(--accent-purple); }
+
+    .bullet-list{ list-style:none; margin:0; padding:0; }
+    .bullet-list li{
+      color: var(--text-medium);
+      line-height:1.65;
+      margin-bottom:12px;
+      padding-left: 26px;
+      position:relative;
+      font-size:14.5px;
+      font-weight:450;
+    }
+    .bullet-list li::before{
+      content:"•";
+      position:absolute;
+      left:10px;
+      color: var(--accent-purple);
+      font-size:18px;
+    }
+
+    /* ===========================
+       TOGGLES PANEL (Premium)
+    =========================== */
+    .toggle-panel{
+      max-width:1100px;
+      margin: 0 auto;
+      padding: 0 20px 4px;
+    }
+    .toggle-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+    .toggle-card::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height:3px;
+      background: var(--premium-gradient);
+      opacity: 0.95;
+    }
+    .toggle-head{
+      display:flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .toggle-head h3{
+      font-size: 15px;
+      font-weight: 750;
+      color: var(--text-dark);
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      line-height: 1.2;
+    }
+    .toggle-head h3 i{
+      color: var(--accent-purple);
+      font-size: 16px;
+    }
+    .toggle-sub{
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--text-medium);
+      font-weight: 450;
+      line-height: 1.55;
+      max-width: 920px;
+    }
+    .toggle-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    .seg{
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 10px 10px;
+      background: var(--light-gray);
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+    .dark-mode .seg{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.10);
+    }
+    .seg-label{
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 700;
+      color: var(--dark-gray);
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .seg-label i{ color: var(--accent-purple); opacity: 0.9; }
+    .seg-options{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
+    .chip-btn{
+      border: 1px solid rgba(123,95,196,0.22);
+      background: rgba(123,95,196,0.08);
+      color: var(--accent-purple-dark);
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor:pointer;
+      transition: transform 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+    .dark-mode .chip-btn{
+      background: rgba(123,95,196,0.18);
+      border-color: rgba(157,134,233,0.28);
+      color: var(--accent-purple);
+    }
+    .chip-btn:hover{
+      transform: translateY(-1px);
+      background: rgba(123,95,196,0.13);
+      border-color: rgba(123,95,196,0.30);
+    }
+    .chip-btn.active{
+      background: var(--premium-gradient);
+      border-color: transparent;
+      color:#fff;
+      box-shadow: 0 10px 22px rgba(123,95,196,0.20);
+    }
+
+    .toggle-microcopy{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:flex-start;
+      margin-top: 2px;
+    }
+    .micro-line{
+      flex: 1;
+      min-width: 220px;
+      font-size: 12.8px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.55;
+      border-left: 3px solid rgba(123,95,196,0.25);
+      padding-left: 10px;
+    }
+    .dark-mode .micro-line{
+      border-left-color: rgba(157,134,233,0.25);
+    }
+    .micro-line strong{
+      color: var(--text-dark);
+      font-weight: 750;
+    }
+
+    /* ===========================
+       WORKSPACE
+    =========================== */
+    .workspace-wrap{
+      max-width:1100px;
+      margin: 0 auto;
+      padding: 0 20px 10px;
+    }
+
+    .workspace-header{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 14px 0 14px;
+    }
+    .workspace-title{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width: 0;
+    }
+    .workspace-title h2{
+      font-size: 26px;
+      font-weight: 750;
+      color: var(--accent-purple-dark);
+      line-height: 1.2;
+    }
+    .workspace-title p{
+      font-size: 14px;
+      color: var(--text-medium);
+      font-weight: 450;
+      max-width: 860px;
+    }
+
+    /* Actions moved to bottom */
+    .workspace-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .workspace-actions.bottom{
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      justify-content: flex-end;
+    }
+    .dark-mode .workspace-actions.bottom{
+      border-top-color: rgba(255,255,255,0.10);
+    }
+
+    .btn{
+      border:none;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn.primary{
+      background: var(--premium-gradient);
+      color:#fff;
+      box-shadow: 0 12px 26px rgba(123,95,196,0.22);
+    }
+    .btn.primary:hover{ transform: translateY(-1px); box-shadow: 0 16px 30px rgba(123,95,196,0.28); }
+    .btn.secondary{
+      background: var(--light-purple);
+      color: var(--accent-purple-dark);
+    }
+    .dark-mode .btn.secondary{
+      background: rgba(123,95,196,0.22);
+      color: var(--accent-purple);
+    }
+    .btn.secondary:hover{
+      transform: translateY(-1px);
+      background: rgba(123,95,196,0.18);
+    }
+    .btn.danger{
+      background: rgba(239,68,68,0.12);
+      color: #b91c1c;
+      border: 1px solid rgba(239,68,68,0.20);
+    }
+    .dark-mode .btn.danger{
+      background: rgba(239,68,68,0.18);
+      color: #fca5a5;
+      border-color: rgba(239,68,68,0.24);
+    }
+    .btn.danger:hover{
+      transform: translateY(-1px);
+      background: rgba(239,68,68,0.16);
+    }
+    .btn:disabled{
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform:none !important;
+      box-shadow:none !important;
+    }
+
+    .modules-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 0;
+    }
+
+    .module-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 16px 16px 14px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+      position: relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 520px;
+    }
+    .dark-mode .module-card{
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+    }
+    .module-card::before{
+      content:'';
+      position:absolute;
+      left:0; right:0; top:0;
+      height: 3px;
+      background: var(--premium-gradient);
+      opacity: 0.95;
+    }
+
+    .module-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .module-chip{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .module-num{
+      width: 30px;
+      height: 30px;
+      border-radius: 12px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 600;
+      font-size: 12px;
+      color:#fff;
+      background: var(--premium-gradient);
+      box-shadow: 0 12px 22px rgba(123,95,196,0.18);
+      flex-shrink: 0;
+    }
+    .module-title{
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .module-title h3{
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .module-title p{
+      font-size: 12.5px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .module-helper{ display:none !important; }
+
+    textarea.module-input{
+      width: 100%;
+      resize: none;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      padding: 12px 12px;
+      color: var(--text-dark);
+      font-size: 13.5px;
+      line-height: 1.55;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 450;
+      flex: 1;
+      min-height: 360px;
+      overflow: hidden;
+    }
+    .dark-mode textarea.module-input{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.10);
+    }
+    textarea.module-input:focus{
+      border-color: rgba(123,95,196,0.35);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.10);
+    }
+
+    .module-meta{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 10px;
+      margin-top: -2px;
+    }
+    .count{
+      font-size: 12px;
+      color: var(--dark-gray);
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    /* ===========================
+       GENERATED PACK
+    =========================== */
+    .pack-section{
+      max-width:1100px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      display:none;
+    }
+    .pack-section.active{
+      display:block;
+      animation: slideIn 0.5s ease;
+    }
+    @keyframes slideIn{
+      from{ opacity:0; transform: translateY(20px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .pack-header{
+      text-align:center;
+      margin: 18px 0 22px;
+    }
+    .pack-title{
+      font-size: 24px;
+      font-weight: 850;
+      color: var(--accent-purple-dark);
+      margin-bottom: 6px;
+    }
+    .pack-subtitle{
+      color: var(--text-medium);
+      font-size: 14.5px;
+      font-weight: 450;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .pack-bar{
+      background: var(--primary-white);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 14px 40px rgba(123,95,196,0.12);
+      border: 1px solid rgba(123,95,196,0.15);
+      display:flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .pack-metrics{
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+    }
+    .metric-row{
+      display:flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .metric-title{
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-purple-dark);
+      letter-spacing: 0.2px;
+    }
+    .metric-score{
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--accent-purple);
+      white-space: nowrap;
+    }
+    .mini-progress{
+      height: 10px;
+      background: var(--light-gray);
+      border-radius: 6px;
+      overflow:hidden;
+    }
+    .dark-mode .mini-progress{
+      background: rgba(255,255,255,0.12);
+    }
+    .mini-fill{
+      height:100%;
+      width:0%;
+      border-radius: 6px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: var(--premium-gradient);
+    }
+    /* Keep these colours (requested) */
+    .mini-fill.high { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .mini-fill.medium { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .mini-fill.low { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+    .pack-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+      flex-shrink: 0;
+    }
+
+    .section-header{
+      font-size: 18px;
+      font-weight: 850;
+      margin: 18px 0 14px;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-gray);
+    }
+    .section-header.purple{ color: var(--accent-purple-dark); }
+    .section-header.orange{ color: var(--warning-orange); }
+    .section-header.blue{ color: var(--accent-purple); }
+
+    .pack-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .pack-card{
+      background: var(--primary-white);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+    }
+    .dark-mode .pack-card{
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.32);
+    }
+    .pack-card::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height:3px;
+      background: var(--premium-gradient);
+    }
+
+    .pc-ico{
+      font-size: 18px;
+      margin-bottom: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--accent-purple);
+      background: var(--lighter-purple);
+    }
+    .pc-title{
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .pc-body{
+      color: var(--text-medium);
+      font-size: 13.5px;
+      line-height: 1.6;
+      font-weight: 450;
+      white-space: pre-wrap;
+      flex: 1;
+    }
+
+    .pack-output{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+      margin-bottom: 12px;
+    }
+    .dark-mode .pack-output{
+      box-shadow: 0 18px 34px rgba(0,0,0,0.32);
+    }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12.8px;
+      color: var(--text-medium);
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    /* ===========================
+       PRESSURE MODE OVERLAY
+    =========================== */
+    .overlay{
+      position: fixed;
+      inset: 0;
+      z-index: 1300;
+      display:none;
+    }
+    .overlay.open{ display:block; }
+    .overlay-backdrop{
+      position:absolute;
+      inset:0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+    .overlay-panel{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(960px, calc(100% - 40px));
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(255,255,255,0.55);
+      border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+      overflow:hidden;
+    }
+    .dark-mode .overlay-panel{
+      background: rgba(18,18,18,0.96);
+      border-color: rgba(255,255,255,0.10);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.65);
+    }
+    .overlay-panel::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height: 4px;
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      opacity: 0.95;
+    }
+    .overlay-head{
+      padding: 18px 18px 12px;
+      display:flex;
+      justify-content: space-between;
+      align-items:flex-start;
+      gap: 12px;
+      position: relative;
+    }
+    .overlay-title{
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+      min-width: 0;
+    }
+    .overlay-title h3{
+      font-size: 18px;
+      font-weight: 850;
+      color: var(--text-dark);
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      line-height: 1.2;
+    }
+    .overlay-title h3 i{
+      color: #ef4444;
+    }
+    .overlay-title p{
+      color: var(--text-medium);
+      font-size: 13.5px;
+      font-weight: 500;
+      line-height: 1.6;
+      max-width: 760px;
+    }
+    .overlay-close{
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--dark-gray);
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.2s ease;
+      margin-top: 2px;
+    }
+    .overlay-close:hover{ background: var(--light-gray); }
+    .dark-mode .overlay-close:hover{ background: rgba(255,255,255,0.08); }
+
+    .overlay-body{
+      padding: 0 18px 18px;
+      display:grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+    }
+    .overlay-card{
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      border-radius: 14px;
+      padding: 14px 14px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    }
+    .dark-mode .overlay-card{
+      border-color: rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.45);
+    }
+    .overlay-card h4{
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: #b91c1c;
+      font-weight: 850;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .dark-mode .overlay-card h4{ color: #fca5a5; }
+    .overlay-steps{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .overlay-step{
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+      padding: 10px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(239,68,68,0.18);
+      background: rgba(239,68,68,0.06);
+    }
+    .dark-mode .overlay-step{
+      border-color: rgba(239,68,68,0.18);
+      background: rgba(239,68,68,0.10);
+    }
+    .os-num{
+      width: 28px; height: 28px;
+      border-radius: 10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      color:#fff;
+      font-weight: 850;
+      font-size: 12px;
+      flex-shrink: 0;
+      box-shadow: 0 10px 18px rgba(239,68,68,0.18);
+    }
+    .os-body{
+      display:flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+    }
+    .os-title{
+      font-size: 13.5px;
+      font-weight: 850;
+      color: var(--text-dark);
+      line-height: 1.25;
+    }
+    .os-text{
+      font-size: 12.8px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.55;
+    }
+    .overlay-mini{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .overlay-mini .mini-box{
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.06);
+      background: rgba(255,255,255,0.85);
+      padding: 12px 12px;
+    }
+    .dark-mode .overlay-mini .mini-box{
+      border-color: rgba(255,255,255,0.10);
+      background: rgba(18,18,18,0.55);
+    }
+    .mini-box h5{
+      font-size: 13px;
+      font-weight: 850;
+      color: var(--text-dark);
+      margin-bottom: 6px;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .mini-box h5 i{
+      color: #ef4444;
+      opacity: 0.9;
+    }
+    .mini-box p{
+      font-size: 12.8px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+    .mini-box textarea{
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      color: var(--text-dark);
+      padding: 10px 10px;
+      font-size: 13px;
+      line-height: 1.55;
+      font-weight: 500;
+      resize: none;
+      min-height: 120px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .dark-mode .mini-box textarea{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.10);
+    }
+    .mini-box textarea:focus{
+      border-color: rgba(239,68,68,0.35);
+      box-shadow: 0 0 0 4px rgba(239,68,68,0.10);
+    }
+    .overlay-actions{
+      padding: 0 18px 18px;
+      display:flex;
+      justify-content: flex-end;
+      gap: 10px;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      margin-top: 10px;
+      padding-top: 14px;
+    }
+    .dark-mode .overlay-actions{
+      border-top-color: rgba(255,255,255,0.10);
+    }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR
+    =========================== */
+    .my-playbook-fab{
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1200;
+      background: var(--premium-gradient);
+      color:#fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      cursor:pointer;
+      font-size: 13px;
+      font-weight: 750;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+    .my-playbook-fab:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+    }
+
+    .playbook-sidebar-overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1190;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity 0.25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position: fixed;
+      top:0;
+      right: -380px;
+      width: 340px;
+      max-width: 90%;
+      height: 100%;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index: 1191;
+      display:flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border-light);
+      transition: right 0.25s ease;
+    }
+    .dark-mode .playbook-sidebar{
+      background: rgba(18,18,18,0.96);
+      box-shadow: -4px 0 22px rgba(0,0,0,0.6);
+    }
+    .playbook-sidebar.open{ right:0; }
+
+    .playbook-sidebar-header{
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .playbook-sidebar-header-title-row{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      margin-bottom: 4px;
+    }
+    .playbook-sidebar-header h3{
+      font-size:18px;
+      font-weight:700;
+      color: var(--text-dark);
+    }
+    .playbook-sidebar-header p{
+      font-size: 13px;
+      color: var(--dark-gray);
+    }
+    .playbook-close-btn{
+      background:none;
+      border:none;
+      color: var(--dark-gray);
+      cursor:pointer;
+      font-size: 18px;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.2s ease;
+    }
+    .playbook-close-btn:hover{ background: var(--light-gray); }
+
+    .playbook-sidebar-body{
+      padding: 14px 18px 20px;
+      padding-bottom: 50px;
+      overflow-y: auto;
+      flex:1;
+      display:flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .saved-items-empty{
+      font-size: 13px;
+      color: var(--dark-gray);
+      line-height: 1.6;
+    }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+
+    .saved-item{
+      padding: 10px 10px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom: 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .saved-item-title-row{
+      display:flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .saved-item-title{
+      font-size: 14px;
+      font-weight: 850;
+      color: var(--text-dark);
+    }
+    .saved-item-type{
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent-purple-dark);
+      font-weight: 600;
+    }
+    .saved-item-meta{
+      font-size: 12px;
+      color: var(--dark-gray);
+    }
+    .saved-item-link{
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--accent-purple);
+      text-decoration:none;
+      font-weight: 850;
+      display:inline-flex;
+      align-items:center;
+      gap: 4px;
+    }
+    .saved-item-link:hover{ text-decoration: underline; }
+
+    .playbook-quick-links{
+      margin-top: 223px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+    }
+    .quick-links-title{
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-medium);
+    }
+    .playbook-quick-links-list{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .quick-link-pill{
+      width: 58%;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.35);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      text-decoration:none;
+      color: var(--accent-purple-dark);
+      font-size: 13px;
+      font-weight: 650;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .quick-link-pill:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+    }
+    .dark-mode .quick-link-pill{
+      border-color: rgba(157,134,233,0.55);
+      background: linear-gradient(135deg, rgba(123,95,196,0.26), rgba(123,95,196,0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer{
+      background: var(--primary-white);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 30px;
+      text-align:center;
+      color: var(--text-medium);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px){
+      .context-tips-grid{ grid-template-columns: 1fr; gap: 24px; }
+      .toggle-grid{ grid-template-columns: 1fr 1fr; }
+      .modules-grid{ grid-template-columns: 1fr; }
+      .pack-grid{ grid-template-columns: repeat(2, 1fr); }
+      .pack-bar{ flex-direction: column; align-items: stretch; }
+      .pack-actions{ justify-content: flex-start; }
+      textarea.module-input{ min-height: 380px; }
+      .module-card{ min-height: 560px; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .overlay-body{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px){
+      .tool-hero-section{ margin-top: 100px; }
+      .hero-main-heading{ font-size: 36px; }
+      .save-btn{ right: 18px; top: 10px; }
+      .my-playbook-fab{ bottom: 18px; right: 18px; }
+      .pack-grid{ grid-template-columns: 1fr; }
+
+      .category-pill{
+        font-size: 12px;
+        padding: 7px 14px;
+        height: 34px;
+      }
+      textarea.module-input{ min-height: 380px; }
+      .module-card{ min-height: 590px; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .toggle-grid{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px){
+      .hero-main-heading{ font-size: 32px; }
+      .checklist-name{ font-size: 13px; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .pack-actions{ justify-content: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===========================
+     NAVIGATION
+=========================== -->
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo" aria-label="The Employee Playbook">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      <div class="logo-fallback" id="logoFallback">The Employee Playbook</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<div class="tool-hero-section">
+  <button class="save-btn" id="saveBtn">
+    <i class="far fa-bookmark"></i>
+    <span>Save</span>
+  </button>
+
+  <div class="tool-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-house"></i> Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="the-toolkit.html">The Toolkit</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="category-burnout-and-capacity.html">Burnout &amp; Capacity</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Sustainable Pace Plan</span>
+    </div>
+
+    <span class="checklist-name">SUSTAINABLE PACE PLAN</span>
+
+    <h1 class="hero-main-heading">Build a pace you can maintain by controlling work design, pressure triggers, and expectation drift</h1>
+
+    <div class="hero-subheading">
+      Diagnose your current delivery pattern, identify your pace archetype, and design guardrails to protect quality, health, and credibility.
+      Use the toggles to switch between <strong>Pace</strong> (steady-state design) and <strong>Pressure</strong> (when you're feeling close to overload), then generate a Sustainable Pace Pack: a one-page plan, pressure tripwires, and scripts to reset expectations.
+    </div>
+
+    <div class="related-row" aria-label="Related categories">
+      <span class="related-label">Related categories</span>
+
+      <div class="related-pills">
+        <a class="category-pill clarity" href="category-clarity-priorities-and-direction.html" title="Clarity, Priorities & Direction">
+          <i class="fas fa-bullseye category-icon"></i>
+          <span>Clarity, Priorities &amp; Direction</span>
+        </a>
+
+        <a class="category-pill manager" href="category-manager-relationship-and-leadership-style.html" title="Manager Relationship & Leadership Style">
+          <i class="fas fa-handshake category-icon"></i>
+          <span>Manager Relationship &amp; Leadership Style</span>
+        </a>
+
+        <a class="category-pill politics" href="category-workplace-dynamics-and-politics.html" title="Workplace Dynamics & Politics">
+          <i class="fas fa-chess category-icon"></i>
+          <span>Workplace Politics</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     CONTEXT & PRO TIPS
+=========================== -->
+<div class="context-tips-grid">
+  <div class="context-card">
+    <h3 class="section-title"><i class="fas fa-compass"></i>When to Use This Plan</h3>
+    <ul class="bullet-list">
+      <li>When “just this week” has become your permanent operating system.</li>
+      <li>When you are delivering, but it’s powered by late nights, adrenaline, and constant catch-up.</li>
+      <li>When you feel wired after work and your weekends are recovery, not life.</li>
+      <li>When the job keeps expanding because you keep absorbing the gaps.</li>
+      <li>When you need to protect both <strong>output</strong> and <strong>reputation</strong> — not collapse in private and perform in public.</li>
+    </ul>
+  </div>
+
+  <div class="tips-card">
+    <h3 class="section-title"><i class="fas fa-bolt"></i>How to Use It (fast)</h3>
+    <ul class="bullet-list">
+      <li>Start with reality: map your week as it truly runs, not how it “should” run.</li>
+      <li>Identify your pace archetype — it will explain why you keep drifting into overwork.</li>
+      <li>Choose 3 guardrails that change <strong>expectations</strong> (not just your coping).</li>
+      <li>Use <strong>Pressure Mode</strong> when you’re running hot: it gives you a 48-hour triage route that protects sleep and credibility.</li>
+      <li>A sustainable pace is a <strong>design problem</strong> (priorities, capacity, boundaries) as much as a personal one.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===========================
+     TOGGLES (PACE VS PRESSURE + CONTEXT)
+=========================== -->
+<div class="toggle-panel" aria-label="Mode toggles">
+  <div class="toggle-card">
+    <div class="toggle-head">
+      <div>
+        <h3><i class="fas fa-sliders"></i>Make this plan match your reality</h3>
+        <div class="toggle-sub">
+          Your answers and pack outputs adjust based on mode and context. You can design <strong>steady-state pace</strong>, or switch into <strong>Pressure Mode</strong> when you need a clean triage route without turning your life into the overflow tray.
+        </div>
+      </div>
+      <button class="btn danger" id="pressureOverlayBtn" title="Open Pressure Mode overlay">
+        <i class="fas fa-triangle-exclamation"></i> Pressure Mode
+      </button>
+    </div>
+
+    <div class="toggle-grid">
+      <div class="seg">
+        <div class="seg-label"><i class="fas fa-gauge-high"></i>Plan mode</div>
+        <div class="seg-options">
+          <button class="chip-btn active" id="modePace"><i class="fas fa-feather"></i> Pace</button>
+          <button class="chip-btn" id="modePressure"><i class="fas fa-fire"></i> Pressure</button>
+        </div>
+      </div>
+
+      <div class="seg">
+        <div class="seg-label"><i class="fas fa-users"></i>Operating context</div>
+        <div class="seg-options">
+          <button class="chip-btn active" id="ctxSolo"><i class="fas fa-user"></i> Solo</button>
+          <button class="chip-btn" id="ctxTeam"><i class="fas fa-people-group"></i> Team</button>
+        </div>
+      </div>
+
+      <div class="seg">
+        <div class="seg-label"><i class="fas fa-lock"></i>Output format</div>
+        <div class="seg-options">
+          <button class="chip-btn active" id="outPrivate"><i class="fas fa-user-shield"></i> Private</button>
+          <button class="chip-btn" id="outShare"><i class="fas fa-share-nodes"></i> Shareable</button>
+        </div>
+      </div>
+
+      <div class="seg">
+        <div class="seg-label"><i class="fas fa-wand-magic-sparkles"></i>Depth</div>
+        <div class="seg-options">
+          <button class="chip-btn active" id="depthStandard"><i class="fas fa-layer-group"></i> Standard</button>
+          <button class="chip-btn" id="depthDeep"><i class="fas fa-magnifying-glass"></i> Deep</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic microcopy for key toggles (3–4 lines) -->
+    <div class="toggle-microcopy" aria-label="Dynamic microcopy">
+      <div class="micro-line" id="mcMode">
+        <strong>Pace mode:</strong> design guardrails that make your week repeatable. You’re building a pace you can hold, not a hero sprint.
+      </div>
+      <div class="micro-line" id="mcContext">
+        <strong>Solo:</strong> focus on personal boundaries and scope control. You protect your time by controlling entry points and trade-offs.
+      </div>
+      <div class="micro-line" id="mcOutput">
+        <strong>Private:</strong> write the truth. The shareable pack will automatically convert to cleaner language if you switch.
+      </div>
+      <div class="micro-line" id="mcDepth">
+        <strong>Standard:</strong> a tight plan you can execute. Deep mode pushes for root causes and the exact levers you’ll pull.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     WORKSPACE
+=========================== -->
+<div class="workspace-wrap" id="workspace">
+  <div class="workspace-header">
+    <div class="workspace-title">
+      <h2>Draft your sustainable pace plan</h2>
+      <p id="workspaceSubtitle">
+        Eight modules to map your current week, identify your pace archetype, and design constraints that protect quality, health, and credibility. Switch modes to update prompts.
+      </p>
+    </div>
+  </div>
+
+  <div class="modules-grid" id="modulesGrid">
+    <!-- Modules injected by JS -->
+  </div>
+
+  <!-- ACTIONS AT BOTTOM -->
+  <div class="workspace-actions bottom" aria-label="Draft actions">
+    <button class="btn secondary" id="copyDraftBtn"><i class="far fa-copy"></i> Copy draft</button>
+    <button class="btn secondary" id="clearDraftBtn"><i class="fas fa-eraser"></i> Clear</button>
+    <button class="btn primary" id="generatePackBtn" disabled><i class="fas fa-wand-magic-sparkles"></i> Generate Sustainable Pace Pack</button>
+  </div>
+</div>
+
+<!-- ===========================
+     GENERATED PACK
+=========================== -->
+<div class="pack-section" id="packSection">
+  <div class="pack-header">
+    <h2 class="pack-title">Your Sustainable Pace Pack</h2>
+    <p class="pack-subtitle" id="packSubtitle">
+      A structured output you can use immediately: a one-page pace plan, pressure tripwires (so you catch drift early), and scripts that protect delivery without drama.
+    </p>
+  </div>
+
+  <div class="pack-bar">
+    <div class="pack-metrics">
+      <div class="metric-row">
+        <div class="metric-title">Draft completeness</div>
+        <div class="metric-score" id="completenessScore">0%</div>
+      </div>
+      <div class="mini-progress"><div class="mini-fill" id="miniFill"></div></div>
+      <div class="metric-row" style="margin-top:2px;">
+        <div class="metric-title">Pace stability signal</div>
+        <div class="metric-score" id="paceSignal">—</div>
+      </div>
+    </div>
+
+    <div class="pack-actions">
+      <button class="btn primary" id="copyPackBtn"><i class="far fa-copy"></i> Copy pack</button>
+      <button class="btn secondary" id="downloadPackBtn"><i class="fas fa-download"></i> Download .txt</button>
+      <button class="btn secondary" id="printPackBtn"><i class="fas fa-print"></i> Print</button>
+    </div>
+  </div>
+
+  <h3 class="section-header purple"><i class="fas fa-file-lines"></i> One-page pace plan</h3>
+  <div class="pack-output">
+    <div class="mono" id="onePageOutput"></div>
+  </div>
+
+  <h3 class="section-header orange"><i class="fas fa-triangle-exclamation"></i> Pressure tripwires (catch drift early)</h3>
+  <div class="pack-grid" id="riskGrid"></div>
+
+  <h3 class="section-header blue"><i class="fas fa-comments"></i> Scripts (clear, calm, UK-friendly)</h3>
+  <div class="pack-grid" id="scriptsGrid"></div>
+</div>
+
+<!-- ===========================
+     PRESSURE MODE OVERLAY
+=========================== -->
+<div class="overlay" id="pressureOverlay" aria-hidden="true">
+  <div class="overlay-backdrop" id="pressureBackdrop"></div>
+
+  <div class="overlay-panel" role="dialog" aria-modal="true" aria-label="Pressure Mode overlay">
+    <div class="overlay-head">
+      <div class="overlay-title">
+        <h3><i class="fas fa-fire"></i> Pressure Mode: 48-hour triage (without a reputation dent)</h3>
+        <p>
+          Use this when you’re running hot: overload, exhaustion, constant urgency, or you need sustainable pace and recovery built into delivery.
+          This overlay helps you stop the slide, reduce load fast, and convert urgency into clear trade-offs.
+        </p>
+      </div>
+
+      <button class="overlay-close" id="pressureCloseBtn" aria-label="Close Pressure Mode">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="overlay-body">
+      <div class="overlay-card">
+        <h4><i class="fas fa-stopwatch"></i> 48-hour triage steps</h4>
+        <ul class="overlay-steps">
+          <li class="overlay-step">
+            <div class="os-num">1</div>
+            <div class="os-body">
+              <div class="os-title">Stop the leak</div>
+              <div class="os-text">Pause new intake for 24 hours. Reply with a holding line and require priorities/trade-offs before accepting more.</div>
+            </div>
+          </li>
+          <li class="overlay-step">
+            <div class="os-num">2</div>
+            <div class="os-body">
+              <div class="os-title">Convert urgency into a decision</div>
+              <div class="os-text">Ask: “What moves if this comes in?” If nobody will name the trade-off, it is not a real priority.</div>
+            </div>
+          </li>
+          <li class="overlay-step">
+            <div class="os-num">3</div>
+            <div class="os-body">
+              <div class="os-title">Protect sleep as a delivery dependency</div>
+              <div class="os-text">Choose one non-negotiable: hard stop time, no late emails, or a short reset block. Your output depends on it.</div>
+            </div>
+          </li>
+          <li class="overlay-step">
+            <div class="os-num">4</div>
+            <div class="os-body">
+              <div class="os-title">Make the plan visible</div>
+              <div class="os-text">Send a short note with priorities + what you’re not doing. Clarity reduces “surprise urgency”.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="overlay-mini">
+        <div class="mini-box">
+          <h5><i class="fas fa-scissors"></i> What will you stop or pause today?</h5>
+          <p>Write 3 items you will pause for 24–48 hours. This is not failure — it is triage.</p>
+          <textarea id="pmStopBox" placeholder="Example: Pause non-essential reporting • Decline optional meetings • Stop doing two people’s roles"></textarea>
+        </div>
+
+        <div class="mini-box">
+          <h5><i class="fas fa-scale-balanced"></i> Trade-off question (copy/paste)</h5>
+          <p>Use this line to force a prioritisation decision without sounding dramatic.</p>
+          <textarea id="pmTradeoffBox" placeholder="“I can take this on. What should I move or drop to make room for it?”"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay-actions">
+      <button class="btn secondary" id="pressureCopyBtn"><i class="far fa-copy"></i> Copy triage notes</button>
+      <button class="btn primary" id="pressureApplyBtn"><i class="fas fa-wand-magic-sparkles"></i> Apply to draft (autofill)</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     MY PLAYBOOK SIDEBAR (Right)
+=========================== -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven’t saved anything yet. Use <strong>Save</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <div class="playbook-quick-links-header">
+          <span class="quick-links-title">Quick links</span>
+        </div>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill">
+            <i class="fas fa-gauge"></i> The Dashboard
+          </a>
+          <a href="the-lens.html" class="quick-link-pill">
+            <i class="fas fa-search"></i> The Lens
+          </a>
+          <a href="the-toolkit.html" class="quick-link-pill">
+            <i class="fas fa-toolbox"></i> The Toolkit
+          </a>
+          <a href="the-coach.html" class="quick-link-pill">
+            <i class="fas fa-comments"></i> The Coach
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ===========================
+   BOOT
+=========================== */
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('loaded');
+
+  initializeThemeToggle();
+  initializeMobileNav();
+  initializePlaybook();
+
+  initializeToggles();
+  initializePressureOverlay();
+
+  buildModules();
+  loadDraft();
+  wireDraftHandlers();
+
+  refreshGenerateState();
+  applyDynamicCopy();
+});
+
+/* ===========================
+   MOBILE NAV
+=========================== */
+function initializeMobileNav() {
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (!mobileToggle || !navLinks) return;
+
+  mobileToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('active');
+    const icon = this.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    }
+  });
+
+  document.addEventListener('click', function(event) {
+    if (navLinks.classList.contains('active') &&
+        !navLinks.contains(event.target) &&
+        !mobileToggle.contains(event.target)) {
+      navLinks.classList.remove('active');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) {
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+      }
+    }
+  });
+}
+
+/* ===========================
+   THEME TOGGLE + LOGO
+=========================== */
+function initializeThemeToggle() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (!themeToggleBtn) return;
+
+  const themeIcon = themeToggleBtn.querySelector('i');
+  const logoImg = document.getElementById('mainLogo');
+  const logoFallback = document.getElementById('logoFallback');
+
+  function getLogoPath(filename) {
+    if (window.location.protocol === 'file:') {
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+      return basePath + 'assets/img/' + filename;
+    } else {
+      return './assets/img/' + filename;
+    }
+  }
+
+  function showFallbackLogo() {
+    if (logoImg) logoImg.style.display = 'none';
+    if (logoFallback) logoFallback.style.display = 'inline-flex';
+  }
+
+  function showImageLogo() {
+    if (logoFallback) logoFallback.style.display = 'none';
+    if (logoImg) logoImg.style.display = 'block';
+  }
+
+  function updateLogoForTheme(isDarkMode) {
+    if (!logoImg) return;
+    showImageLogo();
+    logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+    logoImg.alt = 'The Employee Playbook';
+  }
+
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const savedTheme = localStorage.getItem('theme');
+  const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches);
+
+  if (shouldUseDark) {
+    document.body.classList.add('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+    updateLogoForTheme(true);
+  } else {
+    document.body.classList.remove('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+    updateLogoForTheme(false);
+  }
+
+  themeToggleBtn.addEventListener('click', function() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+
+    if (isDarkMode) {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+      updateLogoForTheme(false);
+    } else {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+      updateLogoForTheme(true);
+    }
+  });
+
+  prefersDarkScheme.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      if (e.matches) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      }
+    }
+  });
+
+  if (logoImg) {
+    logoImg.addEventListener('error', function() {
+      if (this.src.includes('logo-dark.png')) {
+        this.src = getLogoPath('logo.png');
+      } else {
+        showFallbackLogo();
+      }
+    });
+  }
+}
+
+/* ===========================
+   TOGGLE STATE (Pace/Pressure + Context + Output + Depth)
+=========================== */
+const TOGGLE_KEY = 'tepSustainablePaceToggles_v1';
+
+const toggleState = {
+  mode: 'pace',      // pace | pressure
+  context: 'solo',   // solo | team
+  output: 'private', // private | share
+  depth: 'standard'  // standard | deep
+};
+
+function loadToggleState(){
+  try{
+    const raw = localStorage.getItem(TOGGLE_KEY);
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== 'object') return;
+    if (parsed.mode) toggleState.mode = parsed.mode;
+    if (parsed.context) toggleState.context = parsed.context;
+    if (parsed.output) toggleState.output = parsed.output;
+    if (parsed.depth) toggleState.depth = parsed.depth;
+  } catch(e){}
+}
+
+function saveToggleState(){
+  try{ localStorage.setItem(TOGGLE_KEY, JSON.stringify(toggleState)); } catch(e){}
+}
+
+function setActive(elOn, elOff){
+  if (!elOn || !elOff) return;
+  elOn.classList.add('active');
+  elOff.classList.remove('active');
+}
+
+function initializeToggles(){
+  loadToggleState();
+
+  const modePace = document.getElementById('modePace');
+  const modePressure = document.getElementById('modePressure');
+  const ctxSolo = document.getElementById('ctxSolo');
+  const ctxTeam = document.getElementById('ctxTeam');
+  const outPrivate = document.getElementById('outPrivate');
+  const outShare = document.getElementById('outShare');
+  const depthStandard = document.getElementById('depthStandard');
+  const depthDeep = document.getElementById('depthDeep');
+
+  if (toggleState.mode === 'pressure') setActive(modePressure, modePace); else setActive(modePace, modePressure);
+  if (toggleState.context === 'team') setActive(ctxTeam, ctxSolo); else setActive(ctxSolo, ctxTeam);
+  if (toggleState.output === 'share') setActive(outShare, outPrivate); else setActive(outPrivate, outShare);
+  if (toggleState.depth === 'deep') setActive(depthDeep, depthStandard); else setActive(depthStandard, depthDeep);
+
+  const wire = (btn, handler) => btn && btn.addEventListener('click', handler);
+
+  wire(modePace, () => { toggleState.mode = 'pace'; setActive(modePace, modePressure); afterToggleChange(); });
+  wire(modePressure, () => { toggleState.mode = 'pressure'; setActive(modePressure, modePace); afterToggleChange(); });
+
+  wire(ctxSolo, () => { toggleState.context = 'solo'; setActive(ctxSolo, ctxTeam); afterToggleChange(); });
+  wire(ctxTeam, () => { toggleState.context = 'team'; setActive(ctxTeam, ctxSolo); afterToggleChange(); });
+
+  wire(outPrivate, () => { toggleState.output = 'private'; setActive(outPrivate, outShare); afterToggleChange(); });
+  wire(outShare, () => { toggleState.output = 'share'; setActive(outShare, outPrivate); afterToggleChange(); });
+
+  wire(depthStandard, () => { toggleState.depth = 'standard'; setActive(depthStandard, depthDeep); afterToggleChange(); });
+  wire(depthDeep, () => { toggleState.depth = 'deep'; setActive(depthDeep, depthStandard); afterToggleChange(); });
+
+  // Ensure module prompts reflect toggles
+  applyDynamicCopy();
+}
+
+function afterToggleChange(){
+  saveToggleState();
+  applyDynamicCopy();
+  rebuildPlaceholdersInPlace();
+  refreshGenerateState();
+
+  const pack = document.getElementById('packSection');
+  if (pack) pack.classList.remove('active');
+}
+
+function applyDynamicCopy(){
+  const mcMode = document.getElementById('mcMode');
+  const mcContext = document.getElementById('mcContext');
+  const mcOutput = document.getElementById('mcOutput');
+  const mcDepth = document.getElementById('mcDepth');
+
+  if (mcMode){
+    if (toggleState.mode === 'pace'){
+      mcMode.innerHTML = "<strong>Pace mode:</strong> design guardrails that make your week repeatable. You’re building a pace you can hold, not a hero sprint.";
+    } else {
+      mcMode.innerHTML = "<strong>Pressure mode:</strong> you’re in triage. The aim is to reduce load fast, protect sleep, and convert urgency into explicit trade-offs.";
+    }
+  }
+
+  if (mcContext){
+    if (toggleState.context === 'solo'){
+      mcContext.innerHTML = "<strong>Solo:</strong> focus on scope control, entry points, and trade-offs. You protect your time by controlling what gets through.";
+    } else {
+      mcContext.innerHTML = "<strong>Team:</strong> focus on shared norms, meeting hygiene, and how work enters the group. You’re designing pace at system level.";
+    }
+  }
+
+  if (mcOutput){
+    if (toggleState.output === 'private'){
+      mcOutput.innerHTML = "<strong>Private:</strong> write the truth. The pack will keep it direct. If you switch to shareable, it will convert to cleaner, workplace-ready language.";
+    } else {
+      mcOutput.innerHTML = "<strong>Shareable:</strong> your outputs will be phrased for stakeholders. It keeps the message firm without oversharing personal detail.";
+    }
+  }
+
+  if (mcDepth){
+    if (toggleState.depth === 'standard'){
+      mcDepth.innerHTML = "<strong>Standard:</strong> a tight plan you can execute immediately. Clean guardrails, clean scripts, minimal complexity.";
+    } else {
+      mcDepth.innerHTML = "<strong>Deep:</strong> pushes for root causes, hidden drivers, and exact leverage points. You’ll name the real pattern, not the polite version.";
+    }
+  }
+
+  const wsSubtitle = document.getElementById('workspaceSubtitle');
+  if (wsSubtitle){
+    wsSubtitle.textContent =
+      toggleState.mode === 'pressure'
+        ? "Pressure drafting: focus on triage, trade-offs, and the minimum viable guardrails to stabilise output without burning yourself out."
+        : "Pace drafting: map your week, identify your archetype, and design constraints that make delivery sustainable without sacrificing credibility.";
+  }
+
+  const packSubtitle = document.getElementById('packSubtitle');
+  if (packSubtitle){
+    packSubtitle.textContent =
+      toggleState.mode === 'pressure'
+        ? "A structured output you can use immediately: a 48-hour stabilisation plan, pressure tripwires, and scripts that force clarity and trade-offs."
+        : "A structured output you can use immediately: a one-page pace plan, pressure tripwires (so you catch drift early), and scripts that protect delivery without drama.";
+  }
+}
+
+/* ===========================
+   PRESSURE MODE OVERLAY
+=========================== */
+function initializePressureOverlay(){
+  const overlay = document.getElementById('pressureOverlay');
+  const backdrop = document.getElementById('pressureBackdrop');
+  const openBtn = document.getElementById('pressureOverlayBtn');
+  const closeBtn = document.getElementById('pressureCloseBtn');
+
+  const copyBtn = document.getElementById('pressureCopyBtn');
+  const applyBtn = document.getElementById('pressureApplyBtn');
+
+  if (!overlay || !backdrop || !openBtn || !closeBtn) return;
+
+  const open = () => {
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const close = () => {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  openBtn.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', close);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) close();
+  });
+
+  if (copyBtn){
+    copyBtn.addEventListener('click', () => {
+      const stop = (document.getElementById('pmStopBox')?.value || '').trim();
+      const trade = (document.getElementById('pmTradeoffBox')?.value || '').trim();
+      const txt =
+`PRESSURE MODE (Triage notes)
+----------------------------
+Stop/Pause (24–48 hours):
+${stop || '—'}
+
+Trade-off line:
+${trade || '—'}
+`;
+      copyText(txt, copyBtn, 'Copied');
+    });
+  }
+
+  if (applyBtn){
+    applyBtn.addEventListener('click', () => {
+      // Apply overlay notes into the draft (pressure-friendly placement)
+      const stop = (document.getElementById('pmStopBox')?.value || '').trim();
+      const trade = (document.getElementById('pmTradeoffBox')?.value || '').trim();
+
+      const d = getDraft();
+      const addLine = (existing, block) => {
+        const base = (existing || '').trim();
+        if (!block) return base;
+        if (!base) return block;
+        return base + "\n\n" + block;
+      };
+
+      // Inject into "triage" and "scripts" modules by design (module ids below)
+      const triageBlock =
+`Pressure Mode notes
+• Stop/Pause (24–48h): ${stop || '—'}
+• Trade-off line: ${trade || '—'}
+• Aim: stabilise sleep, reduce load, convert urgency into a decision.`;
+
+      d.triage = addLine(d.triage, triageBlock);
+
+      const scriptBlock =
+`Holding line (copy/paste)
+“Happy to help. To take this on, I need to confirm priorities and what moves. What should I deprioritise to make room?”`;
+
+      d.scripts = addLine(d.scripts, scriptBlock);
+
+      setDraft(d);
+      loadDraft();
+      refreshGenerateState();
+
+      const overlay = document.getElementById('pressureOverlay');
+      if (overlay){
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      // Switch mode to pressure automatically for coherence
+      toggleState.mode = 'pressure';
+      saveToggleState();
+      document.getElementById('modePressure')?.classList.add('active');
+      document.getElementById('modePace')?.classList.remove('active');
+      applyDynamicCopy();
+      rebuildPlaceholdersInPlace();
+    });
+  }
+}
+
+/* ===========================
+   MODULES (EVEN NUMBER) + DYNAMIC PLACEHOLDERS
+=========================== */
+const DRAFT_KEY = 'tepSustainablePaceDraft_v1';
+
+const moduleDefs = [
+  {
+    id: 'baseline',
+    title: 'Baseline reality (how your week actually runs)',
+    hint: 'Your true cadence: meetings, deep work, reactive load, and spillover.',
+    basePlaceholder:
+`Map your week as it currently runs (not the fantasy version).
+
+Include:
+• Start/finish pattern (real, not ideal)
+• Meetings: volume, type, and when they cluster
+• Deep work: where it is squeezed (and why)
+• Reactive load: what keeps interrupting
+• Spillover: what leaks into evenings/weekends
+
+Finish with:
+• “The one thing that makes this week unsustainable is…”`,
+    paceAdd:
+`\n\nPace focus:
+• What would a repeatable “good week” look like (minimum viable)?
+• What has to be true for that to be possible?`,
+    pressureAdd:
+`\n\nPressure focus:
+• What is on fire right now? Name the 3 urgent items.
+• What is the minimum you can deliver this week without damage?`
+  },
+  {
+    id: 'pressureMap',
+    title: 'Pressure map (what tips you into urgency)',
+    hint: 'Triggers, patterns, and where urgency is created.',
+    basePlaceholder:
+`List the triggers that push you into urgency.
+
+Include:
+• External: late requests, unclear priorities, resourcing gaps, stakeholder pressure
+• Internal: perfectionism, rescue reflex, fear of disappointing, avoiding conflict
+• System: unclear decision rights, poor briefs, too many approvals
+
+Then answer:
+• Where does urgency come from (facts) vs where is it manufactured (habits/norms)?
+• What repeats every month/quarter?`,
+    paceAdd:
+`\n\nPace focus:
+• Which trigger can you remove with a simple rule?
+• Which trigger requires a stakeholder boundary?`,
+    pressureAdd:
+`\n\nPressure focus:
+• What will you stop accepting for 48 hours?
+• Which trigger requires an immediate trade-off conversation today?`
+  },
+  {
+    id: 'archetype',
+    title: 'Behaviour-driven pace archetype (your default)',
+    hint: 'Name your delivery style — then design around it.',
+    basePlaceholder:
+`Pick the archetype that is most true for you (and be honest).
+
+1) The Sprint Merchant
+• Starts fast, runs on adrenaline, then crashes and “recovers” at weekends.
+
+2) The Invisible Hero
+• Quietly absorbs gaps and saves the day, but becomes the default backstop.
+
+3) The Perfection Loop
+• Overworks to feel safe, rechecks, refines, then time disappears.
+
+4) The Boundary Drifter
+• Has rules, but compromises “just this once” until there are no rules.
+
+5) The People-Soother
+• Manages tension, smooths conflict, carries emotional labour, then burns out.
+
+Write:
+• Your archetype
+• Your early tell (first sign you’re slipping)
+• Your interruption rule (what you do instead)
+• The sentence you will use when you feel the pull`,
+    paceAdd:
+`\n\nPace focus:
+• What constraint would make your archetype harmless (e.g., hard stop, meeting rule, intake rule)?`,
+    pressureAdd:
+`\n\nPressure focus:
+• What is the fastest “interruption rule” you can apply today (within 15 minutes)?`
+  },
+  {
+    id: 'capacity',
+    title: 'Capacity design (what you can actually carry)',
+    hint: 'Define your safe load, then protect it.',
+    basePlaceholder:
+`Define your capacity in operational terms (not motivation).
+
+Answer:
+• What is a safe number of “heavy” deliverables per week?
+• What is a safe number of meetings per day before quality drops?
+• What is your maximum context switches per day (be realistic)?
+• What time do you need protected for deep work?
+
+Then define your “pace ceiling”:
+• “If I cross X, I must trigger a reset conversation.”`,
+    paceAdd:
+`\n\nPace focus:
+• What do you protect first: deep work blocks, meeting cap, or intake rules?
+• How will you measure drift weekly?`,
+    pressureAdd:
+`\n\nPressure focus:
+• What is the single cap you will enforce for the next 7 days to stabilise?`
+  },
+  {
+    id: 'guardrails',
+    title: 'Guardrails (the rules that protect delivery)',
+    hint: 'Design the rules that stop work expanding into your life.',
+    basePlaceholder:
+`Write 5–7 guardrails you will hold.
+
+Examples:
+• No new work without a trade-off
+• Meeting-free blocks (twice weekly)
+• Written briefs only for “urgent” tasks
+• Response windows (not instant replies)
+• Hard stop on two nights per week
+• No back-to-back meetings without a reset gap
+
+For each guardrail:
+• The rule
+• Why it exists (delivery reason)
+• What you will do if it is tested (follow-up action)`,
+    paceAdd:
+`\n\nPace focus:
+• Which guardrails need stakeholder agreement?
+• Which ones you can implement unilaterally today?`,
+    pressureAdd:
+`\n\nPressure focus:
+• Choose the 3 guardrails that stabilise the next 48 hours.`
+  },
+  {
+    id: 'teamNorms',
+    title: 'Meetings + comms hygiene (reduce drain)',
+    hint: 'Make time predictable and reduce reactive chaos.',
+    basePlaceholder:
+`Define how meetings and comms will work going forward.
+
+Meetings:
+• When you will decline
+• What requires an agenda/decision
+• What becomes written updates instead
+• How you stop “quick calls” becoming the work
+
+Comms:
+• Response windows (what is “same-day” vs “next-day”)
+• How “urgent” is defined
+• Who can interrupt you, and how
+
+Finish with:
+• The two meeting rules you will enforce immediately.`,
+    paceAdd:
+`\n\nPace focus:
+• What norms would reduce interruptions across the team?`,
+    pressureAdd:
+`\n\nPressure focus:
+• Which meeting type gets cancelled this week without consequence?`
+  },
+  {
+    id: 'recovery',
+    title: 'Recovery that supports output (not guilt)',
+    hint: 'Recovery is a dependency for delivery, not a reward for suffering.',
+    basePlaceholder:
+`Design recovery that fits your life and protects output.
+
+Daily:
+• One short reset (10–20 minutes) you will actually do
+• One switch-off cue after work (simple ritual)
+• One non-negotiable: sleep, food, movement, quiet
+
+Weekly:
+• One proper rest block (no guilt)
+• One “life admin” block (so it doesn’t leak into evenings)
+• One connection block (people who refill you)
+
+Also list:
+• What you must stop doing at night that keeps you wired.`,
+    paceAdd:
+`\n\nPace focus:
+• What is the earliest you can realistically switch off — twice a week?`,
+    pressureAdd:
+`\n\nPressure focus:
+• What is the smallest credible sleep protection move you can make tonight?`
+  },
+  {
+    id: 'triage',
+    title: 'Pace vs Pressure plan (what you do when it spikes)',
+    hint: 'A clean route: triage, trade-offs, and escalation thresholds.',
+    basePlaceholder:
+`Write your two-mode plan.
+
+PACE (steady-state):
+• What “good week” looks like
+• Your non-negotiable guardrails
+• How you’ll measure drift
+
+PRESSURE (when spikes hit):
+• 48-hour actions: stop, reduce, simplify
+• The trade-off question you will ask
+• Who you tell (and what you say)
+• The minimum viable delivery you will protect
+
+Escalation threshold:
+• “If X happens for Y days, I trigger manager/HR support.”`,
+    paceAdd:
+`\n\nPace focus:
+• Name the drift metric you will review weekly (simple, visible).`,
+    pressureAdd:
+`\n\nPressure focus:
+• Write the message you will send today to lock priorities in writing.`
+  },
+  {
+    id: 'scripts',
+    title: 'Scripts you will actually use',
+    hint: 'Short, calm lines that protect boundaries and force trade-offs.',
+    basePlaceholder:
+`Write your 4 scripts (copy/paste ready):
+
+1) Holding line (when something lands urgently)
+2) Trade-off question (forces prioritisation)
+3) Boundary statement (calm, not apologetic)
+4) Follow-up note (locks it in writing)
+
+Keep them short. Keep them factual. Keep them repeatable.`,
+    paceAdd:
+`\n\nPace focus:
+• Include a meeting rule script (“agenda + decision needed”).`,
+    pressureAdd:
+`\n\nPressure focus:
+• Include an escalation line (“capacity risk”).`
+  }
+];
+
+(function ensureEvenModules(){
+  if (moduleDefs.length % 2 !== 0) {
+    moduleDefs.push({
+      id: 'notes',
+      title: 'Notes (auto-added)',
+      hint: 'A safety module to keep the set even.',
+      basePlaceholder: "Any extra context you don't want to lose.",
+      paceAdd: "",
+      pressureAdd: ""
+    });
+  }
+})();
+
+function getPlaceholderFor(def){
+  const base = def.basePlaceholder || '';
+  const add = toggleState.mode === 'pressure' ? (def.pressureAdd || '') : (def.paceAdd || '');
+  const contextAdd =
+    toggleState.context === 'team'
+      ? "\n\nTeam context prompt:\n• What needs to be true across the team for pace to hold?\n• What norm will you stop participating in?"
+      : "\n\nSolo context prompt:\n• Where do you personally create drift (over-responding, over-fixing, over-explaining)?\n• What is the rule you will hold anyway?";
+
+  const depthAdd =
+    toggleState.depth === 'deep'
+      ? "\n\nDeep prompt:\n• What are you getting out of the current pattern (safety, approval, control, avoidance)?\n• What is the cost (health, relationships, long-term reputation)?\n• What is the smallest brave action that changes the system?"
+      : "";
+
+  // Output mode affects language: shareable reduces personal detail prompts
+  const outputAdd =
+    toggleState.output === 'share'
+      ? "\n\nShareable prompt:\n• Phrase this in workplace-ready language (delivery risk, capacity, priorities, trade-offs). Avoid personal detail."
+      : "";
+
+  return base + add + contextAdd + depthAdd + outputAdd;
+}
+
+function buildModules(){
+  const grid = document.getElementById('modulesGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  moduleDefs.forEach((m, idx) => {
+    const card = document.createElement('div');
+    card.className = 'module-card';
+    const ph = getPlaceholderFor(m);
+
+    card.innerHTML = `
+      <div class="module-top">
+        <div class="module-chip">
+          <div class="module-num">${idx + 1}</div>
+          <div class="module-title">
+            <h3>${m.title}</h3>
+            <p>${m.hint}</p>
+          </div>
+        </div>
+        <div class="module-helper" title="Focus tag.">
+          <i class="fas fa-crosshairs"></i>
+          <span>Focus</span>
+        </div>
+      </div>
+
+      <textarea class="module-input" id="input_${m.id}" placeholder="${escapeHtml(ph)}"></textarea>
+
+      <div class="module-meta">
+        <div class="count" id="count_${m.id}">0 chars</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function rebuildPlaceholdersInPlace(){
+  // Update placeholders without wiping user content
+  moduleDefs.forEach(m => {
+    const el = document.getElementById(`input_${m.id}`);
+    if (!el) return;
+    el.placeholder = getPlaceholderFor(m);
+  });
+}
+
+/* ===========================
+   UTILS
+=========================== */
+function escapeHtml(str){
+  return (str || '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
+/* ===========================
+   DRAFT STORAGE
+=========================== */
+function getDraft(){
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch(e){
+    return {};
+  }
+}
+function setDraft(d){
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); }
+  catch(e){ console.warn('Draft save failed:', e); }
+}
+
+function loadDraft(){
+  const d = getDraft();
+  moduleDefs.forEach(m => {
+    const el = document.getElementById(`input_${m.id}`);
+    if (!el) return;
+    el.value = (d[m.id] || '');
+    updateModuleCount(m.id);
+  });
+}
+
+function wireDraftHandlers(){
+  moduleDefs.forEach(m => {
+    const el = document.getElementById(`input_${m.id}`);
+    if (el) {
+      el.addEventListener('input', () => {
+        const d = getDraft();
+        d[m.id] = el.value;
+        setDraft(d);
+        updateModuleCount(m.id);
+        refreshGenerateState();
+      });
+    }
+  });
+
+  const copyDraftBtn = document.getElementById('copyDraftBtn');
+  const clearDraftBtn = document.getElementById('clearDraftBtn');
+  const generateBtn = document.getElementById('generatePackBtn');
+
+  if (copyDraftBtn) copyDraftBtn.addEventListener('click', copyDraft);
+  if (clearDraftBtn) clearDraftBtn.addEventListener('click', clearDraft);
+  if (generateBtn) generateBtn.addEventListener('click', generateSustainablePacePack);
+
+  const copyPackBtn = document.getElementById('copyPackBtn');
+  const downloadPackBtn = document.getElementById('downloadPackBtn');
+  const printPackBtn = document.getElementById('printPackBtn');
+
+  if (copyPackBtn) copyPackBtn.addEventListener('click', () => {
+    const text = buildPackText();
+    copyText(text, copyPackBtn, 'Pack copied');
+  });
+
+  if (downloadPackBtn) downloadPackBtn.addEventListener('click', () => {
+    const text = buildPackText();
+    downloadText(text, 'sustainable-pace-pack.txt');
+  });
+
+  if (printPackBtn) printPackBtn.addEventListener('click', () => {
+    window.print();
+  });
+}
+
+function updateModuleCount(moduleId){
+  const input = document.getElementById(`input_${moduleId}`);
+  const count = document.getElementById(`count_${moduleId}`);
+  if (!input || !count) return;
+  count.textContent = `${(input.value || '').length} chars`;
+}
+
+function refreshGenerateState(){
+  const btn = document.getElementById('generatePackBtn');
+  if (!btn) return;
+
+  const d = getDraft();
+  const filled = moduleDefs.filter(m => ((d[m.id] || '').trim().length > 0)).length;
+  btn.disabled = filled < 2;
+}
+
+/* ===========================
+   COPY / CLEAR
+=========================== */
+function copyDraft(){
+  const text = buildDraftText();
+  const btn = document.getElementById('copyDraftBtn');
+  copyText(text, btn, 'Draft copied');
+}
+
+function clearDraft(){
+  const ok = confirm('Clear the full draft? This cannot be undone.');
+  if (!ok) return;
+
+  localStorage.removeItem(DRAFT_KEY);
+  loadDraft();
+  refreshGenerateState();
+
+  const pack = document.getElementById('packSection');
+  if (pack) pack.classList.remove('active');
+}
+
+function copyText(text, buttonEl, successLabel){
+  navigator.clipboard.writeText(text);
+
+  if (!buttonEl) return;
+  const originalHTML = buttonEl.innerHTML;
+  const originalBg = buttonEl.style.background;
+  const originalColor = buttonEl.style.color;
+
+  buttonEl.innerHTML = `<i class="fas fa-check"></i> ${successLabel}`;
+  buttonEl.style.background = '#10b981';
+  buttonEl.style.color = '#ffffff';
+
+  setTimeout(() => {
+    buttonEl.innerHTML = originalHTML;
+    buttonEl.style.background = originalBg;
+    buttonEl.style.color = originalColor;
+  }, 1800);
+}
+
+function downloadText(text, filename){
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ===========================
+   PACK GENERATION
+=========================== */
+function generateSustainablePacePack(){
+  const d = getDraft();
+
+  const packSection = document.getElementById('packSection');
+  const onePageOutput = document.getElementById('onePageOutput');
+  const riskGrid = document.getElementById('riskGrid');
+  const scriptsGrid = document.getElementById('scriptsGrid');
+
+  if (!packSection || !onePageOutput || !riskGrid || !scriptsGrid) return;
+
+  const completeness = calcCompleteness(d);
+  const signal = calcPaceSignal(d, completeness);
+
+  document.getElementById('completenessScore').textContent = `${completeness}%`;
+  document.getElementById('paceSignal').textContent = signal.label;
+
+  const fill = document.getElementById('miniFill');
+  fill.style.width = `${completeness}%`;
+  fill.classList.remove('high','medium','low');
+  fill.classList.add(signal.fillClass);
+
+  onePageOutput.textContent = buildOnePageSummary(d);
+
+  riskGrid.innerHTML = '';
+  buildRiskCards(d, riskGrid);
+
+  scriptsGrid.innerHTML = '';
+  buildScriptCards(d, scriptsGrid);
+
+  packSection.classList.add('active');
+  packSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+function calcCompleteness(d){
+  const total = moduleDefs.length;
+  const filled = moduleDefs.filter(m => ((d[m.id] || '').trim().length > 0)).length;
+  return total > 0 ? Math.round((filled / total) * 100) : 0;
+}
+
+function calcPaceSignal(d, completeness){
+  // A pragmatic signal: do we have guardrails + capacity + triage + scripts filled?
+  const anchors = ['capacity','guardrails','triage','scripts'];
+  const filledAnchors = anchors.filter(id => ((d[id]||'').trim().length > 0)).length;
+
+  // If in pressure mode, triage + scripts matter more
+  if (toggleState.mode === 'pressure'){
+    if (completeness >= 70 && filledAnchors >= 3) return { label: 'Stabilising', fillClass: 'high' };
+    if (completeness >= 40 && filledAnchors >= 2) return { label: 'At risk', fillClass: 'medium' };
+    return { label: 'Unstable', fillClass: 'low' };
+  }
+
+  // Pace mode
+  if (completeness >= 75 && filledAnchors === 4) return { label: 'Stable pace', fillClass: 'high' };
+  if (completeness >= 45 && filledAnchors >= 2) return { label: 'Fragile pace', fillClass: 'medium' };
+  return { label: 'Unsustainable', fillClass: 'low' };
+}
+
+function buildOnePageSummary(d){
+  const safe = (s) => (s || '').trim() || '—';
+
+  const now = new Date();
+  const date = now.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+
+  const modeLabel = toggleState.mode === 'pressure' ? 'PRESSURE (Triage)' : 'PACE (Steady-state)';
+  const ctxLabel = toggleState.context === 'team' ? 'Team context' : 'Solo context';
+  const outLabel = toggleState.output === 'share' ? 'Shareable language' : 'Private language';
+  const depthLabel = toggleState.depth === 'deep' ? 'Deep' : 'Standard';
+
+  const out = [];
+  out.push(`SUSTAINABLE PACE PACK (One-page)`);
+  out.push(`Date: ${date}`);
+  out.push(`Mode: ${modeLabel} • ${ctxLabel} • Output: ${outLabel} • Depth: ${depthLabel}`);
+  out.push(``);
+
+  out.push(`1) Baseline reality (current week)`);
+  out.push(indentBlock(safe(d.baseline)));
+  out.push(``);
+
+  out.push(`2) Pressure map (triggers + manufactured urgency)`);
+  out.push(indentBlock(safe(d.pressureMap)));
+  out.push(``);
+
+  out.push(`3) Pace archetype (pattern + interruption rule)`);
+  out.push(indentBlock(safe(d.archetype)));
+  out.push(``);
+
+  out.push(`4) Capacity design (pace ceiling)`);
+  out.push(indentBlock(safe(d.capacity)));
+  out.push(``);
+
+  out.push(`5) Guardrails (rules that protect delivery)`);
+  out.push(indentBlock(safe(d.guardrails)));
+  out.push(``);
+
+  out.push(`6) Meetings + comms hygiene (reduce drain)`);
+  out.push(indentBlock(safe(d.teamNorms)));
+  out.push(``);
+
+  out.push(`7) Recovery that supports output`);
+  out.push(indentBlock(safe(d.recovery)));
+  out.push(``);
+
+  out.push(`8) Pace vs Pressure plan (what I do when it spikes)`);
+  out.push(indentBlock(safe(d.triage)));
+  out.push(``);
+
+  out.push(`9) Scripts I will use`);
+  out.push(indentBlock(safe(d.scripts)));
+  out.push(``);
+
+  out.push(`My clean ask (priorities + trade-offs):`);
+  out.push(indentBlock(buildAskLine(d)));
+
+  return out.join('\n');
+}
+
+function buildAskLine(d){
+  // Keep it generic + workplace-ready
+  const parts = [];
+  parts.push("Confirm the top priorities for the next 2–3 weeks");
+  parts.push("Agree what moves or drops when new work comes in");
+  parts.push("Align on capacity assumptions and decision rights");
+  parts.push("Confirm guardrails that protect sustainable delivery");
+  return parts.join(' • ') + '.';
+}
+
+function indentBlock(text){
+  return (text || '—').split('\n').map(l => `   ${l}`).join('\n');
+}
+
+function buildRiskCards(d, grid){
+  const prompts = getTripwirePrompts(d);
+  prompts.slice(0, 6).forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'pack-card';
+    card.innerHTML = `
+      <div class="pc-ico"><i class="${p.icon}"></i></div>
+      <div class="pc-title">${p.title}</div>
+      <div class="pc-body">${escapeCardText(p.body)}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function getTripwirePrompts(d){
+  const missing = (id) => !((d[id]||'').trim());
+  const prompts = [];
+
+  prompts.push({
+    title: "Drift detector (what will you watch weekly?)",
+    icon: "fas fa-gauge",
+    body:
+"Choose one simple metric: late finishes, meeting overload, context switching, weekend catch-up, or sleep erosion. If you can’t measure drift, you’ll normalise it."
+  });
+
+  prompts.push({
+    title: "Manufactured urgency",
+    icon: "fas fa-bolt",
+    body:
+"Where is urgency created by poor planning, unclear priorities, or ‘always-on’ norms? Name the pattern you will stop participating in."
+  });
+
+  prompts.push({
+    title: "Archetype tripwire",
+    icon: "fas fa-user-gear",
+    body:
+"Which archetype pulls you off pace (hero, perfection loop, boundary drift)? What is your first tell — and your interruption rule?"
+  });
+
+  if (missing('capacity')){
+    prompts.push({
+      title: "Pace ceiling (missing)",
+      icon: "fas fa-traffic-light",
+      body:
+"Define the ceiling: how many heavy deliverables, meetings, or switches is safe. If you don’t set the ceiling, the job will set it for you."
+    });
+  } else {
+    prompts.push({
+      title: "Pace ceiling (enforcement)",
+      icon: "fas fa-traffic-light",
+      body:
+"When you cross your ceiling, what do you do within 24 hours? A ceiling without enforcement becomes a wish."
+    });
+  }
+
+  if (toggleState.mode === 'pressure'){
+    prompts.push({
+      title: "48-hour stabilisation",
+      icon: "fas fa-stopwatch",
+      body:
+"Identify what you will stop, reduce, and simplify in 48 hours. Your first job is stabilising sleep and converting urgency into trade-offs."
+    });
+  } else {
+    prompts.push({
+      title: "Guardrail integrity",
+      icon: "fas fa-shield",
+      body:
+"Which guardrail will be tested first (and by whom)? What is your follow-up action — not just the statement?"
+    });
+  }
+
+  prompts.push({
+    title: "Visibility without oversharing",
+    icon: "fas fa-envelope-open-text",
+    body:
+"How will you make priorities and trade-offs visible in writing? Visibility prevents ‘surprise urgency’ and protects your reputation."
+  });
+
+  return prompts;
+}
+
+function buildScriptCards(d, grid){
+  const scripts = getScripts(d);
+  scripts.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'pack-card';
+    card.innerHTML = `
+      <div class="pc-ico"><i class="${s.icon}"></i></div>
+      <div class="pc-title">${s.title}</div>
+      <div class="pc-body">${escapeCardText(s.body)}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function getScripts(d){
+  const mode = toggleState.mode;
+
+  const holdLine =
+`“Thanks — I can help. To take this on, I need to confirm priorities and what moves. What should I deprioritise to make room?”`;
+
+  const meetingLine =
+`“Before I join, can you confirm the purpose, the decision needed, and whether I’m required? If it’s an update, I’m happy to respond to a written summary instead.”`;
+
+  const boundaryLine =
+`“To protect delivery, I’m working to agreed priorities and trade-offs. I can take urgent work — but we will need to agree what it replaces.”`;
+
+  const followUp =
+`Subject: Priorities and trade-offs (next 2–3 weeks)
+“Thanks — here’s my understanding:
+• Priorities: [A, B]
+• Deprioritised / moved: [C, D]
+• Decision needed from: [name/role]
+• Guardrails to protect delivery: [two rules]
+If anything is off, tell me. Otherwise I’ll run with this.”`;
+
+  const escalation =
+`“I’m raising a capacity risk. I’ve attempted to reset priorities and guardrails, but the workload remains unsustainable. I need support to agree adjustments so delivery stays stable without health impact.”`;
+
+  const modeLead =
+    mode === 'pressure'
+      ? "Use these to stabilise quickly and convert urgency into decisions."
+      : "Use these to keep pace steady and prevent drift back into ‘everything’.";
+
+  return [
+    {
+      title: "Holding line (forces trade-offs)",
+      icon: "fas fa-hourglass-half",
+      body: `${modeLead}\n\n${holdLine}`
+    },
+    {
+      title: "Meeting control (reduce drain)",
+      icon: "fas fa-users",
+      body: meetingLine
+    },
+    {
+      title: "Boundary statement (calm, not apologetic)",
+      icon: "fas fa-shield",
+      body: boundaryLine
+    },
+    {
+      title: "Follow-up note (locks it in writing)",
+      icon: "fas fa-envelope",
+      body: followUp
+    },
+    {
+      title: "Escalation line (capacity risk)",
+      icon: "fas fa-file-signature",
+      body: escalation
+    },
+    {
+      title: "Clean ask (anchors the conversation)",
+      icon: "fas fa-handshake",
+      body: `“Before this drifts further, I want to lock what matters: ${buildAskLine(d)}”`
+    }
+  ];
+}
+
+function escapeCardText(str){
+  return escapeHtml(str).replaceAll('\n', '<br>');
+}
+
+function buildDraftText(){
+  const d = getDraft();
+  const out = [];
+  out.push('SUSTAINABLE PACE PLAN (Draft)');
+  out.push('=============================');
+  out.push('');
+  out.push(`Mode: ${toggleState.mode.toUpperCase()} • Context: ${toggleState.context.toUpperCase()} • Output: ${toggleState.output.toUpperCase()} • Depth: ${toggleState.depth.toUpperCase()}`);
+  out.push('');
+
+  moduleDefs.forEach((m, idx) => {
+    out.push(`${idx + 1}. ${m.title}`);
+    out.push((d[m.id] || '').trim() ? (d[m.id] || '').trim() : '—');
+    out.push('');
+  });
+
+  return out.join('\n');
+}
+
+function buildPackText(){
+  const d = getDraft();
+  const onePage = buildOnePageSummary(d);
+
+  const prompts = getTripwirePrompts(d).slice(0, 6)
+    .map((p, i) => `${i+1}. ${p.title}\n   ${p.body}`)
+    .join('\n\n');
+
+  const scripts = getScripts(d)
+    .map((s, i) => `${i+1}. ${s.title}\n${s.body}`)
+    .join('\n\n');
+
+  const out = [];
+  out.push(onePage);
+  out.push('\n\nPRESSURE TRIPWIRES\n==================\n');
+  out.push(prompts);
+  out.push('\n\nSCRIPTS\n=======\n');
+  out.push(scripts);
+
+  return out.join('');
+}
+
+/* ===========================
+   MY PLAYBOOK (LOCALSTORAGE)
+=========================== */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'sustainable-pace-plan';
+const CURRENT_TOOL_TITLE = 'Sustainable Pace Plan';
+const CURRENT_TOOL_TYPE = 'Plan';
+
+function getSavedItems(){
+  try {
+    const raw = localStorage.getItem(PLAYBOOK_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch(e){
+    console.warn('Error reading saved items:', e);
+    return [];
+  }
+}
+function setSavedItems(items){
+  try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+  catch(e){ console.warn('Error saving items:', e); }
+}
+
+function initializePlaybook(){
+  const playbookOverlay = document.getElementById('playbookOverlay');
+  const playbookSidebar = document.getElementById('playbookSidebar');
+  const playbookButton = document.getElementById('myPlaybookButton');
+  const closeBtn = document.getElementById('closePlaybook');
+  const saveItemBtn = document.getElementById('saveBtn');
+
+  if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+  renderSavedItems();
+
+  const savedItems = getSavedItems();
+  const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+  updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+  saveItemBtn.addEventListener('click', () => {
+    const items = getSavedItems();
+    const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+    let nowSaved;
+
+    if (index === -1) {
+      const toolLink = window.location.pathname.split('/').pop() || 'sustainable-pace-plan.html';
+      items.push({
+        id: CURRENT_TOOL_ID,
+        title: CURRENT_TOOL_TITLE,
+        type: CURRENT_TOOL_TYPE,
+        link: toolLink,
+        savedAt: new Date().toISOString()
+      });
+      nowSaved = true;
+    } else {
+      items.splice(index, 1);
+      nowSaved = false;
+    }
+
+    setSavedItems(items);
+    updateSaveButtonState(saveItemBtn, nowSaved);
+    renderSavedItems();
+  });
+
+  playbookButton.addEventListener('click', () => {
+    playbookOverlay.classList.add('open');
+    playbookSidebar.classList.add('open');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    playbookOverlay.classList.remove('open');
+    playbookSidebar.classList.remove('open');
+  });
+
+  playbookOverlay.addEventListener('click', (e) => {
+    if (e.target === playbookOverlay) {
+      playbookOverlay.classList.remove('open');
+      playbookSidebar.classList.remove('open');
+    }
+  });
+}
+
+function updateSaveButtonState(button, isSaved){
+  if (!button) return;
+  const icon = button.querySelector('i');
+  const label = button.querySelector('span');
+
+  if (isSaved) {
+    button.classList.add('saved');
+    if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+    if (label) label.textContent = 'Saved';
+  } else {
+    button.classList.remove('saved');
+    if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+    if (label) label.textContent = 'Save item';
+  }
+}
+
+function renderSavedItems(){
+  const listEl = document.getElementById('savedItemsList');
+  const emptyEl = document.getElementById('savedItemsEmpty');
+  if (!listEl || !emptyEl) return;
+
+  const items = getSavedItems();
+  listEl.innerHTML = '';
+
+  if (!items.length) {
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+
+  items.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'saved-item';
+
+    const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+    const dateText = savedDate
+      ? savedDate.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
+      : '';
+
+    li.innerHTML = `
+      <div class="saved-item-title-row">
+        <span class="saved-item-title">${escapeHtml(item.title)}</span>
+        <span class="saved-item-type">${escapeHtml(item.type)}</span>
+      </div>
+      <div class="saved-item-meta">
+        ${dateText ? `Saved on ${dateText}` : ``}
+      </div>
+      <a class="saved-item-link" href="${escapeHtml(item.link)}">
+        Open <i class="fas fa-arrow-right"></i>
+      </a>
+    `;
+    listEl.appendChild(li);
+  });
+}
+</script>
+
+</body>
+</html>

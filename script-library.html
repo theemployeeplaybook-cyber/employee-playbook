@@ -1,0 +1,3321 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Script Library | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    :root{
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+      --text-dark:#212529;
+      --text-medium:#495057;
+      --border-light:rgba(0,0,0,0.08);
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --nav-bg: rgba(255,255,255,0.95);
+      --hero-bg: linear-gradient(135deg,#F9F6FF 0%,#F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg,#7B5FC4 0%,#5A4496 100%);
+
+      /* GOLD ACCENT (swipe underline) */
+      --gold-1:#FFD700;
+      --gold-2:#F3BE33;
+
+      /* CATEGORY COLOURS */
+      --category-clarity:#7B5FC4;
+      --category-burnout:#f59e0b;
+      --category-manager:#10b981;
+      --category-politics:#3b82f6;
+      --category-hr:#6D28D9;
+      --category-confidence:#ef4444;
+      --category-career:#800020;
+
+      /* Crisis SOS */
+      --category-sos:#dc2626;
+    }
+
+    .dark-mode{
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#888888;
+      --text-dark:#e0e0e0;
+      --text-medium:#b0b0b0;
+      --border-light:rgba(255,255,255,0.08);
+      --nav-bg: rgba(30,30,30,0.95);
+      --hero-bg: linear-gradient(135deg,#2a2a2a 0%,#1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg,#9d86e9 0%,#7b5fc4 100%);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-weight:400;}
+    body{background:var(--primary-white);color:var(--text-dark);line-height:1.6;overflow-x:hidden;opacity:0;transition:opacity .35s ease;min-height:100vh;}
+    body.loaded{opacity:1;}
+
+    .container{max-width:1400px;margin:0 auto;padding:0 20px;}
+    .shell{max-width:1100px;margin:0 auto;padding:0 20px;}
+
+    /* NAV */
+    nav{
+      position:fixed;top:0;width:100%;
+      background:var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index:1000;
+      border-bottom:1px solid var(--border-light);
+      box-shadow:0 1px 3px rgba(0,0,0,0.05);
+      height:80px;
+    }
+    .nav-container{display:flex;justify-content:space-between;align-items:center;padding:12px 0;height:100%;}
+    .logo-img{height:100px;width:auto;transform:translateX(20%);padding:14px 10px;display:block;min-height:100px;}
+    .nav-links{display:flex;gap:50px;align-items:center;}
+    .nav-link{color:var(--text-dark);text-decoration:none;font-weight:500;transition:color .2s ease;font-size:17px;position:relative;}
+    .nav-link:hover{color:var(--accent-purple);}
+    .nav-actions{display:flex;align-items:center;gap:24px;transform:translateX(-20%);}
+    .header-cta{
+      background:var(--accent-purple);color:white;padding:8px 20px;border-radius:999px;text-decoration:none;
+      font-weight:600;font-size:14px;transition:all .2s ease;box-shadow:0 5px 15px rgba(123,95,196,.3);
+    }
+    .header-cta:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(123,95,196,.35);}
+    .sign-in{color:var(--text-dark);text-decoration:none;font-weight:500;font-size:17px;}
+    .sign-in:hover{color:var(--accent-purple);}
+    .theme-toggle{
+      background:none;border:none;color:var(--text-dark);cursor:pointer;font-size:16px;
+      width:36px;height:36px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+      transition:background-color .2s ease;
+    }
+    .theme-toggle:hover{background-color:var(--light-gray);}
+    .mobile-toggle{
+      display:none;background:none;border:none;color:var(--text-dark);cursor:pointer;font-size:24px;
+      width:40px;height:40px;border-radius:999px;align-items:center;justify-content:center;
+      transition:background-color .2s ease;
+    }
+    .mobile-toggle:hover{background-color:var(--light-gray);}
+    .mobile-sign-in,.mobile-sign-up{display:none;}
+
+    /* NEW tag container */
+    .nav-link-container{position:relative;display:inline-block;}
+
+    @media(max-width:768px){
+      .nav-container{justify-content:center;position:relative;}
+      .logo{position:absolute;left:50%;transform:translateX(-50%);display:flex;align-items:center;height:100%;}
+      .logo-img{height:125px;transform:none;padding:12px 0;}
+      .mobile-toggle{display:flex;position:absolute;left:20px;}
+      .nav-actions{transform:none;gap:16px;position:absolute;right:20px;}
+      .nav-actions .sign-in,.nav-actions .header-cta{display:none;}
+      .nav-links{
+        display:none;position:absolute;top:100%;left:0;width:100%;
+        background:var(--nav-bg);backdrop-filter: blur(10px);-webkit-backdrop-filter: blur(10px);
+        flex-direction:column;padding:20px;border-top:1px solid var(--border-light);
+        box-shadow:0 5px 15px rgba(0,0,0,.1);gap:20px;
+      }
+      .nav-links.active{display:flex;}
+      .mobile-sign-in{
+        display:block!important;margin-top:10px;padding:12px 20px;background:var(--primary-white);
+        color:var(--accent-purple);border-radius:12px;text-align:center;font-weight:600;text-decoration:none;
+        border:2px solid var(--accent-purple);transition:all .2s ease;
+      }
+      .mobile-sign-up{
+        display:block!important;margin-top:10px;padding:12px 20px;background:var(--accent-purple);
+        color:white;border-radius:12px;text-align:center;font-weight:600;text-decoration:none;
+        border:2px solid var(--accent-purple);transition:all .2s ease;
+      }
+    }
+
+    /* HERO */
+    .tool-hero-section{
+      width:100%;
+      background:var(--hero-bg);
+      padding:28px 0 34px;
+      margin-top:110px;
+      position:relative;
+      border-bottom:1px solid var(--border-light);
+      overflow:hidden;
+    }
+    .tool-hero-section::before{
+      content:'';
+      position:absolute;inset:0;
+      background: linear-gradient(135deg, rgba(250,245,255,0.82) 0%, rgba(245,240,255,0.62) 50%, rgba(255,255,255,0.28) 100%);
+      z-index:1;
+    }
+    .dark-mode .tool-hero-section::before{
+      background: linear-gradient(135deg, rgba(42,42,42,0.92) 0%, rgba(31,31,31,0.72) 50%, rgba(26,26,26,0.44) 100%);
+    }
+    .hero-inner{position:relative;z-index:2;} /* needed so Save can sit top-right */
+
+    .hero-toprow{
+      display:flex;
+      align-items:center;
+      justify-content:flex-start;
+      gap:16px;
+      margin-bottom:10px;
+      position:relative;
+      padding-right: 90px;
+    }
+
+    .breadcrumb{
+      font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--dark-gray);
+      display:flex;gap:6px;align-items:center;flex-wrap:wrap;
+    }
+    .breadcrumb a{color:var(--text-medium);text-decoration:none;font-weight:500;letter-spacing:.5px;transition:color .2s ease;}
+    .breadcrumb a:hover{color:var(--accent-purple-dark);}
+    .breadcrumb .current{color:var(--text-dark);font-weight:600;}
+    .breadcrumb i{font-size:10px;opacity:.7;color:var(--dark-gray);}
+
+    /* Centre hero text block */
+    .hero-kicker,
+    .hero-title,
+    .hero-sub{
+      text-align:center;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    /* PREMIUM UNDERLINE — THIN GOLD SWIPE */
+    .hero-kicker{
+      font-size:18px;
+      font-weight:600;
+      letter-spacing:2.2px;
+      text-transform:uppercase;
+      color: var(--accent-purple);
+      display:block;
+      width:fit-content;
+      margin:0 auto 14px;
+      text-align:center;
+      padding:0 10px 14px;
+      position:relative;
+    }
+    .hero-kicker::after{
+      content:'';
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%) skewX(-10deg);
+      bottom:0;
+      width:172px;
+      height:2px;              /* thin swipe */
+      border-radius:999px;
+      background: linear-gradient(90deg, rgba(243,190,51,0.95), rgba(255,215,0,0.98), rgba(243,190,51,0.95));
+      border:1px solid rgba(255,215,0,0.98);
+      box-shadow:
+        0 6px 20px rgba(243,190,51,0.20),
+        inset 0 1px 1px rgba(255,255,255,0.55);
+      opacity:0.98;
+    }
+    .hero-kicker::before{
+      content:'';
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%) skewX(-10deg);
+      bottom:4px;
+      width:150px;
+      height:1px;
+      border-radius:999px;
+      background: linear-gradient(90deg,
+        rgba(255,255,255,0.00),
+        rgba(255,255,255,0.75),
+        rgba(255,255,255,0.00)
+      );
+      opacity:0.55;
+      pointer-events:none;
+    }
+    .dark-mode .hero-kicker::after{
+      border:1px solid rgba(255,255,255,0.12);
+      box-shadow:
+        0 14px 30px rgba(0,0,0,0.45),
+        0 10px 26px rgba(243,190,51,0.12),
+        inset 0 1px 1px rgba(255,255,255,0.25);
+    }
+    .dark-mode .hero-kicker::before{opacity:0.42;}
+
+    .hero-title{
+      font-size:64px;
+      line-height:1.04;
+      font-weight:700;
+      color:var(--text-dark);
+      max-width:850px;
+      margin-bottom:16px;
+    }
+    .hero-sub{
+      font-size:18px;
+      font-weight:400;
+      color:var(--text-medium);
+      max-width:860px;
+      margin-bottom:30px;
+    }
+
+    /* DEMO SECTION */
+    .demo-wrap{
+      padding:22px 0 6px;
+      border-bottom:1px solid var(--border-light);
+      background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0));
+    }
+    .dark-mode .demo-wrap{background:transparent;}
+    .demo-card{
+      position:relative;
+      background: var(--primary-white);
+      border:1px solid var(--border-light);
+      border-radius:20px;
+      padding:18px 18px;
+      box-shadow: 0 14px 40px rgba(123,95,196,0.10);
+      overflow:hidden;
+    }
+    .dark-mode .demo-card{box-shadow: 0 18px 50px rgba(0,0,0,0.42);}
+    .demo-top{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:14px;
+      margin-bottom:14px;
+      padding-right: 90px;
+    }
+    .demo-kicker{
+      font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+      color: var(--accent-purple);
+      margin-bottom:8px;
+    }
+    .demo-title{
+      font-size:18px;font-weight:700;color:var(--text-dark);line-height:1.25;
+      margin-bottom:8px;
+    }
+    .demo-sub{
+      font-size:14px;font-weight:400;color:var(--text-medium);line-height:1.55;
+      max-width: 880px;
+    }
+
+    .block{
+      border-radius:16px;
+      border:1px solid var(--border-light);
+      padding:14px 14px;
+      background: rgba(255,255,255,0.75);
+    }
+    .dark-mode .block{background: rgba(255,255,255,0.06);}
+
+    .block.primary{
+      border-color: rgba(123,95,196,0.25);
+      background: linear-gradient(135deg, rgba(123,95,196,0.09), rgba(123,95,196,0.03));
+    }
+
+    .block-title{
+      display:flex;align-items:center;gap:10px;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      color: var(--accent-purple-dark);
+      margin-bottom:10px;
+      opacity:.95;
+    }
+    .block-title i{opacity:.7;}
+    .block-text{
+      font-size:15px;
+      font-weight:400;
+      color: var(--text-dark);
+      line-height:1.6;
+      white-space:pre-line;
+    }
+    .block-text strong{font-weight:700;}
+    .muted{color: var(--text-medium);font-weight:400;}
+
+    .use-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      margin-top:12px;
+      padding-bottom: 0;
+    }
+    .use-chip{
+      border-radius:16px;
+      border:1px solid rgba(123,95,196,0.18);
+      background: linear-gradient(135deg, rgba(123,95,196,0.07), rgba(123,95,196,0.02));
+      padding:12px 12px;
+    }
+    .use-chip .t{
+      font-size:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;
+      color: var(--accent-purple-dark);opacity:.95;margin-bottom:8px;
+      display:flex;gap:10px;align-items:center;
+    }
+    .use-chip .b{
+      font-size:14px;font-weight:400;color:var(--text-dark);line-height:1.55;
+    }
+    .use-chip i{opacity:.7;}
+
+    .tip-list{
+      margin: 8px 0 0 0;
+      padding-left: 18px;
+      color: var(--text-dark);
+      font-size:14px;
+      line-height:1.55;
+    }
+    .tip-list li{margin-bottom:6px;}
+    .tip-list li:last-child{margin-bottom:0;}
+
+    @media(max-width:1024px){ .use-grid{grid-template-columns:1fr;} }
+
+    .demo-corner-stats{
+      position:absolute;
+      right:34px;
+      bottom:24px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      color: var(--accent-purple-dark);
+      font-size:12px;
+      font-weight:600;
+      opacity:0.95;
+      pointer-events:none;
+    }
+    .dark-mode .demo-corner-stats{color: var(--text-dark);opacity:0.9;}
+    .demo-corner-stats .stat{display:inline-flex;align-items:center;gap:6px;}
+    .demo-corner-stats i{color: var(--accent-purple);}
+
+    /* SEARCH */
+    .search-wrap{
+      padding:22px 0 10px;
+      border-bottom:1px solid var(--border-light);
+      background: linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0));
+    }
+    .dark-mode .search-wrap{background:transparent;}
+    .search-card{
+      background: var(--primary-white);
+      border:1px solid var(--border-light);
+      border-radius:18px;
+      padding:18px 18px;
+      box-shadow: 0 10px 30px rgba(123,95,196,0.08);
+      position:relative;
+    }
+    .dark-mode .search-card{box-shadow: 0 10px 30px rgba(0,0,0,0.35);}
+
+    .search-row{display:flex;align-items:center;gap:12px;}
+    .search-field{position:relative;flex:1;}
+    .search-input{
+      width:100%;
+      border:1px solid rgba(123,95,196,0.18);
+      background: linear-gradient(135deg, rgba(123,95,196,0.06), rgba(123,95,196,0.02));
+      border-radius:999px;
+      padding:12px 14px 12px 44px;
+      font-size:14px;
+      font-weight:400;
+      color:var(--text-dark);
+      outline:none;
+      transition:all .18s ease;
+    }
+    .dark-mode .search-input{
+      border-color:rgba(157,134,233,0.22);
+      background: rgba(255,255,255,0.06);
+    }
+    .search-input:focus{
+      border-color: rgba(123,95,196,0.42);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.12);
+    }
+    .search-icon{
+      position:absolute;
+      left:16px;
+      top:50%;
+      transform: translateY(-50%);
+      color: var(--accent-purple-dark);
+      opacity:.85;
+      pointer-events:none;
+      font-size:14px;
+    }
+    .search-hint{
+      margin-top:10px;
+      color: var(--text-medium);
+      font-size:13px;
+      font-weight:400;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .search-hint strong{font-weight:600;}
+
+    .hint-actions{display:flex;align-items:center;gap:10px;}
+    .tiny-link{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(123,95,196,0.25);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      text-decoration:none;
+      color: var(--accent-purple-dark);
+      font-size:12px;font-weight:600;
+      transition:all .18s ease;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .tiny-link:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(0,0,0,0.10);}
+
+    /* Search results */
+    .results-panel{
+      display:none;
+      margin-top:12px;
+      border-radius:16px;
+      border:1px solid var(--border-light);
+      background: var(--primary-white);
+      overflow:hidden;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+    }
+    .dark-mode .results-panel{box-shadow: 0 16px 40px rgba(0,0,0,0.45);}
+    .results-panel.active{display:block;}
+    .results-head{
+      padding:12px 14px;
+      background: linear-gradient(135deg, rgba(123,95,196,0.07), rgba(123,95,196,0.02));
+      border-bottom:1px solid var(--border-light);
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+    }
+    .results-title{
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      color: var(--text-medium);
+    }
+    .results-meta{font-size:12px;color: var(--dark-gray);font-weight:400;}
+    .results-list{
+      list-style:none;margin:0;padding:0;
+      max-height: 420px;
+      overflow-y:auto;
+    }
+    .result-item{
+      padding:12px 14px;
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+      cursor:pointer;
+      border-bottom:1px solid var(--border-light);
+      transition:background .15s ease;
+    }
+    .result-item:last-child{border-bottom:none;}
+    .result-item:hover{background: rgba(123,95,196,0.05);}
+    .result-left{min-width:0;}
+    .result-title{
+      font-size:14px;
+      font-weight:700;
+      color: var(--text-dark);
+      margin-bottom:6px;
+      line-height:1.25;
+    }
+    .result-sub{
+      font-size:12px;
+      color: var(--text-medium);
+      line-height:1.45;
+      margin-bottom:8px;
+    }
+    .result-meta-row{
+      display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+      font-size:12px;color: var(--dark-gray);
+      font-weight:600;
+      opacity:.95;
+    }
+    .result-meta-row i{color: var(--accent-purple);}
+
+    /* Section */
+    .section{padding:34px 0;}
+    .section h2{
+      font-size:34px;
+      font-weight:700;
+      color: var(--accent-purple-dark);
+      margin-bottom:6px;
+      letter-spacing:-0.3px;
+    }
+    .section p.lead{color:var(--text-medium);font-size:15px;font-weight:400;margin-bottom:18px;}
+
+    /* BROWSE */
+    .browse-wrap{padding-top:30px;}
+    .category-grid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:14px;
+      margin-top:16px;
+      align-items:stretch;
+    }
+    .cat-card{
+      position:relative;
+      border-radius:18px;
+      border:1px solid var(--border-light);
+      background: var(--primary-white);
+      padding:16px 16px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.05);
+      cursor:pointer;
+      transition: all .18s ease;
+      overflow:hidden;
+      min-height: 160px;
+      display:flex;flex-direction:column;
+    }
+    .dark-mode .cat-card{box-shadow: 0 10px 28px rgba(0,0,0,0.35);}
+    .cat-card:hover{transform:translateY(-2px);box-shadow: 0 18px 38px rgba(0,0,0,0.10);}
+    .cat-accent{position:absolute;top:0;left:0;right:0;height:3px;background: var(--premium-gradient);}
+    .cat-icon{
+      width:40px;height:40px;border-radius:14px;
+      display:flex;align-items:center;justify-content:center;
+      margin-bottom:12px;
+      background: rgba(123,95,196,0.10);
+      border:1px solid rgba(123,95,196,0.14);
+      color: var(--accent-purple-dark);
+      flex-shrink:0;
+    }
+    .cat-name{font-size:14px;font-weight:700;color:var(--text-dark);margin-bottom:8px;line-height:1.25;}
+    .cat-desc{font-size:13px;font-weight:400;color: var(--text-medium);line-height:1.45;flex:1;}
+    .cat-foot{
+      margin-top:12px;
+      display:flex;align-items:center;justify-content:space-between;gap:10px;
+      font-size:12px;color:var(--dark-gray);
+    }
+    .cat-badge{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:6px 10px;border-radius:999px;
+      border:1px solid var(--border-light);
+      background: rgba(255,255,255,0.8);
+      font-weight:600;
+      color: var(--text-medium);
+      white-space:nowrap;
+    }
+    .dark-mode .cat-badge{background: rgba(255,255,255,0.06);}
+
+    /* Category-specific accents */
+    .cat-clarity .cat-accent{background: linear-gradient(135deg, var(--category-clarity), rgba(123,95,196,0.55));}
+    .cat-clarity .cat-icon{background: rgba(123,95,196,0.10);border-color: rgba(123,95,196,0.18);color: var(--category-clarity);}
+
+    .cat-burnout .cat-accent{background: linear-gradient(135deg, var(--category-burnout), rgba(245,158,11,0.55));}
+    .cat-burnout .cat-icon{background: rgba(245,158,11,0.10);border-color: rgba(245,158,11,0.18);color: var(--category-burnout);}
+
+    .cat-manager .cat-accent{background: linear-gradient(135deg, var(--category-manager), rgba(16,185,129,0.55));}
+    .cat-manager .cat-icon{background: rgba(16,185,129,0.10);border-color: rgba(16,185,129,0.18);color: var(--category-manager);}
+
+    .cat-politics .cat-accent{background: linear-gradient(135deg, var(--category-politics), rgba(59,130,246,0.55));}
+    .cat-politics .cat-icon{background: rgba(59,130,246,0.10);border-color: rgba(59,130,246,0.18);color: var(--category-politics);}
+
+    .cat-hr .cat-accent{background: linear-gradient(135deg, var(--category-hr), rgba(109,40,217,0.55));}
+    .cat-hr .cat-icon{background: rgba(109,40,217,0.10);border-color: rgba(109,40,217,0.18);color: var(--category-hr);}
+
+    .cat-confidence .cat-accent{background: linear-gradient(135deg, var(--category-confidence), rgba(239,68,68,0.55));}
+    .cat-confidence .cat-icon{background: rgba(239,68,68,0.10);border-color: rgba(239,68,68,0.18);color: var(--category-confidence);}
+
+    .cat-career .cat-accent{background: linear-gradient(135deg, var(--category-career), rgba(128,0,32,0.55));}
+    .cat-career .cat-icon{background: rgba(128,0,32,0.10);border-color: rgba(128,0,32,0.18);color: var(--category-career);}
+
+    .cat-sos .cat-accent{background: linear-gradient(135deg, var(--category-sos), rgba(220,38,38,0.55));}
+    .cat-sos .cat-icon{background: rgba(220,38,38,0.10);border-color: rgba(220,38,38,0.18);color: var(--category-sos);}
+
+    /* THEMES (new) */
+    .theme-grid{
+      display:grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap:14px;
+      margin-top:16px;
+      align-items:stretch;
+    }
+    .theme-card{min-height:150px;}
+    .theme-workload .cat-accent{background: linear-gradient(135deg, var(--category-clarity), rgba(123,95,196,0.55));}
+    .theme-workload .cat-icon{background: rgba(123,95,196,0.10);border-color: rgba(123,95,196,0.18);color: var(--category-clarity);}
+
+    .theme-expectations .cat-accent{background: linear-gradient(135deg, var(--category-burnout), rgba(245,158,11,0.55));}
+    .theme-expectations .cat-icon{background: rgba(245,158,11,0.10);border-color: rgba(245,158,11,0.18);color: var(--category-burnout);}
+
+    .theme-micromanagement .cat-accent{background: linear-gradient(135deg, var(--category-manager), rgba(16,185,129,0.55));}
+    .theme-micromanagement .cat-icon{background: rgba(16,185,129,0.10);border-color: rgba(16,185,129,0.18);color: var(--category-manager);}
+
+    .theme-hrconv .cat-accent{background: linear-gradient(135deg, var(--category-hr), rgba(109,40,217,0.55));}
+    .theme-hrconv .cat-icon{background: rgba(109,40,217,0.10);border-color: rgba(109,40,217,0.18);color: var(--category-hr);}
+
+    .theme-difficult .cat-accent{background: linear-gradient(135deg, var(--category-confidence), rgba(239,68,68,0.55));}
+    .theme-difficult .cat-icon{background: rgba(239,68,68,0.10);border-color: rgba(239,68,68,0.18);color: var(--category-confidence);}
+
+    /* SCRIPT GRID (cards) */
+    .script-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      align-items:stretch;
+    }
+    .mini-script{
+      position:relative;
+      border:1px solid var(--border-light);
+      border-radius:18px;
+      background: rgba(255,255,255,0.86);
+      padding:14px 14px;
+      display:flex;flex-direction:column;
+      gap:10px;
+      cursor:pointer;
+      transition:all .18s ease;
+      min-height: 260px;
+      box-shadow:0 1px 4px rgba(0,0,0,0.04);
+      overflow:hidden;
+      padding-right: 96px;
+      padding-bottom: 34px;
+    }
+    .dark-mode .mini-script{background: rgba(255,255,255,0.06);}
+    .mini-script:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(0,0,0,0.10);}
+
+    .mini-cat{
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:1.6px;
+      text-transform:uppercase;
+      margin-bottom:2px;
+      opacity:.95;
+    }
+    .mini-theme{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:11px;
+      font-weight:600;
+      letter-spacing:1.4px;
+      text-transform:uppercase;
+      color: var(--text-medium);
+      opacity:.95;
+    }
+    .mini-theme .dot{
+      width:7px;height:7px;border-radius:999px;display:inline-block;background: var(--accent-purple);
+      box-shadow:0 8px 18px rgba(123,95,196,0.18);
+    }
+
+    .mini-title{
+      font-size:14px;font-weight:700;color:var(--text-dark);
+      line-height:1.25;margin:0;min-width:0;
+    }
+    .mini-title span{
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+    .mini-summary{
+      font-size:13px;
+      color: var(--text-medium);
+      line-height:1.5;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+      padding-right: 6px;
+    }
+    .mini-use{
+      font-size:13px;
+      color: var(--text-dark);
+      line-height:1.45;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+      padding-right: 6px;
+    }
+    .mini-use strong{font-weight:700;}
+    .mini-note{
+      font-size:12px;
+      color: var(--text-medium);
+      line-height:1.45;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+      padding-right: 6px;
+    }
+    .mini-note strong{font-weight:700;color:var(--accent-purple-dark);}
+
+    .mini-corner-stats{
+      position:absolute;
+      right:14px;
+      bottom:14px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color: var(--accent-purple-dark);
+      font-size:12px;
+      font-weight:600;
+      opacity:0.95;
+      pointer-events:none;
+    }
+    .dark-mode .mini-corner-stats{color: var(--text-dark);opacity:0.9;}
+    .mini-corner-stats .stat{display:inline-flex;align-items:center;gap:6px;}
+    .mini-corner-stats i{color: var(--accent-purple);}
+
+    /* Scripts section header controls */
+    .scripts-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .scripts-controls{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .chip-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;border:1px solid rgba(123,95,196,0.28);
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--accent-purple-dark);
+      cursor:pointer;
+      font-size:12px;font-weight:600;
+      transition:all .18s ease;
+      white-space:nowrap;
+    }
+    .dark-mode .chip-btn{background: rgba(255,255,255,0.06);border-color: rgba(157,134,233,0.30);color: var(--text-dark);}
+    .chip-btn:hover{transform:translateY(-1px);box-shadow:0 14px 28px rgba(0,0,0,0.12);}
+    .chip-btn.primary{background: var(--premium-gradient);border-color:transparent;color:#fff;}
+
+    /* MODAL */
+    .modal-overlay{
+      position:fixed;inset:0;background: rgba(0,0,0,0.5);
+      display:none;align-items:center;justify-content:center;
+      z-index:2000;
+      padding:18px;
+    }
+    .modal-overlay.open{display:flex;}
+    .modal{
+      width: min(1180px, 100%);
+      background: var(--primary-white);
+      border-radius:20px;
+      border:1px solid var(--border-light);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+      overflow:hidden;
+      max-height: calc(100vh - 36px);
+      display:flex;
+      flex-direction:column;
+    }
+    .modal-head{
+      padding:14px 16px;
+      border-bottom:1px solid var(--border-light);
+      background: linear-gradient(135deg, rgba(123,95,196,0.07), rgba(123,95,196,0.02));
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+    }
+    .modal-title{font-size:16px;font-weight:700;color:var(--text-dark);line-height:1.25;margin-bottom:0;}
+    .modal-actions{display:flex;gap:10px;align-items:center;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end;}
+    .pill-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;border:1px solid var(--border-light);
+      background: var(--primary-white);
+      color: var(--text-medium);
+      cursor:pointer;
+      font-size:12px;font-weight:600;
+      transition:all .18s ease;
+      white-space:nowrap;
+    }
+    .pill-btn:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(0,0,0,0.10);color:var(--accent-purple-dark);}
+    .pill-btn.primary{
+      border-color: rgba(123,95,196,0.25);
+      background: linear-gradient(135deg, rgba(123,95,196,0.10), rgba(123,95,196,0.03));
+      color: var(--accent-purple-dark);
+    }
+    .pill-btn.saved{background: var(--premium-gradient); color:#fff; border-color:transparent;}
+    .modal-close{
+      width:40px;height:40px;border-radius:999px;border:1px solid var(--border-light);
+      background: var(--primary-white);
+      cursor:pointer;color:var(--text-medium);
+      display:flex;align-items:center;justify-content:center;
+      transition:all .18s ease;
+    }
+    .modal-close:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(0,0,0,0.10);color:var(--accent-purple-dark);}
+    .modal-body{
+      padding:14px 16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      overflow:auto;
+    }
+    .modal-body .block.primary{grid-column:1 / -1;}
+    .modal-body .block-text{font-size:14px;line-height:1.55;}
+    .modal-body .use-grid{grid-column:1 / -1;}
+    .modal-body .block.full{grid-column:1 / -1;}
+
+    /* TOAST */
+    .toast{
+      position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+      background: rgba(20,20,20,0.92);
+      color:#fff;
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:13px;
+      display:none;
+      align-items:center;
+      gap:10px;
+      z-index:3000;
+      box-shadow:0 20px 40px rgba(0,0,0,0.35);
+    }
+    .toast.show{display:flex;}
+    .toast i{opacity:.9;}
+
+    /* MY PLAYBOOK FAB + SIDEBAR */
+    .my-playbook-fab{
+      position:fixed;bottom:24px;right:24px;z-index:1200;
+      background: var(--premium-gradient);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      display:inline-flex;align-items:center;gap:8px;
+      cursor:pointer;font-size:13px;font-weight:600;
+      box-shadow:0 10px 25px rgba(0,0,0,0.25);
+      transition:all .22s ease;
+    }
+    .my-playbook-fab:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(0,0,0,0.32);}
+    .playbook-sidebar-overlay{
+      position:fixed;inset:0;background: rgba(0,0,0,0.45);
+      z-index:1190;opacity:0;pointer-events:none;transition:opacity .22s ease;
+    }
+    .playbook-sidebar-overlay.open{opacity:1;pointer-events:auto;}
+    .playbook-sidebar{
+      position:fixed;top:0;right:-380px;width:340px;max-width:90%;height:100%;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index:1191;
+      display:flex;flex-direction:column;
+      border-left:1px solid var(--border-light);
+      transition:right .22s ease;
+    }
+    .dark-mode .playbook-sidebar{background: rgba(18,18,18,0.96);box-shadow: -4px 0 22px rgba(0,0,0,0.6);}
+    .playbook-sidebar.open{right:0;}
+    .playbook-sidebar-header{padding:20px 20px 14px;border-bottom:1px solid var(--border-light);}
+    .playbook-sidebar-header-title-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+    .playbook-sidebar-header h3{font-size:18px;font-weight:700;color:var(--text-dark);}
+    .playbook-sidebar-header p{font-size:13px;color:var(--dark-gray);font-weight:400;}
+    .playbook-close-btn{
+      background:none;border:none;color:var(--dark-gray);cursor:pointer;font-size:18px;
+      border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+      transition:background-color .18s ease;
+    }
+    .playbook-close-btn:hover{background: var(--light-gray);}
+    .playbook-sidebar-body{
+      padding:14px 18px 20px;
+      padding-bottom:50px;
+      overflow-y:auto;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    .saved-items-empty{font-size:13px;color:var(--dark-gray);line-height:1.6;font-weight:400;}
+    .saved-items-list{list-style:none;margin:0;padding:0;}
+    .saved-item{
+      padding:10px 10px;border-radius:12px;border:1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow:0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom:10px;
+      display:flex;flex-direction:column;gap:4px;
+    }
+    .saved-item-title-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+    .saved-item-title{font-size:14px;font-weight:600;color:var(--text-dark);}
+    .saved-item-type{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--accent-purple-dark);font-weight:600;}
+    .saved-item-meta{font-size:12px;color:var(--dark-gray);font-weight:400;}
+    .saved-item-link{
+      margin-top:6px;font-size:12px;color:var(--accent-purple);
+      text-decoration:none;font-weight:600;display:inline-flex;align-items:center;gap:6px;
+    }
+    .saved-item-link:hover{text-decoration:underline;}
+
+    /* Reduce pill width by 30% */
+    .quick-link-pill{
+      width:49%;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.35);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      text-decoration:none;
+      color: var(--accent-purple-dark);
+      font-size:13px;font-weight:600;
+      display:flex;align-items:center;gap:10px;
+      transition:all .18s ease;
+    }
+    .quick-link-pill:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+    }
+    .dark-mode .quick-link-pill{border-color: rgba(157,134,233,0.55);background: linear-gradient(135deg, rgba(123,95,196,0.26), rgba(123,95,196,0.12));}
+
+    .playbook-quick-links{
+      margin-top:auto;
+      padding-top:12px;
+      border-top:1px solid var(--border-light);
+    }
+    .quick-links-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--text-medium);}
+    .playbook-quick-links-list{display:flex;flex-direction:column;gap:10px;margin-top:10px;}
+
+    /* CTA at bottom */
+    .bottom-cta{padding:26px 0 6px;}
+    .cta-card{
+      border:1px solid var(--border-light);
+      border-radius:20px;
+      padding:16px 16px;
+      background: linear-gradient(135deg, rgba(123,95,196,0.10), rgba(255,255,255,0.75));
+      box-shadow: 0 16px 42px rgba(123,95,196,0.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      overflow:hidden;
+      position:relative;
+    }
+    .dark-mode .cta-card{
+      background: linear-gradient(135deg, rgba(123,95,196,0.20), rgba(255,255,255,0.06));
+      box-shadow: 0 18px 54px rgba(0,0,0,0.42);
+    }
+    .cta-copy{min-width:0;}
+    .cta-kicker{
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:1.6px;
+      text-transform:uppercase;
+      color: var(--accent-purple);
+      margin-bottom:6px;
+    }
+    .cta-title{
+      font-size:18px;
+      font-weight:700;
+      color: var(--text-dark);
+      line-height:1.2;
+      margin-bottom:6px;
+    }
+    .cta-sub{
+      font-size:14px;
+      font-weight:400;
+      color: var(--text-medium);
+      max-width: 760px;
+    }
+    .cta-actions{display:flex;align-items:center;gap:10px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end;}
+    .cta-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.28);
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      text-decoration:none;
+      color: var(--accent-purple-dark);
+      font-size:13px;
+      font-weight:600;
+      transition:all .18s ease;
+      white-space:nowrap;
+    }
+    .cta-btn:hover{transform:translateY(-1px);box-shadow:0 14px 28px rgba(0,0,0,0.12);}
+    .cta-btn.primary{
+      background: var(--premium-gradient);
+      border-color: transparent;
+      color:#fff;
+      box-shadow:0 10px 22px rgba(123,95,196,0.22);
+    }
+
+    footer{
+      background: var(--primary-white);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 30px;
+      text-align: center;
+      color: var(--text-medium);
+      font-weight:400;
+    }
+
+    @media(max-width:1024px){
+      .category-grid{grid-template-columns: repeat(2, minmax(0, 1fr));}
+      .theme-grid{grid-template-columns: repeat(2, minmax(0, 1fr));}
+      .hero-title{font-size:52px;}
+      .script-grid{grid-template-columns:1fr;}
+      .modal-body{grid-template-columns:1fr;}
+    }
+    @media(max-width:768px){
+      .tool-hero-section{margin-top:100px;}
+      .hero-title{font-size:40px;}
+      .category-grid{grid-template-columns:1fr;}
+      .theme-grid{grid-template-columns:1fr;}
+      .my-playbook-fab{bottom:18px;right:18px;}
+      .save-btn{top:12px;right:0;}
+      .cta-card{flex-direction:column;align-items:flex-start;}
+      .cta-actions{justify-content:flex-start;}
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container nav-container">
+      <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+
+      <a href="index.html" class="logo">
+        <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      </a>
+
+      <div class="nav-links">
+        <a href="the-lens.html" class="nav-link">The Lens</a>
+        <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+
+        <div class="nav-link-container">
+          <a href="the-coach.html" class="nav-link">The Coach</a>
+          <span class="new-tag" style="position:absolute;top:-12px;right:-35px;background:linear-gradient(135deg,#FFD700,#FFA500);color:#000;font-size:10px;font-weight:600;padding:2px 6px;border-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,0.2);z-index:10;white-space:nowrap;">NEW</span>
+        </div>
+
+        <a href="the-shift.html" class="nav-link">The Shift</a>
+        <a href="the-pricing.html" class="nav-link">The Pricing</a>
+
+        <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+        <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="create-account.html" class="header-cta">Sign up</a>
+        <a href="sign-in.html" class="sign-in">Sign in</a>
+        <button class="theme-toggle" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="tool-hero-section">
+    <div class="shell hero-inner">
+
+      <div class="hero-toprow">
+        <div class="breadcrumb">
+          <i class="fas fa-house" style="font-size:11px;opacity:.75;color:var(--dark-gray);"></i>
+          <a href="index.html">Home</a>
+          <i class="fas fa-chevron-right"></i>
+          <a href="the-toolkit.html">Toolkit</a>
+          <i class="fas fa-chevron-right"></i>
+          <span class="current">Script Library</span>
+        </div>
+      </div>
+
+      <div class="hero-kicker">SCRIPT LIBRARY</div>
+
+      <h1 class="hero-title">Scripts that do the talking<br>when it matters.</h1>
+
+      <p class="hero-sub">
+        Calm, articulate language for high-pressure moments at work.
+        Copy it, make it sound like you, and send — without replaying the conversation in your head for three hours.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- EXACT EXAMPLE -->
+  <section class="demo-wrap">
+    <div class="shell">
+      <div class="demo-card">
+        <div class="demo-top">
+          <div style="min-width:0;">
+            <div class="demo-kicker">EXACTLY WHAT YOU GET</div>
+            <div class="demo-title">Example script: “New urgent request lands — protect your reputation without sounding difficult”</div>
+            <div class="demo-sub">
+              This is the real format: a primary script you can send, the most likely response you’ll get back,
+              and two follow-ups that keep you in control (without arguing, apologising, or over-explaining).
+              Use it as a message, an email, or words for a call — swap the brackets.
+            </div>
+          </div>
+        </div>
+
+        <div class="block primary">
+          <div class="block-title"><i class="fas fa-quote-left"></i> Primary script (send this)</div>
+          <div class="block-text">Got it — I can take this.
+
+Quick reality-check so we don’t accidentally create a “quiet failure” later: if this jumps to the top, something else has to move. Otherwise one of two things will happen:
+• the timeline slips silently (and it looks like I dropped it), or
+• quality dips (and it still looks like I dropped it)
+
+Here are the clean options:
+1) I pause [Project/Task A] and deliver this by [Day/Date]
+2) I keep [Project/Task A] moving and deliver this by [Day/Date]
+
+<strong>Which outcome do you want protected most?</strong></div>
+        </div>
+
+        <div class="block">
+          <div class="block-title"><i class="fas fa-reply"></i> Typical response (what they’ll say)</div>
+          <div class="block-text muted">“Can’t you just squeeze it in?” / “This is urgent — we need it sooner.” / “We need everything to stay on track.”</div>
+        </div>
+
+        <div class="block">
+          <div class="block-title"><i class="fas fa-arrow-right"></i> Additional response 1 (keep it calm, make it real)</div>
+          <div class="block-text">I can move it up — I just need the trade-off to be explicit.
+
+When everything becomes “urgent”, the cost doesn’t show up immediately. It shows up later as rework, missed dates, and reputations getting damaged for things nobody named out loud.
+I’m trying to protect delivery here, not avoid work.
+
+Which item are you comfortable deprioritising?</div>
+        </div>
+
+        <div class="block">
+          <div class="block-title"><i class="fas fa-arrow-right"></i> Additional response 2 (if they won’t choose)</div>
+          <div class="block-text">No problem — if you don’t want to move anything yet, I’ll do this safely in two steps:
+
+• By [Day/Date]: a decision-ready version that covers the core (so you can move)
+• By [Day/Date]: the full version with the extras
+
+That way you get value fast, and we don’t gamble with a “promise” that’s actually impossible.</div>
+        </div>
+
+        <div class="use-grid">
+          <div class="use-chip">
+            <div class="t"><i class="fas fa-wand-magic-sparkles"></i> How to use it in real life</div>
+            <div class="b"><strong>Send the primary script within 5–10 minutes</strong> of the new ask. Fast + calm reads as “in control”, not “resistant”. Replace [Project/Task A] with the thing they already care about.</div>
+          </div>
+          <div class="use-chip">
+            <div class="t"><i class="fas fa-shield-halved"></i> Why it works (the power move)</div>
+            <div class="b">It forces a decision without being combative. You’re not “saying no” — you’re making the cost visible and asking them to choose. That shifts responsibility back where it belongs.</div>
+          </div>
+        </div>
+
+        <div class="demo-corner-stats" aria-hidden="true">
+          <span class="stat"><i class="fas fa-eye"></i>18.4k</span>
+          <span class="stat"><i class="fas fa-bookmark"></i>6.1k</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEARCH -->
+  <section class="search-wrap" id="search">
+    <div class="shell">
+      <div class="search-card">
+        <div class="search-row">
+          <div class="search-field">
+            <i class="fas fa-magnifying-glass search-icon"></i>
+            <input id="searchInput" class="search-input" type="text" placeholder="Search scripts by situation or keyword…" autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="search-hint">
+          <span>
+            <strong>Try:</strong> deadline, capacity, escalation, feedback, micromanagement, HR, promotion…
+          </span>
+
+          <span class="hint-actions">
+            <a class="tiny-link" href="#top-scripts"><i class="fas fa-star"></i> Top scripts</a>
+            <a class="tiny-link" href="#themes"><i class="fas fa-layer-group"></i> Themes</a>
+            <a class="tiny-link" href="#browse"><i class="fas fa-compass"></i> Categories</a>
+          </span>
+        </div>
+
+        <div class="results-panel" id="resultsPanel" aria-live="polite">
+          <div class="results-head">
+            <div class="results-title">Matches</div>
+            <div class="results-meta" id="resultsMeta">0 results</div>
+          </div>
+          <ul class="results-list" id="resultsList"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THEMES (NEW) -->
+  <section class="section browse-wrap" id="themes">
+    <div class="shell">
+      <h2>Browse by theme</h2>
+      <p class="lead" id="themesLead">
+        Five high-demand themes with a total of <strong style="font-weight:600;"><span id="totalThemeScripts">0</span> scripts</strong>.
+        Click a theme to load the full set.
+      </p>
+
+      <div class="theme-grid" id="themeGrid"></div>
+    </div>
+  </section>
+
+  <!-- BROWSE -->
+  <section class="section browse-wrap" id="browse">
+    <div class="shell">
+      <h2>Browse by category</h2>
+      <p class="lead" id="libraryLead">
+        Categories shown with a library total of <strong style="font-weight:600;"><span id="totalScripts">0</span> scripts</strong>.
+        Click a category to see <strong style="font-weight:600;">everything</strong> inside it.
+      </p>
+
+      <div class="category-grid" id="categoryGrid"></div>
+    </div>
+  </section>
+
+  <!-- TOP SCRIPTS -->
+  <section class="section" id="top-scripts">
+    <div class="shell">
+      <h2>Top scripts</h2>
+      <p class="lead">
+        The scripts people reach for most when they want power without drama. Click any card to open the full script.
+      </p>
+
+      <div class="script-grid" id="topScriptsGrid"></div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="bottom-cta">
+    <div class="shell">
+      <div class="cta-card">
+        <div class="cta-copy">
+          <div class="cta-kicker">NEXT STEP</div>
+          <div class="cta-title">Want the strategy behind the script?</div>
+          <div class="cta-sub">
+            Use <strong style="font-weight:600;">The Lens</strong> to diagnose what’s really happening — then come back here and pick the exact words that fit.
+            Or jump straight into <strong style="font-weight:600;">The Toolkit</strong> for the step-by-step plan.
+          </div>
+        </div>
+        <div class="cta-actions">
+          <a class="cta-btn" href="the-lens.html"><i class="fas fa-search"></i> Go to The Lens</a>
+          <a class="cta-btn primary" href="the-toolkit.html"><i class="fas fa-toolbox"></i> Go to The Toolkit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCRIPT MODAL -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Script details">
+    <div class="modal">
+      <div class="modal-head">
+        <div>
+          <div class="modal-title" id="modalTitle"></div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="pill-btn primary" id="modalCopyAllBtn"><i class="far fa-copy"></i> Copy</button>
+          <button class="pill-btn" id="modalSaveBtn"><i class="far fa-bookmark"></i> Save</button>
+          <button class="modal-close" id="modalCloseBtn" aria-label="Close">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- MY PLAYBOOK SIDEBAR -->
+  <div class="playbook-sidebar-overlay" id="playbookOverlay">
+    <div class="playbook-sidebar" id="playbookSidebar">
+      <div class="playbook-sidebar-header">
+        <div class="playbook-sidebar-header-title-row">
+          <h3>My Playbook</h3>
+          <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <p>Saved items</p>
+      </div>
+
+      <div class="playbook-sidebar-body">
+        <div id="savedItemsContainer">
+          <p class="saved-items-empty" id="savedItemsEmpty">
+            You haven’t saved anything yet. Use <strong style="font-weight:600;">Save</strong> on scripts you want quick access to.
+          </p>
+          <ul class="saved-items-list" id="savedItemsList"></ul>
+        </div>
+
+        <div class="playbook-quick-links">
+          <span class="quick-links-title">Quick links</span>
+          <div class="playbook-quick-links-list">
+            <a href="dashboard.html" class="quick-link-pill"><i class="fas fa-gauge"></i> The Dashboard</a>
+            <a href="the-lens.html" class="quick-link-pill"><i class="fas fa-search"></i> The Lens</a>
+            <a href="the-toolkit.html" class="quick-link-pill"><i class="fas fa-toolbox"></i> The Toolkit</a>
+            <a href="the-coach.html" class="quick-link-pill"><i class="fas fa-comments"></i> The Coach</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-playbook-fab" id="myPlaybookButton">
+    <i class="fas fa-book-open"></i>
+    <span style="font-weight:600;">My Playbook</span>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"><i class="fas fa-check"></i><span id="toastText">Copied</span></div>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 The Employee Playbook. All rights reserved.</p>
+    </div>
+  </footer>
+
+<script>
+/* =========================
+   BOOT
+========================= */
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('loaded');
+  initializeThemeToggle();
+  initializeMobileNav();
+  initializePlaybook();
+  buildThemes();
+  buildCategories();
+  buildTopScripts();
+  initializeSearch();
+  initializeModal();
+  initializeCategorySectionControls();
+  hydrateFromUrl();
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+});
+
+/* =========================
+   THEME TOGGLE
+========================= */
+function initializeThemeToggle() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (!themeToggleBtn) return;
+
+  const themeIcon = themeToggleBtn.querySelector('i');
+  const logoImg = document.getElementById('mainLogo');
+
+  function getLogoPath(filename) {
+    if (window.location.protocol === 'file:') {
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+      return basePath + 'assets/img/' + filename;
+    } else {
+      return './assets/img/' + filename;
+    }
+  }
+
+  function updateLogoForTheme(isDarkMode) {
+    if (!logoImg) return;
+    logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+    logoImg.alt = 'The Employee Playbook';
+  }
+
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const savedTheme = localStorage.getItem('theme');
+
+  if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+    document.body.classList.add('dark-mode');
+    themeIcon?.classList.remove('fa-moon');
+    themeIcon?.classList.add('fa-sun');
+    updateLogoForTheme(true);
+  } else {
+    document.body.classList.remove('dark-mode');
+    themeIcon?.classList.remove('fa-sun');
+    themeIcon?.classList.add('fa-moon');
+    updateLogoForTheme(false);
+  }
+
+  themeToggleBtn.addEventListener('click', () => {
+    const isDark = document.body.classList.contains('dark-mode');
+    if (isDark) {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      themeIcon?.classList.remove('fa-sun'); themeIcon?.classList.add('fa-moon');
+      updateLogoForTheme(false);
+    } else {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      themeIcon?.classList.remove('fa-moon'); themeIcon?.classList.add('fa-sun');
+      updateLogoForTheme(true);
+    }
+  });
+
+  prefersDarkScheme.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      if (e.matches) {
+        document.body.classList.add('dark-mode');
+        themeIcon?.classList.remove('fa-moon'); themeIcon?.classList.add('fa-sun');
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        themeIcon?.classList.remove('fa-sun'); themeIcon?.classList.add('fa-moon');
+        updateLogoForTheme(false);
+      }
+    }
+  });
+}
+
+/* =========================
+   MOBILE NAV
+========================= */
+function initializeMobileNav() {
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (!mobileToggle || !navLinks) return;
+
+  mobileToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('active');
+    const icon = this.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    }
+  });
+
+  document.addEventListener('click', function(event) {
+    if (navLinks.classList.contains('active') &&
+      !navLinks.contains(event.target) &&
+      !mobileToggle.contains(event.target)) {
+      navLinks.classList.remove('active');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+    }
+  });
+}
+
+/* =========================
+   DATA: THEMES (NEW)
+========================= */
+const themes = [
+  { key:'workload',      name:'Workload Negotiation',        icon:'fa-scale-balanced',        cardClass:'theme-workload',      desc:'Trade-offs, deadlines, resourcing, scope — without sounding “difficult”.' },
+  { key:'expectations',  name:'Expectations Reset',          icon:'fa-rotate',                cardClass:'theme-expectations',  desc:'Reset “normal” when normal is chaos: urgent creep, fuzzy ownership, always-on.' },
+  { key:'micromanagement', name:'Micromanagement Response',  icon:'fa-shield',                cardClass:'theme-micromanagement', desc:'Create autonomy with guardrails — and stop death-by-nitpick.' },
+  { key:'hrconv',        name:'HR Conversations',            icon:'fa-file-contract',         cardClass:'theme-hrconv',        desc:'Professional record, protected requests, performance/process language that holds up.' },
+  { key:'difficult',     name:'Difficult Conversations',     icon:'fa-comments',              cardClass:'theme-difficult',     desc:'Feedback, pushback, tension, and conflict — calm, direct, and clean.' }
+];
+function getTheme(key){ return themes.find(t=>t.key===key); }
+function themeColor(key){
+  const map = {
+    workload: 'var(--category-clarity)',
+    expectations: 'var(--category-burnout)',
+    micromanagement: 'var(--category-manager)',
+    hrconv: 'var(--category-hr)',
+    difficult: 'var(--category-confidence)'
+  };
+  return map[key] || 'var(--text-medium)';
+}
+
+/* =========================
+   DATA: CATEGORIES
+========================= */
+const categories = [
+  { key:'clarity',     name:'Clarity, Priorities & Direction',         icon:'fa-bullseye',             cardClass:'cat-clarity',     desc:'Priorities, deadlines, trade-offs, scope control, re-alignment.' },
+  { key:'burnout',     name:'Expectations, Burnout & Capacity',        icon:'fa-fire',                 cardClass:'cat-burnout',     desc:'Capacity, overload, sustainable pace, boundaries, “what has to move”.' },
+  { key:'manager',     name:'Manager Relationship & Leadership Style', icon:'fa-handshake',            cardClass:'cat-manager',     desc:'Pushback, updates, alignment, accountability, tricky 1:1 moments.' },
+  { key:'politics',    name:'Workplace Dynamics and Politics',         icon:'fa-users',                cardClass:'cat-politics',    desc:'Stakeholders, influence, credit, visibility, competing agendas.' },
+  { key:'hr',          name:'HR and Formal Processes',                 icon:'fa-file-contract',        cardClass:'cat-hr',          desc:'Documentation, grievance/performance language, protected requests.' },
+  { key:'confidence',  name:'Confidence, Presence & Influence',        icon:'fa-chart-line',           cardClass:'cat-confidence',  desc:'Tone, presence, authority, directness without aggression.' },
+  { key:'career',      name:'Career Playbook',                         icon:'fa-briefcase',            cardClass:'cat-career',      desc:'Promotion, development, scope, role clarity, future-proof moves.' },
+  { key:'sos',         name:'Crisis SOS',                              icon:'fa-triangle-exclamation', cardClass:'cat-sos',          desc:'Immediate stabilisers: conflict spikes, blame storms, urgent escalations.' },
+];
+function getCategory(key){ return categories.find(c=>c.key===key); }
+function categoryColor(key){
+  const map = {
+    clarity: 'var(--category-clarity)',
+    burnout: 'var(--category-burnout)',
+    manager: 'var(--category-manager)',
+    politics: 'var(--category-politics)',
+    hr: 'var(--category-hr)',
+    confidence: 'var(--category-confidence)',
+    career: 'var(--category-career)',
+    sos: 'var(--category-sos)'
+  };
+  return map[key] || 'var(--text-medium)';
+}
+
+/* =========================
+   DATA: SCRIPTS
+========================= */
+function s(id, title, categoryKey, viewed, saved, summary, use, context, primary, typical, add1, add2, howToUse, whyWorks, tweaks, watchFor, themeKey){
+  return { id, title, categoryKey, viewed, saved, summary, use, context, primary, typical, add1, add2, howToUse, whyWorks, tweaks, watchFor, themeKey: themeKey || 'core' };
+}
+
+const scriptsData = [
+  /* ===== CLARITY (core) ===== */
+  s(
+    'clarity-urgent-reset',
+    'Reset priorities when a “new urgent” drops in',
+    'clarity',
+    18423, 6120,
+    'Turns “can you squeeze this in?” into a clean decision. No drama, no apology spiral, no silent failure.',
+    'Use the moment the request lands — fast, calm, and structured.',
+    'Best when you’re being asked to “just do one more thing” and nobody is naming what will slip. This script makes the trade-off explicit, so your credibility stays intact.',
+    `Got it — I can take this.
+
+Quick reality-check so we don’t accidentally create a “quiet failure” later: if this jumps to the top, something else has to move. Otherwise one of two things will happen:
+• the timeline slips silently (and it looks like I dropped it), or
+• quality dips (and it still looks like I dropped it)
+
+Here are the clean options:
+1) I pause [Project/Task A] and deliver this by [Day/Date]
+2) I keep [Project/Task A] moving and deliver this by [Day/Date]
+
+**Which outcome do you want protected most?**`,
+    `“Can’t you just squeeze it in?” / “This is urgent — we need it sooner.” / “We need everything to stay on track.”`,
+    `I can move it up — I just need the trade-off to be explicit.
+
+When everything becomes “urgent”, the cost doesn’t show up immediately. It shows up later as rework, missed dates, and reputations getting damaged for things nobody named out loud.
+I’m trying to protect delivery here, not avoid work.
+
+Which item are you comfortable deprioritising?`,
+    `No problem — if you don’t want to move anything yet, I’ll do this safely in two steps:
+
+• By [Day/Date]: a decision-ready version that covers the core (so you can move)
+• By [Day/Date]: the full version with the extras
+
+That way you get value fast, and we don’t gamble with a “promise” that’s actually impossible.`,
+    'Send within 5–10 minutes. Keep it short, then stop talking. Let the silence force the decision.',
+    'It flips the pressure back to the decision-maker without sounding combative. You’re not refusing — you’re protecting outcome quality and accountability.',
+    [
+      'Swap “quiet failure” for “hidden risk” if the culture hates emotive language.',
+      'If you’re junior, replace “Here are the clean options” with “Would you prefer…”',
+      'If it’s written, add: “Happy to adjust once we align the order.”'
+    ],
+    [
+      'If they reply “everything is priority”, don’t argue. Repeat: “Which one moves?”',
+      'Don’t list 7 tasks. Pick the single trade-off they care about most.'
+    ]
+  ),
+  s(
+    'clarity-scope-trim',
+    'Trim scope without sounding like “the difficult one”',
+    'clarity',
+    12744, 3321,
+    'Protects the deadline by splitting must-have vs Phase 2, without sounding negative or obstructive.',
+    'Use when “everything by Friday” is the vibe.',
+    'This is for when the ask is technically possible… but only if you cut corners. You’re offering a path to success, not pushing back for sport.',
+    `Yes — we can hit [date]. To make that promise real, we need to keep scope tight.
+
+For [date], I recommend:
+• Must-have (what unblocks progress): [items]
+• Phase 2 (safe follow-up): [extras]
+
+If you want everything in one go, the earliest date I can stand behind is [date].
+
+**Which version do you want first?**`,
+    `“We need it all.” / “Just make it happen.” / “This is non-negotiable.”`,
+    `Understood — if “all” is genuinely non-negotiable, we’ll need to move one lever:
+• timeline, or
+• resourcing, or
+• accept a quality / rework risk.
+
+I can execute — I just need you to choose which lever we’re pulling.`,
+    `Quick question that saves pain: what’s the part that actually makes progress possible?
+
+If we ship that first, you get value immediately, and we avoid the classic late-night scramble that still misses the mark.`,
+    'Write the Must-have list as outcomes, not tasks. It reads more senior and it’s harder to argue with.',
+    'It turns a vague “make it happen” into a controlled release plan. People stop debating effort and start choosing outcomes.',
+    [
+      'Replace “Phase 2” with “Next release” if the audience hates anything that sounds optional.',
+      'If challenged, add: “I’m protecting the delivery you’ll be judged on.”',
+      'If they insist, lock a written decision: “Confirmed — shipping all; timeline becomes [date].”'
+    ],
+    [
+      'Avoid saying “I can’t”. Say “I can, if we choose the lever.”',
+      'Don’t negotiate in circles. Offer two choices and stop.'
+    ]
+  ),
+  s(
+    'clarity-decision-owner',
+    'Confirm who owns the decision (so you don’t get blamed later)',
+    'clarity',
+    9021, 2804,
+    'Stops “I thought you were handling it” by naming the decision owner and the next step in one line.',
+    'Use when multiple people are “involved” but nobody is accountable.',
+    'Perfect for meetings where everyone has opinions but no one wants the final call. This prevents later rewriting of history.',
+    `Quick clarity check so we move cleanly:
+
+For [decision], my understanding is:
+• Decision owner: [Name]
+• Input needed from: [A, B]
+• I own: [your part]
+• Deadline to lock: [date/time]
+
+If that’s right, I’ll proceed on that basis. If not, can you confirm who the decision owner is?`,
+    `“Let’s decide later.” / “It’s a group call.” / “Just keep moving.”`,
+    `No problem — we can absolutely keep momentum.
+
+To avoid rework, I’ll take a light step now (outline / draft / options). But I’ll hold the full build until we have a named decision owner and a locked direction.`,
+    `If you’d rather keep it group-led, I’m happy with that — I just need one person to be the final “yes/no” so we don’t end up with 6 different versions of “approved”.`,
+    'Say it neutrally and quickly. The moment it turns into a debate, you’ve already lost the clarity.',
+    'It forces accountability without sounding accusatory. Most people will pick a decision owner rather than admit there isn’t one.',
+    [
+      'If it’s email, put the decision owner line in bold.',
+      'If missing, propose one: “Suggesting [Name] as D.O. unless you prefer otherwise.”',
+      'If asked “why does it matter?”, answer: “It avoids rework and protects timeline.”'
+    ],
+    [
+      'Don’t list 10 stakeholders. Keep it to what matters.',
+      'Avoid “who’s responsible?” — it triggers defensiveness. Say “decision owner”.'
+    ]
+  ),
+
+  /* ===== BURNOUT (core) ===== */
+  s(
+    'burnout-capacity-snapshot',
+    'Flag capacity without sounding dramatic',
+    'burnout',
+    15231, 5088,
+    'Makes overload visible in a calm, factual way — so you’re not the person silently failing in the background.',
+    'Use early (not at breaking point).',
+    'This is for when you’re at the edge and everyone assumes you can “just absorb it”. You’re converting stress into a decision.',
+    `Quick capacity snapshot so we don’t drift into hidden overload:
+
+This week I’m already committed to:
+• [A] (due [date] — owner expectations: [what “done” means])
+• [B] (due [date] — dependency: [who is waiting on it])
+• [C] (in progress — risk if delayed: [what breaks])
+
+If we add [new work], I can do it — but one of the above has to move, or we’ll create an unspoken miss.
+
+**Which item do you want me to deprioritise?**`,
+    `“We’re all busy.” / “Just manage it.” / “This shouldn’t take long.”`,
+    `Totally — I’m not saying I’m special. I’m making the trade-offs visible so we don’t end up in the classic trap:
+everything stays “priority one”, and the miss shows up later with someone’s reputation attached to it.
+
+If we want reliability, we need one clear decision: what moves.`,
+    `If we genuinely need everything to stay on track, we can pull one lever:
+• scope (trim),
+• timeline (extend),
+• resourcing (share ownership).
+
+**Which lever do you want to pull on this?**`,
+    'Keep it written, short, and factual. Lists beat feelings in busy environments.',
+    'It reframes “capacity” as delivery risk (leaders respect that) instead of personal limitation (they dismiss that).',
+    [
+      'If you get “it won’t take long”, reply: “Great — then which item should I pause to create space?”',
+      'If senior, replace “can we pull a lever” with “I recommend we pull…”',
+      'If junior, add “so expectations are fair” (softens without weakening).'
+    ],
+    [
+      'Don’t use “I’m drowning”. Use delivery language: “this creates a miss.”',
+      'Don’t ask for permission. Ask for a decision.'
+    ]
+  ),
+  s(
+    'burnout-boundary-afterhours',
+    'Reset expectations about after-hours replies',
+    'burnout',
+    9802, 4016,
+    'Sets a boundary without sounding rigid: urgent has a channel; everything else has a predictable response window.',
+    'Use when late-night messages become “normal”.',
+    'This is for “always on” cultures where your availability becomes the product. You’re re-defining what “urgent” means.',
+    `Just setting expectations so we don’t accidentally build a bad pattern:
+
+I’m offline after [time]. If something is genuinely urgent, call/text and I’ll respond.
+If it can wait, I’ll pick it up first thing tomorrow.
+
+That keeps “urgent” meaningful — and it keeps my delivery consistent long-term.`,
+    `“I need faster responses.” / “But I messaged you last night.” / “Everyone’s always on.”`,
+    `Happy to be quick when it’s truly urgent.
+
+If after-hours is becoming regular, can we define what counts as urgent and what can wait?
+Otherwise everything becomes “urgent”, and nobody wins — quality drops, response times get worse, and people burn out.`,
+    `If we genuinely need consistent after-hours cover, we’ll need a rota or shared ownership.
+
+I can help set that up — I just can’t be the system on my own.`,
+    'Deliver it once, calmly, then stick to it. Consistency is the boundary.',
+    'It offers a route for true emergencies, so you can say “no” to everything else without guilt or argument.',
+    [
+      'If they ignore it, reply next morning with: “Picking this up now.” (no apology).',
+      'If your manager is the offender, use “I’m asleep after…” rather than “offline”.',
+      'If you’re in a regulated role, add: “I’m protecting quality and accuracy.”'
+    ],
+    [
+      'Do not over-explain. One clean boundary beats a paragraph.',
+      'Never punish “urgent”. Just define the channel.'
+    ]
+  ),
+
+  /* ===== MANAGER (core) ===== */
+  s(
+    'manager-alignment-whiplash',
+    'Stop “alignment whiplash” when leadership changes their mind',
+    'manager',
+    16890, 5210,
+    'Pins down the real direction so you don’t get blamed later for following the wrong voice in the room.',
+    'Use the first time you hear conflicting instruction.',
+    'This is for environments where direction changes by mood, meeting, or senior person. You’re preventing rework and political blame.',
+    `Just checking we’re still aligned before I build the wrong thing.
+
+As of [date], the agreed direction was:
+• Outcome: [what success looks like]
+• Priority: [what we are optimising for]
+• Scope: [what’s in / out]
+
+In the last [day/week], I’ve heard a different direction from:
+• [name/team] suggesting [new direction]
+
+To avoid churn and mixed messages, can you confirm which version we’re backing — and who the decision owner is?
+
+Once that’s locked, I’ll deliver against it and hold the line.`,
+    `“Why are you making this complicated?” / “We’ll decide later.” / “Just keep moving.”`,
+    `I’m not trying to slow us down — I’m trying to stop invisible rework.
+
+When direction changes mid-flight, the cost doesn’t show up as “a decision”. It shows up as late delivery, messy handovers, and someone getting blamed for not reading minds.
+If we lock one version now, I can move fast without wasting days on a false path.
+
+**Which direction are we committing to today?**`,
+    `If you don’t want to decide right now, I’ll keep momentum without guessing:
+
+• I’ll produce a short “Option A vs Option B” note by [time] (impact on timeline, risk, and effort)
+• You pick one (or nominate the decision owner) by [time/date]
+• I execute the chosen option and treat it as baseline unless you explicitly reset it
+
+That gives you speed and control — without turning me into a mind-reader.`,
+    'Use it as “protect the delivery”, not a complaint. Neutral tone = authority.',
+    'It forces a concrete choice and creates a record. Most “whiplash” happens because nothing was ever locked.',
+    [
+      'If your manager hates lists, turn the bullets into one sentence.',
+      'Swap “I’ve heard” with “There’s been some new input…” for softer diplomacy.',
+      'If they say “just do both”, reply: “Happy to — timeline becomes [date].”'
+    ],
+    [
+      'Do not sound annoyed. Neutral = powerful.',
+      'Don’t name too many people. Keep it tight.'
+    ]
+  ),
+
+  /* ===== POLITICS (core) ===== */
+  s(
+    'politics-stakeholder-alignment',
+    'Align stakeholders before they derail delivery',
+    'politics',
+    9060, 2204,
+    'Stops late-stage “surprise feedback” by aligning what “good” means before you build the whole thing.',
+    'Use when two stakeholders have different agendas.',
+    'This is your anti-ambush script. If you’ve ever been praised by one person and attacked by another… it’s usually because nobody aligned the success criteria.',
+    `Before we commit, I want to align [stakeholder A] and [stakeholder B] on what “good” looks like — so we don’t build twice.
+
+Right now I’m hearing two different success criteria:
+• From [A]: [their priority]
+• From [B]: [their priority]
+
+Can I run a tight 15-minute alignment slot:
+• 2 options
+• 1 decision
+• then we move?
+
+That protects timeline, avoids rework, and keeps expectations clean.`,
+    `“We don’t have time.” / “Just get on with it.” / “They’ll be fine.”`,
+    `If we skip alignment, we usually pay for it later as:
+• “why didn’t you include X?”
+• a last-minute change request
+• a credibility hit for something that was never agreed
+
+Fifteen minutes now protects days later — and it stops people rewriting history at the end.`,
+    `If a call won’t happen, I’ll do it asynchronously:
+
+• I’ll send a one-page decision note with 2 options + impact
+• Ask for a yes/no by [time]
+• Once confirmed, I’ll deliver to that standard and treat it as the baseline
+
+**Who do you want as the final decision owner?**`,
+    'Frame it as “protect timeline”, not “manage politics”. Same move, cleaner language.',
+    'It makes disagreement visible early, when it’s cheap to fix. Politics becomes expensive when it shows up at the end.',
+    [
+      'If someone is senior, call it “alignment” not “decision”.',
+      'Always write a short record afterwards: “Confirmed success criteria are…”',
+      'If a blocker exists, align them first so they feel “seen”.'
+    ],
+    [
+      'Don’t call it “conflict”. Say “different success criteria”.',
+      'Never name who is “wrong”. Keep it neutral.'
+    ]
+  ),
+
+  /* ===== HR (core) ===== */
+  s(
+    'hr-confirm-in-writing',
+    'Confirm a sensitive agreement in writing',
+    'hr',
+    8421, 3178,
+    'Creates a clean written record without sounding threatening — protects you if the story changes later.',
+    'Use immediately after a meeting/call.',
+    'This is “paper trail without paranoia”. It reads like professional hygiene, not a legal threat.',
+    `Just to confirm my understanding of what we agreed today (so we’re both working from the same record):
+
+• [agreement 1]
+• [agreement 2]
+• [timelines / owners]
+• [any constraints / conditions]
+
+If I’ve missed anything, please reply with corrections. Otherwise I’ll proceed on this basis.
+
+(For clarity: this is to avoid misunderstandings, not to add extra process.)`,
+    `“Yes.” / “That’s not what I meant.” / silence`,
+    `Thanks — can you clarify the specific change you want?
+
+I want to avoid guessing, and I want us to have a clean record of the agreement so expectations are fair for everyone.`,
+    `If I don’t hear back by [time/date], I’ll proceed with the understanding above so delivery stays on track.
+
+If anything needs changing, I’m happy to adjust once we confirm — I just don’t want to build on assumptions.`,
+    'Keep it calm and neutral. Bullet points beat paragraphs for clarity (and later recall).',
+    'Silence becomes agreement because you invited correction. It stops “I never said that” later.',
+    [
+      'Avoid legal language. Keep it human.',
+      'If it’s high-risk, keep your distribution list small and professional.',
+      'Never mix feelings into this message. Facts only.'
+    ],
+    [
+      'Don’t write an essay. Keep it short and clean.',
+      'Don’t threaten. Just confirm.'
+    ]
+  ),
+
+  /* ===== CONFIDENCE (core) ===== */
+  s(
+    'confidence-direct-no',
+    'Say “no” cleanly (without apology spirals)',
+    'confidence',
+    13209, 5560,
+    'A calm “no” that still keeps you cooperative — without over-explaining, arguing, or sounding defensive.',
+    'Use when someone tries to push extra ownership onto you.',
+    'This is clarity, not bluntness. You’re refusing the hidden contract: “You’ll take it and absorb the consequences.”',
+    `I can’t take that on right now.
+
+I want to be honest rather than “agree and miss”. If it becomes priority over [X], I can revisit — but I’d need a clear reprioritisation so I’m not silently dropping something else.
+
+If the goal is [outcome], I can support via [lighter option] (quick review / outline / first draft) — just not full ownership.`,
+    `“We really need you on this.” / “It won’t take long.” / “Can you just do it as a favour?”`,
+    `I hear you. If you want me on it, I need your decision on what comes off my plate this week.
+
+**What do you want me to stop doing — so I can do this well?**`,
+    `If it helps, here are two options:
+• Option A: I do a fast “directional” pass by [time] (so you can move)
+• Option B: I own it fully, but that means [X] shifts to [date]
+
+**Which one do you want?**`,
+    'Deliver it once. Don’t negotiate. The power is repetition, not explanation.',
+    'You’re still offering paths forward. It’s hard to label you “unhelpful” when you’re giving options.',
+    [
+      'Swap “I can’t” with “I’m not able to” if you need softer phrasing.',
+      'If tone is delicate, start: “I want to help — here’s what I can do…”',
+      'If they guilt-trip, repeat the trade-off question unchanged.'
+    ],
+    [
+      'Avoid “sorry”. Reasons invite debate.',
+      'Don’t list your whole workload. Offer one trade-off.'
+    ]
+  ),
+
+  /* ===== CAREER (core) ===== */
+  s(
+    'career-promo-scope',
+    'Position for promotion without begging for permission',
+    'career',
+    7788, 1980,
+    'Frames growth as ownership + measurable outcomes (not “I feel ready”). Makes your impact hard to ignore.',
+    'Use in a 1:1 or career chat.',
+    'This is how you sound like a future leader: you propose a business case, you offer accountability, and you ask for criteria — not compliments.',
+    `I’d like to take end-to-end ownership of [scope] — including decisions, stakeholder management, and outcomes.
+
+It matches the level I’m already operating at, and we can measure success by:
+• [metric 1]
+• [metric 2]
+• [quality bar / timeline]
+
+Can we confirm I’m the DRI for this so accountability is clear — and so I can be assessed fairly on the outcome?
+
+If there are gaps you want to see from me at the next level, tell me the top 1–2 criteria so I can hit them deliberately.`,
+    `“Let’s see how it goes.” / “Maybe later.” / “We’ll review at year-end.”`,
+    `Sounds good. Can we set a specific review point in [4–6 weeks]?
+
+That keeps this real: outcomes, evidence, and a clear yes/no conversation — not something that drifts until it disappears.`,
+    `If timing is the issue, I’m happy to do a phased version:
+
+• Phase 1 (next 2–4 weeks): I own [subset] to prove outcomes
+• Phase 2: we expand scope once metrics are met
+
+**What would make you comfortable saying “yes” to the expanded scope?**`,
+    'Bring one or two hard outcomes. One metric beats ten opinions.',
+    'It forces a fair evaluation: measurable criteria + accountability is hard to hand-wave.',
+    [
+      'Always leave with a date: “So we’ll review on [date].”',
+      'If your manager is vague, ask: “What does ‘ready’ mean here?”',
+      'If your org is political, emphasise stakeholder outcomes (not self-development).'
+    ],
+    [
+      'Avoid “I deserve”. Use “I can own” + “here’s how we measure it.”',
+      'Don’t accept open-ended “later” with no review point.'
+    ]
+  ),
+
+  /* ===== SOS (core) ===== */
+  s(
+    'sos-blame-storm',
+    'Hold steady during a blame storm',
+    'sos',
+    10204, 2755,
+    'Pulls a heated moment back into facts, decisions, and stabilisation — without taking the bait.',
+    'Use when someone starts swinging blame.',
+    'This is crisis control. You’re not proving innocence — you’re stopping chaos spreading and getting the next decision made.',
+    `I want to move us out of heat and into facts so we can stabilise.
+
+Facts as I understand them (correct me if any are wrong):
+• [fact 1]
+• [fact 2]
+• [fact 3]
+
+Impact right now:
+• [customer / delivery / risk]
+
+The decision we need in the next 10 minutes:
+• Option A: [action + consequence]
+• Option B: [action + consequence]
+
+**Tell me which option you want and who owns the next step.**`,
+    `“This is your fault.” / “How could you let this happen?” / “We need answers now.”`,
+    `I’m not going to argue blame in the moment.
+
+Right now the fastest way to protect the business is: decision → owner → next step → comms.
+Once we’re stable, we can do a proper review and fix the system, not just the symptom.
+
+**What’s the next decision you want made right now?**`,
+    `If we want a root-cause review, I’ll set it up once we’ve stabilised:
+
+• what happened (timeline)
+• why it happened (contributing factors)
+• what changes (controls + owners)
+
+But first: stabilise, communicate, and stop the bleeding.`,
+    'Speak like a control room, not a courtroom. Your calm becomes the reference point.',
+    'It refuses the emotional trap and offers structure. Most rooms follow whoever provides structure in chaos.',
+    [
+      'If they keep attacking, repeat: “Decision, owner, next step.”',
+      'If it’s in writing, keep it bullet-based and short.',
+      'After stabilisation, send a timeline email (facts only).'
+    ],
+    [
+      'Don’t defend yourself in the crisis moment.',
+      'Don’t accept ownership of “the system” on the spot.'
+    ]
+  ),
+
+  /* =========================================================
+     THEME: WORKLOAD NEGOTIATION (3 scripts)
+  ========================================================= */
+  s(
+    'workload-tradeoff-menu',
+    'Negotiate workload using a “trade-off menu” (no guilt, no drama)',
+    'clarity',
+    11240, 3920,
+    'Gives leaders a menu of trade-offs so you don’t become the silent “yes” that fails later.',
+    'Use when workload is growing, but priorities are not changing.',
+    'This works when you’re being treated like elastic — every new request stretches you, but nobody names the cost. You’re turning pressure into a clear choice.',
+    `I can take [new request]. To protect delivery, I need us to choose the trade-off explicitly.
+
+Here are the options — pick one:
+1) **Keep timeline** → we reduce scope to [core outcomes]
+2) **Keep scope** → timeline becomes [date]
+3) **Keep both** → we add resourcing: [person/role] for [hours/days]
+4) **Keep both, no resourcing** → we accept risk: [what will likely slip]
+
+**Which option do you want me to execute?**`,
+    `“Just make it work.” / “Can’t you be flexible?” / “We need all of it.”`,
+    `I can be flexible — I just don’t want “flexible” to become “unreliable” later.
+
+If we don’t choose a trade-off now, the miss still happens — it just happens quietly, and it lands on someone’s reputation.
+Which lever are we pulling?`,
+    `If it helps, I’ll recommend the cleanest option: **Option [1/2/3]** because it protects [priority: customer / timeline / quality].
+
+If you prefer another option, I’ll follow it — I just need it named so expectations are fair.`,
+    'Send it as soon as the additional work becomes “real” (not when you’re already late). Keep the tone calm and operational.',
+    'It moves the conversation from effort (“try harder”) to constraints (“choose the lever”). Leaders can’t argue with physics.',
+    [
+      'If you’re junior, swap “pick one” for “which would you prefer?”',
+      'Replace “accept risk” with “create a delivery risk” if your culture is sensitive.',
+      'If it’s a call, read Option 1–3 and leave Option 4 as the unspoken consequence.'
+    ],
+    [
+      'Don’t offer 10 options. Four is the sweet spot.',
+      'Avoid “I’m overloaded”. Talk in outcomes and delivery risk.'
+    ],
+    'workload'
+  ),
+  s(
+    'workload-renegotiate-deadline',
+    'Renegotiate a deadline without sounding like you “can’t cope”',
+    'clarity',
+    8890, 2550,
+    'Resets the deadline as a rational decision, not a personal limitation.',
+    'Use when a deadline is unrealistic or has changed quietly.',
+    'Use this when a deadline was agreed under one reality… and then the reality changed (scope creep, missing inputs, competing priorities).',
+    `I want to flag a timing risk early so we can protect the outcome.
+
+Based on the current scope + dependencies, the earliest date I can stand behind is **[date]**.
+
+If you need it by **[original date]**, we can still make that happen by changing one lever:
+• reduce scope to [core], or
+• get [input/resource] by [date/time], or
+• accept a “draft” version (decision-ready) first, then polish after.
+
+**Which version do you want me to optimise for?**`,
+    `“We can’t move the date.” / “Just do your best.” / “Everyone’s under pressure.”`,
+    `Understood — if the date cannot move, then scope has to.
+
+Tell me the **one** outcome that matters most for [original date], and I’ll deliver that cleanly. Everything else becomes Phase 2.`,
+    `If you want me to “do my best” without a trade-off, I can — but I don’t want us to accidentally commit to a deadline that becomes a surprise miss.
+
+I’d rather agree the shape of “done” now than apologise later.`,
+    'Lead with facts (scope/dependencies), not feelings. One firm date + two levers reads as leadership.',
+    'It makes you the person protecting delivery, not the person “pushing back”. You’re offering controlled choices.',
+    [
+      'Swap “timing risk” for “delivery risk” for a more senior feel.',
+      'If they blame you, repeat: “Which lever are we pulling?”',
+      'If there’s politics, put the date in bold so it’s visible in threads.'
+    ],
+    [
+      'Don’t overshare details of your calendar. Keep it at outcome level.',
+      'Don’t apologise for realism.'
+    ],
+    'workload'
+  ),
+  s(
+    'workload-resource-ask',
+    'Ask for extra resourcing (without sounding needy or negative)',
+    'manager',
+    7410, 2190,
+    'Frames resourcing as an efficiency decision: protect outcomes, reduce churn, stop late rework.',
+    'Use when delivery depends on you doing two roles at once.',
+    'This script works when you’re absorbing work because “it’s easier if you just do it”. You’re converting hidden dependency into explicit resourcing.',
+    `To deliver [outcome] to the standard you want by [date], we need to remove a single bottleneck.
+
+Right now that bottleneck is [your role/time], because I’m covering:
+• [workstream A]
+• [workstream B]
+
+If we add **[resource/type]** for **[time box]**, we get:
+• faster throughput on [X]
+• fewer handoffs / less rework
+• a cleaner, more predictable timeline
+
+If resourcing isn’t available, I can still deliver — but we’ll need to reduce scope or extend the date.
+
+**Which route do you want to take?**`,
+    `“We don’t have headcount.” / “Just get it done.” / “Can’t we use someone else?”`,
+    `If headcount is a hard no, no problem — then we adjust a different lever.
+
+Tell me what you want protected: **timeline, scope, or quality**. We can protect two. We can’t protect all three without capacity.`,
+    `We can also do a short-term workaround:
+• I keep ownership of the critical path
+• [someone] picks up [support tasks] (comms, documentation, testing, scheduling)
+• We review after [2 weeks] and decide if we continue
+
+That gives you momentum without creating a long-term dependency on me doing everything.`,
+    'Keep the ask specific: role/type, time box, and what it unlocks. Vagueness gets ignored.',
+    'Leaders fund outcomes, not feelings. This turns “I need help” into “here’s the ROI”.',
+    [
+      'Replace “we can protect two” with “we need to choose a trade-off” for softer delivery.',
+      'If your org hates “ROI”, say “predictability”.',
+      'If you’re junior, add: “I’m flagging this early so it’s manageable.”'
+    ],
+    [
+      'Don’t sound like you’re asking permission to exist.',
+      'Avoid “I’m stressed”. Stick to throughput and risk.'
+    ],
+    'workload'
+  ),
+
+  /* =========================================================
+     THEME: EXPECTATIONS RESET (3 scripts)
+  ========================================================= */
+  s(
+    'expectations-define-urgent',
+    'Reset what “urgent” means (so everything stops being urgent)',
+    'burnout',
+    10310, 3710,
+    'Defines urgent with a channel + rule. Restores sane boundaries without being rigid.',
+    'Use when “urgent” is used as a pressure word.',
+    'This is for teams where everything is labelled urgent to jump the queue. You’re making urgency measurable so it can’t be abused.',
+    `Can we align on what “urgent” means for this team?
+
+If something is urgent, it means:
+• deadline within [X hours], or
+• customer / regulatory impact, or
+• blocking a critical path.
+
+If it doesn’t meet that, it’s important — but not urgent, and it should go through the normal queue.
+
+I’ll respond fast to urgent items (via [channel]), and I’ll pick up non-urgent items during working hours.
+
+**Is that the expectation you want me to operate to?**`,
+    `“Everything is urgent.” / “We move fast here.” / “Just be responsive.”`,
+    `If everything is urgent, then “urgent” stops meaning anything — and response quality drops.
+
+I’m happy to move fast. I just need us to agree how we prioritise so delivery stays reliable.`,
+    `If you want constant responsiveness as standard, that’s a different operating model.
+
+We’d need either:
+• rota/shared cover, or
+• reduced scope elsewhere, so it’s sustainable.
+
+Which model do you want?`,
+    'Keep it neutral. You’re not policing people — you’re protecting delivery reliability.',
+    'It removes the emotional label (“urgent”) and replaces it with criteria. People can argue opinions; criteria forces clarity.',
+    [
+      'Swap “align” for “quick check” if the culture is informal.',
+      'If it’s your manager, ask for their definition first: “How do you define urgent?”',
+      'If hybrid/remote, define channel: “urgent via call/Teams ping”.'
+    ],
+    [
+      'Don’t debate urgency case-by-case in a thread. Apply the rule.',
+      'Don’t become the “urgent” police. Be calm and consistent.'
+    ],
+    'expectations'
+  ),
+  s(
+    'expectations-ownership-reset',
+    'Reset fuzzy ownership (so you stop being everyone’s default)',
+    'clarity',
+    8210, 2640,
+    'Stops “can you just…” becoming permanent ownership without agreement.',
+    'Use when tasks keep landing with you by default.',
+    'This is for teams where roles are blurred and the most competent person becomes the dumping ground. You’re setting ownership rules without sounding territorial.',
+    `Quick check on ownership so we don’t accidentally create confusion.
+
+For [task/workstream], is the expectation that:
+A) I’m the owner end-to-end (decisions + delivery), or
+B) I’m supporting (input/review), with [Name/Team] owning delivery?
+
+I’m happy either way — I just need it explicit so I prioritise correctly and we don’t get “I thought you were doing it” later.`,
+    `“Just help out.” / “We all pitch in.” / “Why does it matter?”`,
+    `Totally — I’m happy to pitch in.
+
+It matters because priorities flow from ownership. If I’m the owner, it displaces other work. If I’m supporting, I’ll keep it lightweight and time-boxed.
+Which is it?`,
+    `If you want support, here’s what I can do:
+• 30-minute review of the plan, or
+• a first draft outline, or
+• a risk list of what could derail it
+
+If you want me to own it, I’ll need a clear deprioritisation elsewhere.`,
+    'Use this as soon as the “help” request appears. Early clarity prevents weeks of invisible expectation.',
+    'It removes ambiguity — the main weapon of workload dumping. You’re asking a neutral question that forces a choice.',
+    [
+      'Swap “owner end-to-end” for “DRI” if your org uses it.',
+      'If senior leaders are involved, follow up with a one-line recap in writing.',
+      'If you’re junior, start with: “I want to make sure I’m prioritising correctly.”'
+    ],
+    [
+      'Don’t ask “why me?” — it triggers defensiveness.',
+      'Don’t accept “just help” without defining what “help” means.'
+    ],
+    'expectations'
+  ),
+  s(
+    'expectations-success-criteria',
+    'Reset what “good” means (so the goalposts stop moving)',
+    'manager',
+    6970, 2130,
+    'Locks success criteria early to reduce churn, nitpicking, and late surprises.',
+    'Use when feedback is vague or constantly shifting.',
+    'This is for leaders who say “I’ll know it when I see it”. You’re anchoring the work to agreed criteria so you aren’t chasing moods.',
+    `Before I build further, can we lock what “good” looks like?
+
+For this deliverable, are we optimising for:
+• speed (decision-ready), or
+• depth (fully detailed), or
+• polish (stakeholder-ready)?
+
+And success looks like:
+• [1–2 measurable criteria]
+• [what’s explicitly out of scope]
+
+If we align this now, I can deliver quickly without rework.`,
+    `“Just make it great.” / “Use your judgement.” / “We don’t have time for this.”`,
+    `Happy to use judgement — I just want to reduce churn.
+
+When “good” isn’t defined, feedback becomes opinion-driven, and we end up rebuilding the same thing three times.
+Two minutes now saves days later.`,
+    `If you don’t want to define criteria, I’ll propose a standard and treat it as the baseline:
+
+• Optimising for: [speed/depth/polish]
+• Out of scope: [x]
+If you confirm, I’ll execute and hold the line.`,
+    'Offer three optimisation choices. People can choose faster than they can describe.',
+    'It converts vague feedback into explicit criteria. That reduces micromanagement and protects your time.',
+    [
+      'If they hate structure, ask one question: “Is this decision-ready or stakeholder-ready?”',
+      'Send a short recap after: “Confirmed we’re optimising for…”',
+      'If they keep shifting, point back to the agreed optimisation.'
+    ],
+    [
+      'Don’t ask for 10 criteria. Two is enough.',
+      'Don’t let “make it great” become infinite scope.'
+    ],
+    'expectations'
+  ),
+
+  /* =========================================================
+     THEME: MICROMANAGEMENT RESPONSE (3 scripts)
+  ========================================================= */
+  s(
+    'micro-update-cadence',
+    'Set an update cadence that reduces micromanagement',
+    'manager',
+    9860, 3390,
+    'Gives a controlling manager more visibility, so you get more autonomy.',
+    'Use when you’re being chased for updates or copied into everything.',
+    'This uses a simple truth: micromanagement is often a visibility problem disguised as a personality problem. You’re creating a visibility system that protects your focus.',
+    `I want to keep you fully confident this is under control — and also protect focus time so delivery stays fast.
+
+Can we agree a simple cadence:
+• Daily (Mon–Thu): 3-bullet update by [time]
+  1) what moved
+  2) what’s next
+  3) risks / decisions needed
+• Friday: 10-minute wrap + plan for next week
+
+If something changes materially, I’ll flag it immediately.
+
+If we do this, can we avoid ad-hoc pings during the day unless it’s urgent?`,
+    `“I still want to be looped in.” / “Just keep me updated.” / “I need more detail.”`,
+    `No problem — if you want more detail, I can include:
+• progress against milestones, and
+• what I’m waiting on
+
+What I’m trying to avoid is fragmented updates that slow delivery. A predictable cadence gives you visibility without interrupting execution.`,
+    `If you’d prefer, we can also use a single tracker:
+• status = On track / At risk / Blocked
+• owner for each item
+• next decision needed
+
+That way you have full visibility at any time, without needing constant check-ins.`,
+    'Deliver it as a service: “I want you confident”. It’s hard to reject.',
+    'Micromanagers chase reassurance. Give them reassurance on a schedule so they stop chasing it on your time.',
+    [
+      'If they’re anxious, start with: “I can see why you want visibility.”',
+      'Keep the update in bullets. Paragraphs invite debate.',
+      'If remote/hybrid, use one channel for updates to avoid scattered threads.'
+    ],
+    [
+      'Don’t present it as “stop micromanaging me”. Present it as “better visibility system”.',
+      'If they break the rule, politely redirect: “I’ll cover this in the [time] update.”'
+    ],
+    'micromanagement'
+  ),
+  s(
+    'micro-autonomy-guardrails',
+    'Ask for autonomy with guardrails (so you sound senior, not defensive)',
+    'manager',
+    7840, 2470,
+    'Requests space to operate — while giving risk controls that make it safe for them to say yes.',
+    'Use when someone is rewriting your work line-by-line.',
+    'This is the “trust contract”: you get autonomy, they get early warning. It’s how you move from “doer” to “owner”.',
+    `I want to make sure we’re using time in the highest-leverage way.
+
+If you’re comfortable, I’d like to run this with clear guardrails:
+• I make the day-to-day calls
+• I flag risks early (no surprises)
+• You step in only on: [budget/priority/scope changes]
+
+To make that safe, I’ll send:
+• a short plan by [time/date]
+• a checkpoint at [milestone]
+• a decision request only when we hit a real fork
+
+If that works, it will speed delivery and reduce churn. Are you happy with that operating model?`,
+    `“I need to review everything.” / “This is too important.” / “I don’t want surprises.”`,
+    `I completely agree — no surprises.
+
+That’s why I’m proposing guardrails + checkpoints. Reviewing everything line-by-line tends to create late delivery without actually reducing risk.
+If we define the points you care about, you’ll get control where it matters — and speed everywhere else.`,
+    `If you do want to review everything, no problem — then we should adjust expectations:
+• timeline extends to [date], or
+• we reduce scope, so review time is built in.
+
+Which would you prefer?`,
+    'Keep it respectful, but firm. You’re offering a system, not requesting approval like a child.',
+    'It makes autonomy feel safe: you’ve named the risk points and created checkpoints.',
+    [
+      'Replace “guardrails” with “checkpoints” if they dislike corporate language.',
+      'If they’re senior, say: “I’ll escalate decisions at forks.”',
+      'If you’re junior, add: “so I’m learning judgement at this level.”'
+    ],
+    [
+      'Don’t say “you’re micromanaging”. It triggers defensiveness.',
+      'Don’t promise “no issues”. Promise “early visibility”.'
+    ],
+    'micromanagement'
+  ),
+  s(
+    'micro-nitpicks-to-outcomes',
+    'Redirect nitpicking to outcomes (without sounding disrespectful)',
+    'confidence',
+    6490, 2180,
+    'Moves feedback from minor preferences to what actually matters — faster decisions, cleaner delivery.',
+    'Use when you’re getting a stream of tiny edits.',
+    'This is for leaders who “manage by comment”. You’re making their preference cost visible without criticising them.',
+    `Quick check so we’re optimising the right thing.
+
+I’m seeing a lot of detail-level feedback (wording / formatting / minor structure). Happy to tidy it — I just want to confirm the priority:
+
+Are we optimising for:
+A) decision accuracy (right call),
+B) speed (move today),
+or
+C) polish (stakeholder-ready)?
+
+If it’s A or B, I suggest we lock the core decisions first, then polish the presentation after.
+If it’s C, I’ll allocate time specifically for refinement so it’s planned, not disruptive.`,
+    `“It needs to be perfect.” / “Details matter.” / “I just want it right.”`,
+    `Agreed — details do matter.
+
+I just want to avoid the pattern where we perfect slide 3 while the core decision is still unmade.
+If we lock the decision first, we can make the polish truly serve the outcome.`,
+    `If you want perfection now, I’m happy to do it — I just need to adjust the timeline accordingly.
+
+Given the level of refinement requested, the realistic delivery becomes **[date]** unless we reduce scope elsewhere.`,
+    'Name the optimisation choice (A/B/C). It makes the conversation simple and non-emotional.',
+    'You’re not rejecting feedback; you’re sequencing it. Sequencing is leadership.',
+    [
+      'If they’re sensitive, start with: “This is helpful feedback — quick check…”',
+      'If remote, use one “consolidated comments” request rather than endless pings.',
+      'If they refuse to choose, choose for them: “I’ll treat this as A (decision accuracy).”'
+    ],
+    [
+      'Don’t roll your eyes (even verbally). Keep it calm.',
+      'Avoid “nitpicking” language. Say “detail-level feedback”.'
+    ],
+    'micromanagement'
+  ),
+
+  /* =========================================================
+     THEME: HR CONVERSATIONS (3 scripts)
+  ========================================================= */
+  s(
+    'hr-reasonable-adjustments-request',
+    'Request reasonable adjustments (clear, professional, hard to ignore)',
+    'hr',
+    9100, 3440,
+    'A structured request that sounds calm and credible — focuses on impact and workable solutions.',
+    'Use when you need adjustments, flexibility, or a change in expectations.',
+    'This is designed to be HR-safe: factual, solutions-focused, and written like professional hygiene (not a complaint).',
+    `Hello [Name],
+
+I’m writing to request a discussion about **reasonable adjustments** to support sustainable performance.
+
+The current impact is:
+• [impact on work / health / ability to sustain pace]
+• [what triggers it / where it shows up]
+
+I’m proposing the following adjustments (practical and measurable):
+• [adjustment 1] — expected effect: [what improves]
+• [adjustment 2] — expected effect: [what improves]
+• [adjustment 3] — review point: [date]
+
+I’m committed to delivery, and I want a plan that protects outcomes without creating repeated flare-ups.
+
+Can we schedule a meeting this week to agree next steps and confirm what documentation you need from me?
+
+Thanks,
+[Your name]`,
+    `“Can you provide more detail?” / “We’ll review.” / “Is this a performance issue?”`,
+    `Happy to provide more detail.
+
+Just to be clear: this request is about enabling sustained performance and fair expectations — not avoiding work.
+If you can share the process and any forms you need completed, I’ll respond promptly.`,
+    `If it helps, I can propose a short trial:
+• implement adjustments for [2–4 weeks]
+• measure impact on delivery/attendance
+• decide whether to keep, tweak, or revert
+
+That keeps it evidence-based and practical.`,
+    'Keep it factual and solution-first. The goal is a workable plan, not an emotional debate.',
+    'It makes your request hard to dismiss: it’s specific, measurable, and framed around performance sustainability.',
+    [
+      'If you’re worried about tone, remove “flare-ups” and use “recurrence”.',
+      'Keep a copy of this message for your records.',
+      'If you’ve already discussed it, add: “As discussed on [date]…”'
+    ],
+    [
+      'Don’t overshare personal details. Keep it impact + solutions.',
+      'Avoid blaming individuals in the first message.'
+    ],
+    'hrconv'
+  ),
+  s(
+    'hr-performance-plan-clarity',
+    'In a performance conversation: lock what “good” means (and how it’s measured)',
+    'hr',
+    8020, 2710,
+    'Stops vague performance feedback by forcing clear standards, measures, and support.',
+    'Use when feedback is subjective or constantly shifting.',
+    'This is for performance conversations where “improve communication” or “be more proactive” is being used without definitions. You’re turning it into measurable expectations.',
+    `Thanks for the conversation today. To make sure I’m responding properly, can we confirm the specifics of what “good” looks like?
+
+For each point raised, please can you confirm:
+• the expected standard (examples of what “good” is)
+• how it will be measured (evidence/metrics)
+• the timeframe for review
+• what support/resources are available
+• who I should go to if I hit blockers
+
+Once those are confirmed, I can build a targeted plan and provide weekly progress updates.
+
+I’m committed to improvement — I just want the criteria to be clear and consistent.`,
+    `“We’ll keep it informal.” / “Just use your judgement.” / “We’ll see how it goes.”`,
+    `I’m happy to keep the tone constructive.
+
+I do need the criteria to be explicit though — otherwise we risk misunderstandings and inconsistent feedback.
+If we lock the standard now, we’ll both know what success looks like.`,
+    `If it helps, I can propose the measures in a one-page plan (drafted by me) for you to approve.
+
+That way we’re aligned quickly and we can move forward without ambiguity.`,
+    'Ask for examples. Examples force specificity. Specificity protects you.',
+    'It turns “vibes-based performance” into “criteria-based performance”. That’s fairer and more defensible for everyone.',
+    [
+      'If they resist, say: “This helps me improve faster.”',
+      'Send this within 24 hours of the meeting while memory is fresh.',
+      'Keep it polite and neutral — this is about clarity, not confrontation.'
+    ],
+    [
+      'Don’t admit fault you don’t agree with. Confirm you understand, then ask for criteria.',
+      'Avoid emotional language. Let the structure do the work.'
+    ],
+    'hrconv'
+  ),
+  s(
+    'hr-formal-meeting-setup',
+    'When HR invite you to a “chat”: clarify purpose, process, and your rights (politely)',
+    'hr',
+    7260, 2330,
+    'Gets clarity on what the meeting is, what it’s about, and what you should prepare — without sounding paranoid.',
+    'Use when you receive a vague HR or management meeting invite.',
+    'This is for those ambiguous invites that make your stomach drop. You’re asking normal, professional questions that any organised person would ask.',
+    `Hi [Name],
+
+Thanks for the invite. To prepare properly, please can you confirm:
+• the purpose of the meeting (what it’s about)
+• whether it’s informal or part of a formal process
+• who will be attending and their roles
+• whether I’m expected to bring anything (documents / examples)
+• whether I can be accompanied, if it becomes a formal meeting
+
+Once I have that, I’ll come prepared and we can use the time productively.
+
+Thanks,
+[Your name]`,
+    `“It’s just a chat.” / “Don’t worry about it.” / “We’ll explain in the meeting.”`,
+    `Understood — I’m not trying to make it heavy.
+
+I just want to avoid surprises and make sure I’m prepared so the meeting is productive.
+Can you confirm the broad topic and attendees?`,
+    `If you prefer to keep detail for the meeting, that’s fine — please can you confirm whether it’s formal or informal, and whether I can be accompanied if needed.
+
+That’s just standard preparation on my side.`,
+    'Send it immediately after the invite. If they won’t clarify, that itself is useful information.',
+    'It signals calm competence and creates a paper trail. It also discourages “ambush” meetings.',
+    [
+      'Keep it short. Don’t add accusations.',
+      'If they refuse to answer, forward the invite + your reply to your own notes.',
+      'If it’s a unionised workplace, check your accompaniment rights.'
+    ],
+    [
+      'Avoid “I feel threatened”. Keep it procedural.',
+      'Don’t attend a “mystery meeting” without clarity unless you have no choice.'
+    ],
+    'hrconv'
+  ),
+
+  /* =========================================================
+     THEME: DIFFICULT CONVERSATIONS (3 scripts)
+  ========================================================= */
+  s(
+    'difficult-feedback-peer',
+    'Give feedback to a peer (direct, calm, no moralising)',
+    'confidence',
+    9050, 3120,
+    'Delivers feedback without triggering a fight: observation → impact → request.',
+    'Use when someone’s behaviour is creating friction or risk.',
+    'This is built to avoid the two classic mistakes: (1) vague hints, (2) emotional unload. You’re keeping it clean and specific.',
+    `Can I share something directly?
+
+When [specific behaviour] happens (for example: [recent example]), the impact is:
+• [impact on delivery / team / stakeholders]
+
+I’m not questioning your intent — I’m flagging the effect.
+
+Going forward, can we do this instead:
+• [clear request / alternative behaviour]
+
+If there’s something I’m doing that makes your job harder, tell me — I’d rather fix it than build tension.`,
+    `“I didn’t mean it like that.” / “You’re being sensitive.” / “That’s not my problem.”`,
+    `I hear you — and I’m not trying to argue intent.
+
+I’m flagging the impact because it affects delivery. If we adjust the behaviour, we remove the friction and everything gets easier.`,
+    `If you don’t agree, that’s fine — can we at least agree the working rule for this project:
+• [working agreement]
+
+That way we’re not re-litigating the same issue every week.`,
+    'Pick one behaviour, one example, one request. Don’t bring a catalogue.',
+    'It separates intent from impact, which keeps the conversation adult and practical.',
+    [
+      'If they’re defensive, slow down and repeat: “I’m talking about impact.”',
+      'If it’s a call, keep your tone neutral and your pace steady.',
+      'If it’s sensitive, use “Can we align on a working rule?”'
+    ],
+    [
+      'Avoid “you always/never”. Use one example.',
+      'Don’t diagnose their personality. Stick to observable behaviour.'
+    ],
+    'difficult'
+  ),
+  s(
+    'difficult-undermined-meeting',
+    'When you’re undermined in a meeting: reset it without starting a war',
+    'politics',
+    8720, 2790,
+    'Stops public undermining by moving it into facts, ownership, and a clear next step.',
+    'Use when someone contradicts or discredits you in front of others.',
+    'This protects your credibility without escalating. You’re refusing to do a public argument, but you are not letting it slide.',
+    `I want to keep this productive, not turn it into a debate.
+
+Just to clarify for the group:
+• The current decision is: [decision]
+• The owner for the next step is: [owner]
+• The next milestone is: [date]
+
+If there’s a different view, I’m happy to take it offline straight after and align — then we’ll come back with one clear direction.
+
+For now, can we confirm which decision we’re proceeding with?`,
+    `“We need to talk about this now.” / “That’s not accurate.” / “You’re wrong.”`,
+    `Happy to address it — I just don’t think a live debate in this forum helps.
+
+Let’s lock:
+1) what decision we’re making today, and
+2) who owns the next step.
+
+Then we can take five minutes after to reconcile details and avoid mixed messages.`,
+    `If you’d prefer to resolve it asynchronously, I’ll send a short note with:
+• the facts as I understand them
+• the options
+• impact on timeline
+
+Then we’ll confirm one direction in writing, so we stop the back-and-forth.`,
+    'Keep your voice level. Treat it like meeting facilitation, not self-defence.',
+    'You preserve status by providing structure. Most undermining relies on you reacting emotionally.',
+    [
+      'If they repeatedly do it, follow up privately: “I’m happy to debate, but not in a way that confuses the group.”',
+      'Use “for the group” language — it signals leadership.',
+      'Always send a post-meeting recap to lock the record.'
+    ],
+    [
+      'Don’t trade barbs. Win by staying calm and precise.',
+      'Avoid “you undermined me”. Talk about clarity and mixed messages.'
+    ],
+    'difficult'
+  ),
+  s(
+    'difficult-passive-aggressive',
+    'Respond to passive-aggressive messages (without getting dragged into tone wars)',
+    'confidence',
+    7640, 2580,
+    'Neutralises tone and forces clarity: what is the ask, what is the decision, what is the deadline.',
+    'Use when messages are snide, vague, or loaded.',
+    'This is the “tone-proof” reply: you do not mirror, you do not apologise, you do not debate attitude. You extract the work.',
+    `I want to make sure I’m responding to the actual ask.
+
+    like.
+
+Can you confirm:
+• what outcome you need,
+• by when,
+• and what “done” looks like?
+
+Once I’ve got that, I’ll respond with the quickest route to delivery.`,
+    `“Wow.” / “Fine, I’ll just do it myself.” / “You should have known.”`,
+    `Understood.
+
+To keep this moving cleanly, I’ll focus on the deliverable:
+• Outcome: [confirm]
+• Deadline: [confirm]
+• Owner: [confirm]
+
+If there’s feedback on tone, I’m happy to discuss it separately — but first I want to make sure we deliver the right thing.`,
+    `If you’d rather not go back and forth in messages, we can do this in 10 minutes:
+
+• You tell me the outcome + deadline + decision owner
+• I confirm the plan and next step
+• We move
+
+What time works today?`,
+    'Do not mirror their tone. Reply to the work. Extract clarity. Keep it short.',
+    'It removes the “tone trap” and forces specifics. Passive aggression dies when you ask for clear outcomes.',
+    [
+      'If they’re senior, add: “I want to respect your time, so I’m keeping it tight.”',
+      'If you need to be firmer: “I’m not able to act on implied asks — I need the outcome and deadline.”',
+      'If they keep sniping, move to a call: “Happy to resolve quickly live.”'
+    ],
+    [
+      'Don’t apologise for asking for clarity — it signals weakness.',
+      'Don’t debate whether they were rude. Keep it operational.'
+    ],
+    'difficult'
+  )
+];
+
+/* =========================
+   HELPERS
+========================= */
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+
+function formatNumber(n){
+  try {
+    return new Intl.NumberFormat('en-GB', { notation:'compact', maximumFractionDigits:1 }).format(n);
+  } catch {
+    // fallback
+    if (n >= 1000000) return (n/1000000).toFixed(1)+'m';
+    if (n >= 1000) return (n/1000).toFixed(1)+'k';
+    return String(n);
+  }
+}
+
+function escapeHtml(str=''){
+  return String(str)
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;');
+}
+
+function showToast(msg){
+  const toast = $('#toast');
+  const toastText = $('#toastText');
+  if (!toast || !toastText) return;
+  toastText.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=>toast.classList.remove('show'), 1600);
+}
+
+function smoothScrollTo(id){
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function normalize(str=''){
+  return str
+    .toLowerCase()
+    .replace(/[’']/g,"'")
+    .replace(/[^a-z0-9\s\-]/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+/* =========================
+   MY PLAYBOOK (localStorage)
+========================= */
+const STORAGE_KEY = 'tep_savedScripts_v1';
+
+function getSavedIds(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  } catch { return []; }
+}
+function setSavedIds(ids){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(Array.from(new Set(ids))));
+}
+function isSaved(id){
+  return getSavedIds().includes(id);
+}
+function toggleSaved(id){
+  const ids = getSavedIds();
+  const idx = ids.indexOf(id);
+  if (idx >= 0) ids.splice(idx,1);
+  else ids.push(id);
+  setSavedIds(ids);
+  return ids.includes(id);
+}
+
+/* =========================
+   BUILD: THEMES + CATEGORIES + TOP
+========================= */
+function buildThemes(){
+  const grid = $('#themeGrid');
+  if (!grid) return;
+
+  const themeCounts = Object.fromEntries(themes.map(t=>[t.key, 0]));
+  scriptsData.forEach(sc => { if (themeCounts[sc.themeKey] != null) themeCounts[sc.themeKey]++; });
+
+  const totalThemeScripts = Object.values(themeCounts).reduce((a,b)=>a+b,0);
+  const totalEl = $('#totalThemeScripts');
+  if (totalEl) totalEl.textContent = String(totalThemeScripts);
+
+  grid.innerHTML = themes.map(t => {
+    const count = themeCounts[t.key] || 0;
+    return `
+      <div class="cat-card theme-card ${t.cardClass}" data-theme="${t.key}" role="button" tabindex="0" aria-label="Theme: ${escapeHtml(t.name)}">
+        <div class="cat-accent"></div>
+        <div class="cat-icon"><i class="fas ${t.icon}"></i></div>
+        <div class="cat-name">${escapeHtml(t.name)}</div>
+        <div class="cat-desc">${escapeHtml(t.desc)}</div>
+        <div class="cat-foot">
+          <span class="cat-badge"><i class="fas fa-layer-group"></i> ${count} scripts</span>
+          <span style="font-weight:600;color:var(--text-medium);"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // click handlers
+  $$('#themeGrid .cat-card').forEach(card => {
+    const themeKey = card.getAttribute('data-theme');
+    const open = () => applyFilter({ themeKey });
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); open(); } });
+  });
+}
+
+function buildCategories(){
+  const grid = $('#categoryGrid');
+  if (!grid) return;
+
+  const catCounts = Object.fromEntries(categories.map(c=>[c.key, 0]));
+  scriptsData.forEach(sc => { if (catCounts[sc.categoryKey] != null) catCounts[sc.categoryKey]++; });
+
+  const total = scriptsData.length;
+  const totalEl = $('#totalScripts');
+  if (totalEl) totalEl.textContent = String(total);
+
+  grid.innerHTML = categories.map(c => {
+    const count = catCounts[c.key] || 0;
+    return `
+      <div class="cat-card ${c.cardClass}" data-category="${c.key}" role="button" tabindex="0" aria-label="Category: ${escapeHtml(c.name)}">
+        <div class="cat-accent"></div>
+        <div class="cat-icon"><i class="fas ${c.icon}"></i></div>
+        <div class="cat-name">${escapeHtml(c.name)}</div>
+        <div class="cat-desc">${escapeHtml(c.desc)}</div>
+        <div class="cat-foot">
+          <span class="cat-badge"><i class="fas fa-folder-open"></i> ${count} scripts</span>
+          <span style="font-weight:600;color:var(--text-medium);"><i class="fas fa-arrow-right"></i></span>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  $$('#categoryGrid .cat-card').forEach(card => {
+    const categoryKey = card.getAttribute('data-category');
+    const open = () => applyFilter({ categoryKey });
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); open(); } });
+  });
+}
+
+function buildTopScripts(){
+  const grid = $('#topScriptsGrid');
+  if (!grid) return;
+
+  // pick top 6 by saved count, then viewed
+  const top = [...scriptsData]
+    .sort((a,b)=> (b.saved - a.saved) || (b.viewed - a.viewed))
+    .slice(0, 6);
+
+  grid.innerHTML = top.map(renderMiniScriptCard).join('');
+  hookMiniScriptCardClicks(grid);
+}
+
+/* =========================
+   RENDER: MINI SCRIPT CARDS
+========================= */
+function renderMiniScriptCard(sc){
+  const cat = getCategory(sc.categoryKey);
+  const theme = getTheme(sc.themeKey);
+  const catCol = categoryColor(sc.categoryKey);
+  const themeCol = themeColor(sc.themeKey);
+  const savedFlag = isSaved(sc.id);
+
+  return `
+    <div class="mini-script" data-script-id="${sc.id}" role="button" tabindex="0" aria-label="Open script: ${escapeHtml(sc.title)}">
+      <div class="mini-cat" style="color:${catCol};">${escapeHtml(cat?.name || sc.categoryKey)}</div>
+      <div class="mini-theme"><span class="dot" style="background:${themeCol};"></span>${escapeHtml(theme?.name || 'Theme')}</div>
+      <h3 class="mini-title"><span>${escapeHtml(sc.title)}</span></h3>
+      <div class="mini-summary">${escapeHtml(sc.summary || '')}</div>
+      <div class="mini-use"><strong>Use when:</strong> ${escapeHtml(sc.use || '')}</div>
+      <div class="mini-note"><strong>Power move:</strong> ${escapeHtml(sc.whyWorks || '')}</div>
+
+      <div class="mini-corner-stats" aria-hidden="true">
+        <span class="stat"><i class="fas fa-eye"></i>${formatNumber(sc.viewed || 0)}</span>
+        <span class="stat"><i class="${savedFlag ? 'fas' : 'far'} fa-bookmark"></i>${formatNumber(sc.saved || 0)}</span>
+      </div>
+    </div>
+  `;
+}
+
+function hookMiniScriptCardClicks(containerEl){
+  if (!containerEl) return;
+  const cards = Array.from(containerEl.querySelectorAll('.mini-script'));
+  cards.forEach(card => {
+    const id = card.getAttribute('data-script-id');
+    const open = () => {
+      const sc = scriptsData.find(x => x.id === id);
+      if (sc) openModalWithScript(sc);
+    };
+    card.addEventListener('click', open);
+    card.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' ') { e.preventDefault(); open(); } });
+  });
+}
+
+/* =========================
+   FILTER: APPLY + RENDER
+========================= */
+let currentFilter = { categoryKey:null, themeKey:null };
+
+function applyFilter({ categoryKey=null, themeKey=null }){
+  currentFilter = { categoryKey, themeKey };
+
+  const heading = $('#scriptsHeading');
+  const lead = $('#scriptsLead');
+  const grid = $('#scriptsGrid');
+  const clearBtn = $('#clearCategoryBtn');
+
+  if (!grid) return;
+
+  let list = [...scriptsData];
+
+  if (themeKey){
+    list = list.filter(s => s.themeKey === themeKey);
+    const theme = getTheme(themeKey);
+    if (heading) heading.textContent = theme ? theme.name : 'Theme scripts';
+    if (lead) lead.textContent = `Showing ${list.length} scripts under this theme. Click any card to open the full wording.`;
+  } else if (categoryKey){
+    list = list.filter(s => s.categoryKey === categoryKey);
+    const cat = getCategory(categoryKey);
+    if (heading) heading.textContent = cat ? cat.name : 'Category scripts';
+    if (lead) lead.textContent = `Showing ${list.length} scripts in this category. Click any card to open the full wording.`;
+  } else {
+    if (heading) heading.textContent = 'Scripts';
+    if (lead) lead.textContent = 'Pick a theme or category above to pull up the full set of scripts.';
+    list = [];
+  }
+
+  if (clearBtn) clearBtn.style.display = (themeKey || categoryKey) ? 'inline-flex' : 'none';
+
+  grid.innerHTML = list.map(renderMiniScriptCard).join('');
+  hookMiniScriptCardClicks(grid);
+
+  // update URL (nice but optional)
+  try{
+    const url = new URL(window.location.href);
+    url.searchParams.delete('theme');
+    url.searchParams.delete('category');
+    if (themeKey) url.searchParams.set('theme', themeKey);
+    if (categoryKey) url.searchParams.set('category', categoryKey);
+    window.history.replaceState({}, '', url.toString());
+  } catch {}
+
+  smoothScrollTo('scripts');
+}
+
+function clearFilter(){
+  currentFilter = { categoryKey:null, themeKey:null };
+  const grid = $('#scriptsGrid');
+  if (grid) grid.innerHTML = '';
+  const heading = $('#scriptsHeading');
+  const lead = $('#scriptsLead');
+  const clearBtn = $('#clearCategoryBtn');
+  if (heading) heading.textContent = 'Scripts';
+  if (lead) lead.textContent = 'Pick a theme or category above to pull up the full set of scripts.';
+  if (clearBtn) clearBtn.style.display = 'none';
+
+  try{
+    const url = new URL(window.location.href);
+    url.searchParams.delete('theme');
+    url.searchParams.delete('category');
+    window.history.replaceState({}, '', url.toString());
+  } catch {}
+}
+
+/* =========================
+   SEARCH
+========================= */
+function initializeSearch(){
+  const input = $('#searchInput');
+  const panel = $('#resultsPanel');
+  const listEl = $('#resultsList');
+  const meta = $('#resultsMeta');
+  if (!input || !panel || !listEl || !meta) return;
+
+  const index = scriptsData.map(sc => ({
+    sc,
+    hay: normalize([
+      sc.title, sc.summary, sc.use, sc.context, sc.primary, sc.typical, sc.add1, sc.add2,
+      getCategory(sc.categoryKey)?.name, getTheme(sc.themeKey)?.name
+    ].join(' '))
+  }));
+
+  input.addEventListener('input', () => {
+    const q = normalize(input.value);
+    if (!q){
+      panel.classList.remove('active');
+      listEl.innerHTML = '';
+      meta.textContent = '0 results';
+      return;
+    }
+
+    const matches = index
+      .filter(x => x.hay.includes(q))
+      .slice(0, 24)
+      .map(x => x.sc);
+
+    meta.textContent = `${matches.length} result${matches.length===1?'':'s'}`;
+    listEl.innerHTML = matches.map(sc => {
+      const cat = getCategory(sc.categoryKey);
+      const theme = getTheme(sc.themeKey);
+      return `
+        <li class="result-item" data-script-id="${sc.id}">
+          <div class="result-left">
+            <div class="result-title">${escapeHtml(sc.title)}</div>
+            <div class="result-sub">${escapeHtml(sc.summary || '')}</div>
+            <div class="result-meta-row">
+              <span><i class="fas fa-folder-open"></i> ${escapeHtml(cat?.name || sc.categoryKey)}</span>
+              <span><i class="fas fa-layer-group"></i> ${escapeHtml(theme?.name || sc.themeKey)}</span>
+              <span><i class="fas fa-eye"></i> ${formatNumber(sc.viewed || 0)}</span>
+              <span><i class="${isSaved(sc.id) ? 'fas' : 'far'} fa-bookmark"></i> ${formatNumber(sc.saved || 0)}</span>
+            </div>
+          </div>
+          <div style="color:var(--text-medium);font-weight:700;"><i class="fas fa-chevron-right"></i></div>
+        </li>
+      `;
+    }).join('');
+
+    panel.classList.add('active');
+
+    // click opens modal
+    Array.from(listEl.querySelectorAll('.result-item')).forEach(item => {
+      const id = item.getAttribute('data-script-id');
+      item.addEventListener('click', () => {
+        const sc = scriptsData.find(x => x.id === id);
+        if (sc) openModalWithScript(sc);
+      });
+    });
+  });
+}
+
+/* =========================
+   MODAL
+========================= */
+let activeScript = null;
+
+function initializeModal(){
+  const overlay = $('#modalOverlay');
+  const closeBtn = $('#modalCloseBtn');
+  if (!overlay || !closeBtn) return;
+
+  closeBtn.addEventListener('click', closeModal);
+
+  overlay.addEventListener('click', (e)=>{
+    // close if clicking overlay (not modal content)
+    if (e.target === overlay) closeModal();
+  });
+
+  const copyBtn = $('#modalCopyAllBtn');
+  const saveBtn = $('#modalSaveBtn');
+
+  copyBtn?.addEventListener('click', () => {
+    if (!activeScript) return;
+    const text = buildCopyText(activeScript);
+    navigator.clipboard.writeText(text).then(()=>{
+      showToast('Copied');
+    }).catch(()=>{
+      showToast('Copy failed');
+    });
+  });
+
+  saveBtn?.addEventListener('click', () => {
+    if (!activeScript) return;
+    const nowSaved = toggleSaved(activeScript.id);
+    updateModalSaveButton(nowSaved);
+    renderSavedItems(); // sidebar list
+    refreshVisibleBookmarks();
+    showToast(nowSaved ? 'Saved' : 'Removed');
+  });
+}
+
+function openModalWithScript(sc){
+  activeScript = sc;
+
+  const overlay = $('#modalOverlay');
+  const titleEl = $('#modalTitle');
+  const bodyEl = $('#modalBody');
+  if (!overlay || !titleEl || !bodyEl) return;
+
+  titleEl.textContent = sc.title;
+
+  const cat = getCategory(sc.categoryKey);
+  const theme = getTheme(sc.themeKey);
+
+  bodyEl.innerHTML = `
+    <div class="block primary full">
+      <div class="block-title"><i class="fas fa-circle-info"></i> Context</div>
+      <div class="block-text">${escapeHtml(sc.context || '')}</div>
+    </div>
+
+    <div class="block primary full">
+      <div class="block-title"><i class="fas fa-quote-left"></i> Primary script (send this)</div>
+      <div class="block-text">${escapeHtml(sc.primary || '')}</div>
+    </div>
+
+    <div class="block">
+      <div class="block-title"><i class="fas fa-reply"></i> Typical response</div>
+      <div class="block-text muted">${escapeHtml(sc.typical || '')}</div>
+    </div>
+
+    <div class="block">
+      <div class="block-title"><i class="fas fa-arrow-right"></i> Additional response 1</div>
+      <div class="block-text">${escapeHtml(sc.add1 || '')}</div>
+    </div>
+
+    <div class="block">
+      <div class="block-title"><i class="fas fa-arrow-right"></i> Additional response 2</div>
+      <div class="block-text">${escapeHtml(sc.add2 || '')}</div>
+    </div>
+
+    <div class="use-grid">
+      <div class="use-chip">
+        <div class="t"><i class="fas fa-wand-magic-sparkles"></i> How to use it in real life</div>
+        <div class="b">${escapeHtml(sc.howToUse || '')}</div>
+      </div>
+      <div class="use-chip">
+        <div class="t"><i class="fas fa-shield-halved"></i> Why it works</div>
+        <div class="b">${escapeHtml(sc.whyWorks || '')}</div>
+      </div>
+    </div>
+
+    <div class="block full">
+      <div class="block-title"><i class="fas fa-sliders"></i> Tweaks (choose what fits)</div>
+      <ul class="tip-list">
+        ${(sc.tweaks || []).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}
+      </ul>
+    </div>
+
+    <div class="block full">
+      <div class="block-title"><i class="fas fa-triangle-exclamation"></i> Watch for</div>
+      <ul class="tip-list">
+        ${(sc.watchFor || []).map(x=>`<li>${escapeHtml(x)}</li>`).join('')}
+      </ul>
+    </div>
+
+    <div class="block full">
+      <div class="block-title"><i class="fas fa-tags"></i> Labels</div>
+      <div class="block-text">
+        <strong>Category:</strong> ${escapeHtml(cat?.name || sc.categoryKey)}<br>
+        <strong>Theme:</strong> ${escapeHtml(theme?.name || sc.themeKey)}
+      </div>
+    </div>
+  `;
+
+  updateModalSaveButton(isSaved(sc.id));
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // also store hash for deep-link
+  try{
+    const url = new URL(window.location.href);
+    url.hash = `script=${encodeURIComponent(sc.id)}`;
+    window.history.replaceState({}, '', url.toString());
+  } catch {}
+}
+
+function updateModalSaveButton(saved){
+  const saveBtn = $('#modalSaveBtn');
+  if (!saveBtn) return;
+  saveBtn.classList.toggle('saved', !!saved);
+  saveBtn.innerHTML = saved
+    ? `<i class="fas fa-bookmark"></i> Saved`
+    : `<i class="far fa-bookmark"></i> Save`;
+}
+
+function closeModal(){
+  const overlay = $('#modalOverlay');
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+  activeScript = null;
+
+  // clear hash
+  try{
+    const url = new URL(window.location.href);
+    if (url.hash.startsWith('#script=')) url.hash = '';
+    window.history.replaceState({}, '', url.toString());
+  } catch {}
+}
+
+function buildCopyText(sc){
+  const cat = getCategory(sc.categoryKey);
+  const theme = getTheme(sc.themeKey);
+  return [
+    `${sc.title}`,
+    `Category: ${cat?.name || sc.categoryKey}`,
+    `Theme: ${theme?.name || sc.themeKey}`,
+    ``,
+    `CONTEXT`,
+    sc.context || '',
+    ``,
+    `PRIMARY SCRIPT`,
+    sc.primary || '',
+    ``,
+    `TYPICAL RESPONSE`,
+    sc.typical || '',
+    ``,
+    `ADDITIONAL RESPONSE 1`,
+    sc.add1 || '',
+    ``,
+    `ADDITIONAL RESPONSE 2`,
+    sc.add2 || '',
+    ``,
+    `HOW TO USE`,
+    sc.howToUse || '',
+    ``,
+    `WHY IT WORKS`,
+    sc.whyWorks || '',
+  ].join('\n');
+}
+
+/* =========================
+   PLAYBOOK SIDEBAR
+========================= */
+function initializePlaybook(){
+  const btn = $('#myPlaybookButton');
+  const overlay = $('#playbookOverlay');
+  const sidebar = $('#playbookSidebar');
+  const closeBtn = $('#closePlaybook');
+
+  if (!btn || !overlay || !sidebar || !closeBtn) return;
+
+  btn.addEventListener('click', openPlaybook);
+  closeBtn.addEventListener('click', closePlaybook);
+
+  overlay.addEventListener('click', (e)=>{
+    // close when clicking outside sidebar
+    if (e.target === overlay) closePlaybook();
+  });
+
+  // render on load
+  renderSavedItems();
+
+  // also close on ESC
+  document.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape'){
+      closePlaybook();
+      closeModal();
+    }
+  });
+}
+
+function openPlaybook(){
+  const overlay = $('#playbookOverlay');
+  const sidebar = $('#playbookSidebar');
+  if (!overlay || !sidebar) return;
+  overlay.classList.add('open');
+  sidebar.classList.add('open');
+}
+
+function closePlaybook(){
+  const overlay = $('#playbookOverlay');
+  const sidebar = $('#playbookSidebar');
+  if (!overlay || !sidebar) return;
+  overlay.classList.remove('open');
+  sidebar.classList.remove('open');
+}
+
+function renderSavedItems(){
+  const empty = $('#savedItemsEmpty');
+  const list = $('#savedItemsList');
+  if (!list || !empty) return;
+
+  const ids = getSavedIds();
+  const savedScripts = ids
+    .map(id => scriptsData.find(s=>s.id===id))
+    .filter(Boolean);
+
+  if (!savedScripts.length){
+    empty.style.display = 'block';
+    list.innerHTML = '';
+    return;
+  }
+
+  empty.style.display = 'none';
+
+  list.innerHTML = savedScripts.map(sc => {
+    const cat = getCategory(sc.categoryKey);
+    const theme = getTheme(sc.themeKey);
+    return `
+      <li class="saved-item" data-script-id="${sc.id}">
+        <div class="saved-item-title-row">
+          <div class="saved-item-title">${escapeHtml(sc.title)}</div>
+          <div class="saved-item-type">${escapeHtml(cat?.key || sc.categoryKey)}</div>
+        </div>
+        <div class="saved-item-meta">${escapeHtml(theme?.name || sc.themeKey)}</div>
+        <a href="javascript:void(0)" class="saved-item-link"><i class="fas fa-arrow-up-right-from-square"></i> Open</a>
+        <a href="javascript:void(0)" class="saved-item-link" data-remove="1" style="color:var(--text-medium);"><i class="fas fa-trash"></i> Remove</a>
+      </li>
+    `;
+  }).join('');
+
+  // open / remove handlers
+  Array.from(list.querySelectorAll('.saved-item')).forEach(item => {
+    const id = item.getAttribute('data-script-id');
+    const openLink = item.querySelector('.saved-item-link');
+    const removeLink = item.querySelector('.saved-item-link[data-remove="1"]');
+
+    openLink?.addEventListener('click', () => {
+      const sc = scriptsData.find(s=>s.id===id);
+      if (sc) openModalWithScript(sc);
+    });
+
+    removeLink?.addEventListener('click', () => {
+      toggleSaved(id);
+      renderSavedItems();
+      refreshVisibleBookmarks();
+      showToast('Removed');
+    });
+  });
+}
+
+function refreshVisibleBookmarks(){
+  // update bookmark icons in visible lists/cards without rerendering whole app
+  $$('.mini-script').forEach(card => {
+    const id = card.getAttribute('data-script-id');
+    const icon = card.querySelector('.mini-corner-stats i.fa-bookmark');
+    if (!icon) return;
+    const saved = isSaved(id);
+    icon.classList.toggle('fas', saved);
+    icon.classList.toggle('far', !saved);
+  });
+}
+
+/* =========================
+   SECTION CONTROLS
+========================= */
+function initializeCategorySectionControls(){
+  const jumpBtn = $('#jumpToSearchBtn');
+  const clearBtn = $('#clearCategoryBtn');
+
+  jumpBtn?.addEventListener('click', () => smoothScrollTo('search'));
+  clearBtn?.addEventListener('click', clearFilter);
+}
+
+/* =========================
+   URL HYDRATION (theme/category/script)
+========================= */
+function hydrateFromUrl(){
+  try{
+    const url = new URL(window.location.href);
+    const theme = url.searchParams.get('theme');
+    const category = url.searchParams.get('category');
+
+    if (theme && themes.some(t=>t.key===theme)) {
+      applyFilter({ themeKey: theme });
+    } else if (category && categories.some(c=>c.key===category)) {
+      applyFilter({ categoryKey: category });
+    }
+
+    // hash form: #script=script-id
+    if (url.hash && url.hash.startsWith('#script=')){
+      const id = decodeURIComponent(url.hash.replace('#script=',''));
+      const sc = scriptsData.find(s=>s.id===id);
+      if (sc) openModalWithScript(sc);
+    }
+  } catch {}
+}
+</script>
+
+</body>
+</html>

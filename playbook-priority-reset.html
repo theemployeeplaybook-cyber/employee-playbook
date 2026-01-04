@@ -1,0 +1,2629 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priority Reset Playbook | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    :root {
+      --primary-white: #FFFFFF;
+      --light-gray: #F8F9FA;
+      --medium-gray: #E9ECEF;
+      --dark-gray: #6C757D;
+      --text-dark: #212529;
+      --text-medium: #495057;
+
+      --accent-purple: #7B5FC4;
+      --accent-purple-dark: #5A4496;
+      --light-purple: #E6E0F5;
+      --lighter-purple: #F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+      --danger-red: #ef4444;
+
+      /* ===========================
+         CATEGORY COLOURS (Canonical 9)
+         =========================== */
+      --category-clarity: #7B5FC4;       /* Workload Clarity & Direction */
+      --category-burnout: #f59e0b;       /* Burnout & Capacity */
+      --category-manager: #10b981;       /* Manager Behaviour */
+      --category-politics: #3b82f6;      /* Workplace Dynamics & Politics */
+      --category-team: #06b6d4;          /* Team Issues */
+      --category-boundaries: #f59e0b;    /* Boundaries & Overextension */
+      --category-hr: #6D28D9;            /* HR & Performance */
+      --category-confidence: #ef4444;    /* Confidence & Influence */
+      --category-career: #800020;        /* Decision Making & Career Path */
+
+      /* ===========================
+         PLAYBOOK UI (Premium)
+         =========================== */
+      --pb-surface: rgba(255,255,255,0.92);
+      --pb-glass: rgba(255,255,255,0.72);
+      --pb-shadow: 0 18px 60px rgba(17, 24, 39, 0.08);
+      --pb-shadow-strong: 0 26px 90px rgba(17, 24, 39, 0.10);
+      --pb-border: rgba(123, 95, 196, 0.16);
+      --pb-ring: rgba(123,95,196,0.22);
+      --pb-ring-rest: rgba(123,95,196,0.16);
+      --pb-hero: radial-gradient(900px 380px at 12% 10%, rgba(123,95,196,0.24) 0%, rgba(123,95,196,0.00) 60%),
+                 radial-gradient(800px 340px at 88% 22%, rgba(90,68,150,0.18) 0%, rgba(90,68,150,0.00) 58%),
+                 linear-gradient(135deg, rgba(249,246,255,0.95) 0%, rgba(240,235,250,0.90) 100%);
+      --pb-ink: #111827;
+      --pb-muted: rgba(73, 80, 87, 0.92);
+      --pb-chip: rgba(123, 95, 196, 0.10);
+      --pb-chip-border: rgba(123, 95, 196, 0.22);
+      --pb-success: #10b981;
+      --pb-info: #3b82f6;
+      --pb-warn: #f59e0b;
+
+      /* HERO TITLE ICON SIZE (two-line H1) */
+      --pb-title-icon-size: 88px;
+      --pb-title-icon-gap: 0px;
+
+      /* H1 two-line control */
+      --pb-h1-line: 52px;
+      --pb-h1-gap: 10px;
+    }
+
+    .dark-mode {
+      --primary-white: #1a1a1a;
+      --light-gray: #2a2a2a;
+      --medium-gray: #3a3a3a;
+      --dark-gray: #888888;
+      --text-dark: #e0e0e0;
+      --text-medium: #b0b0b0;
+
+      --accent-purple: #9d86e9;
+      --accent-purple-dark: #7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.2);
+      --lighter-purple: rgba(123, 95, 196, 0.1);
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+      --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      /* CATEGORY COLOURS (Canonical 9) */
+      --category-clarity: #9d86e9;
+      --category-burnout: #f59e0b;
+      --category-manager: #34d399;
+      --category-politics: #60a5fa;
+      --category-team: #22d3ee;
+      --category-boundaries: #f59e0b;
+      --category-hr: #a78bfa;
+      --category-confidence: #fb7185;
+      --category-career: #B03060;
+
+      /* PLAYBOOK UI */
+      --pb-surface: rgba(20,20,20,0.78);
+      --pb-glass: rgba(20,20,20,0.62);
+      --pb-shadow: 0 18px 70px rgba(0,0,0,0.38);
+      --pb-shadow-strong: 0 26px 96px rgba(0,0,0,0.46);
+      --pb-border: rgba(157,134,233,0.20);
+      --pb-ring: rgba(157,134,233,0.26);
+      --pb-ring-rest: rgba(157,134,233,0.18);
+      --pb-hero: radial-gradient(900px 380px at 12% 10%, rgba(157,134,233,0.22) 0%, rgba(157,134,233,0.00) 60%),
+                 radial-gradient(800px 340px at 88% 22%, rgba(123,95,196,0.18) 0%, rgba(123,95,196,0.00) 58%),
+                 linear-gradient(135deg, rgba(26,26,26,0.95) 0%, rgba(18,18,18,0.88) 100%);
+      --pb-ink: #f3f4f6;
+      --pb-muted: rgba(176, 176, 176, 0.92);
+      --pb-chip: rgba(157,134,233,0.14);
+      --pb-chip-border: rgba(157,134,233,0.28);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+    body{
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      min-height: 100vh;
+    }
+    body.loaded{ opacity:1; }
+    .container{ max-width:1400px; margin:0 auto; padding:0 20px; }
+
+    /* NAV */
+    nav{
+      position: fixed; top:0; width:100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index:1000;
+      border-bottom:1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      height:80px;
+    }
+    .nav-container{ display:flex; justify-content:space-between; align-items:center; padding:12px 0; height:100%; }
+    .logo-img{ height:100px; width:auto; transform: translateX(20%); padding:14px 10px; display:block; min-height:100px; transition: all .3s ease; }
+    .nav-links{ display:flex; gap:50px; }
+    .nav-link{ color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; transition: color .3s ease; }
+    .nav-link:hover{ color: var(--accent-purple); }
+    .nav-link-container{ position:relative; display:inline-block; }
+    .new-tag{
+      position:absolute; top:-12px; right:-35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color:#000; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2); white-space:nowrap;
+    }
+    .nav-actions{ display:flex; align-items:center; gap:24px; transform: translateX(-20%); }
+    .header-cta{
+      background: var(--accent-purple); color:#fff; padding:8px 20px; border-radius:50px;
+      text-decoration:none; font-weight:600; font-size:14px;
+      transition: all .3s ease; box-shadow: 0 5px 15px rgba(123,95,196,.3);
+    }
+    .header-cta:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(123,95,196,.35); }
+    .sign-in{ color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; }
+    .sign-in:hover{ color: var(--accent-purple); }
+    .theme-toggle{
+      background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:16px;
+      width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition: background-color .3s ease;
+    }
+    .theme-toggle:hover{ background-color: var(--light-gray); }
+
+    .mobile-toggle{
+      display:none;
+      background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:24px;
+      width:40px; height:40px; border-radius:50%;
+      align-items:center; justify-content:center; transition: background-color .3s ease;
+    }
+    .mobile-toggle:hover{ background-color: var(--light-gray); }
+    .mobile-sign-in, .mobile-sign-up { display:none; }
+
+    @media (max-width: 768px){
+      .nav-container{ justify-content:center; position:relative; }
+      .logo{ position:absolute; left:50%; transform: translateX(-50%); display:flex; align-items:center; height:100%; }
+      .logo-img{ height:125px; transform:none; padding:12px 0; }
+      .mobile-toggle{ display:flex; position:absolute; left:20px; }
+      .nav-actions{ transform:none; gap:16px; position:absolute; right:20px; }
+      .nav-actions .sign-in, .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none; position:absolute; top:100%; left:0; width:100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction:column; padding:20px; gap:20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
+      .nav-links.active{ display:flex; }
+      .nav-link-container{ display:flex; align-items:center; width:100%; }
+      .new-tag{ position:static; margin-left:8px; }
+      .mobile-sign-in{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--primary-white);
+        color: var(--accent-purple);
+        border-radius:8px;
+        text-align:center;
+        font-weight:600;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all .3s ease;
+      }
+      .mobile-sign-up{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--accent-purple);
+        color:#fff;
+        border-radius:8px;
+        text-align:center;
+        font-weight:600;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all .3s ease;
+      }
+
+      :root{
+        --pb-title-icon-size: 63px;
+        --pb-title-icon-gap: 18px;
+        --pb-h1-line: 42px;
+        --pb-h1-gap: 9px;
+      }
+    }
+
+    /* PLAYBOOK HERO */
+    .pb-hero{
+      width:100%;
+      padding: 26px 0 22px;
+      margin-top:110px;
+      position:relative;
+      overflow:hidden;
+      border-bottom: 1px solid var(--border-light);
+      background: var(--pb-hero);
+    }
+    .pb-hero::after{
+      content:'';
+      position:absolute; inset:0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.00) 0%, rgba(255,255,255,0.16) 80%, rgba(255,255,255,0.22) 100%);
+      pointer-events:none;
+      opacity: .75;
+    }
+    .dark-mode .pb-hero::after{
+      background: linear-gradient(180deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.18) 80%, rgba(0,0,0,0.24) 100%);
+      opacity: .9;
+    }
+
+    .pb-hero-inner{
+      position:relative; z-index:2;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 20px 10px;
+      animation: heroFadeUp .45s ease-out;
+    }
+    @keyframes heroFadeUp { from{opacity:0; transform: translateY(18px);} to{opacity:1; transform:none;} }
+
+    .breadcrumb-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+
+    .breadcrumb{
+      font-size:10px; text-transform:uppercase; letter-spacing:1px;
+      color: var(--dark-gray);
+      display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+      margin:0;
+    }
+    .breadcrumb a{
+      color: var(--text-medium); text-decoration:none !important;
+      font-weight:500; letter-spacing:.5px; transition: color .2s ease;
+      display:inline-flex; align-items:center; gap:6px;
+    }
+    .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+    .breadcrumb i{ color: var(--dark-gray); opacity:.8; font-size:10px; }
+    .breadcrumb .current{ color: var(--text-dark); font-weight:600; }
+
+    .save-btn{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 12px; font-size:12px; font-weight:600;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.60);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--accent-purple-dark);
+      cursor:pointer; transition: all .2s ease;
+      height:29px;
+    }
+    .save-btn:hover{ transform: translateY(-1px); box-shadow: 0 4px 10px rgba(123,95,196,0.18); background:#fff; }
+    .dark-mode .save-btn{ background: rgba(20,20,20,0.90); border-color: rgba(157,134,233,0.60); color: var(--accent-purple); }
+    .save-btn.saved{ background: var(--premium-gradient); color:#fff; border-color: transparent; }
+    .save-btn i{ font-size:12px; }
+    .save-btn .save-label{ display:inline; }
+
+    /* top-right of hero */
+    .save-btn.hero-save{
+      position:absolute;
+      top:-10px;
+      right:-19px;
+      z-index:5;
+      margin-left:0;
+      box-shadow: 0 12px 40px rgba(17,24,39,0.06);
+    }
+
+    .sr-only{
+      position:absolute;
+      width:1px; height:1px;
+      padding:0; margin:-1px;
+      overflow:hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space:nowrap;
+      border:0;
+    }
+
+    .pb-top-row{
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+      text-align:center;
+    }
+
+    .pb-title-block{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 8px;
+      margin-top:34px;
+      max-width: 1080px;
+      margin-left:auto;
+      margin-right:auto;
+      text-align:center;
+    }
+    .pb-title-row{
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      gap: var(--pb-title-icon-gap);
+      width:100%;
+    }
+    .pb-title-text{
+      text-align:center;
+      max-width: 980px;
+    }
+
+    .pb-title-icon{
+      color:#ffffff;
+      font-size: var(--pb-title-icon-size);
+      line-height: 1;
+      filter: drop-shadow(0 10px 24px rgba(0,0,0,0.18)) drop-shadow(0 2px 6px rgba(123,95,196,0.22));
+      flex-shrink:0;
+      margin-top: calc((var(--pb-h1-line) + (var(--pb-h1-gap) / 2)) - (var(--pb-title-icon-size) / 2));
+      margin-left: 23px;
+    }
+
+    .pb-title{
+      font-size: 46px;
+      font-weight: 650;
+      color: var(--pb-ink);
+      margin: 0;
+      letter-spacing: -0.8px;
+      text-align:center;
+      max-width: 980px;
+    }
+    .pb-title .line1{ display:block; line-height: var(--pb-h1-line); }
+    .pb-title .line2{ display:block; line-height: var(--pb-h1-line); margin-top: var(--pb-h1-gap); }
+
+    .pb-subtitle{
+      font-size: 16px;
+      color: var(--pb-muted);
+      line-height: 1.65;
+      max-width: 920px;
+      margin: 30px 0;
+      text-align:center;
+    }
+
+    .pb-meta{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin: 8px 0 0;
+      justify-content:center;
+    }
+    .meta-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 7px 11px;
+      border-radius: 12px;
+      background: var(--pb-glass);
+      border: 1px solid var(--pb-border);
+      color: var(--pb-ink);
+      font-size: 12.5px;
+      font-weight: 500;
+      box-shadow: 0 12px 40px rgba(17,24,39,0.06);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      white-space:nowrap;
+    }
+    .meta-pill span{ color: var(--pb-muted); font-weight: 500; }
+    .meta-pill b{ color: var(--pb-ink); font-weight: 700; letter-spacing: .2px; }
+    .meta-pill i{ color: var(--accent-purple); }
+
+    /* CATEGORY PILLS */
+    .category-pills-container{
+      margin-top: 30px;
+      border-top: 1px solid var(--border-light);
+      padding-top: 14px;
+      padding-bottom: 30px;
+    }
+    .category-pills-title{
+      font-size:12px; font-weight:700; color: var(--text-medium);
+      text-transform:uppercase; letter-spacing:1px;
+      margin-top:10px; margin-bottom:10px; display:block;
+      text-align:center;
+    }
+    .category-pills-grid{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+    .category-pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 12px; border-radius:999px;
+      font-size:12px; font-weight:500; text-transform:uppercase; letter-spacing:.5px;
+      border:1px solid transparent;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      text-decoration:none;
+      height:32px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: all .2s ease;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .dark-mode .category-pill{ background: rgba(255,255,255,0.08); box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+    .category-pill:hover{ transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.08); }
+
+    .category-pill.clarity{ color: var(--category-clarity); border-color: rgba(123,95,196,0.22); background: linear-gradient(135deg, rgba(123,95,196,0.10), rgba(123,95,196,0.05)); }
+    .category-pill.burnout{ color: var(--category-burnout); border-color: rgba(245,158,11,0.22); background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(245,158,11,0.05)); }
+    .category-pill.manager{ color: var(--category-manager); border-color: rgba(16,185,129,0.22); background: linear-gradient(135deg, rgba(16,185,129,0.10), rgba(16,185,129,0.05)); }
+    .category-pill.politics{ color: var(--category-politics); border-color: rgba(59,130,246,0.22); background: linear-gradient(135deg, rgba(59,130,246,0.10), rgba(59,130,246,0.05)); }
+    .category-pill.team{ color: var(--category-team); border-color: rgba(6,182,212,0.22); background: linear-gradient(135deg, rgba(6,182,212,0.10), rgba(6,182,212,0.05)); }
+    .category-pill.boundaries{ color: var(--category-boundaries); border-color: rgba(249,115,22,0.22); background: linear-gradient(135deg, rgba(249,115,22,0.12), rgba(249,115,22,0.05)); }
+    .category-pill.hr{ color: var(--category-hr); border-color: rgba(109,40,217,0.22); background: linear-gradient(135deg, rgba(109,40,217,0.10), rgba(109,40,217,0.05)); }
+    .category-pill.confidence{ color: var(--category-confidence); border-color: rgba(239,68,68,0.22); background: linear-gradient(135deg, rgba(239,68,68,0.10), rgba(239,68,68,0.05)); }
+    .category-pill.career{ color: var(--category-career); border-color: rgba(128,0,32,0.22); background: linear-gradient(135deg, rgba(128,0,32,0.10), rgba(128,0,32,0.05)); }
+
+    /* PLAYBOOK LAYOUT */
+    .pb-shell{ max-width: 1180px; margin: 0 auto; padding: 18px 20px 20px; }
+
+    .pb-intro-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 6px; }
+    .pb-outcome{
+      border: 1px solid rgba(123,95,196,0.16);
+      background: rgba(123,95,196,0.06);
+      border-radius: 16px;
+      padding: 12px 12px;
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+    }
+    .dark-mode .pb-outcome{ background: rgba(123,95,196,0.14); border-color: rgba(123,95,196,0.26); }
+    .pb-outcome i{ color: var(--accent-purple); margin-top: 2px; flex-shrink:0; }
+    .pb-outcome b{ color: var(--pb-ink); font-weight: 700; display:block; margin-bottom: 2px; font-size: 13.5px; }
+    .pb-outcome span{ color: var(--text-medium); font-size: 13px; line-height: 1.45; display:block; }
+
+    .pb-grid{ display:grid; grid-template-columns: 0.42fr 0.58fr; gap: 18px; align-items:start; }
+
+    .pb-rail{
+      position: sticky; top: 104px;
+      background: var(--pb-surface);
+      border: 1px solid var(--pb-border);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--pb-shadow);
+      overflow:hidden;
+    }
+    .pb-rail::before{ content:''; position:absolute; left:0; right:0; top:0; height:3px; background: var(--premium-gradient); opacity: .95; }
+    .pb-rail-title{
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      color: var(--accent-purple-dark);
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .pb-rail-title i{ color: var(--accent-purple); }
+    .pb-rail-sub{ font-size: 12.5px; color: var(--text-medium); line-height: 1.45; margin-top: 6px; }
+
+    .pb-progress{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      border: 1px solid var(--border-light);
+      background: rgba(123,95,196,0.05);
+      border-radius: 16px;
+      padding: 12px;
+      margin: 10px 0 14px;
+    }
+    .dark-mode .pb-progress{ background: rgba(123,95,196,0.12); }
+
+    .ring{
+      width: 52px; height: 52px; border-radius: 999px;
+      background: conic-gradient(var(--accent-purple) 0deg, var(--accent-purple) 0deg, var(--pb-ring-rest) 0deg);
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 14px 34px rgba(123,95,196,0.12);
+      border: 1px solid var(--pb-ring);
+    }
+    .ring-inner{
+      width: 40px; height: 40px; border-radius: 999px;
+      background: var(--pb-surface);
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 700; color: var(--pb-ink); font-size: 12px;
+      border: 1px solid var(--border-light);
+    }
+    .pb-progress-meta .big{ font-size: 13px; font-weight: 700; color: var(--pb-ink); margin-bottom: 2px; }
+    .pb-progress-meta .small{ font-size: 12px; color: var(--text-medium); line-height: 1.35; }
+
+    .pb-btn{
+      border: 1px solid rgba(123,95,196,0.28);
+      background: rgba(255,255,255,0.90);
+      color: var(--accent-purple-dark);
+      border-radius: 12px;
+      padding: 9px 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition: all .2s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 14px 40px rgba(17,24,39,0.06);
+      width:100%;
+      justify-content:center;
+    }
+    .dark-mode .pb-btn{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(157,134,233,0.32);
+      color: var(--accent-purple);
+      box-shadow: 0 18px 54px rgba(0,0,0,0.35);
+    }
+    .pb-btn:hover{ transform: translateY(-1px); box-shadow: 0 18px 54px rgba(17,24,39,0.10); }
+    .pb-btn.primary{
+      background: var(--premium-gradient);
+      color:#fff;
+      border:none;
+      box-shadow: 0 18px 50px rgba(123,95,196,0.18);
+    }
+    .pb-btn.primary:hover{ box-shadow: 0 20px 60px rgba(123,95,196,0.26); }
+
+    .pb-rail-actions{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+    }
+    .pb-rail-actions .pb-btn{
+      width:auto;
+      flex:1;
+      padding:8px 10px;
+      font-size:12px;
+    }
+    @media (max-width: 420px){
+      .pb-rail-actions{ flex-direction:column; }
+      .pb-rail-actions .pb-btn{ width:100%; }
+    }
+
+    .pb-jump{ margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-light); }
+    .jump-title{ font-size:12px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color: var(--text-medium); margin-bottom:10px; }
+    .jump-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+    .jump-link{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding: 10px 10px;
+      border-radius: 14px;
+      border: 1px solid var(--border-light);
+      background: rgba(255,255,255,0.70);
+      text-decoration:none;
+      color: var(--pb-ink);
+      transition: all .2s ease;
+    }
+    .dark-mode .jump-link{ background: rgba(255,255,255,0.06); }
+    .jump-link:hover{ transform: translateY(-1px); box-shadow: 0 16px 44px rgba(17,24,39,0.10); border-color: rgba(123,95,196,0.22); }
+    .jump-left{ display:flex; align-items:center; gap:10px; }
+    .jump-icon{
+      width: 30px; height: 30px; border-radius: 12px;
+      background: rgba(123,95,196,0.10);
+      border: 1px solid rgba(123,95,196,0.18);
+      display:flex; align-items:center; justify-content:center;
+      color: var(--accent-purple);
+      flex-shrink:0;
+    }
+    .jump-text{ font-size: 13px; font-weight: 650; letter-spacing: .1px; }
+    .jump-status{
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .7px;
+      padding: 3px 8px; border-radius: 999px;
+      border: 1px solid var(--border-light);
+      background: rgba(0,0,0,0.03);
+      color: var(--text-medium);
+      flex-shrink:0;
+    }
+    .dark-mode .jump-status{ background: rgba(255,255,255,0.06); }
+    .jump-status.done{ border-color: rgba(16,185,129,0.25); background: rgba(16,185,129,0.10); color: var(--pb-success); }
+
+    .pb-main{ display:flex; flex-direction:column; gap: 14px; }
+
+    .pb-card{
+      background: var(--pb-surface);
+      border: 1px solid var(--pb-border);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: var(--pb-shadow);
+      position:relative;
+      overflow:hidden;
+      scroll-margin-top: 120px;
+    }
+    .pb-card::before{
+      content:'';
+      position:absolute; left:0; right:0; top:0; height:3px;
+      background: linear-gradient(135deg, rgba(123,95,196,0.85), rgba(90,68,150,0.70));
+      opacity: .9;
+    }
+
+    .pb-card-header{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      margin-top: 6px;
+      margin-bottom: 10px;
+      flex-wrap:wrap;
+    }
+    .pb-card-title{
+      display:flex; align-items:center; gap:10px;
+      font-size: 15px; font-weight: 750; color: var(--pb-ink);
+    }
+    .pb-card-title i{ color: var(--accent-purple); }
+    .pb-card-sub{ color: var(--pb-muted); font-size: 13.2px; line-height: 1.55; margin-bottom: 12px; max-width: 1100px; }
+
+    .pb-done{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 7px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: rgba(255,255,255,0.70);
+      cursor:pointer;
+      transition: all .2s ease;
+      user-select:none;
+    }
+    .dark-mode .pb-done{ background: rgba(255,255,255,0.06); }
+    .pb-done:hover{ transform: translateY(-1px); border-color: rgba(16,185,129,0.24); }
+    .pb-done i{ color: var(--pb-success); }
+    .pb-done span{ font-size: 12px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase; color: var(--text-medium); }
+
+    .field-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+    .field{ display:flex; flex-direction:column; gap:8px; }
+    .span-2{ grid-column: span 2; }
+
+    .label-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:18px; }
+    .label-text{ font-size:12px; font-weight: 700; color: var(--pb-ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .hint-chip{
+      font-size:11px; font-weight: 700;
+      color: var(--accent-purple-dark);
+      border: 1px solid rgba(123,95,196,0.22);
+      background: rgba(123,95,196,0.06);
+      padding: 2px 8px;
+      border-radius: 999px;
+      white-space:nowrap;
+      flex-shrink:0;
+    }
+    .dark-mode .hint-chip{ border-color: rgba(157,134,233,0.26); background: rgba(123,95,196,0.14); color: var(--accent-purple); }
+
+    .input, .textarea{
+      width:100%;
+      border:1px solid var(--border-light);
+      background: var(--light-gray);
+      color: var(--text-dark);
+      border-radius:14px;
+      padding:11px 12px;
+      font-size:13.5px;
+      outline:none;
+      transition: box-shadow .2s ease, border-color .2s ease, background-color .2s ease;
+    }
+    .dark-mode .input, .dark-mode .textarea{ background: rgba(255,255,255,0.05); }
+    .input:focus, .textarea:focus{
+      border-color: rgba(123,95,196,0.55);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.14);
+      background: rgba(255,255,255,0.9);
+    }
+    .dark-mode .input:focus, .dark-mode .textarea:focus{
+      background: rgba(255,255,255,0.08);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.20);
+    }
+    .textarea{ min-height:110px; resize: vertical; }
+
+    /* Premium insight blocks */
+    .insight-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
+    .insight{
+      border-radius: 16px;
+      border: 1px solid rgba(123,95,196,0.18);
+      background: rgba(123,95,196,0.06);
+      padding: 12px 12px;
+      display:flex;
+      gap: 10px;
+      align-items:flex-start;
+    }
+    .dark-mode .insight{ background: rgba(123,95,196,0.14); border-color: rgba(123,95,196,0.28); }
+    .insight i{ color: var(--accent-purple); margin-top: 2px; }
+    .insight > div > b{
+      display:block;
+      color: var(--pb-ink);
+      font-size: 13px;
+      font-weight: 750;
+      margin-bottom: 2px;
+    }
+    .insight span{ display:block; color: var(--text-medium); font-size: 13px; line-height: 1.45; }
+
+    /* TAB STRIP */
+    .pb-tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-top: 8px; margin-bottom: 8px; }
+    .pb-tab{
+      border: 1px solid var(--border-light);
+      background: rgba(255,255,255,0.70);
+      color: var(--pb-ink);
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition: all .2s ease;
+    }
+    .dark-mode .pb-tab{ background: rgba(255,255,255,0.06); }
+    .pb-tab i{ color: var(--accent-purple); }
+    .pb-tab.active{
+      background: var(--premium-gradient);
+      color:#fff;
+      border-color: transparent;
+      box-shadow: 0 16px 50px rgba(123,95,196,0.20);
+    }
+    .pb-tab.active i{ color:#fff; }
+    .pb-tab-panel{ display:none; }
+    .pb-tab-panel.active{ display:block; animation: panelIn .35s ease; }
+    @keyframes panelIn { from{opacity:0; transform: translateY(10px);} to{opacity:1; transform:none;} }
+
+    /* OUTPUT BOX */
+    .output-box{
+      border: 1px solid rgba(123,95,196,0.18);
+      background: rgba(123,95,196,0.06);
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+    .dark-mode .output-box{ background: rgba(123,95,196,0.14); border-color: rgba(123,95,196,0.28); }
+    .output-title{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom: 8px;
+      flex-wrap:wrap;
+    }
+    .output-title h4{
+      font-size:12px; font-weight: 750; letter-spacing:.8px; text-transform:uppercase;
+      color: var(--accent-purple-dark);
+      display:flex; align-items:center; gap:10px;
+    }
+    .output-title h4 i{ color: var(--accent-purple); }
+    .output-content{
+      font-size: 13.5px;
+      color: var(--text-dark);
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    /* MINI ROW */
+    .mini-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 10px; }
+    .mini-row .pb-btn{ width:auto; padding: 9px 12px; border-radius: 12px; }
+
+    /* Accordion */
+    .acc{ display:flex; flex-direction:column; gap:10px; }
+    .acc-item{
+      border-radius: 16px;
+      border: 1px solid var(--border-light);
+      background: rgba(255,255,255,0.70);
+      overflow:hidden;
+      transition: all .2s ease;
+    }
+    .dark-mode .acc-item{ background: rgba(255,255,255,0.06); }
+    .acc-head{
+      width:100%;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      padding: 12px 12px;
+      cursor:pointer;
+      background: transparent;
+      border:none;
+      text-align:left;
+      color: var(--pb-ink);
+    }
+    .acc-head:hover{ background: rgba(123,95,196,0.06); }
+    .dark-mode .acc-head:hover{ background: rgba(157,134,233,0.10); }
+    .acc-left{ display:flex; gap:10px; align-items:flex-start; }
+    .acc-icon{
+      width: 32px; height: 32px; border-radius: 12px;
+      display:flex; align-items:center; justify-content:center;
+      background: rgba(123,95,196,0.10);
+      border: 1px solid rgba(123,95,196,0.18);
+      color: var(--accent-purple);
+      flex-shrink:0;
+      margin-top: 1px;
+    }
+    .acc-title{ font-size: 13.5px; font-weight: 750; line-height: 1.25; }
+    .acc-meta{ font-size: 12px; color: var(--text-medium); margin-top: 2px; line-height: 1.35; }
+    .acc-chevron{ color: var(--accent-purple); margin-top: 2px; opacity: .9; }
+    .acc-body{
+      display:none;
+      padding: 0 12px 12px;
+      border-top: 1px solid var(--border-light);
+    }
+    .acc-body.open{ display:block; }
+    .acc-body p{ color: var(--text-medium); font-size: 13px; line-height: 1.55; margin-top: 10px; }
+    .script-box{
+      margin-top: 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(123,95,196,0.18);
+      background: rgba(123,95,196,0.06);
+      padding: 12px;
+    }
+    .dark-mode .script-box{ background: rgba(123,95,196,0.14); border-color: rgba(123,95,196,0.28); }
+    .script-box .label{
+      font-size:11px; font-weight: 800; letter-spacing:.8px; text-transform:uppercase;
+      color: var(--accent-purple-dark);
+      display:flex; align-items:center; gap:8px;
+      margin-bottom: 8px;
+    }
+    .script-box .label i{ color: var(--accent-purple); }
+    .script-text{
+      white-space: pre-wrap;
+      font-size: 13.5px;
+      color: var(--text-dark);
+      line-height: 1.55;
+    }
+
+    /* Script search */
+    .script-search{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+    .script-search .input{ flex:1; min-width:240px; }
+    .script-search .hint-chip{ margin-left:auto; }
+
+    /* FOOTER */
+    footer{
+      background: var(--primary-white);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 30px;
+      text-align:center;
+      color: var(--text-medium);
+    }
+
+    /* MY PLAYBOOK FAB + SIDEBAR */
+    .my-playbook-fab{
+      position:fixed; bottom:24px; right:24px; z-index:1200;
+      background: var(--premium-gradient);
+      color:#fff;
+      padding:10px 16px;
+      border-radius:999px;
+      display:inline-flex; align-items:center; gap:8px;
+      cursor:pointer; font-size:13px; font-weight:700;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all .25s ease;
+    }
+    .my-playbook-fab:hover{ transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.32); }
+
+    .playbook-sidebar-overlay{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,0.45);
+      z-index:1190;
+      opacity:0; pointer-events:none;
+      transition: opacity .25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position:fixed; top:0; right:-380px;
+      width:340px; max-width:90%;
+      height:100%;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index:1191;
+      display:flex; flex-direction:column;
+      border-left: 1px solid var(--border-light);
+      transition: right .25s ease;
+    }
+    .dark-mode .playbook-sidebar{ background: rgba(18,18,18,0.96); box-shadow: -4px 0 22px rgba(0,0,0,0.6); }
+    .playbook-sidebar.open{ right:0; }
+    .playbook-sidebar-header{ padding:20px 20px 14px; border-bottom:1px solid var(--border-light); }
+    .playbook-sidebar-header-title-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+    .playbook-sidebar-header h3{ font-size:18px; font-weight:700; color: var(--text-dark); }
+    .playbook-sidebar-header p{ font-size:13px; color: var(--dark-gray); }
+    .playbook-close-btn{
+      background:none; border:none; color: var(--dark-gray);
+      cursor:pointer; font-size:18px; border-radius:999px;
+      width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+      transition: background-color .2s ease;
+    }
+    .playbook-close-btn:hover{ background: var(--light-gray); }
+    .playbook-sidebar-body{
+      padding:14px 18px 20px; padding-bottom:50px;
+      overflow-y:auto; flex:1;
+      display:flex; flex-direction:column; gap:18px;
+    }
+    .saved-items-empty{ font-size:13px; color: var(--dark-gray); line-height:1.6; }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+    .saved-item{
+      padding:10px 8px;
+      border-radius:10px;
+      border:1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom:10px;
+      display:flex; flex-direction:column; gap:2px;
+    }
+    .saved-item-title-row{ display:flex; justify-content:space-between; align-items:baseline; gap:6px; }
+    .saved-item-title{ font-size:14px; font-weight:700; color: var(--text-dark); }
+    .saved-item-type{ font-size:11px; text-transform:uppercase; letter-spacing:.6px; color: var(--accent-purple-dark); font-weight:700; }
+    .saved-item-meta{ font-size:12px; color: var(--dark-gray); }
+    .saved-item-link{
+      margin-top:6px;
+      font-size:12px;
+      color: var(--accent-purple);
+      text-decoration:none;
+      font-weight:700;
+      display:inline-flex; align-items:center; gap:4px;
+    }
+    .saved-item-link:hover{ text-decoration:underline; }
+
+    .playbook-quick-links{
+      margin-top: auto;
+      padding-top:12px;
+      border-top:1px solid var(--border-light);
+    }
+    .quick-links-title{
+      font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.8px;
+      color: var(--text-medium);
+    }
+    .playbook-quick-links-list{ display:flex; flex-direction:column; gap:10px; margin-top:6px; }
+    .quick-link-pill{
+      width:50%;
+      padding:4px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.35);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      text-decoration:none;
+      color: var(--accent-purple-dark);
+      font-size:13px;
+      font-weight:700;
+      display:flex; align-items:center; gap:8px;
+      transition: all .2s ease;
+    }
+    .quick-link-pill:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+    }
+
+    /* Toast */
+    .toast{
+      position: fixed;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 22px;
+      z-index: 1400;
+      background: rgba(20,20,20,0.92);
+      color: #fff;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: .2px;
+      box-shadow: 0 16px 44px rgba(0,0,0,0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px){
+      .pb-grid{ grid-template-columns: 1fr; }
+      .pb-rail{ position: relative; top: auto; }
+      .pb-title-block{ max-width: 100%; }
+    }
+    @media (max-width: 768px){
+      .pb-hero{ margin-top: 100px; }
+      .pb-title{ font-size: 36px; }
+      .field-grid{ grid-template-columns:1fr; }
+      .span-2{ grid-column: span 1; }
+      .pb-intro-grid{ grid-template-columns: 1fr; }
+      .insight-grid{ grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <!-- THEME PRELOAD -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const useDark = saved ? (saved === 'dark') : prefersDark;
+        if (useDark) document.documentElement.classList.add('dark-mode');
+      } catch (e) {}
+    })();
+  </script>
+</head>
+
+<body>
+
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle" id="mobileToggleBtn" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+    </a>
+
+    <div class="nav-links" id="navLinks">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- PLAYBOOK HERO -->
+<section class="pb-hero">
+  <div class="pb-hero-inner">
+
+    <!-- Save button -->
+    <button class="save-btn hero-save" id="saveBtn" title="Save to My Playbook" aria-label="Save to My Playbook" aria-pressed="false">
+      <i class="fa-regular fa-bookmark" aria-hidden="true"></i>
+      <span class="save-label">Save</span>
+      <span class="sr-only">Save item</span>
+    </button>
+
+    <div class="breadcrumb-row">
+      <div class="breadcrumb">
+        <a href="index.html" title="Home"><i class="fas fa-house"></i> Home</a>
+        <i class="fas fa-chevron-right"></i>
+
+        <a href="the-toolkit.html">Toolkit</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="category-clarity-priorities-and-direction.html">Clarity, Priorities &amp; Direction</a>
+        <i class="fas fa-chevron-right"></i>
+        <span class="current">Priority Reset Playbook</span>
+      </div>
+    </div>
+
+    <div class="pb-top-row">
+      <div class="pb-title-block">
+
+        <div class="pb-title-row">
+          <i class="fas fa-book-open pb-title-icon" aria-hidden="true"></i>
+
+          <div class="pb-title-text">
+            <h1 class="pb-title">
+              <span class="line1">Priority Reset Playbook</span>
+              <span class="line2">Turn Overload into a Defensible Plan</span>
+            </h1>
+
+            <div class="pb-subtitle">
+              This is a <b>real-world reset</b> for when everything is “urgent” and you’re quietly drowning.
+              You’ll convert chaos into a <b>must-win priority set</b>, protect your capacity with <b>trade-offs</b>,
+              and leave with scripts that keep you calm while you realign the work.
+            </div>
+
+            <div class="pb-meta">
+              <div class="meta-pill"><i class="fas fa-stopwatch"></i> <span>Time:</span> <b>30–45 mins</b></div>
+              <div class="meta-pill"><i class="fas fa-layer-group"></i> <span>Format:</span> <b>Triage + Trade-offs + Scripts + One-pager</b></div>
+              <div class="meta-pill"><i class="fas fa-bullseye"></i> <span>Outcome:</span> <b>Clarity + Control + Delivery</b></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="category-pills-container">
+      <span class="category-pills-title">Related Categories</span>
+      <div class="category-pills-grid">
+        <a href="category-expectation-burnout-and-capacity.html" class="category-pill burnout" title="Burnout &amp; Capacity">
+          <i class="fas fa-fire"></i><span>Expectation, Burnout &amp; Capacity</span>
+        </a>
+        <a href="category-manager-relationship-and-leadership-style.html" class="category-pill manager" title="Manager Behaviour">
+          <i class="fas fa-user-check"></i><span>Manager Relationship &amp; Leadership Style</span>
+        </a>
+        <a href="category-workplace-dynamics-and-politics.html" class="category-pill politics" title="Workplace Dynamics &amp; Politics">
+          <i class="fas fa-chess"></i><span>Workplace Dynamics &amp; Politics</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PLAYBOOK CONTENT -->
+<div class="pb-shell">
+
+  <section class="pb-card" id="intro">
+    <div class="pb-card-header">
+      <div>
+        <div class="pb-card-title"><i class="fas fa-compass"></i> How to use this playbook</div>
+        <div class="pb-card-sub" style="padding-bottom:18px;">
+          A priority reset is not “getting organised”. It’s a <b>power move</b>: you create a plan that a decision-maker can sign off,
+          and you make it hard for work to sneak in through the side door. The goal is simple: <b>no more silent overtime</b> to cover unclear priorities.
+        </div>
+      </div>
+    </div>
+
+    <div class="pb-intro-grid">
+      <div class="pb-outcome">
+        <i class="fas fa-triangle-exclamation"></i>
+        <div><b>Stop the leak</b><span>Identify what’s swallowing time (meetings, interruptions, “quick asks”, unclear ownership).</span></div>
+      </div>
+      <div class="pb-outcome">
+        <i class="fas fa-bullseye"></i>
+        <div><b>Pick the must-wins</b><span>Convert “everything matters” into <b>3 outcomes</b> that the business actually needs.</span></div>
+      </div>
+      <div class="pb-outcome">
+        <i class="fas fa-scale-balanced"></i>
+        <div><b>Make trade-offs explicit</b><span>Turn conflicting asks into <b>choices</b> (A or B), not personal stress.</span></div>
+      </div>
+      <div class="pb-outcome">
+        <i class="fas fa-shield"></i>
+        <div><b>Protect capacity</b><span>Build a weekly cadence + scripts that stop scope creep without drama.</span></div>
+      </div>
+    </div>
+
+    <div class="insight-grid">
+      <div class="insight">
+        <i class="fas fa-brain"></i>
+        <div>
+          <b>Game-changing insight: “priority” is a decision, not a feeling</b>
+          <span>Until someone with authority chooses <b>what loses</b>, you don’t have priorities — you have pressure. Your job is to surface trade-offs and force clarity.</span>
+        </div>
+      </div>
+      <div class="insight">
+        <i class="fas fa-chess-king"></i>
+        <div>
+          <b>Hidden mechanism: leaders promote people who reduce noise</b>
+          <span>When you can turn chaos into a crisp plan, you become the person who <b>lowers ambiguity</b> — and that is high-status in modern organisations.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="pb-grid">
+
+    <!-- LEFT RAIL -->
+    <aside class="pb-rail">
+      <div>
+        <div class="pb-rail-title"><i class="fas fa-route"></i> Playbook Control Rail</div>
+        <div class="pb-rail-sub">Track progress, jump to chapters, and copy your one-pager in one click.</div>
+      </div>
+
+      <div class="pb-progress">
+        <div class="ring" id="progressRing">
+          <div class="ring-inner" id="progressPct">0%</div>
+        </div>
+        <div class="pb-progress-meta">
+          <div class="big" id="progressLabel">Not started</div>
+          <div class="small">Mark chapters done. Your progress saves locally.</div>
+        </div>
+      </div>
+
+      <div class="pb-jump">
+        <div class="jump-title">Chapters</div>
+        <ul class="jump-list">
+          <li><a class="jump-link" href="#c1"><div class="jump-left"><div class="jump-icon"><i class="fas fa-inbox"></i></div><div class="jump-text">1) Intake & triage</div></div><div class="jump-status" id="st-c1">open</div></a></li>
+          <li><a class="jump-link" href="#c2"><div class="jump-left"><div class="jump-icon"><i class="fas fa-bullseye"></i></div><div class="jump-text">2) Must-win outcomes</div></div><div class="jump-status" id="st-c2">open</div></a></li>
+          <li><a class="jump-link" href="#c3"><div class="jump-left"><div class="jump-icon"><i class="fas fa-gauge-high"></i></div><div class="jump-text">3) Capacity & constraints</div></div><div class="jump-status" id="st-c3">open</div></a></li>
+          <li><a class="jump-link" href="#c4"><div class="jump-left"><div class="jump-icon"><i class="fas fa-scale-balanced"></i></div><div class="jump-text">4) Trade-offs & decision rights</div></div><div class="jump-status" id="st-c4">open</div></a></li>
+          <li><a class="jump-link" href="#c5"><div class="jump-left"><div class="jump-icon"><i class="fas fa-people-group"></i></div><div class="jump-text">5) Alignment & comms</div></div><div class="jump-status" id="st-c5">open</div></a></li>
+          <li><a class="jump-link" href="#c6"><div class="jump-left"><div class="jump-icon"><i class="fas fa-calendar-check"></i></div><div class="jump-text">6) Execution cadence</div></div><div class="jump-status" id="st-c6">open</div></a></li>
+          <li><a class="jump-link" href="#c7"><div class="jump-left"><div class="jump-icon"><i class="fas fa-heart-pulse"></i></div><div class="jump-text">7) Stabilisation & wellbeing</div></div><div class="jump-status" id="st-c7">open</div></a></li>
+        </ul>
+      </div>
+
+      <div class="pb-rail-actions">
+        <button class="pb-btn primary" id="copyAllBtn"><i class="far fa-copy"></i> Copy one-pager</button>
+        <button class="pb-btn" id="resetBtn"><i class="fas fa-rotate-left"></i> Reset</button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="pb-main">
+
+      <!-- CHAPTER 1 -->
+      <section class="pb-card" id="c1">
+        <div class="pb-card-header">
+          <div>
+            <div class="pb-card-title"><i class="fas fa-inbox"></i> Chapter 1) Intake & triage</div>
+            <div class="pb-card-sub">
+              Your brain can’t prioritise what it can’t see. This step turns “too much” into an inventory you can control.
+              Don’t make this perfect — make it <b>honest</b>.
+            </div>
+          </div>
+          <div class="pb-done" data-module="c1"><i class="fas fa-check-circle"></i><span>Mark done</span></div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field span-2">
+            <div class="label-row"><span class="label-text">Everything currently on your plate</span><span class="hint-chip">dump</span></div>
+            <textarea class="textarea pb-input" id="c1_list" placeholder="List projects, requests, recurring responsibilities, and ‘small’ tasks that are eating time. One per line."></textarea>
+          </div>
+
+          <div class="field">
+            <div class="label-row"><span class="label-text">Your role’s primary purpose</span><span class="hint-chip">north</span></div>
+            <input class="input pb-input" id="c1_purpose" placeholder="Example: keep delivery stable / reduce risk / improve customer outcomes / run ops">
+          </div>
+
+          <div class="field">
+            <div class="label-row"><span class="label-text">Who decides priorities?</span><span class="hint-chip">power</span></div>
+            <input class="input pb-input" id="c1_decider" placeholder="Example: manager / director / PMO / steering group">
+          </div>
+
+          <div class="field span-2">
+            <div class="label-row"><span class="label-text">Time leaks (what’s actually stealing capacity)</span><span class="hint-chip">leaks</span></div>
+            <textarea class="textarea pb-input" id="c1_leaks" placeholder="Example: meetings with no decisions, interruptions, unclear ownership, rework, urgent Slack, context switching."></textarea>
+          </div>
+
+          <div class="field span-2">
+            <div class="label-row"><span class="label-text">Your non-negotiables (what you must protect)</span><span class="hint-chip">protect</span></div>
+            <textarea class="textarea pb-input" id="c1_nonneg" placeholder="Example: no weekend work, school pick-up, deep-work blocks, health boundaries, no late-night handovers."></textarea>
+          </div>
+        </div>
+
+        <div class="insight-grid">
+          <div class="insight">
+            <i class="fas fa-lightbulb"></i>
+            <div>
+              <b>Uncommon truth: “busyness” is often un-owned work</b>
+              <span>Overload is frequently the absence of a decision-maker saying: <b>this is not yours</b>, <b>this is not now</b>, or <b>this stops</b>.</span>
+            </div>
+          </div>
+          <div class="insight">
+            <i class="fas fa-user-gear"></i>
+            <div>
+              <b>Personality / Behaviour lens</b>
+              <span><b>High-control manager:</b> bring options + measures. <b>Avoidant manager:</b> propose a plan and ask for a “yes/no by Friday”.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="output-box">
+          <div class="output-title">
+            <h4><i class="fas fa-clipboard-list"></i> Triage snapshot (copy-ready)</h4>
+            <div class="mini-row">
+              <button class="pb-btn" type="button" onclick="buildTriage()"><i class="fas fa-wand-magic-sparkles"></i> Build</button>
+              <button class="pb-btn" type="button" onclick="copyText('out_triage')"><i class="far fa-copy"></i> Copy</button>
+            </div>
+          </div>
+          <div class="output-content" id="out_triage">Click Build to generate your triage snapshot.</div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 2 -->
+      <section class="pb-card" id="c2">
+        <div class="pb-card-header">
+          <div>
+            <div class="pb-card-title"><i class="fas fa-bullseye"></i> Chapter 2) Must-win outcomes</div>
+            <div class="pb-card-sub">
+              “Priority” means <b>something else loses</b>. Choose three must-wins that are easy to defend and hard to misinterpret.
+              You’re aiming for outcomes, not activity.
+            </div>
+          </div>
+          <div class="pb-done" data-module="c2"><i class="fas fa-check-circle"></i><span>Mark done</span></div>
+        </div>
+
+        <div class="pb-tabs" role="tablist" aria-label="Must-win tabs">
+          <button class="pb-tab active" type="button" data-tab="mwA"><i class="fas fa-star"></i> Must-wins</button>
+          <button class="pb-tab" type="button" data-tab="mwB"><i class="fas fa-shield"></i> Risks & consequences</button>
+          <button class="pb-tab" type="button" data-tab="mwC"><i class="fas fa-filter"></i> Decision filters</button>
+        </div>
+
+        <div class="pb-tab-panel active" id="mwA">
+          <div class="pb-card-sub">
+            <b>Standard worth keeping:</b> if you can’t say it in one sentence, it’s not priority-ready.
+          </div>
+          <div class="field-grid">
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">Must-win #1 (outcome)</span><span class="hint-chip">1</span></div>
+              <input class="input pb-input" id="c2_mw1" placeholder="Example: Ship X by date / stabilise Y / reduce incidents / close Z gap">
+            </div>
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">Must-win #2 (outcome)</span><span class="hint-chip">2</span></div>
+              <input class="input pb-input" id="c2_mw2" placeholder="Example: Deliver agreed milestone / improve SLA / cut backlog by N%">
+            </div>
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">Must-win #3 (outcome)</span><span class="hint-chip">3</span></div>
+              <input class="input pb-input" id="c2_mw3" placeholder="Example: Launch / compliance / stakeholder confidence / cost reduction">
+            </div>
+
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">What you are explicitly not doing (for now)</span><span class="hint-chip">stop</span></div>
+              <textarea class="textarea pb-input" id="c2_notdoing" placeholder="Example: pause nice-to-haves, stop duplicate reporting, defer non-critical requests, reduce meeting load."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pb-tab-panel" id="mwB">
+          <div class="pb-card-sub">
+            The fastest route to clarity is consequences. Leaders decide faster when you show <b>what breaks</b> if priorities stay fuzzy.
+          </div>
+          <div class="field-grid">
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">If we don’t do the must-wins, what happens?</span><span class="hint-chip">risk</span></div>
+              <textarea class="textarea pb-input" id="c2_risks" placeholder="Example: missed deadlines, customer impact, compliance exposure, churn, reputational hit, team burnout."></textarea>
+            </div>
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">What’s the single biggest risk right now?</span><span class="hint-chip">1st</span></div>
+              <input class="input pb-input" id="c2_biggestrisk" placeholder="Example: scope creep / unclear ownership / dependency risk / decision delays">
+            </div>
+          </div>
+        </div>
+
+        <div class="pb-tab-panel" id="mwC">
+          <div class="insight-grid">
+            <div class="insight">
+              <i class="fas fa-check-double"></i>
+              <div>
+                <b>The “Yes Filter” (accept work only if…)</b>
+                <span>It supports a must-win, has an owner, has a decision-maker, and a deadline. If any are missing, it becomes a <b>clarification request</b>, not instant labour.</span>
+              </div>
+            </div>
+            <div class="insight">
+              <i class="fas fa-ban"></i>
+              <div>
+                <b>The “No Filter” (polite refusal logic)</b>
+                <span>If it’s vague, late, or duplicates existing work, you don’t refuse emotionally — you refuse with <b>trade-offs</b>: “Yes, if we drop X.”</span>
+              </div>
+            </div>
+            <div class="insight">
+              <i class="fas fa-layer-group"></i>
+              <div>
+                <b>The “3 Outcomes Rule”</b>
+                <span>If you’re responsible for more than three outcomes at once, you’re not prioritising — you’re <b>spreading risk</b> and guaranteeing slippage.</span>
+              </div>
+            </div>
+            <div class="insight">
+              <i class="fas fa-stopwatch"></i>
+              <div>
+                <b>The “48-hour clarity test”</b>
+                <span>If a request can’t be clarified within 48 hours, it goes to <b>defer</b>. Otherwise it becomes a quiet drain on your week.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="output-box">
+          <div class="output-title">
+            <h4><i class="fas fa-bullseye"></i> Must-win statement (copy-ready)</h4>
+            <div class="mini-row">
+              <button class="pb-btn" type="button" onclick="buildMustWins()"><i class="fas fa-wand-magic-sparkles"></i> Build</button>
+              <button class="pb-btn" type="button" onclick="copyText('out_mustwins')"><i class="far fa-copy"></i> Copy</button>
+            </div>
+          </div>
+          <div class="output-content" id="out_mustwins">Click Build to generate your must-win statement.</div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 3 -->
+      <section class="pb-card" id="c3">
+        <div class="pb-card-header">
+          <div>
+            <div class="pb-card-title"><i class="fas fa-gauge-high"></i> Chapter 3) Capacity & constraints</div>
+            <div class="pb-card-sub">
+              This is where the reset becomes defensible. You’re not “being difficult” — you’re matching workload to capacity.
+              The trick: translate it into <b>hours, constraints, and sequencing</b>.
+            </div>
+          </div>
+          <div class="pb-done" data-module="c3"><i class="fas fa-check-circle"></i><span>Mark done</span></div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field">
+            <div class="label-row"><span class="label-text">Your realistic weekly capacity (hours)</span><span class="hint-chip">hrs</span></div>
+            <input class="input pb-input" id="c3_hours" placeholder="Example: 32 / 37.5 / 25">
+          </div>
+          <div class="field">
+            <div class="label-row"><span class="label-text">Meetings you can’t avoid (hours)</span><span class="hint-chip">mtgs</span></div>
+            <input class="input pb-input" id="c3_meet" placeholder="Example: 12">
+          </div>
+
+          <div class="field">
+            <div class="label-row"><span class="label-text">Deep work needed (hours)</span><span class="hint-chip">focus</span></div>
+            <input class="input pb-input" id="c3_deep" placeholder="Example: 10">
+          </div>
+          <div class="field">
+            <div class="label-row"><span class="label-text">Context switching penalty</span><span class="hint-chip">drag</span></div>
+            <input class="input pb-input" id="c3_drag" placeholder="Example: high / medium / low">
+          </div>
+
+          <div class="field span-2">
+            <div class="label-row"><span class="label-text">Constraints (what makes delivery harder)</span><span class="hint-chip">limits</span></div>
+            <textarea class="textarea pb-input" id="c3_constraints" placeholder="Example: dependencies, approvals, unclear scope, missing data, multiple stakeholders, limited access, part-time, health."></textarea>
+          </div>
+
+          <div class="field span-2">
+            <div class="label-row"><span class="label-text">What you need to remove to make delivery real</span><span class="hint-chip">remove</span></div>
+            <textarea class="textarea pb-input" id="c3_remove" placeholder="Example: drop weekly report, cut meeting frequency, remove duplicate approvals, reduce stakeholder touchpoints."></textarea>
+          </div>
+        </div>
+
+        <div class="insight-grid">
+          <div class="insight">
+            <i class="fas fa-bolt"></i>
+            <div>
+              <b>Game-changing move: name the “capacity maths” out loud</b>
+              <span>Leaders can’t argue with arithmetic. “I have 25 delivery hours after meetings; the asks add up to 40. Which 15 do we drop or delay?”</span>
+            </div>
+          </div>
+          <div class="insight">
+            <i class="fas fa-triangle-exclamation"></i>
+            <div>
+              <b>Watch-out: invisible overtime creates fake capacity</b>
+              <span>If you keep rescuing delivery with late nights, you train the system that your workload is fine. The reset ends that pattern.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="output-box">
+          <div class="output-title">
+            <h4><i class="fas fa-gauge"></i> Capacity statement (copy-ready)</h4>
+            <div class="mini-row">
+              <button class="pb-btn" type="button" onclick="buildCapacity()"><i class="fas fa-wand-magic-sparkles"></i> Build</button>
+              <button class="pb-btn" type="button" onclick="copyText('out_capacity')"><i class="far fa-copy"></i> Copy</button>
+            </div>
+          </div>
+          <div class="output-content" id="out_capacity">Click Build to generate your capacity statement.</div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 4 -->
+      <section class="pb-card" id="c4">
+        <div class="pb-card-header">
+          <div>
+            <div class="pb-card-title"><i class="fas fa-scale-balanced"></i> Chapter 4) Trade-offs & decision rights</div>
+            <div class="pb-card-sub">
+              This chapter is the reset. You stop absorbing conflict and you force choices.
+              The secret: present <b>two options</b> and ask for a decision date.
+            </div>
+          </div>
+          <div class="pb-done" data-module="c4"><i class="fas fa-check-circle"></i><span>Mark done</span></div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field span-2">
+            <div class="label-row"><span class="label-text">Current conflict</span><span class="hint-chip">A vs B</span></div>
+            <input class="input pb-input" id="c4_conflict" placeholder="Example: Stakeholder A wants X now; Stakeholder B wants Y now; both ‘urgent’.">
+          </div>
+
+          <div class="field">
+            <div class="label-row"><span class="label-text">Option A (what you can deliver)</span><span class="hint-chip">A</span></div>
+            <input class="input pb-input" id="c4_optA" placeholder="Example: Deliver X by Friday, delay Y to next week.">
+          </div>
+
+          <div class="field">
+            <div class="label-row"><span class="label-text">Option B (alternative sequence)</span><span class="hint-chip">B</span></div>
+            <input class="input pb-input" id="c4_optB" placeholder="Example: Deliver Y by Friday, deliver X by next Wednesday.">
+          </div>
+
+          <div class="field">
+            <div class="label-row"><span class="label-text">Decision-maker</span><span class="hint-chip">who</span></div>
+            <input class="input pb-input" id="c4_dm" placeholder="Example: Manager / Director / Programme lead">
+          </div>
+
+          <div class="field">
+            <div class="label-row"><span class="label-text">Decision deadline</span><span class="hint-chip">by</span></div>
+            <input class="input pb-input" id="c4_deadline" placeholder="Example: today 4pm / by Wednesday">
+          </div>
+
+          <div class="field span-2">
+            <div class="label-row"><span class="label-text">Decision rights (what you can decide vs what needs approval)</span><span class="hint-chip">rights</span></div>
+            <textarea class="textarea pb-input" id="c4_rights" placeholder="Example: I can decide sequencing within the week; anything affecting external commitments needs approval."></textarea>
+          </div>
+        </div>
+
+        <div class="insight-grid">
+          <div class="insight">
+            <i class="fas fa-lock"></i>
+            <div>
+              <b>Neuro hack: reduce threat cues</b>
+              <span>People resist when they feel blamed. Use “alignment language”: <b>clarify</b>, <b>agree</b>, <b>decide</b>, <b>sequence</b>. Keep it clean.</span>
+            </div>
+          </div>
+          <div class="insight">
+            <i class="fas fa-user-gear"></i>
+            <div>
+              <b>Personality / Behaviour lens</b>
+              <span><b>Defensive stakeholder:</b> “help me understand the priority” (not “you’re wrong”). <b>Dominant stakeholder:</b> put the trade-off in writing and ask for a sponsor decision.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="output-box">
+          <div class="output-title">
+            <h4><i class="fas fa-envelope-open-text"></i> Trade-off message (copy-ready)</h4>
+            <div class="mini-row">
+              <button class="pb-btn" type="button" onclick="buildTradeoff()"><i class="fas fa-wand-magic-sparkles"></i> Build</button>
+              <button class="pb-btn" type="button" onclick="copyText('out_tradeoff')"><i class="far fa-copy"></i> Copy</button>
+            </div>
+          </div>
+          <div class="output-content" id="out_tradeoff">Click Build to generate a trade-off message you can send.</div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 5 -->
+      <section class="pb-card" id="c5">
+        <div class="pb-card-header">
+          <div>
+            <div class="pb-card-title"><i class="fas fa-people-group"></i> Chapter 5) Alignment & comms</div>
+            <div class="pb-card-sub">
+              Priorities survive when you communicate them consistently. This chapter creates a <b>repeatable cadence</b> that stops constant renegotiation.
+            </div>
+          </div>
+          <div class="pb-done" data-module="c5"><i class="fas fa-check-circle"></i><span>Mark done</span></div>
+        </div>
+
+        <div class="field-grid">
+          <div class="field span-2">
+            <div class="label-row"><span class="label-text">Who needs to be aligned (names/roles)</span><span class="hint-chip">stake</span></div>
+            <textarea class="textarea pb-input" id="c5_people" placeholder="Example: Manager, Stakeholder A, Stakeholder B, cross-team lead, PMO."></textarea>
+          </div>
+
+          <div class="field">
+            <div class="label-row"><span class="label-text">Update cadence</span><span class="hint-chip">rhythm</span></div>
+            <input class="input pb-input" id="c5_cadence" placeholder="Example: weekly 6-line update / fortnightly review / daily stand-up">
+          </div>
+
+          <div class="field">
+            <div class="label-row"><span class="label-text">Your “decision channel”</span><span class="hint-chip">channel</span></div>
+            <input class="input pb-input" id="c5_channel" placeholder="Example: email recap / Slack thread / Monday meeting / Jira comment">
+          </div>
+
+          <div class="field span-2">
+            <div class="label-row"><span class="label-text">The 3-part update format you will use</span><span class="hint-chip">format</span></div>
+            <textarea class="textarea pb-input" id="c5_format" placeholder="Example: 1) Progress vs must-wins 2) Risks/blocks 3) Decisions needed + by when."></textarea>
+          </div>
+
+          <div class="field span-2">
+            <div class="label-row"><span class="label-text">What you will stop responding to instantly</span><span class="hint-chip">stop</span></div>
+            <textarea class="textarea pb-input" id="c5_stop" placeholder="Example: ad hoc ‘quick asks’, unclear messages, last-minute scope changes without trade-offs."></textarea>
+          </div>
+        </div>
+
+        <div class="insight-grid">
+          <div class="insight">
+            <i class="fas fa-eye"></i>
+            <div>
+              <b>Uncommon insight: repeated framing creates reality</b>
+              <span>If you repeat the must-wins and the trade-offs weekly, people stop negotiating from noise and start negotiating from your plan.</span>
+            </div>
+          </div>
+          <div class="insight">
+            <i class="fas fa-shield"></i>
+            <div>
+              <b>Quiet power move: written recap</b>
+              <span>Verbal agreement evaporates. Written recap locks decisions, reduces rework, and protects you if priorities flip later.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="output-box">
+          <div class="output-title">
+            <h4><i class="fas fa-paper-plane"></i> Alignment broadcast (copy-ready)</h4>
+            <div class="mini-row">
+              <button class="pb-btn" type="button" onclick="buildBroadcast()"><i class="fas fa-wand-magic-sparkles"></i> Build</button>
+              <button class="pb-btn" type="button" onclick="copyText('out_broadcast')"><i class="far fa-copy"></i> Copy</button>
+            </div>
+          </div>
+          <div class="output-content" id="out_broadcast">Click Build to generate your alignment message.</div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 6 -->
+      <section class="pb-card" id="c6">
+        <div class="pb-card-header">
+          <div>
+            <div class="pb-card-title"><i class="fas fa-calendar-check"></i> Chapter 6) Execution cadence</div>
+            <div class="pb-card-sub">
+              Priorities fail when you don’t have a delivery rhythm. This creates a simple system: plan, deliver, communicate, repeat.
+              The goal is <b>predictability</b>.
+            </div>
+          </div>
+          <div class="pb-done" data-module="c6"><i class="fas fa-check-circle"></i><span>Mark done</span></div>
+        </div>
+
+        <div class="pb-tabs" role="tablist" aria-label="Execution cadence tabs">
+          <button class="pb-tab active" type="button" data-tab="exA"><i class="fas fa-calendar-week"></i> Weekly rhythm</button>
+          <button class="pb-tab" type="button" data-tab="exB"><i class="fas fa-layer-group"></i> Backlog hygiene</button>
+          <button class="pb-tab" type="button" data-tab="exC"><i class="fas fa-stopwatch"></i> Meeting surgery</button>
+        </div>
+
+        <div class="pb-tab-panel active" id="exA">
+          <div class="field-grid">
+            <div class="field">
+              <div class="label-row"><span class="label-text">Planning day</span><span class="hint-chip">plan</span></div>
+              <input class="input pb-input" id="c6_plan" placeholder="Example: Monday 09:00">
+            </div>
+            <div class="field">
+              <div class="label-row"><span class="label-text">Update day</span><span class="hint-chip">update</span></div>
+              <input class="input pb-input" id="c6_update" placeholder="Example: Wednesday 16:00">
+            </div>
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">Your “three blocks” (where delivery actually happens)</span><span class="hint-chip">blocks</span></div>
+              <textarea class="textarea pb-input" id="c6_blocks" placeholder="Example: Tue 10–12 deep work; Thu 9–11 deep work; Fri 10–11 admin/close."></textarea>
+            </div>
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">Your shutdown rule (end of day)</span><span class="hint-chip">close</span></div>
+              <textarea class="textarea pb-input" id="c6_shutdown" placeholder="Example: capture next actions; set tomorrow’s top 1; stop at time; no late-night ‘catch up’."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pb-tab-panel" id="exB">
+          <div class="pb-card-sub">
+            A messy backlog creates emotional overload. A clean backlog creates calm authority.
+          </div>
+          <div class="field-grid">
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">Your active list cap (max concurrent items)</span><span class="hint-chip">cap</span></div>
+              <input class="input pb-input" id="c6_cap" placeholder="Example: 5 (anything beyond goes to ‘queue’)">
+            </div>
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">What goes to the queue (not active)</span><span class="hint-chip">queue</span></div>
+              <textarea class="textarea pb-input" id="c6_queue" placeholder="Example: nice-to-haves, unclear asks, non-urgent improvements, tasks awaiting decisions."></textarea>
+            </div>
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">Definition of ‘done’ (to prevent endless loops)</span><span class="hint-chip">done</span></div>
+              <textarea class="textarea pb-input" id="c6_done" placeholder="Example: accepted by stakeholder; documented; handed over; metric stable for 2 weeks."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="pb-tab-panel" id="exC">
+          <div class="insight-grid">
+            <div class="insight">
+              <i class="fas fa-scissors"></i>
+              <div>
+                <b>Meeting surgery rule</b>
+                <span>No meeting without: <b>purpose</b>, <b>decision</b>, <b>owner</b>, <b>pre-read</b>. Otherwise it’s a time leak in premium packaging.</span>
+              </div>
+            </div>
+            <div class="insight">
+              <i class="fas fa-bullseye"></i>
+              <div>
+                <b>The “10-second opener”</b>
+                <span>Start with: status, decision needed, next step. This prevents meetings becoming group therapy.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="field-grid" style="margin-top:12px;">
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">Meetings you will reduce/cancel</span><span class="hint-chip">cut</span></div>
+              <textarea class="textarea pb-input" id="c6_cut" placeholder="Example: downgrade weekly meeting to fortnightly; replace with written update; decline optional forums."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="output-box">
+          <div class="output-title">
+            <h4><i class="fas fa-list-check"></i> Execution plan (copy-ready)</h4>
+            <div class="mini-row">
+              <button class="pb-btn" type="button" onclick="buildExecution()"><i class="fas fa-wand-magic-sparkles"></i> Build</button>
+              <button class="pb-btn" type="button" onclick="copyText('out_execution')"><i class="far fa-copy"></i> Copy</button>
+            </div>
+          </div>
+          <div class="output-content" id="out_execution">Click Build to generate your execution plan.</div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 7 -->
+      <section class="pb-card" id="c7">
+        <div class="pb-card-header">
+          <div>
+            <div class="pb-card-title"><i class="fas fa-heart-pulse"></i> Chapter 7) Stabilisation & wellbeing</div>
+            <div class="pb-card-sub">
+              A priority reset that burns you out is not a reset — it’s a temporary adrenaline spike. This locks in a rhythm that keeps you steady.
+            </div>
+          </div>
+          <div class="pb-done" data-module="c7"><i class="fas fa-check-circle"></i><span>Mark done</span></div>
+        </div>
+
+        <div class="pb-tabs" role="tablist" aria-label="Wellbeing tabs">
+          <button class="pb-tab active" type="button" data-tab="wbA"><i class="fas fa-calendar-check"></i> 14-day reset plan</button>
+          <button class="pb-tab" type="button" data-tab="wbB"><i class="fas fa-brain"></i> Nervous system stability</button>
+          <button class="pb-tab" type="button" data-tab="wbC"><i class="fas fa-shield"></i> Boundary anchors</button>
+        </div>
+
+        <div class="pb-tab-panel active" id="wbA">
+          <div class="field-grid">
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">Your next 3 actions (tiny but high-leverage)</span><span class="hint-chip">next</span></div>
+              <textarea class="textarea pb-input" id="c7_next3" placeholder="Example: book a priority reset with manager; send trade-off note; cut one meeting; protect 2 deep work blocks."></textarea>
+            </div>
+            <div class="field">
+              <div class="label-row"><span class="label-text">Your weekly stabiliser</span><span class="hint-chip">steady</span></div>
+              <input class="input pb-input" id="c7_stabiliser" placeholder="Example: Friday 30-min review + Monday 20-min plan">
+            </div>
+            <div class="field">
+              <div class="label-row"><span class="label-text">Your visibility touchpoint</span><span class="hint-chip">signal</span></div>
+              <input class="input pb-input" id="c7_touch" placeholder="Example: weekly written update + decision list">
+            </div>
+          </div>
+        </div>
+
+        <div class="pb-tab-panel" id="wbB">
+          <div class="insight-grid">
+            <div class="insight">
+              <i class="fas fa-wind"></i>
+              <div><b>Downshift in 90 seconds</b><span>Before difficult conversations: slower inhale, longer exhale. You’re training calm authority.</span></div>
+            </div>
+            <div class="insight">
+              <i class="fas fa-circle-check"></i>
+              <div><b>Decision fatigue defence</b><span>Make fewer decisions at once. Use “next 2 steps only”. Clarity lowers stress and increases follow-through.</span></div>
+            </div>
+            <div class="insight">
+              <i class="fas fa-triangle-exclamation"></i>
+              <div><b>Early warning signs</b><span>Sleep drops, irritability, dread, procrastination, late-night work, emotional reactivity. Catch it early — adjust the plan.</span></div>
+            </div>
+            <div class="insight">
+              <i class="fas fa-shield"></i>
+              <div><b>One protected block</b><span>Pick one protected block weekly where you do the work that makes the job easier. Treat it as non-negotiable.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pb-tab-panel" id="wbC">
+          <div class="pb-card-sub">
+            Boundaries don’t have to be loud. The best boundaries are <b>procedural</b>: options, trade-offs, written recap.
+          </div>
+          <div class="field-grid">
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">Your boundary sentence (copy-ready)</span><span class="hint-chip">line</span></div>
+              <textarea class="textarea pb-input" id="c7_boundary" placeholder="Example: I can do this if we move X or adjust the deadline. Which do you prefer?"></textarea>
+            </div>
+            <div class="field span-2">
+              <div class="label-row"><span class="label-text">Your “no drama” rule</span><span class="hint-chip">rule</span></div>
+              <textarea class="textarea pb-input" id="c7_rule" placeholder="Example: I don’t argue. I offer options, trade-offs, and a written recap."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="output-box">
+          <div class="output-title">
+            <h4><i class="fas fa-file-lines"></i> Priority reset one-pager (final output)</h4>
+            <div class="mini-row">
+              <button class="pb-btn" type="button" onclick="buildOnePager()"><i class="fas fa-wand-magic-sparkles"></i> Build</button>
+              <button class="pb-btn" type="button" onclick="copyText('out_onepager')"><i class="far fa-copy"></i> Copy</button>
+            </div>
+          </div>
+          <div class="output-content" id="out_onepager">Click Build to generate your priority reset one-pager.</div>
+        </div>
+      </section>
+
+      <!-- SCRIPTS (Bonus chapter-style card) -->
+      <section class="pb-card" id="scripts">
+        <div class="pb-card-header">
+          <div>
+            <div class="pb-card-title"><i class="fas fa-comment-dots"></i> Scripts that stop scope creep (without drama)</div>
+            <div class="pb-card-sub">
+              These scripts are designed to protect your reputation while forcing clarity. They work because they’re <b>procedural</b>:
+              options, trade-offs, decision dates, written recap.
+            </div>
+          </div>
+        </div>
+
+        <div class="script-search">
+          <input class="input" id="scriptSearch" placeholder="Search scripts (e.g., trade-off, urgent, scope, decision, meeting, recap)">
+          <span class="hint-chip">quick filter</span>
+        </div>
+
+        <div class="acc" id="scriptsAcc">
+
+          <div class="acc-item" data-search="trade-off urgent choose A or B decision by when">
+            <button class="acc-head" type="button" data-acc="s1">
+              <div class="acc-left">
+                <div class="acc-icon"><i class="fas fa-scale-balanced"></i></div>
+                <div>
+                  <div class="acc-title">The trade-off ask (turn conflict into a decision)</div>
+                  <div class="acc-meta">Use when: two “urgent” requests collide.</div>
+                </div>
+              </div>
+              <div class="acc-chevron"><i class="fas fa-chevron-down"></i></div>
+            </button>
+            <div class="acc-body" id="s1">
+              <p><b>Positioning:</b> you’re aligning delivery to business priorities — not refusing work.</p>
+              <p><b>Tip:</b> keep it brief. Options + decision deadline. Then stop negotiating emotionally.</p>
+              <div class="script-box">
+                <div class="label"><i class="fas fa-copy"></i> Copy-ready script</div>
+                <div class="script-text" id="script_s1">I can progress both, but not at the same time without impacting quality or timelines. Please choose:
+Option A: deliver &lt;A&gt; by &lt;DATE&gt;, then start &lt;B&gt; on &lt;DATE&gt;.
+Option B: deliver &lt;B&gt; by &lt;DATE&gt;, then start &lt;A&gt; on &lt;DATE&gt;.
+If neither works, we’ll need a sponsor decision on priority by &lt;TIME/DATE&gt;.</div>
+                <div class="mini-row">
+                  <button class="pb-btn" type="button" onclick="copyText('script_s1')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item" data-search="scope creep new request clarify owner deadline definition of done">
+            <button class="acc-head" type="button" data-acc="s2">
+              <div class="acc-left">
+                <div class="acc-icon"><i class="fas fa-filter"></i></div>
+                <div>
+                  <div class="acc-title">The clarification gate (stop vague work from entering)</div>
+                  <div class="acc-meta">Use when: requests arrive fuzzy and urgent-by-vibe.</div>
+                </div>
+              </div>
+              <div class="acc-chevron"><i class="fas fa-chevron-down"></i></div>
+            </button>
+            <div class="acc-body" id="s2">
+              <p><b>Why it works:</b> it turns “instant labour” into “fast clarification”.</p>
+              <p><b>Tip:</b> ask for owner + outcome + deadline. If any are missing, it goes to queue.</p>
+              <div class="script-box">
+                <div class="label"><i class="fas fa-copy"></i> Copy-ready script</div>
+                <div class="script-text" id="script_s2">Happy to look at this — quick clarification so I prioritise it correctly:
+1) What outcome do you need (one sentence)?
+2) What’s the deadline and what happens if it slips?
+3) Who is the owner/decision-maker for sign-off?
+Once I have that, I’ll confirm where it fits against the current must-wins.</div>
+                <div class="mini-row">
+                  <button class="pb-btn" type="button" onclick="copyText('script_s2')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item" data-search="manager priority reset meeting agenda align plan capacity maths">
+            <button class="acc-head" type="button" data-acc="s3">
+              <div class="acc-left">
+                <div class="acc-icon"><i class="fas fa-people-arrows"></i></div>
+                <div>
+                  <div class="acc-title">Book a priority reset meeting (calm, senior tone)</div>
+                  <div class="acc-meta">Use when: you need authority to choose what loses.</div>
+                </div>
+              </div>
+              <div class="acc-chevron"><i class="fas fa-chevron-down"></i></div>
+            </button>
+            <div class="acc-body" id="s3">
+              <p><b>Positioning:</b> you’re protecting delivery and reducing risk.</p>
+              <p><b>Tip:</b> include the “capacity maths” line. It stops moral debates.</p>
+              <div class="script-box">
+                <div class="label"><i class="fas fa-copy"></i> Copy-ready script</div>
+                <div class="script-text" id="script_s3">Can we do a 20-minute priority reset this week? I want to align on the 3 must-win outcomes and agree what we are explicitly not doing right now.
+I currently have &lt;X&gt; delivery hours after meetings; the incoming asks total roughly &lt;Y&gt;. I’ll bring two sequencing options so we can decide quickly and keep delivery clean.</div>
+                <div class="mini-row">
+                  <button class="pb-btn" type="button" onclick="copyText('script_s3')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="acc-item" data-search="recap in writing decisions agreed next steps protect yourself">
+            <button class="acc-head" type="button" data-acc="s4">
+              <div class="acc-left">
+                <div class="acc-icon"><i class="fas fa-file-signature"></i></div>
+                <div>
+                  <div class="acc-title">The written recap (lock decisions, stop revisionism)</div>
+                  <div class="acc-meta">Use when: priorities change and you need protection.</div>
+                </div>
+              </div>
+              <div class="acc-chevron"><i class="fas fa-chevron-down"></i></div>
+            </button>
+            <div class="acc-body" id="s4">
+              <p><b>Why it works:</b> it reduces rework, reduces anxiety, and creates accountability without conflict.</p>
+              <p><b>Tip:</b> keep it short. Decisions, trade-offs, next steps, owners.</p>
+              <div class="script-box">
+                <div class="label"><i class="fas fa-copy"></i> Copy-ready script</div>
+                <div class="script-text" id="script_s4">Quick recap of what we agreed:
+1) Must-wins this week: &lt;MW1&gt;, &lt;MW2&gt;, &lt;MW3&gt;
+2) Trade-offs: we are pausing/deferring &lt;X&gt; to enable the above
+3) Decisions: &lt;DECISION&gt; owned by &lt;NAME/ROLE&gt; by &lt;DATE&gt;
+4) Next update: &lt;CADENCE&gt;
+If anything above is incorrect, please reply today so I can adjust the plan.</div>
+                <div class="mini-row">
+                  <button class="pb-btn" type="button" onclick="copyText('script_s4')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- MY PLAYBOOK SIDEBAR -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar" role="dialog" aria-modal="true" aria-label="My Playbook">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven’t saved anything yet. Use <strong>Save</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <div class="playbook-quick-links-header">
+          <span class="quick-links-title">Quick links</span>
+        </div>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill"><i class="fas fa-gauge"></i> The Dashboard</a>
+          <a href="the-lens.html" class="quick-link-pill"><i class="fas fa-search"></i> The Lens</a>
+          <a href="the-toolkit.html" class="quick-link-pill"><i class="fas fa-toolbox"></i> The Toolkit</a>
+          <a href="the-coach.html" class="quick-link-pill"><i class="fas fa-comments"></i> The Coach</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<div class="toast" id="toast">Copied</div>
+
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ============ JS (complete, no syntax errors) ============ */
+(function () {
+  const PAGE_KEY = 'priority-reset-playbook';
+  const LS_THEME = 'theme';
+  const LS_SAVED = 'tep_saved_items';
+  const LS_INPUTS = 'pb_inputs_' + PAGE_KEY;
+  const LS_DONE = 'pb_modules_done_' + PAGE_KEY;
+
+  const $ = (id) => document.getElementById(id);
+  const body = document.body;
+  const root = document.documentElement;
+
+  window.addEventListener('DOMContentLoaded', () => {
+    body.classList.add('loaded');
+    syncThemeIcon();
+    restoreInputs();
+    restoreDone();
+    syncSaveState();
+    renderSavedItems();
+    wireEvents();
+    updateProgress();
+  });
+
+  function toast(msg){
+    const t = $('toast');
+    if (!t) return;
+    t.textContent = msg || 'Done';
+    t.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => t.classList.remove('show'), 1200);
+  }
+
+  function isDark() { return root.classList.contains('dark-mode'); }
+  function setTheme(mode) {
+    if (mode === 'dark') root.classList.add('dark-mode');
+    else root.classList.remove('dark-mode');
+    try { localStorage.setItem(LS_THEME, mode); } catch (e) {}
+    syncThemeIcon();
+  }
+  function syncThemeIcon() {
+    const btn = $('themeToggleBtn');
+    if (!btn) return;
+    btn.innerHTML = isDark() ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+  }
+
+  function toggleNav() {
+    const navLinks = $('navLinks');
+    if (!navLinks) return;
+    navLinks.classList.toggle('active');
+  }
+
+  function getSaved() {
+    try {
+      const raw = localStorage.getItem(LS_SAVED);
+      const parsed = raw ? JSON.parse(raw) : [];
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) { return []; }
+  }
+  function setSaved(items) {
+    try { localStorage.setItem(LS_SAVED, JSON.stringify(items)); } catch (e) {}
+  }
+
+  function thisItem() {
+    return {
+      id: PAGE_KEY,
+      title: 'Priority Reset Playbook',
+      type: 'Playbook',
+      href: window.location.href,
+      meta: 'Clarity, Priorities & Direction',
+      ts: Date.now()
+    };
+  }
+
+  function isSaved() { return getSaved().some(x => x && x.id === PAGE_KEY); }
+
+  function setSaveButton(saved) {
+    const btn = $('saveBtn');
+    if (!btn) return;
+
+    btn.classList.toggle('saved', saved);
+
+    const icon = btn.querySelector('i');
+    if (icon) icon.className = saved ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark';
+
+    const label = btn.querySelector('.save-label');
+    if (label) label.textContent = saved ? 'Saved' : 'Save';
+
+    btn.setAttribute('aria-pressed', saved ? 'true' : 'false');
+  }
+
+  function toggleSave() {
+    const items = getSaved();
+    const idx = items.findIndex(x => x && x.id === PAGE_KEY);
+    if (idx >= 0) {
+      items.splice(idx, 1);
+      setSaved(items);
+      setSaveButton(false);
+      toast('Removed');
+    } else {
+      items.unshift(thisItem());
+      setSaved(items);
+      setSaveButton(true);
+      toast('Saved');
+    }
+    renderSavedItems();
+  }
+
+  function syncSaveState() { setSaveButton(isSaved()); }
+
+  function openSidebar() {
+    $('playbookOverlay')?.classList.add('open');
+    $('playbookSidebar')?.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSidebar() {
+    $('playbookOverlay')?.classList.remove('open');
+    $('playbookSidebar')?.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function renderSavedItems() {
+    const list = $('savedItemsList');
+    const empty = $('savedItemsEmpty');
+    if (!list || !empty) return;
+
+    const items = getSaved();
+    list.innerHTML = '';
+    empty.style.display = items.length ? 'none' : 'block';
+
+    items.forEach(item => {
+      if (!item) return;
+      const li = document.createElement('li');
+      li.className = 'saved-item';
+      li.innerHTML = `
+        <div class="saved-item-title-row">
+          <div class="saved-item-title">${escapeHtml(item.title || 'Saved item')}</div>
+          <div class="saved-item-type">${escapeHtml(item.type || 'Item')}</div>
+        </div>
+        <div class="saved-item-meta">${escapeHtml(item.meta || '')}</div>
+        <a class="saved-item-link" href="${escapeAttr(item.href || '#')}"><i class="fas fa-arrow-up-right-from-square"></i> Open</a>
+      `;
+      list.appendChild(li);
+    });
+  }
+
+  function restoreInputs() {
+    let data = {};
+    try {
+      const raw = localStorage.getItem(LS_INPUTS);
+      data = raw ? JSON.parse(raw) : {};
+    } catch (e) { data = {}; }
+
+    document.querySelectorAll('.pb-input').forEach(el => {
+      if (!el.id) return;
+      if (data[el.id] != null) el.value = data[el.id];
+    });
+  }
+  function saveInputs() {
+    const data = {};
+    document.querySelectorAll('.pb-input').forEach(el => {
+      if (!el.id) return;
+      data[el.id] = el.value || '';
+    });
+    try { localStorage.setItem(LS_INPUTS, JSON.stringify(data)); } catch (e) {}
+  }
+
+  function getDone() {
+    try {
+      const raw = localStorage.getItem(LS_DONE);
+      const arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr : [];
+    } catch (e) { return []; }
+  }
+  function setDone(arr) { try { localStorage.setItem(LS_DONE, JSON.stringify(arr)); } catch (e) {} }
+
+  function restoreDone() {
+    const done = new Set(getDone());
+
+    document.querySelectorAll('.pb-done[data-module]').forEach(btn => {
+      const m = btn.getAttribute('data-module');
+      if (!m) return;
+      const isDone = done.has(m);
+      btn.dataset.done = isDone ? 'true' : 'false';
+      const span = btn.querySelector('span');
+      if (span) span.textContent = isDone ? 'Done' : 'Mark done';
+    });
+
+    ['c1','c2','c3','c4','c5','c6','c7'].forEach(m => {
+      const st = $('st-' + m);
+      if (!st) return;
+      const yes = done.has(m);
+      st.textContent = yes ? 'done' : 'open';
+      st.classList.toggle('done', yes);
+    });
+  }
+
+  function toggleDone(moduleId) {
+    const done = new Set(getDone());
+    if (done.has(moduleId)) done.delete(moduleId);
+    else done.add(moduleId);
+    setDone(Array.from(done));
+    restoreDone();
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const done = new Set(getDone());
+    const total = 7;
+    const count = ['c1','c2','c3','c4','c5','c6','c7'].filter(m => done.has(m)).length;
+    const pct = Math.round((count / total) * 100);
+
+    const ring = $('progressRing');
+    const pctEl = $('progressPct');
+    const label = $('progressLabel');
+
+    if (pctEl) pctEl.textContent = pct + '%';
+    if (ring) {
+      const deg = Math.round((pct / 100) * 360);
+      ring.style.background = `conic-gradient(var(--accent-purple) 0deg, var(--accent-purple) ${deg}deg, var(--pb-ring-rest) ${deg}deg)`;
+    }
+    if (label) label.textContent = pct === 0 ? 'Not started' : (pct === 100 ? 'Complete' : 'In progress');
+  }
+
+  function setActiveTabScoped(containerEl, tabId) {
+    containerEl.querySelectorAll('.pb-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+    containerEl.querySelectorAll('.pb-tab-panel').forEach(p => p.classList.toggle('active', p.id === tabId));
+  }
+
+  window.copyText = async function (id) {
+    const el = $(id);
+    if (!el) return;
+    const text = (el.textContent || '').trim();
+    try {
+      await navigator.clipboard.writeText(text);
+      toast('Copied');
+    } catch (e) {
+      fallbackCopy(text);
+      toast('Copied');
+    }
+  };
+
+  function fallbackCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  function resetAll() {
+    try {
+      localStorage.removeItem(LS_INPUTS);
+      localStorage.removeItem(LS_DONE);
+    } catch (e) {}
+    document.querySelectorAll('.pb-input').forEach(el => el.value = '');
+
+    const resetText = (id, txt) => { if ($(id)) $(id).textContent = txt; };
+    resetText('out_triage', 'Click Build to generate your triage snapshot.');
+    resetText('out_mustwins', 'Click Build to generate your must-win statement.');
+    resetText('out_capacity', 'Click Build to generate your capacity statement.');
+    resetText('out_tradeoff', 'Click Build to generate a trade-off message you can send.');
+    resetText('out_broadcast', 'Click Build to generate your alignment message.');
+    resetText('out_execution', 'Click Build to generate your execution plan.');
+    resetText('out_onepager', 'Click Build to generate your priority reset one-pager.');
+
+    const ss = $('scriptSearch');
+    if (ss) ss.value = '';
+    filterScripts('');
+
+    document.querySelectorAll('.acc-body.open').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.acc-chevron i').forEach(i => i.className = 'fas fa-chevron-down');
+
+    restoreDone();
+    updateProgress();
+    toast('Reset');
+  }
+
+  function condense(text) { return String(text || '').replace(/\s+/g, ' ').trim(); }
+  function safeLine(text) { return condense(text); }
+
+  // ===== Builders =====
+  window.buildTriage = function () {
+    const list = ($('c1_list')?.value || '').trim();
+    const purpose = safeLine($('c1_purpose')?.value);
+    const decider = safeLine($('c1_decider')?.value);
+    const leaks = condense($('c1_leaks')?.value);
+    const nonneg = condense($('c1_nonneg')?.value);
+
+    const lines = [];
+    lines.push('PRIORITY RESET — TRIAGE SNAPSHOT');
+    if (purpose) lines.push(`Role purpose: ${purpose}`);
+    if (decider) lines.push(`Priority decider: ${decider}`);
+
+    lines.push('\nInventory (raw):');
+    lines.push(list ? list : '(add your list)');
+
+    if (leaks) {
+      lines.push('\nTime leaks to address:');
+      lines.push(leaks);
+    }
+    if (nonneg) {
+      lines.push('\nNon-negotiables to protect:');
+      lines.push(nonneg);
+    }
+
+    lines.push('\nOperating rule: unclear work becomes a clarification request, not instant labour.');
+    $('out_triage').textContent = lines.join('\n');
+  };
+
+  window.buildMustWins = function () {
+    const mw1 = safeLine($('c2_mw1')?.value);
+    const mw2 = safeLine($('c2_mw2')?.value);
+    const mw3 = safeLine($('c2_mw3')?.value);
+    const notdoing = condense($('c2_notdoing')?.value);
+    const risks = condense($('c2_risks')?.value);
+    const big = safeLine($('c2_biggestrisk')?.value);
+
+    const lines = [];
+    lines.push('MUST-WIN PRIORITIES (THIS PERIOD)');
+    lines.push(`1) ${mw1 || '(must-win #1)'}`);
+    lines.push(`2) ${mw2 || '(must-win #2)'}`);
+    lines.push(`3) ${mw3 || '(must-win #3)'}`);
+
+    if (notdoing) {
+      lines.push('\nExplicitly not doing (for now):');
+      lines.push(notdoing);
+    }
+    if (big || risks) {
+      lines.push('\nRisk framing (for decision-makers):');
+      if (big) lines.push(`Biggest risk: ${big}`);
+      if (risks) lines.push(`If we don’t focus: ${risks}`);
+    }
+
+    lines.push('\nAsk: please confirm these 3 must-wins and what we are pausing so delivery stays clean.');
+    $('out_mustwins').textContent = lines.join('\n');
+  };
+
+  window.buildCapacity = function () {
+    const hrs = safeLine($('c3_hours')?.value);
+    const mtg = safeLine($('c3_meet')?.value);
+    const deep = safeLine($('c3_deep')?.value);
+    const drag = safeLine($('c3_drag')?.value);
+    const constraints = condense($('c3_constraints')?.value);
+    const remove = condense($('c3_remove')?.value);
+
+    const lines = [];
+    lines.push('CAPACITY STATEMENT (DEFENSIBLE)');
+    if (hrs) lines.push(`Weekly capacity: ${hrs} hours`);
+    if (mtg) lines.push(`Unavoidable meetings: ${mtg} hours`);
+    if (deep) lines.push(`Deep work required: ${deep} hours`);
+    if (drag) lines.push(`Context switching penalty: ${drag}`);
+
+    lines.push('\nPlain-English version:');
+    lines.push('I can deliver reliably when scope matches capacity. If new work lands, we must trade off something else.');
+
+    if (constraints) {
+      lines.push('\nConstraints:');
+      lines.push(constraints);
+    }
+    if (remove) {
+      lines.push('\nTo make delivery real, remove/reduce:');
+      lines.push(remove);
+    }
+
+    $('out_capacity').textContent = lines.join('\n');
+  };
+
+  window.buildTradeoff = function () {
+    const conflict = safeLine($('c4_conflict')?.value);
+    const A = safeLine($('c4_optA')?.value);
+    const B = safeLine($('c4_optB')?.value);
+    const dm = safeLine($('c4_dm')?.value);
+    const dl = safeLine($('c4_deadline')?.value);
+    const rights = condense($('c4_rights')?.value);
+
+    const lines = [];
+    lines.push('TRADE-OFF NOTE (SEND/PASTE)');
+    if (conflict) lines.push(`Context: ${conflict}`);
+    lines.push('\nTo keep delivery clean, please choose:');
+    lines.push(`Option A: ${A || '(option A)'}`);
+    lines.push(`Option B: ${B || '(option B)'}`);
+
+    if (dm) lines.push(`\nDecision-maker: ${dm}`);
+    if (dl) lines.push(`Decision needed by: ${dl}`);
+
+    if (rights) {
+      lines.push('\nDecision rights (for clarity):');
+      lines.push(rights);
+    }
+
+    lines.push('\nOnce confirmed, I will update the plan in writing and proceed accordingly.');
+    $('out_tradeoff').textContent = lines.join('\n');
+  };
+
+  window.buildBroadcast = function () {
+    const people = condense($('c5_people')?.value);
+    const cadence = safeLine($('c5_cadence')?.value);
+    const channel = safeLine($('c5_channel')?.value);
+    const format = condense($('c5_format')?.value);
+    const stop = condense($('c5_stop')?.value);
+
+    const mw1 = safeLine($('c2_mw1')?.value);
+    const mw2 = safeLine($('c2_mw2')?.value);
+    const mw3 = safeLine($('c2_mw3')?.value);
+    const notdoing = condense($('c2_notdoing')?.value);
+
+    const lines = [];
+    lines.push('ALIGNMENT BROADCAST (SEND/PASTE)');
+    if (people) lines.push(`To: ${people}`);
+
+    lines.push('\nPriority reset — proposed must-wins:');
+    lines.push(`1) ${mw1 || '(must-win #1)'}`);
+    lines.push(`2) ${mw2 || '(must-win #2)'}`);
+    lines.push(`3) ${mw3 || '(must-win #3)'}`);
+
+    if (notdoing) {
+      lines.push('\nTo enable this, we are pausing/deferring:');
+      lines.push(notdoing);
+    }
+
+    if (cadence || channel || format) {
+      lines.push('\nOperating cadence:');
+      if (cadence) lines.push(`- Update rhythm: ${cadence}`);
+      if (channel) lines.push(`- Decision channel: ${channel}`);
+      if (format) lines.push(`- Update format: ${format}`);
+    }
+
+    if (stop) {
+      lines.push('\nTo protect delivery, I won’t respond instantly to:');
+      lines.push(stop);
+      lines.push('Instead, I’ll route new requests through trade-offs and an agreed queue.');
+    }
+
+    lines.push('\nPlease reply with any corrections today — otherwise I’ll proceed with this plan.');
+    $('out_broadcast').textContent = lines.join('\n');
+  };
+
+  window.buildExecution = function () {
+    const plan = safeLine($('c6_plan')?.value);
+    const update = safeLine($('c6_update')?.value);
+    const blocks = condense($('c6_blocks')?.value);
+    const shutdown = condense($('c6_shutdown')?.value);
+    const cap = safeLine($('c6_cap')?.value);
+    const queue = condense($('c6_queue')?.value);
+    const doneDef = condense($('c6_done')?.value);
+    const cut = condense($('c6_cut')?.value);
+
+    const lines = [];
+    lines.push('EXECUTION CADENCE (SIMPLE, REPEATABLE)');
+    if (plan) lines.push(`Planning slot: ${plan}`);
+    if (update) lines.push(`Update slot: ${update}`);
+
+    if (blocks) {
+      lines.push('\nDelivery blocks (non-negotiable):');
+      lines.push(blocks);
+    }
+    if (cap) {
+      lines.push(`\nActive list cap: ${cap}`);
+      lines.push('Rule: if the cap is full, new work must displace an item via a decision.');
+    }
+    if (queue) {
+      lines.push('\nQueue (not active):');
+      lines.push(queue);
+    }
+    if (doneDef) {
+      lines.push('\nDefinition of done:');
+      lines.push(doneDef);
+    }
+    if (cut) {
+      lines.push('\nMeeting surgery (reduce/cancel):');
+      lines.push(cut);
+    }
+    if (shutdown) {
+      lines.push('\nShutdown rule:');
+      lines.push(shutdown);
+    }
+
+    $('out_execution').textContent = lines.join('\n');
+  };
+
+  window.buildOnePager = function () {
+    const mw = $('out_mustwins')?.textContent?.includes('MUST-WIN') ? $('out_mustwins').textContent : '';
+    const cap = $('out_capacity')?.textContent?.includes('CAPACITY') ? $('out_capacity').textContent : '';
+    const trade = $('out_tradeoff')?.textContent?.includes('TRADE-OFF') ? $('out_tradeoff').textContent : '';
+    const exec = $('out_execution')?.textContent?.includes('EXECUTION') ? $('out_execution').textContent : '';
+
+    const nonneg = condense($('c1_nonneg')?.value);
+    const next3 = condense($('c7_next3')?.value);
+    const boundary = condense($('c7_boundary')?.value);
+
+    const lines = [];
+    lines.push('PRIORITY RESET — ONE-PAGER');
+    lines.push('----------------------------------------');
+
+    lines.push('\n1) Must-wins');
+    lines.push(mw ? mw.replace(/^MUST-WIN PRIORITIES \(THIS PERIOD\)\n?/, '') : '(Build Must-wins first)');
+
+    lines.push('\n2) Capacity & constraints');
+    lines.push(cap ? cap.replace(/^CAPACITY STATEMENT \(DEFENSIBLE\)\n?/, '') : '(Build Capacity statement first)');
+
+    lines.push('\n3) Trade-offs (template)');
+    lines.push(trade ? trade.replace(/^TRADE-OFF NOTE \(SEND\/PASTE\)\n?/, '') : '(Build Trade-off note first)');
+
+    lines.push('\n4) Execution cadence');
+    lines.push(exec ? exec.replace(/^EXECUTION CADENCE \(SIMPLE, REPEATABLE\)\n?/, '') : '(Build Execution plan first)');
+
+    if (nonneg) {
+      lines.push('\n5) Non-negotiables');
+      lines.push(nonneg);
+    }
+    if (boundary) {
+      lines.push('\n6) Boundary anchor sentence');
+      lines.push(boundary);
+    }
+    if (next3) {
+      lines.push('\n7) Next 3 actions (14-day reset)');
+      lines.push(next3);
+    }
+
+    lines.push('\nOperating rule: new work enters via clarification + trade-offs, not via guilt or urgency-by-vibe.');
+    $('out_onepager').textContent = lines.join('\n');
+  };
+
+  // ===== Scripts accordion + search =====
+  function toggleAcc(id){
+    const bodyEl = $(id);
+    if (!bodyEl) return;
+    const open = bodyEl.classList.toggle('open');
+    const head = document.querySelector(`.acc-head[data-acc="${id}"]`);
+    const icon = head ? head.querySelector('.acc-chevron i') : null;
+    if (icon) icon.className = open ? 'fas fa-chevron-up' : 'fas fa-chevron-down';
+  }
+
+  function filterScripts(q){
+    const query = (q || '').toLowerCase().trim();
+    document.querySelectorAll('#scriptsAcc .acc-item').forEach(item => {
+      const hay = (item.getAttribute('data-search') || '').toLowerCase();
+      const text = item.textContent.toLowerCase();
+      const show = !query || hay.includes(query) || text.includes(query);
+      item.style.display = show ? '' : 'none';
+    });
+  }
+
+  // ===== Wire up =====
+  function wireEvents(){
+    $('themeToggleBtn')?.addEventListener('click', () => setTheme(isDark() ? 'light' : 'dark'));
+    $('mobileToggleBtn')?.addEventListener('click', toggleNav);
+
+    $('saveBtn')?.addEventListener('click', toggleSave);
+
+    $('myPlaybookButton')?.addEventListener('click', openSidebar);
+    $('closePlaybook')?.addEventListener('click', closeSidebar);
+    $('playbookOverlay')?.addEventListener('click', (e) => { if (e.target === $('playbookOverlay')) closeSidebar(); });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeSidebar();
+    });
+
+    document.querySelectorAll('.pb-input').forEach(el => {
+      el.addEventListener('input', () => {
+        saveInputs();
+      });
+      el.addEventListener('change', saveInputs);
+    });
+
+    document.querySelectorAll('.pb-done[data-module]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const m = btn.getAttribute('data-module');
+        if (m) toggleDone(m);
+      });
+    });
+
+    // Tab groups: scope to nearest pb-card
+    document.querySelectorAll('.pb-card').forEach(card => {
+      const tabs = card.querySelectorAll('.pb-tab');
+      if (!tabs.length) return;
+      tabs.forEach(t => {
+        t.addEventListener('click', () => setActiveTabScoped(card, t.dataset.tab));
+      });
+    });
+
+    // Accordions
+    document.querySelectorAll('.acc-head[data-acc]').forEach(btn => {
+      btn.addEventListener('click', () => toggleAcc(btn.dataset.acc));
+    });
+
+    // Script search
+    $('scriptSearch')?.addEventListener('input', (e) => filterScripts(e.target.value));
+
+    // Rail actions
+    $('resetBtn')?.addEventListener('click', resetAll);
+    $('copyAllBtn')?.addEventListener('click', async () => {
+      buildOnePager();
+      const txt = ($('out_onepager')?.textContent || '').trim();
+      try {
+        await navigator.clipboard.writeText(txt);
+        toast('Copied');
+      } catch(e){
+        fallbackCopy(txt);
+        toast('Copied');
+      }
+    });
+  }
+
+  // ===== Utils =====
+  function escapeHtml(str){
+    return String(str || '').replace(/[&<>"']/g, (m) => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
+    }[m]));
+  }
+  function escapeAttr(str){
+    return String(str || '').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+  }
+})();
+</script>
+
+</body>
+</html>

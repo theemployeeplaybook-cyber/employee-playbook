@@ -1,0 +1,2746 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Action Plan | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand + Category Pills System)
+    =========================== */
+    :root{
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+      --text-dark:#212529;
+      --text-medium:#495057;
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+      --success-green:#10b981;
+      --warning-orange:#f59e0b;
+      --danger-red:#ef4444;
+
+      /* Category colours (your 7) */
+      --category-clarity: #7B5FC4;
+      --category-burnout: #f59e0b;
+      --category-manager: #10b981;
+      --category-politics: #3b82f6;
+      --category-hr: #6D28D9;
+      --category-confidence: #ef4444;
+      --category-career: #800020;
+
+      /* Pill tokens (light) */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.08), rgba(123, 95, 196, 0.04));
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.12), rgba(123, 95, 196, 0.08));
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.04));
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.08));
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.08), rgba(128, 0, 32, 0.04));
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.12), rgba(128, 0, 32, 0.08));
+    }
+
+    /* ===========================
+       DARK MODE VARIABLES
+    =========================== */
+    .dark-mode{
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#9aa0a6;
+      --text-dark:#e6e6e6;
+      --text-medium:#c8c8c8;
+
+      --accent-purple:#9d86e9;
+      --accent-purple-dark:#7B5FC4;
+      --light-purple: rgba(123, 95, 196, 0.22);
+      --lighter-purple: rgba(123, 95, 196, 0.12);
+
+      --border-light: rgba(255, 255, 255, 0.10);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+      --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      --category-clarity: #9d86e9;
+      --category-burnout: #fbbf24;
+      --category-manager: #34d399;
+      --category-politics: #60a5fa;
+      --category-hr: #8B5CF6;
+      --category-confidence: #f87171;
+      --category-career: #B03060;
+
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.16), rgba(123, 95, 196, 0.08));
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.22), rgba(123, 95, 196, 0.12));
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.16), rgba(239, 68, 68, 0.08));
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.22), rgba(239, 68, 68, 0.12));
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.16), rgba(128, 0, 32, 0.08));
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.22), rgba(128, 0, 32, 0.12));
+    }
+
+    /* ===========================
+       GLOBAL
+    =========================== */
+    *{ margin:0; padding:0; box-sizing:border-box; font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body{
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      min-height: 100vh;
+    }
+    body.loaded{ opacity: 1; }
+    .container{ max-width: 1400px; margin:0 auto; padding:0 20px; }
+
+    /* ===========================
+       NAVIGATION
+    =========================== */
+    nav{
+      position: fixed; top:0; width:100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      height: 80px;
+    }
+    .nav-container{ display:flex; justify-content: space-between; align-items:center; padding: 12px 0; height: 100%; }
+    .logo{ display:inline-flex; align-items:center; height: 100%; }
+    .logo-img{
+      height:100px; width:auto; transform: translateX(20%);
+      padding: 14px 10px; transition: all 0.3s ease;
+      display:block; min-height:100px;
+    }
+    .logo-fallback{
+      display:none; align-items:center; justify-content:center;
+      height:48px; padding: 0 14px; border-radius: 10px;
+      background: var(--premium-gradient); color:#fff;
+      font-weight:700; letter-spacing: 0.8px; font-size: 13px;
+      text-transform: uppercase; transform: translateX(20%);
+    }
+    .nav-links{ display:flex; gap:50px; }
+    .nav-link{ color: var(--text-dark); text-decoration:none; font-weight: 500; transition: color 0.3s ease; font-size: 17px; }
+    .nav-link:hover{ color: var(--accent-purple); }
+    .nav-link-container{ position: relative; display:inline-block; }
+    .new-tag{
+      position:absolute; top:-12px; right:-35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color:#000; font-size:10px; font-weight:600;
+      padding:2px 6px; border-radius:4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index:10; white-space:nowrap;
+    }
+    .nav-actions{ display:flex; align-items:center; gap:24px; transform: translateX(-20%); }
+    .header-cta{
+      background: var(--accent-purple); color:#fff;
+      padding: 8px 20px; border-radius: 50px; text-decoration:none;
+      font-weight: 600; font-size: 14px;
+      transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(123,95,196,0.3);
+    }
+    .header-cta:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(123,95,196,0.35); }
+    .sign-in{ color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; }
+    .sign-in:hover{ color: var(--accent-purple); }
+    .theme-toggle{
+      background:none; border:none; color: var(--text-dark);
+      cursor:pointer; font-size:16px; width:36px; height:36px;
+      border-radius:50%; display:flex; align-items:center; justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .theme-toggle:hover{ background-color: var(--light-gray); }
+    .mobile-toggle{
+      display:none; background:none; border:none; color: var(--text-dark);
+      cursor:pointer; font-size:24px; width:40px; height:40px;
+      border-radius:50%; align-items:center; justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .mobile-toggle:hover{ background-color: var(--light-gray); }
+    .mobile-sign-in, .mobile-sign-up{ display:none; }
+
+    @media (max-width: 768px){
+      .nav-container{ justify-content:center; position:relative; }
+      .logo{
+        position:absolute; left:50%; transform: translateX(-50%);
+        display:flex; align-items:center; height:100%;
+      }
+      .logo-img{ height:125px; transform:none; padding: 12px 0; }
+      .logo-fallback{ transform:none; }
+
+      .mobile-toggle{ display:flex; position:absolute; left:20px; align-items:center; }
+      .nav-actions{
+        transform:none; gap:16px; position:absolute; right:20px; align-items:center;
+      }
+      .nav-actions .sign-in, .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none; position:absolute; top:100%; left:0; width:100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding:20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        gap:20px;
+      }
+      .nav-links.active{ display:flex; }
+      .nav-link-container{ display:flex; align-items:center; justify-content:flex-start; width:100%; }
+      .new-tag{ position:static; margin-left:8px; }
+      .mobile-sign-in{
+        display:block !important; margin-top:10px; padding:12px 20px;
+        background: var(--primary-white); color: var(--accent-purple);
+        border-radius:10px; text-align:center; font-weight:700;
+        text-decoration:none; border:2px solid var(--accent-purple);
+      }
+      .mobile-sign-up{
+        display:block !important; margin-top:10px; padding:12px 20px;
+        background: var(--accent-purple); color:#fff;
+        border-radius:10px; text-align:center; font-weight:700;
+        text-decoration:none; border:2px solid var(--accent-purple);
+      }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .tool-hero-section{
+      width:100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow:hidden;
+    }
+    .tool-hero-section::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+      z-index:1;
+    }
+    .dark-mode .tool-hero-section::before{
+      background: linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+    }
+    .tool-hero-content{
+      position:relative;
+      z-index:2;
+      max-width:1100px;
+      margin:0 auto;
+      padding: 0 20px 10px;
+      animation: heroFadeUp 0.45s ease-out;
+    }
+    @keyframes heroFadeUp{
+      from{ opacity:0; transform: translateY(18px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .breadcrumb{
+      font-size:10px;
+      text-transform: uppercase;
+      letter-spacing:1px;
+      color: var(--dark-gray);
+      margin-bottom:10px;
+      display:flex;
+      gap:6px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .breadcrumb a{
+      color: var(--text-medium);
+      text-decoration:none !important;
+      font-weight:600;
+      letter-spacing:0.6px;
+      transition: color 0.2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+    }
+    .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+    .breadcrumb i{ font-size:10px; opacity:0.7; }
+    .breadcrumb .current{ color: var(--text-dark); font-weight:700; }
+
+    .checklist-name{
+      font-size:14px;
+      font-weight:700;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing:1.8px;
+      margin: 18px 0 12px;
+      display:block;
+    }
+
+    .hero-main-heading{
+      font-size:46px;
+      font-weight:650;
+      color: var(--text-dark);
+      line-height:1.1;
+      margin-bottom:18px;
+      max-width: 900px;
+    }
+    .hero-subheading{
+      font-size:16px;
+      color: var(--text-medium);
+      line-height:1.6;
+      max-width: 920px;
+      margin-bottom: 16px;
+    }
+
+    /* ===========================
+       RELATED CATEGORIES
+    =========================== */
+    .related-row{
+      display:flex;
+      flex-direction: column;
+      align-items:flex-start;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .related-label{
+      font-size: 12px;
+      font-weight:600;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: var(--text-medium);
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .related-pills{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+    }
+
+    .category-pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      height: 36px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration:none;
+    }
+    .dark-mode .category-pill{ box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); }
+    .category-pill:hover{ transform: translateY(-2px); box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08); }
+    .dark-mode .category-pill:hover{ box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3); }
+    .category-icon{ font-size: 12px; opacity: 0.9; flex-shrink: 0; }
+
+    .category-pill.clarity{ color: var(--category-clarity); border-color: rgba(123,95,196,0.2); background: var(--pill-clarity-bg); }
+    .category-pill.clarity:hover{ background: var(--pill-clarity-hover-bg); border-color: rgba(123,95,196,0.3); }
+    .category-pill.confidence{ color: var(--category-confidence); border-color: rgba(239,68,68,0.2); background: var(--pill-confidence-bg); }
+    .category-pill.confidence:hover{ background: var(--pill-confidence-hover-bg); border-color: rgba(239,68,68,0.3); }
+    .category-pill.career{ color: var(--category-career); border-color: rgba(128,0,32,0.2); background: var(--pill-career-bg); }
+    .category-pill.career:hover{ background: var(--pill-career-hover-bg); border-color: rgba(128,0,32,0.3); }
+
+    .save-btn{
+      position:absolute;
+      top:16px;
+      right:24px;
+      z-index:5;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 12px;
+      font-size:12px;
+      font-weight:600;
+      border-radius:999px;
+      border: 1px solid rgba(123,95,196,0.6);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--accent-purple-dark);
+      cursor:pointer;
+      transition: all 0.2s ease;
+    }
+    .save-btn:hover{ transform: translateY(-1px); box-shadow: 0 4px 10px rgba(123,95,196,0.18); background: #fff; }
+    .dark-mode .save-btn{ background: rgba(20,20,20,0.9); border-color: rgba(157,134,233,0.6); }
+    .save-btn.saved{ background: var(--accent-purple); color:#fff; border-color: transparent; }
+
+    /* ===========================
+       CONTEXT + HOW IT WORKS
+    =========================== */
+    .context-tips-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      width:100%;
+      max-width:1100px;
+      margin: 0 auto 18px;
+      padding: 24px 20px 10px;
+      margin-top: 6px;
+    }
+    .context-card, .tips-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius:14px;
+      padding: 26px 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .section-title{
+      font-size:18px;
+      font-weight:700;
+      color: var(--text-dark);
+      margin-bottom:16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .section-title i{ color: var(--accent-purple); }
+    .bullet-list{ list-style:none; margin:0; padding:0; }
+    .bullet-list li{
+      color: var(--text-medium);
+      line-height:1.65;
+      margin-bottom:12px;
+      padding-left: 26px;
+      position:relative;
+      font-size:14.5px;
+      font-weight:450;
+    }
+    .bullet-list li::before{
+      content:"•";
+      position:absolute;
+      left:10px;
+      color: var(--accent-purple);
+      font-size:18px;
+    }
+
+    /* ===========================
+       WORKSPACE
+    =========================== */
+    .workspace-wrap{ max-width:1100px; margin: 0 auto; padding: 0 20px 10px; }
+
+    .workspace-header{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 18px 0 14px;
+      flex-wrap: wrap;
+    }
+    .workspace-title{ display:flex; flex-direction:column; gap:6px; min-width: 0; flex: 1; }
+    .workspace-title h2{ font-size: 26px; font-weight: 750; color: var(--accent-purple-dark); line-height: 1.2; }
+    .workspace-title p{ font-size: 14px; color: var(--text-medium); font-weight: 450; max-width: 760px; }
+
+    /* REASONS TOGGLE (the missing toggle you flagged) */
+    .reason-panel{
+      width: 100%;
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 14px 14px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 0 0 14px;
+    }
+    .reason-left{
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .reason-label{
+      font-size: 12px;
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: var(--text-medium);
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .reason-help{
+      font-size: 13.5px;
+      color: var(--text-medium);
+      font-weight: 450;
+      line-height: 1.45;
+      max-width: 700px;
+    }
+
+    .segmented{
+      display:inline-flex;
+      background: var(--light-gray);
+      border: 1px solid var(--border-light);
+      border-radius: 999px;
+      padding: 4px;
+      gap: 4px;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .dark-mode .segmented{ background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.10); }
+
+    .seg-btn{
+      border:none;
+      background: transparent;
+      color: var(--text-medium);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12.5px;
+      font-weight: 650;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .seg-btn i{ font-size: 12px; opacity: 0.9; }
+    .seg-btn:hover{ background: rgba(123,95,196,0.08); color: var(--text-dark); }
+    .dark-mode .seg-btn:hover{ background: rgba(157,134,233,0.18); }
+
+    .seg-btn.active{
+      background: var(--premium-gradient);
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(123,95,196,0.18);
+    }
+    .seg-btn.active:hover{ transform: translateY(-1px); }
+
+    .workspace-actions{
+      display:flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end;
+    }
+    .workspace-actions.bottom{
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      justify-content: flex-end;
+    }
+    .dark-mode .workspace-actions.bottom{ border-top-color: rgba(255,255,255,0.10); }
+
+    .btn{
+      border:none;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn.primary{
+      background: var(--premium-gradient);
+      color:#fff;
+      box-shadow: 0 12px 26px rgba(123,95,196,0.22);
+    }
+    .btn.primary:hover{ transform: translateY(-1px); box-shadow: 0 16px 30px rgba(123,95,196,0.28); }
+    .btn.secondary{
+      background: var(--light-purple);
+      color: var(--accent-purple-dark);
+    }
+    .dark-mode .btn.secondary{ background: rgba(123,95,196,0.22); color: var(--accent-purple); }
+    .btn.secondary:hover{ transform: translateY(-1px); background: rgba(123,95,196,0.18); }
+    .btn:disabled{ opacity: 0.55; cursor: not-allowed; transform:none !important; box-shadow:none !important; }
+
+    .modules-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 0; }
+
+    .module-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 16px 16px 14px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+      position: relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 520px;
+    }
+    .dark-mode .module-card{ box-shadow: 0 14px 30px rgba(0,0,0,0.35); }
+    .module-card::before{
+      content:'';
+      position:absolute;
+      left:0; right:0; top:0;
+      height: 3px;
+      background: var(--premium-gradient);
+      opacity: 0.95;
+    }
+
+    .module-top{ display:flex; align-items:flex-start; justify-content: space-between; gap: 10px; }
+    .module-chip{ display:flex; align-items:center; gap: 10px; min-width: 0; }
+    .module-num{
+      width: 30px; height: 30px; border-radius: 12px;
+      display:inline-flex; align-items:center; justify-content:center;
+      font-weight: 600; font-size: 12px; color:#fff;
+      background: var(--premium-gradient);
+      box-shadow: 0 12px 22px rgba(123,95,196,0.18);
+      flex-shrink: 0;
+    }
+    .module-title{ display:flex; flex-direction: column; gap: 2px; min-width: 0; }
+    .module-title h3{
+      font-size: 14px; font-weight: 700; color: var(--text-dark);
+      line-height: 1.2; white-space: nowrap; overflow:hidden; text-overflow: ellipsis;
+    }
+    .module-title p{ font-size: 12.5px; color: var(--text-medium); font-weight: 500; line-height: 1.35; }
+    .module-helper{ display:none !important; }
+
+    textarea.module-input{
+      width: 100%;
+      resize: none;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      padding: 12px 12px;
+      color: var(--text-dark);
+      font-size: 13.5px;
+      line-height: 1.55;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 450;
+      flex: 1;
+      min-height: 360px;
+      overflow: hidden;
+    }
+    .dark-mode textarea.module-input{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.10);
+    }
+    textarea.module-input:focus{
+      border-color: rgba(123,95,196,0.35);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.10);
+    }
+
+    .module-meta{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 10px;
+      margin-top: -2px;
+    }
+    .count{ font-size: 12px; color: var(--dark-gray); font-weight: 650; white-space: nowrap; }
+    .micro-pill{ display:none !important; }
+
+    /* ===========================
+       GENERATED PACK
+    =========================== */
+    .pack-section{
+      max-width:1100px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      display:none;
+    }
+    .pack-section.active{
+      display:block;
+      animation: slideIn 0.5s ease;
+    }
+    @keyframes slideIn{
+      from{ opacity:0; transform: translateY(20px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .pack-header{ text-align:center; margin: 18px 0 22px; }
+    .pack-title{ font-size: 24px; font-weight: 850; color: var(--accent-purple-dark); margin-bottom: 6px; }
+    .pack-subtitle{
+      color: var(--text-medium);
+      font-size: 14.5px;
+      font-weight: 450;
+      max-width: 860px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .pack-bar{
+      background: var(--primary-white);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 14px 40px rgba(123,95,196,0.12);
+      border: 1px solid rgba(123,95,196,0.15);
+      display:flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .pack-metrics{ display:flex; flex-direction: column; gap: 10px; flex: 1; min-width: 0; }
+    .metric-row{ display:flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+    .metric-title{ font-size: 13px; font-weight: 600; color: var(--accent-purple-dark); letter-spacing: 0.2px; }
+    .metric-score{ font-size: 18px; font-weight: 600; color: var(--accent-purple); white-space: nowrap; }
+    .mini-progress{ height: 10px; background: var(--light-gray); border-radius: 6px; overflow:hidden; }
+    .dark-mode .mini-progress{ background: rgba(255,255,255,0.12); }
+    .mini-fill{
+      height:100%;
+      width:0%;
+      border-radius: 6px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: var(--premium-gradient);
+    }
+    .mini-fill.high{ background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .mini-fill.medium{ background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .mini-fill.low{ background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+    .pack-actions{ display:flex; gap: 10px; flex-wrap: wrap; justify-content:flex-end; flex-shrink: 0; }
+
+    .section-header{
+      font-size: 18px;
+      font-weight: 850;
+      margin: 18px 0 14px;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-gray);
+    }
+    .section-header.purple{ color: var(--accent-purple-dark); }
+    .section-header.orange{ color: var(--warning-orange); }
+    .section-header.green{ color: var(--success-green); }
+
+    .pack-output{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+      margin-bottom: 12px;
+    }
+    .dark-mode .pack-output{ box-shadow: 0 18px 34px rgba(0,0,0,0.32); }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12.8px;
+      color: var(--text-medium);
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    .pack-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .pack-card{
+      background: var(--primary-white);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+    }
+    .dark-mode .pack-card{
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.32);
+    }
+    .pack-card::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height:3px;
+      background: var(--premium-gradient);
+    }
+    .pc-ico{
+      font-size: 18px;
+      margin-bottom: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--accent-purple);
+      background: var(--lighter-purple);
+    }
+    .pc-title{ font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .pc-body{
+      color: var(--text-medium);
+      font-size: 13.5px;
+      line-height: 1.6;
+      font-weight: 450;
+      white-space: pre-wrap;
+      flex: 1;
+    }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR
+    =========================== */
+    .my-playbook-fab{
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1200;
+      background: var(--premium-gradient);
+      color:#fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      cursor:pointer;
+      font-size: 13px;
+      font-weight: 750;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+    .my-playbook-fab:hover{ transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.32); }
+
+    .playbook-sidebar-overlay{
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1190;
+      opacity:0; pointer-events:none;
+      transition: opacity 0.25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position: fixed;
+      top:0;
+      right: -380px;
+      width: 340px;
+      max-width: 90%;
+      height: 100%;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index: 1191;
+      display:flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border-light);
+      transition: right 0.25s ease;
+    }
+    .dark-mode .playbook-sidebar{
+      background: rgba(18,18,18,0.96);
+      box-shadow: -4px 0 22px rgba(0,0,0,0.6);
+    }
+    .playbook-sidebar.open{ right:0; }
+
+    .playbook-sidebar-header{ padding: 20px 20px 14px; border-bottom: 1px solid var(--border-light); }
+    .playbook-sidebar-header-title-row{ display:flex; justify-content: space-between; align-items:center; margin-bottom: 4px; }
+    .playbook-sidebar-header h3{ font-size:18px; font-weight:700; color: var(--text-dark); }
+    .playbook-sidebar-header p{ font-size: 13px; color: var(--dark-gray); }
+
+    .playbook-close-btn{
+      background:none; border:none; color: var(--dark-gray);
+      cursor:pointer; font-size: 18px; border-radius: 999px;
+      width: 28px; height: 28px;
+      display:flex; align-items:center; justify-content:center;
+      transition: background-color 0.2s ease;
+    }
+    .playbook-close-btn:hover{ background: var(--light-gray); }
+
+    .playbook-sidebar-body{
+      padding: 14px 18px 20px;
+      padding-bottom: 50px;
+      overflow-y: auto;
+      flex:1;
+      display:flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .saved-items-empty{ font-size: 13px; color: var(--dark-gray); line-height: 1.6; }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+
+    .saved-item{
+      padding: 10px 10px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom: 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .saved-item-title-row{ display:flex; justify-content: space-between; align-items: baseline; gap: 6px; }
+    .saved-item-title{ font-size: 14px; font-weight: 850; color: var(--text-dark); }
+    .saved-item-type{
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent-purple-dark);
+      font-weight: 600;
+    }
+    .saved-item-meta{ font-size: 12px; color: var(--dark-gray); }
+    .saved-item-link{
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--accent-purple);
+      text-decoration:none;
+      font-weight: 850;
+      display:inline-flex;
+      align-items:center;
+      gap: 4px;
+    }
+    .saved-item-link:hover{ text-decoration: underline; }
+
+    .playbook-quick-links{
+      margin-top: 223px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+    }
+    .quick-links-title{
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-medium);
+    }
+    .playbook-quick-links-list{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .quick-link-pill{
+      width: 58%;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.35);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      text-decoration:none;
+      color: var(--accent-purple-dark);
+      font-size: 13px;
+      font-weight: 650;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .quick-link-pill:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+    }
+    .dark-mode .quick-link-pill{
+      border-color: rgba(157,134,233,0.55);
+      background: linear-gradient(135deg, rgba(123,95,196,0.26), rgba(123,95,196,0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer{
+      background: var(--primary-white);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 30px;
+      text-align:center;
+      color: var(--text-medium);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px){
+      .context-tips-grid{ grid-template-columns: 1fr; gap: 24px; }
+      .modules-grid{ grid-template-columns: 1fr; }
+      .pack-grid{ grid-template-columns: repeat(2, 1fr); }
+      .pack-bar{ flex-direction: column; align-items: stretch; }
+      .pack-actions{ justify-content: flex-start; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .reason-panel{ flex-direction: column; align-items: stretch; }
+      .segmented{ justify-content: flex-start; }
+    }
+    @media (max-width: 768px){
+      .tool-hero-section{ margin-top: 100px; }
+      .hero-main-heading{ font-size: 36px; }
+      .save-btn{ right: 18px; top: 10px; }
+      .my-playbook-fab{ bottom: 18px; right: 18px; }
+      .pack-grid{ grid-template-columns: 1fr; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+    }
+    @media (max-width: 480px){
+      .hero-main-heading{ font-size: 32px; }
+      .checklist-name{ font-size: 13px; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .pack-actions{ justify-content: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===========================
+     NAVIGATION
+=========================== -->
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo" aria-label="The Employee Playbook">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      <div class="logo-fallback" id="logoFallback">The Employee Playbook</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<div class="tool-hero-section">
+  <button class="save-btn" id="saveBtn">
+    <i class="far fa-bookmark"></i>
+    <span>Save</span>
+  </button>
+
+  <div class="tool-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-house"></i> Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="the-toolkit.html">The Toolkit</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="category-clarity-priorities-and-direction.html">Clarity, Priorities &amp; Direction</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Personal Action Plan</span>
+    </div>
+
+    <span class="checklist-name">PERSONAL ACTION PLAN</span>
+
+    <h1 class="hero-main-heading">
+      Turn intent into outcomes — with clear actions, timelines, and the leverage to follow through
+    </h1>
+
+    <div class="hero-subheading">
+      Choose the reason you are making a plan (it changes the prompts, scripts, and what “good” looks like).
+      Then draft the modules below and generate your Action Pack.
+    </div>
+
+    <div class="related-row" aria-label="Related categories">
+      <span class="related-label">Related categories</span>
+
+      <div class="related-pills">
+        <a class="category-pill clarity" href="category-clarity-priorities-and-direction.html" title="Clarity, Priorities & Direction">
+          <i class="fas fa-bullseye category-icon"></i>
+          <span>Clarity, Priorities &amp; Direction</span>
+        </a>
+
+        <a class="category-pill confidence" href="category-confidence-and-influence.html" title="Confidence & Influence">
+          <i class="fas fa-bolt category-icon"></i>
+          <span>Confidence &amp; Influence</span>
+        </a>
+
+        <a class="category-pill career" href="category-decision-making-and-career-path.html" title="Decision Making & Career Path">
+          <i class="fas fa-compass category-icon"></i>
+          <span>Decision Making &amp; Career Path</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     CONTEXT & PRO TIPS
+=========================== -->
+<div class="context-tips-grid">
+  <div class="context-card">
+    <h3 class="section-title"><i class="fas fa-compass"></i>When to Use This</h3>
+    <ul class="bullet-list">
+      <li>When you need a plan that can survive real workloads and workplace politics.</li>
+      <li>When you feel stuck: overthinking, delay, or “I’ll do it next week”.</li>
+      <li>When you need to make a decision and then follow through without wobbling.</li>
+      <li>When you need clarity, evidence, and clean scripts — not emotional improvisation.</li>
+      <li>When you need a weekly rhythm for execution and review (not a one-off burst).</li>
+    </ul>
+  </div>
+
+  <div class="tips-card">
+    <h3 class="section-title"><i class="fas fa-bolt"></i>How to Use It (fast)</h3>
+    <ul class="bullet-list">
+      <li>Select your reason first. The prompts and scripts will re-tune automatically.</li>
+      <li>Define a measurable target (not a vibe like “better” or “less stressed”).</li>
+      <li>Choose actions that change reality — not endless prep.</li>
+      <li>Lock decisions in writing. That’s how you beat drift and shifting goalposts.</li>
+      <li>Review weekly. Keep the plan alive without turning it into a drama series.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===========================
+     WORKSPACE
+=========================== -->
+<div class="workspace-wrap" id="workspace">
+
+  <div class="workspace-header">
+    <div class="workspace-title">
+      <h2>Draft your personal action plan</h2>
+      <p id="reasonSubtext">
+        Eight modules to define your outcome, choose the right moves, and build follow-through.
+        Generate your Action Pack once you have at least two modules completed.
+      </p>
+    </div>
+  </div>
+
+  <!-- REASONS TOGGLE (now included) -->
+  <div class="reason-panel" aria-label="Reason toggle">
+    <div class="reason-left">
+      <div class="reason-label"><i class="fas fa-sliders"></i> Reason for this plan</div>
+      <div class="reason-help" id="reasonHelp">
+        Select the reason. The tool will adjust prompts, scripts, and blocker assumptions accordingly.
+      </div>
+    </div>
+
+    <div class="segmented" role="tablist" aria-label="Plan reason">
+      <button class="seg-btn active" data-reason="delivery" role="tab" aria-selected="true">
+        <i class="fas fa-clipboard-check"></i> Delivery & Clarity
+      </button>
+      <button class="seg-btn" data-reason="visibility" role="tab" aria-selected="false">
+        <i class="fas fa-bullhorn"></i> Visibility & Positioning
+      </button>
+      <button class="seg-btn" data-reason="conflict" role="tab" aria-selected="false">
+        <i class="fas fa-handshake-slash"></i> Conflict & Boundaries
+      </button>
+      <button class="seg-btn" data-reason="wellbeing" role="tab" aria-selected="false">
+        <i class="fas fa-heart-pulse"></i> Wellbeing & Capacity
+      </button>
+    </div>
+  </div>
+
+  <div class="modules-grid" id="modulesGrid"></div>
+
+  <!-- ACTIONS AT BOTTOM -->
+  <div class="workspace-actions bottom" aria-label="Draft actions">
+    <button class="btn secondary" id="copyDraftBtn"><i class="far fa-copy"></i> Copy draft</button>
+    <button class="btn secondary" id="clearDraftBtn"><i class="fas fa-eraser"></i> Clear</button>
+    <button class="btn primary" id="generatePackBtn" disabled><i class="fas fa-wand-magic-sparkles"></i> Generate Action Pack</button>
+  </div>
+</div>
+
+<!-- ===========================
+     GENERATED PACK
+=========================== -->
+<div class="pack-section" id="packSection">
+  <div class="pack-header">
+    <h2 class="pack-title">Your Action Pack</h2>
+    <p class="pack-subtitle" id="packSubtitle">
+      A structured output you can execute immediately: a one-page plan, next-7-days checklist,
+      blocker plan, and scripts that create accountability without drama.
+    </p>
+  </div>
+
+  <div class="pack-bar">
+    <div class="pack-metrics">
+      <div class="metric-row">
+        <div class="metric-title">Draft completeness</div>
+        <div class="metric-score" id="completenessScore">0%</div>
+      </div>
+      <div class="mini-progress"><div class="mini-fill" id="miniFill"></div></div>
+      <div class="metric-row">
+        <div class="metric-title">Execution readiness</div>
+        <div class="metric-score" id="readinessLabel">—</div>
+      </div>
+    </div>
+
+    <div class="pack-actions">
+      <button class="btn primary" id="copyPackBtn"><i class="far fa-copy"></i> Copy pack</button>
+      <button class="btn secondary" id="downloadPackBtn"><i class="fas fa-download"></i> Download .txt</button>
+      <button class="btn secondary" id="printPackBtn"><i class="fas fa-print"></i> Print</button>
+    </div>
+  </div>
+
+  <h3 class="section-header purple"><i class="fas fa-file-lines"></i> One-page action plan</h3>
+  <div class="pack-output">
+    <div class="mono" id="onePageOutput"></div>
+  </div>
+
+  <h3 class="section-header green"><i class="fas fa-list-check"></i> Next 7 days checklist</h3>
+  <div class="pack-output">
+    <div class="mono" id="next7Output"></div>
+  </div>
+
+  <h3 class="section-header orange"><i class="fas fa-triangle-exclamation"></i> Blockers & counter-moves</h3>
+  <div class="pack-grid" id="blockersGrid"></div>
+
+  <h3 class="section-header purple"><i class="fas fa-comments"></i> Scripts (calm, clear, UK-friendly)</h3>
+  <div class="pack-grid" id="scriptsGrid"></div>
+</div>
+
+<!-- ===========================
+     MY PLAYBOOK SIDEBAR (Right)
+=========================== -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven’t saved anything yet. Use <strong>Save</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <span class="quick-links-title">Quick links</span>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill"><i class="fas fa-gauge"></i> The Dashboard</a>
+          <a href="the-lens.html" class="quick-link-pill"><i class="fas fa-search"></i> The Lens</a>
+          <a href="the-toolkit.html" class="quick-link-pill"><i class="fas fa-toolbox"></i> The Toolkit</a>
+          <a href="the-coach.html" class="quick-link-pill"><i class="fas fa-comments"></i> The Coach</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ===========================
+   BOOT
+=========================== */
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('loaded');
+
+  initializeThemeToggle();
+  initializeMobileNav();
+  initializePlaybook();
+
+  initialiseReasonToggle();     // ✅ reason toggle wiring
+  buildModules();               // builds modules using the selected reason prompts
+  loadDraft();                  // loads draft for selected reason
+  wireDraftHandlers();
+
+  refreshGenerateState();
+});
+
+/* ===========================
+   MOBILE NAV
+=========================== */
+function initializeMobileNav() {
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (!mobileToggle || !navLinks) return;
+
+  mobileToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('active');
+    const icon = this.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    }
+  });
+
+  document.addEventListener('click', function(event) {
+    if (navLinks.classList.contains('active') &&
+        !navLinks.contains(event.target) &&
+        !mobileToggle.contains(event.target)) {
+      navLinks.classList.remove('active');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) {
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+      }
+    }
+  });
+}
+
+/* ===========================
+   THEME TOGGLE + LOGO
+=========================== */
+function initializeThemeToggle() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (!themeToggleBtn) return;
+
+  const themeIcon = themeToggleBtn.querySelector('i');
+  const logoImg = document.getElementById('mainLogo');
+  const logoFallback = document.getElementById('logoFallback');
+
+  function getLogoPath(filename) {
+    if (window.location.protocol === 'file:') {
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+      return basePath + 'assets/img/' + filename;
+    } else {
+      return './assets/img/' + filename;
+    }
+  }
+
+  function showFallbackLogo() {
+    if (logoImg) logoImg.style.display = 'none';
+    if (logoFallback) logoFallback.style.display = 'inline-flex';
+  }
+
+  function showImageLogo() {
+    if (logoFallback) logoFallback.style.display = 'none';
+    if (logoImg) logoImg.style.display = 'block';
+  }
+
+  function updateLogoForTheme(isDarkMode) {
+    if (!logoImg) return;
+    showImageLogo();
+    logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+    logoImg.alt = 'The Employee Playbook';
+  }
+
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const savedTheme = localStorage.getItem('theme');
+  const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches);
+
+  if (shouldUseDark) {
+    document.body.classList.add('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+    updateLogoForTheme(true);
+  } else {
+    document.body.classList.remove('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+    updateLogoForTheme(false);
+  }
+
+  themeToggleBtn.addEventListener('click', function() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+
+    if (isDarkMode) {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+      updateLogoForTheme(false);
+    } else {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+      updateLogoForTheme(true);
+    }
+  });
+
+  prefersDarkScheme.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      if (e.matches) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      }
+    }
+  });
+
+  if (logoImg) {
+    logoImg.addEventListener('error', function() {
+      if (this.src.includes('logo-dark.png')) {
+        this.src = getLogoPath('logo.png');
+      } else {
+        showFallbackLogo();
+      }
+    });
+  }
+}
+
+/* ===========================
+   REASON TOGGLE (THE BIT YOU SAID WAS MISSING)
+=========================== */
+const REASON_KEY = 'tepPersonalActionPlanReason_v1';
+
+const reasons = {
+  delivery: {
+    label: 'Delivery & Clarity',
+    help: 'Use this when priorities are unclear, workload is messy, or you need written trade-offs to protect delivery.',
+    packSubtitle: 'A delivery-first output: a one-page plan, next-7-days checklist, blocker plan, and scripts to lock priorities and trade-offs in writing.',
+    prompts: {
+      outcome:
+`Write an outcome that improves delivery and reduces ambiguity.
+
+Examples:
+• “By 31 Jan, I have written agreement on top 3 priorities + what drops.”
+• “Within 14 days, I reduce meetings by 25% and protect 2 deep-work blocks weekly.”
+• “By next sprint, scope/ownership is clarified with a single written summary.”
+
+Include:
+• Why it matters (delivery risk)
+• How you will know it’s done (evidence)`,
+      reality:
+`Describe the situation as facts (not frustration).
+
+Include:
+• What is happening (2–4 bullets)
+• Where ambiguity lives (priorities, ownership, “good” definition)
+• Risks if nothing changes (delivery, quality, reputation)
+• What you already tried (briefly)`,
+      actions:
+`List 5–8 actions that reduce ambiguity and improve delivery.
+
+For each:
+• Action
+• Owner (you / manager / stakeholder)
+• Evidence (artefact you will create)
+• Done definition (what “complete” means)
+
+Tip: Convert verbal alignment into written alignment.`,
+      timeline:
+`Build a realistic timeline (Week 1 / Week 2 / Weeks 3–4).
+
+Include:
+• One fast win within 7 days
+• One milestone within 14 days
+• One “locked in writing” checkpoint`,
+      leverage:
+`List leverage + evidence that makes alignment easier:
+
+Examples:
+• Workload list / capacity snapshot
+• Dependencies and risks
+• Examples of scope creep (dates)
+• Missed trade-offs / rework
+• Stakeholder signals (who agrees)
+
+Then: What is the simplest artefact you can create this week?`,
+      constraints:
+`Write constraints that protect delivery.
+
+Examples:
+• “No new work without a trade-off”
+• “Meeting rule: agenda + decision required”
+• “Two protected deep-work blocks”
+• “Hard stop time for evenings”
+
+Add:
+• What you say when boundary is tested
+• How you will keep your tone calm`,
+      blockers:
+`List likely blockers and write counter-moves.
+
+Prioritise:
+• Shifting goalposts
+• Avoidant decision-making
+• “Everything is urgent”
+• Interruptions / meeting creep
+• Stakeholder misalignment
+
+For each:
+• Early warning sign
+• Counter-move within 48 hours`,
+      review:
+`Define your execution rhythm (weekly review + one alignment touchpoint).
+
+Weekly review (15 mins):
+• What moved?
+• What stalled?
+• What is the next smallest step?
+• What needs re-alignment in writing?
+
+Accountability:
+• Who will you update?
+• What will you send?
+• When will you do it?`
+    }
+  },
+
+  visibility: {
+    label: 'Visibility & Positioning',
+    help: 'Use this when you need your work to be seen, your contribution recognised, or your credibility positioned without bragging.',
+    packSubtitle: 'A positioning-first output: one-page plan, next-7-days visibility moves, blocker plan, and scripts to frame impact and build credibility.',
+    prompts: {
+      outcome:
+`Write an outcome that improves visibility and positioning.
+
+Examples:
+• “Within 30 days, my impact is visible to [stakeholders] via 3 short artefacts.”
+• “By end of month, I am leading X area with clear ownership and recognised impact.”
+• “Within 2 weeks, I have a consistent update rhythm and a sponsor touchpoint.”
+
+Include:
+• Who needs to see it
+• What proof looks like (artefacts, metrics, feedback)`,
+      reality:
+`Describe current visibility reality.
+
+Include:
+• What you do that isn’t seen
+• Where credit currently goes (and why)
+• What decisions are made without your input
+• The perception risk (what others assume)`,
+      actions:
+`List 5–8 positioning actions.
+
+Examples:
+• Weekly “impact update” (3 bullets)
+• Create an artefact that makes work legible (one-pager, dashboard snapshot)
+• Stakeholder map + sponsor touchpoint
+• Present a decision with options/trade-offs (shows senior thinking)
+
+For each: action, owner, evidence, done definition.`,
+      timeline:
+`Create a timeline that builds momentum.
+
+Week 1:
+• One visible artefact
+• One stakeholder touchpoint
+Week 2:
+• A second artefact + a decision moment
+Weeks 3–4:
+• Rhythm and reinforcement (repeatable cadence)`,
+      leverage:
+`List proof and credibility anchors.
+
+Examples:
+• Metrics (time saved, risk reduced, quality improved)
+• Before/after comparison
+• “Decision log” (what you solved)
+• Stakeholder quotes (short, factual)
+
+Then: Which artefact creates maximum clarity with minimal effort?`,
+      constraints:
+`Visibility without burnout.
+
+Define:
+• “What I will not do” (stop invisible work)
+• “How I will make updates short” (3 bullets max)
+• “Where I will say no” (non-strategic extras)
+
+Add:
+• Your calm response when someone tries to dump hidden work on you.`,
+      blockers:
+`List visibility blockers + counter-moves.
+
+Common ones:
+• “They don’t invite me”
+• “I feel awkward sharing”
+• Credit capture by others
+• Meetings where decisions happen without you
+
+For each: warning sign + counter-move within 48 hours.`,
+      review:
+`Weekly positioning review:
+• What did I make visible?
+• What proof did I create?
+• Who did I align with?
+• What is the next small exposure move?
+
+Accountability:
+• Who gets your weekly update?
+• When does it go out?
+• What is the template (3 bullets)?`
+    }
+  },
+
+  conflict: {
+    label: 'Conflict & Boundaries',
+    help: 'Use this when you need to hold a line: unfair load, disrespect, micromanagement, blame games, or repeated boundary testing.',
+    packSubtitle: 'A boundaries-first output: one-page plan, next-7-days moves, blocker plan, and scripts for calm confrontation and written follow-up.',
+    prompts: {
+      outcome:
+`Write an outcome that protects boundaries and reduces conflict.
+
+Examples:
+• “Within 2 weeks, my workload is capped with explicit trade-offs in writing.”
+• “By next month, I have a consistent boundary script and follow-up rhythm.”
+• “Within 14 days, we agree behavioural standards (what stops) and escalation route.”
+
+Include:
+• What changes in behaviour
+• What evidence exists (emails, summaries, records)`,
+      reality:
+`Describe the conflict dynamic in facts.
+
+Include:
+• What happens (who, what, when)
+• What triggers it (patterns)
+• Impact (delivery, wellbeing, reputation)
+• What you have tried (and what happened)`,
+      actions:
+`List 5–8 actions that reduce exposure and create leverage.
+
+Examples:
+• Boundary script + follow-up note
+• Record pattern log (dates, facts)
+• Pre-brief ally / stakeholder
+• Escalation sequence (manager → HR → formal)
+• Meeting rules (agenda, minutes, action owner)
+
+For each: action, owner, evidence, done definition.`,
+      timeline:
+`Timeline that reduces risk quickly.
+
+Week 1:
+• Define boundary and deploy script
+• Start factual log
+Week 2:
+• Written alignment + escalation step (if needed)
+Weeks 3–4:
+• Reinforcement and consequences`,
+      leverage:
+`List leverage and protective assets.
+
+Examples:
+• Written summaries of decisions
+• Evidence of shifting requirements
+• Workload list and capacity limits
+• Policy references (light touch) if appropriate
+
+Then: What is your “minimum evidence” threshold before escalation?`,
+      constraints:
+`Your boundary rules (simple + repeatable).
+
+Examples:
+• “I respond in writing to clarify.”
+• “I don’t debate tone — I restate the boundary.”
+• “I don’t accept blame for unclear decisions.”
+
+Add:
+• What you will do if the boundary is ignored twice.`,
+      blockers:
+`List likely conflict blockers + counter-moves.
+
+Common:
+• Guilt and people-pleasing
+• Fear of retaliation
+• Being baited into emotion
+• “Let’s keep it informal” avoidance
+
+For each: warning sign + counter-move within 48 hours.`,
+      review:
+`Weekly boundary review:
+• Where did I hold the line?
+• Where did I wobble (and why)?
+• What is one script I’ll use next time?
+• Do I need to escalate this week?
+
+Accountability:
+• Who keeps you grounded?
+• What update do you send them?`
+    }
+  },
+
+  wellbeing: {
+    label: 'Wellbeing & Capacity',
+    help: 'Use this when you are overloaded, exhausted or need sustainable pace and recovery built into delivery.',
+    packSubtitle: 'A capacity-first output: one-page plan, next-7-days recovery + workload moves, blocker plan, and scripts to protect energy without drama.',
+    prompts: {
+      outcome:
+`Write an outcome that restores capacity while protecting delivery.
+
+Examples:
+• “Within 14 days, I reduce load by X and protect recovery boundaries.”
+• “By end of month, I’m operating at a sustainable pace with explicit trade-offs.”
+• “Within 7 days, I have two protected deep-work blocks and a hard stop time.”
+
+Include:
+• What you are stopping/reducing
+• What becomes protected and non-negotiable`,
+      reality:
+`Describe capacity reality.
+
+Include:
+• Current load (work + life pressure if relevant)
+• Where energy is leaking (meetings, interruptions, emotional labour)
+• Sleep/recovery constraints
+• Early burnout signals (focus, irritability, fatigue, dread)`,
+      actions:
+`List 5–8 actions that reduce load and protect energy.
+
+Examples:
+• Stop doing invisible extras
+• Meeting cuts and rules
+• Trade-off conversations
+• Protected focus blocks
+• Recovery routines (short, realistic)
+
+For each: action, owner, evidence, done definition.`,
+      timeline:
+`Timeline that creates quick relief.
+
+Week 1:
+• Remove one drain, protect one block
+Week 2:
+• Trade-offs + meeting reset
+Weeks 3–4:
+• Stabilise rhythm + reinforce boundaries`,
+      leverage:
+`List proof that supports capacity protection.
+
+Examples:
+• Workload list and time estimates
+• Delivery risk from overload
+• Missed quality due to churn
+• Dependency mapping
+
+Then: What is your clean “capacity statement” (one sentence)?`,
+      constraints:
+`Non-negotiables (keep them few).
+
+Examples:
+• “Hard stop at [time]”
+• “No meetings in first hour”
+• “Two deep work blocks protected”
+• “No new work without a trade-off”
+
+Add:
+• What you say when challenged
+• What you do if you break the rule (reset, not shame).`,
+      blockers:
+`List capacity blockers + counter-moves.
+
+Common:
+• Guilt
+• Perfectionism
+• “It’ll calm down next week”
+• Low boundaries, high responsiveness
+
+For each: warning sign + counter-move within 48 hours.`,
+      review:
+`Weekly capacity review:
+• What reduced load?
+• What increased load?
+• What boundary held?
+• What will I remove next week?
+
+Accountability:
+• Who knows your non-negotiables?
+• What is your weekly check-in question?`
+    }
+  }
+};
+
+function getReason(){
+  try {
+    const raw = localStorage.getItem(REASON_KEY);
+    return raw && reasons[raw] ? raw : 'delivery';
+  } catch(e){
+    return 'delivery';
+  }
+}
+function setReason(key){
+  try { localStorage.setItem(REASON_KEY, key); } catch(e){}
+}
+function reasonDraftKey(reasonKey){
+  return `tepPersonalActionPlanDraft_v1_${reasonKey}`;
+}
+
+function initialiseReasonToggle(){
+  const buttons = Array.from(document.querySelectorAll('.seg-btn'));
+  const current = getReason();
+
+  // apply active UI
+  buttons.forEach(btn => {
+    const isActive = btn.dataset.reason === current;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+  });
+
+  // apply text
+  applyReasonText(current);
+
+  // handle clicks
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const next = btn.dataset.reason;
+      if (!next || !reasons[next]) return;
+
+      // save selection + update UI
+      setReason(next);
+      buttons.forEach(b => {
+        const active = b.dataset.reason === next;
+        b.classList.toggle('active', active);
+        b.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+
+      // hide any generated pack (reason change should regenerate with correct scripts)
+      const pack = document.getElementById('packSection');
+      if (pack) pack.classList.remove('active');
+
+      // rebuild prompts and reload the correct draft store
+      applyReasonText(next);
+      buildModules();
+      loadDraft();
+      wireDraftHandlers(); // ensures new textareas have listeners
+      refreshGenerateState();
+    });
+  });
+}
+
+function applyReasonText(reasonKey){
+  const r = reasons[reasonKey];
+  const help = document.getElementById('reasonHelp');
+  const packSubtitle = document.getElementById('packSubtitle');
+  const reasonSubtext = document.getElementById('reasonSubtext');
+
+  if (help) help.textContent = r.help;
+  if (packSubtitle) packSubtitle.textContent = r.packSubtitle;
+
+  if (reasonSubtext){
+    reasonSubtext.textContent =
+      `Reason selected: ${r.label}. Draft the modules below (prompts are tuned to this reason). Generate your Action Pack once you have at least two modules completed.`;
+  }
+}
+
+/* ===========================
+   MODULES (BASE STRUCTURE)
+=========================== */
+let modulesBase = [
+  { id: 'outcome',   title: 'Outcome (what you are aiming for)', hint: 'Specific, measurable, time-bound — not a feeling.' },
+  { id: 'reality',   title: 'Current reality (facts, not frustration)', hint: 'What is happening, what is missing, what is at risk.' },
+  { id: 'actions',   title: 'Key actions (the high-impact moves)', hint: 'Actions that change reality — not endless preparation.' },
+  { id: 'timeline',  title: 'Timeline (what happens when)', hint: 'Week-by-week, not a vague “soon”.' },
+  { id: 'leverage',  title: 'Leverage & evidence (what strengthens your position)', hint: 'Facts, artefacts, and alignment that make change more likely.' },
+  { id: 'constraints', title: 'Constraints & boundaries (what makes this sustainable)', hint: 'If you cannot protect time/energy, the plan will evaporate.' },
+  { id: 'blockers',  title: 'Blockers (what will derail you) + counter-moves', hint: 'Name the trap, write the counter-move.' },
+  { id: 'review',    title: 'Review & accountability rhythm', hint: 'Weekly review + one accountability touchpoint.' }
+];
+
+/* ===========================
+   BUILD MODULES (uses reason prompts)
+=========================== */
+function buildModules(){
+  const grid = document.getElementById('modulesGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  const reasonKey = getReason();
+  const prompts = reasons[reasonKey].prompts;
+
+  modulesBase.forEach((m, idx) => {
+    const placeholder = prompts[m.id] || 'Write here...';
+    const card = document.createElement('div');
+    card.className = 'module-card';
+    card.innerHTML = `
+      <div class="module-top">
+        <div class="module-chip">
+          <div class="module-num">${idx + 1}</div>
+          <div class="module-title">
+            <h3>${m.title}</h3>
+            <p>${m.hint}</p>
+          </div>
+        </div>
+        <div class="module-helper" aria-hidden="true"></div>
+      </div>
+
+      <textarea class="module-input" id="input_${m.id}" placeholder="${escapeHtml(placeholder)}"></textarea>
+
+      <div class="module-meta">
+        <div class="meta-left"><span class="micro-pill" aria-hidden="true"></span></div>
+        <div class="count" id="count_${m.id}">0 chars</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function escapeHtml(str){
+  return (str || '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
+/* ===========================
+   DRAFT STORAGE (per reason)
+=========================== */
+function getDraft(){
+  const reasonKey = getReason();
+  const key = reasonDraftKey(reasonKey);
+
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch(e){
+    return {};
+  }
+}
+function setDraft(d){
+  const reasonKey = getReason();
+  const key = reasonDraftKey(reasonKey);
+
+  try { localStorage.setItem(key, JSON.stringify(d)); }
+  catch(e){ console.warn('Draft save failed:', e); }
+}
+
+function loadDraft(){
+  const d = getDraft();
+  modulesBase.forEach(m => {
+    const el = document.getElementById(`input_${m.id}`);
+    if (!el) return;
+    el.value = (d[m.id] || '');
+    updateModuleCount(m.id);
+  });
+}
+
+function wireDraftHandlers(){
+  // remove existing listeners by re-assigning (simple + reliable for interns)
+  modulesBase.forEach(m => {
+    const el = document.getElementById(`input_${m.id}`);
+    if (!el) return;
+
+    el.oninput = () => {
+      const d = getDraft();
+      d[m.id] = el.value;
+      setDraft(d);
+      updateModuleCount(m.id);
+      refreshGenerateState();
+    };
+  });
+
+  const copyDraftBtn = document.getElementById('copyDraftBtn');
+  const clearDraftBtn = document.getElementById('clearDraftBtn');
+  const generateBtn = document.getElementById('generatePackBtn');
+
+  if (copyDraftBtn) copyDraftBtn.onclick = copyDraft;
+  if (clearDraftBtn) clearDraftBtn.onclick = clearDraft;
+  if (generateBtn) generateBtn.onclick = generateActionPack;
+
+  const copyPackBtn = document.getElementById('copyPackBtn');
+  const downloadPackBtn = document.getElementById('downloadPackBtn');
+  const printPackBtn = document.getElementById('printPackBtn');
+
+  if (copyPackBtn) copyPackBtn.onclick = () => {
+    const text = buildPackText();
+    copyText(text, copyPackBtn, 'Pack copied');
+  };
+  if (downloadPackBtn) downloadPackBtn.onclick = () => {
+    const text = buildPackText();
+    downloadText(text, `personal-action-plan-${getReason()}.txt`);
+  };
+  if (printPackBtn) printPackBtn.onclick = () => window.print();
+}
+
+function updateModuleCount(moduleId){
+  const input = document.getElementById(`input_${moduleId}`);
+  const count = document.getElementById(`count_${moduleId}`);
+  if (!input || !count) return;
+  count.textContent = `${(input.value || '').length} chars`;
+}
+
+function refreshGenerateState(){
+  const btn = document.getElementById('generatePackBtn');
+  if (!btn) return;
+
+  const d = getDraft();
+  const filled = modulesBase.filter(m => ((d[m.id] || '').trim().length > 0)).length;
+  btn.disabled = filled < 2;
+}
+
+/* ===========================
+   COPY / CLEAR
+=========================== */
+function copyDraft(){
+  const text = buildDraftText();
+  const btn = document.getElementById('copyDraftBtn');
+  copyText(text, btn, 'Draft copied');
+}
+
+function clearDraft(){
+  const ok = confirm('Clear the full draft for the selected reason? This cannot be undone.');
+  if (!ok) return;
+
+  const key = reasonDraftKey(getReason());
+  localStorage.removeItem(key);
+  loadDraft();
+  refreshGenerateState();
+
+  const pack = document.getElementById('packSection');
+  if (pack) pack.classList.remove('active');
+}
+
+function copyText(text, buttonEl, successLabel){
+  navigator.clipboard.writeText(text);
+
+  if (!buttonEl) return;
+  const originalHTML = buttonEl.innerHTML;
+  const originalBg = buttonEl.style.background;
+  const originalColor = buttonEl.style.color;
+
+  buttonEl.innerHTML = `<i class="fas fa-check"></i> ${successLabel}`;
+  buttonEl.style.background = '#10b981';
+  buttonEl.style.color = '#ffffff';
+
+  setTimeout(() => {
+    buttonEl.innerHTML = originalHTML;
+    buttonEl.style.background = originalBg;
+    buttonEl.style.color = originalColor;
+  }, 1800);
+}
+
+function downloadText(text, filename){
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ===========================
+   PACK GENERATION
+=========================== */
+function generateActionPack(){
+  const d = getDraft();
+  const reasonKey = getReason();
+  const reason = reasons[reasonKey];
+
+  const packSection = document.getElementById('packSection');
+  const onePageOutput = document.getElementById('onePageOutput');
+  const next7Output = document.getElementById('next7Output');
+  const blockersGrid = document.getElementById('blockersGrid');
+  const scriptsGrid = document.getElementById('scriptsGrid');
+
+  if (!packSection || !onePageOutput || !next7Output || !blockersGrid || !scriptsGrid) return;
+
+  const completeness = calcCompleteness(d);
+  const readiness = calcReadiness(d, completeness);
+
+  document.getElementById('completenessScore').textContent = `${completeness}%`;
+  document.getElementById('readinessLabel').textContent = readiness.label;
+
+  const fill = document.getElementById('miniFill');
+  fill.style.width = `${completeness}%`;
+  fill.classList.remove('high','medium','low');
+  fill.classList.add(readiness.fillClass);
+
+  onePageOutput.textContent = buildOnePagePlan(d, reasonKey);
+  next7Output.textContent = buildNext7Days(d, readiness, reasonKey);
+
+  blockersGrid.innerHTML = '';
+  buildBlockerCards(d, blockersGrid, reasonKey);
+
+  scriptsGrid.innerHTML = '';
+  buildScriptCards(d, scriptsGrid, reasonKey);
+
+  packSection.classList.add('active');
+  packSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+function calcCompleteness(d){
+  const total = modulesBase.length;
+  const filled = modulesBase.filter(m => ((d[m.id] || '').trim().length > 0)).length;
+  return total > 0 ? Math.round((filled / total) * 100) : 0;
+}
+
+function calcReadiness(d, completeness){
+  const core = ['outcome','actions','timeline','constraints'];
+  const missingCore = core.filter(id => !((d[id]||'').trim().length > 0));
+
+  if (completeness >= 75 && missingCore.length === 0) return { label: 'High', fillClass: 'high' };
+  if (completeness >= 45 && missingCore.length <= 2) return { label: 'Moderate', fillClass: 'medium' };
+  return { label: 'Low', fillClass: 'low' };
+}
+
+function buildOnePagePlan(d, reasonKey){
+  const safe = (s) => (s || '').trim() || '—';
+  const now = new Date();
+  const date = now.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+  const reasonLabel = reasons[reasonKey].label;
+
+  const out = [];
+  out.push(`PERSONAL ACTION PLAN (One-page)`);
+  out.push(`Reason: ${reasonLabel}`);
+  out.push(`Date: ${date}`);
+  out.push(``);
+  out.push(`1) Outcome`);
+  out.push(indentBlock(safe(d.outcome)));
+  out.push(``);
+  out.push(`2) Current reality`);
+  out.push(indentBlock(safe(d.reality)));
+  out.push(``);
+  out.push(`3) Key actions`);
+  out.push(indentBlock(safe(d.actions)));
+  out.push(``);
+  out.push(`4) Timeline`);
+  out.push(indentBlock(safe(d.timeline)));
+  out.push(``);
+  out.push(`5) Leverage & evidence`);
+  out.push(indentBlock(safe(d.leverage)));
+  out.push(``);
+  out.push(`6) Constraints & boundaries`);
+  out.push(indentBlock(safe(d.constraints)));
+  out.push(``);
+  out.push(`7) Blockers + counter-moves`);
+  out.push(indentBlock(safe(d.blockers)));
+  out.push(``);
+  out.push(`8) Review & accountability rhythm`);
+  out.push(indentBlock(safe(d.review)));
+  out.push(``);
+  out.push(`Clean ask (use in conversation / email):`);
+  out.push(indentBlock(buildCleanAsk(reasonKey, d)));
+  out.push(``);
+  out.push(`Escalation threshold (if blocked):`);
+  out.push(indentBlock(buildEscalation(reasonKey)));
+
+  return out.join('\n');
+}
+
+function buildNext7Days(d, readiness, reasonKey){
+  const out = [];
+  const label = reasons[reasonKey].label;
+
+  out.push(`NEXT 7 DAYS (Execution checklist)`);
+  out.push(`Reason: ${label}`);
+  out.push(``);
+
+  // reason-specific Day 1–3 tweaks
+  if (reasonKey === 'visibility'){
+    out.push(`Day 1 — One visible artefact`);
+    out.push(`□ Create one artefact that makes your work legible (one-pager / snapshot / decision log).`);
+    out.push(`□ Decide who needs to see it (2–4 names).`);
+    out.push(`□ Block 45–60 mins for the artefact and 15 mins to send it.`);
+    out.push(``);
+    out.push(`Day 2 — Sponsor/stakeholder touchpoint`);
+    out.push(`□ Book one short touchpoint or send a concise update (3 bullets).`);
+    out.push(`□ Ask one “positioning” question: “What would you want to see to feel confident in this?”`);
+    out.push(``);
+    out.push(`Day 3 — Repeatable cadence`);
+    out.push(`□ Create a repeatable weekly update template (3 bullets).`);
+    out.push(`□ Choose a fixed send time (e.g., Thursday 4pm).`);
+    out.push(``);
+  } else if (reasonKey === 'conflict'){
+    out.push(`Day 1 — Boundary line + follow-up note`);
+    out.push(`□ Write your boundary in one sentence (non-emotional).`);
+    out.push(`□ Use it once and follow up in writing (short summary).`);
+    out.push(`□ Start a factual log (dates, what happened, impact).`);
+    out.push(``);
+    out.push(`Day 2 — Reduce exposure`);
+    out.push(`□ Identify one repeat trigger and remove exposure (meeting rule, written-only, time limit).`);
+    out.push(`□ Pre-brief one trusted person if needed (keep it factual).`);
+    out.push(``);
+    out.push(`Day 3 — Align consequences`);
+    out.push(`□ Define what happens after the boundary is ignored twice (escalation step).`);
+    out.push(`□ Put it in writing calmly: “If this continues, I’ll need X route to protect delivery.”`);
+    out.push(``);
+  } else if (reasonKey === 'wellbeing'){
+    out.push(`Day 1 — Remove one drain`);
+    out.push(`□ Remove or reduce one clear drain (meeting, task, admin loop).`);
+    out.push(`□ Protect one non-negotiable (hard stop / deep work block / no-meet zone).`);
+    out.push(`□ Write your capacity statement (one sentence).`);
+    out.push(``);
+    out.push(`Day 2 — Trade-offs in writing`);
+    out.push(`□ Share workload/capacity snapshot (short) and ask for trade-offs.`);
+    out.push(`□ Enforce “no new work without a trade-off” for one day (practice).`);
+    out.push(``);
+    out.push(`Day 3 — Stabilise rhythm`);
+    out.push(`□ Define a “minimum viable week” plan (2 priorities only).`);
+    out.push(`□ Put recovery into the diary (not as a wish).`);
+    out.push(``);
+  } else {
+    out.push(`Day 1 — Set the target and the first artefact`);
+    out.push(`□ Rewrite outcome into one sentence (measurable).`);
+    out.push(`□ Create one short artefact: workload snapshot / priorities note / action list.`);
+    out.push(`□ Block 2× 45–60 mins in your diary for execution (protected).`);
+    out.push(``);
+    out.push(`Day 2 — Choose the first two actions`);
+    out.push(`□ Pick the 2 actions that change reality fastest.`);
+    out.push(`□ Write the “done” definition for each.`);
+    out.push(`□ Draft your clean ask (two lines) before you speak to anyone.`);
+    out.push(``);
+    out.push(`Day 3 — Alignment touchpoint`);
+    out.push(`□ Send a calm written note to align priorities / trade-offs (if relevant).`);
+    out.push(`□ Ask one clear question: “Which one should move if X becomes urgent?”`);
+    out.push(`□ Capture the response in writing.`);
+    out.push(``);
+  }
+
+  // universal day 4–7
+  out.push(`Day 4 — Implement one constraint`);
+  out.push(`□ Enforce one boundary (meeting rule / trade-off rule / protected block).`);
+  out.push(`□ If tested, use the script and follow-up note.`);
+  out.push(``);
+  out.push(`Day 5 — Evidence and follow-up`);
+  out.push(`□ Update your evidence list: what changed this week?`);
+  out.push(`□ Follow-up on any dependency with a short “next step” message.`);
+  out.push(``);
+  out.push(`Day 6 — Consolidation`);
+  out.push(`□ Consolidate: one-page plan + what is locked in writing.`);
+  out.push(`□ Remove one piece of low-value load.`);
+  out.push(``);
+  out.push(`Day 7 — Weekly review (15 minutes)`);
+  out.push(`□ What moved? What stalled? What is next smallest step?`);
+  out.push(`□ Decide the next 7 days (only 3 priorities).`);
+  out.push(`□ Send one accountability update.`);
+  out.push(``);
+
+  if (readiness.fillClass === 'low') {
+    out.push(`Note: Your execution readiness is currently LOW. Tighten: Outcome + Actions + Timeline + Constraints. Those four create traction.`);
+  } else if (readiness.fillClass === 'medium') {
+    out.push(`Note: Your execution readiness is MODERATE. Your next upgrade is: written alignment and explicit trade-offs.`);
+  } else {
+    out.push(`Note: Your execution readiness is HIGH. Protect your constraints and keep the weekly review. Drift is the enemy.`);
+  }
+
+  return out.join('\n');
+}
+
+function buildCleanAsk(reasonKey, d){
+  const outcomeShort = (d.outcome || '').trim() ? firstSentence(d.outcome) : 'a clear outcome with measurable progress';
+
+  if (reasonKey === 'visibility'){
+    return `I’m aiming for ${outcomeShort}. To make progress visible and reduce rework, I’ll share short artefacts and a weekly 3-bullet update. Is there anything you’d specifically want to see to feel confident in the direction?`;
+  }
+  if (reasonKey === 'conflict'){
+    return `I’m aiming for ${outcomeShort}. To protect delivery and keep this professional, I’m setting a clear boundary and following up in writing. If we can agree the standard and the trade-offs, I can execute consistently without friction.`;
+  }
+  if (reasonKey === 'wellbeing'){
+    return `I’m aiming for ${outcomeShort}. To protect delivery sustainably, I need agreement on trade-offs and a small number of non-negotiables. If we align priorities and what moves, I can deliver without burning out.`;
+  }
+  return `I’m aiming for ${outcomeShort}. To deliver it properly, I need agreement on priorities and what moves if something urgent appears. If we align those trade-offs in writing, I can execute consistently without surprises.`;
+}
+
+function buildEscalation(reasonKey){
+  if (reasonKey === 'conflict'){
+    return [
+      'If the behaviour/boundary breach repeats after clear written alignment, it becomes a formal risk (not a personal misunderstanding).',
+      'At that point I escalate via the agreed route (manager → HR/People → formal), staying factual (dates, impact, requests).'
+    ].join('\n');
+  }
+  if (reasonKey === 'wellbeing'){
+    return [
+      'If capacity remains unsafe for 2–3 weeks with no trade-offs or decision-making, it becomes a delivery and wellbeing risk.',
+      'At that point I escalate for organisational support (written alignment, senior sponsor, HR/People, occupational health as appropriate).'
+    ].join('\n');
+  }
+  if (reasonKey === 'visibility'){
+    return [
+      'If visibility remains blocked despite artefacts and updates, it becomes a structural positioning issue (access and sponsorship).',
+      'At that point I escalate to secure a sponsor touchpoint and clearer ownership in writing.'
+    ].join('\n');
+  }
+  return [
+    'If this is blocked for 2–3 weeks with no decision or trade-offs, it becomes a structural issue (not effort).',
+    'At that point I escalate via written alignment, senior stakeholder, or HR/People support as appropriate — staying factual (risks, dependencies, decisions).'
+  ].join('\n');
+}
+
+function indentBlock(text){
+  return (text || '—').split('\n').map(l => `   ${l}`).join('\n');
+}
+
+/* ===========================
+   BLOCKERS CARDS (reason aware)
+=========================== */
+function buildBlockerCards(d, grid, reasonKey){
+  const cards = getBlockerCards(d, reasonKey);
+  cards.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'pack-card';
+    card.innerHTML = `
+      <div class="pc-ico"><i class="${c.icon}"></i></div>
+      <div class="pc-title">${escapeHtml(c.title)}</div>
+      <div class="pc-body">${escapeCardText(c.body)}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function getBlockerCards(d, reasonKey){
+  const base = [];
+
+  // universal
+  base.push({
+    title: 'Busy week drift',
+    icon: 'fas fa-wind',
+    body: `Warning sign: the plan becomes “when I have time”.\nCounter-move: protect one execution block and do the next smallest step only.`
+  });
+
+  if (reasonKey === 'visibility'){
+    base.push({
+      title: 'Invisible labour',
+      icon: 'fas fa-user-ninja',
+      body: `Warning sign: you do important work but no-one can repeat it back.\nCounter-move: turn it into an artefact (one-pager) and send it to the right people.`
+    });
+    base.push({
+      title: 'Awkwardness about sharing',
+      icon: 'fas fa-face-grimace',
+      body: `Warning sign: you avoid updates because it feels like bragging.\nCounter-move: frame as delivery clarity: “Here’s progress, risks, next step.”`
+    });
+    base.push({
+      title: 'Credit capture',
+      icon: 'fas fa-magnet',
+      body: `Warning sign: others summarise your work without mentioning you.\nCounter-move: circulate written updates that clearly show ownership and impact.`
+    });
+  } else if (reasonKey === 'conflict'){
+    base.push({
+      title: 'Being baited into emotion',
+      icon: 'fas fa-fire',
+      body: `Warning sign: tone escalates, you start defending yourself.\nCounter-move: restate boundary once, then follow up in writing (facts only).`
+    });
+    base.push({
+      title: '“Keep it informal” avoidance',
+      icon: 'fas fa-mask',
+      body: `Warning sign: refusal to put decisions/standards in writing.\nCounter-move: you write the summary anyway and ask them to correct it if wrong.`
+    });
+    base.push({
+      title: 'Guilt / people-pleasing override',
+      icon: 'fas fa-hand-holding-heart',
+      body: `Warning sign: you soften boundaries until they disappear.\nCounter-move: replace yes/no with trade-offs: “I can do X — what moves?”`
+    });
+  } else if (reasonKey === 'wellbeing'){
+    base.push({
+      title: 'Capacity leak',
+      icon: 'fas fa-battery-half',
+      body: `Warning sign: you compensate by working longer.\nCounter-move: reduce load and protect recovery — it’s a delivery control measure.`
+    });
+    base.push({
+      title: 'Perfectionism inflation',
+      icon: 'fas fa-gem',
+      body: `Warning sign: everything becomes “must be perfect”.\nCounter-move: define “done” and stop when you meet it.`
+    });
+    base.push({
+      title: 'False hope cycle',
+      icon: 'fas fa-repeat',
+      body: `Warning sign: “It will calm down next week.”\nCounter-move: enforce one constraint this week and get trade-offs in writing.`
+    });
+  } else {
+    base.push({
+      title: 'Ambiguity trap',
+      icon: 'fas fa-cloud',
+      body: `Warning sign: unclear priorities/ownership/standards.\nCounter-move: force a written prioritisation and ask one trade-off question.`
+    });
+    base.push({
+      title: 'Shifting goalposts',
+      icon: 'fas fa-flag',
+      body: `Warning sign: “done” changes after you deliver.\nCounter-move: lock the “done” definition in writing before you execute.`
+    });
+    base.push({
+      title: 'Dependency stall',
+      icon: 'fas fa-link',
+      body: `Warning sign: waiting on someone else with no deadline.\nCounter-move: “Next step is X by [date]. If not, what changes?”`
+    });
+  }
+
+  return base.slice(0, 6);
+}
+
+/* ===========================
+   SCRIPTS CARDS (reason aware)
+=========================== */
+function buildScriptCards(d, grid, reasonKey){
+  const scripts = getScripts(d, reasonKey);
+  scripts.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'pack-card';
+    card.innerHTML = `
+      <div class="pc-ico"><i class="${s.icon}"></i></div>
+      <div class="pc-title">${escapeHtml(s.title)}</div>
+      <div class="pc-body">${escapeCardText(s.body)}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function getScripts(d, reasonKey){
+  const outcomeShort = (d.outcome || '').trim() ? firstSentence(d.outcome) : 'a clear outcome with measurable progress';
+  const constraintShort = (d.constraints || '').trim() ? firstSentence(d.constraints) : 'a simple boundary with a trade-off';
+
+  const followUp = (reasonKey === 'visibility')
+    ? `Subject: Progress and next step\n\n“Quick update:\n• Progress: [1–2 bullets]\n• Risk / dependency: [1 bullet]\n• Next step: [1 bullet]\n\nIf you want anything changed, tell me — otherwise I’ll proceed.”`
+    : `Subject: Priorities and next steps\n\n“Thanks — here’s my understanding:\n• Outcome: ${outcomeShort}\n• Next steps: [Action 1, Action 2]\n• Trade-offs / what moves: [X]\n• Constraint: ${constraintShort}\n\nIf you want anything adjusted, tell me. Otherwise I’ll proceed on this basis.”`;
+
+  if (reasonKey === 'conflict'){
+    return [
+      {
+        title: 'Boundary statement (calm, short)',
+        icon: 'fas fa-shield',
+        body: `“I’m happy to progress this. I’m not able to do it under [condition]. If it’s urgent, we need to agree what moves.”`
+      },
+      {
+        title: 'Follow-up note (facts only)',
+        icon: 'fas fa-envelope',
+        body: followUp
+      },
+      {
+        title: 'If tone escalates',
+        icon: 'fas fa-volume-xmark',
+        body: `“I’m going to pause this and respond in writing with the facts and the next step.”`
+      },
+      {
+        title: 'Escalation line (non-dramatic)',
+        icon: 'fas fa-arrow-up-right-dots',
+        body: `“If this continues, I’ll need to escalate via the agreed route to protect delivery and keep it professional.”`
+      },
+      {
+        title: 'Trade-off question (your power move)',
+        icon: 'fas fa-scale-balanced',
+        body: `“I can take this on. Which item should drop to make space?”`
+      },
+      {
+        title: 'Self-reset line',
+        icon: 'fas fa-user-check',
+        body: `When you feel pulled into debate: “Boundary. Trade-off. Written follow-up.”`
+      }
+    ];
+  }
+
+  if (reasonKey === 'visibility'){
+    return [
+      {
+        title: 'Impact framing (no bragging)',
+        icon: 'fas fa-bullhorn',
+        body: `“Quick update on ${outcomeShort}: here’s progress, what it changes, and the next step.”`
+      },
+      {
+        title: 'Sponsor ask',
+        icon: 'fas fa-handshake',
+        body: `“Could I sanity-check direction with you for 10 minutes? I want to make sure the right people have visibility and that I’m solving the right problem.”`
+      },
+      {
+        title: 'Weekly update template (3 bullets)',
+        icon: 'fas fa-list',
+        body: `• Progress: …\n• Risk/dependency: …\n• Next step (by when): …`
+      },
+      {
+        title: 'Follow-up note (light + repeatable)',
+        icon: 'fas fa-envelope',
+        body: followUp
+      },
+      {
+        title: 'Ownership clarification',
+        icon: 'fas fa-compass',
+        body: `“Just to confirm ownership: I’m accountable for X. If you want Y included, tell me what moves.”`
+      },
+      {
+        title: 'Credit protection (clean)',
+        icon: 'fas fa-lock',
+        body: `“I’ll share a short artefact after each milestone so we have a clear record of decisions, work done, and impact.”`
+      }
+    ];
+  }
+
+  if (reasonKey === 'wellbeing'){
+    return [
+      {
+        title: 'Capacity statement (one sentence)',
+        icon: 'fas fa-heart-pulse',
+        body: `“To deliver sustainably, I’m at capacity. I can take on new work only if we agree what moves.”`
+      },
+      {
+        title: 'Boundary statement',
+        icon: 'fas fa-shield',
+        body: `“I’m working with ${constraintShort} to protect delivery. If something urgent comes in, we’ll need a trade-off.”`
+      },
+      {
+        title: 'Workload snapshot intro',
+        icon: 'fas fa-clipboard-list',
+        body: `“Here’s my current workload and the estimated effort. Can you confirm the top priorities and what drops?”`
+      },
+      {
+        title: 'Follow-up note',
+        icon: 'fas fa-envelope',
+        body: followUp
+      },
+      {
+        title: 'If you feel guilty',
+        icon: 'fas fa-scale-balanced',
+        body: `“This is not about working less. It’s about reducing mistakes and avoiding late surprises by keeping the plan realistic.”`
+      },
+      {
+        title: 'Self-reset line',
+        icon: 'fas fa-user-check',
+        body: `When you want to “push through”: “Trade-offs first. Recovery is part of delivery.”`
+      }
+    ];
+  }
+
+  // delivery default
+  return [
+    {
+      title: 'Alignment ask (priorities + trade-offs)',
+      icon: 'fas fa-bullseye',
+      body: `“I’m aiming for ${outcomeShort}. To deliver it properly, I need us to confirm priorities and what moves if something urgent appears. Which one should drop if X becomes the focus?”`
+    },
+    {
+      title: 'Boundary statement (calm, not apologetic)',
+      icon: 'fas fa-shield',
+      body: `“To protect delivery, I’m working with ${constraintShort}. If something urgent comes in, I can take it — but we’ll need to agree what it replaces.”`
+    },
+    {
+      title: 'Follow-up note (locks decisions in writing)',
+      icon: 'fas fa-envelope',
+      body: followUp
+    },
+    {
+      title: 'Dependency follow-up (no chase energy)',
+      icon: 'fas fa-link',
+      body: `“Quick nudge on the next step: I need [X] by [date] to keep momentum. If that’s not possible, what should change in the plan?”`
+    },
+    {
+      title: 'If you get pushback (“why are you doing this?”)',
+      icon: 'fas fa-comments',
+      body: `“Because it improves delivery. Clear priorities and written trade-offs reduce mistakes, rework, and late surprises. I’m keeping it operational.”`
+    },
+    {
+      title: 'Self-accountability reset',
+      icon: 'fas fa-user-check',
+      body: `When you drift: “One artefact, one action, one follow-up.”`
+    }
+  ];
+}
+
+function firstSentence(text){
+  const t = (text || '').replace(/\s+/g,' ').trim();
+  if (!t) return '';
+  const cut = t.split(/(?<=[.!?])\s+/)[0];
+  return cut.length > 140 ? (cut.slice(0, 140).trim() + '…') : cut;
+}
+
+function escapeCardText(str){
+  return escapeHtml(str).replaceAll('\n', '<br>');
+}
+
+/* ===========================
+   COPY TEXT BUILDERS
+=========================== */
+function buildDraftText(){
+  const d = getDraft();
+  const reasonKey = getReason();
+  const reasonLabel = reasons[reasonKey].label;
+
+  const out = [];
+  out.push(`PERSONAL ACTION PLAN (Draft)`);
+  out.push(`Reason: ${reasonLabel}`);
+  out.push('===========================');
+  out.push('');
+
+  modulesBase.forEach((m, idx) => {
+    out.push(`${idx + 1}. ${m.title}`);
+    out.push((d[m.id] || '').trim() ? (d[m.id] || '').trim() : '—');
+    out.push('');
+  });
+
+  return out.join('\n');
+}
+
+function buildPackText(){
+  const d = getDraft();
+  const reasonKey = getReason();
+  const completeness = calcCompleteness(d);
+  const readiness = calcReadiness(d, completeness);
+
+  const onePage = buildOnePagePlan(d, reasonKey);
+  const next7 = buildNext7Days(d, readiness, reasonKey);
+
+  const blockers = getBlockerCards(d, reasonKey)
+    .map((c, i) => `${i+1}. ${c.title}\n   ${c.body}`)
+    .join('\n\n');
+
+  const scripts = getScripts(d, reasonKey)
+    .map((s, i) => `${i+1}. ${s.title}\n${s.body}`)
+    .join('\n\n');
+
+  const out = [];
+  out.push(onePage);
+  out.push('\n\nNEXT 7 DAYS\n===========\n');
+  out.push(next7);
+  out.push('\n\nBLOCKERS & COUNTER-MOVES\n=======================\n');
+  out.push(blockers);
+  out.push('\n\nSCRIPTS\n=======\n');
+  out.push(scripts);
+
+  return out.join('');
+}
+
+/* ===========================
+   MY PLAYBOOK (LOCALSTORAGE)
+=========================== */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'personal-action-plan';
+const CURRENT_TOOL_TITLE = 'Personal Action Plan';
+const CURRENT_TOOL_TYPE = 'Plan';
+
+function getSavedItems(){
+  try {
+    const raw = localStorage.getItem(PLAYBOOK_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch(e){
+    console.warn('Error reading saved items:', e);
+    return [];
+  }
+}
+function setSavedItems(items){
+  try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+  catch(e){ console.warn('Error saving items:', e); }
+}
+
+function initializePlaybook(){
+  const playbookOverlay = document.getElementById('playbookOverlay');
+  const playbookSidebar = document.getElementById('playbookSidebar');
+  const playbookButton = document.getElementById('myPlaybookButton');
+  const closeBtn = document.getElementById('closePlaybook');
+  const saveItemBtn = document.getElementById('saveBtn');
+
+  if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+  renderSavedItems();
+
+  const savedItems = getSavedItems();
+  const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+  updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+  saveItemBtn.addEventListener('click', () => {
+    const items = getSavedItems();
+    const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+    let nowSaved;
+
+    if (index === -1) {
+      const toolLink = window.location.pathname.split('/').pop() || 'personal-action-plan.html';
+      items.push({
+        id: CURRENT_TOOL_ID,
+        title: CURRENT_TOOL_TITLE,
+        type: CURRENT_TOOL_TYPE,
+        link: toolLink,
+        savedAt: new Date().toISOString()
+      });
+      nowSaved = true;
+    } else {
+      items.splice(index, 1);
+      nowSaved = false;
+    }
+
+    setSavedItems(items);
+    updateSaveButtonState(saveItemBtn, nowSaved);
+    renderSavedItems();
+  });
+
+  playbookButton.addEventListener('click', () => {
+    playbookOverlay.classList.add('open');
+    playbookSidebar.classList.add('open');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    playbookOverlay.classList.remove('open');
+    playbookSidebar.classList.remove('open');
+  });
+
+  playbookOverlay.addEventListener('click', (e) => {
+    if (e.target === playbookOverlay) {
+      playbookOverlay.classList.remove('open');
+      playbookSidebar.classList.remove('open');
+    }
+  });
+}
+
+function updateSaveButtonState(button, isSaved){
+  if (!button) return;
+  const icon = button.querySelector('i');
+  const label = button.querySelector('span');
+
+  if (isSaved) {
+    button.classList.add('saved');
+    if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+    if (label) label.textContent = 'Saved';
+  } else {
+    button.classList.remove('saved');
+    if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+    if (label) label.textContent = 'Save';
+  }
+}
+
+function renderSavedItems(){
+  const listEl = document.getElementById('savedItemsList');
+  const emptyEl = document.getElementById('savedItemsEmpty');
+  if (!listEl || !emptyEl) return;
+
+  const items = getSavedItems();
+  listEl.innerHTML = '';
+
+  if (!items.length) {
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+
+  items.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'saved-item';
+
+    const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+    const dateText = savedDate
+      ? savedDate.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
+      : '';
+
+    li.innerHTML = `
+      <div class="saved-item-title-row">
+        <span class="saved-item-title">${escapeHtml(item.title)}</span>
+        <span class="saved-item-type">${escapeHtml(item.type)}</span>
+      </div>
+      <div class="saved-item-meta">${dateText ? `Saved on ${dateText}` : ``}</div>
+      <a class="saved-item-link" href="${escapeHtml(item.link)}">
+        Open <i class="fas fa-arrow-right"></i>
+      </a>
+    `;
+    listEl.appendChild(li);
+  });
+}
+</script>
+
+</body>
+</html>

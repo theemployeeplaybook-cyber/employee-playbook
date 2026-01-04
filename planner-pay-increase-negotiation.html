@@ -1,0 +1,2727 @@
+<!DOCTYPE html> 
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pay Increase Negotiation Planner | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand)
+    =========================== */
+    :root{
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+      --text-dark:#212529;
+      --text-medium:#495057;
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --border-light:rgba(0,0,0,0.08);
+      --nav-bg:rgba(255,255,255,0.95);
+      --hero-bg:linear-gradient(135deg,#F9F6FF 0%,#F0EBFA 100%);
+      --premium-gradient:linear-gradient(135deg,#7B5FC4 0%,#5A4496 100%);
+
+      /* Category accents */
+      --cat-clarity:#7B5FC4;
+      --cat-burnout:#f59e0b;
+      --cat-manager:#10b981;
+      --cat-politics:#3b82f6;
+      --cat-hr:#6D28D9;
+      --cat-confidence:#ef4444;
+      --cat-career:#800020;
+
+      --success-green:#10b981;
+      --warning-orange:#f59e0b;
+      --danger-red:#ef4444;
+      --info-blue:#3b82f6;
+    }
+
+    /* Dark mode */
+    .dark-mode{
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#888888;
+      --text-dark:#e0e0e0;
+      --text-medium:#b0b0b0;
+
+      --accent-purple:#9d86e9;
+      --accent-purple-dark:#7b5fc4;
+      --light-purple:rgba(123,95,196,0.2);
+      --lighter-purple:rgba(123,95,196,0.1);
+
+      --border-light:rgba(255,255,255,0.08);
+      --nav-bg:rgba(30,30,30,0.95);
+      --hero-bg:linear-gradient(135deg,#2a2a2a 0%,#1f1f1f 100%);
+      --premium-gradient:linear-gradient(135deg,#9d86e9 0%,#7b5fc4 100%);
+
+      --success-green:#34d399;
+      --warning-orange:#fbbf24;
+      --danger-red:#f87171;
+      --info-blue:#60a5fa;
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body{
+      background:var(--primary-white);
+      color:var(--text-dark);
+      line-height:1.6;
+      overflow-x:hidden;
+      opacity:0;
+      transition:opacity .35s ease;
+      min-height:100vh;
+    }
+    body.loaded{ opacity:1; }
+
+    .container{ max-width:1400px; margin:0 auto; padding:0 20px; }
+
+    /* ===========================
+       NAV
+    =========================== */
+    nav{
+      position:fixed; top:0; width:100%;
+      background:var(--nav-bg);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      z-index:1000;
+      border-bottom:1px solid var(--border-light);
+      box-shadow:0 1px 3px rgba(0,0,0,0.05);
+      height:80px;
+    }
+    .nav-container{ display:flex; justify-content:space-between; align-items:center; padding:12px 0; height:100%; }
+    .logo{ display:inline-flex; align-items:center; height:100%; }
+    .logo-img{
+      height:100px; width:auto; transform:translateX(20%);
+      padding:14px 10px; display:block; min-height:100px;
+    }
+    .logo-fallback{
+      display:none; align-items:center; justify-content:center; height:48px;
+      padding:0 14px; border-radius:10px;
+      background:var(--premium-gradient); color:#fff;
+      font-weight:800; letter-spacing:.8px; font-size:13px; text-transform:uppercase;
+      transform:translateX(20%);
+    }
+    .nav-links{ display:flex; gap:50px; }
+    .nav-link{ color:var(--text-dark); text-decoration:none; font-weight:500; transition:color .3s ease; font-size:17px; }
+    .nav-link:hover{ color:var(--accent-purple); }
+    .nav-link-container{ position:relative; display:inline-block; }
+    .new-tag{
+      position:absolute; top:-12px; right:-35px;
+      background:linear-gradient(135deg,#FFD700,#FFA500);
+      color:#000; font-size:10px; font-weight:800;
+      padding:2px 6px; border-radius:4px;
+      box-shadow:0 2px 4px rgba(0,0,0,0.2); z-index:10; white-space:nowrap;
+    }
+    .nav-actions{ display:flex; align-items:center; gap:24px; transform:translateX(-20%); }
+    .header-cta{
+      background:var(--accent-purple); color:#fff;
+      padding:8px 20px; border-radius:999px;
+      text-decoration:none; font-weight:600; font-size:14px;
+      transition:all .3s ease;
+      box-shadow:0 5px 15px rgba(123,95,196,0.3);
+    }
+    .header-cta:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(123,95,196,0.35); }
+    .sign-in{ color:var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; }
+    .sign-in:hover{ color:var(--accent-purple); }
+    .theme-toggle{
+      background:none; border:none; color:var(--text-dark);
+      cursor:pointer; font-size:16px;
+      width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition:background-color .3s ease;
+    }
+    .theme-toggle:hover{ background:var(--light-gray); }
+    .mobile-toggle{
+      display:none; background:none; border:none; color:var(--text-dark);
+      cursor:pointer; font-size:24px;
+      width:40px; height:40px; border-radius:50%;
+      align-items:center; justify-content:center;
+      transition:background-color .3s ease;
+    }
+    .mobile-toggle:hover{ background:var(--light-gray); }
+    .mobile-sign-in, .mobile-sign-up{ display:none; }
+
+    @media (max-width:768px){
+      .nav-container{ justify-content:center; position:relative; }
+      .logo{ position:absolute; left:50%; transform:translateX(-50%); height:100%; }
+      .logo-img{ height:125px; transform:none; padding:12px 0; }
+      .logo-fallback{ transform:none; }
+
+      .mobile-toggle{ display:flex; position:absolute; left:20px; }
+      .nav-actions{ transform:none; gap:16px; position:absolute; right:20px; }
+      .nav-actions .sign-in, .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none; position:absolute; top:100%; left:0; width:100%;
+        background:var(--nav-bg);
+        backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+        flex-direction:column; padding:20px;
+        border-top:1px solid var(--border-light);
+        box-shadow:0 5px 15px rgba(0,0,0,0.1); gap:20px;
+      }
+      .nav-links.active{ display:flex; }
+      .nav-link-container{ display:flex; align-items:center; justify-content:flex-start; width:100%; }
+      .new-tag{ position:static; margin-left:8px; }
+
+      .mobile-sign-in{
+        display:block !important;
+        margin-top:10px; padding:12px 20px;
+        background:var(--primary-white);
+        color:var(--accent-purple);
+        border-radius:10px; text-align:center;
+        font-weight:700; text-decoration:none;
+        border:2px solid var(--accent-purple);
+      }
+      .mobile-sign-up{
+        display:block !important;
+        margin-top:10px; padding:12px 20px;
+        background:var(--accent-purple);
+        color:#fff; border-radius:10px;
+        text-align:center; font-weight:700; text-decoration:none;
+        border:2px solid var(--accent-purple);
+      }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .tool-hero-section{
+      width:100%;
+      background:var(--hero-bg);
+      padding:20px 0 22px;
+      margin-top:110px;
+      position:relative;
+      border-bottom:1px solid var(--border-light);
+      overflow:hidden;
+    }
+    .tool-hero-section::before{
+      content:'';
+      position:absolute; inset:0;
+      background:linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+      z-index:1;
+    }
+    .dark-mode .tool-hero-section::before{
+      background:linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+    }
+    .tool-hero-content{
+      position:relative; z-index:2;
+      max-width:1100px; margin:0 auto;
+      padding:0 20px 6px;
+      animation:heroFadeUp .45s ease-out;
+    }
+    @keyframes heroFadeUp{ from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:translateY(0);} }
+
+    .breadcrumb{
+      font-size:10px; text-transform:uppercase; letter-spacing:1px;
+      color:var(--dark-gray);
+      margin-bottom:10px;
+      display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+    }
+    .breadcrumb a{
+      color:var(--text-medium);
+      text-decoration:none !important;
+      font-weight:600; letter-spacing:.6px;
+      transition:color .2s ease;
+    }
+    .breadcrumb a:hover{ color:var(--accent-purple-dark); }
+    .breadcrumb i{ font-size:10px; opacity:.7; }
+    .breadcrumb .current{ color:var(--text-dark); font-weight:700; display:inline-flex; align-items:center; gap:8px; }
+
+    .checklist-name{
+      font-size:14px; font-weight:700; color:var(--accent-purple);
+      text-transform:uppercase; letter-spacing:1.8px;
+      margin:18px 0 12px; display:block;
+    }
+    .hero-main-heading{
+      font-size:44px; font-weight:600; color:var(--text-dark); /* CHANGE 2 */
+      line-height:1.1; margin-bottom:14px;
+      max-width:880px;
+    }
+    .hero-subheading{
+      font-size:16px; color:var(--text-medium);
+      line-height:1.6; max-width:920px;
+      margin-bottom:18px; font-weight:450;
+    }
+
+    /* Save button anchored to hero */
+    .save-btn{
+      position:absolute; top:16px; right:24px; z-index:5;
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 12px; font-size:12px; font-weight:600;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.6);
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      color:var(--accent-purple-dark);
+      cursor:pointer;
+      transition:all .2s ease;
+    }
+    .save-btn:hover{ transform:translateY(-1px); box-shadow:0 4px 10px rgba(123,95,196,0.18); background:#fff; }
+    .dark-mode .save-btn{ background:rgba(20,20,20,0.9); border-color:rgba(157,134,233,0.6); }
+    .save-btn.saved{ background:var(--accent-purple); color:#fff; border-color:transparent; }
+
+    /* Category pills */
+    .category-pills-container{ margin-top:6px; }
+    .category-pills-title{
+      font-size:12px; font-weight:700; color:var(--text-medium);
+      text-transform:uppercase; letter-spacing:1px;
+      margin-bottom:10px; display:block;
+    }
+    .category-pills-grid{ display:flex; gap:10px; flex-wrap:wrap; }
+    .category-pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 12px; border-radius:999px;
+      font-size:12px; font-weight:600;
+      text-transform:uppercase; letter-spacing:.5px;
+      border:1px solid transparent;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      text-decoration:none; height:34px;
+      box-shadow:0 1px 3px rgba(0,0,0,0.05);
+      transition:all .2s ease; cursor:pointer;
+      white-space:nowrap;
+    }
+    .dark-mode .category-pill{ background:rgba(255,255,255,0.08); }
+    .category-pill:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+    .category-icon{ font-size:12px; opacity:.9; flex-shrink:0; }
+
+    .category-pill.hr{
+      color:var(--cat-hr);
+      border-color:rgba(109,40,217,0.22);
+      background:linear-gradient(135deg, rgba(109,40,217,0.10), rgba(109,40,217,0.04));
+    }
+    .dark-mode .category-pill.hr{
+      border-color:rgba(167,139,250,0.42);
+      background:linear-gradient(135deg, rgba(109,40,217,0.18), rgba(109,40,217,0.08));
+    }
+
+    .category-pill.confidence{
+      color:var(--cat-confidence);
+      border-color:rgba(239,68,68,0.22);
+      background:linear-gradient(135deg, rgba(239,68,68,0.10), rgba(239,68,68,0.04));
+    }
+    .dark-mode .category-pill.confidence{
+      border-color:rgba(248,113,113,0.45);
+      background:linear-gradient(135deg, rgba(239,68,68,0.18), rgba(239,68,68,0.08));
+    }
+
+    .category-pill.career{
+      color:var(--cat-career);
+      border-color:rgba(128,0,32,0.18);
+      background:linear-gradient(135deg, rgba(128,0,32,0.08), rgba(128,0,32,0.03));
+    }
+    .dark-mode .category-pill.career{
+      border-color:rgba(251,113,133,0.28);
+      background:linear-gradient(135deg, rgba(128,0,32,0.18), rgba(128,0,32,0.08));
+    }
+
+    /* ===========================
+       MAIN CONTENT
+    =========================== */
+    .page-wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:14px 20px 44px;
+    }
+
+    .shell{
+      margin-top:14px;
+      background:var(--primary-white);
+      border:1px solid var(--border-light);
+      border-radius:18px;
+      box-shadow:0 16px 44px rgba(0,0,0,0.06);
+      overflow:hidden;
+    }
+    .shell-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 12px;
+      border-bottom:1px solid var(--border-light);
+      background:rgba(123,95,196,0.04);
+      flex-wrap:wrap;
+    }
+    .shell-title{
+      display:flex; align-items:center; gap:12px;
+      font-size:18px; font-weight:900;
+      color:var(--text-dark);
+      white-space:nowrap;
+    }
+    .shell-title .icon-bubble{
+      width:42px; height:42px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple);
+      color:var(--accent-purple);
+      flex-shrink:0;
+    }
+
+    .head-actions{
+      display:flex; align-items:center; gap:10px;
+      flex:1; justify-content:flex-end;
+      min-width:220px;
+    }
+    .pill-btn{
+      border-radius:999px;
+      padding:8px 12px;
+      font-weight:900;
+      font-size:13px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid rgba(123,95,196,0.25);
+      background:rgba(123,95,196,0.08);
+      color:var(--accent-purple-dark);
+      cursor:pointer;
+      transition:transform .2s ease, box-shadow .2s ease;
+      white-space:nowrap;
+      justify-content:center;
+    }
+    .pill-btn:hover{ transform:translateY(-1px); box-shadow:0 12px 24px rgba(0,0,0,0.12); }
+    .pill-btn.primary{
+      background:var(--premium-gradient);
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 12px 26px rgba(123,95,196,0.18);
+    }
+    .pill-btn.primary:hover{ box-shadow:0 16px 30px rgba(123,95,196,0.26); }
+    .pill-btn.danger{
+      border-color:rgba(239,68,68,0.28);
+      background:rgba(239,68,68,0.10);
+      color:#b91c1c;
+    }
+
+    .shell-body{ padding:12px; }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:12px;
+      align-items:start;
+    }
+
+    .card{
+      border:1px solid var(--border-light);
+      border-radius:18px;
+      background:var(--primary-white);
+      box-shadow:0 12px 34px rgba(0,0,0,0.06);
+      padding:14px;
+      overflow:hidden;
+    }
+
+    .card-head{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--border-light);
+      margin-bottom:10px;
+    }
+    .card-title{
+      display:flex; align-items:center; gap:10px;
+      font-size:16px; font-weight:950; color:var(--text-dark);
+    }
+    .card-title .bubble{
+      width:40px; height:40px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple); color:var(--accent-purple);
+    }
+    .tag{
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.22);
+      background:rgba(123,95,196,0.08);
+      color:var(--accent-purple-dark);
+      font-weight:950;
+      font-size:12px;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    .field{
+      background:var(--light-gray);
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:14px;
+      padding:12px;
+      margin-bottom:10px;
+    }
+    .dark-mode .field{ border-color:rgba(255,255,255,0.08); }
+
+    .label{
+      display:flex; align-items:center; justify-content:space-between;
+      font-size:12px; font-weight:900;
+      text-transform:uppercase; letter-spacing:.9px;
+      color:var(--text-medium);
+      margin-bottom:8px;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .label .mini{
+      font-weight:600; letter-spacing:.6px;
+      color:var(--dark-gray);
+      text-transform:none;
+      font-size:12px;
+      opacity:.95;
+    }
+
+    textarea, input[type="text"], input[type="number"], select{
+      width:100%;
+      background:rgba(255,255,255,0.95);
+      border:1px solid rgba(0,0,0,0.08);
+      border-radius:12px;
+      padding:12px 12px;
+      font-size:14px;
+      color:var(--text-dark);
+      outline:none;
+      transition:border-color .2s ease, box-shadow .2s ease;
+    }
+    .dark-mode textarea, .dark-mode input[type="text"], .dark-mode input[type="number"], .dark-mode select{
+      background:rgba(20,20,20,0.65);
+      border-color:rgba(255,255,255,0.12);
+      color:var(--text-dark);
+    }
+    textarea{ min-height:88px; resize:vertical; }
+
+    .row-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+
+    .hint{
+      margin-top:10px;
+      font-size:13px;
+      color:var(--text-medium);
+      padding:10px 12px;
+      background:rgba(123,95,196,0.06);
+      border:1px solid rgba(123,95,196,0.12);
+      border-radius:12px;
+    }
+
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:10px;
+    }
+    .tab{
+      border:none;
+      border-radius:999px;
+      padding:10px 12px;
+      font-weight:900;
+      font-size:13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:rgba(0,0,0,0.03);
+      border:1px solid rgba(0,0,0,0.05);
+      color:var(--text-medium);
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease, color .15s ease;
+      white-space:nowrap;
+    }
+    .dark-mode .tab{
+      background:rgba(255,255,255,0.06);
+      border-color:rgba(255,255,255,0.10);
+    }
+    .tab.active{
+      background:linear-gradient(135deg, rgba(123,95,196,0.14), rgba(123,95,196,0.06));
+      border-color:rgba(123,95,196,0.22);
+      color:var(--accent-purple-dark);
+      box-shadow:0 10px 24px rgba(0,0,0,0.08);
+    }
+
+    .section{ display:none; }
+    .section.active{ display:block; }
+
+    .metric-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .metric{
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:16px;
+      background:var(--primary-white);
+      padding:12px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.06);
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .dark-mode .metric{ border-color:rgba(255,255,255,0.10); box-shadow:0 16px 30px rgba(0,0,0,0.35); }
+    .metric .k{
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.9px;
+      color:var(--dark-gray);
+      font-weight:900;
+    }
+    .metric .v{
+      font-size:20px;
+      font-weight:950;
+      color:var(--text-dark);
+      margin-top:4px;
+      line-height:1.15;
+    }
+    .metric .s{
+      font-size:12px;
+      color:var(--text-medium);
+      margin-top:6px;
+      line-height:1.35;
+    }
+    .metric .ico{
+      width:42px; height:42px;
+      border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple);
+      color:var(--accent-purple);
+      flex-shrink:0;
+    }
+
+    /* reduce size of Increase number line only */
+    #mIncrease{ font-size:18px; }
+
+    .readiness{
+      border-radius:16px;
+      padding:12px;
+      border:1px solid rgba(123,95,196,0.16);
+      background:linear-gradient(135deg, rgba(123,95,196,0.06), rgba(123,95,196,0.02));
+    }
+    .readiness-top{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      margin-bottom:10px;
+    }
+    .readiness-top .t{
+      font-weight:950; letter-spacing:.6px; text-transform:uppercase;
+      font-size:12px; color:var(--text-medium);
+      display:flex; align-items:center; gap:8px;
+    }
+    .badge{
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:950;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      border:1px solid rgba(0,0,0,0.06);
+      background:rgba(0,0,0,0.02);
+      color:var(--text-medium);
+      white-space:nowrap;
+    }
+    .badge.good{
+      border-color:rgba(16,185,129,0.25);
+      background:rgba(16,185,129,0.12);
+      color:#047857;
+    }
+    .badge.warn{
+      border-color:rgba(245,158,11,0.25);
+      background:rgba(245,158,11,0.14);
+      color:#92400e;
+    }
+    .badge.risk{
+      border-color:rgba(239,68,68,0.25);
+      background:rgba(239,68,68,0.14);
+      color:#991b1b;
+    }
+
+    .bar{
+      height:10px;
+      width:100%;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:rgba(0,0,0,0.03);
+      overflow:hidden;
+    }
+    .dark-mode .bar{ border-color:rgba(255,255,255,0.10); background:rgba(255,255,255,0.06); }
+    .bar > span{
+      display:block;
+      height:100%;
+      width:0%;
+      background:var(--premium-gradient);
+      border-radius:999px;
+      transition:width .25s ease;
+    }
+
+    .checklist{
+      list-style:none;
+      padding:0;
+      margin:0;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .check{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      border:1px solid rgba(0,0,0,0.06);
+      background:rgba(0,0,0,0.02);
+      border-radius:14px;
+      padding:10px 10px;
+    }
+    .dark-mode .check{
+      border-color:rgba(255,255,255,0.10);
+      background:rgba(255,255,255,0.05);
+    }
+    .check input{
+      margin-top:4px;
+      width:16px;
+      height:16px;
+      accent-color: var(--accent-purple);
+      flex-shrink:0;
+    }
+    .check .txt{
+      font-size:13.5px;
+      color:var(--text-medium);
+      line-height:1.45;
+      font-weight:450;
+    }
+    .check .txt strong{ color:var(--text-dark); font-weight:900; }
+
+    .evidence-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .ev{
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:16px;
+      background:var(--primary-white);
+      padding:12px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.06);
+    }
+    .dark-mode .ev{ border-color:rgba(255,255,255,0.10); box-shadow:0 16px 30px rgba(0,0,0,0.35); }
+    .ev-top{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:10px;
+      margin-bottom:8px;
+    }
+    .ev-name{
+      font-size:14.5px;
+      font-weight:950;
+      color:var(--text-dark);
+      line-height:1.2;
+    }
+    .ev-meta{
+      font-size:12px;
+      color:var(--dark-gray);
+      font-weight:650;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+    .mini-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.20);
+      background:linear-gradient(135deg, rgba(123,95,196,0.09), rgba(123,95,196,0.03));
+      color:var(--accent-purple-dark);
+      font-weight:950;
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .mini-pill.good{
+      border-color:rgba(16,185,129,0.25);
+      background:rgba(16,185,129,0.10);
+      color:#047857;
+    }
+    .mini-pill.warn{
+      border-color:rgba(245,158,11,0.25);
+      background:rgba(245,158,11,0.14);
+      color:#92400e;
+    }
+    .mini-pill.risk{
+      border-color:rgba(239,68,68,0.25);
+      background:rgba(239,68,68,0.14);
+      color:#991b1b;
+    }
+
+    .ev-desc{
+      font-size:13.5px;
+      color:var(--text-medium);
+      line-height:1.55;
+      font-weight:450;
+    }
+    .ev-actions{
+      display:flex; gap:8px; justify-content:flex-end;
+      margin-top:10px;
+    }
+    .icon-btn{
+      width:36px; height:36px;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:rgba(255,255,255,0.9);
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--dark-gray);
+      transition:transform .15s ease, box-shadow .15s ease;
+    }
+    .dark-mode .icon-btn{ background:rgba(20,20,20,0.7); border-color:rgba(255,255,255,0.12); }
+    .icon-btn:hover{ transform:translateY(-1px); box-shadow:0 10px 18px rgba(0,0,0,0.12); }
+
+    .script-box{
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:16px;
+      background:var(--primary-white);
+      padding:12px;
+      box-shadow:0 10px 26px rgba(0,0,0,0.06);
+      position:relative;
+    }
+    .dark-mode .script-box{ border-color:rgba(255,255,255,0.10); box-shadow:0 16px 30px rgba(0,0,0,0.35); }
+    .script-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .script-head h4{
+      font-size:12px;
+      letter-spacing:.9px;
+      text-transform:uppercase;
+      color:var(--accent-purple-dark);
+      font-weight:950;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .copy-btn{
+      width:36px; height:36px;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:rgba(255,255,255,0.9);
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--dark-gray);
+      transition:transform .15s ease, box-shadow .15s ease;
+      flex-shrink:0;
+    }
+    .dark-mode .copy-btn{ background:rgba(20,20,20,0.7); border-color:rgba(255,255,255,0.12); }
+    .copy-btn:hover{ transform:translateY(-1px); box-shadow:0 10px 18px rgba(0,0,0,0.12); }
+
+    .script-text{
+      font-size:13.5px;
+      color:var(--text-medium);
+      line-height:1.65;
+      font-weight:450;
+      white-space:pre-wrap;
+    }
+
+    .accordion{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .acc{
+      border:1px solid rgba(0,0,0,0.06);
+      background:rgba(0,0,0,0.02);
+      border-radius:16px;
+      overflow:hidden;
+    }
+    .dark-mode .acc{
+      border-color:rgba(255,255,255,0.10);
+      background:rgba(255,255,255,0.05);
+    }
+    .acc-btn{
+      width:100%;
+      border:none;
+      background:transparent;
+      padding:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      cursor:pointer;
+      text-align:left;
+    }
+    .acc-btn .l{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+    .acc-btn .b{
+      width:40px; height:40px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple);
+      color:var(--accent-purple);
+      flex-shrink:0;
+    }
+    .acc-btn .t{
+      min-width:0;
+    }
+    .acc-btn .t .h{
+      font-size:14.5px;
+      font-weight:950;
+      color:var(--text-dark);
+      line-height:1.2;
+    }
+    .acc-btn .t .s{
+      font-size:12px;
+      color:var(--dark-gray);
+      font-weight:650;
+      margin-top:4px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      opacity:.95;
+    }
+    .acc-btn .chev{
+      width:36px; height:36px;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:rgba(255,255,255,0.85);
+      display:flex; align-items:center; justify-content:center;
+      color:var(--dark-gray);
+      flex-shrink:0;
+      transition:transform .15s ease;
+    }
+    .dark-mode .acc-btn .chev{ background:rgba(20,20,20,0.7); border-color:rgba(255,255,255,0.12); }
+    .acc.open .acc-btn .chev{ transform:rotate(180deg); }
+    .acc-body{
+      display:none;
+      padding:0 12px 12px;
+    }
+    .acc.open .acc-body{ display:block; }
+    .acc-body .p{
+      font-size:13.5px;
+      color:var(--text-medium);
+      line-height:1.55;
+      font-weight:450;
+      margin-top:10px;
+    }
+    .acc-body .p strong{ color:var(--text-dark); font-weight:950; }
+
+    /* CHANGE 4: increase height under one-page summary by 400% */
+    #briefPreview{ height:117vh; }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR
+    =========================== */
+    .my-playbook-fab{
+      position:fixed; bottom:24px; right:24px; z-index:1200;
+      background:var(--premium-gradient); color:#fff;
+      padding:10px 16px; border-radius:999px;
+      display:inline-flex; align-items:center; gap:8px;
+      cursor:pointer; font-size:13px; font-weight:750;
+      box-shadow:0 10px 25px rgba(0,0,0,0.25);
+      transition:all .25s ease;
+    }
+    .my-playbook-fab:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,0,0,0.32); }
+
+    .playbook-sidebar-overlay{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,0.45);
+      z-index:1190;
+      opacity:0; pointer-events:none;
+      transition:opacity .25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position:fixed; top:0; right:-380px;
+      width:340px; max-width:90%;
+      height:100%;
+      background:rgba(255,255,255,0.94);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:-4px 0 20px rgba(0,0,0,0.25);
+      z-index:1191;
+      display:flex; flex-direction:column;
+      border-left:1px solid var(--border-light);
+      transition:right .25s ease;
+    }
+    .dark-mode .playbook-sidebar{ background:rgba(18,18,18,0.96); box-shadow:-4px 0 22px rgba(0,0,0,0.6); }
+    .playbook-sidebar.open{ right:0; }
+
+    .playbook-sidebar-header{
+      padding:20px 20px 14px;
+      border-bottom:1px solid var(--border-light);
+    }
+    .playbook-sidebar-header-title-row{
+      display:flex; justify-content:space-between; align-items:center;
+      margin-bottom:4px;
+    }
+    .playbook-sidebar-header h3{ font-size:18px; font-weight:900; color:var(--text-dark); }
+    .playbook-sidebar-header p{ font-size:13px; color:var(--dark-gray); }
+
+    .playbook-close-btn{
+      background:none; border:none;
+      color:var(--dark-gray);
+      cursor:pointer; font-size:18px;
+      border-radius:999px; width:28px; height:28px;
+      display:flex; align-items:center; justify-content:center;
+      transition:background-color .2s ease;
+    }
+    .playbook-close-btn:hover{ background:var(--light-gray); }
+
+    .playbook-sidebar-body{
+      padding:14px 18px 20px;
+      padding-bottom:50px;
+      overflow-y:auto;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    .saved-items-empty{ font-size:13px; color:var(--dark-gray); line-height:1.6; }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+    .saved-item{
+      padding:10px;
+      border-radius:12px;
+      border:1px solid var(--border-light);
+      background:var(--primary-white);
+      box-shadow:0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom:10px;
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .saved-item-title-row{ display:flex; justify-content:space-between; align-items:baseline; gap:6px; }
+    .saved-item-title{ font-size:14px; font-weight:850; color:var(--text-dark); }
+    .saved-item-type{
+      font-size:11px; text-transform:uppercase; letter-spacing:.6px;
+      color:var(--accent-purple-dark); font-weight:900;
+    }
+    .saved-item-meta{ font-size:12px; color:var(--dark-gray); }
+    .saved-item-link{
+      margin-top:6px; font-size:12px;
+      color:var(--accent-purple); text-decoration:none;
+      font-weight:850; display:inline-flex; align-items:center; gap:4px;
+    }
+    .saved-item-link:hover{ text-decoration:underline; }
+
+    .playbook-quick-links{
+      margin-top:223px;
+      padding-top:10px;
+      border-top:1px solid var(--border-light);
+    }
+    .quick-links-title{
+      font-size:12px; font-weight:900;
+      text-transform:uppercase; letter-spacing:.8px;
+      color:var(--text-medium);
+    }
+    .playbook-quick-links-list{
+      display:flex; flex-direction:column; gap:10px; margin-top:8px;
+    }
+    .quick-link-pill{
+      width:55%;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.35);
+      background:linear-gradient(135deg,rgba(123,95,196,0.08),rgba(123,95,196,0.02));
+      text-decoration:none;
+      color:var(--accent-purple-dark);
+      font-size:13px;
+      font-weight:650;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .quick-link-pill:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+      background:linear-gradient(135deg,rgba(123,95,196,0.16),rgba(123,95,196,0.06));
+    }
+    .dark-mode .quick-link-pill{
+      border-color:rgba(157,134,233,0.55);
+      background:linear-gradient(135deg,rgba(123,95,196,0.26),rgba(123,95,196,0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer{
+      background:var(--primary-white);
+      padding:10px 0;
+      border-top:1px solid var(--border-light);
+      margin-top:30px;
+      text-align:center;
+      color:var(--text-medium);
+    }
+    footer a{ color:var(--accent-purple); text-decoration:none; font-weight:700; }
+    footer a:hover{ text-decoration:underline; }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width:1024px){
+      .grid-2{ grid-template-columns:1fr; }
+      .metric-grid{ grid-template-columns:1fr; }
+      .row-2{ grid-template-columns:1fr; }
+    }
+    @media (max-width:768px){
+      .tool-hero-section{ margin-top:100px; }
+      .hero-main-heading{ font-size:34px; }
+      .save-btn{ right:18px; top:10px; }
+      .head-actions{ justify-content:flex-start; width:100%; }
+      .my-playbook-fab{ bottom:18px; right:18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===========================
+      NAVIGATION
+  =========================== -->
+  <nav>
+    <div class="container nav-container">
+      <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+      <a href="index.html" class="logo" aria-label="The Employee Playbook">
+        <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+        <div class="logo-fallback" id="logoFallback">The Employee Playbook</div>
+      </a>
+
+      <div class="nav-links">
+        <a href="the-lens.html" class="nav-link">The Lens</a>
+        <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+        <div class="nav-link-container">
+          <a href="the-coach.html" class="nav-link">The Coach</a>
+          <span class="new-tag">NEW</span>
+        </div>
+        <a href="the-shift.html" class="nav-link">The Shift</a>
+        <a href="the-pricing.html" class="nav-link">The Pricing</a>
+        <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+        <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="create-account.html" class="header-cta">Sign up</a>
+        <a href="sign-in.html" class="sign-in">Sign in</a>
+        <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===========================
+      HERO
+  =========================== -->
+  <div class="tool-hero-section">
+    <button class="save-btn" id="saveBtn">
+      <i class="far fa-bookmark"></i>
+      <span>Save</span>
+    </button>
+
+    <div class="tool-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html"><i class="fas fa-house"></i> Home</a>
+        <i class="fas fa-chevron-right"></i>   
+        <a href="the-toolkit.html">Toolkit</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="hr-and-performance.html">HR &amp; Formal Processes</a>
+        <i class="fas fa-chevron-right"></i>
+        <span class="current">Pay Increase Negotiation Planner</span>
+      </div>
+
+      <span class="checklist-name">PAY INCREASE NEGOTIATION PLANNER</span>
+      <!-- CHANGE 1: removed dash in hero -->
+      <h1 class="hero-main-heading">Build a calm, evidence-led pay case, then negotiate without burning political capital</h1>
+      <div class="hero-subheading">
+        Use this to prepare an off-cycle ask, a pay-review ask, a promotion-linked adjustment, or a retention conversation (including modern realities like RTO pressure, scope creep, and pay compression).
+        <strong>Output:</strong> a clean negotiation brief + copy-ready scripts + next-step email.
+      </div>
+
+      <div class="category-pills-container">
+        <span class="category-pills-title">Related Categories</span>
+        <div class="category-pills-grid">
+          <a href="category-confidence-presence-influence.html" class="category-pill confidence">
+            <i class="fas fa-bolt category-icon"></i>
+            <span>Confidence, Presence &amp; Influence</span>
+          </a>
+          <a href="category-career-playbook.html" class="category-pill career">
+            <i class="fas fa-compass category-icon"></i>
+            <span>Career Playbook</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+    <div class="shell">
+      <div class="shell-head">
+        <div class="shell-title">
+          <span class="icon-bubble"><i class="fas fa-hand-holding-dollar"></i></span>
+          <span>Negotiation Brief Builder</span>
+        </div>
+
+        <div class="head-actions">
+          <button class="pill-btn" id="loadExamplesBtn"><i class="fas fa-bolt"></i> Load examples</button>
+          <button class="pill-btn" id="resetPlannerBtn"><i class="fas fa-rotate-left"></i> Reset planner</button>
+          <button class="pill-btn primary" id="copyBriefBtn"><i class="far fa-copy"></i> Copy brief</button>
+        </div>
+      </div>
+
+      <div class="shell-body">
+        <div class="grid-2">
+          <!-- LEFT -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">
+                <span class="bubble"><i class="fas fa-layer-group"></i></span>
+                <span>Build your case</span>
+              </div>
+              <span class="tag" id="caseTag">PREP</span>
+            </div>
+
+            <div class="tabs" role="tablist" aria-label="Planner tabs">
+              <button class="tab active" data-tab="tab-prep"><i class="fas fa-clipboard-check"></i> Preparation</button>
+              <button class="tab" data-tab="tab-meeting"><i class="fas fa-comments"></i> Meeting flow</button>
+              <button class="tab" data-tab="tab-scripts"><i class="fas fa-pen-nib"></i> Scripts</button>
+              <button class="tab" data-tab="tab-objections"><i class="fas fa-shield"></i> Objections</button>
+            </div>
+
+            <!-- PREP -->
+            <div class="section active" id="tab-prep">
+              <div class="field">
+                <div class="label">Scenario <span class="mini">Pick the “story” you’re negotiating inside</span></div>
+                <select id="scenarioSelect">
+                  <option value="review" selected>Annual pay review</option>
+                  <option value="offcycle">Off-cycle ask (new scope / performance)</option>
+                  <option value="promotion">Promotion-linked adjustment</option>
+                  <option value="compression">Pay compression (new joiners close to / above)</option>
+                  <option value="retention">Retention risk (credible external pull)</option>
+                  <option value="rto">RTO / hybrid change (role sustainability)</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <div class="label">Role reality <span class="mini">What changed — or what’s now true?</span></div>
+                <textarea id="roleReality" placeholder="Example: Scope expanded (two streams), stakeholder load increased, higher-risk decisions, mentoring, owning delivery..."></textarea>
+              </div>
+
+              <div class="field">
+                <div class="label">Your ask <span class="mini">Numbers drive clarity — even if you negotiate</span></div>
+                <div class="row-2">
+                  <div>
+                    <div class="label">Current pay (annual) <span class="mini">£</span></div>
+                    <input id="currentPay" type="number" min="0" step="500" placeholder="e.g. 52000" />
+                  </div>
+                  <div>
+                    <div class="label">Target pay (annual) <span class="mini">£</span></div>
+                    <input id="targetPay" type="number" min="0" step="500" placeholder="e.g. 60000" />
+                  </div>
+                </div>
+
+                <div style="height:10px"></div>
+
+                <div class="row-2">
+                  <div>
+                    <div class="label">Your range (low) <span class="mini">£ practical floor</span></div>
+                    <input id="rangeLow" type="number" min="0" step="500" placeholder="e.g. 58000" />
+                  </div>
+                  <div>
+                    <div class="label">Your range (high) <span class="mini">£ confident anchor</span></div>
+                    <input id="rangeHigh" type="number" min="0" step="500" placeholder="e.g. 64000" />
+                  </div>
+                </div>
+
+                <div class="hint" id="calcHint">
+                  Tip: A pay rise is usually a <strong>contract change</strong> — if agreed, confirm the new terms in writing so it’s unambiguous.
+                </div>
+              </div>
+
+              <div class="field">
+                <div class="label">Market reality <span class="mini">Optional — but powerful when clean</span></div>
+                <div class="row-2">
+                  <div>
+                    <div class="label">Market median <span class="mini">£</span></div>
+                    <input id="marketMedian" type="number" min="0" step="500" placeholder="e.g. 61000" />
+                  </div>
+                  <div>
+                    <div class="label">Market high <span class="mini">£</span></div>
+                    <input id="marketHigh" type="number" min="0" step="500" placeholder="e.g. 68000" />
+                  </div>
+                </div>
+                <div style="height:10px"></div>
+                <div class="label">Internal alignment <span class="mini">What you can safely reference</span></div>
+                <textarea id="internalAlign" placeholder="Example: Role level expectations, expanded responsibilities, acting-up work, comparable scope..."></textarea>
+              </div>
+
+              <div class="field">
+                <div class="label">Negotiation levers <span class="mini">If base pay is constrained</span></div>
+                <textarea id="levers" placeholder="Examples: bonus, title/level change, training budget, extra leave, flexible pattern, remote/hybrid stability, review date, retention bonus..."></textarea>
+              </div>
+
+              <div class="field">
+                <div class="label">Evidence Vault <span class="mini">Add proof that survives scrutiny (not vibes)</span></div>
+
+                <div class="row-2">
+                  <div>
+                    <div class="label">Evidence type</div>
+                    <select id="evType">
+                      <option value="impact" selected>Impact delivered</option>
+                      <option value="scope">Scope / responsibility expansion</option>
+                      <option value="risk">Risk reduced / quality raised</option>
+                      <option value="speed">Speed / throughput improved</option>
+                      <option value="stakeholders">Stakeholder value / trust</option>
+                      <option value="market">Market benchmark</option>
+                    </select>
+                  </div>
+                  <div>
+                    <div class="label">Strength <span class="mini">How defensible?</span></div>
+                    <select id="evStrength">
+                      <option value="strong" selected>Strong (measurable / evidenced)</option>
+                      <option value="medium">Medium (clear examples)</option>
+                      <option value="soft">Soft (qualitative only)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div style="height:10px"></div>
+
+                <div class="label">Evidence statement <span class="mini">1–2 lines, crisp</span></div>
+                <input id="evText" type="text" placeholder="Example: Led X, delivered Y, saved Z, reduced risk by..., unblocked..." />
+
+                <div style="height:10px"></div>
+
+                <button class="pill-btn" id="addEvidenceBtn"><i class="fas fa-plus"></i> Add evidence</button>
+
+                <div style="height:12px"></div>
+
+                <div class="evidence-list" id="evidenceList"></div>
+              </div>
+
+              <div class="field">
+                <div class="label">Risks & constraints <span class="mini">Be realistic without self-sabotage</span></div>
+                <div class="check">
+                  <input type="checkbox" id="flagFreeze" />
+                  <div class="txt"><strong>Pay freeze / headcount controls</strong> are in play (budget constraint likely)</div>
+                </div>
+                <div class="check">
+                  <input type="checkbox" id="flagRestructure" />
+                  <div class="txt"><strong>Restructure / redundancy risk</strong> is present (timing & tone matters)</div>
+                </div>
+                <div class="check">
+                  <input type="checkbox" id="flagPerf" />
+                  <div class="txt"><strong>Performance narrative is mixed</strong> (you must “re-write” the storyline first)</div>
+                </div>
+                <div class="check">
+                  <input type="checkbox" id="flagProbation" />
+                  <div class="txt"><strong>Probation / very new in role</strong> (consider a defined review date ask)</div>
+                </div>
+
+                <div class="hint" id="riskHint">
+                  Premium move: if constraints are real, don’t “argue budget”. Negotiate <strong>pathway</strong> (scope + outcomes + date) and leave with a written review commitment.
+                </div>
+              </div>
+            </div>
+
+            <!-- MEETING FLOW -->
+            <div class="section" id="tab-meeting">
+              <div class="field">
+                <div class="label">Meeting setup <span class="mini">Reduce defensiveness before you enter</span></div>
+                <ul class="checklist" id="setupChecklist">
+                  <li class="check">
+                    <input type="checkbox" data-check="setup_ask_meeting">
+                    <div class="txt"><strong>Book a dedicated meeting</strong> (don’t ambush) and name the topic neutrally: “compensation review”.</div>
+                  </li>
+                  <li class="check">
+                    <input type="checkbox" data-check="setup_manager_ok">
+                    <div class="txt"><strong>Map the approval path</strong>: who decides, who influences, who blocks (so you aim correctly).</div>
+                  </li>
+                  <li class="check">
+                    <input type="checkbox" data-check="setup_onepager">
+                    <div class="txt"><strong>Create a one-page summary</strong> (scope → impact → ask → options). Keep it manager-safe.</div>
+                  </li>
+                  <li class="check">
+                    <input type="checkbox" data-check="setup_timing">
+                    <div class="txt"><strong>Time it well</strong>: link to review cycles, new responsibilities, delivered milestones, or retention need.</div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="field">
+                <div class="label">The flow <span class="mini">A clean conversation structure</span></div>
+                <ul class="checklist" id="flowChecklist">
+                  <li class="check">
+                    <input type="checkbox" data-check="flow_open">
+                    <div class="txt"><strong>Open calmly</strong>: commitment + purpose + agenda (no apology language).</div>
+                  </li>
+                  <li class="check">
+                    <input type="checkbox" data-check="flow_case">
+                    <div class="txt"><strong>State your case</strong>: role reality + top evidence (3 points max) + market anchor if strong.</div>
+                  </li>
+                  <li class="check">
+                    <input type="checkbox" data-check="flow_ask">
+                    <div class="txt"><strong>Make the ask</strong>: target + effective date + range (if needed). Then pause.</div>
+                  </li>
+                  <li class="check">
+                    <input type="checkbox" data-check="flow_problem_solve">
+                    <div class="txt"><strong>Problem-solve constraints</strong>: “What would make this approvable?” and offer options (phased / bonus / review date).</div>
+                  </li>
+                  <li class="check">
+                    <input type="checkbox" data-check="flow_close">
+                    <div class="txt"><strong>Close tightly</strong>: recap, decision owner, timeline, next touchpoint, and written follow-up.</div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="field">
+                <div class="label">Follow-up discipline <span class="mini">Where most people leak leverage</span></div>
+                <ul class="checklist" id="followChecklist">
+                  <li class="check">
+                    <input type="checkbox" data-check="follow_email">
+                    <div class="txt"><strong>Send a recap email</strong> the same day: what was discussed, any agreed figures, and next steps.</div>
+                  </li>
+                  <li class="check">
+                    <input type="checkbox" data-check="follow_targets">
+                    <div class="txt"><strong>If “not now”</strong>: leave with measurable targets + date (“If I deliver X by Y, can we move to Z?”).</div>
+                  </li>
+                  <li class="check">
+                    <input type="checkbox" data-check="follow_contract">
+                    <div class="txt"><strong>If agreed</strong>: ask when the contract / system will reflect it and from what effective date.</div>
+                  </li>
+                  <li class="check">
+                    <input type="checkbox" data-check="follow_keep_output">
+                    <div class="txt"><strong>Keep artefacts</strong>: summary, outcomes, and evidence list (you will need it again).</div>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="hint">
+                Modern reality: a lot of pay conversations are now tied to <strong>scope creep</strong>, <strong>RTO pressure</strong>, and <strong>retention</strong>. Your best angle is still the same:
+                <strong>value delivered</strong> + <strong>role level reality</strong> + a <strong>manager-defensible</strong> ask.
+              </div>
+            </div>
+
+            <!-- SCRIPTS -->
+            <div class="section" id="tab-scripts">
+              <div class="field">
+                <div class="label">Tone <span class="mini">Choose the posture that fits the room</span></div>
+                <select id="toneSelect">
+                  <option value="balanced" selected>Balanced (firm + collaborative)</option>
+                  <option value="direct">Direct (clear + outcome-led)</option>
+                  <option value="soft">Soft (relationship-first)</option>
+                </select>
+              </div>
+
+              <div class="script-box" style="margin-bottom:10px;">
+                <div class="script-head">
+                  <h4><i class="fas fa-play"></i> Opening (meeting)</h4>
+                  <button class="copy-btn" data-copy="scriptOpening" aria-label="Copy opening"><i class="far fa-copy"></i></button>
+                </div>
+                <div class="script-text" id="scriptOpening"></div>
+              </div>
+
+              <div class="script-box" style="margin-bottom:10px;">
+                <div class="script-head">
+                  <h4><i class="fas fa-bullseye"></i> The ask (clean + specific)</h4>
+                  <button class="copy-btn" data-copy="scriptAsk" aria-label="Copy ask"><i class="far fa-copy"></i></button>
+                </div>
+                <div class="script-text" id="scriptAsk"></div>
+              </div>
+
+              <div class="script-box" style="margin-bottom:10px;">
+                <div class="script-head">
+                  <h4><i class="fas fa-shuffle"></i> If budget is tight (options)</h4>
+                  <button class="copy-btn" data-copy="scriptOptions" aria-label="Copy options"><i class="far fa-copy"></i></button>
+                </div>
+                <div class="script-text" id="scriptOptions"></div>
+              </div>
+
+              <div class="script-box">
+                <div class="script-head">
+                  <h4><i class="fas fa-envelope"></i> Follow-up email (recap)</h4>
+                  <button class="copy-btn" data-copy="scriptEmail" aria-label="Copy follow-up"><i class="far fa-copy"></i></button>
+                </div>
+                <div class="script-text" id="scriptEmail"></div>
+              </div>
+
+              <div class="hint">
+                Ultra-practical rule: don’t “sell yourself” for 20 minutes. Give <strong>three proof points</strong>, make the ask, then pause.
+                Over-talking looks like uncertainty.
+              </div>
+            </div>
+
+            <!-- OBJECTIONS -->
+            <div class="section" id="tab-objections">
+              <div class="accordion" id="objectionAccordion"></div>
+
+              <div class="hint">
+                Objection decoding: most pushback is not personal. It’s either <strong>budget</strong>, <strong>precedent</strong>, <strong>process</strong>, or <strong>risk to the manager</strong>.
+                Your job is to turn “no” into: <strong>criteria + pathway + date</strong>.
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT -->
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">
+                <span class="bubble"><i class="fas fa-file-lines"></i></span>
+                <span>Your brief</span>
+              </div>
+              <span class="tag" id="briefTag">LIVE</span>
+            </div>
+
+            <div class="metric-grid" style="margin-bottom:12px;">
+              <div class="metric">
+                <div>
+                  <div class="k">Increase</div>
+                  <div class="v" id="mIncrease">—</div>
+                  <div class="s" id="mIncreaseSub">Set current + target pay</div>
+                </div>
+                <div class="ico"><i class="fas fa-arrow-trend-up"></i></div>
+              </div>
+
+              <div class="metric">
+                <div>
+                  <div class="k">Monthly delta</div>
+                  <div class="v" id="mMonthly">—</div>
+                  <div class="s">Approx. annual/12</div>
+                </div>
+                <div class="ico"><i class="fas fa-calendar"></i></div>
+              </div>
+
+              <div class="metric">
+                <div>
+                  <div class="k">Market position</div>
+                  <div class="v" id="mMarket">—</div>
+                  <div class="s" id="mMarketSub">Optional</div>
+                </div>
+                <div class="ico"><i class="fas fa-chart-line"></i></div>
+              </div>
+
+              <div class="metric">
+                <div>
+                  <div class="k">Evidence count</div>
+                  <div class="v" id="mEvidence">0</div>
+                  <div class="s">Aim: 3–6 strong points</div>
+                </div>
+                <div class="ico"><i class="fas fa-list-check"></i></div>
+              </div>
+            </div>
+
+            <div class="readiness" style="margin-bottom:12px;">
+              <div class="readiness-top">
+                <div class="t"><i class="fas fa-signal"></i> Readiness</div>
+                <span class="badge" id="readinessBadge">—</span>
+              </div>
+              <div class="bar"><span id="readinessBar"></span></div>
+              <div style="height:10px"></div>
+              <div class="row-2">
+                <div>
+                  <div class="label">Evidence strength <span class="mini">1–5</span></div>
+                  <input id="rEvidence" type="number" min="1" max="5" step="1" value="3" />
+                </div>
+                <div>
+                  <div class="label">Leverage <span class="mini">1–5</span></div>
+                  <input id="rLeverage" type="number" min="1" max="5" step="1" value="3" />
+                </div>
+              </div>
+              <div style="height:10px"></div>
+              <div class="row-2">
+                <div>
+                  <div class="label">Timing <span class="mini">1–5</span></div>
+                  <input id="rTiming" type="number" min="1" max="5" step="1" value="3" />
+                </div>
+                <div>
+                  <div class="label">Manager cover <span class="mini">1–5</span></div>
+                  <input id="rCover" type="number" min="1" max="5" step="1" value="3" />
+                </div>
+              </div>
+              <div class="hint" id="readinessHint" style="margin-top:10px;">
+                Target state: your manager can defend your ask using <strong>role level + evidence + options</strong>.
+              </div>
+            </div>
+
+            <div class="field" style="margin-bottom:12px;">
+              <div class="label">Your one-page summary <span class="mini">This is what you’ll copy</span></div>
+              <textarea id="briefPreview" readonly></textarea>
+            </div>
+
+            <div class="field">
+              <div class="label">Additional negotiation topics <span class="mini">Common “extras” beyond base pay</span></div>
+              <div class="ev-desc" style="margin-bottom:10px;">
+                Use this list to keep optional asks clean (choose <strong>1–2</strong>, not seven).
+              </div>
+
+              <div class="ev-meta">
+                <span class="mini-pill"><i class="fas fa-trophy"></i> Title / level</span>
+                <span class="mini-pill"><i class="fas fa-gift"></i> Bonus</span>
+                <span class="mini-pill"><i class="fas fa-graduation-cap"></i> Training budget</span>
+                <span class="mini-pill"><i class="fas fa-clock"></i> Flexible pattern</span>
+                <span class="mini-pill"><i class="fas fa-house"></i> Hybrid stability</span>
+                <span class="mini-pill"><i class="fas fa-calendar-check"></i> Review date</span>
+              </div>
+              <div class="hint" style="margin-top:10px;">
+                If you’re under RTO pressure, separate the issues: <strong>pay is value</strong> — <strong>work pattern is sustainability</strong>. Keep each request defensible.
+              </div>
+            </div>
+
+            <!-- CHANGE 3: moved calculator to its own container AFTER Additional negotiation topics -->
+            <div class="field">
+              <div class="label">Percentage calculator <span class="mini">Current gross → desired gross</span></div>
+              <div class="row-2" style="margin-bottom:10px;">
+                <div>
+                  <div class="label">Current gross <span class="mini">£</span></div>
+                  <input id="grossCurrent" type="number" min="0" step="500" placeholder="e.g. 52000" />
+                </div>
+                <div>
+                  <div class="label">Desired gross <span class="mini">£</span></div>
+                  <input id="grossDesired" type="number" min="0" step="500" placeholder="e.g. 60000" />
+                </div>
+              </div>
+              <div class="label" style="margin-bottom:0;">% change <span class="mini" id="grossPct">—</span></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card" style="margin-top:12px;">
+          <div class="card-head">
+            <div class="card-title">
+              <span class="bubble"><i class="fas fa-chess"></i></span>
+              <!-- CHANGE 5: removed 'guidance' from heading -->
+              <span>Premium</span>
+            </div>
+            <!-- CHANGE 5: removed word 'SMART' from pill -->
+            <span class="tag">PREMIUM</span>
+          </div>
+
+          <div class="row-2">
+            <div class="script-box">
+              <div class="script-head">
+                <h4><i class="fas fa-lightbulb"></i> What works reliably</h4>
+                <button class="copy-btn" data-copy="worksReliably" aria-label="Copy"><i class="far fa-copy"></i></button>
+              </div>
+              <div class="script-text" id="worksReliably"></div>
+            </div>
+
+            <div class="script-box">
+              <div class="script-head">
+                <h4><i class="fas fa-ban"></i> What to avoid</h4>
+                <button class="copy-btn" data-copy="avoidBox" aria-label="Copy"><i class="far fa-copy"></i></button>
+              </div>
+              <div class="script-text" id="avoidBox"></div>
+            </div>
+          </div>
+
+          <div class="hint" style="margin-top:12px;">
+            UK reality check: there’s typically <strong>no automatic right</strong> to a pay rise unless it’s contractually agreed — but you can always propose a change.
+            The win is to leave with either <strong>an agreed change</strong> or a <strong>written pathway</strong> to one.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+      MY PLAYBOOK SIDEBAR
+  =========================== -->
+  <div class="playbook-sidebar-overlay" id="playbookOverlay">
+    <div class="playbook-sidebar" id="playbookSidebar">
+      <div class="playbook-sidebar-header">
+        <div class="playbook-sidebar-header-title-row">
+          <h3>My Playbook</h3>
+          <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <p>Saved items</p>
+      </div>
+
+      <div class="playbook-sidebar-body">
+        <div id="savedItemsContainer">
+          <p class="saved-items-empty" id="savedItemsEmpty">
+            You haven’t saved anything yet. Use <strong>Save</strong> on tools you want quick access to.
+          </p>
+          <ul class="saved-items-list" id="savedItemsList"></ul>
+        </div>
+
+        <div class="playbook-quick-links">
+          <div class="playbook-quick-links-header">
+            <span class="quick-links-title">Quick links</span>
+          </div>
+          <div class="playbook-quick-links-list">
+            <a href="dashboard.html" class="quick-link-pill"><i class="fas fa-gauge"></i> The Dashboard</a>
+            <a href="the-lens.html" class="quick-link-pill"><i class="fas fa-search"></i> The Lens</a>
+            <a href="the-toolkit.html" class="quick-link-pill"><i class="fas fa-toolbox"></i> The Toolkit</a>
+            <a href="the-coach.html" class="quick-link-pill"><i class="fas fa-comments"></i> The Coach</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-playbook-fab" id="myPlaybookButton">
+    <i class="fas fa-book-open"></i>
+    <span>My Playbook</span>
+  </div>
+
+  <!-- ===========================
+      FOOTER
+    =========================== -->
+  <footer>
+    <div class="container">
+      <p>
+        © 2025 The Employee Playbook. All rights reserved.
+        &nbsp;·&nbsp; Guidance references:
+        <a href="https://www.acas.org.uk/pay-rises" target="_blank" rel="noopener">Acas — Pay rises</a>,
+        <a href="https://www.acas.org.uk/changing-an-employment-contract/advice-for-employees" target="_blank" rel="noopener">Acas — Contract changes</a>.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('loaded');
+      initializeMobileNav();
+      initializeThemeToggle();
+      initializePlaybook();
+      initializePlanner();
+    });
+
+    function initializeMobileNav() {
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      if (!mobileToggle || !navLinks) return;
+
+      mobileToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('active');
+        const icon = this.querySelector('i');
+        if (icon) {
+          icon.classList.toggle('fa-bars');
+          icon.classList.toggle('fa-times');
+        }
+      });
+
+      document.addEventListener('click', function(event) {
+        if (navLinks.classList.contains('active') &&
+            !navLinks.contains(event.target) &&
+            !mobileToggle.contains(event.target)) {
+          navLinks.classList.remove('active');
+          const icon = mobileToggle.querySelector('i');
+          if (icon) {
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+          }
+        }
+      });
+    }
+
+    function initializeThemeToggle() {
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      if (!themeToggleBtn) return;
+
+      const themeIcon = themeToggleBtn.querySelector('i');
+      const logoImg = document.getElementById('mainLogo');
+      const logoFallback = document.getElementById('logoFallback');
+
+      function getLogoPath(filename) {
+        if (window.location.protocol === 'file:') {
+          const currentPath = window.location.pathname;
+          const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+          return basePath + 'assets/img/' + filename;
+        }
+        return './assets/img/' + filename;
+      }
+
+      function showFallbackLogo() {
+        if (logoImg) logoImg.style.display = 'none';
+        if (logoFallback) logoFallback.style.display = 'inline-flex';
+      }
+
+      function showImageLogo() {
+        if (logoFallback) logoFallback.style.display = 'none';
+        if (logoImg) logoImg.style.display = 'block';
+      }
+
+      function updateLogoForTheme(isDarkMode) {
+        if (!logoImg) return;
+        showImageLogo();
+        logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+        logoImg.alt = 'The Employee Playbook';
+      }
+
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const savedTheme = localStorage.getItem('theme');
+      const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches);
+
+      if (shouldUseDark) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      }
+
+      themeToggleBtn.addEventListener('click', function() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        if (isDarkMode) {
+          document.body.classList.remove('dark-mode');
+          localStorage.setItem('theme', 'light');
+          if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+          updateLogoForTheme(false);
+        } else {
+          document.body.classList.add('dark-mode');
+          localStorage.setItem('theme', 'dark');
+          if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+          updateLogoForTheme(true);
+        }
+      });
+
+      prefersDarkScheme.addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+          if (e.matches) {
+            document.body.classList.add('dark-mode');
+            if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+            updateLogoForTheme(true);
+          } else {
+            document.body.classList.remove('dark-mode');
+            if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+            updateLogoForTheme(false);
+          }
+        }
+      });
+
+      if (logoImg) {
+        logoImg.addEventListener('error', function() {
+          if (this.src.includes('logo-dark.png')) {
+            this.src = getLogoPath('logo.png');
+          } else {
+            showFallbackLogo();
+          }
+        });
+      }
+    }
+
+    const PLAYBOOK_KEY = 'tepSavedItems';
+    const CURRENT_TOOL_ID = 'pay-increase-negotiation-planner';
+    const CURRENT_TOOL_TITLE = 'Pay Increase Negotiation Planner';
+    const CURRENT_TOOL_TYPE = 'Framework';
+
+    function getSavedItems() {
+      try {
+        const raw = localStorage.getItem(PLAYBOOK_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function setSavedItems(items) {
+      try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+      catch (e) { }
+    }
+
+    function initializePlaybook() {
+      const playbookOverlay = document.getElementById('playbookOverlay');
+      const playbookSidebar = document.getElementById('playbookSidebar');
+      const playbookButton = document.getElementById('myPlaybookButton');
+      const closeBtn = document.getElementById('closePlaybook');
+      const saveItemBtn = document.getElementById('saveBtn');
+
+      if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+      renderSavedItems();
+
+      const savedItems = getSavedItems();
+      const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+      updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+      saveItemBtn.addEventListener('click', () => {
+        const items = getSavedItems();
+        const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+        let nowSaved;
+
+        if (index === -1) {
+          const toolLink = window.location.pathname.split('/').pop() || 'pay-increase-negotiation-planner.html';
+          items.push({
+            id: CURRENT_TOOL_ID,
+            title: CURRENT_TOOL_TITLE,
+            type: CURRENT_TOOL_TYPE,
+            link: toolLink,
+            savedAt: new Date().toISOString()
+          });
+          nowSaved = true;
+        } else {
+          items.splice(index, 1);
+          nowSaved = false;
+        }
+
+        setSavedItems(items);
+        updateSaveButtonState(saveItemBtn, nowSaved);
+        renderSavedItems();
+      });
+
+      playbookButton.addEventListener('click', () => {
+        playbookOverlay.classList.add('open');
+        playbookSidebar.classList.add('open');
+      });
+
+      closeBtn.addEventListener('click', () => {
+        playbookOverlay.classList.remove('open');
+        playbookSidebar.classList.remove('open');
+      });
+
+      playbookOverlay.addEventListener('click', (e) => {
+        if (e.target === playbookOverlay) {
+          playbookOverlay.classList.remove('open');
+          playbookSidebar.classList.remove('open');
+        }
+      });
+    }
+
+    function updateSaveButtonState(button, isSaved) {
+      if (!button) return;
+      const icon = button.querySelector('i');
+      const label = button.querySelector('span');
+
+      if (isSaved) {
+        button.classList.add('saved');
+        if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+        if (label) label.textContent = 'Saved';
+      } else {
+        button.classList.remove('saved');
+        if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+        if (label) label.textContent = 'Save';
+      }
+    }
+
+    function renderSavedItems() {
+      const listEl = document.getElementById('savedItemsList');
+      const emptyEl = document.getElementById('savedItemsEmpty');
+      if (!listEl || !emptyEl) return;
+
+      const items = getSavedItems();
+      listEl.innerHTML = '';
+
+      if (!items.length) {
+        emptyEl.style.display = 'block';
+        return;
+      }
+
+      emptyEl.style.display = 'none';
+
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'saved-item';
+
+        const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+        const dateText = savedDate
+          ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+          : '';
+
+        li.innerHTML = `
+          <div class="saved-item-title-row">
+            <span class="saved-item-title">${escapeHtml(item.title)}</span>
+            <span class="saved-item-type">${escapeHtml(item.type)}</span>
+          </div>
+          <div class="saved-item-meta">
+            ${dateText ? `Saved on ${dateText}` : ''}
+          </div>
+          <a class="saved-item-link" href="${escapeHtml(item.link)}">
+            Open <i class="fas fa-arrow-right"></i>
+          </a>
+        `;
+        listEl.appendChild(li);
+      });
+    }
+
+    const PLANNER_KEY = 'tepPayNegotiationPlanner_v1';
+
+    const defaultState = () => ({
+      scenario: 'review',
+      tone: 'balanced',
+      roleReality: '',
+      currentPay: '',
+      targetPay: '',
+      rangeLow: '',
+      rangeHigh: '',
+      marketMedian: '',
+      marketHigh: '',
+      internalAlign: '',
+      levers: '',
+      flags: { freeze:false, restructure:false, perf:false, probation:false },
+      evidence: [],
+      checks: {},
+      readiness: { evidence:3, leverage:3, timing:3, cover:3 }
+    });
+
+    let state = defaultState();
+
+    const objections = [
+      { key:'budget', icon:'fas fa-sack-dollar', title:'“There’s no budget right now.”', sub:'Budget / headcount controls',
+        body:[
+          { h:'What it usually means', t:'They may believe you — but they need a defensible path (timing, process, or a trade).' },
+          { h:'What to say', t:'“Understood. What would make this approvable — and when is the next decision window? If base is constrained, can we look at a phased increase, a bonus, or a written review date tied to outcomes?”' },
+          { h:'What to do next', t:'Leave with: (1) criteria, (2) date, (3) owner. If no date exists, propose one.' }
+        ]
+      },
+      { key:'policy', icon:'fas fa-gavel', title:'“That’s not how we do pay here.”', sub:'Process / precedent / HR policy',
+        body:[
+          { h:'What it usually means', t:'They fear creating a precedent or breaking a pay band rule.' },
+          { h:'What to say', t:'“I want this to be aligned with policy. Which level/band matches the work I’m doing today, and what’s the mechanism to adjust fairly?”' },
+          { h:'What to do next', t:'Ask for the pay band / level expectations and align your evidence to the criteria.' }
+        ]
+      },
+      { key:'performance', icon:'fas fa-chart-simple', title:'“We need to see more performance first.”', sub:'Performance narrative is not locked',
+        body:[
+          { h:'What it usually means', t:'They’re not confident your story is shared. Or they want outcomes framed cleanly.' },
+          { h:'What to say', t:'“Okay — what specifically would you need to see to support this? Can we agree 2–3 measurable outcomes and a review date?”' },
+          { h:'What to do next', t:'Write the targets down in the recap email. Do not leave it as “keep doing well”.' }
+        ]
+      },
+      { key:'timing', icon:'fas fa-calendar-xmark', title:'“It’s the wrong time / wait until review.”', sub:'Timing / cycle / approvals',
+        body:[
+          { h:'What it usually means', t:'They want to defer risk, or they genuinely can’t move outside the cycle.' },
+          { h:'What to say', t:'“If we have to wait for the cycle, can we agree now what level this role maps to, what evidence you’ll need, and lock the review conversation into the calendar?”' },
+          { h:'What to do next', t:'Get a dated commitment. If they refuse dates, your leverage is information (market + retention).' }
+        ]
+      },
+      { key:'compare', icon:'fas fa-people-group', title:'“We can’t adjust you without adjusting others.”', sub:'Internal equity anxiety',
+        body:[
+          { h:'What it usually means', t:'They’re worried about internal fairness, banding, or knock-on effects.' },
+          { h:'What to say', t:'“I understand internal equity. My ask is based on role scope and outcomes — what level should this work sit at, and how do we align my pay to that fairly?”' },
+          { h:'What to do next', t:'Re-anchor away from other people’s pay and onto role level + measurable impact.' }
+        ]
+      },
+      { key:'rto', icon:'fas fa-building', title:'“We need you in the office more.”', sub:'RTO / hybrid shift',
+        body:[
+          { h:'What it usually means', t:'They’re using presence as a proxy for trust, culture control, or risk management.' },
+          { h:'What to say', t:'“Happy to support the team. Can we separate the two topics: (1) compensation aligned to scope and impact, and (2) a sustainable working pattern that protects delivery? I can propose a trial with clear outcomes.”' },
+          { h:'What to do next', t:'Offer a time-boxed trial with measurable outputs. Keep it operational, not emotional.' }
+        ]
+      }
+    ];
+
+    function initializePlanner(){
+      bindTabs();
+      bindInputs();
+      renderObjections();
+      renderPremiumGuidance();
+      initGrossCalculator();
+      loadState();
+      refreshAll();
+
+      document.getElementById('loadExamplesBtn').addEventListener('click', loadExamples);
+      document.getElementById('resetPlannerBtn').addEventListener('click', resetPlanner);
+      document.getElementById('copyBriefBtn').addEventListener('click', copyBrief);
+
+      document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const targetId = btn.getAttribute('data-copy');
+          const el = document.getElementById(targetId);
+          if (!el) return;
+          copyText(el.innerText || el.value || '');
+          flashCopied(btn);
+        });
+      });
+    }
+
+    function bindTabs(){
+      document.querySelectorAll('.tab').forEach(t => {
+        t.addEventListener('click', () => {
+          document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+          document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+          t.classList.add('active');
+          const id = t.getAttribute('data-tab');
+          const sec = document.getElementById(id);
+          if (sec) sec.classList.add('active');
+          stateTagFromTab(id);
+          persist();
+        });
+      });
+    }
+
+    function stateTagFromTab(tabId){
+      const tag = document.getElementById('caseTag');
+      if (!tag) return;
+      const map = { 'tab-prep':'PREP', 'tab-meeting':'FLOW', 'tab-scripts':'SCRIPTS', 'tab-objections':'DEFENCE' };
+      tag.textContent = map[tabId] || 'PREP';
+    }
+
+    function bindInputs(){
+      const map = [
+        ['scenarioSelect','scenario'],
+        ['toneSelect','tone'],
+        ['roleReality','roleReality'],
+        ['currentPay','currentPay'],
+        ['targetPay','targetPay'],
+        ['rangeLow','rangeLow'],
+        ['rangeHigh','rangeHigh'],
+        ['marketMedian','marketMedian'],
+        ['marketHigh','marketHigh'],
+        ['internalAlign','internalAlign'],
+        ['levers','levers']
+      ];
+
+      map.forEach(([id,key]) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('input', () => { state[key] = el.value; refreshAll(); persist(); });
+        el.addEventListener('change', () => { state[key] = el.value; refreshAll(); persist(); });
+      });
+
+      const flags = [
+        ['flagFreeze','freeze'],
+        ['flagRestructure','restructure'],
+        ['flagPerf','perf'],
+        ['flagProbation','probation']
+      ];
+      flags.forEach(([id,k]) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('change', () => { state.flags[k] = !!el.checked; refreshAll(); persist(); });
+      });
+
+      document.getElementById('addEvidenceBtn').addEventListener('click', addEvidence);
+
+      document.querySelectorAll('[data-check]').forEach(ch => {
+        ch.addEventListener('change', () => {
+          const key = ch.getAttribute('data-check');
+          state.checks[key] = !!ch.checked;
+          persist();
+        });
+      });
+
+      const rMap = [
+        ['rEvidence','evidence'],
+        ['rLeverage','leverage'],
+        ['rTiming','timing'],
+        ['rCover','cover']
+      ];
+      rMap.forEach(([id,k]) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.addEventListener('input', () => {
+          const v = clampInt(el.value, 1, 5);
+          el.value = v;
+          state.readiness[k] = v;
+          refreshAll();
+          persist();
+        });
+        el.addEventListener('change', () => {
+          const v = clampInt(el.value, 1, 5);
+          el.value = v;
+          state.readiness[k] = v;
+          refreshAll();
+          persist();
+        });
+      });
+    }
+
+    function renderObjections(){
+      const wrap = document.getElementById('objectionAccordion');
+      wrap.innerHTML = '';
+      objections.forEach(o => {
+        const div = document.createElement('div');
+        div.className = 'acc';
+        div.innerHTML = `
+          <button class="acc-btn" type="button" aria-expanded="false">
+            <span class="l">
+              <span class="b"><i class="${o.icon}"></i></span>
+              <span class="t">
+                <span class="h">${escapeHtml(o.title)}</span>
+                <span class="s">${escapeHtml(o.sub)}</span>
+              </span>
+            </span>
+            <span class="chev"><i class="fas fa-chevron-down"></i></span>
+          </button>
+          <div class="acc-body">
+            ${o.body.map(x => `<div class="p"><strong>${escapeHtml(x.h)}:</strong> ${escapeHtml(x.t)}</div>`).join('')}
+          </div>
+        `;
+        const btn = div.querySelector('.acc-btn');
+        btn.addEventListener('click', () => {
+          const isOpen = div.classList.contains('open');
+          document.querySelectorAll('.acc.open').forEach(a => {
+            if (a !== div) {
+              a.classList.remove('open');
+              const b = a.querySelector('.acc-btn');
+              if (b) b.setAttribute('aria-expanded','false');
+            }
+          });
+          div.classList.toggle('open', !isOpen);
+          btn.setAttribute('aria-expanded', String(!isOpen));
+        });
+        wrap.appendChild(div);
+      });
+    }
+
+    function renderPremiumGuidance(){
+      const works = document.getElementById('worksReliably');
+      const avoid = document.getElementById('avoidBox');
+
+      works.textContent =
+`• Keep it manager-defensible: role level + evidence + options (not emotion).
+• Use “approvable language”: “What would make this approvable?” beats “Why not?”
+• Anchor to the work you already do (today), not future potential.
+• Make the ask clean: a number, an effective date, and a short rationale.
+• If blocked, negotiate the pathway: criteria + date + written recap.`;
+
+      avoid.textContent =
+`• “Cost of living” as the only argument (it rarely survives internal scrutiny).
+• Long autobiographies of effort (effort ≠ value in pay decisions).
+• Threats you can’t execute (fake external offers will burn trust).
+• Overloading your manager with seven different asks.
+• Leaving without next steps: no owner, no timeline, no written summary.`;
+    }
+
+    function initGrossCalculator(){
+      const cEl = document.getElementById('grossCurrent');
+      const dEl = document.getElementById('grossDesired');
+      const out = document.getElementById('grossPct');
+      if (!cEl || !dEl || !out) return;
+
+      const update = () => {
+        const c = Number(String(cEl.value || '').replace(/,/g,'').trim());
+        const d = Number(String(dEl.value || '').replace(/,/g,'').trim());
+        if (!Number.isFinite(c) || c <= 0 || !Number.isFinite(d) || d <= 0){
+          out.textContent = '—';
+          return;
+        }
+        const pct = ((d - c) / c) * 100;
+        const sign = pct > 0 ? '+' : '';
+        out.textContent = `${sign}${pct.toFixed(1)}%`;
+      };
+
+      cEl.addEventListener('input', update);
+      dEl.addEventListener('input', update);
+      cEl.addEventListener('change', update);
+      dEl.addEventListener('change', update);
+      update();
+    }
+
+    function loadExamples(){ /* unchanged */ 
+      state = defaultState();
+      state.scenario = 'offcycle';
+      state.tone = 'balanced';
+      state.roleReality = 'Role scope has expanded: I now own two workstreams end-to-end, handle higher-risk decisions, and lead stakeholder alignment across teams.';
+      state.currentPay = '52000';
+      state.targetPay = '60000';
+      state.rangeLow = '58000';
+      state.rangeHigh = '63000';
+      state.marketMedian = '61000';
+      state.marketHigh = '68000';
+      state.internalAlign = 'The work aligns with a higher level: decision complexity, stakeholder surface area, and ownership of outcomes have increased.';
+      state.levers = 'If base is constrained: phased increase, bonus, title/level alignment, training budget, and a written review date in 12 weeks.';
+      state.flags = { freeze:false, restructure:false, perf:false, probation:false };
+      state.evidence = [
+        { id: uid(), type:'impact', strength:'strong', text:'Delivered a key programme milestone 6 weeks early; reduced downstream rework through tighter stakeholder alignment.' },
+        { id: uid(), type:'risk', strength:'strong', text:'Introduced a quality gate that reduced high-severity incidents and prevented avoidable escalation.' },
+        { id: uid(), type:'scope', strength:'medium', text:'Took on ownership of an additional stream and became the escalation point for cross-team dependencies.' }
+      ];
+      state.readiness = { evidence:4, leverage:3, timing:4, cover:3 };
+
+      applyStateToUI();
+      refreshAll();
+      persist();
+      toastTag('caseTag','Loaded');
+    }
+
+    function resetPlanner(){
+      if (!confirm('Reset the planner (clears your saved planner inputs)?')) return;
+      state = defaultState();
+      persist();
+      applyStateToUI();
+      refreshAll();
+      toastTag('caseTag','Reset');
+    }
+
+    function addEvidence(){ /* unchanged */
+      const t = document.getElementById('evType').value;
+      const s = document.getElementById('evStrength').value;
+      const text = (document.getElementById('evText').value || '').trim();
+      if (!text){
+        pulse(document.getElementById('evText'));
+        return;
+      }
+      state.evidence.unshift({ id: uid(), type:t, strength:s, text });
+      document.getElementById('evText').value = '';
+      renderEvidence();
+      refreshAll();
+      persist();
+    }
+
+    function removeEvidence(id){
+      state.evidence = state.evidence.filter(e => e.id !== id);
+      renderEvidence();
+      refreshAll();
+      persist();
+    }
+
+    function renderEvidence(){ /* unchanged */
+      const wrap = document.getElementById('evidenceList');
+      wrap.innerHTML = '';
+      if (!state.evidence.length){
+        wrap.innerHTML = `
+          <div class="ev">
+            <div class="ev-desc">No evidence yet. Add 3–6 points that are measurable or clearly defensible.</div>
+          </div>
+        `;
+        document.getElementById('mEvidence').textContent = '0';
+        return;
+      }
+
+      state.evidence.forEach(ev => {
+        const div = document.createElement('div');
+        div.className = 'ev';
+
+        const typeLabel = ({
+          impact:'Impact delivered',
+          scope:'Scope expansion',
+          risk:'Risk reduced',
+          speed:'Speed improved',
+          stakeholders:'Stakeholder value',
+          market:'Market benchmark'
+        })[ev.type] || 'Evidence';
+
+        const strengthClass = ev.strength === 'strong' ? 'good' : (ev.strength === 'medium' ? 'warn' : 'risk');
+        const strengthLabel = ev.strength === 'strong' ? 'STRONG' : (ev.strength === 'medium' ? 'MEDIUM' : 'SOFT');
+
+        div.innerHTML = `
+          <div class="ev-top">
+            <div>
+              <div class="ev-name">${escapeHtml(typeLabel)}</div>
+              <div class="ev-meta">
+                <span class="mini-pill ${strengthClass}"><i class="fas fa-shield"></i> ${strengthLabel}</span>
+                <span class="mini-pill"><i class="fas fa-note-sticky"></i> Proof point</span>
+              </div>
+            </div>
+            <button class="icon-btn" aria-label="Remove evidence"><i class="fas fa-trash"></i></button>
+          </div>
+          <div class="ev-desc">${escapeHtml(ev.text)}</div>
+        `;
+
+        div.querySelector('.icon-btn').addEventListener('click', () => removeEvidence(ev.id));
+        wrap.appendChild(div);
+      });
+
+      document.getElementById('mEvidence').textContent = String(state.evidence.length);
+    }
+
+    function refreshAll(){ /* unchanged */
+      renderEvidence();
+      computeMetrics();
+      renderBrief();
+      renderScripts();
+      renderReadiness();
+      renderRiskHint();
+    }
+
+    function computeMetrics(){ /* unchanged */
+      const c = toNum(state.currentPay);
+      const t = toNum(state.targetPay);
+
+      const inc = (c && t) ? (t - c) : null;
+      const pct = (c && t) ? ((t - c) / c * 100) : null;
+
+      document.getElementById('mIncrease').textContent = (inc === null) ? '—' : `${fmtGBP(inc)} (${pct.toFixed(1)}%)`;
+      document.getElementById('mMonthly').textContent = (inc === null) ? '—' : `${fmtGBP(inc/12)}`;
+
+      const med = toNum(state.marketMedian);
+      if (t && med){
+        const diff = t - med;
+        const label = diff >= 0 ? `+${fmtGBP(diff)} vs median` : `${fmtGBP(diff)} vs median`;
+        document.getElementById('mMarket').textContent = label;
+        document.getElementById('mMarketSub').textContent = 'Using your target vs market median';
+      } else {
+        document.getElementById('mMarket').textContent = '—';
+        document.getElementById('mMarketSub').textContent = 'Add market median (optional)';
+      }
+
+      const hint = document.getElementById('calcHint');
+      const rl = toNum(state.rangeLow);
+      const rh = toNum(state.rangeHigh);
+      let extra = '';
+      if (c && t){
+        extra = `Your target implies an increase of ${fmtGBP(inc)} (${pct.toFixed(1)}%).`;
+      } else {
+        extra = 'Set current + target pay to calculate the increase.';
+      }
+      if (rl && rh && rl > rh){
+        extra += ' Range note: your low is higher than your high — swap them.';
+      }
+      hint.innerHTML = `Tip: A pay rise is usually a <strong>contract change</strong> — if agreed, confirm the new terms in writing so it’s unambiguous.<br><br><strong>${escapeHtml(extra)}</strong>`;
+    }
+
+    function renderBrief(){ /* unchanged */
+      const brief = document.getElementById('briefPreview');
+
+      const c = toNum(state.currentPay);
+      const t = toNum(state.targetPay);
+      const rl = toNum(state.rangeLow);
+      const rh = toNum(state.rangeHigh);
+
+      const inc = (c && t) ? (t - c) : null;
+      const pct = (c && t) ? ((t - c) / c * 100) : null;
+
+      const eStrong = state.evidence.filter(x => x.strength === 'strong').length;
+      const eTotal = state.evidence.length;
+
+      const scenarioName = ({
+        review:'Annual pay review',
+        offcycle:'Off-cycle ask',
+        promotion:'Promotion-linked',
+        compression:'Pay compression',
+        retention:'Retention',
+        rto:'RTO / hybrid shift'
+      })[state.scenario] || 'Pay discussion';
+
+      const flags = [];
+      if (state.flags.freeze) flags.push('Pay freeze controls');
+      if (state.flags.restructure) flags.push('Restructure risk');
+      if (state.flags.perf) flags.push('Performance narrative mixed');
+      if (state.flags.probation) flags.push('Probation/new role');
+      const flagsLine = flags.length ? flags.join(' · ') : 'None flagged';
+
+      const evidenceLines = state.evidence.slice(0,6).map((x,i) => `  ${i+1}. ${cleanLine(x.text)}`).join('\n');
+
+      const askLine = (c && t)
+        ? `Target: ${fmtGBP(t)} (from ${fmtGBP(c)} → +${fmtGBP(inc)} / ${pct.toFixed(1)}%)`
+        : 'Target: — (set current + target pay)';
+
+      const rangeLine = (rl && rh) ? `Range: ${fmtGBP(Math.min(rl,rh))} to ${fmtGBP(Math.max(rl,rh))}` : 'Range: — (optional)';
+
+      const marketLine = (state.marketMedian || state.marketHigh)
+        ? `Market: median ${state.marketMedian ? fmtGBP(toNum(state.marketMedian)) : '—'} · high ${state.marketHigh ? fmtGBP(toNum(state.marketHigh)) : '—'}`
+        : 'Market: — (optional)';
+
+      const leversLine = state.levers ? cleanLine(state.levers) : '—';
+      const internalLine = state.internalAlign ? cleanLine(state.internalAlign) : '—';
+      const rr = state.roleReality ? cleanLine(state.roleReality) : '—';
+
+      const text =
+`PAY INCREASE NEGOTIATION BRIEF
+==============================
+Scenario: ${scenarioName}
+Tone: ${toneLabel(state.tone)}
+
+ROLE REALITY (what changed / what’s true)
+- ${rr}
+
+THE ASK
+- ${askLine}
+- ${rangeLine}
+- ${marketLine}
+
+TOP EVIDENCE (${eTotal} total · ${eStrong} strong)
+${eTotal ? evidenceLines : '  —'}
+
+INTERNAL ALIGNMENT (manager-defensible framing)
+- ${internalLine}
+
+OPTIONS (if base is constrained)
+- ${leversLine}
+
+RISKS / CONSTRAINTS (flagged)
+- ${flagsLine}
+
+NEXT STEPS
+- Book a dedicated meeting and share a one-page summary (scope → impact → ask → options).
+- Close with a decision owner + timeline, then send a recap email the same day.`;
+
+      brief.value = text;
+    }
+
+    function renderScripts(){ /* unchanged */ 
+      const opening = document.getElementById('scriptOpening');
+      const ask = document.getElementById('scriptAsk');
+      const options = document.getElementById('scriptOptions');
+      const email = document.getElementById('scriptEmail');
+
+      const scenario = state.scenario;
+      const tone = state.tone;
+
+      const target = toNum(state.targetPay);
+      const low = toNum(state.rangeLow);
+      const high = toNum(state.rangeHigh);
+
+      const askPhrase = target ? `${fmtGBP(target)}` : '£[target]';
+      const rangePhrase = (low && high)
+        ? `${fmtGBP(Math.min(low,high))} to ${fmtGBP(Math.max(low,high))}`
+        : '£[range]';
+
+      const rr = state.roleReality ? cleanLine(state.roleReality) : 'the scope of the role has changed';
+      const topEv = state.evidence.slice(0,3).map(x => cleanLine(x.text));
+      const evLine = topEv.length ? topEv.map((x,i)=>`• ${x}`).join('\n') : '• [Proof point 1]\n• [Proof point 2]\n• [Proof point 3]';
+
+      const openerBase = ({
+        balanced: `Thanks for making time. I wanted to have a focused conversation about compensation, based on the work I’m doing now and the value I’m delivering. I’m committed to the role and I want to keep building here — so I’d like to align pay to the current scope.`,
+        direct: `I want to align my compensation to the level of work I’m doing now. I’ll keep this tight: scope, evidence, then a clear ask.`,
+        soft: `Thanks for meeting with me. I’d like to discuss compensation in a constructive way — I enjoy the work and want to stay aligned and motivated as the role evolves.`
+      })[tone];
+
+      const scenarioHook = ({
+        review: 'As we’re in pay review season, this felt like the right time to make the case cleanly.',
+        offcycle: 'Since the role has changed materially, I think it’s reasonable to review compensation off-cycle.',
+        promotion: 'Given the promotion / acting-up work, I want to align pay to the level of responsibility.',
+        compression: 'I’ve noticed pay compression risk in the market/new joiner banding, and I want to keep internal alignment fair and sustainable.',
+        retention: 'I’ve had external pull recently, but my preference is to stay — if we can align pay to the current level of work.',
+        rto: 'Given the recent changes around working patterns, I want to make sure compensation and role sustainability stay aligned to delivery expectations.'
+      })[scenario] || '';
+
+      opening.textContent =
+`${openerBase}
+${scenarioHook}
+
+Here’s the short version of what changed:
+- ${rr}
+
+And here are the top proof points:
+${evLine}`;
+
+      ask.textContent =
+`Based on the scope and outcomes, I’d like to move my pay to ${askPhrase}.
+If it helps to frame it as a range, I’m aiming for ${rangePhrase} depending on how you need to align to policy and timing.
+
+What would you need from me — or what steps would you need to take — to get this approved?`;
+
+      const levers = state.levers ? cleanLine(state.levers) : 'a phased increase, a bonus, or a written review date tied to measurable outcomes';
+      options.textContent =
+`If base pay is constrained right now, I’m open to options that still keep this fair and motivating — for example:
+- ${levers}
+
+If we can’t land the full number today, can we agree the criteria and a date to revisit, so there’s a clear pathway rather than an open-ended “maybe”?`;
+
+      email.textContent =
+`Subject: Recap — compensation review
+
+Hi [Manager name],
+
+Thanks for the conversation today. As discussed, I’m requesting a review of compensation aligned to the current role scope and outcomes.
+
+Summary:
+• Role reality: ${rr}
+• Ask: ${askPhrase}${(low && high) ? ` (range: ${rangePhrase})` : ''}
+• Key evidence (high level):
+${topEv.length ? topEv.map(x => `  - ${x}`).join('\n') : '  - [Proof point 1]\n  - [Proof point 2]\n  - [Proof point 3]'}
+
+Next steps:
+• Decision owner: [name / team]
+• Timeline: [date / by end of week / next review window]
+• If constrained: agree criteria + review date (and any interim options)
+
+Please let me know if you’d like me to send a one-page summary in a format that’s easier to forward.
+
+Thanks,
+[Your name]`;
+    }
+
+    function renderReadiness(){ /* unchanged */
+      const r = state.readiness;
+      const score = Math.round(((r.evidence + r.leverage + r.timing + r.cover) / 20) * 100);
+      const bar = document.getElementById('readinessBar');
+      const badge = document.getElementById('readinessBadge');
+
+      bar.style.width = `${score}%`;
+
+      let label = 'BUILDING';
+      let cls = '';
+      let hint = 'Strengthen evidence and tighten your ask.';
+
+      if (score >= 75){
+        label = 'READY';
+        cls = 'good';
+        hint = 'You have a manager-defensible case. Keep it tight: 3 proof points + clear ask + pause.';
+      } else if (score >= 55){
+        label = 'BUILDING';
+        cls = 'warn';
+        hint = 'You’re close. Add 1–2 stronger proof points and clarify the approval path.';
+      } else {
+        label = 'EARLY';
+        cls = 'risk';
+        hint = 'Do not “wing it”. Build evidence, align to role level, and time it strategically.';
+      }
+
+      badge.className = `badge ${cls}`.trim();
+      badge.textContent = `${label} ${score}%`;
+
+      document.getElementById('readinessHint').innerHTML =
+        `Target state: your manager can defend your ask using <strong>role level + evidence + options</strong>.<br><br><strong>${escapeHtml(hint)}</strong>`;
+
+      document.getElementById('briefTag').textContent = label;
+    }
+
+    function renderRiskHint(){ /* unchanged */
+      const hint = document.getElementById('riskHint');
+      const flags = state.flags;
+      const active = Object.entries(flags).filter(([k,v]) => v).map(([k]) => k);
+
+      if (!active.length){
+        hint.innerHTML = `Premium move: if constraints are real, don’t “argue budget”. Negotiate <strong>pathway</strong> (scope + outcomes + date) and leave with a written review commitment.`;
+        return;
+      }
+
+      const bullets = [];
+      if (flags.freeze) bullets.push('If pay freeze is real, lead with options (bonus / phased / review date) instead of forcing a single number.');
+      if (flags.restructure) bullets.push('Keep it low-drama: manager-safe summary, ask for clarity, avoid emotional framing.');
+      if (flags.perf) bullets.push('Do not argue. Ask for criteria, agree measurable outcomes, and schedule a review date.');
+      if (flags.probation) bullets.push('Consider asking for a defined review point tied to milestones rather than pushing hard on base immediately.');
+
+      hint.innerHTML = `Premium move: constraints are flagged — adjust strategy.<br><br><strong>What to do:</strong><br>• ${bullets.map(escapeHtml).join('<br>• ')}`;
+    }
+
+    function copyBrief(){
+      const text = document.getElementById('briefPreview').value || '';
+      copyText(text);
+      toastTag('briefTag','Copied');
+    }
+
+    function copyText(text){
+      navigator.clipboard.writeText(text).catch(() => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        ta.remove();
+      });
+    }
+
+    function flashCopied(btn){
+      const old = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check"></i>';
+      btn.style.background = 'rgba(16,185,129,0.12)';
+      btn.style.borderColor = 'rgba(16,185,129,0.25)';
+      btn.style.color = '#047857';
+      setTimeout(() => { btn.innerHTML = old; btn.removeAttribute('style'); }, 900);
+    }
+
+    function toastTag(id, text){
+      const el = document.getElementById(id);
+      if (!el) return;
+      const old = el.textContent;
+      el.textContent = text.toUpperCase();
+      setTimeout(() => { el.textContent = old; }, 900);
+    }
+
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(PLANNER_KEY);
+        if (!raw){
+          applyStateToUI();
+          renderEvidence();
+          return;
+        }
+        const parsed = JSON.parse(raw);
+        if (!parsed || typeof parsed !== 'object') throw new Error('bad');
+        state = { ...defaultState(), ...parsed };
+        state.flags = { ...defaultState().flags, ...(parsed.flags || {}) };
+        state.readiness = { ...defaultState().readiness, ...(parsed.readiness || {}) };
+        state.evidence = Array.isArray(parsed.evidence) ? parsed.evidence : [];
+        state.checks = parsed.checks && typeof parsed.checks === 'object' ? parsed.checks : {};
+        applyStateToUI();
+      } catch(e){
+        state = defaultState();
+        applyStateToUI();
+      }
+    }
+
+    function applyStateToUI(){
+      setVal('scenarioSelect', state.scenario);
+      setVal('toneSelect', state.tone);
+      setVal('roleReality', state.roleReality);
+      setVal('currentPay', state.currentPay);
+      setVal('targetPay', state.targetPay);
+      setVal('rangeLow', state.rangeLow);
+      setVal('rangeHigh', state.rangeHigh);
+      setVal('marketMedian', state.marketMedian);
+      setVal('marketHigh', state.marketHigh);
+      setVal('internalAlign', state.internalAlign);
+      setVal('levers', state.levers);
+
+      setChecked('flagFreeze', state.flags.freeze);
+      setChecked('flagRestructure', state.flags.restructure);
+      setChecked('flagPerf', state.flags.perf);
+      setChecked('flagProbation', state.flags.probation);
+
+      document.querySelectorAll('[data-check]').forEach(ch => {
+        const key = ch.getAttribute('data-check');
+        ch.checked = !!state.checks[key];
+      });
+
+      setVal('rEvidence', state.readiness.evidence);
+      setVal('rLeverage', state.readiness.leverage);
+      setVal('rTiming', state.readiness.timing);
+      setVal('rCover', state.readiness.cover);
+
+      renderEvidence();
+    }
+
+    function persist(){
+      try { localStorage.setItem(PLANNER_KEY, JSON.stringify(state)); }
+      catch(e){ }
+    }
+
+    function setVal(id, v){
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.value = (v ?? '');
+    }
+    function setChecked(id, v){
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.checked = !!v;
+    }
+    function toNum(v){
+      const n = Number(String(v || '').replace(/,/g,'').trim());
+      return Number.isFinite(n) && n > 0 ? n : null;
+    }
+    function fmtGBP(n){
+      const x = Number(n);
+      if (!Number.isFinite(x)) return '£—';
+      return x.toLocaleString('en-GB', { style:'currency', currency:'GBP', maximumFractionDigits:0 });
+    }
+    function clampInt(v, min, max){
+      const n = parseInt(v, 10);
+      if (!Number.isFinite(n)) return min;
+      return Math.max(min, Math.min(max, n));
+    }
+    function uid(){
+      return `ev_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+    }
+    function cleanLine(s){
+      return String(s || '').replace(/\s+/g,' ').trim();
+    }
+    function escapeHtml(str){
+      const s = String(str ?? '');
+      return s
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#039;");
+    }
+    function toneLabel(t){
+      return t === 'direct' ? 'Direct' : (t === 'soft' ? 'Soft' : 'Balanced');
+    }
+    function pulse(el){
+      if (!el) return;
+      el.style.boxShadow = '0 0 0 4px rgba(239,68,68,0.18)';
+      el.style.borderColor = 'rgba(239,68,68,0.35)';
+      setTimeout(() => { el.style.boxShadow = ''; el.style.borderColor = ''; }, 700);
+    }
+  </script>
+</body>
+</html>

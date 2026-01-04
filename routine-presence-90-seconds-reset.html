@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presence 90 Second Reset Routine | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand + Category Pills)
+    =========================== */
+    :root {
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+
+      --text-dark:#212529;
+      --text-medium:#495057;
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+      --success-green: #10b981;
+
+      /* Category colors */
+      --category-clarity: #7B5FC4;
+      --category-burnout: #f59e0b;
+      --category-manager: #10b981;
+      --category-politics: #3b82f6;
+      --category-hr: #6D28D9;
+      --category-confidence: #ef4444;
+      --category-career: #800020;
+
+      /* Light mode pill styles */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.08), rgba(123, 95, 196, 0.04));
+      --pill-clarity-border: rgba(123, 95, 196, 0.2);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.12), rgba(123, 95, 196, 0.08));
+      --pill-clarity-hover-border: rgba(123, 95, 196, 0.3);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.04));
+      --pill-burnout-border: rgba(245, 158, 11, 0.2);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(245, 158, 11, 0.08));
+      --pill-burnout-hover-border: rgba(245, 158, 11, 0.3);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.04));
+      --pill-confidence-border: rgba(239, 68, 68, 0.2);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.08));
+      --pill-confidence-hover-border: rgba(239, 68, 68, 0.3);
+    }
+
+    /* Dark Mode Variables */
+    .dark-mode {
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#888888;
+
+      --text-dark:#e0e0e0;
+      --text-medium:#b0b0b0;
+
+      --accent-purple:#9d86e9;
+      --accent-purple-dark:#7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.2);
+      --lighter-purple: rgba(123, 95, 196, 0.1);
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+      --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      --category-clarity: #9d86e9;
+      --category-burnout: #fbbf24;
+      --category-confidence: #f87171;
+
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.15), rgba(123, 95, 196, 0.08));
+      --pill-clarity-border: rgba(157, 134, 233, 0.3);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.2), rgba(123, 95, 196, 0.12));
+      --pill-clarity-hover-border: rgba(157, 134, 233, 0.4);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08));
+      --pill-burnout-border: rgba(251, 191, 36, 0.3);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.12));
+      --pill-burnout-hover-border: rgba(251, 191, 36, 0.4);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.08));
+      --pill-confidence-border: rgba(248, 113, 113, 0.3);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.12));
+      --pill-confidence-hover-border: rgba(248, 113, 113, 0.4);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body {
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.4s ease, background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+    }
+    body.loaded { opacity: 1; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+    /* NAV (template) */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      height: 80px;
+    }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; height: 100%; }
+    .logo-img { height: 100px; width: auto; transform: translateX(20%); padding: 14px 10px; display:block; min-height:100px; }
+    .nav-links { display:flex; gap:50px; }
+    .nav-link { color: var(--text-dark); text-decoration:none; font-weight:500; transition: color 0.3s ease; font-size:17px; }
+    .nav-link:hover { color: var(--accent-purple); }
+    .nav-link-container { position:relative; display:inline-block; }
+    .new-tag {
+      position:absolute; top:-12px; right:-35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color:#000; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2); z-index:10; white-space:nowrap;
+    }
+    .nav-actions { display:flex; align-items:center; gap:24px; transform: translateX(-20%); }
+    .header-cta {
+      background: var(--accent-purple); color:#fff; padding:8px 20px; border-radius:50px; text-decoration:none;
+      font-weight:600; font-size:14px; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(123,95,196,0.3);
+    }
+    .header-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(123,95,196,0.35); }
+    .sign-in { color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; }
+    .sign-in:hover { color: var(--accent-purple); }
+    .theme-toggle {
+      background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:16px;
+      width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .theme-toggle:hover { background-color: var(--light-gray); }
+    .mobile-toggle { display:none; background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:24px; width:40px; height:40px; border-radius:50%; align-items:center; justify-content:center; }
+    .mobile-sign-in, .mobile-sign-up { display:none; }
+
+    @media (max-width: 768px) {
+      .nav-container { justify-content:center; position:relative; }
+      .logo { position:absolute; left:50%; transform: translateX(-50%); display:flex; align-items:center; height:100%; }
+      .logo-img { height:125px; transform:none; padding:12px 0; }
+      .mobile-toggle { display:flex; position:absolute; left:20px; align-items:center; }
+      .nav-actions { transform:none; gap:16px; position:absolute; right:20px; }
+      .nav-actions .sign-in, .nav-actions .header-cta { display:none; }
+
+      .nav-links {
+        display:none; position:absolute; top:100%; left:0; width:100%;
+        background: var(--nav-bg); backdrop-filter: blur(10px);
+        flex-direction:column; padding:20px; border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1); gap:20px;
+      }
+      .nav-links.active { display:flex; }
+      .new-tag { position: static; margin-left: 8px; }
+      .mobile-sign-in, .mobile-sign-up { display:block !important; margin-top:10px; padding:12px 20px; border-radius:8px; text-align:center; font-weight:600; text-decoration:none; border:2px solid var(--accent-purple); }
+      .mobile-sign-in { background: var(--primary-white); color: var(--accent-purple); }
+      .mobile-sign-up { background: var(--accent-purple); color:#fff; }
+    }
+
+    /* HERO */
+    .tool-hero-section {
+      width:100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position:relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow:hidden;
+    }
+    .tool-hero-section::before{
+      content:''; position:absolute; inset:0;
+      background: linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+      z-index:1;
+    }
+    .dark-mode .tool-hero-section::before{
+      background: linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+    }
+    .tool-hero-content{
+      position:relative; z-index:2; max-width:1100px; margin:0 auto; padding: 0 20px 10px;
+      animation: heroFadeUp 0.45s ease-out;
+    }
+    @keyframes heroFadeUp { from { opacity:0; transform: translateY(18px);} to { opacity:1; transform: translateY(0);} }
+    .breadcrumb{
+      font-size:10px; text-transform:uppercase; letter-spacing:1px;
+      color: var(--dark-gray); margin-bottom:10px;
+      display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+    }
+    .breadcrumb a{ color: var(--text-medium); text-decoration:none !important; font-weight:500; letter-spacing:0.5px; transition: color 0.2s ease;}
+    .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+    .breadcrumb i{ color: var(--dark-gray); opacity:0.8; }
+    .breadcrumb .current{ color: var(--text-dark); font-weight:600; }
+
+    .save-btn{
+      position:absolute; top:16px; right:24px; z-index:5;
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 12px; font-size:12px; font-weight:500;
+      border-radius:999px; border:1px solid rgba(123,95,196,0.6);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px); color: var(--accent-purple-dark);
+      cursor:pointer; transition: all 0.2s ease;
+    }
+    .save-btn:hover{ transform: translateY(-1px); box-shadow: 0 4px 10px rgba(123,95,196,0.18); background:#fff; }
+    .dark-mode .save-btn{ background: rgba(20,20,20,0.9); border-color: rgba(157,134,233,0.6); }
+    .save-btn.saved{ background: var(--accent-purple); color:#fff; border-color:transparent; }
+
+    .checklist-name{
+      font-size:20px; font-weight:600; color: var(--accent-purple);
+      text-transform:uppercase; letter-spacing:1.8px;
+      margin-bottom:14px; margin-top:32px; display:block;
+    }
+    .hero-main-heading{ font-size:46px; font-weight:600; color: var(--text-dark); line-height:1.1; margin-bottom:20px; max-width:1100px; }
+    .hero-subheading{ font-size:16px; color: var(--text-medium); line-height:1.6; max-width:1000px; margin-bottom:30px; }
+
+    /* CATEGORY PILLS (kept) */
+    .category-pills-container { margin-bottom: 30px; }
+    .category-pills-title { font-size: 12px; font-weight: 600; color: var(--text-medium); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; display: block; }
+    .category-pills-grid { display:flex; gap:10px; flex-wrap: wrap; }
+
+    .category-pill{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 12px; border-radius:20px;
+      font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;
+      border: 1px solid transparent; backdrop-filter: blur(10px);
+      text-decoration:none; height:32px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: all 0.2s ease; cursor:pointer; white-space:nowrap;
+    }
+    .category-pill:hover{ transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.08); }
+    .category-icon { font-size: 11px; opacity: 0.85; }
+
+    .category-pill.clarity { color: var(--category-clarity); border-color: var(--pill-clarity-border); background: var(--pill-clarity-bg); }
+    .category-pill.clarity:hover { background: var(--pill-clarity-hover-bg); border-color: var(--pill-clarity-hover-border); }
+    .category-pill.burnout { color: var(--category-burnout); border-color: var(--pill-burnout-border); background: var(--pill-burnout-bg); }
+    .category-pill.burnout:hover { background: var(--pill-burnout-hover-bg); border-color: var(--pill-burnout-hover-border); }
+    .category-pill.confidence { color: var(--category-confidence); border-color: var(--pill-confidence-border); background: var(--pill-confidence-bg); }
+    .category-pill.confidence:hover { background: var(--pill-confidence-hover-bg); border-color: var(--pill-confidence-hover-border); }
+
+    /* CONTEXT + TIPS */
+    .context-tips-grid{
+      display:grid; grid-template-columns: 1fr 1fr; gap:32px;
+      margin-bottom:40px; width:100%; max-width:1100px;
+      margin: 0 auto 50px; padding:24px 20px 10px; margin-top:6px;
+    }
+    .context-card, .tips-card{
+      background: var(--primary-white);
+      border:1px solid var(--border-light);
+      border-radius:12px;
+      padding:28px 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .section-title{
+      font-size:20px; font-weight:600; color: var(--text-dark);
+      margin-bottom:18px; display:flex; align-items:center; gap:10px; white-space:nowrap;
+    }
+    .section-title i{ color: var(--accent-purple); }
+    .bullet-list{ list-style:none; margin:0; padding:0; }
+    .bullet-list li{
+      color: var(--text-medium); line-height:1.6; margin-bottom:14px; padding-left:26px; position:relative;
+    }
+    .bullet-list li::before{
+      content:"•"; position:absolute; left:10px; color: var(--accent-purple); font-size:18px;
+    }
+
+    /* BODY */
+    .checklist-body{ max-width:1100px; margin:0 auto; padding: 0 20px 20px; }
+    .checklist-section-title{ font-size:28px; font-weight:700; color: var(--accent-purple-dark); margin-bottom:10px; margin-top:60px !important; }
+    .checklist-section-subtitle{ font-size:14px; color: var(--text-medium); margin-bottom:18px; max-width:900px; }
+
+    .routine-grid{ display:grid; grid-template-columns: 1.15fr 0.85fr; gap:18px; align-items:start; margin-bottom:24px; }
+    .card{
+      background: var(--primary-white);
+      border:1px solid var(--border-light);
+      border-radius:14px;
+      padding:18px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .card-title{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
+    .card-title h3{
+      font-size:16px; font-weight:800; color: var(--text-dark);
+      display:flex; align-items:center; gap:10px;
+    }
+    .card-title h3 i{
+      color: var(--accent-purple);
+      background: var(--lighter-purple);
+      border: 1px solid rgba(123,95,196,0.12);
+      width:34px; height:34px; border-radius:10px;
+      display:inline-flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+
+    .tiny-pill{
+      font-size:11px; font-weight:800; letter-spacing:0.5px; text-transform:uppercase;
+      padding:6px 10px; border-radius:999px;
+      border: 1px solid rgba(123,95,196,0.2);
+      background: linear-gradient(135deg, rgba(123,95,196,0.10), rgba(123,95,196,0.03));
+      color: var(--accent-purple-dark);
+      white-space:nowrap;
+    }
+
+    .routine-meta{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:14px; }
+    .meta-pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:12px;
+      border:1px solid var(--border-light);
+      background: var(--light-gray);
+      font-size:12px; color: var(--text-medium); font-weight:700;
+    }
+    .meta-pill span.value{ color: var(--text-dark); font-variant-numeric: tabular-nums; }
+
+    .timer-face{
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      padding:14px; border-radius:14px;
+      border: 1px solid rgba(123,95,196,0.15);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      margin-bottom:12px;
+    }
+    .timer-label{ font-size:11px; text-transform:uppercase; letter-spacing:0.9px; color: var(--dark-gray); font-weight:800; }
+    .timer-time{ font-size:34px; font-weight:800; letter-spacing:-0.5px; color: var(--text-dark); font-variant-numeric: tabular-nums; line-height:1.0; }
+    .phase-line{ font-size:12.5px; color: var(--text-medium); line-height:1.4; }
+    .phase-line strong{ color: var(--text-dark); }
+
+    .timer-actions{ display:flex; flex-direction:column; gap:8px; align-items:stretch; min-width:160px; }
+    .btn{
+      border:none; border-radius:10px;
+      padding:10px 12px; font-size:13px; font-weight:800;
+      cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+      user-select:none;
+    }
+    .btn.primary{
+      background: var(--premium-gradient); color:#fff;
+      box-shadow: 0 10px 24px rgba(123,95,196,0.25);
+    }
+    .btn.primary:hover{ transform: translateY(-2px); box-shadow: 0 14px 30px rgba(123,95,196,0.30); }
+    .btn.secondary{ background: var(--light-purple); color: var(--accent-purple-dark); }
+    .btn.secondary:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,0.10); background: var(--accent-purple); color:#fff; }
+    .btn.ghost{ background: transparent; border:1px solid rgba(123,95,196,0.20); color: var(--accent-purple-dark); }
+    .btn.ghost:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,0.10); background: linear-gradient(135deg, rgba(123,95,196,0.10), rgba(123,95,196,0.04)); }
+    .btn:disabled{ opacity:0.55; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+
+    .phase-tabs{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+    .phase-tab{
+      flex:1; min-width: 180px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:10px 12px;
+      border-radius:14px;
+      border:1px solid var(--border-light);
+      background: var(--primary-white);
+      cursor:pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .phase-tab:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,0.08); border-color: rgba(123,95,196,0.22); }
+    .phase-tab.active{
+      border-color: rgba(123,95,196,0.35);
+      box-shadow: 0 12px 26px rgba(123,95,196,0.14);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+    }
+    .phase-name{ font-size:12px; font-weight:900; letter-spacing:0.7px; text-transform:uppercase; color: var(--accent-purple-dark); }
+    .phase-desc{ font-size:12.5px; color: var(--text-medium); line-height:1.35; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient: vertical; }
+    .phase-mins{
+      font-size:12px; font-weight:900; color: var(--text-dark);
+      background: var(--light-gray);
+      border: 1px solid var(--border-light);
+      padding:6px 10px;
+      border-radius:999px;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .phase-status{ width:10px; height:10px; border-radius:999px; background: rgba(108,117,125,0.35); border:1px solid rgba(108,117,125,0.25); }
+    .phase-tab.active .phase-status{ background: rgba(123,95,196,0.9); border-color: rgba(123,95,196,0.35); box-shadow: 0 0 0 4px rgba(123,95,196,0.12); }
+    .phase-tab.done .phase-status{ background: rgba(16,185,129,0.95); border-color: rgba(16,185,129,0.35); box-shadow: 0 0 0 4px rgba(16,185,129,0.12); }
+
+    .task-list{ display:flex; flex-direction:column; gap:10px; margin-top:12px; }
+    .task{
+      display:flex; gap:12px; align-items:flex-start;
+      padding:12px; border-radius:12px;
+      border:1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .task:hover{ transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,0.08); border-color: rgba(123,95,196,0.18); }
+
+    .tick{
+      width:22px; height:22px; border-radius:7px;
+      border: 2px solid rgba(123,95,196,0.35);
+      background: rgba(123,95,196,0.06);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; flex-shrink:0; margin-top:1px;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    }
+    .tick i{ font-size:12px; color: transparent; transition: color 0.15s ease; }
+    .task.done .tick{ background: rgba(16,185,129,0.14); border-color: rgba(16,185,129,0.45); }
+    .task.done .tick i{ color: var(--success-green); }
+
+    .task-title{ font-size:13.5px; font-weight:800; color: var(--text-dark); line-height:1.25; }
+    .task-desc{ font-size:12.5px; color: var(--text-medium); line-height:1.45; }
+    .task.done .task-title{ opacity:0.82; text-decoration: line-through; }
+    .task.done .task-desc{ opacity:0.80; }
+
+    .inline-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    .inline-actions .btn{ flex:1; min-width:180px; }
+
+    .micro-cards{ display:flex; flex-direction:column; gap:12px; margin-top:10px; }
+    .micro{ border-radius:14px; border:1px solid var(--border-light); background: var(--primary-white); padding:14px; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+    .micro-title{
+      font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:0.8px;
+      color: var(--accent-purple-dark); margin-bottom:6px;
+      display:flex; align-items:center; gap:8px;
+    }
+    .micro-title i{
+      color: var(--accent-purple);
+      background: var(--lighter-purple);
+      border: 1px solid rgba(123,95,196,0.12);
+      width:28px; height:28px; border-radius:10px;
+      display:inline-flex; align-items:center; justify-content:center;
+    }
+    .micro-text{ font-size:13px; color: var(--text-medium); line-height:1.5; }
+    .micro-text strong{ color: var(--text-dark); }
+
+    .field{ display:flex; flex-direction:column; gap:6px; }
+    .field label{ font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:0.8px; color: var(--dark-gray); }
+    .field input, .field textarea{
+      width:100%; border-radius:12px; border:1px solid var(--border-light);
+      background: var(--primary-white);
+      padding:10px 12px; font-size:13px; color: var(--text-dark);
+      outline:none; transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .field textarea{ min-height: 110px; resize: vertical; }
+    .field input:focus, .field textarea:focus{ border-color: rgba(123,95,196,0.35); box-shadow: 0 0 0 4px rgba(123,95,196,0.10); }
+
+    .mini-input-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+    .mini-input-row .field{ flex:1; min-width:220px; }
+
+    .progress-wrap{
+      margin-top:12px; border-top:1px solid var(--border-light); padding-top:12px;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .progress-row{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+    .progress-row .pct{ font-size:13px; font-weight:900; color: var(--accent-purple); font-variant-numeric: tabular-nums; white-space:nowrap; }
+    .progress-row .hint{ font-size:12.5px; color: var(--text-medium); line-height:1.35; flex:1; }
+
+    .progress-bar{ height:10px; background: var(--light-gray); border-radius:999px; overflow:hidden; border:1px solid var(--border-light); }
+    .progress-fill{ height:100%; width:0%; background: var(--premium-gradient); transition: width 0.5s ease; border-radius:999px; }
+
+    /* My Playbook FAB + sidebar kept (template) */
+    .my-playbook-fab{
+      position:fixed; bottom:24px; right:24px; z-index:1200;
+      background: var(--premium-gradient); color:#fff;
+      padding:10px 16px; border-radius:999px;
+      display:inline-flex; align-items:center; gap:8px;
+      cursor:pointer; font-size:13px; font-weight:700;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+    .my-playbook-fab:hover{ transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.32); }
+
+    .playbook-sidebar-overlay{
+      position:fixed; inset:0; background: rgba(0,0,0,0.45);
+      z-index:1190; opacity:0; pointer-events:none; transition: opacity 0.25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position:fixed; top:0; right:-380px;
+      width:340px; max-width:90%; height:100%;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index:1191;
+      display:flex; flex-direction:column;
+      border-left: 1px solid var(--border-light);
+      transition: right 0.25s ease;
+    }
+    .playbook-sidebar.open{ right:0; }
+    .playbook-sidebar-header{ padding:20px 20px 14px; border-bottom:1px solid var(--border-light); }
+    .playbook-sidebar-header-title-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+    .playbook-sidebar-header h3{ font-size:18px; font-weight:600; color: var(--text-dark); }
+    .playbook-sidebar-header p{ font-size:13px; color: var(--dark-gray); }
+    .playbook-close-btn{
+      background:none; border:none; color: var(--dark-gray); cursor:pointer;
+      font-size:18px; border-radius:999px; width:28px; height:28px;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .playbook-close-btn:hover{ background: var(--light-gray); }
+
+    .playbook-sidebar-body{
+      padding:14px 18px 20px; padding-bottom:50px;
+      overflow-y:auto; flex:1; display:flex; flex-direction:column; gap:18px;
+    }
+    .saved-items-empty{ font-size:13px; color: var(--dark-gray); line-height:1.6; }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+    .saved-item{
+      padding:10px 8px; border-radius:10px;
+      border:1px solid var(--border-light); background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom:10px; display:flex; flex-direction:column; gap:2px;
+    }
+    .saved-item-title-row{ display:flex; justify-content:space-between; align-items:baseline; gap:6px; }
+    .saved-item-title{ font-size:14px; font-weight:700; color: var(--text-dark); }
+    .saved-item-type{ font-size:11px; text-transform:uppercase; letter-spacing:0.6px; color: var(--accent-purple-dark); }
+    .saved-item-meta{ font-size:12px; color: var(--dark-gray); }
+    .saved-item-link{
+      margin-top:6px; font-size:12px; color: var(--accent-purple);
+      text-decoration:none; font-weight:700; display:inline-flex; align-items:center; gap:4px;
+    }
+    .saved-item-link:hover{ text-decoration: underline; }
+
+    .playbook-quick-links{ margin-top:185px; padding-top:10px; border-top:1px solid var(--border-light); }
+    .quick-links-title{ font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:0.8px; color: var(--text-medium); }
+    .playbook-quick-links-list{ display:flex; flex-direction:column; gap:10px; margin-top:6px; }
+    .quick-link-pill{
+      width:50%;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid rgba(123,95,196,0.35);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      text-decoration:none; color: var(--accent-purple-dark);
+      font-size:13px; font-weight:600; display:flex; align-items:center; gap:8px;
+      transition: all 0.2s ease;
+    }
+    .quick-link-pill:hover{ transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.12); background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06)); }
+
+    footer{
+      background: var(--primary-white);
+      padding:10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top:30px;
+      text-align:center;
+      color: var(--text-medium);
+    }
+
+    @media (max-width: 1024px){
+      .context-tips-grid{ grid-template-columns:1fr; gap:24px; }
+      .routine-grid{ grid-template-columns:1fr; }
+      .timer-actions{ flex-direction:row; min-width:0; }
+      .timer-actions .btn{ flex:1; }
+      .phase-tab{ min-width:0; }
+    }
+    @media (max-width: 768px){
+      .tool-hero-section{ margin-top:100px; }
+      .hero-main-heading{ font-size:36px; }
+      .save-btn{ right:18px; top:10px; }
+      .my-playbook-fab{ bottom:18px; right:18px; }
+      .timer-time{ font-size:30px; }
+      .timer-actions{ flex-direction:column; }
+      .inline-actions .btn{ min-width:0; }
+    }
+    @media (max-width: 480px){
+      .hero-main-heading{ font-size:32px; }
+      .timer-face{ flex-direction:column; align-items:stretch; }
+      .timer-actions{ min-width:0; }
+      .mini-input-row .field{ min-width:0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="container nav-container">
+      <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+
+      <a href="index.html" class="logo">
+        <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      </a>
+
+      <div class="nav-links">
+        <a href="the-lens.html" class="nav-link">The Lens</a>
+        <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+        <div class="nav-link-container">
+          <a href="the-coach.html" class="nav-link">The Coach</a>
+          <span class="new-tag">NEW</span>
+        </div>
+        <a href="the-shift.html" class="nav-link">The Shift</a>
+        <a href="the-pricing.html" class="nav-link">The Pricing</a>
+        <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+        <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="create-account.html" class="header-cta">Sign up</a>
+        <a href="sign-in.html" class="sign-in">Sign in</a>
+        <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="tool-hero-section">
+    <button class="save-btn" id="saveBtn">
+      <i class="far fa-bookmark"></i>
+      <span>Save item</span>
+    </button>
+
+    <div class="tool-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html"><i class="fas fa-house"></i> Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="the-toolkit.html">Toolkit</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="confidence-presence-and-influence.html">Confidence, Presence &amp; Influence</a>
+        <i class="fas fa-chevron-right"></i>
+        <span class="current">Presence 90 Second Reset Routine</span>
+      </div>
+
+      <span class="checklist-name">PRESENCE 90 SECOND RESET</span>
+
+      <h1 class="hero-main-heading">Reset your signal in 90 seconds</h1>
+
+      <div class="hero-subheading">
+        This is for moments you’re about to talk, reply, or react — and you can feel your signal slipping
+        (rushing, over-explaining, softness, emotional heat). 90 seconds buys you control.
+      </div>
+
+      <div class="category-pills-container">
+        <span class="category-pills-title">Explore Categories</span>
+        <div class="category-pills-grid">
+          <a href="category-confidence-presence-and-influence.html" class="category-pill confidence">
+            <i class="fas fa-bolt category-icon"></i>
+            <span>Confidence, Presence &amp; Influence</span>
+          </a>
+
+          <a href="category-clarity-priorities-and-direction.html" class="category-pill clarity">
+            <i class="fas fa-bullseye category-icon"></i>
+            <span>Clarity, Priorities &amp; Direction</span>
+          </a>
+
+          <a href="category-burnout-and-capacity.html" class="category-pill burnout">
+            <i class="fas fa-battery-half category-icon"></i>
+            <span>Burnout &amp; Capacity</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTEXT + TIPS -->
+  <div class="context-tips-grid">
+    <div class="context-card">
+      <h3 class="section-title"><i class="fas fa-bolt"></i>When to Use the 90s Reset</h3>
+      <ul class="bullet-list">
+        <li>Right before you speak in a tense or political moment</li>
+        <li>When you feel yourself rushing, softening, or over-explaining</li>
+        <li>When you’re about to send a message you might regret</li>
+        <li>After being interrupted or undermined and you need to re-enter cleanly</li>
+        <li>When your body is “hot” but your thinking needs to be sharp</li>
+      </ul>
+    </div>
+
+    <div class="tips-card">
+      <h3 class="section-title"><i class="fas fa-lightbulb"></i>Pro Tips</h3>
+      <ul class="bullet-list">
+        <li>Don’t add more words — add more control</li>
+        <li>Slow pace = authority. Fast pace = threat signal</li>
+        <li>Keep your message to one ask, one outcome, one next step</li>
+        <li>If you can’t do all 90 seconds, do Phase 1 only (20s)</li>
+        <li>Write a one-line anchor before you hit send</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="checklist-body" id="routineRoot">
+    <h2 class="checklist-section-title">Run the 90-second sequence</h2>
+    <div class="checklist-section-subtitle">
+      You are not trying to “feel better”. You are trying to <strong>sound clean</strong>, <strong>look steady</strong>, and
+      <strong>move the situation</strong> — fast.
+    </div>
+
+    <div class="routine-grid">
+      <!-- LEFT -->
+      <div class="card" id="leftCard">
+        <div class="card-title">
+          <h3><i class="fas fa-stopwatch"></i>Routine Control</h3>
+          <span class="tiny-pill" id="streakPill">Streak: 0</span>
+        </div>
+
+        <div class="routine-meta">
+          <div class="meta-pill"><i class="fas fa-layer-group"></i> Phase <span class="value" id="phaseCount">1/3</span></div>
+          <div class="meta-pill"><i class="fas fa-list-check"></i> Completion <span class="value" id="completionText">0%</span></div>
+          <div class="meta-pill"><i class="fas fa-hourglass-half"></i> Total <span class="value">01:30</span></div>
+        </div>
+
+        <div class="timer-face" role="region" aria-label="Routine timer">
+          <div class="timer-left" style="display:flex; flex-direction:column; gap:4px; min-width:0;">
+            <div class="timer-label" id="phaseLabel">Phase 1 — Stabilise</div>
+            <div class="timer-time" id="timerTime">00:20</div>
+            <div class="phase-line" id="phaseLine">
+              Goal: <strong>drop the urgency</strong> and regain control of your pace.
+            </div>
+          </div>
+
+          <div class="timer-actions">
+            <button class="btn primary" id="startPauseBtn"><i class="fas fa-play"></i> Start</button>
+            <button class="btn secondary" id="nextPhaseBtn"><i class="fas fa-forward"></i> Next</button>
+            <button class="btn ghost" id="resetBtn"><i class="fas fa-rotate-left"></i> Reset</button>
+          </div>
+        </div>
+
+        <div class="phase-tabs" aria-label="Phase selector">
+          <div class="phase-tab active" data-phase="0" role="button" tabindex="0" aria-label="Select Phase 1">
+            <div>
+              <div class="phase-name">Stabilise</div>
+              <div class="phase-desc">Body down. Pace back.</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="phase-mins">20s</div>
+              <div class="phase-status" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="phase-tab" data-phase="1" role="button" tabindex="0" aria-label="Select Phase 2">
+            <div>
+              <div class="phase-name">Clarify</div>
+              <div class="phase-desc">One outcome. One line.</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="phase-mins">30s</div>
+              <div class="phase-status" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="phase-tab" data-phase="2" role="button" tabindex="0" aria-label="Select Phase 3">
+            <div>
+              <div class="phase-name">Execute</div>
+              <div class="phase-desc">One move. Clean send.</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="phase-mins">40s</div>
+              <div class="phase-status" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="task-list" id="taskList" aria-label="Phase tasks"></div>
+
+        <div class="inline-actions">
+          <button class="btn secondary" id="copyRoutineBtn"><i class="far fa-copy"></i> Copy</button>
+          <button class="btn ghost" id="markCompleteBtn"><i class="fas fa-check"></i> Mark complete</button>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="card" id="rightCard">
+        <div class="card-title">
+          <h3><i class="fas fa-clipboard"></i>Lock-In</h3>
+          <span class="tiny-pill" id="statusPill">In progress</span>
+        </div>
+
+        <div class="micro-cards">
+          <div class="micro">
+            <div class="micro-title"><i class="fas fa-signal"></i>Signal rule</div>
+            <div class="micro-text">
+              Your pace is your power. If you sound rushed, you sound weak — even if you’re right.
+            </div>
+          </div>
+
+          <div class="micro">
+            <div class="micro-title"><i class="fas fa-crosshairs"></i>Anchor line</div>
+            <div class="micro-text">
+              One sentence only: <strong>Outcome</strong> + <strong>Ask</strong> + <strong>Next step</strong>.
+            </div>
+          </div>
+
+          <div class="micro">
+            <div class="micro-title"><i class="fas fa-gavel"></i>Boundary micro-script</div>
+            <div class="micro-text">
+              “I can commit to <strong>X</strong>. If you need <strong>Y</strong> as well, we’ll need to drop <strong>Z</strong> or adjust timing.”
+            </div>
+          </div>
+        </div>
+
+        <div class="mini-input-row">
+          <div class="field">
+            <label for="anchorInput">Your anchor (one sentence)</label>
+            <input id="anchorInput" type="text" placeholder="e.g. I’m aligned on the outcome — I need a clear decision on X today." />
+          </div>
+        </div>
+
+        <div class="mini-input-row">
+          <div class="field">
+            <label for="notesInput">Notes (optional)</label>
+            <textarea id="notesInput" placeholder="If you need it: facts only. No spiral."></textarea>
+          </div>
+        </div>
+
+        <div class="mini-input-row">
+          <div class="field">
+            <label for="nextMoveInput">Next move (one action)</label>
+            <input id="nextMoveInput" type="text" placeholder="e.g. Send a 3-line message asking for a decision by 2pm." />
+          </div>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-row">
+            <div class="hint" id="progressHint">Tick tasks. Keep it clean.</div>
+            <div class="pct" id="pctText">0%</div>
+          </div>
+          <div class="progress-bar" aria-label="Progress bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="inline-actions" style="margin-top:10px;">
+            <button class="btn ghost" id="clearNotesBtn"><i class="fas fa-eraser"></i> Clear</button>
+            <button class="btn primary" id="exportBtn"><i class="fas fa-file-export"></i> Export</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MY PLAYBOOK SIDEBAR -->
+  <div class="playbook-sidebar-overlay" id="playbookOverlay">
+    <div class="playbook-sidebar" id="playbookSidebar">
+      <div class="playbook-sidebar-header">
+        <div class="playbook-sidebar-header-title-row">
+          <h3>My Playbook</h3>
+          <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <p>Saved items</p>
+      </div>
+
+      <div class="playbook-sidebar-body">
+        <div id="savedItemsContainer">
+          <p class="saved-items-empty" id="savedItemsEmpty">
+            You haven't saved anything yet. Use <strong>Save item</strong> on tools you want quick access to.
+          </p>
+          <ul class="saved-items-list" id="savedItemsList"></ul>
+        </div>
+
+        <div class="playbook-quick-links">
+          <div class="playbook-quick-links-header">
+            <span class="quick-links-title">Quick links</span>
+          </div>
+          <div class="playbook-quick-links-list">
+            <a href="dashboard.html" class="quick-link-pill"><i class="fas fa-gauge"></i> The Dashboard</a>
+            <a href="the-lens.html" class="quick-link-pill"><i class="fas fa-search"></i> The Lens</a>
+            <a href="the-toolkit.html" class="quick-link-pill"><i class="fas fa-toolbox"></i> The Toolkit</a>
+            <a href="the-coach.html" class="quick-link-pill"><i class="fas fa-comments"></i> The Coach</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-playbook-fab" id="myPlaybookButton">
+    <i class="fas fa-book-open"></i>
+    <span>My Playbook</span>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2025 The Employee Playbook. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('loaded');
+      initializeThemeToggle();
+      initializeMobileNav();
+      initializePlaybook();
+      initializeRoutine();
+    });
+
+    function initializeMobileNav() {
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      if (!mobileToggle || !navLinks) return;
+
+      mobileToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('active');
+        const icon = this.querySelector('i');
+        if (icon) {
+          icon.classList.toggle('fa-bars');
+          icon.classList.toggle('fa-times');
+        }
+      });
+
+      document.addEventListener('click', function(event) {
+        if (navLinks.classList.contains('active') &&
+            !navLinks.contains(event.target) &&
+            !mobileToggle.contains(event.target)) {
+          navLinks.classList.remove('active');
+          const icon = mobileToggle.querySelector('i');
+          if (icon) {
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+          }
+        }
+      });
+    }
+
+    function initializeThemeToggle() {
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      if (!themeToggleBtn) return;
+
+      const themeIcon = themeToggleBtn.querySelector('i');
+      const logoImg = document.getElementById('mainLogo');
+
+      function getLogoPath(filename) {
+        if (window.location.protocol === 'file:') {
+          const currentPath = window.location.pathname;
+          const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+          return basePath + 'assets/img/' + filename;
+        } else {
+          return './assets/img/' + filename;
+        }
+      }
+
+      function updateLogoForTheme(isDarkMode) {
+        if (!logoImg) return;
+        logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+        logoImg.alt = 'The Employee Playbook';
+      }
+
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const savedTheme = localStorage.getItem('theme');
+
+      const useDark = (savedTheme === 'dark') || (!savedTheme && prefersDarkScheme.matches);
+      document.body.classList.toggle('dark-mode', useDark);
+      if (themeIcon) {
+        themeIcon.classList.toggle('fa-moon', !useDark);
+        themeIcon.classList.toggle('fa-sun', useDark);
+      }
+      updateLogoForTheme(useDark);
+
+      themeToggleBtn.addEventListener('click', function() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        document.body.classList.toggle('dark-mode', !isDarkMode);
+        localStorage.setItem('theme', isDarkMode ? 'light' : 'dark');
+        if (themeIcon) {
+          themeIcon.classList.toggle('fa-moon', isDarkMode);
+          themeIcon.classList.toggle('fa-sun', !isDarkMode);
+        }
+        updateLogoForTheme(!isDarkMode);
+      });
+
+      prefersDarkScheme.addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+          document.body.classList.toggle('dark-mode', e.matches);
+          if (themeIcon) {
+            themeIcon.classList.toggle('fa-moon', !e.matches);
+            themeIcon.classList.toggle('fa-sun', e.matches);
+          }
+          updateLogoForTheme(e.matches);
+        }
+      });
+    }
+
+    /* ===========================
+       PRESENCE 90 SECOND RESET
+    =========================== */
+    const ROUTINE_KEY = 'tepPresence90Seconds';
+    const ROUTINE_STREAK_KEY = 'tepPresence90SecondsStreak';
+    const ROUTINE_LAST_COMPLETE_KEY = 'tepPresence90SecondsLastComplete';
+
+    // Total = 90 seconds (20 + 30 + 40)
+    const phases = [
+      {
+        name: 'Phase 1 — Stabilise',
+        short: 'Stabilise',
+        seconds: 20,
+        line: 'Goal: <strong>drop the urgency</strong> and regain control of your pace.',
+        tasks: [
+          { title: 'Posture lock (5s)', desc: 'Feet grounded. Shoulders down. Chin level. Stillness = control.' },
+          { title: 'Exhale longer (10s)', desc: '3 slow breaths. Make the exhale slightly longer than inhale.' },
+          { title: 'Slow your eyes (5s)', desc: 'Stop scanning. Hold gaze steady. No darting.' }
+        ]
+      },
+      {
+        name: 'Phase 2 — Clarify',
+        short: 'Clarify',
+        seconds: 30,
+        line: 'Goal: <strong>one clean outcome</strong> and one sentence you can hold under pressure.',
+        tasks: [
+          { title: 'Pick the outcome (10s)', desc: 'Decision, clarity, boundary, or commitment. Choose one.' },
+          { title: 'Write the anchor (15s)', desc: 'One sentence: outcome + ask + next step.' },
+          { title: 'Cut 30% (5s)', desc: 'Remove filler words. No apologies. No over-context.' }
+        ]
+      },
+      {
+        name: 'Phase 3 — Execute',
+        short: 'Execute',
+        seconds: 40,
+        line: 'Goal: <strong>one move</strong> that advances the situation — not more thinking.',
+        tasks: [
+          { title: 'Pick one action (10s)', desc: 'Send / say / ask. Only one action. No branching.' },
+          { title: '3-line message (20s)', desc: 'Line 1: context. Line 2: anchor. Line 3: ask + timeframe.' },
+          { title: 'Send or speak (10s)', desc: 'Do it now. Momentum is the point.' }
+        ]
+      }
+    ];
+
+    let state = {
+      phaseIndex: 0,
+      secondsLeft: phases[0].seconds,
+      isRunning: false,
+      tasksDone: phases.map(p => p.tasks.map(() => false)),
+      anchor: '',
+      notes: '',
+      nextMove: '',
+      lastTickAt: null
+    };
+
+    let timerInterval = null;
+
+    function initializeRoutine() {
+      loadRoutineState();
+
+      const anchorInput = document.getElementById('anchorInput');
+      const notesInput = document.getElementById('notesInput');
+      const nextMoveInput = document.getElementById('nextMoveInput');
+
+      if (anchorInput) anchorInput.value = state.anchor || '';
+      if (notesInput) notesInput.value = state.notes || '';
+      if (nextMoveInput) nextMoveInput.value = state.nextMove || '';
+
+      anchorInput?.addEventListener('input', () => { state.anchor = anchorInput.value; persistRoutineState(); });
+      notesInput?.addEventListener('input', () => { state.notes = notesInput.value; persistRoutineState(); });
+      nextMoveInput?.addEventListener('input', () => { state.nextMove = nextMoveInput.value; persistRoutineState(); });
+
+      document.getElementById('startPauseBtn')?.addEventListener('click', toggleStartPause);
+      document.getElementById('resetBtn')?.addEventListener('click', hardResetRoutine);
+      document.getElementById('nextPhaseBtn')?.addEventListener('click', () => movePhase(1, true));
+      document.getElementById('copyRoutineBtn')?.addEventListener('click', copyRoutine);
+      document.getElementById('markCompleteBtn')?.addEventListener('click', markRoutineComplete);
+      document.getElementById('clearNotesBtn')?.addEventListener('click', clearNotes);
+      document.getElementById('exportBtn')?.addEventListener('click', exportSummary);
+
+      document.querySelectorAll('.phase-tab').forEach(tab => {
+        tab.addEventListener('click', () => selectPhase(parseInt(tab.getAttribute('data-phase'), 10), true));
+        tab.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectPhase(parseInt(tab.getAttribute('data-phase'), 10), true);
+          }
+        });
+      });
+
+      renderTasks();
+      syncUI();
+      updateStreakPill();
+    }
+
+    function loadRoutineState() {
+      try {
+        const raw = localStorage.getItem(ROUTINE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') state = { ...state, ...parsed };
+        }
+      } catch (e) {}
+
+      // Safety: match structure
+      state.tasksDone = phases.map((p, pi) => {
+        const existing = Array.isArray(state.tasksDone?.[pi]) ? state.tasksDone[pi] : [];
+        return p.tasks.map((_, ti) => Boolean(existing[ti]));
+      });
+
+      if (typeof state.phaseIndex !== 'number' || state.phaseIndex < 0 || state.phaseIndex > 2) state.phaseIndex = 0;
+
+      const max = phases[state.phaseIndex].seconds;
+      if (typeof state.secondsLeft !== 'number' || state.secondsLeft < 0 || state.secondsLeft > max) state.secondsLeft = max;
+
+      state.isRunning = false;
+      clearInterval(timerInterval);
+      timerInterval = null;
+    }
+
+    function persistRoutineState() {
+      try {
+        localStorage.setItem(ROUTINE_KEY, JSON.stringify({
+          phaseIndex: state.phaseIndex,
+          secondsLeft: state.secondsLeft,
+          isRunning: false,
+          tasksDone: state.tasksDone,
+          anchor: state.anchor || '',
+          notes: state.notes || '',
+          nextMove: state.nextMove || '',
+          lastTickAt: state.lastTickAt || null
+        }));
+      } catch (e) {}
+    }
+
+    function formatTime(totalSeconds) {
+      const s = Math.max(0, Math.floor(totalSeconds));
+      const m = Math.floor(s / 60);
+      const r = s % 60;
+      return String(m).padStart(2, '0') + ':' + String(r).padStart(2, '0');
+    }
+
+    function toggleStartPause() {
+      const btn = document.getElementById('startPauseBtn');
+      if (!btn) return;
+
+      if (state.isRunning) {
+        state.isRunning = false;
+        clearInterval(timerInterval);
+        timerInterval = null;
+        btn.innerHTML = '<i class="fas fa-play"></i> Start';
+      } else {
+        state.isRunning = true;
+        btn.innerHTML = '<i class="fas fa-pause"></i> Pause';
+
+        timerInterval = setInterval(() => {
+          state.secondsLeft -= 1;
+
+          if (state.secondsLeft <= 0) {
+            state.secondsLeft = 0;
+            syncUI();
+
+            state.isRunning = false;
+            clearInterval(timerInterval);
+            timerInterval = null;
+            btn.innerHTML = '<i class="fas fa-play"></i> Start';
+
+            flashHint('Phase ended. Move to the next phase.');
+            return;
+          }
+
+          syncUI();
+        }, 1000);
+      }
+
+      persistRoutineState();
+      syncUI();
+    }
+
+    function selectPhase(phaseIndex, stopTimer) {
+      const next = Math.max(0, Math.min(2, phaseIndex));
+      if (next === state.phaseIndex) return;
+
+      if (stopTimer) stopTimerNow();
+
+      state.phaseIndex = next;
+      state.secondsLeft = phases[next].seconds;
+
+      renderTasks();
+      syncUI();
+      persistRoutineState();
+    }
+
+    function stopTimerNow() {
+      state.isRunning = false;
+      clearInterval(timerInterval);
+      timerInterval = null;
+      const btn = document.getElementById('startPauseBtn');
+      if (btn) btn.innerHTML = '<i class="fas fa-play"></i> Start';
+    }
+
+    function movePhase(delta, stopTimer) {
+      const next = state.phaseIndex + delta;
+      if (next < 0 || next > 2) return;
+      selectPhase(next, stopTimer);
+    }
+
+    function hardResetRoutine() {
+      stopTimerNow();
+
+      state.phaseIndex = 0;
+      state.secondsLeft = phases[0].seconds;
+      state.tasksDone = phases.map(p => p.tasks.map(() => false));
+      state.anchor = '';
+      state.notes = '';
+      state.nextMove = '';
+      state.lastTickAt = null;
+
+      const anchorInput = document.getElementById('anchorInput');
+      const notesInput = document.getElementById('notesInput');
+      const nextMoveInput = document.getElementById('nextMoveInput');
+      if (anchorInput) anchorInput.value = '';
+      if (notesInput) notesInput.value = '';
+      if (nextMoveInput) nextMoveInput.value = '';
+
+      renderTasks();
+      syncUI();
+      persistRoutineState();
+      flashHint('Reset complete. Start Phase 1.');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderTasks() {
+      const list = document.getElementById('taskList');
+      if (!list) return;
+
+      const p = phases[state.phaseIndex];
+      list.innerHTML = '';
+
+      p.tasks.forEach((t, idx) => {
+        const isDone = Boolean(state.tasksDone[state.phaseIndex][idx]);
+        const div = document.createElement('div');
+        div.className = 'task' + (isDone ? ' done' : '');
+
+        div.innerHTML = `
+          <div class="tick" role="button" tabindex="0" aria-label="Toggle task completion">
+            <i class="fas fa-check"></i>
+          </div>
+          <div style="flex:1; min-width:0; display:flex; flex-direction:column; gap:6px;">
+            <div class="task-title">${escapeHTML(t.title)}</div>
+            <div class="task-desc">${escapeHTML(t.desc)}</div>
+          </div>
+        `;
+
+        const tick = div.querySelector('.tick');
+        tick.addEventListener('click', () => toggleTask(idx));
+        tick.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTask(idx); }
+        });
+
+        list.appendChild(div);
+      });
+
+      updatePhaseTabStates();
+    }
+
+    function toggleTask(taskIndex) {
+      const current = Boolean(state.tasksDone[state.phaseIndex][taskIndex]);
+      state.tasksDone[state.phaseIndex][taskIndex] = !current;
+      state.lastTickAt = new Date().toISOString();
+
+      renderTasks();
+      syncUI();
+      persistRoutineState();
+    }
+
+    function getCompletion() {
+      let total = 0, done = 0;
+      phases.forEach((p, pi) => {
+        p.tasks.forEach((_, ti) => {
+          total += 1;
+          if (state.tasksDone?.[pi]?.[ti]) done += 1;
+        });
+      });
+      const pct = total ? Math.round((done / total) * 100) : 0;
+      return { total, done, pct };
+    }
+
+    function syncUI() {
+      const phase = phases[state.phaseIndex];
+
+      document.getElementById('phaseLabel').textContent = phase.name;
+      document.getElementById('timerTime').textContent = formatTime(state.secondsLeft);
+      document.getElementById('phaseLine').innerHTML = phase.line;
+
+      document.getElementById('phaseCount').textContent = (state.phaseIndex + 1) + '/3';
+
+      const nextBtn = document.getElementById('nextPhaseBtn');
+      if (nextBtn) nextBtn.disabled = state.phaseIndex === 2;
+
+      const { pct } = getCompletion();
+      document.getElementById('completionText').textContent = pct + '%';
+      document.getElementById('pctText').textContent = pct + '%';
+      const fill = document.getElementById('progressFill');
+      if (fill) fill.style.width = pct + '%';
+
+      const statusPill = document.getElementById('statusPill');
+      if (statusPill) statusPill.textContent = pct === 100 ? 'Complete' : 'In progress';
+
+      const hint = document.getElementById('progressHint');
+      if (hint) {
+        if (pct === 0) hint.textContent = 'Start Phase 1. Slow your pace.';
+        else if (pct < 50) hint.textContent = 'Keep it tight. One sentence anchor.';
+        else if (pct < 100) hint.textContent = 'Finish the loop. One move.';
+        else hint.textContent = 'Done. Execute your next move.';
+      }
+
+      updatePhaseTabStates();
+    }
+
+    function updatePhaseTabStates() {
+      document.querySelectorAll('.phase-tab').forEach(tab => {
+        const idx = parseInt(tab.getAttribute('data-phase'), 10);
+        tab.classList.toggle('active', idx === state.phaseIndex);
+
+        const allDone = phases[idx].tasks.every((_, ti) => Boolean(state.tasksDone?.[idx]?.[ti]));
+        tab.classList.toggle('done', allDone);
+      });
+    }
+
+    function copyRoutine() {
+      const { pct } = getCompletion();
+      const phase = phases[state.phaseIndex];
+
+      const anchor = (document.getElementById('anchorInput')?.value || '').trim();
+      const notes = (document.getElementById('notesInput')?.value || '').trim();
+      const nextMove = (document.getElementById('nextMoveInput')?.value || '').trim();
+
+      let text = `PRESENCE 90 SECOND RESET\n========================\n\n`;
+      text += `Completion: ${pct}%\nCurrent phase: ${phase.name}\nTime remaining in phase: ${formatTime(state.secondsLeft)}\n\n`;
+
+      phases.forEach((p, pi) => {
+        text += `${p.name} (${p.seconds}s)\n-------------------------\n`;
+        p.tasks.forEach((t, ti) => {
+          const done = state.tasksDone?.[pi]?.[ti] ? '✓' : '•';
+          text += `${done} ${t.title} — ${t.desc}\n`;
+        });
+        text += `\n`;
+      });
+
+      if (anchor) text += `ANCHOR:\n${anchor}\n\n`;
+      if (nextMove) text += `NEXT MOVE:\n${nextMove}\n\n`;
+      if (notes) text += `NOTES:\n${notes}\n\n`;
+
+      navigator.clipboard.writeText(text);
+
+      const btn = document.getElementById('copyRoutineBtn');
+      if (!btn) return;
+      const original = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      btn.style.background = '#10b981';
+      btn.style.color = '#fff';
+
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 1400);
+    }
+
+    function clearNotes() {
+      const notesInput = document.getElementById('notesInput');
+      const anchorInput = document.getElementById('anchorInput');
+      const nextMoveInput = document.getElementById('nextMoveInput');
+
+      if (notesInput) notesInput.value = '';
+      if (anchorInput) anchorInput.value = '';
+      if (nextMoveInput) nextMoveInput.value = '';
+
+      state.notes = '';
+      state.anchor = '';
+      state.nextMove = '';
+
+      persistRoutineState();
+      flashHint('Cleared. Keep it tight.');
+    }
+
+    function exportSummary() {
+      const { pct } = getCompletion();
+      const anchor = (document.getElementById('anchorInput')?.value || '').trim();
+      const notes = (document.getElementById('notesInput')?.value || '').trim();
+      const nextMove = (document.getElementById('nextMoveInput')?.value || '').trim();
+
+      const lines = [];
+      lines.push('PRESENCE 90 SECOND RESET — SUMMARY');
+      lines.push('==================================');
+      lines.push(`Completion: ${pct}%`);
+      lines.push(`Date: ${new Date().toLocaleString('en-GB')}`);
+      lines.push('');
+      lines.push('ANCHOR:'); lines.push(anchor || '—');
+      lines.push('');
+      lines.push('NEXT MOVE:'); lines.push(nextMove || '—');
+      lines.push('');
+      lines.push('NOTES:'); lines.push(notes || '—');
+      lines.push('');
+      lines.push('TASKS:');
+      phases.forEach((p, pi) => {
+        lines.push(`\n${p.name}`);
+        p.tasks.forEach((t, ti) => {
+          const done = state.tasksDone?.[pi]?.[ti] ? '✓' : '•';
+          lines.push(`${done} ${t.title}`);
+        });
+      });
+
+      const blob = new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'presence-90-second-reset-summary.txt';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }
+
+    function markRoutineComplete() {
+      const { pct } = getCompletion();
+      const anchor = (document.getElementById('anchorInput')?.value || '').trim();
+      const nextMove = (document.getElementById('nextMoveInput')?.value || '').trim();
+
+      if (pct < 60 && !anchor && !nextMove) {
+        flashHint('Mark complete once you’ve ticked most tasks or written an anchor/next move.');
+        return;
+      }
+
+      stopTimerNow();
+
+      const todayKey = new Date().toISOString().slice(0,10);
+      const last = localStorage.getItem(ROUTINE_LAST_COMPLETE_KEY);
+
+      if (last !== todayKey) {
+        const currentStreak = parseInt(localStorage.getItem(ROUTINE_STREAK_KEY) || '0', 10);
+        const newStreak = Number.isNaN(currentStreak) ? 1 : (currentStreak + 1);
+        localStorage.setItem(ROUTINE_STREAK_KEY, String(newStreak));
+        localStorage.setItem(ROUTINE_LAST_COMPLETE_KEY, todayKey);
+      }
+
+      updateStreakPill();
+      const statusPill = document.getElementById('statusPill');
+      if (statusPill) statusPill.textContent = 'Complete';
+
+      flashHint('Complete. Now execute the next move.');
+    }
+
+    function updateStreakPill() {
+      const streak = parseInt(localStorage.getItem(ROUTINE_STREAK_KEY) || '0', 10);
+      const safe = Number.isNaN(streak) ? 0 : streak;
+      const pill = document.getElementById('streakPill');
+      if (pill) pill.textContent = 'Streak: ' + safe;
+    }
+
+    function flashHint(message) {
+      const hint = document.getElementById('progressHint');
+      if (!hint) return;
+
+      const original = hint.textContent;
+      hint.textContent = message;
+      hint.style.color = 'var(--accent-purple-dark)';
+      hint.style.fontWeight = '800';
+
+      setTimeout(() => {
+        hint.textContent = original;
+        hint.style.color = '';
+        hint.style.fontWeight = '';
+      }, 1800);
+    }
+
+    function escapeHTML(str) {
+      return String(str || '')
+        .replaceAll('&', '&amp;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;')
+        .replaceAll('"', '&quot;')
+        .replaceAll("'", '&#039;');
+    }
+
+    /* ===========================
+       MY PLAYBOOK (LOCALSTORAGE)
+    =========================== */
+    const PLAYBOOK_KEY = 'tepSavedItems';
+    const CURRENT_TOOL_ID = 'presence-90-second-reset';
+    const CURRENT_TOOL_TITLE = 'Presence 90 Second Reset Routine';
+    const CURRENT_TOOL_TYPE = 'Routine';
+
+    function getSavedItems() {
+      try {
+        const raw = localStorage.getItem(PLAYBOOK_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) { return []; }
+    }
+
+    function setSavedItems(items) {
+      try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); } catch (e) {}
+    }
+
+    function initializePlaybook() {
+      const playbookOverlay = document.getElementById('playbookOverlay');
+      const playbookSidebar = document.getElementById('playbookSidebar');
+      const playbookButton = document.getElementById('myPlaybookButton');
+      const closeBtn = document.getElementById('closePlaybook');
+      const saveItemBtn = document.getElementById('saveBtn');
+
+      if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+      renderSavedItems();
+
+      const savedItems = getSavedItems();
+      const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+      updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+      saveItemBtn.addEventListener('click', () => {
+        const items = getSavedItems();
+        const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+        let nowSaved;
+
+        if (index === -1) {
+          const toolLink = window.location.pathname.split('/').pop() || 'presence-90-second-reset.html';
+          items.push({
+            id: CURRENT_TOOL_ID,
+            title: CURRENT_TOOL_TITLE,
+            type: CURRENT_TOOL_TYPE,
+            link: toolLink,
+            savedAt: new Date().toISOString()
+          });
+          nowSaved = true;
+        } else {
+          items.splice(index, 1);
+          nowSaved = false;
+        }
+
+        setSavedItems(items);
+        updateSaveButtonState(saveItemBtn, nowSaved);
+        renderSavedItems();
+      });
+
+      playbookButton.addEventListener('click', () => {
+        playbookOverlay.classList.add('open');
+        playbookSidebar.classList.add('open');
+      });
+
+      closeBtn.addEventListener('click', () => {
+        playbookOverlay.classList.remove('open');
+        playbookSidebar.classList.remove('open');
+      });
+
+      playbookOverlay.addEventListener('click', (e) => {
+        if (e.target === playbookOverlay) {
+          playbookOverlay.classList.remove('open');
+          playbookSidebar.classList.remove('open');
+        }
+      });
+    }
+
+    function updateSaveButtonState(button, isSaved) {
+      const icon = button.querySelector('i');
+      const label = button.querySelector('span');
+
+      if (isSaved) {
+        button.classList.add('saved');
+        if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+        if (label) label.textContent = 'Saved';
+      } else {
+        button.classList.remove('saved');
+        if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+        if (label) label.textContent = 'Save item';
+      }
+    }
+
+    function renderSavedItems() {
+      const listEl = document.getElementById('savedItemsList');
+      const emptyEl = document.getElementById('savedItemsEmpty');
+      if (!listEl || !emptyEl) return;
+
+      const items = getSavedItems();
+      listEl.innerHTML = '';
+
+      if (!items.length) { emptyEl.style.display = 'block'; return; }
+      emptyEl.style.display = 'none';
+
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'saved-item';
+        const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+        const dateText = savedDate
+          ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+          : '';
+
+        li.innerHTML = `
+          <div class="saved-item-title-row">
+            <span class="saved-item-title">${escapeHTML(item.title)}</span>
+            <span class="saved-item-type">${escapeHTML(item.type)}</span>
+          </div>
+          <div class="saved-item-meta">${dateText ? `Saved on ${dateText}` : ''}</div>
+          <a class="saved-item-link" href="${escapeHTML(item.link)}">Open <i class="fas fa-arrow-right"></i></a>
+        `;
+        listEl.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

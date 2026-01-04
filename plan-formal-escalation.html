@@ -1,0 +1,3118 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formal Escalation Plan | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand + Category Pills System)
+       Categories updated to match your pills reference (7 categories)
+    =========================== */
+    :root{
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+      --text-dark:#212529;
+      --text-medium:#495057;
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+      --success-green:#10b981;
+      --warning-orange:#f59e0b;
+      --danger-red:#ef4444;
+      --info-blue:#3b82f6;
+
+      /* ===========================
+         CATEGORY COLORS (Your 7)
+      =========================== */
+      --category-clarity: #7B5FC4;
+      --category-burnout: #f59e0b;
+      --category-manager: #10b981;
+      --category-politics: #3b82f6;
+      --category-hr: #6D28D9;
+      --category-confidence: #ef4444;
+      --category-career: #800020;
+
+      /* ===========================
+         PILL STYLES (Light mode)
+      =========================== */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.08), rgba(123, 95, 196, 0.04));
+      --pill-clarity-border: rgba(123, 95, 196, 0.2);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.12), rgba(123, 95, 196, 0.08));
+      --pill-clarity-hover-border: rgba(123, 95, 196, 0.3);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.04));
+      --pill-burnout-border: rgba(245, 158, 11, 0.2);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(245, 158, 11, 0.08));
+      --pill-burnout-hover-border: rgba(245, 158, 11, 0.3);
+
+      --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.04));
+      --pill-manager-border: rgba(16, 185, 129, 0.2);
+      --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.08));
+      --pill-manager-hover-border: rgba(16, 185, 129, 0.3);
+
+      --pill-politics-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.04));
+      --pill-politics-border: rgba(59, 130, 246, 0.2);
+      --pill-politics-hover-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.08));
+      --pill-politics-hover-border: rgba(59, 130, 246, 0.3);
+
+      --pill-hr-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.08), rgba(109, 40, 217, 0.04));
+      --pill-hr-border: rgba(109, 40, 217, 0.2);
+      --pill-hr-hover-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.12), rgba(109, 40, 217, 0.08));
+      --pill-hr-hover-border: rgba(109, 40, 217, 0.3);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.04));
+      --pill-confidence-border: rgba(239, 68, 68, 0.2);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.08));
+      --pill-confidence-hover-border: rgba(239, 68, 68, 0.3);
+
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.08), rgba(128, 0, 32, 0.04));
+      --pill-career-border: rgba(128, 0, 32, 0.2);
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.12), rgba(128, 0, 32, 0.08));
+      --pill-career-hover-border: rgba(128, 0, 32, 0.3);
+    }
+
+    /* ===========================
+       DARK MODE VARIABLES
+    =========================== */
+    .dark-mode{
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#888888;
+      --text-dark:#e0e0e0;
+      --text-medium:#b0b0b0;
+
+      --accent-purple:#9d86e9;
+      --accent-purple-dark:#7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.2);
+      --lighter-purple: rgba(123, 95, 196, 0.1);
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+      --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      /* Dark mode category colors */
+      --category-clarity: #9d86e9;
+      --category-burnout: #fbbf24;
+      --category-manager: #34d399;
+      --category-politics: #60a5fa;
+      --category-hr: #8B5CF6;
+      --category-confidence: #f87171;
+      --category-career: #B03060;
+
+      /* Dark mode pill styles */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.15), rgba(123, 95, 196, 0.08));
+      --pill-clarity-border: rgba(157, 134, 233, 0.3);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.2), rgba(123, 95, 196, 0.12));
+      --pill-clarity-hover-border: rgba(157, 134, 233, 0.4);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08));
+      --pill-burnout-border: rgba(251, 191, 36, 0.3);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.12));
+      --pill-burnout-hover-border: rgba(251, 191, 36, 0.4);
+
+      --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
+      --pill-manager-border: rgba(52, 211, 153, 0.3);
+      --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.12));
+      --pill-manager-hover-border: rgba(52, 211, 153, 0.4);
+
+      --pill-politics-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08));
+      --pill-politics-border: rgba(96, 165, 250, 0.3);
+      --pill-politics-hover-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.12));
+      --pill-politics-hover-border: rgba(96, 165, 250, 0.4);
+
+      --pill-hr-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.15), rgba(109, 40, 217, 0.08));
+      --pill-hr-border: rgba(139, 92, 246, 0.3);
+      --pill-hr-hover-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.2), rgba(109, 40, 217, 0.12));
+      --pill-hr-hover-border: rgba(139, 92, 246, 0.4);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.08));
+      --pill-confidence-border: rgba(248, 113, 113, 0.3);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.12));
+      --pill-confidence-hover-border: rgba(248, 113, 113, 0.4);
+
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.15), rgba(128, 0, 32, 0.08));
+      --pill-career-border: rgba(176, 48, 96, 0.3);
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.2), rgba(128, 0, 32, 0.12));
+      --pill-career-hover-border: rgba(176, 48, 96, 0.4);
+    }
+
+    /* ===========================
+       GLOBAL
+    =========================== */
+    *{
+      margin:0; padding:0; box-sizing:border-box;
+      font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    body{
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      min-height: 100vh;
+    }
+    body.loaded{ opacity: 1; }
+    .container{
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===========================
+       NAVIGATION
+    =========================== */
+    nav{
+      position: fixed;
+      top:0;
+      width:100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      height: 80px;
+    }
+    .nav-container{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      padding: 12px 0;
+      height: 100%;
+    }
+    .logo{
+      display:inline-flex;
+      align-items:center;
+      height: 100%;
+    }
+    .logo-img{
+      height:100px;
+      width:auto;
+      transform: translateX(20%);
+      padding: 14px 10px;
+      transition: all 0.3s ease;
+      display:block;
+      min-height:100px;
+    }
+    .logo-fallback{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      height:48px;
+      padding: 0 14px;
+      border-radius: 10px;
+      background: var(--premium-gradient);
+      color:#fff;
+      font-weight:700;
+      letter-spacing: 0.8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      transform: translateX(20%);
+    }
+    .nav-links{
+      display:flex;
+      gap:50px;
+    }
+    .nav-link{
+      color: var(--text-dark);
+      text-decoration:none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-size: 17px;
+    }
+    .nav-link:hover{ color: var(--accent-purple); }
+
+    .nav-link-container{ position: relative; display:inline-block; }
+    .new-tag{
+      position:absolute;
+      top:-12px;
+      right:-35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color:#000;
+      font-size:10px;
+      font-weight:600;
+      padding:2px 6px;
+      border-radius:4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index:10;
+      white-space:nowrap;
+    }
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:24px;
+      transform: translateX(-20%);
+    }
+    .header-cta{
+      background: var(--accent-purple);
+      color:#fff;
+      padding: 8px 20px;
+      border-radius: 50px;
+      text-decoration:none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(123,95,196,0.3);
+    }
+    .header-cta:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(123,95,196,0.35);
+    }
+    .sign-in{
+      color: var(--text-dark);
+      text-decoration:none;
+      font-weight:500;
+      font-size:17px;
+    }
+    .sign-in:hover{ color: var(--accent-purple); }
+
+    .theme-toggle{
+      background:none;
+      border:none;
+      color: var(--text-dark);
+      cursor:pointer;
+      font-size:16px;
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .theme-toggle:hover{ background-color: var(--light-gray); }
+
+    .mobile-toggle{
+      display:none;
+      background:none;
+      border:none;
+      color: var(--text-dark);
+      cursor:pointer;
+      font-size:24px;
+      width:40px;
+      height:40px;
+      border-radius:50%;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.3s ease;
+    }
+    .mobile-toggle:hover{ background-color: var(--light-gray); }
+
+    .mobile-sign-in, .mobile-sign-up { display:none; }
+
+    @media (max-width: 768px){
+      .nav-container{ justify-content:center; position:relative; }
+
+      .logo{
+        position:absolute;
+        left:50%;
+        transform: translateX(-50%);
+        display:flex;
+        align-items:center;
+        height:100%;
+      }
+      .logo-img{ height:125px; transform:none; padding: 12px 0; }
+      .logo-fallback{ transform:none; }
+
+      .mobile-toggle{
+        display:flex;
+        position:absolute;
+        left:20px;
+        align-items:center;
+      }
+      .nav-actions{
+        transform:none;
+        gap:16px;
+        position:absolute;
+        right:20px;
+        align-items:center;
+      }
+      .nav-actions .sign-in,
+      .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none;
+        position:absolute;
+        top:100%;
+        left:0;
+        width:100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding:20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        gap:20px;
+      }
+      .nav-links.active{ display:flex; }
+
+      .nav-link-container{
+        display:flex;
+        align-items:center;
+        justify-content:flex-start;
+        width:100%;
+      }
+      .new-tag{ position:static; margin-left:8px; }
+
+      .mobile-sign-in{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--primary-white);
+        color: var(--accent-purple);
+        border-radius:10px;
+        text-align:center;
+        font-weight:700;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+      .mobile-sign-up{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background: var(--accent-purple);
+        color:#fff;
+        border-radius:10px;
+        text-align:center;
+        font-weight:700;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .tool-hero-section{
+      width:100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow:hidden;
+    }
+    .tool-hero-section::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+      z-index:1;
+    }
+    .dark-mode .tool-hero-section::before{
+      background: linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+    }
+    .tool-hero-content{
+      position:relative;
+      z-index:2;
+      max-width:1100px;
+      margin:0 auto;
+      padding: 0 20px 10px;
+      animation: heroFadeUp 0.45s ease-out;
+    }
+    @keyframes heroFadeUp{
+      from{ opacity:0; transform: translateY(18px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .breadcrumb{
+      font-size:10px;
+      text-transform: uppercase;
+      letter-spacing:1px;
+      color: var(--dark-gray);
+      margin-bottom:10px;
+      display:flex;
+      gap:6px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .breadcrumb a{
+      color: var(--text-medium);
+      text-decoration:none !important;
+      font-weight:600;
+      letter-spacing:0.6px;
+      transition: color 0.2s ease;
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+    }
+    .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+    .breadcrumb i{ font-size:10px; opacity:0.7; }
+    .breadcrumb .current{ color: var(--text-dark); font-weight:700; }
+
+    .checklist-name{
+      font-size:14px;
+      font-weight:700;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing:1.8px;
+      margin: 18px 0 12px;
+      display:block;
+    }
+
+    .hero-main-heading{
+      font-size:46px;
+      font-weight:650;
+      color: var(--text-dark);
+      line-height:1.1;
+      margin-bottom:18px;
+      max-width: 900px;
+    }
+    .hero-subheading{
+      font-size:16px;
+      color: var(--text-medium);
+      line-height:1.6;
+      max-width: 920px;
+      margin-bottom: 16px;
+    }
+
+    /* ===========================
+       RELATED CATEGORIES
+    =========================== */
+    .related-row{
+      display:flex;
+      flex-direction: column;
+      align-items:flex-start;
+      gap: 10px;
+      margin-top: 6px;
+    }
+    .related-label{
+      font-size: 12px;
+      font-weight:600;
+      text-transform: uppercase;
+      letter-spacing: 0.9px;
+      color: var(--text-medium);
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .related-pills{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+    }
+
+    .category-pill{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      height: 36px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration:none;
+    }
+    .dark-mode .category-pill{
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    .category-pill:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    }
+    .dark-mode .category-pill:hover{
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+    .category-icon{
+      font-size: 12px;
+      opacity: 0.9;
+      flex-shrink: 0;
+    }
+
+    .category-pill.clarity{
+      color: var(--category-clarity);
+      border-color: var(--pill-clarity-border);
+      background: var(--pill-clarity-bg);
+    }
+    .category-pill.clarity:hover{
+      background: var(--pill-clarity-hover-bg);
+      border-color: var(--pill-clarity-hover-border);
+    }
+
+    .category-pill.burnout{
+      color: var(--category-burnout);
+      border-color: var(--pill-burnout-border);
+      background: var(--pill-burnout-bg);
+    }
+    .category-pill.burnout:hover{
+      background: var(--pill-burnout-hover-bg);
+      border-color: var(--pill-burnout-hover-border);
+    }
+
+    .category-pill.manager{
+      color: var(--category-manager);
+      border-color: var(--pill-manager-border);
+      background: var(--pill-manager-bg);
+    }
+    .category-pill.manager:hover{
+      background: var(--pill-manager-hover-bg);
+      border-color: var(--pill-manager-hover-border);
+    }
+
+    .category-pill.politics{
+      color: var(--category-politics);
+      border-color: var(--pill-politics-border);
+      background: var(--pill-politics-bg);
+    }
+    .category-pill.politics:hover{
+      background: var(--pill-politics-hover-bg);
+      border-color: var(--pill-politics-hover-border);
+    }
+
+    .category-pill.hr{
+      color: var(--category-hr);
+      border-color: var(--pill-hr-border);
+      background: var(--pill-hr-bg);
+    }
+    .category-pill.hr:hover{
+      background: var(--pill-hr-hover-bg);
+      border-color: var(--pill-hr-hover-border);
+    }
+
+    .category-pill.confidence{
+      color: var(--category-confidence);
+      border-color: var(--pill-confidence-border);
+      background: var(--pill-confidence-bg);
+    }
+    .category-pill.confidence:hover{
+      background: var(--pill-confidence-hover-bg);
+      border-color: var(--pill-confidence-hover-border);
+    }
+
+    .category-pill.career{
+      color: var(--category-career);
+      border-color: var(--pill-career-border);
+      background: var(--pill-career-bg);
+    }
+    .category-pill.career:hover{
+      background: var(--pill-career-hover-bg);
+      border-color: var(--pill-career-hover-border);
+    }
+
+    .save-btn{
+      position:absolute;
+      top:16px;
+      right:24px;
+      z-index:5;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 12px;
+      font-size:12px;
+      font-weight:600;
+      border-radius:999px;
+      border: 1px solid rgba(123,95,196,0.6);
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--accent-purple-dark);
+      cursor:pointer;
+      transition: all 0.2s ease;
+    }
+    .save-btn:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(123,95,196,0.18);
+      background: #fff;
+    }
+    .dark-mode .save-btn{
+      background: rgba(20,20,20,0.9);
+      border-color: rgba(157,134,233,0.6);
+    }
+    .save-btn.saved{
+      background: var(--accent-purple);
+      color:#fff;
+      border-color: transparent;
+    }
+
+    /* ===========================
+       CONTEXT + HOW IT WORKS
+    =========================== */
+    .context-tips-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      width:100%;
+      max-width:1100px;
+      margin: 0 auto 18px;
+      padding: 24px 20px 10px;
+      margin-top: 6px;
+    }
+    .context-card, .tips-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius:14px;
+      padding: 26px 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    .section-title{
+      font-size:18px;
+      font-weight:700;
+      color: var(--text-dark);
+      margin-bottom:16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+    .section-title i{ color: var(--accent-purple); }
+
+    .bullet-list{ list-style:none; margin:0; padding:0; }
+    .bullet-list li{
+      color: var(--text-medium);
+      line-height:1.65;
+      margin-bottom:12px;
+      padding-left: 26px;
+      position:relative;
+      font-size:14.5px;
+      font-weight:450;
+    }
+    .bullet-list li::before{
+      content:"•";
+      position:absolute;
+      left:10px;
+      color: var(--accent-purple);
+      font-size:18px;
+    }
+
+    /* ===========================
+       WORKSPACE
+    =========================== */
+    .workspace-wrap{
+      max-width:1100px;
+      margin: 0 auto;
+      padding: 0 20px 10px;
+    }
+
+    .workspace-header{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 18px 0 14px;
+    }
+    .workspace-title{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width: 0;
+    }
+    .workspace-title h2{
+      font-size: 26px;
+      font-weight: 750;
+      color: var(--accent-purple-dark);
+      line-height: 1.2;
+    }
+    .workspace-title p{
+      font-size: 14px;
+      color: var(--text-medium);
+      font-weight: 450;
+      max-width: 780px;
+    }
+
+    .workspace-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .workspace-actions.bottom{
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      justify-content: flex-end;
+    }
+    .dark-mode .workspace-actions.bottom{
+      border-top-color: rgba(255,255,255,0.10);
+    }
+
+    .btn{
+      border:none;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn.primary{
+      background: var(--premium-gradient);
+      color:#fff;
+      box-shadow: 0 12px 26px rgba(123,95,196,0.22);
+    }
+    .btn.primary:hover{ transform: translateY(-1px); box-shadow: 0 16px 30px rgba(123,95,196,0.28); }
+    .btn.secondary{
+      background: var(--light-purple);
+      color: var(--accent-purple-dark);
+    }
+    .dark-mode .btn.secondary{
+      background: rgba(123,95,196,0.22);
+      color: var(--accent-purple);
+    }
+    .btn.secondary:hover{
+      transform: translateY(-1px);
+      background: rgba(123,95,196,0.18);
+    }
+    .btn.danger{
+      background: rgba(239,68,68,0.12);
+      color: #b91c1c;
+    }
+    .dark-mode .btn.danger{
+      background: rgba(239,68,68,0.18);
+      color: #fecaca;
+    }
+    .btn.danger:hover{
+      transform: translateY(-1px);
+      background: rgba(239,68,68,0.16);
+    }
+    .btn:disabled{
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform:none !important;
+      box-shadow:none !important;
+    }
+
+    .modules-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 0;
+    }
+
+    .module-card{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 16px 16px 14px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+      position: relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      min-height: 520px;
+    }
+    .dark-mode .module-card{
+      box-shadow: 0 14px 30px rgba(0,0,0,0.35);
+    }
+    .module-card::before{
+      content:'';
+      position:absolute;
+      left:0; right:0; top:0;
+      height: 3px;
+      background: var(--premium-gradient);
+      opacity: 0.95;
+    }
+
+    .module-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .module-chip{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .module-num{
+      width: 30px;
+      height: 30px;
+      border-radius: 12px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 600;
+      font-size: 12px;
+      color:#fff;
+      background: var(--premium-gradient);
+      box-shadow: 0 12px 22px rgba(123,95,196,0.18);
+      flex-shrink: 0;
+    }
+    .module-title{
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+    .module-title h3{
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+    }
+    .module-title p{
+      font-size: 12.5px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    textarea.module-input{
+      width: 100%;
+      resize: none;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      padding: 12px 12px;
+      color: var(--text-dark);
+      font-size: 13.5px;
+      line-height: 1.55;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      font-weight: 450;
+      flex: 1;
+      min-height: 360px;
+      overflow: hidden;
+    }
+    .dark-mode textarea.module-input{
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.10);
+    }
+    textarea.module-input:focus{
+      border-color: rgba(123,95,196,0.35);
+      box-shadow: 0 0 0 4px rgba(123,95,196,0.10);
+    }
+
+    .module-meta{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 10px;
+      margin-top: -2px;
+    }
+    .count{
+      font-size: 12px;
+      color: var(--dark-gray);
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    /* ===========================
+       PRESSURE MODE (Overlay)
+    =========================== */
+    .pressure-toggle-row{
+      max-width:1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display:flex;
+      justify-content: flex-end;
+      margin-top: -6px;
+      margin-bottom: 8px;
+    }
+    .pressure-toggle{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(239,68,68,0.25);
+      background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(239,68,68,0.03));
+      color: #b91c1c;
+      cursor:pointer;
+      font-size: 13px;
+      font-weight: 650;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+    .dark-mode .pressure-toggle{
+      color: #fecaca;
+      border-color: rgba(248,113,113,0.25);
+      background: linear-gradient(135deg, rgba(239,68,68,0.16), rgba(239,68,68,0.08));
+    }
+    .pressure-toggle:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 12px 26px rgba(239,68,68,0.10);
+      background: linear-gradient(135deg, rgba(239,68,68,0.12), rgba(239,68,68,0.05));
+    }
+    .pressure-toggle .dot{
+      width:10px; height:10px; border-radius:999px;
+      background: rgba(239,68,68,0.55);
+      box-shadow: 0 0 0 6px rgba(239,68,68,0.12);
+    }
+
+    .pressure-overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 2000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+    }
+    .pressure-overlay.open{ display:flex; }
+    .pressure-panel{
+      width: 980px;
+      max-width: 100%;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 18px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      overflow:hidden;
+      position: relative;
+    }
+    .dark-mode .pressure-panel{
+      background: rgba(18,18,18,0.96);
+      border-color: rgba(255,255,255,0.08);
+    }
+    .pressure-panel::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height: 4px;
+      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+    }
+    .pressure-header{
+      padding: 18px 18px 10px;
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .pressure-title{
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+      padding-right: 8px;
+    }
+    .pressure-title h3{
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-dark);
+      display:flex;
+      align-items:center;
+      gap: 10px;
+    }
+    .pressure-title h3 i{ color:#ef4444; }
+    .pressure-title p{
+      font-size: 13.5px;
+      color: var(--text-medium);
+      font-weight: 450;
+      line-height: 1.6;
+      max-width: 820px;
+    }
+    .pressure-close{
+      background:none;
+      border:none;
+      cursor:pointer;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--text-dark);
+      transition: background-color 0.2s ease;
+      flex-shrink: 0;
+    }
+    .pressure-close:hover{ background: var(--light-gray); }
+
+    .pressure-body{
+      padding: 10px 18px 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .pressure-card{
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 14px;
+      background: var(--primary-white);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+    }
+    .dark-mode .pressure-card{
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 14px 26px rgba(0,0,0,0.35);
+      background: rgba(255,255,255,0.03);
+    }
+    .pressure-card h4{
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+    }
+    .pressure-card h4 i{ color:#ef4444; }
+    .pressure-card .txt{
+      font-size: 13px;
+      color: var(--text-medium);
+      font-weight: 450;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+    .pressure-actions{
+      padding: 0 18px 18px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+      border-top: 1px solid var(--border-light);
+      margin-top: 6px;
+      padding-top: 14px;
+    }
+    .dark-mode .pressure-actions{
+      border-top-color: rgba(255,255,255,0.10);
+    }
+
+    /* ===========================
+       GENERATED PACK
+    =========================== */
+    .pack-section{
+      max-width:1100px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      display:none;
+    }
+    .pack-section.active{
+      display:block;
+      animation: slideIn 0.5s ease;
+    }
+    @keyframes slideIn{
+      from{ opacity:0; transform: translateY(20px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    .pack-header{
+      text-align:center;
+      margin: 18px 0 22px;
+    }
+    .pack-title{
+      font-size: 24px;
+      font-weight: 850;
+      color: var(--accent-purple-dark);
+      margin-bottom: 6px;
+    }
+    .pack-subtitle{
+      color: var(--text-medium);
+      font-size: 14.5px;
+      font-weight: 450;
+      max-width: 900px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .pack-bar{
+      background: var(--primary-white);
+      border-radius: 16px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 14px 40px rgba(123,95,196,0.12);
+      border: 1px solid rgba(123,95,196,0.15);
+      display:flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .pack-metrics{
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+    }
+    .metric-row{
+      display:flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .metric-title{
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent-purple-dark);
+      letter-spacing: 0.2px;
+    }
+    .metric-score{
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--accent-purple);
+      white-space: nowrap;
+    }
+    .mini-progress{
+      height: 10px;
+      background: var(--light-gray);
+      border-radius: 6px;
+      overflow:hidden;
+    }
+    .dark-mode .mini-progress{
+      background: rgba(255,255,255,0.12);
+    }
+    .mini-fill{
+      height:100%;
+      width:0%;
+      border-radius: 6px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: var(--premium-gradient);
+    }
+    .mini-fill.high{ background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .mini-fill.medium{ background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .mini-fill.low{ background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+    .pack-actions{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+      flex-shrink: 0;
+    }
+
+    .section-header{
+      font-size: 18px;
+      font-weight: 850;
+      margin: 18px 0 14px;
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-gray);
+    }
+    .section-header.purple{ color: var(--accent-purple-dark); }
+    .section-header.orange{ color: var(--warning-orange); }
+    .section-header.blue{ color: var(--accent-purple); }
+    .section-header.red{ color: #b91c1c; }
+
+    .pack-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .pack-card{
+      background: var(--primary-white);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      overflow:hidden;
+      display:flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+    }
+    .dark-mode .pack-card{
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.32);
+    }
+    .pack-card::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height:3px;
+      background: var(--premium-gradient);
+    }
+
+    .pc-ico{
+      font-size: 18px;
+      margin-bottom: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: var(--accent-purple);
+      background: var(--lighter-purple);
+    }
+    .pc-title{
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .pc-body{
+      color: var(--text-medium);
+      font-size: 13.5px;
+      line-height: 1.6;
+      font-weight: 450;
+      white-space: pre-wrap;
+      flex: 1;
+    }
+
+    .pack-output{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+      margin-bottom: 12px;
+    }
+    .dark-mode .pack-output{
+      box-shadow: 0 18px 34px rgba(0,0,0,0.32);
+    }
+
+    .mono{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12.8px;
+      color: var(--text-medium);
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR
+    =========================== */
+    .my-playbook-fab{
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1200;
+      background: var(--premium-gradient);
+      color:#fff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      cursor:pointer;
+      font-size: 13px;
+      font-weight: 750;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+    .my-playbook-fab:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+    }
+
+    .playbook-sidebar-overlay{
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1190;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity 0.25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position: fixed;
+      top:0;
+      right: -380px;
+      width: 340px;
+      max-width: 90%;
+      height: 100%;
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index: 1191;
+      display:flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border-light);
+      transition: right 0.25s ease;
+    }
+    .dark-mode .playbook-sidebar{
+      background: rgba(18,18,18,0.96);
+      box-shadow: -4px 0 22px rgba(0,0,0,0.6);
+    }
+    .playbook-sidebar.open{ right:0; }
+
+    .playbook-sidebar-header{
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .playbook-sidebar-header-title-row{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      margin-bottom: 4px;
+    }
+    .playbook-sidebar-header h3{
+      font-size:18px;
+      font-weight:700;
+      color: var(--text-dark);
+    }
+    .playbook-sidebar-header p{
+      font-size: 13px;
+      color: var(--dark-gray);
+    }
+    .playbook-close-btn{
+      background:none;
+      border:none;
+      color: var(--dark-gray);
+      cursor:pointer;
+      font-size: 18px;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition: background-color 0.2s ease;
+    }
+    .playbook-close-btn:hover{ background: var(--light-gray); }
+
+    .playbook-sidebar-body{
+      padding: 14px 18px 20px;
+      padding-bottom: 50px;
+      overflow-y: auto;
+      flex:1;
+      display:flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .saved-items-empty{
+      font-size: 13px;
+      color: var(--dark-gray);
+      line-height: 1.6;
+    }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+
+    .saved-item{
+      padding: 10px 10px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom: 10px;
+      display:flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .saved-item-title-row{
+      display:flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .saved-item-title{
+      font-size: 14px;
+      font-weight: 850;
+      color: var(--text-dark);
+    }
+    .saved-item-type{
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent-purple-dark);
+      font-weight: 600;
+    }
+    .saved-item-meta{
+      font-size: 12px;
+      color: var(--dark-gray);
+    }
+    .saved-item-link{
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--accent-purple);
+      text-decoration:none;
+      font-weight: 850;
+      display:inline-flex;
+      align-items:center;
+      gap: 4px;
+    }
+    .saved-item-link:hover{ text-decoration: underline; }
+
+    .playbook-quick-links{
+      margin-top: 223px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+    }
+    .quick-links-title{
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-medium);
+    }
+    .playbook-quick-links-list{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .quick-link-pill{
+      width: 58%;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(123,95,196,0.35);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+      text-decoration:none;
+      color: var(--accent-purple-dark);
+      font-size: 13px;
+      font-weight: 650;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .quick-link-pill:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+    }
+    .dark-mode .quick-link-pill{
+      border-color: rgba(157,134,233,0.55);
+      background: linear-gradient(135deg, rgba(123,95,196,0.26), rgba(123,95,196,0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer{
+      background: var(--primary-white);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 30px;
+      text-align:center;
+      color: var(--text-medium);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px){
+      .context-tips-grid{ grid-template-columns: 1fr; gap: 24px; }
+      .modules-grid{ grid-template-columns: 1fr; }
+      .pack-grid{ grid-template-columns: repeat(2, 1fr); }
+      .pack-bar{ flex-direction: column; align-items: stretch; }
+      .pack-actions{ justify-content: flex-start; }
+      textarea.module-input{ min-height: 380px; }
+      .module-card{ min-height: 560px; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .pressure-body{ grid-template-columns: 1fr; }
+      .pressure-actions{ justify-content:flex-start; }
+    }
+    @media (max-width: 768px){
+      .tool-hero-section{ margin-top: 100px; }
+      .hero-main-heading{ font-size: 36px; }
+      .save-btn{ right: 18px; top: 10px; }
+      .my-playbook-fab{ bottom: 18px; right: 18px; }
+      .pack-grid{ grid-template-columns: 1fr; }
+
+      .category-pill{
+        font-size: 12px;
+        padding: 7px 14px;
+        height: 34px;
+      }
+      textarea.module-input{ min-height: 380px; }
+      .module-card{ min-height: 580px; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .pressure-toggle-row{ justify-content: flex-start; }
+    }
+    @media (max-width: 480px){
+      .hero-main-heading{ font-size: 32px; }
+      .checklist-name{ font-size: 13px; }
+      .workspace-actions.bottom{ justify-content: flex-start; }
+      .pack-actions{ justify-content: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===========================
+     NAVIGATION
+=========================== -->
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo" aria-label="The Employee Playbook">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      <div class="logo-fallback" id="logoFallback">The Employee Playbook</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<div class="tool-hero-section">
+  <button class="save-btn" id="saveBtn">
+    <i class="far fa-bookmark"></i>
+    <span>Save</span>
+  </button>
+
+  <div class="tool-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-house"></i> Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="the-toolkit.html">The Toolkit</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="category-hr-and-performance.html">HR &amp; Formal Processes</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Formal Escalation Plan</span>
+    </div>
+
+    <span class="checklist-name">FORMAL ESCALATION PLAN</span>
+
+    <h1 class="hero-main-heading">
+      Escalate with precision — protect your income, your reputation, and your position while the facts do the talking
+    </h1>
+
+    <div class="hero-subheading">
+      This plan helps you move from “this feels wrong” to a structured escalation path that is calm, credible, and hard to dismiss.
+      It keeps you operational (still delivering where sensible), protects your narrative, and prevents unforced errors that can weaken your position.
+      <br><br>
+      Draft the modules below, then generate your Escalation Pack: a one-page case brief, evidence log structure, risk and income-protection checklist, and UK-friendly scripts for line management, HR, grievance, and occupational health routes.
+    </div>
+
+    <div class="related-row" aria-label="Related categories">
+      <span class="related-label">Related categories</span>
+
+      <div class="related-pills">
+        <a class="category-pill manager" href="category-manager-relationship-and-leadership-style.html" title="Manager Relationship & Leadership Style">
+          <i class="fas fa-people-arrows"></i>
+          <span>Manager Relationship &amp; Leadership Style</span>
+        </a>
+
+        <a class="category-pill hr" href="category-hr-and-performance.html" title="HR & Performance">
+          <i class="fas fa-file-signature category-icon"></i>
+          <span>HR &amp; Formal Processes</span>
+        </a>
+
+        <a class="category-pill politics" href="category-workplace-dynamics-and-politics.html" title="Workplace Dynamics & Politics">
+          <i class="fas fa-chess category-icon"></i>
+          <span>Workplace Dynamics &amp; Politics</span>
+        </a>
+
+        <a class="category-pill clarity" href="category-clarity-priorities-and-direction.html" title="Clarity, Priorities & Direction">
+          <i class="fas fa-bullseye category-icon"></i>
+          <span>Clarity, Priorities &amp; Direction</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     CONTEXT & PRO TIPS
+=========================== -->
+<div class="context-tips-grid">
+  <div class="context-card">
+    <h3 class="section-title"><i class="fas fa-compass"></i>When to Use This Plan</h3>
+    <ul class="bullet-list">
+      <li>When a problem has become persistent (or repeated) and “informal” handling isn’t changing behaviour or outcomes.</li>
+      <li>When your manager is the problem — or your manager is unable/unwilling to fix it.</li>
+      <li>When there is performance, safety, wellbeing, discrimination, bullying, retaliation, pay, or contractual risk.</li>
+      <li>When you need to protect your income and employability while challenging something you should not have to tolerate.</li>
+      <li>When you want a structured path that prevents escalation by emotion, impulse, or “prove it” debates.</li>
+    </ul>
+  </div>
+
+  <div class="tips-card">
+    <h3 class="section-title"><i class="fas fa-bolt"></i>How to Use It (fast)</h3>
+    <ul class="bullet-list">
+      <li>Write like you’re preparing a clear brief: <strong>facts, dates, impacts, evidence</strong>. Avoid labels and mind-reading.</li>
+      <li>Separate: <strong>what happened</strong> vs <strong>what it caused</strong> vs <strong>what you need</strong> to make it stop.</li>
+      <li>Choose the minimum effective route first — but set a firm <strong>threshold</strong> for moving formal.</li>
+      <li>Protect your delivery and boundaries: if you “break” during escalation, you hand over narrative control.</li>
+      <li>Lock key points in writing (brief follow-ups). Verbal only = easily rewritten later.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===========================
+     PRESSURE MODE TOGGLE (Optional Overlay)
+=========================== -->
+<div class="pressure-toggle-row" aria-label="Pressure Mode">
+  <button class="pressure-toggle" id="pressureModeBtn" type="button" title="Open a faster escalation view for high-pressure situations">
+    <span class="dot" aria-hidden="true"></span>
+    Pressure Mode (fast + protective)
+    <i class="fas fa-arrow-right"></i>
+  </button>
+</div>
+
+<!-- ===========================
+     WORKSPACE
+=========================== -->
+<div class="workspace-wrap" id="workspace">
+  <div class="workspace-header">
+    <div class="workspace-title">
+      <h2>Draft your formal escalation plan</h2>
+      <p>
+        Eight modules to clarify the issue, build a credible evidence trail, reduce retaliation risk, and choose the right escalation route.
+        Generate your Escalation Pack when you’ve captured enough detail to act calmly and consistently.
+      </p>
+    </div>
+  </div>
+
+  <div class="modules-grid" id="modulesGrid">
+    <!-- Modules injected by JS -->
+  </div>
+
+  <!-- ACTIONS MOVED TO BOTTOM -->
+  <div class="workspace-actions bottom" aria-label="Draft actions">
+    <button class="btn secondary" id="copyDraftBtn"><i class="far fa-copy"></i> Copy draft</button>
+    <button class="btn secondary" id="clearDraftBtn"><i class="fas fa-eraser"></i> Clear</button>
+    <button class="btn primary" id="generatePackBtn" disabled><i class="fas fa-wand-magic-sparkles"></i> Generate Escalation Pack</button>
+  </div>
+</div>
+
+<!-- ===========================
+     GENERATED PACK
+=========================== -->
+<div class="pack-section" id="packSection">
+  <div class="pack-header">
+    <h2 class="pack-title">Your Escalation Pack</h2>
+    <p class="pack-subtitle">
+      A structured output you can use immediately: a one-page case brief, a clean chronology, an evidence pack structure, a risk and income-protection checklist, and scripts for each escalation step.
+      This is designed to keep your tone calm, your narrative tight, and your next move deliberate.
+    </p>
+  </div>
+
+  <div class="pack-bar">
+    <div class="pack-metrics">
+      <div class="metric-row">
+        <div class="metric-title">Draft completeness</div>
+        <div class="metric-score" id="completenessScore">0%</div>
+      </div>
+      <div class="mini-progress"><div class="mini-fill" id="miniFill"></div></div>
+      <div class="metric-row" style="margin-top:2px;">
+        <div class="metric-title">Escalation readiness</div>
+        <div class="metric-score" id="readinessSignal">—</div>
+      </div>
+    </div>
+
+    <div class="pack-actions">
+      <button class="btn primary" id="copyPackBtn"><i class="far fa-copy"></i> Copy pack</button>
+      <button class="btn secondary" id="downloadPackBtn"><i class="fas fa-download"></i> Download .txt</button>
+      <button class="btn secondary" id="printPackBtn"><i class="fas fa-print"></i> Print</button>
+    </div>
+  </div>
+
+  <h3 class="section-header purple"><i class="fas fa-file-lines"></i> One-page case brief (paste-ready)</h3>
+  <div class="pack-output">
+    <div class="mono" id="onePageOutput"></div>
+  </div>
+
+  <h3 class="section-header blue"><i class="fas fa-route"></i> Escalation route map (minimum effective path)</h3>
+  <div class="pack-grid" id="routeGrid"></div>
+
+  <h3 class="section-header orange"><i class="fas fa-shield-halved"></i> Risk & income protection (do not skip)</h3>
+  <div class="pack-grid" id="protectionGrid"></div>
+
+  <h3 class="section-header red"><i class="fas fa-folder-open"></i> Evidence pack structure (simple + credible)</h3>
+  <div class="pack-grid" id="evidenceGrid"></div>
+
+  <h3 class="section-header purple"><i class="fas fa-comments"></i> Scripts (calm, precise, UK-friendly)</h3>
+  <div class="pack-grid" id="scriptsGrid"></div>
+</div>
+
+<!-- ===========================
+     PRESSURE OVERLAY
+=========================== -->
+<div class="pressure-overlay" id="pressureOverlay" aria-hidden="true">
+  <div class="pressure-panel" role="dialog" aria-modal="true" aria-label="Pressure Mode">
+    <div class="pressure-header">
+      <div class="pressure-title">
+        <h3><i class="fas fa-triangle-exclamation"></i> Pressure Mode: fast, protective escalation</h3>
+        <p>
+          Use this when you’re under time pressure, emotional load, or you suspect politics/retaliation risk.
+          This view keeps you safe: facts-first, minimal exposure, and clear written follow-ups.
+        </p>
+      </div>
+      <button class="pressure-close" id="pressureCloseBtn" aria-label="Close Pressure Mode"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="pressure-body">
+      <div class="pressure-card">
+        <h4><i class="fas fa-bullseye"></i> Your only objective</h4>
+        <div class="txt">Secure a credible record, a clear ask, and a defined route — without losing composure or leverage.</div>
+      </div>
+      <div class="pressure-card">
+        <h4><i class="fas fa-pen-to-square"></i> The “written lock” rule</h4>
+        <div class="txt">After any verbal conversation, send a short follow-up confirming what was agreed. If it is not written, it can be rewritten later.</div>
+      </div>
+      <div class="pressure-card">
+        <h4><i class="fas fa-shield"></i> Minimise retaliation surface</h4>
+        <div class="txt">Keep your tone neutral. Keep your output steady where reasonable. Do not threaten or “warn”. Ask for process and resolution.</div>
+      </div>
+      <div class="pressure-card">
+        <h4><i class="fas fa-stairs"></i> The shortest safe route</h4>
+        <div class="txt">1) Document → 2) Clear ask → 3) Manager/HR route → 4) Formal grievance if no change → 5) Occupational health if health impact / capacity risk.</div>
+      </div>
+    </div>
+
+    <div class="pressure-actions">
+      <button class="btn secondary" id="pressureCopyOnePageBtn"><i class="far fa-copy"></i> Copy one-page brief</button>
+      <button class="btn danger" id="pressureOpenEvidenceBtn"><i class="fas fa-folder-open"></i> Jump to evidence module</button>
+      <button class="btn primary" id="pressureOpenScriptsBtn"><i class="fas fa-comment-dots"></i> Jump to scripts module</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     MY PLAYBOOK SIDEBAR (Right)
+=========================== -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven’t saved anything yet. Use <strong>Save</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <div class="playbook-quick-links-header">
+          <span class="quick-links-title">Quick links</span>
+        </div>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill">
+            <i class="fas fa-gauge"></i> The Dashboard
+          </a>
+          <a href="the-lens.html" class="quick-link-pill">
+            <i class="fas fa-search"></i> The Lens
+          </a>
+          <a href="the-toolkit.html" class="quick-link-pill">
+            <i class="fas fa-toolbox"></i> The Toolkit
+          </a>
+          <a href="the-coach.html" class="quick-link-pill">
+            <i class="fas fa-comments"></i> The Coach
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+/* ===========================
+   BOOT
+=========================== */
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('loaded');
+
+  initializeThemeToggle();
+  initializeMobileNav();
+  initializePlaybook();
+  initializePressureMode();
+
+  buildModules();
+  loadDraft();
+  wireDraftHandlers();
+
+  refreshGenerateState();
+});
+
+/* ===========================
+   MOBILE NAV
+=========================== */
+function initializeMobileNav() {
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (!mobileToggle || !navLinks) return;
+
+  mobileToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('active');
+    const icon = this.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    }
+  });
+
+  document.addEventListener('click', function(event) {
+    if (navLinks.classList.contains('active') &&
+        !navLinks.contains(event.target) &&
+        !mobileToggle.contains(event.target)) {
+      navLinks.classList.remove('active');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) {
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+      }
+    }
+  });
+}
+
+/* ===========================
+   THEME TOGGLE + LOGO
+=========================== */
+function initializeThemeToggle() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (!themeToggleBtn) return;
+
+  const themeIcon = themeToggleBtn.querySelector('i');
+  const logoImg = document.getElementById('mainLogo');
+  const logoFallback = document.getElementById('logoFallback');
+
+  function getLogoPath(filename) {
+    if (window.location.protocol === 'file:') {
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+      return basePath + 'assets/img/' + filename;
+    } else {
+      return './assets/img/' + filename;
+    }
+  }
+
+  function showFallbackLogo() {
+    if (logoImg) logoImg.style.display = 'none';
+    if (logoFallback) logoFallback.style.display = 'inline-flex';
+  }
+
+  function showImageLogo() {
+    if (logoFallback) logoFallback.style.display = 'none';
+    if (logoImg) logoImg.style.display = 'block';
+  }
+
+  function updateLogoForTheme(isDarkMode) {
+    if (!logoImg) return;
+    showImageLogo();
+    logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+    logoImg.alt = 'The Employee Playbook';
+  }
+
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const savedTheme = localStorage.getItem('theme');
+  const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches);
+
+  if (shouldUseDark) {
+    document.body.classList.add('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+    updateLogoForTheme(true);
+  } else {
+    document.body.classList.remove('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+    updateLogoForTheme(false);
+  }
+
+  themeToggleBtn.addEventListener('click', function() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+
+    if (isDarkMode) {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+      updateLogoForTheme(false);
+    } else {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+      updateLogoForTheme(true);
+    }
+  });
+
+  prefersDarkScheme.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      if (e.matches) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      }
+    }
+  });
+
+  if (logoImg) {
+    logoImg.addEventListener('error', function() {
+      if (this.src.includes('logo-dark.png')) {
+        this.src = getLogoPath('logo.png');
+      } else {
+        showFallbackLogo();
+      }
+    });
+  }
+}
+
+/* ===========================
+   PRESSURE MODE
+=========================== */
+function initializePressureMode(){
+  const btn = document.getElementById('pressureModeBtn');
+  const overlay = document.getElementById('pressureOverlay');
+  const closeBtn = document.getElementById('pressureCloseBtn');
+
+  const copyOnePage = document.getElementById('pressureCopyOnePageBtn');
+  const jumpEvidence = document.getElementById('pressureOpenEvidenceBtn');
+  const jumpScripts = document.getElementById('pressureOpenScriptsBtn');
+
+  if (!btn || !overlay || !closeBtn) return;
+
+  const open = () => {
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden';
+  };
+  const close = () => {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden','true');
+    document.body.style.overflow = '';
+  };
+
+  btn.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) close();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) close();
+  });
+
+  if (copyOnePage) copyOnePage.addEventListener('click', () => {
+    const text = buildOnePageBrief(getDraft());
+    copyText(text, copyOnePage, 'Brief copied');
+  });
+
+  if (jumpEvidence) jumpEvidence.addEventListener('click', () => {
+    close();
+    const el = document.getElementById('input_evidence');
+    if (el) el.scrollIntoView({behavior:'smooth', block:'center'});
+    setTimeout(() => el && el.focus(), 250);
+  });
+
+  if (jumpScripts) jumpScripts.addEventListener('click', () => {
+    close();
+    const el = document.getElementById('input_scripts');
+    if (el) el.scrollIntoView({behavior:'smooth', block:'center'});
+    setTimeout(() => el && el.focus(), 250);
+  });
+}
+
+/* ===========================
+   MODULES (EVEN NUMBER)
+=========================== */
+const DRAFT_KEY = 'tepFormalEscalationDraft_v1';
+
+const modules = [
+  {
+    id: 'issue',
+    title: 'Issue definition (facts only)',
+    hint: 'What is happening, how often, and what exactly is unacceptable?',
+    placeholder:
+`Write a factual definition. Avoid labels (e.g., “bullying”) unless you can show behaviour.
+
+Include:
+• The behaviour or failure (what happened)
+• Frequency (one-off, weekly, pattern)
+• Where it occurs (meetings, messages, 1:1s)
+• Who is involved (roles, not opinions)
+
+Finish with a single sentence:
+• “This needs intervention because: [impact + risk].”`
+  },
+  {
+    id: 'timeline',
+    title: 'Chronology (dates + anchors)',
+    hint: 'A clean timeline turns emotion into evidence.',
+    placeholder:
+`Create a short chronology:
+
+• Date — event — who was present — what was said/done — immediate outcome
+
+Keep each line short. Use anchors:
+• email date
+• meeting title
+• ticket number
+• message timestamp
+• document version
+
+Finish with:
+• “The pattern started on [date] and has continued despite [informal step].”`
+  },
+  {
+    id: 'impact',
+    title: 'Impact (work, health, reputation, risk)',
+    hint: 'Impact is what makes escalation legitimate.',
+    placeholder:
+`Describe impact in four lanes (keep it calm):
+
+1) Work impact:
+• missed deadlines, rework, errors, delays, loss of focus
+
+2) Health/wellbeing impact:
+• sleep, anxiety, sustained stress, medical advice (if applicable)
+
+3) Reputation impact:
+• stakeholder trust, visibility, narrative risk, credibility hits
+
+4) Organisational risk:
+• compliance, safety, client risk, data risk, team turnover risk
+
+Finish with:
+• “If this continues for 4–6 weeks, the most likely consequence is: [clear consequence].”`
+  },
+  {
+    id: 'outcome',
+    title: 'Outcome required (resolution in plain English)',
+    hint: 'What do you want to be different, specifically?',
+    placeholder:
+`Define the resolution. Be specific and practical.
+
+Include:
+• What must stop (behaviour/process)
+• What must change (decision rights, workload, boundaries, reporting line)
+• What “good” looks like (2–3 observable signals)
+• What support you need (HR process, mediation, training, adjustments)
+
+Finish with:
+• “I’m seeking resolution, not conflict. This is about a safe, workable environment.”`
+  },
+  {
+    id: 'evidence',
+    title: 'Evidence pack (what you have + what you will capture)',
+    hint: 'Evidence beats arguments.',
+    placeholder:
+`List evidence you already have:
+
+• Emails / messages (dates)
+• Documents / tickets / outputs
+• Meeting notes (your notes + invitations)
+• Witnesses (only if safe and appropriate)
+• Policy references (short)
+
+Then list what you will capture going forward:
+• A weekly log (date, behaviour, impact, evidence link)
+• Follow-up emails after key conversations
+• Screenshots / file versions (stored safely)
+
+Finish with:
+• “My evidence is factual, dated, and focused on impact.”`
+  },
+  {
+    id: 'route',
+    title: 'Route selection (minimum effective escalation path)',
+    hint: 'Choose the shortest route that still protects you.',
+    placeholder:
+`Choose your route and why:
+
+A) Line manager route (if manager is able to act)
+B) Skip-level / senior sponsor (if manager is the problem or blocked)
+C) HR informal case management (early intervention)
+D) Formal grievance (if sustained, serious, or ignored)
+E) Occupational health (if health impact / capacity risk)
+F) Whistleblowing route (if legal/regulatory wrongdoing is involved)
+
+Write:
+• Route chosen: [A–F]
+• Why this route is appropriate
+• Your threshold for moving formal (what must happen by when)`
+  },
+  {
+    id: 'risk',
+    title: 'Risk & income protection (guardrails)',
+    hint: 'Escalation is a power move — keep your exposure low.',
+    placeholder:
+`List the risks and your guardrails:
+
+Risks to anticipate:
+• narrative distortion (“performance issue” reframing)
+• isolation / cold shoulder
+• workload pressure
+• “informal warnings” or capability hints
+• retaliation via projects, visibility, access
+
+Guardrails you will hold:
+• keep delivery steady where reasonable
+• keep tone neutral, brief, written
+• avoid venting in workplace channels
+• do not threaten or “warn”
+• document key events and follow-ups
+• keep personal admin tight (finances, CV readiness)
+
+Finish with:
+• “My behaviour will remain professional and consistent throughout.”`
+  },
+  {
+    id: 'scripts',
+    title: 'Scripts & phrasing (the words you will use)',
+    hint: 'Your tone is your protection.',
+    placeholder:
+`Write 4 scripts you can use without improvising:
+
+1) Raise with manager (calm, factual)
+2) Follow-up email (locks summary)
+3) HR request (process + support)
+4) Formal grievance opening (brief, structured)
+
+Rules:
+• factual
+• no accusations
+• no sarcasm
+• clear ask + timeline
+• request next steps in writing`
+  }
+];
+
+(function ensureEvenModules(){
+  if (modules.length % 2 !== 0) {
+    modules.push({
+      id: 'notes',
+      title: 'Notes (auto-added)',
+      hint: 'A safety module to keep the set even.',
+      placeholder: "Any extra context you don't want to lose."
+    });
+  }
+})();
+
+function buildModules(){
+  const grid = document.getElementById('modulesGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  modules.forEach((m, idx) => {
+    const card = document.createElement('div');
+    card.className = 'module-card';
+    card.innerHTML = `
+      <div class="module-top">
+        <div class="module-chip">
+          <div class="module-num">${idx + 1}</div>
+          <div class="module-title">
+            <h3>${m.title}</h3>
+            <p>${m.hint}</p>
+          </div>
+        </div>
+      </div>
+
+      <textarea class="module-input" id="input_${m.id}" placeholder="${escapeHtml(m.placeholder)}"></textarea>
+
+      <div class="module-meta">
+        <div></div>
+        <div class="count" id="count_${m.id}">0 chars</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function escapeHtml(str){
+  return (str || '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
+/* ===========================
+   DRAFT STORAGE
+=========================== */
+function getDraft(){
+  try {
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if (!raw) return {};
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === 'object' ? parsed : {};
+  } catch(e){
+    return {};
+  }
+}
+function setDraft(d){
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); }
+  catch(e){ console.warn('Draft save failed:', e); }
+}
+
+function loadDraft(){
+  const d = getDraft();
+  modules.forEach(m => {
+    const el = document.getElementById(`input_${m.id}`);
+    if (!el) return;
+    el.value = (d[m.id] || '');
+    updateModuleCount(m.id);
+  });
+}
+
+function wireDraftHandlers(){
+  modules.forEach(m => {
+    const el = document.getElementById(`input_${m.id}`);
+    if (el) {
+      el.addEventListener('input', () => {
+        const d = getDraft();
+        d[m.id] = el.value;
+        setDraft(d);
+        updateModuleCount(m.id);
+        refreshGenerateState();
+      });
+    }
+  });
+
+  const copyDraftBtn = document.getElementById('copyDraftBtn');
+  const clearDraftBtn = document.getElementById('clearDraftBtn');
+  const generateBtn = document.getElementById('generatePackBtn');
+
+  if (copyDraftBtn) copyDraftBtn.addEventListener('click', copyDraft);
+  if (clearDraftBtn) clearDraftBtn.addEventListener('click', clearDraft);
+  if (generateBtn) generateBtn.addEventListener('click', generateEscalationPack);
+
+  const copyPackBtn = document.getElementById('copyPackBtn');
+  const downloadPackBtn = document.getElementById('downloadPackBtn');
+  const printPackBtn = document.getElementById('printPackBtn');
+
+  if (copyPackBtn) copyPackBtn.addEventListener('click', () => {
+    const text = buildPackText();
+    copyText(text, copyPackBtn, 'Pack copied');
+  });
+
+  if (downloadPackBtn) downloadPackBtn.addEventListener('click', () => {
+    const text = buildPackText();
+    downloadText(text, 'formal-escalation-pack.txt');
+  });
+
+  if (printPackBtn) printPackBtn.addEventListener('click', () => {
+    window.print();
+  });
+}
+
+function updateModuleCount(moduleId){
+  const input = document.getElementById(`input_${moduleId}`);
+  const count = document.getElementById(`count_${moduleId}`);
+  if (!input || !count) return;
+  count.textContent = `${(input.value || '').length} chars`;
+}
+
+function refreshGenerateState(){
+  const btn = document.getElementById('generatePackBtn');
+  if (!btn) return;
+
+  const d = getDraft();
+  const filled = modules.filter(m => ((d[m.id] || '').trim().length > 0)).length;
+  btn.disabled = filled < 2;
+}
+
+/* ===========================
+   COPY / CLEAR
+=========================== */
+function copyDraft(){
+  const text = buildDraftText();
+  const btn = document.getElementById('copyDraftBtn');
+  copyText(text, btn, 'Draft copied');
+}
+
+function clearDraft(){
+  const ok = confirm('Clear the full draft? This cannot be undone.');
+  if (!ok) return;
+
+  localStorage.removeItem(DRAFT_KEY);
+  loadDraft();
+  refreshGenerateState();
+
+  const pack = document.getElementById('packSection');
+  if (pack) pack.classList.remove('active');
+}
+
+function copyText(text, buttonEl, successLabel){
+  navigator.clipboard.writeText(text);
+
+  if (!buttonEl) return;
+  const originalHTML = buttonEl.innerHTML;
+  const originalBg = buttonEl.style.background;
+  const originalColor = buttonEl.style.color;
+
+  buttonEl.innerHTML = `<i class="fas fa-check"></i> ${successLabel}`;
+  buttonEl.style.background = '#10b981';
+  buttonEl.style.color = '#ffffff';
+
+  setTimeout(() => {
+    buttonEl.innerHTML = originalHTML;
+    buttonEl.style.background = originalBg;
+    buttonEl.style.color = originalColor;
+  }, 1800);
+}
+
+function downloadText(text, filename){
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ===========================
+   PACK GENERATION
+=========================== */
+function generateEscalationPack(){
+  const d = getDraft();
+
+  const packSection = document.getElementById('packSection');
+  const onePageOutput = document.getElementById('onePageOutput');
+  const routeGrid = document.getElementById('routeGrid');
+  const protectionGrid = document.getElementById('protectionGrid');
+  const evidenceGrid = document.getElementById('evidenceGrid');
+  const scriptsGrid = document.getElementById('scriptsGrid');
+
+  if (!packSection || !onePageOutput || !routeGrid || !protectionGrid || !evidenceGrid || !scriptsGrid) return;
+
+  const completeness = calcCompleteness(d);
+  const readiness = calcReadinessSignal(d, completeness);
+
+  document.getElementById('completenessScore').textContent = `${completeness}%`;
+  document.getElementById('readinessSignal').textContent = readiness.label;
+
+  const fill = document.getElementById('miniFill');
+  fill.style.width = `${completeness}%`;
+  fill.classList.remove('high','medium','low');
+  fill.classList.add(readiness.fillClass);
+
+  onePageOutput.textContent = buildOnePageBrief(d);
+
+  routeGrid.innerHTML = '';
+  buildCards(routeGrid, buildRouteCards(d, readiness));
+
+  protectionGrid.innerHTML = '';
+  buildCards(protectionGrid, buildProtectionCards(d, readiness));
+
+  evidenceGrid.innerHTML = '';
+  buildCards(evidenceGrid, buildEvidenceCards(d));
+
+  scriptsGrid.innerHTML = '';
+  buildCards(scriptsGrid, buildScriptCards(d));
+
+  packSection.classList.add('active');
+  packSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+function calcCompleteness(d){
+  const total = modules.length;
+  const filled = modules.filter(m => ((d[m.id] || '').trim().length > 0)).length;
+  return total > 0 ? Math.round((filled / total) * 100) : 0;
+}
+
+function calcReadinessSignal(d, completeness){
+  const critical = ['issue','timeline','impact','outcome','evidence','route'];
+  const missing = critical.filter(id => !((d[id]||'').trim().length > 0));
+
+  // Readiness is not “rightness”, it’s “are you protected enough to act”
+  if (completeness >= 75 && missing.length === 0) return { label: 'High readiness', fillClass: 'high' };
+  if (completeness >= 45 && missing.length <= 2) return { label: 'Moderate readiness', fillClass: 'medium' };
+  return { label: 'Low readiness', fillClass: 'low' };
+}
+
+function buildOnePageBrief(d){
+  const safe = (s) => (s || '').trim() || '—';
+
+  const now = new Date();
+  const date = now.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+
+  const out = [];
+  out.push(`FORMAL ESCALATION PACK (One-page brief)`);
+  out.push(`Date: ${date}`);
+  out.push(``);
+  out.push(`1) Issue definition (facts only)`);
+  out.push(indentBlock(safe(d.issue)));
+  out.push(``);
+  out.push(`2) Chronology (dates + anchors)`);
+  out.push(indentBlock(safe(d.timeline)));
+  out.push(``);
+  out.push(`3) Impact (work, health, reputation, risk)`);
+  out.push(indentBlock(safe(d.impact)));
+  out.push(``);
+  out.push(`4) Outcome required (resolution)`);
+  out.push(indentBlock(safe(d.outcome)));
+  out.push(``);
+  out.push(`5) Evidence pack (what exists + capture plan)`);
+  out.push(indentBlock(safe(d.evidence)));
+  out.push(``);
+  out.push(`6) Route selection (minimum effective path)`);
+  out.push(indentBlock(safe(d.route)));
+  out.push(``);
+  out.push(`7) Risk & income protection (guardrails)`);
+  out.push(indentBlock(safe(d.risk)));
+  out.push(``);
+  out.push(`8) Scripts & phrasing (use, do not improvise)`);
+  out.push(indentBlock(safe(d.scripts)));
+  out.push(``);
+  out.push(`My clean ask (summary):`);
+  out.push(indentBlock(buildCleanAsk(d)));
+  out.push(``);
+  out.push(`Escalation threshold (when I move formal):`);
+  out.push(indentBlock(buildThreshold(d)));
+
+  return out.join('\n');
+}
+
+function buildCleanAsk(d){
+  const ask = [];
+  ask.push(`I am requesting a structured resolution process and clear next steps in writing.`);
+  ask.push(`I want the behaviour/process to stop, the impact addressed, and a workable arrangement confirmed.`);
+  ask.push(`If a meeting is held, I will follow up with a written summary to confirm what was agreed.`);
+  return ask.join(' ');
+}
+
+function buildThreshold(d){
+  const route = (d.route || '').trim();
+  if (route) {
+    return `If there is no meaningful change within the timeline set in my route selection, or if the behaviour repeats, I will escalate to the next formal step (HR case management / formal grievance / occupational health as applicable).`;
+  }
+  return `If the behaviour repeats after being raised, or if there is no defined resolution path within a reasonable timeframe, I will escalate to HR and/or the formal grievance route.`;
+}
+
+function indentBlock(text){
+  return (text || '—').split('\n').map(l => `   ${l}`).join('\n');
+}
+
+function buildCards(grid, cards){
+  cards.forEach(c => {
+    const card = document.createElement('div');
+    card.className = 'pack-card';
+    card.innerHTML = `
+      <div class="pc-ico"><i class="${c.icon}"></i></div>
+      <div class="pc-title">${c.title}</div>
+      <div class="pc-body">${escapeCardText(c.body)}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function buildRouteCards(d, readiness){
+  const routeRaw = (d.route || '').toLowerCase();
+  const managerIsProblem = routeRaw.includes('manager is the problem') || routeRaw.includes('skip-level') || routeRaw.includes('senior');
+  const healthImpact = ((d.impact||'').toLowerCase().includes('sleep') || (d.impact||'').toLowerCase().includes('anxiety') || (d.impact||'').toLowerCase().includes('stress') || (d.impact||'').toLowerCase().includes('health'));
+  const wrongdoing = routeRaw.includes('whistle') || routeRaw.includes('regulatory') || routeRaw.includes('illegal');
+
+  const cards = [];
+
+  cards.push({
+    title: 'Route A: Line management (if safe + effective)',
+    icon: 'fas fa-user-check',
+    body:
+`Use when:
+• Your manager can act and is not the subject of the issue
+• You want a fast reset without formal process
+
+Move to the next step if:
+• the behaviour repeats
+• there is no written outcome
+• the issue is reframed as “your attitude/performance” without facts`
+  });
+
+  cards.push({
+    title: 'Route B: Skip-level / sponsor (when blocked)',
+    icon: 'fas fa-arrow-up-right-dots',
+    body:
+`Use when:
+• your manager is the problem, or has a conflict of interest
+• the issue is being minimised or delayed
+• politics is distorting the facts
+
+Ask for:
+• a neutral review of the timeline + evidence
+• a clear owner for resolution
+• written next steps`
+  });
+
+  cards.push({
+    title: 'Route C/D: HR case management → formal grievance',
+    icon: 'fas fa-scale-balanced',
+    body:
+`Use when:
+• it is persistent, serious, or impacting health/ability to work
+• informal routes have failed
+• you need a documented process and outcome
+
+Grievance works best when:
+• you have a clean chronology
+• you can show impact
+• your ask is practical (what must change)`
+  });
+
+  if (healthImpact) {
+    cards.push({
+      title: 'Route E: Occupational health (protect capacity)',
+      icon: 'fas fa-heart-pulse',
+      body:
+`Use when:
+• there is health impact, stress injury risk, or sustained overload
+• you need adjustments, workload controls, or support to continue delivering
+
+Focus on:
+• functional impact (sleep, concentration, recovery)
+• adjustments needed (work design, boundaries, reduced exposure to triggers)`
+    });
+  } else {
+    cards.push({
+      title: 'Occupational health (if impact moves into health)',
+      icon: 'fas fa-heart-pulse',
+      body:
+`If health impact starts to appear, consider OH early.
+It can shift the conversation from “preference” to “capacity and adjustment”.
+
+Trigger points:
+• sleep disruption for multiple weeks
+• sustained anxiety/stress symptoms
+• inability to recover across a weekend`
+    });
+  }
+
+  if (wrongdoing) {
+    cards.push({
+      title: 'Route F: Whistleblowing (if wrongdoing)',
+      icon: 'fas fa-bullhorn',
+      body:
+`Use when:
+• the issue relates to legal/regulatory wrongdoing, safety, fraud, serious misconduct
+
+Keep it:
+• factual
+• documented
+• routed through the correct internal channel
+
+Do not use whistleblowing as leverage for a personal dispute — it weakens credibility.`
+    });
+  } else {
+    cards.push({
+      title: 'Wrongdoing vs workplace conflict (don’t mix)',
+      icon: 'fas fa-triangle-exclamation',
+      body:
+`If the issue is a workplace conflict or manager behaviour, use the HR/grievance routes.
+If it is legal/regulatory wrongdoing, use the whistleblowing route.
+
+Mixing them can muddy the case and slow resolution. Keep the lane clean.`
+    });
+  }
+
+  // Keep exactly 6 cards and adapt one to readiness
+  const base = cards.slice(0, 6);
+  if (readiness.fillClass === 'low') {
+    base[0] = {
+      title: 'Immediate next step (low readiness)',
+      icon: 'fas fa-clipboard-check',
+      body:
+`Before you escalate, tighten protection:
+• write a clean chronology (dates + anchors)
+• define your ask in 2–3 observable outcomes
+• list evidence you already have (even if incomplete)
+
+Then escalate calmly with a written follow-up.`
+    };
+  } else if (readiness.fillClass === 'high') {
+    base[0] = {
+      title: 'Execution step (high readiness)',
+      icon: 'fas fa-paper-plane',
+      body:
+`You have enough coverage to act.
+Next move:
+• choose the route
+• request a meeting or process owner
+• follow up in writing with your one-page brief and your resolution ask.`
+    };
+  }
+  return base;
+}
+
+function buildProtectionCards(d, readiness){
+  const riskTxt = (d.risk || '').toLowerCase();
+  const performanceReframe = riskTxt.includes('performance') || (d.impact || '').toLowerCase().includes('reputation');
+  const politics = riskTxt.includes('politics') || (d.route || '').toLowerCase().includes('politic');
+
+  const cards = [
+    {
+      title: 'Tone discipline (your armour)',
+      icon: 'fas fa-shield',
+      body:
+`Stay neutral, brief, and factual.
+Do:
+• “Here is what happened, here is the impact, here is what I am asking for.”
+Avoid:
+• labels, sarcasm, motive claims, threats
+
+Your tone becomes part of the record.`
+    },
+    {
+      title: 'Written follow-ups (lock reality)',
+      icon: 'fas fa-envelope',
+      body:
+`After any conversation, send a short summary:
+• what was discussed
+• what was agreed
+• timelines and owners
+
+This prevents “rewrites” and protects you if the narrative shifts.`
+    },
+    {
+      title: 'Delivery protection (reduce exposure)',
+      icon: 'fas fa-clipboard-list',
+      body:
+`Keep output steady where reasonable.
+During escalation:
+• avoid unforced mistakes
+• document priorities and trade-offs
+• reduce reactive work where possible
+
+It is harder to dismiss you when your delivery remains calm and consistent.`
+    },
+    {
+      title: 'Income protection (quiet admin)',
+      icon: 'fas fa-wallet',
+      body:
+`Do not wait until you’re under pressure.
+Quietly tighten:
+• key expenses visibility
+• emergency buffer plan
+• CV / LinkedIn readiness
+• references list (private)
+• timeline awareness (probation, reviews, restructures)
+
+This reduces fear-driven decisions.`
+    },
+    {
+      title: performanceReframe ? 'Counter reframing (performance narrative)' : 'Prevent reframing (performance narrative)',
+      icon: 'fas fa-user-shield',
+      body:
+`If you suspect reframing:
+• keep a clean chronology
+• keep evidence links
+• be explicit about wanting resolution and continued delivery
+
+If anyone implies “performance” without facts:
+• ask for examples, dates, and expectations in writing.`
+    },
+    {
+      title: politics ? 'Politics-proofing (minimum exposure)' : 'Retaliation-proofing (minimum exposure)',
+      icon: 'fas fa-chess',
+      body:
+`Assume information travels.
+Do:
+• share only what is needed, with the right owner
+• avoid workplace venting
+• keep messages professional and brief
+Avoid:
+• recruiting allies, gossip, “proving” your case in public`
+    }
+  ];
+
+  if (readiness.fillClass === 'low') {
+    cards[0] = {
+      title: 'Stabilise first (low readiness)',
+      icon: 'fas fa-life-ring',
+      body:
+`Before escalation:
+• write your one-page brief
+• list evidence anchors
+• define your outcome required
+• decide your route and threshold
+
+This prevents “emotion-led escalation” that damages leverage.`
+    };
+  }
+  return cards;
+}
+
+function buildEvidenceCards(d){
+  const hasChronology = ((d.timeline||'').trim().length > 0);
+  const hasEvidence = ((d.evidence||'').trim().length > 0);
+
+  const cards = [
+    {
+      title: 'Evidence structure (simple)',
+      icon: 'fas fa-folder-tree',
+      body:
+`Create a single folder structure:
+• 01_Chronology
+• 02_Emails_Messages
+• 03_Documents_Outputs
+• 04_Meetings_Notes
+• 05_Policies
+• 06_Health_OH (if relevant)
+
+Keep file names dated.`
+    },
+    {
+      title: 'Chronology template (copy/paste)',
+      icon: 'fas fa-calendar-days',
+      body:
+`Format:
+Date — event — who — what happened — impact — evidence link
+
+Example:
+12 Oct — 1:1 — Manager — instruction changed after approval — rework — email_12Oct.pdf
+
+Short lines win.`
+    },
+    {
+      title: 'Meeting notes rule (credible)',
+      icon: 'fas fa-pen',
+      body:
+`Write notes immediately after meetings:
+• attendees
+• decisions
+• key statements
+• actions + owners
+
+Then send a short follow-up if the meeting matters.`
+    },
+    {
+      title: 'Screenshots and exports (clean)',
+      icon: 'fas fa-image',
+      body:
+`If using screenshots:
+• capture context (date/time)
+• do not edit
+• store as PDF if possible
+• keep it minimal and relevant
+
+Quality > volume.`
+    },
+    {
+      title: hasChronology ? 'Evidence balance (you’re covered)' : 'Evidence gap (fix first)',
+      icon: 'fas fa-circle-check',
+      body:
+hasChronology
+? `A chronology with anchors is the backbone.
+You can escalate without “every piece of proof”, as long as your record is dated and consistent.`
+: `If you do one thing before escalating, build the chronology.
+It converts “feelings” into a case that can be reviewed fairly.`
+    },
+    {
+      title: hasEvidence ? 'Capture plan (ongoing, low effort)' : 'Start capture plan (today)',
+      icon: 'fas fa-stopwatch',
+      body:
+hasEvidence
+? `Keep a weekly log (10 minutes):
+• what happened
+• impact
+• evidence link
+• follow-up sent (yes/no)`
+: `Start a weekly log today.
+Even a simple dated note plus follow-up emails can protect you if the situation escalates later.`
+    }
+  ];
+
+  return cards;
+}
+
+function buildScriptCards(d){
+  const outcome = (d.outcome || '').trim();
+  const route = (d.route || '').trim();
+
+  const cleanOutcome = outcome ? shorten(outcome, 260) : 'a workable resolution with clear next steps and a written outcome';
+  const cleanRoute = route ? shorten(route, 240) : 'the appropriate resolution route with a named owner and timeline';
+
+  return [
+    {
+      title: 'Raise with manager (facts + ask)',
+      icon: 'fas fa-handshake',
+      body:
+`“I want to raise a concern and get it resolved properly. Here are the facts and the pattern I’m seeing. The impact is [impact]. I’m asking for ${cleanOutcome}. Can we agree next steps and confirm them in writing?”`
+    },
+    {
+      title: 'Follow-up email (locks summary)',
+      icon: 'fas fa-envelope',
+      body:
+`Subject: Summary and next steps
+
+“Thanks for the conversation. My understanding is:
+• Issue: [one line]
+• Impact: [one line]
+• Agreed actions: [A, B]
+• Owner(s): [names/roles]
+• Timeline: [date]
+
+If anything above is incorrect, please reply with the correction. Otherwise I’ll proceed on this basis.”`
+    },
+    {
+      title: 'HR request (process owner)',
+      icon: 'fas fa-file-signature',
+      body:
+`“I’m requesting support to resolve a workplace issue through the appropriate process. I have a dated chronology and evidence anchors. I’m seeking ${cleanRoute}. Please confirm the correct route, the case owner, and the expected timescales.”`
+    },
+    {
+      title: 'Formal grievance opening (brief)',
+      icon: 'fas fa-scale-balanced',
+      body:
+`“I am raising a formal grievance regarding [issue]. I have attempted to resolve this informally, but the issue persists. The impact is [impact]. I am seeking [outcome]. I am providing a chronology with evidence anchors and request confirmation of next steps and timescales.”`
+    },
+    {
+      title: 'Occupational health / adjustments (if needed)',
+      icon: 'fas fa-heart-pulse',
+      body:
+`“I’m raising a capacity and wellbeing risk. The current situation is having a sustained impact on my ability to work safely and consistently. I would like an occupational health assessment and support to agree reasonable adjustments so I can continue delivering.”`
+    },
+    {
+      title: 'If you suspect reframing as “performance”',
+      icon: 'fas fa-user-shield',
+      body:
+`“If there are performance concerns, I’m keen to address them. Please can you set out the specific examples, dates, expectations, and the improvement standard required in writing. Separately, I’m still requesting resolution of the workplace issue described in my chronology.”`
+    }
+  ];
+}
+
+function shorten(text, maxLen){
+  const t = (text || '').replace(/\s+/g,' ').trim();
+  if (t.length <= maxLen) return t;
+  return t.slice(0, maxLen - 1).trim() + '…';
+}
+
+function escapeCardText(str){
+  return escapeHtml(str).replaceAll('\n', '<br>');
+}
+
+function buildDraftText(){
+  const d = getDraft();
+  const out = [];
+  out.push('FORMAL ESCALATION PLAN (Draft)');
+  out.push('===============================');
+  out.push('');
+
+  modules.forEach((m, idx) => {
+    out.push(`${idx + 1}. ${m.title}`);
+    out.push((d[m.id] || '').trim() ? (d[m.id] || '').trim() : '—');
+    out.push('');
+  });
+
+  return out.join('\n');
+}
+
+function buildPackText(){
+  const d = getDraft();
+  const completeness = calcCompleteness(d);
+  const readiness = calcReadinessSignal(d, completeness);
+
+  const onePage = buildOnePageBrief(d);
+
+  const routeCards = buildRouteCards(d, readiness).map((c,i)=>`${i+1}. ${c.title}\n   ${c.body}`).join('\n\n');
+  const protectionCards = buildProtectionCards(d, readiness).map((c,i)=>`${i+1}. ${c.title}\n   ${c.body}`).join('\n\n');
+  const evidenceCards = buildEvidenceCards(d).map((c,i)=>`${i+1}. ${c.title}\n   ${c.body}`).join('\n\n');
+  const scripts = buildScriptCards(d).map((c,i)=>`${i+1}. ${c.title}\n${c.body}`).join('\n\n');
+
+  const out = [];
+  out.push(onePage);
+  out.push('\n\nESCALATION ROUTE MAP\n===================\n');
+  out.push(routeCards);
+  out.push('\n\nRISK & INCOME PROTECTION\n=======================\n');
+  out.push(protectionCards);
+  out.push('\n\nEVIDENCE PACK STRUCTURE\n======================\n');
+  out.push(evidenceCards);
+  out.push('\n\nSCRIPTS\n=======\n');
+  out.push(scripts);
+
+  return out.join('');
+}
+
+/* ===========================
+   MY PLAYBOOK (LOCALSTORAGE)
+=========================== */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'formal-escalation-plan';
+const CURRENT_TOOL_TITLE = 'Formal Escalation Plan';
+const CURRENT_TOOL_TYPE = 'Plan';
+
+function getSavedItems(){
+  try {
+    const raw = localStorage.getItem(PLAYBOOK_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch(e){
+    console.warn('Error reading saved items:', e);
+    return [];
+  }
+}
+function setSavedItems(items){
+  try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+  catch(e){ console.warn('Error saving items:', e); }
+}
+
+function initializePlaybook(){
+  const playbookOverlay = document.getElementById('playbookOverlay');
+  const playbookSidebar = document.getElementById('playbookSidebar');
+  const playbookButton = document.getElementById('myPlaybookButton');
+  const closeBtn = document.getElementById('closePlaybook');
+  const saveItemBtn = document.getElementById('saveBtn');
+
+  if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+  renderSavedItems();
+
+  const savedItems = getSavedItems();
+  const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+  updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+  saveItemBtn.addEventListener('click', () => {
+    const items = getSavedItems();
+    const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+    let nowSaved;
+
+    if (index === -1) {
+      const toolLink = window.location.pathname.split('/').pop() || 'formal-escalation-plan.html';
+      items.push({
+        id: CURRENT_TOOL_ID,
+        title: CURRENT_TOOL_TITLE,
+        type: CURRENT_TOOL_TYPE,
+        link: toolLink,
+        savedAt: new Date().toISOString()
+      });
+      nowSaved = true;
+    } else {
+      items.splice(index, 1);
+      nowSaved = false;
+    }
+
+    setSavedItems(items);
+    updateSaveButtonState(saveItemBtn, nowSaved);
+    renderSavedItems();
+  });
+
+  playbookButton.addEventListener('click', () => {
+    playbookOverlay.classList.add('open');
+    playbookSidebar.classList.add('open');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    playbookOverlay.classList.remove('open');
+    playbookSidebar.classList.remove('open');
+  });
+
+  playbookOverlay.addEventListener('click', (e) => {
+    if (e.target === playbookOverlay) {
+      playbookOverlay.classList.remove('open');
+      playbookSidebar.classList.remove('open');
+    }
+  });
+}
+
+function updateSaveButtonState(button, isSaved){
+  if (!button) return;
+  const icon = button.querySelector('i');
+  const label = button.querySelector('span');
+
+  if (isSaved) {
+    button.classList.add('saved');
+    if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+    if (label) label.textContent = 'Saved';
+  } else {
+    button.classList.remove('saved');
+    if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+    if (label) label.textContent = 'Save';
+  }
+}
+
+function renderSavedItems(){
+  const listEl = document.getElementById('savedItemsList');
+  const emptyEl = document.getElementById('savedItemsEmpty');
+  if (!listEl || !emptyEl) return;
+
+  const items = getSavedItems();
+  listEl.innerHTML = '';
+
+  if (!items.length) {
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+
+  items.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'saved-item';
+
+    const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+    const dateText = savedDate
+      ? savedDate.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
+      : '';
+
+    li.innerHTML = `
+      <div class="saved-item-title-row">
+        <span class="saved-item-title">${escapeHtml(item.title)}</span>
+        <span class="saved-item-type">${escapeHtml(item.type)}</span>
+      </div>
+      <div class="saved-item-meta">
+        ${dateText ? `Saved on ${dateText}` : ``}
+      </div>
+      <a class="saved-item-link" href="${escapeHtml(item.link)}">
+        Open <i class="fas fa-arrow-right"></i>
+      </a>
+    `;
+    listEl.appendChild(li);
+  });
+}
+</script>
+
+</body>
+</html>

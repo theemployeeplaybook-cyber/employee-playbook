@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Career Anchoring Playbook | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand)
+    =========================== */
+    :root{
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+      --text-dark:#212529;
+      --text-medium:#495057;
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --border-light:rgba(0, 0, 0, 0.08);
+      --nav-bg:rgba(255, 255, 255, 0.95);
+      --hero-bg:linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient:linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+      --success-green:#10b981;
+      --warning-orange:#f59e0b;
+      --danger-red:#ef4444;
+      --info-blue:#3b82f6;
+
+      /* Category accents (TEP style) */
+      --cat-burnout:#F59E0B;      /* orange */
+      --cat-clarity:#14B8A6;      /* teal */
+      --cat-manager:#10b981;      /* green */
+      --cat-politics:#3B82F6;     /* blue */
+      --cat-hr:#8B5CF6;           /* violet */
+      --cat-confidence:#EF4444;   /* red */
+      --cat-decision:#6366F1;     /* indigo */
+      --cat-career:#800020;       /* burgundy (Career Playbook) */
+      --cat-team:#F97316;         /* orange-red */
+      --cat-boundaries:#22c55e;   /* green */
+    }
+
+    /* Dark Mode Variables */
+    .dark-mode{
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#888888;
+      --text-dark:#e0e0e0;
+      --text-medium:#b0b0b0;
+
+      --accent-purple:#9d86e9;
+      --accent-purple-dark:#7b5fc4;
+      --light-purple:rgba(123, 95, 196, 0.2);
+      --lighter-purple:rgba(123, 95, 196, 0.1);
+
+      --border-light:rgba(255, 255, 255, 0.08);
+      --nav-bg:rgba(30, 30, 30, 0.95);
+      --hero-bg:linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient:linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      --cat-career:#B03060;
+    }
+
+    /* ===========================
+       GLOBAL STYLES
+    =========================== */
+    *{ margin:0; padding:0; box-sizing:border-box; font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+    body{
+      background-color:var(--primary-white);
+      color:var(--text-dark);
+      line-height:1.6;
+      overflow-x:hidden;
+      opacity:0;
+      transition:opacity 0.35s ease;
+      min-height:100vh;
+    }
+    body.loaded{ opacity:1; }
+
+    .container{ max-width:1400px; margin:0 auto; padding:0 20px; }
+
+    /* ===========================
+       NAVIGATION
+    =========================== */
+    nav{
+      position:fixed; top:0; width:100%;
+      background:var(--nav-bg);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      z-index:1000;
+      border-bottom:1px solid var(--border-light);
+      box-shadow:0 1px 3px rgba(0,0,0,0.05);
+      transition:background-color 0.3s ease, border-color 0.3s ease;
+      height:80px;
+    }
+
+    .nav-container{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 0;
+      height:100%;
+    }
+
+    .logo{ display:inline-flex; align-items:center; height:100%; }
+    .logo-img{
+      height:100px; width:auto;
+      transform:translateX(20%);
+      padding:14px 10px;
+      transition:all 0.3s ease;
+      display:block;
+      min-height:100px;
+    }
+    .logo-fallback{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      height:48px;
+      padding:0 14px;
+      border-radius:10px;
+      background:var(--premium-gradient);
+      color:#fff;
+      font-weight:800;
+      letter-spacing:0.8px;
+      font-size:13px;
+      text-transform:uppercase;
+      transform:translateX(20%);
+    }
+
+    .nav-links{ display:flex; gap:50px; }
+    .nav-link{
+      color:var(--text-dark);
+      text-decoration:none;
+      font-weight:500;
+      transition:color 0.3s ease;
+      font-size:17px;
+    }
+    .nav-link:hover{ color:var(--accent-purple); }
+
+    .nav-link-container{ position:relative; display:inline-block; }
+    .new-tag{
+      position:absolute; top:-12px; right:-35px;
+      background:linear-gradient(135deg,#FFD700,#FFA500);
+      color:#000;
+      font-size:10px;
+      font-weight:800;
+      padding:2px 6px;
+      border-radius:4px;
+      box-shadow:0 2px 4px rgba(0,0,0,0.2);
+      z-index:10;
+      white-space:nowrap;
+    }
+
+    .nav-actions{
+      display:flex; align-items:center; gap:24px;
+      transform:translateX(-20%);
+    }
+    .header-cta{
+      background:var(--accent-purple);
+      color:#fff;
+      padding:8px 20px;
+      border-radius:50px;
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      transition:all 0.3s ease;
+      box-shadow:0 5px 15px rgba(123, 95, 196, 0.3);
+    }
+    .header-cta:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(123, 95, 196, 0.35); }
+
+    .sign-in{ color:var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; }
+    .sign-in:hover{ color:var(--accent-purple); }
+
+    .theme-toggle{
+      background:none; border:none; color:var(--text-dark);
+      cursor:pointer; font-size:16px;
+      width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition:background-color 0.3s ease;
+    }
+    .theme-toggle:hover{ background-color:var(--light-gray); }
+
+    .mobile-toggle{
+      display:none;
+      background:none; border:none; color:var(--text-dark);
+      cursor:pointer; font-size:24px;
+      width:40px; height:40px; border-radius:50%;
+      align-items:center; justify-content:center;
+      transition:background-color 0.3s ease;
+    }
+    .mobile-toggle:hover{ background-color:var(--light-gray); }
+
+    .mobile-sign-in, .mobile-sign-up{ display:none; }
+
+    @media (max-width:768px){
+      .nav-container{ justify-content:center; position:relative; }
+
+      .logo{
+        position:absolute; left:50%;
+        transform:translateX(-50%);
+        display:flex; align-items:center; height:100%;
+      }
+      .logo-img{ height:125px; transform:none; padding:12px 0; }
+      .logo-fallback{ transform:none; }
+
+      .mobile-toggle{
+        display:flex; position:absolute; left:20px; align-items:center;
+      }
+
+      .nav-actions{
+        transform:none; gap:16px;
+        position:absolute; right:20px; align-items:center;
+      }
+      .nav-actions .sign-in, .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none;
+        position:absolute; top:100%; left:0; width:100%;
+        background:var(--nav-bg);
+        backdrop-filter:blur(10px);
+        -webkit-backdrop-filter:blur(10px);
+        flex-direction:column;
+        padding:20px;
+        border-top:1px solid var(--border-light);
+        box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        gap:20px;
+      }
+      .nav-links.active{ display:flex; }
+
+      .nav-link-container{
+        display:flex; align-items:center; justify-content:flex-start; width:100%;
+      }
+      .new-tag{ position:static; margin-left:8px; }
+
+      .mobile-sign-in{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background:var(--primary-white);
+        color:var(--accent-purple);
+        border-radius:10px;
+        text-align:center;
+        font-weight:700;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition:all 0.3s ease;
+      }
+      .mobile-sign-up{
+        display:block !important;
+        margin-top:10px;
+        padding:12px 20px;
+        background:var(--accent-purple);
+        color:#fff;
+        border-radius:10px;
+        text-align:center;
+        font-weight:700;
+        text-decoration:none;
+        border:2px solid var(--accent-purple);
+        transition:all 0.3s ease;
+      }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .tool-hero-section{
+      width:100%;
+      background:var(--hero-bg);
+      padding:20px 0 30px;
+      margin-top:110px;
+      position:relative;
+      border-bottom:1px solid var(--border-light);
+      overflow:hidden;
+    }
+    .tool-hero-section::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+      z-index:1;
+    }
+    .dark-mode .tool-hero-section::before{
+      background:linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+    }
+
+    .tool-hero-content{
+      position:relative;
+      z-index:2;
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 10px;
+      animation:heroFadeUp 0.45s ease-out;
+    }
+    @keyframes heroFadeUp{
+      from{ opacity:0; transform:translateY(18px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+
+    .breadcrumb{
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      color:var(--dark-gray);
+      margin-bottom:10px;
+      display:flex;
+      gap:6px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .breadcrumb a{
+      color:var(--text-medium);
+      text-decoration:none !important;
+      font-weight:600;
+      letter-spacing:0.6px;
+      transition:color 0.2s ease;
+    }
+    .breadcrumb a:hover{ color:var(--accent-purple-dark); }
+    .breadcrumb i{ font-size:10px; opacity:0.7; }
+    .breadcrumb .current{ color:var(--text-dark); font-weight:600; }
+
+    .checklist-name{
+      font-size:14px;
+      font-weight:700;
+      color:var(--accent-purple);
+      text-transform:uppercase;
+      letter-spacing:1.8px;
+      margin:18px 0 12px;
+      display:block;
+    }
+
+    .hero-main-heading{
+      font-size:46px;
+      font-weight:700;
+      color:var(--text-dark);
+      line-height:1.1;
+      margin-bottom:18px;
+      max-width:860px;
+    }
+
+    .hero-subheading{
+      font-size:16px;
+      color:var(--text-medium);
+      line-height:1.6;
+      max-width:700px;
+      margin-bottom:26px;
+    }
+
+    /* ===========================
+       SAVE BUTTON (from your template)
+    =========================== */
+    .save-btn{
+      position:absolute;
+      top:16px;
+      right:24px;
+      z-index:5;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 12px;
+      font-size:12px;
+      font-weight:600;
+      border-radius:999px;
+      border:1px solid rgba(123, 95, 196, 0.6);
+      background:rgba(255, 255, 255, 0.95);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      color:var(--accent-purple-dark);
+      cursor:pointer;
+      transition:all 0.2s ease;
+    }
+    .save-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 4px 10px rgba(123, 95, 196, 0.18);
+      background:#ffffff;
+    }
+    .dark-mode .save-btn{
+      background:rgba(20, 20, 20, 0.9);
+      border-color:rgba(157, 134, 233, 0.6);
+    }
+    .save-btn.saved{
+      background:var(--accent-purple);
+      color:#ffffff;
+      border-color:transparent;
+    }
+
+    /* ===========================
+       RELATED CATEGORY PILLS
+    =========================== */
+    .category-pills-container{ margin-bottom:10px; }
+    .category-pills-title{
+      font-size:12px;
+      font-weight:700;
+      color:var(--text-medium);
+      text-transform:uppercase;
+      letter-spacing:1px;
+      margin-bottom:12px;
+      display:block;
+    }
+    .category-pills-grid{
+      display:flex;
+      gap:10px;
+      margin-bottom:10px;
+      flex-wrap:wrap;
+    }
+    .category-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:6px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:0.5px;
+      border:1px solid transparent;
+      background:rgba(255, 255, 255, 0.85);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      text-decoration:none;
+      height:34px;
+      box-shadow:0 1px 3px rgba(0,0,0,0.05);
+      transition:all 0.2s ease;
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .dark-mode .category-pill{ background:rgba(255, 255, 255, 0.08); }
+
+    .category-pill:hover{
+      transform:translateY(-1px);
+      box-shadow:0 6px 18px rgba(0,0,0,0.08);
+      text-decoration:none;
+    }
+    .category-icon{ font-size:12px; opacity:0.9; flex-shrink:0; }
+
+    /* Full-name category colours */
+    .category-pill.decision{
+      color:var(--cat-decision);
+      border-color:rgba(99, 102, 241, 0.25);
+      background:linear-gradient(135deg, rgba(99, 102, 241, 0.10), rgba(99, 102, 241, 0.04));
+    }
+    .dark-mode .category-pill.decision{
+      border-color:rgba(99, 102, 241, 0.45);
+      background:linear-gradient(135deg, rgba(99, 102, 241, 0.20), rgba(99, 102, 241, 0.10));
+    }
+
+    .category-pill.confidence{
+      color:var(--cat-confidence);
+      border-color:rgba(239, 68, 68, 0.25);
+      background:linear-gradient(135deg, rgba(239, 68, 68, 0.10), rgba(239, 68, 68, 0.04));
+    }
+    .dark-mode .category-pill.confidence{
+      border-color:rgba(239, 68, 68, 0.45);
+      background:linear-gradient(135deg, rgba(239, 68, 68, 0.20), rgba(239, 68, 68, 0.10));
+    }
+
+    .category-pill.clarity{
+      color:var(--cat-clarity);
+      border-color:rgba(20, 184, 166, 0.25);
+      background:linear-gradient(135deg, rgba(20, 184, 166, 0.10), rgba(20, 184, 166, 0.04));
+    }
+    .dark-mode .category-pill.clarity{
+      border-color:rgba(20, 184, 166, 0.45);
+      background:linear-gradient(135deg, rgba(20, 184, 166, 0.20), rgba(20, 184, 166, 0.10));
+    }
+
+    .category-pill.burnout{
+      color:var(--cat-burnout);
+      border-color:rgba(245, 158, 11, 0.25);
+      background:linear-gradient(135deg, rgba(245, 158, 11, 0.10), rgba(245, 158, 11, 0.04));
+    }
+    .dark-mode .category-pill.burnout{
+      border-color:rgba(245, 158, 11, 0.45);
+      background:linear-gradient(135deg, rgba(245, 158, 11, 0.20), rgba(245, 158, 11, 0.10));
+    }
+
+    /* ===========================
+       PLAYBOOK BODY
+    =========================== */
+    .playbook-wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:0 20px 20px;
+    }
+
+    .intro-grid{
+      display:grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap:18px;
+      margin:22px auto 10px;
+      align-items:start;
+    }
+
+    .card{
+      background:var(--primary-white);
+      border:1px solid var(--border-light);
+      border-radius:14px;
+      padding:18px 18px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    }
+    .dark-mode .card{ box-shadow:0 14px 34px rgba(0,0,0,0.32); }
+
+    .card-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:0.6px;
+      text-transform:uppercase;
+      color:var(--accent-purple-dark);
+      margin-bottom:10px;
+    }
+    .card-title i{ color:var(--accent-purple); }
+
+    .mini{
+      color:var(--text-medium);
+      font-size:13.5px;
+      line-height:1.6;
+      font-weight:450;
+    }
+
+    .score-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-top:8px;
+    }
+    .score-label{
+      font-size:12px;
+      color:var(--text-medium);
+      font-weight:600;
+      letter-spacing:0.4px;
+      text-transform:uppercase;
+    }
+    .score-value{
+      font-size:22px;
+      font-weight:600;
+      color:var(--accent-purple);
+    }
+    .progress-container{
+      height:10px;
+      background:var(--light-gray);
+      border-radius:5px;
+      overflow:hidden;
+      margin-top:8px;
+    }
+    .dark-mode .progress-container{ background:rgba(255,255,255,0.12); }
+    .progress-fill{
+      height:100%;
+      background:var(--premium-gradient);
+      width:0%;
+      border-radius:5px;
+      transition:width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .pill-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:10px;
+      margin-top:12px;
+    }
+    .micro-pill{
+      border-radius:12px;
+      padding:10px 10px;
+      border:1px solid var(--border-light);
+      background:var(--light-gray);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      font-size:13px;
+      color:var(--text-medium);
+      min-height:46px;
+    }
+    .dark-mode .micro-pill{
+      background:rgba(255,255,255,0.04);
+      border-color:rgba(255,255,255,0.1);
+    }
+    .micro-pill span.label{ font-weight:600; color:var(--text-dark); }
+    .micro-pill span.value{ font-weight:600; color:var(--accent-purple); }
+
+    .section{
+      margin-top:20px;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(123, 95, 196, 0.14);
+      background:linear-gradient(180deg, rgba(123,95,196,0.06), rgba(123,95,196,0.02));
+    }
+    .dark-mode .section{
+      border-color:rgba(157,134,233,0.18);
+      background:linear-gradient(180deg, rgba(123,95,196,0.14), rgba(123,95,196,0.06));
+    }
+
+    .section-header{
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      cursor:pointer;
+      background:rgba(255,255,255,0.72);
+      border-bottom:1px solid var(--border-light);
+    }
+    .dark-mode .section-header{ background:rgba(18,18,18,0.60); }
+
+    .section-left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+    .section-badge{
+      width:34px;
+      height:34px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:600;
+      color:#fff;
+      background:var(--premium-gradient);
+      box-shadow:0 10px 22px rgba(123,95,196,0.22);
+      flex-shrink:0;
+    }
+    .section-title{
+      display:flex;
+      flex-direction:column;
+      min-width:0;
+      gap:2px;
+    }
+    .section-title strong{
+      font-size:14px;
+      font-weight:700;
+      color:var(--text-dark);
+      line-height:1.2;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .section-title span{
+      font-size:12.5px;
+      color:var(--text-medium);
+      font-weight:500;
+      line-height:1.2;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .section-right{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-shrink:0;
+    }
+    .section-status{
+      font-size:11px;
+      font-weight:600;
+      text-transform:uppercase;
+      letter-spacing:0.6px;
+      color:var(--accent-purple-dark);
+      background:rgba(123,95,196,0.10);
+      border:1px solid rgba(123,95,196,0.16);
+      padding:6px 10px;
+      border-radius:999px;
+      min-width:116px;
+      text-align:center;
+    }
+    .dark-mode .section-status{
+      color:var(--accent-purple);
+      background:rgba(123,95,196,0.18);
+      border-color:rgba(157,134,233,0.22);
+    }
+    .chev{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--border-light);
+      background:rgba(255,255,255,0.65);
+      color:var(--text-medium);
+      transition:transform 0.2s ease;
+    }
+    .dark-mode .chev{ background:rgba(255,255,255,0.06); }
+
+    .section.open .chev{ transform:rotate(180deg); }
+
+    .section-body{
+      display:none;
+      padding:16px;
+      background:var(--primary-white);
+    }
+    .section.open .section-body{ display:block; }
+
+    .q-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:12px;
+    }
+
+    .q{
+      border:1px solid var(--border-light);
+      border-radius:14px;
+      padding:12px 12px;
+      background:linear-gradient(180deg, rgba(0,0,0,0.015), rgba(0,0,0,0.00));
+      min-height:140px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .dark-mode .q{
+      background:linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border-color:rgba(255,255,255,0.10);
+    }
+
+    .q-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .q-title{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      min-width:0;
+    }
+    .q-title i{
+      width:30px;
+      height:30px;
+      border-radius:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--accent-purple);
+      background:var(--lighter-purple);
+      flex-shrink:0;
+      margin-top:1px;
+    }
+    .q-title strong{
+      font-size:13.5px;
+      font-weight:700;
+      color:var(--text-dark);
+      line-height:1.25;
+    }
+
+    .q-done{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      font-weight:600;
+      color:var(--text-medium);
+      cursor:pointer;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .q-done input{ width:16px; height:16px; cursor:pointer; }
+
+    .q textarea{
+      width:100%;
+      min-height:72px;
+      resize:vertical;
+      border-radius:12px;
+      border:1px solid var(--border-light);
+      background:var(--primary-white);
+      color:var(--text-dark);
+      padding:10px 10px;
+      font-size:13.5px;
+      line-height:1.55;
+      outline:none;
+      transition:border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .dark-mode .q textarea{
+      background:rgba(0,0,0,0.18);
+      border-color:rgba(255,255,255,0.12);
+    }
+    .q textarea:focus{
+      border-color:rgba(123,95,196,0.35);
+      box-shadow:0 0 0 4px rgba(123,95,196,0.10);
+    }
+
+    .section-foot{
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .tip-box{
+      flex:1;
+      min-width:280px;
+      border-radius:14px;
+      border:1px solid rgba(16,185,129,0.18);
+      background:linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.05));
+      padding:12px 12px;
+      color:var(--text-medium);
+      font-size:13.5px;
+      font-weight:450;
+      line-height:1.6;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+    }
+    .tip-box i{ color:var(--success-green); margin-top:2px; }
+
+    .mini-actions{
+      display:flex;
+      gap:10px;
+      flex-shrink:0;
+      align-items:center;
+    }
+    .mini-btn{
+      border:none;
+      padding:10px 12px;
+      border-radius:12px;
+      font-weight:600;
+      font-size:13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      transition:transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+      white-space:nowrap;
+    }
+    .mini-btn.primary{
+      background:var(--premium-gradient);
+      color:#fff;
+      box-shadow:0 12px 26px rgba(123,95,196,0.22);
+    }
+    .mini-btn.primary:hover{ transform:translateY(-1px); box-shadow:0 16px 30px rgba(123,95,196,0.28); }
+
+    .mini-btn.secondary{
+      background:var(--light-purple);
+      color:var(--accent-purple-dark);
+    }
+    .dark-mode .mini-btn.secondary{
+      background:rgba(123, 95, 196, 0.22);
+      color:var(--accent-purple);
+    }
+    .mini-btn.secondary:hover{ transform:translateY(-1px); background:rgba(123,95,196,0.18); }
+
+    /* ===========================
+       RIGHT MINI “SIGNAL RAIL” (narrow + collapses on outside click)
+    =========================== */
+    .rail{
+      position:fixed;
+      top:120px;
+      right:18px;
+      z-index:1105;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-end;
+    }
+
+    .rail-btn{
+      width:44px;
+      height:44px;
+      border-radius:14px;
+      border:1px solid rgba(123,95,196,0.22);
+      background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      color:var(--accent-purple-dark);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 8px 24px rgba(0,0,0,0.10);
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .dark-mode .rail-btn{
+      background:rgba(18,18,18,0.90);
+      border-color:rgba(157,134,233,0.22);
+      box-shadow:0 10px 26px rgba(0,0,0,0.45);
+    }
+    .rail-btn:hover{ transform:translateY(-1px); box-shadow:0 12px 28px rgba(0,0,0,0.14); }
+
+    .rail-panel-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.35);
+      z-index:1102;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity 0.22s ease;
+    }
+    .rail-panel-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .rail-panel{
+      position:fixed;
+      top:120px;
+      right:72px;
+      width:280px;   /* narrow */
+      max-width:calc(100vw - 92px);
+      z-index:1103;
+      background:rgba(255,255,255,0.94);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border:1px solid var(--border-light);
+      border-radius:16px;
+      box-shadow:0 16px 40px rgba(0,0,0,0.22);
+      overflow:hidden;
+      transform:translateX(12px);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity 0.22s ease, transform 0.22s ease;
+    }
+    .dark-mode .rail-panel{
+      background:rgba(18,18,18,0.96);
+      border-color:rgba(255,255,255,0.10);
+      box-shadow:0 18px 44px rgba(0,0,0,0.55);
+    }
+    .rail-panel.open{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateX(0);
+    }
+
+    .rail-panel-head{
+      padding:12px 12px;
+      border-bottom:1px solid var(--border-light);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .rail-panel-head strong{
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:0.7px;
+      text-transform:uppercase;
+      color:var(--accent-purple-dark);
+      display:flex;
+      align-items:center;
+      gap:8px;
+      white-space:nowrap;
+    }
+    .rail-close{
+      background:none;
+      border:none;
+      color:var(--dark-gray);
+      cursor:pointer;
+      width:30px;
+      height:30px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:background-color 0.2s ease;
+    }
+    .rail-close:hover{ background:var(--light-gray); }
+
+    .rail-panel-body{
+      padding:12px 12px 14px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .rail-stat{
+      border-radius:14px;
+      border:1px solid var(--border-light);
+      background:var(--primary-white);
+      padding:10px 10px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      box-shadow:0 1px 4px rgba(0,0,0,0.04);
+    }
+    .dark-mode .rail-stat{
+      background:rgba(0,0,0,0.18);
+      border-color:rgba(255,255,255,0.10);
+    }
+    .rail-stat .k{
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:0.5px;
+      text-transform:uppercase;
+      color:var(--text-medium);
+    }
+    .rail-stat .v{
+      font-size:16px;
+      font-weight:600;
+      color:var(--accent-purple);
+      white-space:nowrap;
+    }
+    .rail-hint{
+      font-size:12.5px;
+      color:var(--text-medium);
+      line-height:1.6;
+      font-weight:450;
+      padding:8px 2px 0;
+    }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR (Right) - from your template
+    =========================== */
+    .my-playbook-fab{
+      position:fixed;
+      bottom:24px;
+      right:24px;
+      z-index:1200;
+      background:var(--premium-gradient);
+      color:#ffffff;
+      padding:10px 16px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      cursor:pointer;
+      font-size:13px;
+      font-weight:750;
+      box-shadow:0 10px 25px rgba(0,0,0,0.25);
+      transition:all 0.25s ease;
+    }
+    .my-playbook-fab:hover{
+      transform:translateY(-3px);
+      box-shadow:0 14px 30px rgba(0,0,0,0.32);
+    }
+
+    .playbook-sidebar-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.45);
+      z-index:1190;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity 0.25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position:fixed;
+      top:0;
+      right:-380px;
+      width:340px;
+      max-width:90%;
+      height:100%;
+      background:rgba(255, 255, 255, 0.94);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:-4px 0 20px rgba(0,0,0,0.25);
+      z-index:1191;
+      display:flex;
+      flex-direction:column;
+      border-left:1px solid var(--border-light);
+      transition:right 0.25s ease;
+    }
+    .dark-mode .playbook-sidebar{ background:rgba(18,18,18,0.96); box-shadow:-4px 0 22px rgba(0,0,0,0.6); }
+    .playbook-sidebar.open{ right:0; }
+
+    .playbook-sidebar-header{
+      padding:20px 20px 14px;
+      border-bottom:1px solid var(--border-light);
+    }
+    .playbook-sidebar-header-title-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:4px;
+    }
+    .playbook-sidebar-header h3{ font-size:18px; font-weight:700; color:var(--text-dark); }
+    .playbook-sidebar-header p{ font-size:13px; color:var(--dark-gray); }
+
+    .playbook-close-btn{
+      background:none;
+      border:none;
+      color:var(--dark-gray);
+      cursor:pointer;
+      font-size:18px;
+      border-radius:999px;
+      width:28px;
+      height:28px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:background-color 0.2s ease;
+    }
+    .playbook-close-btn:hover{ background:var(--light-gray); }
+
+    .playbook-sidebar-body{
+      padding:14px 18px 20px;
+      padding-bottom:50px;
+      overflow-y:auto;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .saved-items-empty{ font-size:13px; color:var(--dark-gray); line-height:1.6; }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+
+    .saved-item{
+      padding:10px 10px 10px;
+      border-radius:12px;
+      border:1px solid var(--border-light);
+      background:var(--primary-white);
+      box-shadow:0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom:10px;
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+
+    .saved-item-title-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:baseline;
+      gap:6px;
+    }
+    .saved-item-title{ font-size:14px; font-weight:700; color:var(--text-dark); }
+    .saved-item-type{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:0.6px;
+      color:var(--accent-purple-dark);
+      font-weight:600;
+    }
+    .saved-item-meta{ font-size:12px; color:var(--dark-gray); }
+
+    .saved-item-link{
+      margin-top:6px;
+      font-size:12px;
+      color:var(--accent-purple);
+      text-decoration:none;
+      font-weight:600;
+      display:inline-flex;
+      align-items:center;
+      gap:4px;
+    }
+    .saved-item-link:hover{ text-decoration:underline; }
+
+    .playbook-quick-links{
+      margin-top:184px;
+      padding-top:10px;
+      border-top:1px solid var(--border-light);
+    }
+    .quick-links-title{
+      font-size:12px;
+      font-weight:600;
+      text-transform:uppercase;
+      letter-spacing:0.8px;
+      color:var(--text-medium);
+    }
+    .playbook-quick-links-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-top:8px;
+    }
+
+    .quick-link-pill{
+      width:54%;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(123, 95, 196, 0.35);
+      background:linear-gradient(135deg,rgba(123, 95, 196, 0.08),rgba(123, 95, 196, 0.02));
+      text-decoration:none;
+      color:var(--accent-purple-dark);
+      font-size:12px;
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      transition:transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .quick-link-pill:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+      background:linear-gradient(135deg,rgba(123, 95, 196, 0.16), rgba(123, 95, 196, 0.06));
+    }
+    .dark-mode .quick-link-pill{
+      border-color:rgba(157, 134, 233, 0.55);
+      background:linear-gradient(135deg,rgba(123, 95, 196, 0.26),rgba(123, 95, 196, 0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer{
+      background:var(--primary-white);
+      padding:10px 0;
+      border-top:1px solid var(--border-light);
+      margin-top:30px;
+      text-align:center;
+      color:var(--text-medium);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width:1024px){
+      .intro-grid{ grid-template-columns:1fr; }
+      .q-grid{ grid-template-columns:1fr; }
+      .rail{ display:none; } /* keep desktop-only */
+    }
+    @media (max-width:768px){
+      .tool-hero-section{ margin-top:100px; }
+      .hero-main-heading{ font-size:36px; }
+      .save-btn{ right:18px; top:10px; }
+      .my-playbook-fab{ bottom:18px; right:18px; }
+    }
+    @media (max-width:480px){
+      .hero-main-heading{ font-size:32px; }
+      .checklist-name{ font-size:13px; }
+      .pill-grid{ grid-template-columns:1fr; }
+      .section-status{ min-width:100px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===========================
+     NAVIGATION
+=========================== -->
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo" aria-label="The Employee Playbook">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      <div class="logo-fallback" id="logoFallback">The Employee Playbook</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<div class="tool-hero-section">
+  <!-- Save button + icon (from your template) -->
+  <button class="save-btn" id="saveBtn">
+    <i class="far fa-bookmark"></i>
+    <span>Save</span>
+  </button>
+
+  <div class="tool-hero-content">
+    <!-- Breadcrumb: Career Playbook is the main category -->
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-house"></i> Home</a>
+      <i class="fas fa-chevron-right"></i>  
+      <a href="the-toolkit.html">Toolkit</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="category-career-playbook.html">Career Playbook</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Career Anchoring Framework</span>
+    </div>
+
+    <span class="checklist-name">CAREER ANCHORING FRAMEWORK</span>
+
+    <h1 class="hero-main-heading">Anchor your career to what you actually want (and can defend)</h1>
+
+    <div class="hero-subheading">
+      Turn vague “next steps” into a clear anchor: what you’re building, what you won’t trade away, and how to choose roles that fit your strengths, energy and identity
+    </div>
+
+    <!-- Related Categories: full names (exclude Career Playbook) -->
+    <div class="category-pills-container">
+      <span class="category-pills-title">Related Categories</span>
+      <div class="category-pills-grid">
+        <a href="category-confidence-presence-influence.html" class="category-pill confidence">
+          <i class="fas fa-bolt category-icon"></i>
+          <span>Confidence, Presence &amp; Influence</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     RIGHT MINI “SIGNAL RAIL”
+=========================== -->
+
+
+<div class="rail-panel-overlay" id="railOverlay" aria-hidden="true"></div>
+<div class="rail-panel" id="railPanel" role="dialog" aria-label="Quick signals">
+  <div class="rail-panel-head">
+    <strong><i class="fas fa-chart-line"></i> Anchor signals</strong>
+    <button class="rail-close" id="railClose" aria-label="Close signals"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="rail-panel-body">
+    <div class="rail-stat">
+      <span class="k">Anchor clarity</span>
+      <span class="v" id="railClarity">0%</span>
+    </div>
+    <div class="rail-stat">
+      <span class="k">Non-negotiables</span>
+      <span class="v" id="railNN">0/4</span>
+    </div>
+    <div class="rail-stat">
+      <span class="k">Decision filter</span>
+      <span class="v" id="railFilter">0/4</span>
+    </div>
+    <div class="rail-hint">
+      Tip: aim for a <strong>clean anchor</strong> you can say out loud in one sentence. Then make every “next move” prove it.
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     PLAYBOOK CONTENT
+=========================== -->
+<div class="playbook-wrap">
+
+  <div class="intro-grid">
+    <div class="card">
+      <div class="card-title"><i class="fas fa-bullseye"></i>How to use this framework</div>
+      <p class="mini">
+        Work through each section once, fast and honest. Don’t aim for perfect wording — aim for an anchor you can defend.
+        When you’re done, your output is: <strong>(1)</strong> your one-sentence anchor, <strong>(2)</strong> four non-negotiables,
+        and <strong>(3)</strong> a decision filter that stops you saying yes to roles that dilute you.
+      </p>
+      <div class="pill-grid">
+        <div class="micro-pill"><span class="label">Time</span><span class="value">20–30 mins</span></div>
+        <div class="micro-pill"><span class="label">Output</span><span class="value">1 anchor</span></div>
+        <div class="micro-pill"><span class="label">Depth</span><span class="value">Strategic</span></div>
+        <div class="micro-pill"><span class="label">Best use</span><span class="value">Before job moves</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title"><i class="fas fa-gauge-high"></i>Live anchor score</div>
+      <p class="mini">
+        This is not a “performance score”. It’s a completion signal — so you leave with something usable, not half-formed thoughts.
+      </p>
+
+      <div class="score-row">
+        <span class="score-label">Completed</span>
+        <span class="score-value" id="overallScore">0%</span>
+      </div>
+      <div class="progress-container">
+        <div class="progress-fill" id="overallFill"></div>
+      </div>
+
+      <div class="pill-grid" style="margin-top:14px;">
+        <div class="micro-pill"><span class="label">Direction</span><span class="value" id="scoreDirection">0%</span></div>
+        <div class="micro-pill"><span class="label">Fit</span><span class="value" id="scoreFit">0%</span></div>
+        <div class="micro-pill"><span class="label">Boundaries</span><span class="value" id="scoreBoundaries">0%</span></div>
+        <div class="micro-pill"><span class="label">Decision</span><span class="value" id="scoreDecision">0%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section" data-section="direction">
+    <div class="section-header" role="button" tabindex="0">
+      <div class="section-left">
+        <div class="section-badge">1</div>
+        <div class="section-title">
+          <strong>Your anchor sentence</strong>
+          <span>Make it simple, defensible, and specific enough to guide choices.</span>
+        </div>
+      </div>
+      <div class="section-right">
+        <div class="section-status" id="status-direction">0/4 complete</div>
+        <div class="chev"><i class="fas fa-chevron-down"></i></div>
+      </div>
+    </div>
+
+    <div class="section-body">
+      <div class="q-grid">
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-pen-nib"></i>
+              <strong>Write the anchor (one sentence)</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done" data-dim="direction"> Done</label>
+          </div>
+          <textarea class="field" placeholder="Example: I build calm, high-credibility operations that reduce risk, create clarity, and scale teams without chaos."></textarea>
+        </div>
+
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-crosshairs"></i>
+              <strong>What outcome do you want to be known for?</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done" data-dim="direction"> Done</label>
+          </div>
+          <textarea class="field" placeholder="The measurable outcomes your work reliably creates (not your job title)."></textarea>
+        </div>
+
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-mountain"></i>
+              <strong>What problems are you willing to solve repeatedly?</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done" data-dim="direction"> Done</label>
+          </div>
+          <textarea class="field" placeholder="Problems you don’t resent solving. The ones that feel like ‘your lane’."></textarea>
+        </div>
+
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-ban"></i>
+              <strong>What do you refuse to build your career on?</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done" data-dim="direction"> Done</label>
+          </div>
+          <textarea class="field" placeholder="e.g. constant fire-fighting, politics-first environments, value drift, low trust."></textarea>
+        </div>
+      </div>
+
+      <div class="section-foot">
+        <div class="tip-box">
+          <i class="fas fa-leaf"></i>
+          <div>
+            <strong>Note:</strong> vague anchors create drift. If your anchor can fit any job, it will guide none.
+            Your anchor should <em>exclude</em> as much as it includes.
+          </div>
+        </div>
+        <div class="mini-actions">
+          <button class="mini-btn secondary" data-action="clear" title="Clear this section"><i class="fas fa-eraser"></i> Clear</button>
+          <button class="mini-btn primary" data-action="copy" title="Copy anchor output"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section" data-section="fit">
+    <div class="section-header" role="button" tabindex="0">
+      <div class="section-left">
+        <div class="section-badge">2</div>
+        <div class="section-title">
+          <strong>Strength + environment fit</strong>
+          <span>What you do best, and the conditions you need for it to show up.</span>
+        </div>
+      </div>
+      <div class="section-right">
+        <div class="section-status" id="status-fit">0/4 complete</div>
+        <div class="chev"><i class="fas fa-chevron-down"></i></div>
+      </div>
+    </div>
+
+    <div class="section-body">
+      <div class="q-grid">
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-star"></i>
+              <strong>Your unfair advantages (top 3)</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done" data-dim="fit"> Done</label>
+          </div>
+          <textarea class="field" placeholder="What you do better than most, with less effort."></textarea>
+        </div>
+
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-people-group"></i>
+              <strong>People + leadership style you thrive under</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done" data-dim="fit"> Done</label>
+          </div>
+          <textarea class="field" placeholder="What good leadership looks like for you (autonomy, clarity, feedback rhythm)."></textarea>
+        </div>
+
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-battery-three-quarters"></i>
+              <strong>What gives you energy (at work)</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done" data-dim="fit"> Done</label>
+          </div>
+          <textarea class="field" placeholder="Work you’d do even on a tough week because it feels meaningful."></textarea>
+        </div>
+
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-battery-empty"></i>
+              <strong>What drains you fast (red zone)</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done" data-dim="fit"> Done</label>
+          </div>
+          <textarea class="field" placeholder="Work patterns that make you resentful, foggy, or reactive."></textarea>
+        </div>
+      </div>
+
+      <div class="section-foot">
+        <div class="tip-box">
+          <i class="fas fa-leaf"></i>
+          <div>
+            <strong>Personality / Behaviour lens:</strong> if you’re high-conscientious, high-standards, low tolerance for mess —
+            you’ll suffer in chaos unless you have authority to build systems. Don’t call it “resilience”; call it fit.
+          </div>
+        </div>
+        <div class="mini-actions">
+          <button class="mini-btn secondary" data-action="clear"><i class="fas fa-eraser"></i> Clear</button>
+          <button class="mini-btn primary" data-action="copy"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section" data-section="boundaries">
+    <div class="section-header" role="button" tabindex="0">
+      <div class="section-left">
+        <div class="section-badge">3</div>
+        <div class="section-title">
+          <strong>Non-negotiables</strong>
+          <span>Your guardrails: what must be true for a role to be worth it.</span>
+        </div>
+      </div>
+      <div class="section-right">
+        <div class="section-status" id="status-boundaries">0/4 complete</div>
+        <div class="chev"><i class="fas fa-chevron-down"></i></div>
+      </div>
+    </div>
+
+    <div class="section-body">
+      <div class="q-grid">
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-shield"></i>
+              <strong>Non-negotiable #1 (work conditions)</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done nn" data-dim="boundaries"> Done</label>
+          </div>
+          <textarea class="field" placeholder="e.g. autonomy on delivery / realistic workload / clear success criteria."></textarea>
+        </div>
+
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-shield"></i>
+              <strong>Non-negotiable #2 (values / ethics)</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done nn" data-dim="boundaries"> Done</label>
+          </div>
+          <textarea class="field" placeholder="What you will not compromise on, even for more money or status."></textarea>
+        </div>
+
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-shield"></i>
+              <strong>Non-negotiable #3 (health / capacity)</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done nn" data-dim="boundaries"> Done</label>
+          </div>
+          <textarea class="field" placeholder="What must be true so you can sustain performance without burnout."></textarea>
+        </div>
+
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-shield"></i>
+              <strong>Non-negotiable #4 (growth / trajectory)</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done nn" data-dim="boundaries"> Done</label>
+          </div>
+          <textarea class="field" placeholder="What must exist so the role compounds your career capital."></textarea>
+        </div>
+      </div>
+
+      <div class="section-foot">
+        <div class="tip-box">
+          <i class="fas fa-leaf"></i>
+          <div>
+            <strong>Note:</strong> non-negotiables are not preferences. If you break them, you pay later — in stress, reputation, or time.
+          </div>
+        </div>
+        <div class="mini-actions">
+          <button class="mini-btn secondary" data-action="clear"><i class="fas fa-eraser"></i> Clear</button>
+          <button class="mini-btn primary" data-action="copy"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="section" data-section="decision">
+    <div class="section-header" role="button" tabindex="0">
+      <div class="section-left">
+        <div class="section-badge">4</div>
+        <div class="section-title">
+          <strong>Decision filter</strong>
+          <span>A fast “yes/no/maybe” system for roles, projects, and promotions.</span>
+        </div>
+      </div>
+      <div class="section-right">
+        <div class="section-status" id="status-decision">0/4 complete</div>
+        <div class="chev"><i class="fas fa-chevron-down"></i></div>
+      </div>
+    </div>
+
+    <div class="section-body">
+      <div class="q-grid">
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-filter"></i>
+              <strong>Top 3 “yes” signals</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done filter" data-dim="decision"> Done</label>
+          </div>
+          <textarea class="field" placeholder="Signals that the role fits your anchor and will compound your value."></textarea>
+        </div>
+
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-triangle-exclamation"></i>
+              <strong>Top 3 “no” signals</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done filter" data-dim="decision"> Done</label>
+          </div>
+          <textarea class="field" placeholder="Signals that the role will drain you, dilute you, or damage credibility."></textarea>
+        </div>
+
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-scale-balanced"></i>
+              <strong>Your trade-off rule</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done filter" data-dim="decision"> Done</label>
+          </div>
+          <textarea class="field" placeholder="If you take X, you must get Y (e.g. more scope requires more autonomy)."></textarea>
+        </div>
+
+        <div class="q">
+          <div class="q-top">
+            <div class="q-title">
+              <i class="fas fa-calendar-days"></i>
+              <strong>Next 90 days: one move that proves the anchor</strong>
+            </div>
+            <label class="q-done"><input type="checkbox" class="done filter" data-dim="decision"> Done</label>
+          </div>
+          <textarea class="field" placeholder="A concrete move: conversation, project, visibility play, or skill investment."></textarea>
+        </div>
+      </div>
+
+      <div class="section-foot">
+        <div class="tip-box">
+          <i class="fas fa-leaf"></i>
+          <div>
+            <strong>Note:</strong> the market rewards coherence. The filter stops you becoming “useful in everything” and recognised for nothing.
+          </div>
+        </div>
+        <div class="mini-actions">
+          <button class="mini-btn secondary" data-action="clear"><i class="fas fa-eraser"></i> Clear</button>
+          <button class="mini-btn primary" data-action="copy"><i class="far fa-copy"></i> Copy</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:18px; display:flex; justify-content:flex-end; gap:10px; flex-wrap:wrap;">
+    <button class="mini-btn secondary" id="collapseAll"><i class="fas fa-compress"></i> Collapse all</button>
+    <button class="mini-btn primary" id="expandAll"><i class="fas fa-expand"></i> Expand all</button>
+  </div>
+
+</div>
+
+<!-- ===========================
+     MY PLAYBOOK SIDEBAR (Right) - from your template
+=========================== -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven’t saved anything yet. Use <strong>Save</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <div class="playbook-quick-links-header">
+          <span class="quick-links-title">Quick links</span>
+        </div>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill">
+            <i class="fas fa-gauge"></i> The Dashboard
+          </a>
+          <a href="the-lens.html" class="quick-link-pill">
+            <i class="fas fa-search"></i> The Lens
+          </a>
+          <a href="the-toolkit.html" class="quick-link-pill">
+            <i class="fas fa-toolbox"></i> The Toolkit
+          </a>
+          <a href="the-coach.html" class="quick-link-pill">
+            <i class="fas fa-comments"></i> The Coach
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ===========================
+     JAVASCRIPT
+=========================== -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('loaded');
+
+  initializeThemeToggle();
+  initializeMobileNav();
+  initializePlaybook();        // save button + my playbook sidebar (from your template)
+  initializeSections();        // playbook accordion + actions
+  initializeSignalRail();      // right narrow signals panel
+  recalcAll();                 // initial score render
+});
+
+/* ===========================
+   MOBILE NAV
+=========================== */
+function initializeMobileNav() {
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (!mobileToggle || !navLinks) return;
+
+  mobileToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('active');
+    const icon = this.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    }
+  });
+
+  document.addEventListener('click', function(event) {
+    if (navLinks.classList.contains('active') &&
+        !navLinks.contains(event.target) &&
+        !mobileToggle.contains(event.target)) {
+      navLinks.classList.remove('active');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) {
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+      }
+    }
+  });
+}
+
+/* ===========================
+   THEME TOGGLE + LOGO
+=========================== */
+function initializeThemeToggle() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (!themeToggleBtn) return;
+
+  const themeIcon = themeToggleBtn.querySelector('i');
+  const logoImg = document.getElementById('mainLogo');
+  const logoFallback = document.getElementById('logoFallback');
+
+  function getLogoPath(filename) {
+    if (window.location.protocol === 'file:') {
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+      return basePath + 'assets/img/' + filename;
+    } else {
+      return './assets/img/' + filename;
+    }
+  }
+
+  function showFallbackLogo() {
+    if (logoImg) logoImg.style.display = 'none';
+    if (logoFallback) logoFallback.style.display = 'inline-flex';
+  }
+
+  function showImageLogo() {
+    if (logoFallback) logoFallback.style.display = 'none';
+    if (logoImg) logoImg.style.display = 'block';
+  }
+
+  function updateLogoForTheme(isDarkMode) {
+    if (!logoImg) return;
+    showImageLogo();
+    logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+    logoImg.alt = 'The Employee Playbook';
+  }
+
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const savedTheme = localStorage.getItem('theme');
+  const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches);
+
+  if (shouldUseDark) {
+    document.body.classList.add('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+    updateLogoForTheme(true);
+  } else {
+    document.body.classList.remove('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+    updateLogoForTheme(false);
+  }
+
+  themeToggleBtn.addEventListener('click', function() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+    if (isDarkMode) {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+      updateLogoForTheme(false);
+    } else {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+      updateLogoForTheme(true);
+    }
+  });
+
+  prefersDarkScheme.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      if (e.matches) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      }
+    }
+  });
+
+  if (logoImg) {
+    logoImg.addEventListener('error', function() {
+      if (this.src.includes('logo-dark.png')) this.src = getLogoPath('logo.png');
+      else showFallbackLogo();
+    });
+  }
+}
+
+/* ===========================
+   PLAYBOOK ACCORDION + INPUTS
+=========================== */
+function initializeSections() {
+  // accordion
+  document.querySelectorAll('.section').forEach((section) => {
+    const header = section.querySelector('.section-header');
+    header.addEventListener('click', () => toggleSection(section));
+    header.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleSection(section); }
+    });
+
+    // section buttons
+    section.querySelectorAll('[data-action]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const action = btn.getAttribute('data-action');
+        if (action === 'clear') clearSection(section);
+        if (action === 'copy') copySection(section);
+        recalcAll();
+      });
+    });
+
+    // recompute when fields/checkboxes change
+    section.querySelectorAll('textarea').forEach(t => t.addEventListener('input', recalcAll));
+    section.querySelectorAll('input.done').forEach(c => c.addEventListener('change', recalcAll));
+  });
+
+  // expand/collapse all
+  const expandAll = document.getElementById('expandAll');
+  const collapseAll = document.getElementById('collapseAll');
+  if (expandAll) expandAll.addEventListener('click', () => document.querySelectorAll('.section').forEach(s => s.classList.add('open')));
+  if (collapseAll) collapseAll.addEventListener('click', () => document.querySelectorAll('.section').forEach(s => s.classList.remove('open')));
+}
+
+function toggleSection(section) {
+  const isOpen = section.classList.contains('open');
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('open'));
+  if (!isOpen) section.classList.add('open');
+}
+
+function clearSection(section) {
+  section.querySelectorAll('textarea').forEach(t => t.value = '');
+  section.querySelectorAll('input.done').forEach(c => c.checked = false);
+}
+
+function copySection(section) {
+  const title = section.querySelector('.section-title strong')?.textContent?.trim() || 'Section';
+  const items = [];
+  section.querySelectorAll('.q').forEach((q, idx) => {
+    const qTitle = q.querySelector('.q-title strong')?.textContent?.trim() || `Q${idx+1}`;
+    const val = q.querySelector('textarea')?.value?.trim() || '';
+    const done = q.querySelector('input.done')?.checked ? '[✓]' : '[ ]';
+    items.push(`${done} ${qTitle}\n${val || '(blank)'}\n`);
+  });
+
+  const text = `CAREER ANCHORING FRAMEWORK — ${title}\n================================\n\n${items.join('\n')}`;
+  navigator.clipboard.writeText(text);
+}
+
+/* ===========================
+   SCORES / COMPLETION
+=========================== */
+function recalcAll() {
+  const dims = ['direction','fit','boundaries','decision'];
+  const dimTotals = {};
+  const dimDone = {};
+
+  dims.forEach(d => { dimTotals[d] = 0; dimDone[d] = 0; });
+
+  document.querySelectorAll('.done').forEach(cb => {
+    const dim = cb.getAttribute('data-dim');
+    if (!dim || !(dim in dimTotals)) return;
+    dimTotals[dim] += 1;
+    if (cb.checked) dimDone[dim] += 1;
+  });
+
+  // per-section statuses (always 4 questions)
+  setStatus('direction', dimDone.direction, dimTotals.direction);
+  setStatus('fit', dimDone.fit, dimTotals.fit);
+  setStatus('boundaries', dimDone.boundaries, dimTotals.boundaries);
+  setStatus('decision', dimDone.decision, dimTotals.decision);
+
+  // dimension % scores
+  const pct = (d) => dimTotals[d] ? Math.round((dimDone[d]/dimTotals[d]) * 100) : 0;
+
+  const directionPct = pct('direction');
+  const fitPct = pct('fit');
+  const boundariesPct = pct('boundaries');
+  const decisionPct = pct('decision');
+
+  // overall
+  const totalDone = dimDone.direction + dimDone.fit + dimDone.boundaries + dimDone.decision;
+  const totalAll = dimTotals.direction + dimTotals.fit + dimTotals.boundaries + dimTotals.decision;
+  const overall = totalAll ? Math.round((totalDone/totalAll) * 100) : 0;
+
+  // render
+  document.getElementById('overallScore').textContent = overall + '%';
+  document.getElementById('overallFill').style.width = overall + '%';
+
+  document.getElementById('scoreDirection').textContent = directionPct + '%';
+  document.getElementById('scoreFit').textContent = fitPct + '%';
+  document.getElementById('scoreBoundaries').textContent = boundariesPct + '%';
+  document.getElementById('scoreDecision').textContent = decisionPct + '%';
+
+  // rail stats
+  const nnDone = document.querySelectorAll('input.nn:checked').length;
+  const filterDone = document.querySelectorAll('input.filter:checked').length;
+
+  document.getElementById('railClarity').textContent = overall + '%';
+  document.getElementById('railNN').textContent = `${nnDone}/4`;
+  document.getElementById('railFilter').textContent = `${filterDone}/4`;
+}
+
+function setStatus(sectionKey, done, total) {
+  const el = document.getElementById(`status-${sectionKey}`);
+  if (!el) return;
+  el.textContent = `${done}/${total} complete`;
+}
+
+/* ===========================
+   SIGNAL RAIL (click out closes)
+=========================== */
+function initializeSignalRail() {
+  const openBtn = document.getElementById('openRail');
+  const overlay = document.getElementById('railOverlay');
+  const panel = document.getElementById('railPanel');
+  const closeBtn = document.getElementById('railClose');
+
+  if (!openBtn || !overlay || !panel || !closeBtn) return;
+
+  function open() {
+    overlay.classList.add('open');
+    panel.classList.add('open');
+    overlay.setAttribute('aria-hidden','false');
+  }
+  function close() {
+    overlay.classList.remove('open');
+    panel.classList.remove('open');
+    overlay.setAttribute('aria-hidden','true');
+  }
+
+  openBtn.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+}
+
+/* ===========================
+   MY PLAYBOOK (LOCALSTORAGE) - from your template
+=========================== */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'career-anchoring-playbook';
+const CURRENT_TOOL_TITLE = 'Career Anchoring Playbook';
+const CURRENT_TOOL_TYPE = 'Playbook';
+
+function getSavedItems() {
+  try {
+    const raw = localStorage.getItem(PLAYBOOK_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    console.warn('Error reading saved items:', e);
+    return [];
+  }
+}
+
+function setSavedItems(items) {
+  try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+  catch (e) { console.warn('Error saving items:', e); }
+}
+
+function initializePlaybook() {
+  const playbookOverlay = document.getElementById('playbookOverlay');
+  const playbookSidebar = document.getElementById('playbookSidebar');
+  const playbookButton = document.getElementById('myPlaybookButton');
+  const closeBtn = document.getElementById('closePlaybook');
+  const saveItemBtn = document.getElementById('saveBtn');
+
+  if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+  renderSavedItems();
+
+  const savedItems = getSavedItems();
+  const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+  updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+  saveItemBtn.addEventListener('click', () => {
+    const items = getSavedItems();
+    const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+    let nowSaved;
+
+    if (index === -1) {
+      const toolLink = window.location.pathname.split('/').pop() || 'career-anchoring-playbook.html';
+      items.push({
+        id: CURRENT_TOOL_ID,
+        title: CURRENT_TOOL_TITLE,
+        type: CURRENT_TOOL_TYPE,
+        link: toolLink,
+        savedAt: new Date().toISOString()
+      });
+      nowSaved = true;
+    } else {
+      items.splice(index, 1);
+      nowSaved = false;
+    }
+
+    setSavedItems(items);
+    updateSaveButtonState(saveItemBtn, nowSaved);
+    renderSavedItems();
+  });
+
+  playbookButton.addEventListener('click', () => {
+    playbookOverlay.classList.add('open');
+    playbookSidebar.classList.add('open');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    playbookOverlay.classList.remove('open');
+    playbookSidebar.classList.remove('open');
+  });
+
+  playbookOverlay.addEventListener('click', (e) => {
+    if (e.target === playbookOverlay) {
+      playbookOverlay.classList.remove('open');
+      playbookSidebar.classList.remove('open');
+    }
+  });
+}
+
+function updateSaveButtonState(button, isSaved) {
+  if (!button) return;
+  const icon = button.querySelector('i');
+  const label = button.querySelector('span');
+
+  if (isSaved) {
+    button.classList.add('saved');
+    if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+    if (label) label.textContent = 'Saved';
+  } else {
+    button.classList.remove('saved');
+    if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+    if (label) label.textContent = 'Save item';
+  }
+}
+
+function renderSavedItems() {
+  const listEl = document.getElementById('savedItemsList');
+  const emptyEl = document.getElementById('savedItemsEmpty');
+  if (!listEl || !emptyEl) return;
+
+  const items = getSavedItems();
+  listEl.innerHTML = '';
+
+  if (!items.length) {
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+
+  items.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'saved-item';
+
+    const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+    const dateText = savedDate
+      ? savedDate.toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' })
+      : '';
+
+    li.innerHTML = `
+      <div class="saved-item-title-row">
+        <span class="saved-item-title">${item.title}</span>
+        <span class="saved-item-type">${item.type}</span>
+      </div>
+      <div class="saved-item-meta">
+        ${dateText ? `Saved on ${dateText}` : ''}
+      </div>
+      <a class="saved-item-link" href="${item.link}">
+        Open <i class="fas fa-arrow-right"></i>
+      </a>
+    `;
+    listEl.appendChild(li);
+  });
+}
+</script>
+
+</body>
+</html>

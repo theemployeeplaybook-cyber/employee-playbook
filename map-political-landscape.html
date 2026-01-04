@@ -1,0 +1,3034 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Political Landscape Map — map influence, alignment, narratives and pressure points so you can move with precision in workplace politics." />
+  <title>Political Landscape Map | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand)
+    =========================== */
+    :root{
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+      --text-dark:#212529;
+      --text-medium:#495057;
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --border-light:rgba(0,0,0,0.08);
+      --nav-bg:rgba(255,255,255,0.95);
+      --hero-bg:linear-gradient(135deg,#F9F6FF 0%,#F0EBFA 100%);
+      --premium-gradient:linear-gradient(135deg,#7B5FC4 0%,#5A4496 100%);
+
+      /* Category accents */
+      --cat-clarity:#7B5FC4;
+      --cat-burnout:#f59e0b;
+      --cat-manager:#10b981;
+      --cat-politics:#3b82f6;
+      --cat-hr:#6D28D9;
+      --cat-confidence:#ef4444;
+      --cat-career:#800020;
+
+      --success-green:#10b981;
+      --warning-orange:#f59e0b;
+      --danger-red:#ef4444;
+      --info-blue:#3b82f6;
+
+      --shadow-soft:0 14px 40px rgba(123,95,196,0.10);
+    }
+
+    /* Dark mode */
+    .dark-mode{
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#888888;
+      --text-dark:#e0e0e0;
+      --text-medium:#b0b0b0;
+
+      --accent-purple:#9d86e9;
+      --accent-purple-dark:#7b5fc4;
+      --light-purple:rgba(123,95,196,0.2);
+      --lighter-purple:rgba(123,95,196,0.1);
+
+      --border-light:rgba(255,255,255,0.08);
+      --nav-bg:rgba(30,30,30,0.95);
+      --hero-bg:linear-gradient(135deg,#2a2a2a 0%,#1f1f1f 100%);
+      --premium-gradient:linear-gradient(135deg,#9d86e9 0%,#7b5fc4 100%);
+      --shadow-soft:0 18px 44px rgba(0,0,0,0.45);
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body{
+      background:var(--primary-white);
+      color:var(--text-dark);
+      line-height:1.6;
+      overflow-x:hidden;
+      opacity:0;
+      transition:opacity .35s ease;
+      min-height:100vh;
+    }
+    body.loaded{ opacity:1; }
+
+    .container{ max-width:1400px; margin:0 auto; padding:0 20px; }
+
+    /* ===========================
+       NAV
+    =========================== */
+    nav{
+      position:fixed; top:0; width:100%;
+      background:var(--nav-bg);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      z-index:1000;
+      border-bottom:1px solid var(--border-light);
+      box-shadow:0 1px 3px rgba(0,0,0,0.05);
+      height:80px;
+    }
+    .nav-container{ display:flex; justify-content:space-between; align-items:center; padding:12px 0; height:100%; }
+    .logo{ display:inline-flex; align-items:center; height:100%; }
+    .logo-img{
+      height:100px; width:auto; transform:translateX(20%);
+      padding:14px 10px; display:block; min-height:100px;
+    }
+    .logo-fallback{
+      display:none; align-items:center; justify-content:center; height:48px;
+      padding:0 14px; border-radius:10px;
+      background:var(--premium-gradient); color:#fff;
+      font-weight:800; letter-spacing:.8px; font-size:13px; text-transform:uppercase;
+      transform:translateX(20%);
+    }
+    .nav-links{ display:flex; gap:50px; }
+    .nav-link{ color:var(--text-dark); text-decoration:none; font-weight:500; transition:color .3s ease; font-size:17px; }
+    .nav-link:hover{ color:var(--accent-purple); }
+    .nav-link-container{ position:relative; display:inline-block; }
+    .new-tag{
+      position:absolute; top:-12px; right:-35px;
+      background:linear-gradient(135deg,#FFD700,#FFA500);
+      color:#000; font-size:10px; font-weight:800;
+      padding:2px 6px; border-radius:4px;
+      box-shadow:0 2px 4px rgba(0,0,0,0.2); z-index:10; white-space:nowrap;
+    }
+    .nav-actions{ display:flex; align-items:center; gap:24px; transform:translateX(-20%); }
+    .header-cta{
+      background:var(--accent-purple); color:#fff;
+      padding:8px 20px; border-radius:999px;
+      text-decoration:none; font-weight:600; font-size:14px;
+      transition:all .3s ease;
+      box-shadow:0 5px 15px rgba(123,95,196,0.3);
+    }
+    .header-cta:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(123,95,196,0.35); }
+    .sign-in{ color:var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; }
+    .sign-in:hover{ color:var(--accent-purple); }
+    .theme-toggle{
+      background:none; border:none; color:var(--text-dark);
+      cursor:pointer; font-size:16px;
+      width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition:background-color .3s ease;
+    }
+    .theme-toggle:hover{ background:var(--light-gray); }
+    .mobile-toggle{
+      display:none; background:none; border:none; color:var(--text-dark);
+      cursor:pointer; font-size:24px;
+      width:40px; height:40px; border-radius:50%;
+      align-items:center; justify-content:center;
+      transition:background-color .3s ease;
+    }
+    .mobile-toggle:hover{ background:var(--light-gray); }
+    .mobile-sign-in, .mobile-sign-up{ display:none; }
+
+    @media (max-width:768px){
+      .nav-container{ justify-content:center; position:relative; }
+      .logo{ position:absolute; left:50%; transform:translateX(-50%); height:100%; }
+      .logo-img{ height:125px; transform:none; padding:12px 0; }
+      .logo-fallback{ transform:none; }
+
+      .mobile-toggle{ display:flex; position:absolute; left:20px; }
+      .nav-actions{ transform:none; gap:16px; position:absolute; right:20px; }
+      .nav-actions .sign-in, .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none; position:absolute; top:100%; left:0; width:100%;
+        background:var(--nav-bg);
+        backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+        flex-direction:column; padding:20px;
+        border-top:1px solid var(--border-light);
+        box-shadow:0 5px 15px rgba(0,0,0,0.1); gap:20px;
+      }
+      .nav-links.active{ display:flex; }
+      .nav-link-container{ display:flex; align-items:center; justify-content:flex-start; width:100%; }
+      .new-tag{ position:static; margin-left:8px; }
+
+      .mobile-sign-in{
+        display:block !important;
+        margin-top:10px; padding:12px 20px;
+        background:var(--primary-white);
+        color:var(--accent-purple);
+        border-radius:10px; text-align:center;
+        font-weight:700; text-decoration:none;
+        border:2px solid var(--accent-purple);
+      }
+      .mobile-sign-up{
+        display:block !important;
+        margin-top:10px; padding:12px 20px;
+        background:var(--accent-purple);
+        color:#fff; border-radius:10px;
+        text-align:center; font-weight:700; text-decoration:none;
+        border:2px solid var(--accent-purple);
+      }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .tool-hero-section{
+      width:100%;
+      background:var(--hero-bg);
+      padding:20px 0 22px;
+      margin-top:110px;
+      position:relative;
+      border-bottom:1px solid var(--border-light);
+      overflow:hidden;
+    }
+    .tool-hero-section::before{
+      content:'';
+      position:absolute; inset:0;
+      background:linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+      z-index:1;
+    }
+    .dark-mode .tool-hero-section::before{
+      background:linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+    }
+    .tool-hero-content{
+      position:relative; z-index:2;
+      max-width:1100px; margin:0 auto;
+      padding:0 20px 6px;
+      animation:heroFadeUp .45s ease-out;
+    }
+    @keyframes heroFadeUp{ from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:translateY(0);} }
+
+    .breadcrumb{
+      font-size:10px; text-transform:uppercase; letter-spacing:1px;
+      color:var(--dark-gray);
+      margin-bottom:10px;
+      display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+    }
+    .breadcrumb a{
+      color:var(--text-medium);
+      text-decoration:none !important;
+      font-weight:500; letter-spacing:.6px;
+      transition:color .2s ease;
+    }
+    .breadcrumb a:hover{ color:var(--accent-purple-dark); }
+    .breadcrumb i{ font-size:10px; opacity:.7; }
+    .breadcrumb .current{ color:var(--text-dark); font-weight:600; display:inline-flex; align-items:center; gap:8px; }
+
+    .checklist-name{
+      font-size:14px; font-weight:700; color:var(--accent-purple);
+      text-transform:uppercase; letter-spacing:1.8px;
+      margin:18px 0 12px; display:block;
+    }
+    .hero-main-heading{
+      font-size:44px; font-weight:650; color:var(--text-dark);
+      line-height:1.1; margin-bottom:14px;
+      max-width:900px;
+    }
+    .hero-subheading{
+      font-size:16px; color:var(--text-medium);
+      line-height:1.6; max-width:920px;
+      margin-bottom:18px; font-weight:450;
+    }
+
+    /* Save button anchored to hero */
+    .save-btn{
+      position:absolute; top:16px; right:24px; z-index:5;
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 12px; font-size:12px; font-weight:600;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.6);
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      color:var(--accent-purple-dark);
+      cursor:pointer;
+      transition:all .2s ease;
+    }
+    .save-btn:hover{ transform:translateY(-1px); box-shadow:0 4px 10px rgba(123,95,196,0.18); background:#fff; }
+    .dark-mode .save-btn{ background:rgba(20,20,20,0.9); border-color:rgba(157,134,233,0.6); }
+    .save-btn.saved{ background:var(--accent-purple); color:#fff; border-color:transparent; }
+
+    /* Category pills */
+    .category-pills-container{ margin-top:6px; }
+    .category-pills-title{
+      font-size:12px; font-weight:700; color:var(--text-medium);
+      text-transform:uppercase; letter-spacing:1px;
+      margin-bottom:10px; display:block;
+    }
+    .category-pills-grid{ display:flex; gap:10px; flex-wrap:wrap; }
+    .category-pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 12px; border-radius:999px;
+      font-size:12px; font-weight:600;
+      text-transform:uppercase; letter-spacing:.5px;
+      border:1px solid transparent;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      text-decoration:none; height:34px;
+      box-shadow:0 1px 3px rgba(0,0,0,0.05);
+      transition:all .2s ease; cursor:pointer;
+      white-space:nowrap;
+    }
+    .dark-mode .category-pill{ background:rgba(255,255,255,0.08); }
+    .category-pill:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+    .category-icon{ font-size:12px; opacity:.9; flex-shrink:0; }
+
+    .category-pill.politics{
+      color:var(--cat-politics);
+      border-color:rgba(59,130,246,0.25);
+      background:linear-gradient(135deg, rgba(59,130,246,0.10), rgba(59,130,246,0.04));
+    }
+    .dark-mode .category-pill.politics{
+      border-color:rgba(96,165,250,0.45);
+      background:linear-gradient(135deg, rgba(59,130,246,0.20), rgba(59,130,246,0.10));
+    }
+    .category-pill.clarity{
+      color:var(--cat-clarity);
+      border-color:rgba(123,95,196,0.25);
+      background:linear-gradient(135deg, rgba(123,95,196,0.10), rgba(123,95,196,0.04));
+    }
+    .dark-mode .category-pill.clarity{
+      border-color:rgba(157,134,233,0.55);
+      background:linear-gradient(135deg, rgba(123,95,196,0.26), rgba(123,95,196,0.12));
+    }
+    .category-pill.manager{
+      color:var(--cat-manager);
+      border-color:rgba(16,185,129,0.25);
+      background:linear-gradient(135deg, rgba(16,185,129,0.10), rgba(16,185,129,0.04));
+    }
+    .dark-mode .category-pill.manager{
+      border-color:rgba(52,211,153,0.45);
+      background:linear-gradient(135deg, rgba(16,185,129,0.20), rgba(16,185,129,0.10));
+    }
+
+    /* ===========================
+       MAIN CONTENT
+    =========================== */
+    .page-wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:14px 20px 40px;
+    }
+
+    .input-card{
+      background:var(--primary-white);
+      border:1px solid var(--border-light);
+      border-radius:16px;
+      box-shadow:var(--shadow-soft);
+      padding:18px;
+      margin-top:14px;
+    }
+
+    .input-grid{
+      display:grid;
+      grid-template-columns: 0.95fr 360px;
+      gap:14px;
+      align-items:start;
+    }
+
+    .field{
+      background:var(--light-gray);
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:14px;
+      padding:12px;
+    }
+    .dark-mode .field{ border-color:rgba(255,255,255,0.08); }
+
+    .label{
+      display:flex; align-items:center; justify-content:space-between;
+      font-size:12px; font-weight:600;
+      text-transform:uppercase; letter-spacing:.9px;
+      color:var(--text-medium);
+      margin-bottom:8px;
+    }
+    .label .mini{
+      font-weight:600; letter-spacing:.6px;
+      color:var(--dark-gray);
+      text-transform:none;
+      font-size:12px;
+      opacity:.95;
+    }
+
+    textarea, input[type="text"], select{
+      width:100%;
+      background:rgba(255,255,255,0.95);
+      border:1px solid rgba(0,0,0,0.08);
+      border-radius:12px;
+      padding:12px 12px;
+      font-size:14px;
+      color:var(--text-dark);
+      outline:none;
+      transition:border-color .2s ease, box-shadow .2s ease;
+    }
+    .dark-mode textarea, .dark-mode input[type="text"], .dark-mode select{
+      background:rgba(20,20,20,0.65);
+      border-color:rgba(255,255,255,0.12);
+      color:var(--text-dark);
+    }
+    textarea{ min-height:92px; resize:vertical; }
+
+    .row-2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+
+    .subtle-tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:14px;
+      background:rgba(123,95,196,0.06);
+      border:1px solid rgba(123,95,196,0.12);
+      color:var(--text-medium);
+      font-size:13px;
+      font-weight:500;
+      line-height:1.45;
+      margin-top:10px;
+    }
+    .subtle-tag strong{ color:var(--accent-purple-dark); font-weight:700; }
+
+    input[type="range"]{ width:100%; }
+    .range-row{ display:flex; align-items:center; gap:10px; }
+    .range-badge{
+      min-width:42px; height:34px;
+      border-radius:12px;
+      display:inline-flex; align-items:center; justify-content:center;
+      font-weight:700;
+      background:linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+      border:1px solid rgba(123,95,196,0.22);
+      color:var(--accent-purple-dark);
+    }
+    .range-badge.neg{
+      background:linear-gradient(135deg, rgba(239,68,68,0.14), rgba(239,68,68,0.05));
+      border-color:rgba(239,68,68,0.22);
+      color:#b91c1c;
+    }
+    .dark-mode .range-badge.neg{
+      background:linear-gradient(135deg, rgba(239,68,68,0.18), rgba(239,68,68,0.10));
+      border-color:rgba(239,68,68,0.30);
+      color:#fecaca;
+    }
+
+    .scale-hint{
+      margin-top:8px;
+      display:flex;
+      gap:14px;
+      flex-wrap:nowrap;
+      font-size:12px;
+      color:var(--dark-gray);
+      line-height:1.35;
+      white-space:nowrap;
+    }
+    .scale-hint span{ display:inline-flex; gap:6px; align-items:baseline; }
+    .scale-hint strong{ color:var(--text-medium); font-weight:600; }
+
+    .input-actions{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      border:none;
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:600;
+      font-size:13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition:transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+      white-space:nowrap;
+    }
+    .btn.secondary{
+      background:var(--light-purple);
+      color:var(--accent-purple-dark);
+      border:1px solid rgba(123,95,196,0.20);
+    }
+    .btn.secondary:hover{ transform:translateY(-1px); box-shadow:0 10px 22px rgba(0,0,0,0.10); }
+    .btn.primary{
+      background:var(--premium-gradient);
+      color:#fff;
+      box-shadow:0 12px 26px rgba(123,95,196,0.18);
+    }
+    .btn.primary:hover{ transform:translateY(-1px); box-shadow:0 16px 30px rgba(123,95,196,0.26); }
+    .btn.ghost{
+      background:rgba(255,255,255,0.75);
+      border:1px solid rgba(0,0,0,0.10);
+      color:var(--text-medium);
+    }
+    .dark-mode .btn.ghost{
+      background:rgba(20,20,20,0.55);
+      border-color:rgba(255,255,255,0.14);
+      color:var(--text-dark);
+    }
+
+    /* Inline toggle pills */
+    .toggle-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:10px;
+    }
+    .toggle-pill{
+      border-radius:999px;
+      padding:9px 12px;
+      border:1px solid rgba(123,95,196,0.22);
+      background:linear-gradient(135deg, rgba(123,95,196,0.10), rgba(123,95,196,0.04));
+      color:var(--accent-purple-dark);
+      font-weight:700;
+      font-size:13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition:transform .15s ease, box-shadow .15s ease, background-color .15s ease;
+      user-select:none;
+    }
+    .toggle-pill:hover{ transform:translateY(-1px); box-shadow:0 12px 24px rgba(0,0,0,0.10); }
+    .toggle-pill.active{
+      background:var(--premium-gradient);
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 14px 28px rgba(123,95,196,0.22);
+    }
+
+    /* ===========================
+       MAP HEADER
+    =========================== */
+    .map-shell{
+      margin-top:18px;
+      background:var(--primary-white);
+      border:1px solid var(--border-light);
+      border-radius:18px;
+      box-shadow:0 16px 44px rgba(0,0,0,0.06);
+      overflow:hidden;
+    }
+    .map-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 12px;
+      border-bottom:1px solid var(--border-light);
+      background:rgba(123,95,196,0.04);
+    }
+    .map-title{
+      display:flex; align-items:center; gap:12px;
+      font-size:18px; font-weight:700;
+      color:var(--text-dark);
+      white-space:nowrap;
+    }
+    .map-title .icon-bubble{
+      width:42px; height:42px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple);
+      color:var(--accent-purple);
+      flex-shrink:0;
+    }
+
+    .map-controls{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:1;
+      justify-content:flex-end;
+      flex-wrap:nowrap;
+      min-width:0;
+    }
+    .search{
+      position:relative;
+      flex:1;
+      max-width:520px;
+      min-width:220px;
+    }
+    .search input{
+      padding-left:40px;
+      border-radius:999px;
+      height:42px;
+    }
+    .search i{
+      position:absolute; left:14px; top:50%;
+      transform:translateY(-50%);
+      color:var(--dark-gray);
+      pointer-events:none;
+    }
+
+    .sort{
+      width:170px;
+      flex-shrink:0;
+    }
+    .sort select{
+      height:42px;
+      border-radius:999px;
+      padding:10px 36px 10px 14px;
+      appearance:none;
+      background-image: linear-gradient(45deg, transparent 50%, var(--dark-gray) 50%),
+                        linear-gradient(135deg, var(--dark-gray) 50%, transparent 50%);
+      background-position: calc(100% - 18px) calc(1em + 2px),
+                           calc(100% - 13px) calc(1em + 2px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat:no-repeat;
+    }
+
+    .map-actions{
+      display:flex;
+      gap:10px;
+      flex-shrink:0;
+      margin-left:6px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .pill-btn{
+      border-radius:999px;
+      padding:8px 12px;
+      font-weight:600;
+      font-size:13px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid rgba(123,95,196,0.25);
+      background:rgba(123,95,196,0.08);
+      color:var(--accent-purple-dark);
+      cursor:pointer;
+      transition:transform .2s ease, box-shadow .2s ease;
+      min-width:150px;
+      justify-content:center;
+    }
+    .pill-btn:hover{ transform:translateY(-1px); box-shadow:0 12px 24px rgba(0,0,0,0.12); }
+    .pill-btn.danger{
+      border-color:rgba(239,68,68,0.28);
+      background:rgba(239,68,68,0.10);
+      color:#b91c1c;
+      min-width:140px;
+    }
+    .pill-btn.neutral{
+      border-color:rgba(59,130,246,0.25);
+      background:rgba(59,130,246,0.10);
+      color:#1d4ed8;
+      min-width:160px;
+    }
+
+    /* ===========================
+       MAP BODY (grid)
+    =========================== */
+    .map-body{ padding:12px; }
+
+    .legend-row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .legend-box{
+      border:1px solid rgba(123,95,196,0.16);
+      background:linear-gradient(135deg, rgba(123,95,196,0.06), rgba(123,95,196,0.02));
+      border-radius:14px;
+      padding:10px 12px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      min-height:62px;
+    }
+    .legend-ico{
+      width:36px; height:36px; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple);
+      color:var(--accent-purple-dark);
+      flex-shrink:0;
+    }
+    .legend-text{
+      font-size:12px;
+      color:var(--text-medium);
+      line-height:1.35;
+      font-weight:450;
+    }
+    .legend-text strong{ font-weight:650; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      transform:scale(0.985);
+      transform-origin: top center;
+    }
+
+    .quad{
+      border:1px solid var(--border-light);
+      border-radius:16px;
+      background:var(--primary-white);
+      box-shadow:0 10px 28px rgba(0,0,0,0.05);
+      overflow:hidden;
+      min-height:240px;
+      display:flex;
+      flex-direction:column;
+      position:relative;
+    }
+    .quad::after{
+      content:"";
+      position:absolute; inset:0;
+      pointer-events:none;
+      background:radial-gradient(600px 240px at 30% -20%, rgba(123,95,196,0.10), transparent 55%);
+      opacity:.8;
+    }
+    .dark-mode .quad::after{
+      background:radial-gradient(600px 240px at 30% -20%, rgba(157,134,233,0.18), transparent 60%);
+      opacity:1;
+    }
+
+    .quad-head{
+      padding:12px 12px 10px;
+      border-bottom:1px solid var(--border-light);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background:rgba(123,95,196,0.035);
+      position:relative;
+      z-index:1;
+    }
+    .quad-head-left{
+      display:flex; align-items:center; gap:10px; min-width:0;
+    }
+    .quad-bubble{
+      width:40px; height:40px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple);
+      color:var(--accent-purple);
+      flex-shrink:0;
+    }
+    .quad-title-wrap{ min-width:0; }
+    .quad-title{
+      font-size:16px;
+      font-weight:650;
+      letter-spacing:.2px;
+      color:var(--text-dark);
+      line-height:1.2;
+      cursor:pointer;
+      user-select:none;
+    }
+    .quad-sub{
+      font-size:12px;
+      color:var(--dark-gray);
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      margin-top:4px;
+      font-weight:650;
+      opacity:.95;
+    }
+    .quad-count{
+      font-size:22px;
+      font-weight:750;
+      color:var(--accent-purple-dark);
+      padding:0 6px;
+      flex-shrink:0;
+      position:relative;
+      z-index:1;
+    }
+    .quad-drop{
+      padding:10px 10px 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      overflow:auto;
+      position:relative;
+      z-index:1;
+    }
+    .empty{
+      border:1px dashed rgba(123,95,196,0.25);
+      background:rgba(123,95,196,0.04);
+      border-radius:14px;
+      padding:12px;
+      color:var(--dark-gray);
+      font-size:13px;
+      font-weight:650;
+    }
+
+    /* Stakeholder card */
+    .card{
+      background:var(--primary-white);
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:16px;
+      padding:12px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.06);
+      cursor:grab;
+      user-select:none;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute; left:-40px; top:-60px;
+      width:180px; height:180px;
+      background:radial-gradient(circle at 30% 30%, rgba(123,95,196,0.14), transparent 60%);
+      transform:rotate(10deg);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .dark-mode .card::before{
+      background:radial-gradient(circle at 30% 30%, rgba(157,134,233,0.18), transparent 60%);
+    }
+    .card:hover{
+      transform:translateY(-1px);
+      box-shadow:0 14px 30px rgba(0,0,0,0.10);
+      border-color:rgba(123,95,196,0.22);
+    }
+    .card:active{ cursor:grabbing; }
+
+    .card-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      position:relative;
+      z-index:1;
+    }
+    .card-name{
+      font-size:15px;
+      font-weight:600;
+      color:var(--text-dark);
+      line-height:1.2;
+      margin-bottom:2px;
+      text-transform:none;
+    }
+    .card-role{
+      font-size:13px;
+      color:var(--text-medium);
+      font-weight:500;
+      line-height:1.2;
+    }
+    .card-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-shrink:0;
+    }
+    .rel-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      border:1px solid rgba(123,95,196,0.22);
+      background:linear-gradient(135deg, rgba(123,95,196,0.10), rgba(123,95,196,0.04));
+      color:var(--accent-purple-dark);
+      white-space:nowrap;
+    }
+    .rel-badge.ally{
+      border-color:rgba(16,185,129,0.25);
+      background:rgba(16,185,129,0.10);
+      color:#047857;
+    }
+    .rel-badge.risk{
+      border-color:rgba(239,68,68,0.26);
+      background:rgba(239,68,68,0.10);
+      color:#b91c1c;
+    }
+    .rel-badge.neutral{
+      border-color:rgba(59,130,246,0.22);
+      background:rgba(59,130,246,0.08);
+      color:#1d4ed8;
+    }
+
+    .icon-btn{
+      width:36px; height:36px;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:rgba(255,255,255,0.9);
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--dark-gray);
+      transition:transform .15s ease, box-shadow .15s ease;
+    }
+    .dark-mode .icon-btn{ background:rgba(20,20,20,0.7); border-color:rgba(255,255,255,0.12); }
+    .icon-btn:hover{ transform:translateY(-1px); box-shadow:0 10px 18px rgba(0,0,0,0.12); }
+
+    .score-row{
+      display:flex;
+      gap:10px;
+      margin-top:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      position:relative;
+      z-index:1;
+    }
+    .score-pill{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.20);
+      background:linear-gradient(135deg, rgba(123,95,196,0.09), rgba(123,95,196,0.03));
+      color:var(--accent-purple-dark);
+      font-weight:600;
+      font-size:13px;
+      min-width:104px;
+      justify-content:center;
+    }
+    .score-pill.blue{
+      border-color:rgba(59,130,246,0.22);
+      background:rgba(59,130,246,0.08);
+      color:#1d4ed8;
+      min-width:108px;
+    }
+    .score-pill.red{
+      border-color:rgba(239,68,68,0.22);
+      background:rgba(239,68,68,0.08);
+      color:#b91c1c;
+      min-width:112px;
+    }
+    .dark-mode .score-pill.red{ color:#fecaca; }
+    .dark-mode .score-pill.blue{ color:#bfdbfe; }
+
+    .card-notes{
+      margin-top:10px;
+      font-size:13px;
+      color:var(--text-medium);
+      line-height:1.45;
+      font-weight:450;
+      min-height:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .card-footer{
+      margin-top:10px;
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      color:var(--dark-gray);
+      font-size:12px;
+      font-weight:650;
+      position:relative;
+      z-index:1;
+    }
+    .mini-stat{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,0.06);
+      background:rgba(0,0,0,0.02);
+    }
+    .dark-mode .mini-stat{ border-color:rgba(255,255,255,0.10); background:rgba(255,255,255,0.05); }
+
+    /* ===========================
+       PLAN + SNAPSHOT
+    =========================== */
+    .below-row{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:12px;
+      align-items:start;
+    }
+
+    .info-card{
+      border:1px solid var(--border-light);
+      border-radius:18px;
+      background:var(--primary-white);
+      box-shadow:0 12px 34px rgba(0,0,0,0.06);
+      padding:14px;
+      overflow:hidden;
+    }
+    .info-head{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--border-light);
+      margin-bottom:10px;
+    }
+    .info-title{
+      display:flex; align-items:center; gap:10px;
+      font-size:16px; font-weight:600; color:var(--text-dark);
+    }
+    .info-title .bubble{
+      width:40px; height:40px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple); color:var(--accent-purple);
+    }
+
+    .total-pill{
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.22);
+      background:rgba(123,95,196,0.08);
+      color:var(--accent-purple-dark);
+      font-weight:600;
+      font-size:12px;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    .plan-body p{
+      font-size:14px;
+      color:var(--text-medium);
+      line-height:1.55;
+      font-weight:450;
+      margin-bottom:10px;
+    }
+    .plan-box{
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:16px;
+      background:var(--light-gray);
+      padding:12px;
+    }
+    .plan-box .plan-h{
+      font-weight:600;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      font-size:12px;
+      color:var(--text-medium);
+      margin-bottom:8px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .plan-box .plan-h .micro{
+      font-weight:650;
+      text-transform:none;
+      letter-spacing:.2px;
+      color:var(--dark-gray);
+      font-size:12px;
+    }
+    .plan-box ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+    .plan-box li{
+      font-size:13.5px;
+      color:var(--text-medium);
+      padding-left:18px;
+      position:relative;
+      line-height:1.45;
+    }
+    .plan-box li::before{
+      content:"•";
+      position:absolute; left:6px; top:0;
+      color:var(--accent-purple);
+      font-size:16px;
+      line-height:1.1;
+    }
+
+    .snapshot-list{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    .snapshot-item{
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:16px;
+      background:var(--primary-white);
+      padding:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      cursor:pointer;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .snapshot-item:hover{
+      transform:translateY(-1px);
+      box-shadow:0 14px 30px rgba(0,0,0,0.10);
+      border-color:rgba(123,95,196,0.20);
+    }
+    .snap-left{
+      display:flex; align-items:center; gap:10px; min-width:0;
+    }
+    .snap-ico{
+      width:40px; height:40px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple);
+      color:var(--accent-purple);
+      flex-shrink:0;
+    }
+    .snap-txt{ min-width:0; }
+    .snap-name{ font-weight:600; font-size:14.5px; color:var(--text-dark); line-height:1.2; }
+    .snap-sub{ font-size:12px; color:var(--dark-gray); text-transform:uppercase; letter-spacing:.8px; font-weight:650; margin-top:4px; }
+    .snap-count{ font-size:22px; font-weight:800; color:var(--accent-purple-dark); }
+
+    /* ===========================
+       MODAL
+    =========================== */
+    .modal-overlay{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,0.45);
+      z-index:1300;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    .modal-overlay.open{ opacity:1; pointer-events:auto; }
+    .modal{
+      width:min(820px, 96vw);
+      background:rgba(255,255,255,0.96);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,0.22);
+      border-radius:20px;
+      box-shadow:0 24px 70px rgba(0,0,0,0.35);
+      overflow:hidden;
+    }
+    .dark-mode .modal{ background:rgba(20,20,20,0.92); border-color:rgba(255,255,255,0.10); }
+    .modal-head{
+      padding:14px 16px;
+      border-bottom:1px solid var(--border-light);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      position:relative;
+    }
+    .modal-head::before{
+      content:"";
+      position:absolute; left:0; top:0; height:3px; width:100%;
+      background:var(--premium-gradient);
+    }
+    .modal-title{
+      display:flex; align-items:center; gap:10px;
+      font-size:16px; font-weight:600;
+      color:var(--text-dark);
+    }
+    .modal-title .bubble{
+      width:40px; height:40px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple); color:var(--accent-purple);
+    }
+    .modal-close{
+      width:40px; height:40px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:rgba(255,255,255,0.85);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; color:var(--dark-gray);
+    }
+    .dark-mode .modal-close{ background:rgba(20,20,20,0.7); border-color:rgba(255,255,255,0.12); }
+    .modal-body{
+      padding:14px 16px 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .modal-card{
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:16px;
+      background:var(--primary-white);
+      padding:12px;
+      box-shadow:0 10px 26px rgba(0,0,0,0.06);
+    }
+    .dark-mode .modal-card{ border-color:rgba(255,255,255,0.10); box-shadow:0 16px 30px rgba(0,0,0,0.35); }
+    .modal-card h4{
+      font-size:12px; letter-spacing:.9px; text-transform:uppercase;
+      color:var(--accent-purple-dark);
+      font-weight:600;
+      display:flex; align-items:center; gap:8px;
+      margin-bottom:8px;
+    }
+    .modal-card p, .modal-card li{
+      font-size:13.5px;
+      color:var(--text-medium);
+      font-weight:450;
+      line-height:1.55;
+    }
+    .modal-card ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+    .modal-card ul li{ padding-left:18px; position:relative; }
+    .modal-card ul li::before{
+      content:"•"; position:absolute; left:6px; top:0;
+      color:var(--accent-purple); font-size:16px; line-height:1.1;
+    }
+    .modal-wide{ grid-column:1 / -1; }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR
+    =========================== */
+    .my-playbook-fab{
+      position:fixed; bottom:24px; right:24px; z-index:1200;
+      background:var(--premium-gradient); color:#fff;
+      padding:10px 16px; border-radius:999px;
+      display:inline-flex; align-items:center; gap:8px;
+      cursor:pointer; font-size:13px; font-weight:750;
+      box-shadow:0 10px 25px rgba(0,0,0,0.25);
+      transition:all .25s ease;
+    }
+    .my-playbook-fab:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,0,0,0.32); }
+
+    .playbook-sidebar-overlay{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,0.45);
+      z-index:1190;
+      opacity:0; pointer-events:none;
+      transition:opacity .25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position:fixed; top:0; right:-380px;
+      width:340px; max-width:90%;
+      height:100%;
+      background:rgba(255,255,255,0.94);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:-4px 0 20px rgba(0,0,0,0.25);
+      z-index:1191;
+      display:flex; flex-direction:column;
+      border-left:1px solid var(--border-light);
+      transition:right .25s ease;
+    }
+    .dark-mode .playbook-sidebar{ background:rgba(18,18,18,0.96); box-shadow:-4px 0 22px rgba(0,0,0,0.6); }
+    .playbook-sidebar.open{ right:0; }
+
+    .playbook-sidebar-header{
+      padding:20px 20px 14px;
+      border-bottom:1px solid var(--border-light);
+    }
+    .playbook-sidebar-header-title-row{
+      display:flex; justify-content:space-between; align-items:center;
+      margin-bottom:4px;
+    }
+    .playbook-sidebar-header h3{ font-size:18px; font-weight:700; color:var(--text-dark); }
+    .playbook-sidebar-header p{ font-size:13px; color:var(--dark-gray); }
+
+    .playbook-close-btn{
+      background:none; border:none;
+      color:var(--dark-gray);
+      cursor:pointer; font-size:18px;
+      border-radius:999px; width:28px; height:28px;
+      display:flex; align-items:center; justify-content:center;
+      transition:background-color .2s ease;
+    }
+    .playbook-close-btn:hover{ background:var(--light-gray); }
+
+    .playbook-sidebar-body{
+      padding:14px 18px 20px;
+      padding-bottom:50px;
+      overflow-y:auto;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    .saved-items-empty{ font-size:13px; color:var(--dark-gray); line-height:1.6; }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+    .saved-item{
+      padding:10px;
+      border-radius:12px;
+      border:1px solid var(--border-light);
+      background:var(--primary-white);
+      box-shadow:0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom:10px;
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .saved-item-title-row{ display:flex; justify-content:space-between; align-items:baseline; gap:6px; }
+    .saved-item-title{ font-size:14px; font-weight:700; color:var(--text-dark); }
+    .saved-item-type{
+      font-size:11px; text-transform:uppercase; letter-spacing:.6px;
+      color:var(--accent-purple-dark); font-weight:700;
+    }
+    .saved-item-meta{ font-size:12px; color:var(--dark-gray); }
+    .saved-item-link{
+      margin-top:6px; font-size:12px;
+      color:var(--accent-purple); text-decoration:none;
+      font-weight:800; display:inline-flex; align-items:center; gap:4px;
+    }
+    .saved-item-link:hover{ text-decoration:underline; }
+
+    .playbook-quick-links{
+      margin-top:223px;
+      padding-top:10px;
+      border-top:1px solid var(--border-light);
+    }
+    .quick-links-title{
+      font-size:12px; font-weight:700;
+      text-transform:uppercase; letter-spacing:.8px;
+      color:var(--text-medium);
+    }
+    .playbook-quick-links-list{
+      display:flex; flex-direction:column; gap:10px; margin-top:8px;
+    }
+    .quick-link-pill{
+      width:55%;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.35);
+      background:linear-gradient(135deg,rgba(123,95,196,0.08),rgba(123,95,196,0.02));
+      text-decoration:none;
+      color:var(--accent-purple-dark);
+      font-size:13px;
+      font-weight:650;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .quick-link-pill:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+      background:linear-gradient(135deg,rgba(123,95,196,0.16),rgba(123,95,196,0.06));
+    }
+    .dark-mode .quick-link-pill{
+      border-color:rgba(157,134,233,0.55);
+      background:linear-gradient(135deg,rgba(123,95,196,0.26),rgba(123,95,196,0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer{
+      background:var(--primary-white);
+      padding:10px 0;
+      border-top:1px solid var(--border-light);
+      margin-top:30px;
+      text-align:center;
+      color:var(--text-medium);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width:1024px){
+      .below-row{ grid-template-columns:1fr; }
+      .input-grid{ grid-template-columns:1fr; }
+      .scale-hint{ flex-wrap:wrap; white-space:normal; }
+    }
+    @media (max-width:768px){
+      .tool-hero-section{ margin-top:100px; }
+      .hero-main-heading{ font-size:34px; }
+      .save-btn{ right:18px; top:10px; }
+      .map-head{ flex-wrap:wrap; justify-content:flex-start; }
+      .map-controls{ width:100%; justify-content:space-between; flex-wrap:wrap; }
+      .search{ max-width:none; width:100%; order:1; }
+      .sort{ order:2; width:100%; }
+      .map-actions{ order:3; width:100%; justify-content:flex-end; }
+      .grid{ grid-template-columns:1fr; }
+      .legend-row{ grid-template-columns:1fr; }
+      .modal-body{ grid-template-columns:1fr; }
+      .my-playbook-fab{ bottom:18px; right:18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===========================
+      NAVIGATION
+  =========================== -->
+  <nav>
+    <div class="container nav-container">
+      <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+      <a href="index.html" class="logo" aria-label="The Employee Playbook">
+        <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+        <div class="logo-fallback" id="logoFallback">The Employee Playbook</div>
+      </a>
+
+      <div class="nav-links">
+        <a href="the-lens.html" class="nav-link">The Lens</a>
+        <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+        <div class="nav-link-container">
+          <a href="the-coach.html" class="nav-link">The Coach</a>
+          <span class="new-tag">NEW</span>
+        </div>
+        <a href="the-shift.html" class="nav-link">The Shift</a>
+        <a href="the-pricing.html" class="nav-link">The Pricing</a>
+        <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+        <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="create-account.html" class="header-cta">Sign up</a>
+        <a href="sign-in.html" class="sign-in">Sign in</a>
+        <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===========================
+      HERO
+  =========================== -->
+  <div class="tool-hero-section">
+    <button class="save-btn" id="saveBtn">
+      <i class="far fa-bookmark"></i>
+      <span>Save</span>
+    </button>
+
+    <div class="tool-hero-content">
+      <div class="breadcrumb">
+        <a href="the-toolkit.html">Toolkit</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="workplace-dynamics-and-politics.html">Workplace Dynamics &amp; Politics</a>
+        <i class="fas fa-chevron-right"></i>
+        <span class="current">Political Landscape Map</span>
+      </div>
+
+      <span class="checklist-name">POLITICAL LANDSCAPE MAP</span>
+      <h1 class="hero-main-heading">Map who moves outcomes, who moves narratives, and where your real leverage actually sits</h1>
+      <div class="hero-subheading">
+        Add stakeholders (or group), score <strong>influence</strong> and <strong>alignment</strong>, and drag cards into the right quadrant.
+        Then use the plan panel to lock a <strong>clean, reputation-safe strategy</strong> — without over-explaining yourself.
+      </div>
+
+      <div class="category-pills-container">
+        <span class="category-pills-title">Related Categories</span>
+        <div class="category-pills-grid">
+          <a href="workload-clarity-and-direction.html" class="category-pill clarity">
+            <i class="fas fa-compass category-icon"></i>
+            <span>Workload Clarity &amp; Direction</span>
+          </a>
+          <a href="manager-relationship-and-leadership-style.html" class="category-pill manager">
+            <i class="fas fa-handshake category-icon"></i>
+            <span>Manager Relationship &amp; Leadership Style</span>
+          </a>
+          <a href="workplace-dynamics-and-politics.html" class="category-pill politics">
+            <i class="fas fa-chess category-icon"></i>
+            <span>Workplace Dynamics &amp; Politics</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-wrap">
+    <!-- ===========================
+        INPUTS
+    =========================== -->
+    <div class="input-card">
+      <div class="input-grid">
+        <div class="field">
+          <div class="label">Node type <span class="mini">person, group, or narrative</span></div>
+          <select id="typeInput">
+            <option value="person" selected>Person</option>
+            <option value="group">Group / Team</option>
+            <option value="narrative">Narrative thread</option>
+          </select>
+
+          <div style="height:10px"></div>
+
+          <div class="label">Name / label <span class="mini">use an alias if needed</span></div>
+          <input id="nameInput" type="text" placeholder="e.g. “Programme sponsor”, “Head of X”, “Budget narrative”">
+
+          <div style="height:10px"></div>
+
+          <div class="label">Role / surface label <span class="mini">what they appear to be</span></div>
+          <input id="roleInput" type="text" placeholder="e.g. Decision maker, Project lead, Gatekeeper, Culture carrier…">
+
+          <div style="height:10px"></div>
+
+          <div class="row-2">
+            <div>
+              <div class="label">Agenda / what they want <span class="mini">keep it blunt</span></div>
+              <input id="agendaInput" type="text" placeholder="e.g. reduce risk, win credit, keep control, protect headcount…">
+            </div>
+            <div>
+              <div class="label">Currency <span class="mini">what they trade in</span></div>
+              <input id="currencyInput" type="text" placeholder="e.g. approvals, visibility, expertise, access, fear, trust…">
+            </div>
+          </div>
+
+          <div style="height:10px"></div>
+
+          <div class="label">Pressure points &amp; persuasion cues <span class="mini">what makes them say yes</span></div>
+          <textarea id="pressureInput" placeholder="What do they protect? What do they fear losing? What makes them feel safe? What do they need to look consistent with?"></textarea>
+
+          <div class="toggle-row" aria-label="Mode toggles">
+            <div class="toggle-pill active" id="modeStakeholders"><i class="fas fa-users"></i> Stakeholders mode</div>
+            <div class="toggle-pill" id="modeNarratives"><i class="fas fa-bullhorn"></i> Narrative mode</div>
+            <div class="toggle-pill" id="modeRisk"><i class="fas fa-triangle-exclamation"></i> Risk lens</div>
+          </div>
+
+          <div class="subtle-tag" id="modeHint">
+            <i class="fas fa-lightbulb"></i>
+            <span><strong>Stakeholders mode:</strong> capture the person and their motive, then use alignment + influence to place them fast.</span>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="label">Relationship <span class="mini">how it feels today</span></div>
+          <select id="relationshipInput">
+            <option value="neutral" selected>Neutral / unknown</option>
+            <option value="ally">Ally</option>
+            <option value="risk">Risk</option>
+          </select>
+
+          <div style="height:10px"></div>
+
+          <div class="label">Influence <span class="mini">pull, network, credibility</span></div>
+          <div class="range-row">
+            <span class="range-badge" id="influenceBadge">3</span>
+            <input id="influenceInput" type="range" min="1" max="5" step="1" value="3" aria-label="Influence (1 to 5)">
+          </div>
+          <div class="scale-hint">
+            <span><strong>1</strong> limited pull</span>
+            <span><strong>3</strong> can tilt</span>
+            <span><strong>5</strong> shapes outcomes</span>
+          </div>
+
+          <div style="height:10px"></div>
+
+          <div class="label">Alignment <span class="mini">towards your success</span></div>
+          <div class="range-row">
+            <span class="range-badge neg" id="alignmentBadge">0</span>
+            <input id="alignmentInput" type="range" min="-2" max="2" step="1" value="0" aria-label="Alignment (-2 to 2)">
+          </div>
+          <div class="scale-hint">
+            <span><strong>-2</strong> blocks</span>
+            <span><strong>0</strong> uncertain</span>
+            <span><strong>+2</strong> champions</span>
+          </div>
+
+          <div style="height:10px"></div>
+
+          <div class="label">Heat <span class="mini">volatility / ego / reactivity</span></div>
+          <div class="range-row">
+            <span class="range-badge" id="heatBadge">3</span>
+            <input id="heatInput" type="range" min="1" max="5" step="1" value="3" aria-label="Heat (1 to 5)">
+          </div>
+          <div class="scale-hint">
+            <span><strong>1</strong> steady</span>
+            <span><strong>3</strong> unpredictable</span>
+            <span><strong>5</strong> explosive</span>
+          </div>
+
+          <div style="height:10px"></div>
+
+          <div class="label">Exposure <span class="mini">how closely they watch</span></div>
+          <div class="range-row">
+            <span class="range-badge" id="exposureBadge">3</span>
+            <input id="exposureInput" type="range" min="1" max="5" step="1" value="3" aria-label="Exposure (1 to 5)">
+          </div>
+          <div class="scale-hint">
+            <span><strong>1</strong> distant</span>
+            <span><strong>3</strong> notices</span>
+            <span><strong>5</strong> tracks you</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subtle-tag">
+        <i class="fas fa-shield-halved"></i>
+        <span>
+          <strong>Reputation rule:</strong> politics is rarely “truth vs lies”, it’s <strong>status, safety, and incentives</strong>.
+          Your goal is to move outcomes without becoming the story.
+        </span>
+      </div>
+
+      <div class="input-actions">
+        <button class="btn secondary" id="examplesBtn"><i class="fas fa-bolt"></i> Add examples</button>
+        <button class="btn ghost" id="resetBtn"><i class="fas fa-rotate-left"></i> Reset fields</button>
+        <button class="btn primary" id="addBtn"><i class="fas fa-plus"></i> Add box</button>
+      </div>
+    </div>
+
+    <!-- ===========================
+        MAP
+    =========================== -->
+    <div class="map-shell">
+      <div class="map-head">
+        <div class="map-title">
+          <span class="icon-bubble"><i class="fas fa-chess"></i></span>
+          <span>Political Landscape Map</span>
+        </div>
+
+        <div class="map-controls">
+          <div class="search">
+            <i class="fas fa-search"></i>
+            <input id="searchInput" type="text" placeholder="Search (name, role, agenda, notes)…" />
+          </div>
+
+          <div class="sort">
+            <select id="sortSelect" aria-label="Sort nodes">
+              <option value="recent" selected>Sort: Recent first</option>
+              <option value="name">Sort: Name A–Z</option>
+              <option value="influence">Sort: Influence high–low</option>
+              <option value="alignment">Sort: Alignment high–low</option>
+              <option value="heat">Sort: Heat high–low</option>
+            </select>
+          </div>
+
+          <div class="map-actions">
+            <button class="pill-btn neutral" id="exportBtn"><i class="fas fa-file-arrow-down"></i> Export</button>
+            <button class="pill-btn" id="copyPlanBtn"><i class="far fa-copy"></i> Copy plan</button>
+            <button class="pill-btn danger" id="clearAllBtn"><i class="fas fa-trash"></i> Clear all</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="map-body">
+        <div class="legend-row">
+          <div class="legend-box">
+            <div class="legend-ico"><i class="fas fa-bullhorn"></i></div>
+            <div class="legend-text">
+              <strong>Influence:</strong> who shifts opinion, airtime, and decisions (even without authority).
+              Track <strong>networks</strong>, <strong>credibility</strong>, and who people defer to.
+            </div>
+          </div>
+          <div class="legend-box">
+            <div class="legend-ico"><i class="fas fa-compass"></i></div>
+            <div class="legend-text">
+              <strong>Alignment:</strong> -2 blocks · 0 uncertain · +2 champions.
+              Alignment can change fast when <strong>risk</strong>, <strong>credit</strong>, or <strong>status</strong> is in play.
+            </div>
+          </div>
+        </div>
+
+        <div class="grid" id="grid">
+          <!-- High influence / Positive alignment -->
+          <div class="quad" data-quad="champions">
+            <div class="quad-head">
+              <div class="quad-head-left">
+                <div class="quad-bubble"><i class="fas fa-trophy"></i></div>
+                <div class="quad-title-wrap">
+                  <div class="quad-title" data-open="champions">Champions</div>
+                  <div class="quad-sub">High influence · Pro-you</div>
+                </div>
+              </div>
+              <div class="quad-count" id="countChampions">0</div>
+            </div>
+            <div class="quad-drop" id="dropChampions"></div>
+          </div>
+
+          <!-- High influence / Negative alignment -->
+          <div class="quad" data-quad="snipers">
+            <div class="quad-head">
+              <div class="quad-head-left">
+                <div class="quad-bubble"><i class="fas fa-crosshairs"></i></div>
+                <div class="quad-title-wrap">
+                  <div class="quad-title" data-open="snipers">Snipers</div>
+                  <div class="quad-sub">High influence · Anti-you</div>
+                </div>
+              </div>
+              <div class="quad-count" id="countSnipers">0</div>
+            </div>
+            <div class="quad-drop" id="dropSnipers"></div>
+          </div>
+
+          <!-- Low influence / Positive alignment -->
+          <div class="quad" data-quad="helpers">
+            <div class="quad-head">
+              <div class="quad-head-left">
+                <div class="quad-bubble"><i class="fas fa-seedling"></i></div>
+                <div class="quad-title-wrap">
+                  <div class="quad-title" data-open="helpers">Helpers</div>
+                  <div class="quad-sub">Low influence · Pro-you</div>
+                </div>
+              </div>
+              <div class="quad-count" id="countHelpers">0</div>
+            </div>
+            <div class="quad-drop" id="dropHelpers"></div>
+          </div>
+
+          <!-- Low influence / Negative or unclear alignment -->
+          <div class="quad" data-quad="floaters">
+            <div class="quad-head">
+              <div class="quad-head-left">
+                <div class="quad-bubble"><i class="fas fa-cloud"></i></div>
+                <div class="quad-title-wrap">
+                  <div class="quad-title" data-open="floaters">Floaters</div>
+                  <div class="quad-sub">Low influence · Unclear / resistant</div>
+                </div>
+              </div>
+              <div class="quad-count" id="countFloaters">0</div>
+            </div>
+            <div class="quad-drop" id="dropFloaters"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================
+        PLAN + SNAPSHOT
+    =========================== -->
+    <div class="below-row">
+      <div class="info-card">
+        <div class="info-head">
+          <div class="info-title">
+            <span class="bubble"><i class="fas fa-bullseye"></i></span>
+            <span>Political Play</span>
+          </div>
+        </div>
+
+        <div class="plan-body">
+          <p><strong>Select a box</strong> (click) to generate a tight, reputation-safe approach.</p>
+          <p>Drag the box across the map if your reality differs — your plan updates automatically.</p>
+
+          <div class="plan-box" id="selectedPlanBox">
+            <div class="plan-h">
+              <span>No box selected</span>
+              <span class="micro">Click a card or open a quadrant for strategy</span>
+            </div>
+            <ul>
+              <li>Click any card to see the clean approach: what to do, what to avoid, and the smallest next move.</li>
+              <li>Click a <strong>quadrant title</strong> (e.g. “Snipers”) for broader strategy and containment moves.</li>
+              <li>Use <strong>Export</strong> if you want a file version for your notes or escalation trail.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-head">
+          <div class="info-title">
+            <span class="bubble"><i class="fas fa-chart-pie"></i></span>
+            <span>Map Snapshot</span>
+          </div>
+          <div class="total-pill" id="totalPill">0 TOTAL</div>
+        </div>
+
+        <div class="snapshot-list" id="snapshotList">
+          <div class="snapshot-item" data-open="champions">
+            <div class="snap-left">
+              <div class="snap-ico"><i class="fas fa-trophy"></i></div>
+              <div class="snap-txt">
+                <div class="snap-name">Champions</div>
+                <div class="snap-sub">High influence · Pro-you</div>
+              </div>
+            </div>
+            <div class="snap-count" id="snapChampions">0</div>
+          </div>
+
+          <div class="snapshot-item" data-open="snipers">
+            <div class="snap-left">
+              <div class="snap-ico"><i class="fas fa-crosshairs"></i></div>
+              <div class="snap-txt">
+                <div class="snap-name">Snipers</div>
+                <div class="snap-sub">High influence · Anti-you</div>
+              </div>
+            </div>
+            <div class="snap-count" id="snapSnipers">0</div>
+          </div>
+
+          <div class="snapshot-item" data-open="helpers">
+            <div class="snap-left">
+              <div class="snap-ico"><i class="fas fa-seedling"></i></div>
+              <div class="snap-txt">
+                <div class="snap-name">Helpers</div>
+                <div class="snap-sub">Low influence · Pro-you</div>
+              </div>
+            </div>
+            <div class="snap-count" id="snapHelpers">0</div>
+          </div>
+
+          <div class="snapshot-item" data-open="floaters">
+            <div class="snap-left">
+              <div class="snap-ico"><i class="fas fa-cloud"></i></div>
+              <div class="snap-txt">
+                <div class="snap-name">Floaters</div>
+                <div class="snap-sub">Low influence · Unclear/resistant</div>
+              </div>
+            </div>
+            <div class="snap-count" id="snapFloaters">0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card" style="margin-top:12px;">
+      <div class="info-head">
+        <div class="info-title">
+          <span class="bubble"><i class="fas fa-shield-halved"></i></span>
+          <span>Political landscape: smart rules</span>
+        </div>
+      </div>
+
+      <div class="plan-box">
+        <div class="plan-h">Practical rules you can keep</div>
+        <ul>
+          <li><strong>Incentives beat opinions:</strong> ask “What do they gain/lose if I win?” and you’ll see the real alignment.</li>
+          <li><strong>Narratives travel via people:</strong> identify who repeats the story and who benefits from it.</li>
+          <li><strong>Pre-alignment is your leverage:</strong> settle the frame before the meeting; don’t try to win in-room.</li>
+          <li><strong>Containment is a strategy:</strong> with high-influence resistance, you’re often aiming to <em>limit spread</em>, not change minds.</li>
+          <li><strong>Write to be re-read:</strong> assume your message will be forwarded. Keep it calm, factual, and decision-shaped.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+      MODAL
+  =========================== -->
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div class="modal-title" id="modalTitle">
+          <span class="bubble"><i class="fas fa-layer-group"></i></span>
+          <span id="modalTitleText">Quadrant</span>
+        </div>
+        <button class="modal-close" id="modalClose" aria-label="Close"><i class="fas fa-times"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-card">
+          <h4><i class="fas fa-bullseye"></i> Recommended approach</h4>
+          <p id="modalApproach"></p>
+        </div>
+
+        <div class="modal-card">
+          <h4><i class="fas fa-ban"></i> What to avoid</h4>
+          <p id="modalAvoid"></p>
+        </div>
+
+        <div class="modal-card modal-wide">
+          <h4><i class="fas fa-list-check"></i> Fast moves</h4>
+          <ul id="modalMoves"></ul>
+        </div>
+
+        <div class="modal-card modal-wide">
+          <h4><i class="fas fa-users"></i> Nodes in this quadrant</h4>
+          <p id="modalPeople" style="margin-bottom:10px;"></p>
+          <div id="modalPeopleList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+      MY PLAYBOOK SIDEBAR
+  =========================== -->
+  <div class="playbook-sidebar-overlay" id="playbookOverlay">
+    <div class="playbook-sidebar" id="playbookSidebar">
+      <div class="playbook-sidebar-header">
+        <div class="playbook-sidebar-header-title-row">
+          <h3>My Playbook</h3>
+          <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <p>Saved items</p>
+      </div>
+
+      <div class="playbook-sidebar-body">
+        <div id="savedItemsContainer">
+          <p class="saved-items-empty" id="savedItemsEmpty">
+            You haven’t saved anything yet. Use <strong>Save</strong> on tools you want quick access to.
+          </p>
+          <ul class="saved-items-list" id="savedItemsList"></ul>
+        </div>
+
+        <div class="playbook-quick-links">
+          <div class="playbook-quick-links-header">
+            <span class="quick-links-title">Quick links</span>
+          </div>
+          <div class="playbook-quick-links-list">
+            <a href="dashboard.html" class="quick-link-pill"><i class="fas fa-gauge"></i> The Dashboard</a>
+            <a href="the-lens.html" class="quick-link-pill"><i class="fas fa-search"></i> The Lens</a>
+            <a href="the-toolkit.html" class="quick-link-pill"><i class="fas fa-toolbox"></i> The Toolkit</a>
+            <a href="the-coach.html" class="quick-link-pill"><i class="fas fa-comments"></i> The Coach</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-playbook-fab" id="myPlaybookButton">
+    <i class="fas fa-book-open"></i>
+    <span>My Playbook</span>
+  </div>
+
+  <!-- ===========================
+      FOOTER
+  =========================== -->
+  <footer>
+    <div class="container">
+      <p>© 2025 The Employee Playbook. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('loaded');
+      initializeMobileNav();
+      initializeThemeToggle();
+      initializePlaybook();
+      initializePoliticalLandscapeTool();
+    });
+
+    /* ===========================
+       MOBILE NAV
+    =========================== */
+    function initializeMobileNav() {
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      if (!mobileToggle || !navLinks) return;
+
+      mobileToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('active');
+        const icon = this.querySelector('i');
+        if (icon) {
+          icon.classList.toggle('fa-bars');
+          icon.classList.toggle('fa-times');
+        }
+      });
+
+      document.addEventListener('click', function(event) {
+        if (navLinks.classList.contains('active') &&
+            !navLinks.contains(event.target) &&
+            !mobileToggle.contains(event.target)) {
+          navLinks.classList.remove('active');
+          const icon = mobileToggle.querySelector('i');
+          if (icon) {
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+          }
+        }
+      });
+    }
+
+    /* ===========================
+       THEME TOGGLE + LOGO
+    =========================== */
+    function initializeThemeToggle() {
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      if (!themeToggleBtn) return;
+
+      const themeIcon = themeToggleBtn.querySelector('i');
+      const logoImg = document.getElementById('mainLogo');
+      const logoFallback = document.getElementById('logoFallback');
+
+      function getLogoPath(filename) {
+        if (window.location.protocol === 'file:') {
+          const currentPath = window.location.pathname;
+          const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+          return basePath + 'assets/img/' + filename;
+        }
+        return './assets/img/' + filename;
+      }
+
+      function showFallbackLogo() {
+        if (logoImg) logoImg.style.display = 'none';
+        if (logoFallback) logoFallback.style.display = 'inline-flex';
+      }
+
+      function showImageLogo() {
+        if (logoFallback) logoFallback.style.display = 'none';
+        if (logoImg) logoImg.style.display = 'block';
+      }
+
+      function updateLogoForTheme(isDarkMode) {
+        if (!logoImg) return;
+        showImageLogo();
+        logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+        logoImg.alt = 'The Employee Playbook';
+      }
+
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const savedTheme = localStorage.getItem('theme');
+      const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches);
+
+      if (shouldUseDark) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      }
+
+      themeToggleBtn.addEventListener('click', function() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        if (isDarkMode) {
+          document.body.classList.remove('dark-mode');
+          localStorage.setItem('theme', 'light');
+          if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+          updateLogoForTheme(false);
+        } else {
+          document.body.classList.add('dark-mode');
+          localStorage.setItem('theme', 'dark');
+          if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+          updateLogoForTheme(true);
+        }
+      });
+
+      prefersDarkScheme.addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+          if (e.matches) {
+            document.body.classList.add('dark-mode');
+            if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+            updateLogoForTheme(true);
+          } else {
+            document.body.classList.remove('dark-mode');
+            if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+            updateLogoForTheme(false);
+          }
+        }
+      });
+
+      if (logoImg) {
+        logoImg.addEventListener('error', function() {
+          if (this.src.includes('logo-dark.png')) {
+            this.src = getLogoPath('logo.png');
+          } else {
+            showFallbackLogo();
+          }
+        });
+      }
+    }
+
+    /* ===========================
+       POLITICAL LANDSCAPE TOOL
+    =========================== */
+    const STORAGE_KEY = 'tepPoliticalLandscapeMap_v1';
+    let nodes = [];
+
+    const quadRules = {
+      champions: (influence, alignment) => influence >= 4 && alignment >= 1,
+      snipers:   (influence, alignment) => influence >= 4 && alignment <= -1,
+      helpers:   (influence, alignment) => influence <= 3 && alignment >= 1,
+      floaters:  (influence, alignment) => influence <= 3 && alignment <= 0
+    };
+
+    const quadMeta = {
+      champions: {
+        title: 'Champions',
+        icon: 'fas fa-trophy',
+        sub: 'High influence · Pro-you',
+        approach:
+          'Treat them like leverage, not comfort. Give them a clean narrative, clear decision points, and a safe way to amplify your work without them feeling exposed.',
+        avoid:
+          'Over-sharing messy detail, or relying on them as your only safety net. A champion can flip if your work threatens their status or risk exposure.',
+        moves: [
+          'Give a crisp “why this matters” narrative they can repeat in one breath.',
+          'Ask for a specific micro-ask: intro, endorsement, or meeting framing.',
+          'Confirm alignment privately before high-visibility moments.',
+          'Protect their reputation: never put them on the spot in-room.',
+          'Send a short written follow-up that is safe to forward.'
+        ]
+      },
+      snipers: {
+        title: 'Snipers',
+        icon: 'fas fa-crosshairs',
+        sub: 'High influence · Anti-you',
+        approach:
+          'Aim for containment, not conversion. Reduce ammunition, remove ambiguity, and shift decisions into written, criteria-based pathways that limit narrative distortion.',
+        avoid:
+          'Public debate, defensiveness, or “calling them out”. If they’re high influence, they can make you the story even when you’re right.',
+        moves: [
+          'Make everything decision-shaped: options, trade-offs, and “what’s needed to approve safely”.',
+          'Pre-align the room with your manager/sponsor before meetings.',
+          'Use calm, factual language that reads well out of context.',
+          'Reduce private access to ambiguity—do not vent in writing.',
+          'If needed: route through process, criteria, or governance rather than personality.'
+        ]
+      },
+      helpers: {
+        title: 'Helpers',
+        icon: 'fas fa-seedling',
+        sub: 'Low influence · Pro-you',
+        approach:
+          'Convert support into signal. They may not move outcomes alone, but they can strengthen delivery, reduce friction, and provide proof-of-work that protects you.',
+        avoid:
+          'Using them as messengers for conflict, or asking them to fight battles that cost them socially.',
+        moves: [
+          'Give them clear tasks that create visible progress and proof.',
+          'Collect factual “wins” and outcomes they can reference.',
+          'Use them to sense-check reactions before wider rollout.',
+          'Build them up quietly—your credibility rises with reliable allies.',
+          'Keep them away from high-ego conflict zones.'
+        ]
+      },
+      floaters: {
+        title: 'Floaters',
+        icon: 'fas fa-cloud',
+        sub: 'Low influence · Unclear / resistant',
+        approach:
+          'Do not over-invest. Keep them informed at the right level and watch for changes. Some floaters become champions when they see safety and upside.',
+        avoid:
+          'Chasing approval from people who do not decide. It drains energy and increases exposure.',
+        moves: [
+          'Use lightweight updates and document decisions clearly.',
+          'Test alignment with small asks and observe behaviour, not words.',
+          'If alignment improves: move them to Helpers and build steadily.',
+          'If they start spreading doubt: treat as early-stage sniper and contain.',
+          'Re-map monthly — politics changes when priorities shift.'
+        ]
+      }
+    };
+
+    function initializePoliticalLandscapeTool(){
+      const influence = document.getElementById('influenceInput');
+      const alignment = document.getElementById('alignmentInput');
+      const heat      = document.getElementById('heatInput');
+      const exposure  = document.getElementById('exposureInput');
+
+      const influenceBadge = document.getElementById('influenceBadge');
+      const alignmentBadge = document.getElementById('alignmentBadge');
+      const heatBadge      = document.getElementById('heatBadge');
+      const exposureBadge  = document.getElementById('exposureBadge');
+
+      function syncBadges(){
+        influenceBadge.textContent = influence.value;
+        heatBadge.textContent = heat.value;
+        exposureBadge.textContent = exposure.value;
+
+        const a = parseInt(alignment.value, 10);
+        alignmentBadge.textContent = (a > 0 ? `+${a}` : `${a}`);
+
+        // Make alignment badge feel intuitive (negative = warning)
+        if (a < 0){
+          alignmentBadge.classList.add('neg');
+        } else {
+          alignmentBadge.classList.remove('neg');
+        }
+      }
+      influence.addEventListener('input', syncBadges);
+      alignment.addEventListener('input', syncBadges);
+      heat.addEventListener('input', syncBadges);
+      exposure.addEventListener('input', syncBadges);
+      syncBadges();
+
+      // Mode toggles (micro-copy + subtle learning for interns)
+      initializeModeToggles();
+
+      nodes = readNodes();
+      renderAll();
+
+      document.getElementById('resetBtn').addEventListener('click', resetFields);
+      document.getElementById('examplesBtn').addEventListener('click', addExamples);
+      document.getElementById('addBtn').addEventListener('click', addNodeFromForm);
+      document.getElementById('copyPlanBtn').addEventListener('click', copyPlan);
+      document.getElementById('exportBtn').addEventListener('click', exportBundle);
+      document.getElementById('clearAllBtn').addEventListener('click', clearAll);
+
+      document.getElementById('searchInput').addEventListener('input', renderAll);
+      document.getElementById('sortSelect').addEventListener('change', renderAll);
+
+      attachDrop('dropChampions', 'champions');
+      attachDrop('dropSnipers', 'snipers');
+      attachDrop('dropHelpers', 'helpers');
+      attachDrop('dropFloaters', 'floaters');
+
+      document.querySelectorAll('[data-open]').forEach(el => {
+        el.addEventListener('click', () => openQuadrantModal(el.getAttribute('data-open')));
+      });
+
+      const overlay = document.getElementById('modalOverlay');
+      const close = document.getElementById('modalClose');
+      close.addEventListener('click', closeModal);
+      overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    }
+
+    function initializeModeToggles(){
+      const sBtn = document.getElementById('modeStakeholders');
+      const nBtn = document.getElementById('modeNarratives');
+      const rBtn = document.getElementById('modeRisk');
+      const hint = document.getElementById('modeHint');
+      const type = document.getElementById('typeInput');
+
+      function setActive(active){
+        [sBtn,nBtn,rBtn].forEach(x => x.classList.remove('active'));
+        active.classList.add('active');
+
+        if (active === sBtn){
+          hint.innerHTML = `<i class="fas fa-lightbulb"></i><span><strong>Stakeholders mode:</strong> map the person and their incentive. Your goal is clean alignment and a safe decision path.</span>`;
+          type.value = 'person';
+        }
+        if (active === nBtn){
+          hint.innerHTML = `<i class="fas fa-lightbulb"></i><span><strong>Narrative mode:</strong> capture the story that is travelling (“X is risky”, “Y is failing”, “Z is not ready”). Then map who benefits.</span>`;
+          type.value = 'narrative';
+        }
+        if (active === rBtn){
+          hint.innerHTML = `<i class="fas fa-lightbulb"></i><span><strong>Risk lens:</strong> prioritise containment. High influence + negative alignment + high heat is where reputations get damaged.</span>`;
+        }
+      }
+
+      sBtn.addEventListener('click', () => setActive(sBtn));
+      nBtn.addEventListener('click', () => setActive(nBtn));
+      rBtn.addEventListener('click', () => setActive(rBtn));
+    }
+
+    function resetFields(){
+      document.getElementById('typeInput').value = 'person';
+      document.getElementById('nameInput').value = '';
+      document.getElementById('roleInput').value = '';
+      document.getElementById('agendaInput').value = '';
+      document.getElementById('currencyInput').value = '';
+      document.getElementById('pressureInput').value = '';
+      document.getElementById('relationshipInput').value = 'neutral';
+      document.getElementById('influenceInput').value = '3';
+      document.getElementById('alignmentInput').value = '0';
+      document.getElementById('heatInput').value = '3';
+      document.getElementById('exposureInput').value = '3';
+      document.getElementById('influenceBadge').textContent = '3';
+      document.getElementById('alignmentBadge').textContent = '0';
+      document.getElementById('heatBadge').textContent = '3';
+      document.getElementById('exposureBadge').textContent = '3';
+      document.getElementById('alignmentBadge').classList.remove('neg');
+    }
+
+    function addExamples(){
+      const now = Date.now();
+      const examples = [
+        {
+          type:'person',
+          name:'Senior Sponsor',
+          role:'Outcome owner',
+          agenda:'Wants delivery without drama',
+          currency:'Decisions, protection, airtime',
+          pressure:'Feels safe with options + risks surfaced early. Dislikes surprises. Needs a “defensible decision”.',
+          influence:5, alignment:2, heat:2, exposure:4, relationship:'ally'
+        },
+        {
+          type:'person',
+          name:'High-status Influencer',
+          role:'Respected lead in adjacent team',
+          agenda:'Protects status and narrative control',
+          currency:'Credibility, alignment, being right',
+          pressure:'Responds to early alignment and being consulted. Reacts badly to being bypassed.',
+          influence:5, alignment:-1, heat:4, exposure:4, relationship:'risk'
+        },
+        {
+          type:'group',
+          name:'Governance / Risk',
+          role:'Gatekeeping function',
+          agenda:'Reduce risk, prevent embarrassment',
+          currency:'Criteria, process, compliance',
+          pressure:'Needs written assumptions, mitigation, and a clear approval path.',
+          influence:4, alignment:0, heat:2, exposure:3, relationship:'neutral'
+        },
+        {
+          type:'narrative',
+          name:'“This is too risky” thread',
+          role:'Narrative',
+          agenda:'Slow/stop change',
+          currency:'Uncertainty, fear, plausible doubt',
+          pressure:'Dies when risk is named, bounded, and mitigated in writing with owners and dates.',
+          influence:4, alignment:-2, heat:3, exposure:5, relationship:'risk'
+        },
+        {
+          type:'person',
+          name:'Reliable Peer',
+          role:'Delivery ally',
+          agenda:'Get work done cleanly',
+          currency:'Proof, results, predictability',
+          pressure:'Give them clear tasks that create visible progress and reduce noise.',
+          influence:2, alignment:2, heat:1, exposure:2, relationship:'ally'
+        }
+      ].map((x, i) => makeNode({
+        ...x,
+        id: `ex_${now}_${i}`,
+        createdAt: new Date(now + i).toISOString(),
+        viewed: rand(1, 10),
+        saved: rand(0, 5)
+      }));
+
+      nodes = [...examples, ...nodes];
+      persistNodes();
+      renderAll();
+    }
+
+    function addNodeFromForm(){
+      const type = document.getElementById('typeInput').value;
+      const name = document.getElementById('nameInput').value.trim();
+      if (!name){
+        pulse(document.getElementById('nameInput'));
+        return;
+      }
+
+      const role = document.getElementById('roleInput').value.trim();
+      const agenda = document.getElementById('agendaInput').value.trim();
+      const currency = document.getElementById('currencyInput').value.trim();
+      const pressure = document.getElementById('pressureInput').value.trim();
+
+      const relationship = document.getElementById('relationshipInput').value;
+      const influence = parseInt(document.getElementById('influenceInput').value, 10);
+      const alignment = parseInt(document.getElementById('alignmentInput').value, 10);
+      const heat = parseInt(document.getElementById('heatInput').value, 10);
+      const exposure = parseInt(document.getElementById('exposureInput').value, 10);
+
+      const node = makeNode({
+        id: `pl_${Date.now()}_${Math.random().toString(16).slice(2)}`,
+        type, name, role, agenda, currency, pressure,
+        influence, alignment, heat, exposure, relationship,
+        createdAt: new Date().toISOString(),
+        viewed: 0,
+        saved: 0
+      });
+
+      nodes.unshift(node);
+      persistNodes();
+      renderAll();
+      resetFields();
+    }
+
+    function makeNode(n){
+      const quad = deriveQuadrant(n.influence, n.alignment);
+      return {
+        id:n.id,
+        type:n.type || 'person',
+        name:n.name,
+        role:n.role || '',
+        agenda:n.agenda || '',
+        currency:n.currency || '',
+        pressure:n.pressure || '',
+        influence:Number(n.influence) || 3,
+        alignment:Number(n.alignment) || 0,
+        heat:Number(n.heat) || 3,
+        exposure:Number(n.exposure) || 3,
+        relationship:n.relationship || 'neutral',
+        createdAt:n.createdAt || new Date().toISOString(),
+        viewed:Number(n.viewed) || 0,
+        saved:Number(n.saved) || 0,
+        quad
+      };
+    }
+
+    function deriveQuadrant(influence, alignment){
+      for (const [q, fn] of Object.entries(quadRules)){
+        if (fn(influence, alignment)) return q;
+      }
+      // fallback boundaries
+      if (influence >= 4 && alignment >= 1) return 'champions';
+      if (influence >= 4 && alignment <= -1) return 'snipers';
+      if (influence <= 3 && alignment >= 1) return 'helpers';
+      return 'floaters';
+    }
+
+    function attachDrop(dropId, quad){
+      const zone = document.getElementById(dropId);
+      if (!zone) return;
+
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        zone.style.outline = '2px solid rgba(123,95,196,0.30)';
+        zone.style.outlineOffset = '4px';
+        zone.style.borderRadius = '14px';
+      });
+      zone.addEventListener('dragleave', () => {
+        zone.style.outline = '';
+        zone.style.outlineOffset = '';
+      });
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.style.outline = '';
+        zone.style.outlineOffset = '';
+
+        const id = e.dataTransfer.getData('text/plain');
+        const idx = nodes.findIndex(s => s.id === id);
+        if (idx === -1) return;
+
+        nodes[idx].quad = quad;
+        persistNodes();
+        renderAll();
+      });
+    }
+
+    function renderAll(){
+      const search = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      const sortBy = document.getElementById('sortSelect').value;
+
+      let items = [...nodes];
+
+      if (search){
+        items = items.filter(n => {
+          const hay = `${n.type} ${n.name} ${n.role} ${n.agenda} ${n.currency} ${n.pressure}`.toLowerCase();
+          return hay.includes(search);
+        });
+      }
+
+      items = sortItems(items, sortBy);
+
+      const byQuad = { champions:[], snipers:[], helpers:[], floaters:[] };
+      items.forEach(n => byQuad[n.quad].push(n));
+
+      renderQuad('dropChampions', byQuad.champions);
+      renderQuad('dropSnipers', byQuad.snipers);
+      renderQuad('dropHelpers', byQuad.helpers);
+      renderQuad('dropFloaters', byQuad.floaters);
+
+      updateCounts(byQuad);
+      updateSnapshot(byQuad);
+    }
+
+    function sortItems(items, sortBy){
+      if (sortBy === 'name'){
+        return items.sort((a,b) => a.name.localeCompare(b.name));
+      }
+      if (sortBy === 'influence'){
+        return items.sort((a,b) => (b.influence - a.influence) || (new Date(b.createdAt)-new Date(a.createdAt)));
+      }
+      if (sortBy === 'alignment'){
+        return items.sort((a,b) => (b.alignment - a.alignment) || (b.influence - a.influence));
+      }
+      if (sortBy === 'heat'){
+        return items.sort((a,b) => (b.heat - a.heat) || (b.influence - a.influence));
+      }
+      return items.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+    }
+
+    function renderQuad(dropId, arr){
+      const zone = document.getElementById(dropId);
+      zone.innerHTML = '';
+
+      if (!arr.length){
+        const empty = document.createElement('div');
+        empty.className = 'empty';
+        empty.textContent = 'Drop nodes here…';
+        zone.appendChild(empty);
+        return;
+      }
+
+      arr.forEach(n => {
+        const el = document.createElement('div');
+        el.className = 'card';
+        el.draggable = true;
+        el.dataset.id = n.id;
+
+        el.addEventListener('dragstart', (e) => {
+          e.dataTransfer.setData('text/plain', n.id);
+          e.dataTransfer.effectAllowed = 'move';
+        });
+
+        el.addEventListener('click', () => {
+          const idx = nodes.findIndex(x => x.id === n.id);
+          if (idx !== -1){
+            nodes[idx].viewed = (nodes[idx].viewed || 0) + 1;
+            persistNodes();
+            n.viewed = nodes[idx].viewed;
+            renderAll();
+          }
+          showSelectedPlan(n.id);
+        });
+
+        const relClass = n.relationship === 'ally' ? 'ally' : (n.relationship === 'risk' ? 'risk' : 'neutral');
+        const relText  = n.relationship === 'ally' ? 'ALLY' : (n.relationship === 'risk' ? 'RISK' : 'NEUTRAL');
+
+        const typeIcon = n.type === 'group' ? 'fas fa-people-group' : (n.type === 'narrative' ? 'fas fa-comment-dots' : 'fas fa-user');
+
+        const align = Number(n.alignment || 0);
+        const alignText = align > 0 ? `+${align}` : `${align}`;
+        const alignClass = align < 0 ? 'red' : 'blue';
+
+        const shortRole = (n.role || '').trim();
+        const subtitle = shortRole ? shortRole : (n.type === 'narrative' ? 'Narrative thread' : '—');
+
+        const compactNotes = buildCompactNotes(n);
+
+        el.innerHTML = `
+          <div class="card-top">
+            <div>
+              <div class="card-name"><i class="${typeIcon}" style="margin-right:8px; opacity:.85;"></i>${escapeHtml(n.name)}</div>
+              <div class="card-role">${escapeHtml(subtitle)}</div>
+            </div>
+            <div class="card-actions">
+              <span class="rel-badge ${relClass}">${relText}</span>
+              <button class="icon-btn" data-del="${escapeHtml(n.id)}" aria-label="Delete node">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="score-row">
+            <div class="score-pill" title="Influence">
+              <i class="fas fa-bullhorn"></i> Influence ${Number(n.influence)}
+            </div>
+            <div class="score-pill ${alignClass}" title="Alignment">
+              <i class="fas fa-compass"></i> Align ${escapeHtml(alignText)}
+            </div>
+            <div class="score-pill" title="Heat">
+              <i class="fas fa-fire"></i> Heat ${Number(n.heat)}
+            </div>
+            <div class="score-pill" title="Exposure">
+              <i class="fas fa-eye"></i> Watch ${Number(n.exposure)}
+            </div>
+          </div>
+
+          <div class="card-notes">${escapeHtml(compactNotes)}</div>
+
+          <div class="card-footer">
+            <span class="mini-stat" title="Viewed"><i class="far fa-eye"></i> ${Number(n.viewed||0)}</span>
+            <span class="mini-stat" title="Saved"><i class="far fa-bookmark"></i> ${Number(n.saved||0)}</span>
+          </div>
+        `;
+
+        el.querySelector('[data-del]').addEventListener('click', (e) => {
+          e.stopPropagation();
+          deleteNode(n.id);
+        });
+
+        zone.appendChild(el);
+      });
+    }
+
+    function buildCompactNotes(n){
+      // “Insights-first” card body: agenda + currency + pressure cue
+      const parts = [];
+      if (n.agenda) parts.push(`Agenda: ${n.agenda}`);
+      if (n.currency) parts.push(`Currency: ${n.currency}`);
+      if (n.pressure) parts.push(`Cue: ${n.pressure}`);
+      const out = parts.join(' · ').trim();
+      return out || '—';
+    }
+
+    function updateCounts(byQuad){
+      document.getElementById('countChampions').textContent = byQuad.champions.length;
+      document.getElementById('countSnipers').textContent = byQuad.snipers.length;
+      document.getElementById('countHelpers').textContent = byQuad.helpers.length;
+      document.getElementById('countFloaters').textContent = byQuad.floaters.length;
+    }
+
+    function updateSnapshot(byQuad){
+      const total = nodes.length;
+      document.getElementById('totalPill').textContent = `${total} TOTAL`;
+
+      document.getElementById('snapChampions').textContent = byQuad.champions.length;
+      document.getElementById('snapSnipers').textContent = byQuad.snipers.length;
+      document.getElementById('snapHelpers').textContent = byQuad.helpers.length;
+      document.getElementById('snapFloaters').textContent = byQuad.floaters.length;
+    }
+
+    function deleteNode(id){
+      nodes = nodes.filter(n => n.id !== id);
+      persistNodes();
+      renderAll();
+
+      const box = document.getElementById('selectedPlanBox');
+      if (box && box.dataset && box.dataset.currentId === id){
+        box.removeAttribute('data-current-id');
+        box.innerHTML = `
+          <div class="plan-h">
+            <span>No node selected</span>
+            <span class="micro">Click a card or open a quadrant for strategy</span>
+          </div>
+          <ul>
+            <li>Click any card to see the clean approach: what to do, what to avoid, and the smallest next move.</li>
+            <li>Click a <strong>quadrant title</strong> (e.g. “Snipers”) for broader strategy and containment moves.</li>
+            <li>Use <strong>Export</strong> if you want a file version for your notes or escalation trail.</li>
+          </ul>
+        `;
+      }
+    }
+
+    function showSelectedPlan(id){
+      const n = nodes.find(x => x.id === id);
+      if (!n) return;
+
+      const meta = quadMeta[n.quad];
+      const box = document.getElementById('selectedPlanBox');
+      box.dataset.currentId = id;
+
+      const riskSignal = computeRiskSignal(n);
+      const archetype = inferArchetype(n);
+      const nextMove = recommendNextMove(n);
+
+      const align = Number(n.alignment || 0);
+      const alignText = align > 0 ? `+${align}` : `${align}`;
+
+      box.innerHTML = `
+        <div class="plan-h">
+          <span>${escapeHtml(n.name)} · ${escapeHtml(meta.title)}</span>
+          <span class="micro">Influence ${Number(n.influence)} · Align ${escapeHtml(alignText)} · Heat ${Number(n.heat)} · Watch ${Number(n.exposure)}</span>
+        </div>
+        <ul>
+          <li><strong>Read:</strong> ${escapeHtml(archetype)}</li>
+          <li><strong>Approach:</strong> ${escapeHtml(meta.approach)}</li>
+          <li><strong>Risk signal:</strong> ${escapeHtml(riskSignal)}</li>
+          <li><strong>Small next move:</strong> ${escapeHtml(nextMove)}</li>
+          <li><strong>Avoid:</strong> ${escapeHtml(meta.avoid)}</li>
+        </ul>
+      `;
+    }
+
+    function computeRiskSignal(n){
+      // A simple, explainable heuristic: interns can see why it returns what it returns.
+      const neg = n.alignment <= -1;
+      const highInf = n.influence >= 4;
+      const hot = n.heat >= 4;
+      const close = n.exposure >= 4;
+
+      if (highInf && neg && (hot || close)){
+        return 'High risk for narrative distortion. Prioritise containment: written criteria, pre-alignment, minimal emotion.';
+      }
+      if (highInf && neg){
+        return 'Meaningful resistance with reach. Reduce ambiguity and remove “grey areas” they can weaponise.';
+      }
+      if (highInf && n.alignment >= 1){
+        return 'Strong leverage. Give them a clean narrative and a safe micro-ask.';
+      }
+      if (!highInf && neg){
+        return 'Low leverage resistance. Do not chase. Keep updates minimal and watch for influence changes.';
+      }
+      return 'Stable. Keep it calm, predictable, and decision-shaped.';
+    }
+
+    function inferArchetype(n){
+      // Behaviour lens (human patterning without sounding clinical)
+      const highInf = n.influence >= 4;
+      const neg = n.alignment <= -1;
+      const pro = n.alignment >= 1;
+      const hot = n.heat >= 4;
+      const watcher = n.exposure >= 4;
+      const narrative = n.type === 'narrative';
+
+      if (narrative) return 'Narrative node — treat the story as the actor. Identify carriers, beneficiaries, and how to starve it of oxygen.';
+
+      if (highInf && pro && watcher) return 'Sponsor-style leverage — they notice quickly and can open doors. Keep updates tight and defensible.';
+      if (highInf && neg && hot) return 'Status defender — likely to attack via tone, doubt, or credibility. Contain via process and written clarity.';
+      if (highInf && neg && !hot) return 'Cold influencer — may undermine quietly. Prevent misinterpretation; align others before key moments.';
+      if (!highInf && pro) return 'Reliable helper — converts into proof-of-work and stability. Use them to build signal, not conflict.';
+      if (!highInf && neg) return 'Low-power friction — may complain or stall. Don’t over-invest; limit exposure and keep boundaries.';
+      return 'Unclear actor — test with small asks and observe behaviour more than promises.';
+    }
+
+    function recommendNextMove(n){
+      // A practical “one action” generator. Keeps it emotionally sticky and usable.
+      if (n.type === 'narrative'){
+        return 'Write a one-paragraph “risk bounded” statement: what is true, what is not assumed, what mitigation exists, and who owns the decision/date.';
+      }
+
+      if (n.quad === 'snipers'){
+        if (n.exposure >= 4){
+          return 'Move the next step into writing: “To proceed safely, we need X / Y by DATE. If not, we hold.” Calm, factual, non-defensive.';
+        }
+        return 'Pre-align your sponsor/manager with your recommended option and likely objections before the next meeting.';
+      }
+
+      if (n.quad === 'champions'){
+        return 'Ask for one specific lever: “Can you frame this as the safest path because X?” Keep it short and easy to repeat.';
+      }
+
+      if (n.quad === 'helpers'){
+        return 'Give them a visible, measurable task that creates proof within 7 days (a win you can cite calmly).';
+      }
+
+      // floaters
+      if (n.alignment === 0){
+        return 'Test alignment with a small ask: “Can you sanity-check this?” Then watch if they help, delay, or distort.';
+      }
+      if (n.alignment <= -1){
+        return 'Reduce time spent: switch to lightweight updates and focus on decision-makers and champions instead.';
+      }
+      return 'Keep them informed and track if their influence increases (role change, new sponsor, wider visibility).';
+    }
+
+    function openQuadrantModal(quad){
+      const meta = quadMeta[quad];
+      if (!meta) return;
+
+      const overlay = document.getElementById('modalOverlay');
+      document.getElementById('modalTitleText').textContent = meta.title;
+      document.getElementById('modalApproach').textContent = meta.approach;
+      document.getElementById('modalAvoid').textContent = meta.avoid;
+
+      const moves = document.getElementById('modalMoves');
+      moves.innerHTML = '';
+      meta.moves.forEach(m => {
+        const li = document.createElement('li');
+        li.textContent = m;
+        moves.appendChild(li);
+      });
+
+      const inQuad = nodes
+        .filter(n => n.quad === quad)
+        .sort((a,b) => (b.influence - a.influence) || (b.alignment - a.alignment));
+
+      document.getElementById('modalPeople').textContent = inQuad.length
+        ? `You have ${inQuad.length} node${inQuad.length === 1 ? '' : 's'} here.`
+        : 'No nodes in this quadrant yet.';
+
+      const peopleList = document.getElementById('modalPeopleList');
+      peopleList.innerHTML = '';
+      inQuad.forEach(n => {
+        const row = document.createElement('div');
+        row.className = 'modal-card';
+        row.style.boxShadow = 'none';
+        row.style.marginTop = '10px';
+
+        const align = Number(n.alignment || 0);
+        const alignText = align > 0 ? `+${align}` : `${align}`;
+
+        row.innerHTML = `
+          <h4><i class="fas fa-user"></i> ${escapeHtml(n.name)}</h4>
+          <p style="margin-bottom:8px;">${escapeHtml(n.role || (n.type === 'narrative' ? 'Narrative thread' : '—'))}</p>
+          <p style="margin-bottom:10px;">${escapeHtml(buildCompactNotes(n))}</p>
+          <p style="font-size:12px; color:var(--dark-gray); font-weight:650;">
+            <i class="fas fa-bullhorn"></i> ${Number(n.influence)} &nbsp;&nbsp;
+            <i class="fas fa-compass"></i> ${escapeHtml(alignText)} &nbsp;&nbsp;
+            <i class="fas fa-fire"></i> ${Number(n.heat)} &nbsp;&nbsp;
+            <i class="fas fa-eye"></i> ${Number(n.exposure)}
+          </p>
+        `;
+        peopleList.appendChild(row);
+      });
+
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal(){
+      const overlay = document.getElementById('modalOverlay');
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    function copyPlan(){
+      const counts = {
+        champions: nodes.filter(n => n.quad === 'champions').length,
+        snipers: nodes.filter(n => n.quad === 'snipers').length,
+        helpers: nodes.filter(n => n.quad === 'helpers').length,
+        floaters: nodes.filter(n => n.quad === 'floaters').length
+      };
+
+      const lines = [];
+      lines.push('POLITICAL LANDSCAPE MAP — PLAN');
+      lines.push('=============================');
+      lines.push(`Total: ${nodes.length}`);
+      lines.push(`Champions: ${counts.champions}`);
+      lines.push(`Snipers: ${counts.snipers}`);
+      lines.push(`Helpers: ${counts.helpers}`);
+      lines.push(`Floaters: ${counts.floaters}`);
+      lines.push('');
+      lines.push('DETAIL');
+      lines.push('------');
+
+      const ordered = [...nodes].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+      ordered.forEach(n => {
+        const q = quadMeta[n.quad]?.title || n.quad;
+        const a = Number(n.alignment || 0);
+        const alignText = a > 0 ? `+${a}` : `${a}`;
+        lines.push(`- ${n.name} (${n.type}) · ${q} · Influence ${n.influence} · Align ${alignText} · Heat ${n.heat} · Watch ${n.exposure} · ${n.relationship.toUpperCase()}`);
+        if (n.role) lines.push(`  Role: ${n.role}`);
+        if (n.agenda) lines.push(`  Agenda: ${n.agenda}`);
+        if (n.currency) lines.push(`  Currency: ${n.currency}`);
+        if (n.pressure) lines.push(`  Pressure cues: ${n.pressure}`);
+      });
+
+      navigator.clipboard.writeText(lines.join('\n')).then(() => {
+        const btn = document.getElementById('copyPlanBtn');
+        const old = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+        btn.style.background = 'rgba(16,185,129,0.12)';
+        btn.style.borderColor = 'rgba(16,185,129,0.25)';
+        btn.style.color = '#047857';
+        setTimeout(() => { btn.innerHTML = old; btn.removeAttribute('style'); }, 1400);
+      }).catch(() => {
+        alert('Copy failed in this browser context. Use Export instead.');
+      });
+    }
+
+    function exportBundle(){
+      const payload = {
+        tool: 'Political Landscape Map',
+        exportedAt: new Date().toISOString(),
+        totals: {
+          total: nodes.length,
+          champions: nodes.filter(n => n.quad === 'champions').length,
+          snipers: nodes.filter(n => n.quad === 'snipers').length,
+          helpers: nodes.filter(n => n.quad === 'helpers').length,
+          floaters: nodes.filter(n => n.quad === 'floaters').length
+        },
+        nodes: [...nodes].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+      };
+
+      // Provide both JSON and a readable TXT inside one download (zip-free, simple)
+      const txt = buildReadableExport(payload);
+      const json = JSON.stringify(payload, null, 2);
+
+      const boundary = '---';
+      const combined =
+`${txt}
+
+${boundary}
+RAW JSON (for import / tooling)
+${boundary}
+${json}
+`;
+
+      downloadFile(combined, `political-landscape-map_${new Date().toISOString().slice(0,10)}.txt`, 'text/plain');
+      toastExport();
+    }
+
+    function buildReadableExport(payload){
+      const lines = [];
+      lines.push('POLITICAL LANDSCAPE MAP — EXPORT');
+      lines.push('================================');
+      lines.push(`Exported: ${new Date(payload.exportedAt).toLocaleString('en-GB')}`);
+      lines.push('');
+      lines.push('Snapshot');
+      lines.push('--------');
+      lines.push(`Total: ${payload.totals.total}`);
+      lines.push(`Champions: ${payload.totals.champions}`);
+      lines.push(`Snipers: ${payload.totals.snipers}`);
+      lines.push(`Helpers: ${payload.totals.helpers}`);
+      lines.push(`Floaters: ${payload.totals.floaters}`);
+      lines.push('');
+      lines.push('Nodes');
+      lines.push('-----');
+
+      payload.nodes.forEach(n => {
+        const q = quadMeta[n.quad]?.title || n.quad;
+        const a = Number(n.alignment || 0);
+        const alignText = a > 0 ? `+${a}` : `${a}`;
+        lines.push(`${n.name} — ${q}`);
+        lines.push(`  Type: ${n.type}`);
+        lines.push(`  Influence: ${n.influence} | Alignment: ${alignText} | Heat: ${n.heat} | Exposure: ${n.exposure}`);
+        lines.push(`  Relationship: ${String(n.relationship || 'neutral').toUpperCase()}`);
+        if (n.role) lines.push(`  Role: ${n.role}`);
+        if (n.agenda) lines.push(`  Agenda: ${n.agenda}`);
+        if (n.currency) lines.push(`  Currency: ${n.currency}`);
+        if (n.pressure) lines.push(`  Pressure cues: ${n.pressure}`);
+        lines.push(`  Next move: ${recommendNextMove(n)}`);
+        lines.push('');
+      });
+
+      return lines.join('\n');
+    }
+
+    function toastExport(){
+      const btn = document.getElementById('exportBtn');
+      const old = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check"></i> Exported';
+      btn.style.background = 'rgba(16,185,129,0.12)';
+      btn.style.borderColor = 'rgba(16,185,129,0.25)';
+      btn.style.color = '#047857';
+      setTimeout(() => { btn.innerHTML = old; btn.removeAttribute('style'); }, 1400);
+    }
+
+    function downloadFile(text, filename, mime){
+      const blob = new Blob([text], { type: mime || 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 300);
+    }
+
+    function clearAll(){
+      if (!confirm('Clear all nodes?')) return;
+      nodes = [];
+      persistNodes();
+      renderAll();
+
+      const box = document.getElementById('selectedPlanBox');
+      box.innerHTML = `
+        <div class="plan-h">
+          <span>No node selected</span>
+          <span class="micro">Click a card or open a quadrant for strategy</span>
+        </div>
+        <ul>
+          <li>Click any card to see the clean approach: what to do, what to avoid, and the smallest next move.</li>
+          <li>Click a <strong>quadrant title</strong> (e.g. “Snipers”) for broader strategy and containment moves.</li>
+          <li>Use <strong>Export</strong> if you want a file version for your notes or escalation trail.</li>
+        </ul>
+      `;
+    }
+
+    function persistNodes(){
+      try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(nodes)); }
+      catch(e){ console.warn('Could not save political landscape map:', e); }
+    }
+
+    function readNodes(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return [];
+        return parsed.map(makeNode);
+      }catch(e){
+        return [];
+      }
+    }
+
+    function escapeHtml(str){
+      const s = String(str ?? '');
+      return s
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'","&#039;");
+    }
+
+    function pulse(el){
+      if (!el) return;
+      el.style.boxShadow = '0 0 0 4px rgba(239,68,68,0.18)';
+      el.style.borderColor = 'rgba(239,68,68,0.35)';
+      setTimeout(() => { el.style.boxShadow = ''; el.style.borderColor = ''; }, 700);
+    }
+
+    function rand(min, max){ return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+    /* ===========================
+       MY PLAYBOOK (LOCALSTORAGE)
+    =========================== */
+    const PLAYBOOK_KEY = 'tepSavedItems';
+    const CURRENT_TOOL_ID = 'political-landscape-map';
+    const CURRENT_TOOL_TITLE = 'Political Landscape Map';
+    const CURRENT_TOOL_TYPE = 'Framework';
+
+    function getSavedItems() {
+      try {
+        const raw = localStorage.getItem(PLAYBOOK_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function setSavedItems(items) {
+      try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+      catch (e) { /* ignore */ }
+    }
+
+    function initializePlaybook() {
+      const playbookOverlay = document.getElementById('playbookOverlay');
+      const playbookSidebar = document.getElementById('playbookSidebar');
+      const playbookButton = document.getElementById('myPlaybookButton');
+      const closeBtn = document.getElementById('closePlaybook');
+      const saveItemBtn = document.getElementById('saveBtn');
+
+      if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+      renderSavedItems();
+
+      const savedItems = getSavedItems();
+      const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+      updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+      saveItemBtn.addEventListener('click', () => {
+        const items = getSavedItems();
+        const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+        let nowSaved;
+
+        if (index === -1) {
+          const toolLink = window.location.pathname.split('/').pop() || 'political-landscape-map.html';
+          items.push({
+            id: CURRENT_TOOL_ID,
+            title: CURRENT_TOOL_TITLE,
+            type: CURRENT_TOOL_TYPE,
+            link: toolLink,
+            savedAt: new Date().toISOString()
+          });
+          nowSaved = true;
+        } else {
+          items.splice(index, 1);
+          nowSaved = false;
+        }
+
+        setSavedItems(items);
+        updateSaveButtonState(saveItemBtn, nowSaved);
+        renderSavedItems();
+      });
+
+      playbookButton.addEventListener('click', () => {
+        playbookOverlay.classList.add('open');
+        playbookSidebar.classList.add('open');
+      });
+
+      closeBtn.addEventListener('click', () => {
+        playbookOverlay.classList.remove('open');
+        playbookSidebar.classList.remove('open');
+      });
+
+      playbookOverlay.addEventListener('click', (e) => {
+        if (e.target === playbookOverlay) {
+          playbookOverlay.classList.remove('open');
+          playbookSidebar.classList.remove('open');
+        }
+      });
+    }
+
+    function updateSaveButtonState(button, isSaved) {
+      if (!button) return;
+      const icon = button.querySelector('i');
+      const label = button.querySelector('span');
+
+      if (isSaved) {
+        button.classList.add('saved');
+        if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+        if (label) label.textContent = 'Saved';
+      } else {
+        button.classList.remove('saved');
+        if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+        if (label) label.textContent = 'Save item';
+      }
+    }
+
+    function renderSavedItems() {
+      const listEl = document.getElementById('savedItemsList');
+      const emptyEl = document.getElementById('savedItemsEmpty');
+      if (!listEl || !emptyEl) return;
+
+      const items = getSavedItems();
+      listEl.innerHTML = '';
+
+      if (!items.length) {
+        emptyEl.style.display = 'block';
+        return;
+      }
+
+      emptyEl.style.display = 'none';
+
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'saved-item';
+
+        const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+        const dateText = savedDate
+          ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+          : '';
+
+        li.innerHTML = `
+          <div class="saved-item-title-row">
+            <span class="saved-item-title">${escapeHtml(item.title)}</span>
+            <span class="saved-item-type">${escapeHtml(item.type)}</span>
+          </div>
+          <div class="saved-item-meta">
+            ${dateText ? `Saved on ${dateText}` : ''}
+          </div>
+          <a class="saved-item-link" href="${escapeHtml(item.link)}">
+            Open <i class="fas fa-arrow-right"></i>
+          </a>
+        `;
+        listEl.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

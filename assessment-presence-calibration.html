@@ -1,0 +1,2321 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presence Calibration Assessment | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand + Category Pills)
+       NOTE: Tool styling stays BRAND (purple). Category pills use category colours.
+    =========================== */
+    :root {
+      /* Brand */
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+
+      --text-dark:#212529;
+      --text-medium:#495057;
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+      --success-green: #10b981;
+      --warning-orange: #f59e0b;
+      --danger-red: #ef4444;
+      --info-blue: #3b82f6;
+
+      /* Category colors (as provided) */
+      --category-clarity: #7B5FC4;
+      --category-burnout: #f59e0b;
+      --category-manager: #10b981;
+      --category-politics: #3b82f6;
+      --category-hr: #6D28D9;
+      --category-confidence: #ef4444;
+      --category-career: #800020;
+
+      /* Light mode pill styles */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.08), rgba(123, 95, 196, 0.04));
+      --pill-clarity-border: rgba(123, 95, 196, 0.2);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.12), rgba(123, 95, 196, 0.08));
+      --pill-clarity-hover-border: rgba(123, 95, 196, 0.3);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(245, 158, 11, 0.04));
+      --pill-burnout-border: rgba(245, 158, 11, 0.2);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(245, 158, 11, 0.08));
+      --pill-burnout-hover-border: rgba(245, 158, 11, 0.3);
+
+      --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.04));
+      --pill-manager-border: rgba(16, 185, 129, 0.2);
+      --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.08));
+      --pill-manager-hover-border: rgba(16, 185, 129, 0.3);
+
+      --pill-politics-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.04));
+      --pill-politics-border: rgba(59, 130, 246, 0.2);
+      --pill-politics-hover-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(59, 130, 246, 0.08));
+      --pill-politics-hover-border: rgba(59, 130, 246, 0.3);
+
+      --pill-hr-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.08), rgba(109, 40, 217, 0.04));
+      --pill-hr-border: rgba(109, 40, 217, 0.2);
+      --pill-hr-hover-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.12), rgba(109, 40, 217, 0.08));
+      --pill-hr-hover-border: rgba(109, 40, 217, 0.3);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(239, 68, 68, 0.04));
+      --pill-confidence-border: rgba(239, 68, 68, 0.2);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(239, 68, 68, 0.08));
+      --pill-confidence-hover-border: rgba(239, 68, 68, 0.3);
+
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.08), rgba(128, 0, 32, 0.04));
+      --pill-career-border: rgba(128, 0, 32, 0.2);
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.12), rgba(128, 0, 32, 0.08));
+      --pill-career-hover-border: rgba(128, 0, 32, 0.3);
+    }
+
+    /* Dark Mode Variables */
+    .dark-mode {
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#888888;
+
+      --text-dark:#e0e0e0;
+      --text-medium:#b0b0b0;
+
+      --accent-purple:#9d86e9;
+      --accent-purple-dark:#7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.2);
+      --lighter-purple: rgba(123, 95, 196, 0.1);
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+      --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      /* Category colours (dark variants) */
+      --category-clarity: #9d86e9;
+      --category-burnout: #fbbf24;
+      --category-manager: #34d399;
+      --category-politics: #60a5fa;
+      --category-hr: #8B5CF6;
+      --category-confidence: #f87171;
+      --category-career: #B03060;
+
+      /* Dark mode pill styles */
+      --pill-clarity-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.15), rgba(123, 95, 196, 0.08));
+      --pill-clarity-border: rgba(157, 134, 233, 0.3);
+      --pill-clarity-hover-bg: linear-gradient(135deg, rgba(123, 95, 196, 0.2), rgba(123, 95, 196, 0.12));
+      --pill-clarity-hover-border: rgba(157, 134, 233, 0.4);
+
+      --pill-burnout-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.08));
+      --pill-burnout-border: rgba(251, 191, 36, 0.3);
+      --pill-burnout-hover-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.12));
+      --pill-burnout-hover-border: rgba(251, 191, 36, 0.4);
+
+      --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
+      --pill-manager-border: rgba(52, 211, 153, 0.3);
+      --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.12));
+      --pill-manager-hover-border: rgba(52, 211, 153, 0.4);
+
+      --pill-politics-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(59, 130, 246, 0.08));
+      --pill-politics-border: rgba(96, 165, 250, 0.3);
+      --pill-politics-hover-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(59, 130, 246, 0.12));
+      --pill-politics-hover-border: rgba(96, 165, 250, 0.4);
+
+      --pill-hr-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.15), rgba(109, 40, 217, 0.08));
+      --pill-hr-border: rgba(139, 92, 246, 0.3);
+      --pill-hr-hover-bg: linear-gradient(135deg, rgba(109, 40, 217, 0.2), rgba(109, 40, 217, 0.12));
+      --pill-hr-hover-border: rgba(139, 92, 246, 0.4);
+
+      --pill-confidence-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.08));
+      --pill-confidence-border: rgba(248, 113, 113, 0.3);
+      --pill-confidence-hover-bg: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.12));
+      --pill-confidence-hover-border: rgba(248, 113, 113, 0.4);
+
+      --pill-career-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.15), rgba(128, 0, 32, 0.08));
+      --pill-career-border: rgba(176, 48, 96, 0.3);
+      --pill-career-hover-bg: linear-gradient(135deg, rgba(128, 0, 32, 0.2), rgba(128, 0, 32, 0.12));
+      --pill-career-hover-border: rgba(176, 48, 96, 0.4);
+    }
+
+    /* ===========================
+       GLOBAL STYLES
+    =========================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.4s ease, background-color 0.3s ease, color 0.3s ease;
+      min-height: 100vh;
+    }
+    body.loaded { opacity: 1; }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===========================
+       NAVIGATION
+    =========================== */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      height: 80px;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      height: 100%;
+    }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      transform: translateX(20%);
+      padding: 14px 10px;
+      transition: all 0.3s ease;
+      display: block;
+      min-height: 100px;
+    }
+
+    .logo-img.fallback {
+      width: 200px;
+      height: 50px;
+      background: var(--accent-purple);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      border-radius: 4px;
+      transform: translateX(20%);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 50px;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-size: 17px;
+    }
+
+    .nav-link:hover { color: var(--accent-purple); }
+
+    .nav-link-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .new-tag {
+      position: absolute;
+      top: -12px;
+      right: -35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #000;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index: 10;
+      white-space: nowrap;
+    }
+    .dark-mode .new-tag { box-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      transform: translateX(-20%);
+    }
+
+    .header-cta {
+      background: var(--accent-purple);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
+    }
+
+    .header-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(123, 95, 196, 0.35);
+    }
+
+    .sign-in {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 17px;
+    }
+    .sign-in:hover { color: var(--accent-purple); }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+    .theme-toggle:hover { background-color: var(--light-gray); }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+    .mobile-toggle:hover { background-color: var(--light-gray); }
+
+    .mobile-sign-in, .mobile-sign-up { display: none; }
+
+    @media (max-width: 768px) {
+      .nav-container { justify-content: center; position: relative; }
+
+      .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+
+      .logo-img { height: 125px; transform: none; padding: 12px 0; }
+
+      .mobile-toggle {
+        display: flex;
+        position: absolute;
+        left: 20px;
+        align-items: center;
+      }
+
+      .nav-actions {
+        transform: none;
+        gap: 16px;
+        position: absolute;
+        right: 20px;
+        align-items: center;
+      }
+
+      .nav-actions .sign-in, .nav-actions .header-cta { display: none; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        gap: 20px;
+      }
+
+      .nav-links.active { display: flex; }
+
+      .nav-link-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+      }
+
+      .new-tag { position: static; margin-left: 8px; }
+
+      .mobile-sign-in {
+        display: block !important;
+        margin-top: 10px;
+        padding: 12px 20px;
+        background: var(--primary-white);
+        color: var(--accent-purple);
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 600;
+        text-decoration: none;
+        border: 2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+
+      .mobile-sign-up {
+        display: block !important;
+        margin-top: 10px;
+        padding: 12px 20px;
+        background: var(--accent-purple);
+        color: white;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 600;
+        text-decoration: none;
+        border: 2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .tool-hero-section {
+      width: 100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+
+    .tool-hero-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(250, 245, 255, 0.85) 0%, rgba(245, 240, 255, 0.6) 50%, rgba(255, 255, 255, 0.25) 100%);
+      z-index: 1;
+    }
+    .dark-mode .tool-hero-section::before {
+      background: linear-gradient(135deg, rgba(42, 42, 42, 0.9) 0%, rgba(31, 31, 31, 0.7) 50%, rgba(26, 26, 26, 0.4) 100%);
+    }
+
+    .tool-hero-section::after {
+      content: '';
+      position: absolute;
+      bottom: -30px;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.06), transparent);
+      opacity: 0.25;
+      pointer-events: none;
+    }
+    .dark-mode .tool-hero-section::after {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+    }
+
+    .tool-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 10px;
+      animation: heroFadeUp 0.45s ease-out;
+    }
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .breadcrumb {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dark-gray);
+      margin-bottom: 10px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb a {
+      color: var(--text-medium);
+      text-decoration: none !important;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.2s ease;
+    }
+    .breadcrumb a:hover { color: var(--accent-purple-dark); }
+
+    .breadcrumb i { color: var(--dark-gray); opacity: 0.8; }
+    .breadcrumb .current { color: var(--text-dark); font-weight: 600; }
+
+    .save-btn {
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      z-index: 5;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 95, 196, 0.6);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--accent-purple-dark);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .save-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(123, 95, 196, 0.18);
+      background: #ffffff;
+    }
+    .dark-mode .save-btn {
+      background: rgba(20, 20, 20, 0.9);
+      border-color: rgba(157, 134, 233, 0.6);
+    }
+    .save-btn.saved {
+      background: var(--accent-purple);
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    .checklist-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      margin-bottom: 14px;
+      margin-top: 32px;
+      display: block;
+    }
+
+    .hero-main-heading {
+      font-size: 46px;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 20px;
+      max-width: 1100px;
+    }
+
+    .hero-subheading {
+      font-size: 16px;
+      color: var(--text-medium);
+      line-height: 1.6;
+      max-width: 1000px;
+      margin-bottom: 30px;
+    }
+
+    /* ===========================
+       CATEGORY PILLS
+    =========================== */
+    .category-pills-container { margin-bottom: 30px; }
+    .category-pills-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-medium);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .category-pills-grid {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      text-decoration: none;
+      height: 32px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .dark-mode .category-pill { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+
+    .category-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+      text-decoration: none;
+    }
+    .dark-mode .category-pill:hover { box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35); }
+
+    .category-icon { font-size: 11px; opacity: 0.85; flex-shrink: 0; }
+
+    .category-pill.clarity { color: var(--category-clarity); border-color: var(--pill-clarity-border); background: var(--pill-clarity-bg); }
+    .category-pill.clarity:hover { background: var(--pill-clarity-hover-bg); border-color: var(--pill-clarity-hover-border); }
+
+    .category-pill.burnout { color: var(--category-burnout); border-color: var(--pill-burnout-border); background: var(--pill-burnout-bg); }
+    .category-pill.burnout:hover { background: var(--pill-burnout-hover-bg); border-color: var(--pill-burnout-hover-border); }
+
+    .category-pill.manager { color: var(--category-manager); border-color: var(--pill-manager-border); background: var(--pill-manager-bg); }
+    .category-pill.manager:hover { background: var(--pill-manager-hover-bg); border-color: var(--pill-manager-hover-border); }
+
+    .category-pill.politics { color: var(--category-politics); border-color: var(--pill-politics-border); background: var(--pill-politics-bg); }
+    .category-pill.politics:hover { background: var(--pill-politics-hover-bg); border-color: var(--pill-politics-hover-border); }
+
+    .category-pill.hr { color: var(--category-hr); border-color: var(--pill-hr-border); background: var(--pill-hr-bg); }
+    .category-pill.hr:hover { background: var(--pill-hr-hover-bg); border-color: var(--pill-hr-hover-border); }
+
+    .category-pill.confidence { color: var(--category-confidence); border-color: var(--pill-confidence-border); background: var(--pill-confidence-bg); }
+    .category-pill.confidence:hover { background: var(--pill-confidence-hover-bg); border-color: var(--pill-confidence-hover-border); }
+
+    .category-pill.career { color: var(--category-career); border-color: var(--pill-career-border); background: var(--pill-career-bg); }
+    .category-pill.career:hover { background: var(--pill-career-hover-bg); border-color: var(--pill-career-hover-border); }
+
+    /* ===========================
+       CONTEXT & PRO TIPS
+    =========================== */
+    .context-tips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 40px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto 50px;
+      padding: 24px 20px 10px;
+      margin-top: 6px;
+    }
+
+    .context-card, .tips-card {
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 28px 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .dark-mode .context-card, .dark-mode .tips-card { box-shadow: 0 2px 8px rgba(0,0,0,0.22); }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .section-title i { color: var(--accent-purple); }
+
+    .bullet-list { list-style: none; margin: 0; padding: 0; }
+    .bullet-list li {
+      color: var(--text-medium);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      padding-left: 26px;
+      position: relative;
+    }
+    .bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 10px;
+      color: var(--accent-purple);
+      font-size: 18px;
+    }
+
+    /* ===========================
+       ASSESSMENT BODY
+    =========================== */
+    .checklist-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 20px;
+    }
+
+    .checklist-section-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent-purple-dark);
+      margin-bottom: 10px;
+      margin-top: 60px !important;
+    }
+
+    .checklist-section-subtitle {
+      font-size: 14px;
+      color: var(--text-medium);
+      margin-bottom: 18px;
+      max-width: 900px;
+    }
+
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .assessment-item {
+      background: var(--primary-white);
+      padding: 14px 16px;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      border: 1px solid var(--border-light);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      height: 100%;
+      min-height: 96px;
+    }
+    .dark-mode .assessment-item { box-shadow: 0 1px 4px rgba(0,0,0,0.14); }
+    .assessment-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+    .dark-mode .assessment-item:hover { box-shadow: 0 3px 8px rgba(0,0,0,0.28); }
+
+    .item-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: var(--lighter-purple);
+      border: 1px solid rgba(123, 95, 196, 0.14);
+      color: var(--accent-purple-dark);
+      margin-top: 2px;
+    }
+    .dark-mode .item-icon {
+      background: rgba(123, 95, 196, 0.18);
+      border-color: rgba(157, 134, 233, 0.22);
+      color: var(--accent-purple);
+    }
+
+    .assessment-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .assessment-text {
+      color: var(--text-medium);
+      font-size: 14.5px;
+      line-height: 1.45;
+    }
+
+    /* ===========================
+       SLIDING SCALE (like Conflict Risk Radar)
+       - whole numbers only (step=1)
+       - no "Rate" label
+    =========================== */
+    .rating-row{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      width:100%;
+      justify-content:flex-start;
+    }
+
+    .slider-value-pill{
+      width: 44px;          /* increased so it always shows cleanly */
+      height: 30px;
+      border-radius: 10px;
+      border: 1px solid rgba(123,95,196,0.22);
+      background: rgba(123,95,196,0.08);
+      color: var(--accent-purple-dark);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink:0;
+      user-select:none;
+      font-variant-numeric: tabular-nums;
+    }
+    .dark-mode .slider-value-pill{
+      border-color: rgba(157,134,233,0.28);
+      background: rgba(123,95,196,0.16);
+      color: var(--accent-purple);
+    }
+
+    .slider-stack{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width: 180px;
+    }
+
+    .rating-slider{
+      -webkit-appearance:none;
+      appearance:none;
+      width:100%;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(123,95,196,0.35), rgba(123,95,196,0.10));
+      border: 1px solid rgba(123,95,196,0.18);
+      outline:none;
+      cursor:pointer;
+      transition: filter 0.15s ease, opacity 0.15s ease, border-color 0.15s ease;
+      opacity: 0.55; /* until touched */
+    }
+    .dark-mode .rating-slider{
+      background: linear-gradient(90deg, rgba(157,134,233,0.35), rgba(157,134,233,0.12));
+      border-color: rgba(157,134,233,0.22);
+    }
+
+    .rating-slider.touched{ opacity: 1; }
+
+    .rating-slider::-webkit-slider-thumb{
+      -webkit-appearance:none;
+      appearance:none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-purple);
+      border: 3px solid rgba(255,255,255,0.9);
+      box-shadow: 0 8px 18px rgba(123,95,196,0.28);
+    }
+    .dark-mode .rating-slider::-webkit-slider-thumb{
+      border-color: rgba(0,0,0,0.35);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.35);
+    }
+
+    .rating-slider::-moz-range-thumb{
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-purple);
+      border: 3px solid rgba(255,255,255,0.9);
+      box-shadow: 0 8px 18px rgba(123,95,196,0.28);
+    }
+
+    .slider-ticks{
+      display:flex;
+      justify-content:space-between;
+      font-size: 11px;
+      color: var(--dark-gray);
+      padding: 0 2px;
+      user-select:none;
+    }
+
+    /* ===========================
+       SCORE BAR (Brand purple headings)
+    =========================== */
+    .burnout-score-section {
+      max-width: 1100px;
+      margin: 25px auto 40px;
+      padding: 0 20px;
+    }
+
+    .burnout-snapshot-header {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .burnout-snapshot-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent-purple-dark);
+      margin-bottom: 6px;
+    }
+
+    .burnout-snapshot-header p {
+      font-size: 14px;
+      color: var(--text-medium);
+      max-width: 1100px;
+      line-height: 1.5;
+    }
+
+    .burnout-score-bar {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 30px;
+      align-items: end;
+      background: var(--primary-white);
+      border-radius: 16px;
+      padding: 22px 24px 20px;
+      box-shadow: 0 8px 30px rgba(123, 95, 196, 0.12);
+      border: 1px solid rgba(123, 95, 196, 0.15);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .dark-mode .burnout-score-bar {
+      box-shadow: 0 8px 30px rgba(123, 95, 196, 0.25);
+      border: 1px solid rgba(123, 95, 196, 0.35);
+    }
+
+    .burnout-progress-container { width: 100%; }
+
+    .burnout-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 10px;
+    }
+
+    .burnout-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-purple-dark);
+    }
+
+    .burnout-percentage {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--accent-purple);
+      min-width: 72px; /* helps avoid clipping */
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .progress-container {
+      height: 10px;
+      background: var(--light-gray);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .dark-mode .progress-container { background: rgba(255, 255, 255, 0.12); }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--premium-gradient);
+      width: 0%;
+      border-radius: 5px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+    }
+
+    .progress-fill.high { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .progress-fill.medium { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .progress-fill.low { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--dark-gray);
+    }
+
+    .burnout-dimensions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    /* Increased box size so % never truncates */
+    .burnout-dimension-pill {
+      border-radius: 12px;
+      padding: 10px 12px;
+      min-height: 44px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-medium);
+      gap: 10px;
+    }
+
+    .dark-mode .burnout-dimension-pill {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .burnout-dimension-pill span.label {
+      font-weight: 700;
+      color: var(--text-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .burnout-dimension-pill span.score {
+      font-weight: 700;
+      color: var(--accent-purple);
+      min-width: 52px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .actions-container {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: stretch;
+      max-width: 260px;
+      padding-bottom: 0;
+    }
+
+    .action-btn {
+      background: var(--premium-gradient);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      font-size: 13.5px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(123, 95, 196, 0.3);
+    }
+
+    .action-btn.secondary {
+      background: var(--light-purple);
+      color: var(--accent-purple-dark);
+    }
+    .dark-mode .action-btn.secondary {
+      background: rgba(123, 95, 196, 0.21);
+      color: var(--accent-purple);
+    }
+    .action-btn.secondary:hover {
+      background: var(--accent-purple);
+      color: white;
+    }
+
+    .action-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* ===========================
+       SMART SUMMARY
+    =========================== */
+    .smart-summary-section {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      display: none;
+    }
+    .smart-summary-section.active {
+      display: block;
+      animation: slideIn 0.5s ease;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .summary-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .summary-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--accent-purple-dark);
+      margin-bottom: 6px;
+    }
+
+    .summary-subtitle {
+      color: var(--text-medium);
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .summary-insight {
+      font-size: 14px;
+      color: var(--dark-gray);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-gray);
+      color: var(--accent-purple-dark);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .summary-card {
+      background: var(--primary-white);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(123, 95, 196, 0.08);
+      border: 1px solid rgba(123, 95, 196, 0.1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .dark-mode .summary-card {
+      box-shadow: 0 4px 12px rgba(123, 95, 196, 0.21);
+      border: 1px solid rgba(123, 95, 196, 0.25);
+    }
+
+    .summary-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--premium-gradient);
+    }
+
+    .summary-icon {
+      font-size: 20px;
+      color: var(--accent-purple);
+      margin-bottom: 15px;
+      width: 40px;
+      height: 40px;
+      background: var(--lighter-purple);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dark-mode .summary-icon { background: rgba(123, 95, 196, 0.21); }
+
+    .summary-card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 10px;
+    }
+
+    .summary-card-desc {
+      color: var(--text-medium);
+      font-size: 14px;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR
+    =========================== */
+    .my-playbook-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1200;
+      background: var(--premium-gradient);
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+    .my-playbook-fab:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.32); }
+
+    .playbook-sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1190;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .playbook-sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+
+    .playbook-sidebar {
+      position: fixed;
+      top: 0;
+      right: -380px;
+      width: 340px;
+      max-width: 90%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index: 1191;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border-light);
+      transition: right 0.25s ease;
+    }
+    .dark-mode .playbook-sidebar {
+      background: rgba(18, 18, 18, 0.96);
+      box-shadow: -4px 0 22px rgba(0,0,0,0.6);
+    }
+    .playbook-sidebar.open { right: 0; }
+
+    .playbook-sidebar-header {
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .playbook-sidebar-header-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .playbook-sidebar-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .playbook-sidebar-header p { font-size: 13px; color: var(--dark-gray); }
+
+    .playbook-close-btn {
+      background: none;
+      border: none;
+      color: var(--dark-gray);
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+    .playbook-close-btn:hover { background: var(--light-gray); }
+
+    .playbook-sidebar-body {
+      padding: 14px 18px 20px;
+      padding-bottom: 50px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .saved-items-empty {
+      font-size: 13px;
+      color: var(--dark-gray);
+      line-height: 1.6;
+    }
+
+    .saved-items-list { list-style: none; margin: 0; padding: 0; }
+
+    .saved-item {
+      padding: 10px 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .saved-item-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .saved-item-title { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+    .saved-item-type { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--accent-purple-dark); }
+    .saved-item-meta { font-size: 12px; color: var(--dark-gray); }
+
+    .saved-item-link {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--accent-purple);
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .saved-item-link:hover { text-decoration: underline; }
+
+    .playbook-quick-links {
+      margin-top: 185px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .quick-links-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-medium);
+    }
+
+    .playbook-quick-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .quick-link-pill {
+      width: 50%;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 95, 196, 0.35);
+      background: linear-gradient(135deg,rgba(123, 95, 196, 0.08),rgba(123, 95, 196, 0.02));
+      text-decoration: none;
+      color: var(--accent-purple-dark);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .quick-link-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg,rgba(123, 95, 196, 0.16), rgba(123, 95, 196, 0.06));
+    }
+
+    .dark-mode .quick-link-pill {
+      border-color: rgba(157, 134, 233, 0.55);
+      background: linear-gradient(135deg,rgba(123, 95, 196, 0.26),rgba(123, 95, 196, 0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      background: var(--primary-white);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 30px;
+      text-align: center;
+      color: var(--text-medium);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px) {
+      .context-tips-grid { grid-template-columns: 1fr; gap: 24px; }
+      .checklist-grid { grid-template-columns: 1fr; }
+
+      .burnout-score-bar {
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+
+      .actions-container {
+        max-width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .action-btn { flex: 1; min-width: 180px; }
+
+      .summary-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .tool-hero-section { margin-top: 100px; }
+      .context-tips-grid { padding: 20px 20px 10px; margin-top: 5px; }
+      .context-card, .tips-card { padding: 24px; }
+
+      .section-title { font-size: 18px; white-space: normal; }
+      .hero-main-heading { font-size: 36px; }
+      .hero-subheading { font-size: 16px; max-width: 100%; }
+      .burnout-score-bar { padding: 18px; }
+
+      .actions-container { flex-direction: column; align-items: stretch; }
+      .action-btn { min-width: 0; }
+
+      .save-btn { right: 18px; top: 10px; }
+
+      .summary-grid { grid-template-columns: 1fr; }
+
+      .my-playbook-fab { bottom: 18px; right: 18px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-main-heading { font-size: 32px; }
+      .checklist-name { font-size: 18px; }
+      .burnout-percentage { font-size: 24px; }
+      .burnout-dimensions { grid-template-columns: 1fr; }
+      .slider-stack{ min-width: 140px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===========================
+       NAVIGATION
+  =========================== -->
+  <nav>
+    <div class="container nav-container">
+      <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+
+      <a href="index.html" class="logo">
+        <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      </a>
+
+      <div class="nav-links">
+        <a href="the-lens.html" class="nav-link">The Lens</a>
+        <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+        <div class="nav-link-container">
+          <a href="the-coach.html" class="nav-link">The Coach</a>
+          <span class="new-tag">NEW</span>
+        </div>
+        <a href="the-shift.html" class="nav-link">The Shift</a>
+        <a href="the-pricing.html" class="nav-link">The Pricing</a>
+        <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+        <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="create-account.html" class="header-cta">Sign up</a>
+        <a href="sign-in.html" class="sign-in">Sign in</a>
+        <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===========================
+       HERO
+  =========================== -->
+  <div class="tool-hero-section">
+    <button class="save-btn" id="saveBtn">
+      <i class="far fa-bookmark"></i>
+      <span>Save item</span>
+    </button>
+
+    <div class="tool-hero-content">
+      <div class="breadcrumb">
+        <a href="index.html"><i class="fas fa-house"></i> Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="the-toolkit.html">Toolkit</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="confidence-presence-and-influence.html">Confidence, Presence &amp; Influence</a>
+        <i class="fas fa-chevron-right"></i>
+        <span class="current">Presence Calibration Assessment</span>
+      </div>
+
+      <span class="checklist-name">PRESENCE CALIBRATION ASSESSMENT</span>
+
+      <h1 class="hero-main-heading">Calibrate your response when the stakes rise</h1>
+
+      <div class="hero-subheading">
+        Presence isn’t your personality. It’s the sum of how you communicate, hold your space, and signal authority under pressure.
+      </div>
+
+      <div class="category-pills-container">
+        <span class="category-pills-title">Explore Categories</span>
+        <div class="category-pills-grid">
+          <a href="category-clarity-priorities-and-direction.html" class="category-pill clarity">
+            <i class="fas fa-bullseye category-icon"></i>
+            <span>Clarity, Priorities &amp; Direction</span>
+          </a>
+
+          <a href="category-manager-relationship-and-leadership-style.html" class="category-pill manager">
+            <i class="fas fa-people-group category-icon"></i>
+            <span>Manager Relationship &amp; Leadership Style</span>
+          </a>
+
+          <a href="category-workplace-dynamics-and-politics.html" class="category-pill politics">
+            <i class="fas fa-users category-icon"></i>
+            <span>Workplace Dynamics &amp; Politics</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+       CONTEXT + TIPS
+  =========================== -->
+  <div class="context-tips-grid">
+    <div class="context-card">
+      <h3 class="section-title"><i class="fas fa-calendar-check"></i>When to Use This Assessment</h3>
+      <ul class="bullet-list">
+        <li>Before a high-stakes meeting, interview, or performance conversation</li>
+        <li>When you feel “competent” but not taken as seriously as you should be</li>
+        <li>When you’re being interrupted, second-guessed, or talked over more than usual</li>
+        <li>When pressure makes you rush, over-explain, or lose your centre</li>
+        <li>When you want a practical baseline to track presence improvements over time</li>
+      </ul>
+    </div>
+
+    <div class="tips-card">
+      <h3 class="section-title"><i class="fas fa-lightbulb"></i>Pro Tips</h3>
+      <ul class="bullet-list">
+        <li>Rate your <strong>default under pressure</strong>, not your best day</li>
+        <li>Look for clusters: the pattern matters more than a single low score</li>
+        <li>Low scores aren’t “bad” — they’re precise targets for upgrades</li>
+        <li>Re-run monthly, or after any major role/manager change</li>
+        <li>Use the summary as a private plan — not something you need to “prove” to anyone</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===========================
+       ASSESSMENT BODY
+  =========================== -->
+  <div class="checklist-body" id="checklistText">
+    <h2 class="checklist-section-title">Rate Your Presence Under Pressure</h2>
+    <div class="checklist-section-subtitle">
+      <strong>1</strong> = Rarely true &nbsp;&nbsp;·&nbsp;&nbsp; <strong>3</strong> = Sometimes true &nbsp;&nbsp;·&nbsp;&nbsp; <strong>5</strong> = Consistently true
+    </div>
+
+    <div class="checklist-grid" id="assessmentGrid">
+      <!-- Items injected by JS -->
+    </div>
+  </div>
+
+  <!-- ===========================
+       SCORE BAR
+  =========================== -->
+  <div class="burnout-score-section">
+    <div class="burnout-snapshot-header">
+      <h2>Your Presence Calibration Snapshot</h2>
+      <p>
+        This score is a directional read on how consistently your confidence signals, clarity, and authority hold when pressure rises.
+        Use it to identify where your presence is strong — and where it leaks.
+      </p>
+    </div>
+
+    <div class="burnout-score-bar">
+      <div class="burnout-progress-container">
+        <div class="burnout-header">
+          <div class="burnout-title">Presence Calibration Score</div>
+          <div class="burnout-percentage" id="presencePercentage">0%</div>
+        </div>
+
+        <div class="progress-container">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="progress-labels">
+          <span>Needs stabilising</span>
+          <span>Solid baseline</span>
+          <span>Executive-grade</span>
+        </div>
+
+        <div class="burnout-dimensions">
+          <div class="burnout-dimension-pill">
+            <span class="label">Composure</span>
+            <span class="score" id="scoreComposure">0%</span>
+          </div>
+          <div class="burnout-dimension-pill">
+            <span class="label">Clarity</span>
+            <span class="score" id="scoreClarity">0%</span>
+          </div>
+          <div class="burnout-dimension-pill">
+            <span class="label">Authority</span>
+            <span class="score" id="scoreAuthority">0%</span>
+          </div>
+          <div class="burnout-dimension-pill">
+            <span class="label">Connection</span>
+            <span class="score" id="scoreConnection">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions-container">
+        <button class="action-btn" onclick="generateSmartSummary()" id="generateBtn" disabled>
+          <i class="fas fa-magic"></i> Generate Summary
+        </button>
+        <button class="action-btn secondary" onclick="copyResponses()" id="copyBtn">
+          <i class="far fa-copy"></i> Copy Responses
+        </button>
+        <button class="action-btn secondary" onclick="clearAllRatings()" id="clearBtn" aria-label="Clear all ratings">
+          <i class="fas fa-eraser"></i> Clear all
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+       SUMMARY
+  =========================== -->
+  <div class="smart-summary-section" id="smartSummary">
+    <div class="summary-header">
+      <h2 class="summary-title">Your Presence Calibration Summary</h2>
+      <p class="summary-subtitle">Based on your score of <span id="summaryScore">0%</span></p>
+      <p class="summary-insight">
+        This isn’t a label — it’s a map. The cards below show what you already do well, where pressure distorts your signal,
+        and what to tighten next.
+      </p>
+    </div>
+
+    <h3 class="section-header"><i class="fas fa-check"></i>What’s Working</h3>
+    <div class="summary-grid" id="strengthGrid"></div>
+
+    <h3 class="section-header"><i class="fas fa-exclamation-circle"></i>Where Your Signal Leaks</h3>
+    <div class="summary-grid" id="leakGrid"></div>
+
+    <h3 class="section-header"><i class="fas fa-forward"></i>Next Moves This Week</h3>
+    <div class="summary-grid" id="nextGrid"></div>
+  </div>
+
+  <!-- ===========================
+       MY PLAYBOOK SIDEBAR
+  =========================== -->
+  <div class="playbook-sidebar-overlay" id="playbookOverlay">
+    <div class="playbook-sidebar" id="playbookSidebar">
+      <div class="playbook-sidebar-header">
+        <div class="playbook-sidebar-header-title-row">
+          <h3>My Playbook</h3>
+          <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <p>Saved items</p>
+      </div>
+
+      <div class="playbook-sidebar-body">
+        <div id="savedItemsContainer">
+          <p class="saved-items-empty" id="savedItemsEmpty">
+            You haven't saved anything yet. Use <strong>Save item</strong> on tools you want quick access to.
+          </p>
+          <ul class="saved-items-list" id="savedItemsList"></ul>
+        </div>
+
+        <div class="playbook-quick-links">
+          <div class="playbook-quick-links-header">
+            <span class="quick-links-title">Quick links</span>
+          </div>
+          <div class="playbook-quick-links-list">
+            <a href="dashboard.html" class="quick-link-pill">
+              <i class="fas fa-gauge"></i> The Dashboard
+            </a>
+            <a href="the-lens.html" class="quick-link-pill">
+              <i class="fas fa-search"></i> The Lens
+            </a>
+            <a href="the-toolkit.html" class="quick-link-pill">
+              <i class="fas fa-toolbox"></i> The Toolkit
+            </a>
+            <a href="the-coach.html" class="quick-link-pill">
+              <i class="fas fa-comments"></i> The Coach
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating button -->
+  <div class="my-playbook-fab" id="myPlaybookButton">
+    <i class="fas fa-book-open"></i>
+    <span>My Playbook</span>
+  </div>
+
+  <!-- ===========================
+       FOOTER
+  =========================== -->
+  <footer>
+    <div class="container">
+      <p>© 2025 The Employee Playbook. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===========================
+       JAVASCRIPT
+  =========================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('loaded');
+      initializeAssessment();
+      initializeThemeToggle();
+      initializeMobileNav();
+      initializePlaybook();
+    });
+
+    /* ===========================
+       MOBILE NAV
+    =========================== */
+    function initializeMobileNav() {
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      if (mobileToggle) {
+        mobileToggle.addEventListener('click', function () {
+          navLinks.classList.toggle('active');
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+          }
+        });
+      }
+
+      document.addEventListener('click', function(event) {
+        if (!navLinks || !mobileToggle) return;
+        if (navLinks.classList.contains('active') &&
+            !navLinks.contains(event.target) &&
+            !mobileToggle.contains(event.target)) {
+          navLinks.classList.remove('active');
+          const icon = mobileToggle.querySelector('i');
+          if (icon) {
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+          }
+        }
+      });
+    }
+
+    /* ===========================
+       THEME TOGGLE
+    =========================== */
+    function initializeThemeToggle() {
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      if (!themeToggleBtn) return;
+
+      const themeIcon = themeToggleBtn.querySelector('i');
+      const logoImg = document.getElementById('mainLogo');
+
+      function getLogoPath(filename) {
+        if (window.location.protocol === 'file:') {
+          const currentPath = window.location.pathname;
+          const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+          return basePath + 'assets/img/' + filename;
+        } else {
+          return './assets/img/' + filename;
+        }
+      }
+
+      function createFallbackLogo(isDarkMode) {
+        if (!logoImg) return;
+        logoImg.classList.add('fallback');
+        logoImg.style.background = 'var(--accent-purple)';
+        logoImg.style.color = 'white';
+
+        const logoText = document.createElement('div');
+        logoText.textContent = 'THE EMPLOYEE PLAYBOOK';
+        logoText.style.fontSize = '14px';
+        logoText.style.fontWeight = '700';
+        logoText.style.letterSpacing = '1px';
+
+        logoImg.src = '';
+        logoImg.alt = 'The Employee Playbook';
+        logoImg.style.display = 'flex';
+        logoImg.style.alignItems = 'center';
+        logoImg.style.justifyContent = 'center';
+        logoImg.innerHTML = '';
+        logoImg.appendChild(logoText);
+      }
+
+      function updateLogoForTheme(isDarkMode) {
+        if (!logoImg) return;
+        logoImg.classList.remove('fallback');
+        logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+        logoImg.alt = 'The Employee Playbook';
+      }
+
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const savedTheme = localStorage.getItem('theme');
+
+      if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      }
+
+      themeToggleBtn.addEventListener('click', function() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+
+        if (isDarkMode) {
+          document.body.classList.remove('dark-mode');
+          localStorage.setItem('theme', 'light');
+          if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+          updateLogoForTheme(false);
+        } else {
+          document.body.classList.add('dark-mode');
+          localStorage.setItem('theme', 'dark');
+          if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+          updateLogoForTheme(true);
+        }
+      });
+
+      prefersDarkScheme.addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+          if (e.matches) {
+            document.body.classList.add('dark-mode');
+            if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+            updateLogoForTheme(true);
+          } else {
+            document.body.classList.remove('dark-mode');
+            if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+            updateLogoForTheme(false);
+          }
+        }
+      });
+
+      if (logoImg) {
+        logoImg.addEventListener('error', function() {
+          const isDarkMode = document.body.classList.contains('dark-mode');
+          if (this.src.includes('logo-dark.png')) {
+            this.src = getLogoPath('logo.png');
+          } else {
+            createFallbackLogo(isDarkMode);
+          }
+        });
+        logoImg.addEventListener('load', function() {
+          this.classList.remove('fallback');
+        });
+      }
+    }
+
+    /* ===========================
+       PRESENCE ASSESSMENT LOGIC
+    =========================== */
+    const assessmentItems = [
+      // Composure
+      { dim: 'composure', icon: 'fas fa-shield', text: 'When tension rises, I keep my pace steady rather than speeding up or spiralling.' },
+      { dim: 'composure', icon: 'fas fa-wind', text: 'I can pause before responding, even when I disagree or feel pressured.' },
+      { dim: 'composure', icon: 'fas fa-face-smile', text: 'My tone stays controlled; I don’t leak irritation, sarcasm, or defensiveness.' },
+      { dim: 'composure', icon: 'fas fa-stopwatch', text: 'I don’t fill silence to relieve my own discomfort — I let moments land.' },
+
+      // Clarity
+      { dim: 'clarity', icon: 'fas fa-crosshairs', text: 'I can state my point in one sentence without over-explaining.' },
+      { dim: 'clarity', icon: 'fas fa-list-check', text: 'Under pressure, I stay anchored to priorities rather than reacting to everything.' },
+      { dim: 'clarity', icon: 'fas fa-route', text: 'When challenged, I can re-frame the conversation back to the decision or outcome.' },
+      { dim: 'clarity', icon: 'fas fa-comments', text: 'My answers are structured (point → evidence → next step), even when put on the spot.' },
+
+      // Authority
+      { dim: 'authority', icon: 'fas fa-chess-king', text: 'I hold my ground without sounding rigid, combative, or apologetic.' },
+      { dim: 'authority', icon: 'fas fa-hand-paper', text: 'I can interrupt politely when needed and reclaim the floor.' },
+      { dim: 'authority', icon: 'fas fa-bullhorn', text: 'I make clear asks and boundaries, instead of hinting or hoping others infer them.' },
+      { dim: 'authority', icon: 'fas fa-gavel', text: 'If a conversation drifts, I steer it back with calm control rather than frustration.' },
+
+      // Connection
+      { dim: 'connection', icon: 'fas fa-handshake', text: 'I stay present with people — I don’t become cold, clipped, or withdrawn under stress.' },
+      { dim: 'connection', icon: 'fas fa-user-check', text: 'I show that I’ve heard the other person, without abandoning my position.' },
+      { dim: 'connection', icon: 'fas fa-users', text: 'I adapt my communication to the room (detail vs headline) without losing authority.' },
+      { dim: 'connection', icon: 'fas fa-compass', text: 'Even in conflict, I keep the relationship intact and the purpose clear.' }
+    ];
+
+    const ratings = new Array(assessmentItems.length).fill(0);
+
+    const dimMap = {
+      composure: { label: 'Composure', ids: [] },
+      clarity: { label: 'Clarity', ids: [] },
+      authority: { label: 'Authority', ids: [] },
+      connection: { label: 'Connection', ids: [] }
+    };
+
+    function initializeAssessment() {
+      const grid = document.getElementById('assessmentGrid');
+      if (!grid) return;
+
+      // Build dimension index map
+      assessmentItems.forEach((it, idx) => {
+        if (dimMap[it.dim]) dimMap[it.dim].ids.push(idx);
+      });
+
+      // Render items (slider scale)
+      grid.innerHTML = '';
+      assessmentItems.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'assessment-item';
+        card.setAttribute('data-dim', item.dim);
+
+        card.innerHTML = `
+          <div class="item-icon" aria-hidden="true">
+            <i class="${item.icon}"></i>
+          </div>
+          <div class="assessment-content">
+            <div class="assessment-text">${item.text}</div>
+
+            <div class="rating-row" aria-label="Rating row">
+              <div class="slider-value-pill" id="val-${index}" aria-label="Selected rating">—</div>
+
+              <div class="slider-stack">
+                <input
+                  type="range"
+                  class="rating-slider"
+                  min="1"
+                  max="5"
+                  step="1"
+                  value="3"
+                  data-index="${index}"
+                  aria-label="Rating from 1 to 5"
+                />
+                <div class="slider-ticks" aria-hidden="true">
+                  <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Slider handlers (whole numbers only via step=1)
+      grid.addEventListener('input', (e) => {
+        const slider = e.target.closest('.rating-slider');
+        if (!slider) return;
+
+        const idx = parseInt(slider.getAttribute('data-index'), 10);
+        const val = parseInt(slider.value, 10);
+        if (Number.isNaN(idx) || Number.isNaN(val)) return;
+
+        slider.classList.add('touched');
+        setRating(idx, val);
+      });
+
+      updatePresenceScore();
+    }
+
+    function setRating(index, value) {
+      ratings[index] = value;
+
+      const valEl = document.getElementById(`val-${index}`);
+      if (valEl) valEl.textContent = String(value);
+
+      updatePresenceScore();
+    }
+
+    function clearAllRatings() {
+      for (let i = 0; i < ratings.length; i++) ratings[i] = 0;
+
+      // reset sliders + value pills
+      document.querySelectorAll('.rating-slider').forEach(sl => {
+        sl.value = 3;
+        sl.classList.remove('touched');
+      });
+      document.querySelectorAll('.slider-value-pill').forEach(v => v.textContent = '—');
+
+      document.getElementById('smartSummary')?.classList.remove('active');
+      updatePresenceScore();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function percentFromAvg(avg) {
+      const p = Math.round((avg / 5) * 100);
+      return Math.max(0, Math.min(100, p));
+    }
+
+    function setProgressClass(fillEl, pct) {
+      if (!fillEl) return;
+      fillEl.classList.remove('high', 'medium', 'low');
+      if (pct >= 80) fillEl.classList.add('high');
+      else if (pct >= 50) fillEl.classList.add('medium');
+      else fillEl.classList.add('low');
+    }
+
+    function updatePresenceScore() {
+      const answered = ratings.filter(v => v > 0).length;
+
+      const sum = ratings.reduce((a,b) => a + b, 0);
+      const avg = answered ? (sum / answered) : 0;
+      const pct = answered ? percentFromAvg(avg) : 0;
+
+      const pctEl = document.getElementById('presencePercentage');
+      const fillEl = document.getElementById('progressFill');
+      if (pctEl) pctEl.textContent = pct + '%';
+      if (fillEl) {
+        fillEl.style.width = pct + '%';
+        setProgressClass(fillEl, pct);
+      }
+
+      const genBtn = document.getElementById('generateBtn');
+      if (genBtn) genBtn.disabled = answered < 6;
+
+      const dimScores = {};
+      Object.keys(dimMap).forEach(dim => {
+        const ids = dimMap[dim].ids;
+        let s = 0, c = 0;
+        ids.forEach(i => {
+          if (ratings[i] > 0) { s += ratings[i]; c += 1; }
+        });
+        const a = c ? (s / c) : 0;
+        dimScores[dim] = c ? percentFromAvg(a) : 0;
+      });
+
+      document.getElementById('scoreComposure').textContent = (dimScores.composure || 0) + '%';
+      document.getElementById('scoreClarity').textContent = (dimScores.clarity || 0) + '%';
+      document.getElementById('scoreAuthority').textContent = (dimScores.authority || 0) + '%';
+      document.getElementById('scoreConnection').textContent = (dimScores.connection || 0) + '%';
+    }
+
+    /* ===========================
+       SUMMARY GENERATION
+    =========================== */
+    function generateSmartSummary() {
+      const dimAvg = {};
+      Object.keys(dimMap).forEach(dim => {
+        const ids = dimMap[dim].ids;
+        let s = 0, c = 0;
+        ids.forEach(i => { if (ratings[i] > 0) { s += ratings[i]; c++; } });
+        dimAvg[dim] = c ? (s / c) : 0;
+      });
+
+      const answered = ratings.filter(v => v > 0).length;
+      const sum = ratings.reduce((a,b) => a + b, 0);
+      const overallAvg = answered ? (sum / answered) : 0;
+      const overallPct = answered ? percentFromAvg(overallAvg) : 0;
+
+      document.getElementById('summaryScore').textContent = overallPct + '%';
+
+      const dimsSorted = Object.keys(dimAvg).sort((a,b) => (dimAvg[b] || 0) - (dimAvg[a] || 0));
+      const topDims = dimsSorted.slice(0, 2);
+      const bottomDims = dimsSorted.slice(-2).reverse();
+
+      const strengths = [
+        {
+          title: 'Your strongest signal right now',
+          desc: `Your highest area is <strong>${cap(dimMap[topDims[0]].label)}</strong>. When the stakes rise, you’re more likely to keep your centre and project control rather than urgency.`,
+          icon: 'fas fa-star'
+        },
+        {
+          title: 'A dependable secondary strength',
+          desc: `Your next strongest is <strong>${cap(dimMap[topDims[1]].label)}</strong>. This helps others trust your direction even when the environment gets noisy.`,
+          icon: 'fas fa-shield-check'
+        },
+        {
+          title: 'What to keep doing',
+          desc: 'Protect your baseline: slower pace, cleaner sentences, fewer filler words, and calmer endings. Small consistency beats dramatic “confidence pushes”.',
+          icon: 'fas fa-repeat'
+        }
+      ];
+
+      const leaks = [
+        {
+          title: 'Most likely leak under pressure',
+          desc: `Your lowest area is <strong>${cap(dimMap[bottomDims[0]].label)}</strong>. This is where pressure can distort your signal — e.g., rushing, over-explaining, softening asks, or losing control of the frame.`,
+          icon: 'fas fa-exclamation-circle'
+        },
+        {
+          title: 'Secondary leak (watch this)',
+          desc: `Your next lowest area is <strong>${cap(dimMap[bottomDims[1]].label)}</strong>. When this dips, people feel uncertainty even if your content is correct.`,
+          icon: 'fas fa-eye'
+        },
+        {
+          title: 'The pattern to look for',
+          desc: 'If your lowest scores cluster in the same dimension, that’s not a “confidence problem” — it’s a specific skill gap you can train and stabilise quickly.',
+          icon: 'fas fa-chart-simple'
+        }
+      ];
+
+      const nextMoves = [
+        {
+          title: 'One-sentence anchor',
+          desc: 'Before a meeting: write your point in one sentence. If you can’t, you’ll over-talk in the room.',
+          icon: 'fas fa-pen-nib'
+        },
+        {
+          title: 'Two-beat pause',
+          desc: 'When challenged: pause, then answer. The pause reads as control — not hesitation.',
+          icon: 'fas fa-pause'
+        },
+        {
+          title: 'Boundary + next step',
+          desc: 'Practise: “I can do X by Friday. If you need Y as well, we’ll need to drop Z or extend the deadline.”',
+          icon: 'fas fa-arrow-right'
+        }
+      ];
+
+      renderSummaryCards('strengthGrid', strengths);
+      renderSummaryCards('leakGrid', leaks);
+      renderSummaryCards('nextGrid', nextMoves);
+
+      const summary = document.getElementById('smartSummary');
+      summary.classList.add('active');
+      summary.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function renderSummaryCards(containerId, cards) {
+      const el = document.getElementById(containerId);
+      if (!el) return;
+      el.innerHTML = '';
+      cards.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'summary-card';
+        card.innerHTML = `
+          <div class="summary-icon"><i class="${c.icon}"></i></div>
+          <div class="summary-card-title">${c.title}</div>
+          <div class="summary-card-desc">${c.desc}</div>
+        `;
+        el.appendChild(card);
+      });
+    }
+
+    function cap(str) { return String(str || '').trim(); }
+
+    /* ===========================
+       COPY RESPONSES
+    =========================== */
+    function copyResponses() {
+      const heading = 'PRESENCE CALIBRATION ASSESSMENT';
+      const title = document.querySelector('.hero-main-heading')?.textContent || '';
+      const sub = document.querySelector('.hero-subheading')?.textContent || '';
+
+      let text = `${heading}\n=============================\n\n${title}\n\n${sub}\n\nYOUR RATINGS:\n================\n\n`;
+
+      assessmentItems.forEach((item, i) => {
+        const r = ratings[i] || 0;
+        const rText = r ? `${r}/5` : 'Not rated';
+        text += `${String(i+1).padStart(2,'0')}. (${rText}) ${item.text}\n`;
+      });
+
+      const answered = ratings.filter(v => v > 0).length;
+      if (answered) {
+        const avg = ratings.reduce((a,b) => a + b, 0) / answered;
+        const pct = Math.round((avg / 5) * 100);
+        text += `\nSNAPSHOT:\n================\nAnswered: ${answered}/${ratings.length}\nPresence Calibration Score: ${pct}%\n`;
+      }
+
+      navigator.clipboard.writeText(text);
+
+      const btn = document.getElementById('copyBtn');
+      const original = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+      btn.style.background = '#10b981';
+
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.style.background = '';
+      }, 1800);
+    }
+
+    /* ===========================
+       MY PLAYBOOK (LOCALSTORAGE)
+    =========================== */
+    const PLAYBOOK_KEY = 'tepSavedItems';
+    const CURRENT_TOOL_ID = 'presence-calibration-assessment';
+    const CURRENT_TOOL_TITLE = 'Presence Calibration Assessment';
+    const CURRENT_TOOL_TYPE = 'Assessment';
+
+    function getSavedItems() {
+      try {
+        const raw = localStorage.getItem(PLAYBOOK_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        console.warn('Error reading saved items:', e);
+        return [];
+      }
+    }
+
+    function setSavedItems(items) {
+      try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+      catch (e) { console.warn('Error saving items:', e); }
+    }
+
+    function initializePlaybook() {
+      const playbookOverlay = document.getElementById('playbookOverlay');
+      const playbookSidebar = document.getElementById('playbookSidebar');
+      const playbookButton = document.getElementById('myPlaybookButton');
+      const closeBtn = document.getElementById('closePlaybook');
+      const saveItemBtn = document.getElementById('saveBtn');
+
+      if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+      renderSavedItems();
+
+      const savedItems = getSavedItems();
+      const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+      updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+      saveItemBtn.addEventListener('click', () => {
+        const items = getSavedItems();
+        const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+        let nowSaved;
+
+        if (index === -1) {
+          const toolLink = window.location.pathname.split('/').pop() || 'presence-calibration-assessment.html';
+          items.push({
+            id: CURRENT_TOOL_ID,
+            title: CURRENT_TOOL_TITLE,
+            type: CURRENT_TOOL_TYPE,
+            link: toolLink,
+            savedAt: new Date().toISOString()
+          });
+          nowSaved = true;
+        } else {
+          items.splice(index, 1);
+          nowSaved = false;
+        }
+
+        setSavedItems(items);
+        updateSaveButtonState(saveItemBtn, nowSaved);
+        renderSavedItems();
+      });
+
+      playbookButton.addEventListener('click', () => {
+        playbookOverlay.classList.add('open');
+        playbookSidebar.classList.add('open');
+      });
+
+      closeBtn.addEventListener('click', () => {
+        playbookOverlay.classList.remove('open');
+        playbookSidebar.classList.remove('open');
+      });
+
+      playbookOverlay.addEventListener('click', (e) => {
+        if (e.target === playbookOverlay) {
+          playbookOverlay.classList.remove('open');
+          playbookSidebar.classList.remove('open');
+        }
+      });
+    }
+
+    function updateSaveButtonState(button, isSaved) {
+      const icon = button.querySelector('i');
+      const label = button.querySelector('span');
+
+      if (isSaved) {
+        button.classList.add('saved');
+        if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+        if (label) label.textContent = 'Saved';
+      } else {
+        button.classList.remove('saved');
+        if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+        if (label) label.textContent = 'Save item';
+      }
+    }
+
+    function renderSavedItems() {
+      const listEl = document.getElementById('savedItemsList');
+      const emptyEl = document.getElementById('savedItemsEmpty');
+      if (!listEl || !emptyEl) return;
+
+      const items = getSavedItems();
+      listEl.innerHTML = '';
+
+      if (!items.length) {
+        emptyEl.style.display = 'block';
+        return;
+      }
+
+      emptyEl.style.display = 'none';
+
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'saved-item';
+        const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+        const dateText = savedDate
+          ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+          : '';
+
+        li.innerHTML = `
+          <div class="saved-item-title-row">
+            <span class="saved-item-title">${item.title}</span>
+            <span class="saved-item-type">${item.type}</span>
+          </div>
+          <div class="saved-item-meta">${dateText ? `Saved on ${dateText}` : ''}</div>
+          <a class="saved-item-link" href="${item.link}">
+            Open <i class="fas fa-arrow-right"></i>
+          </a>
+        `;
+        listEl.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>

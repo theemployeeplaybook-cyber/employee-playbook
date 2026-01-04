@@ -1,0 +1,2459 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credibility and Positioning Framework | The Employee Playbook</title>
+
+    <!-- ICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+    <style>
+        :root {
+            --primary-white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --medium-gray: #E9ECEF;
+            --dark-gray: #6C757D;
+            --text-dark: #212529;
+            --text-medium: #495057;
+
+            --accent-purple: #7B5FC4;
+            --accent-purple-dark: #5A4496;
+            --light-purple: #E6E0F5;
+            --lighter-purple: #F0EBFA;
+
+            --border-light: rgba(0, 0, 0, 0.08);
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+            --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+            --danger-red: #ef4444;
+
+            --category-clarity: #7B5FC4;
+            --category-politics: #3b82f6;
+            --category-confidence: #ef4444;
+        }
+
+        .dark-mode {
+            --primary-white: #1a1a1a;
+            --light-gray: #2a2a2a;
+            --medium-gray: #3a3a3a;
+            --dark-gray: #888888;
+            --text-dark: #e0e0e0;
+            --text-medium: #b0b0b0;
+
+            --accent-purple: #9d86e9;
+            --accent-purple-dark: #7b5fc4;
+            --light-purple: rgba(123, 95, 196, 0.2);
+            --lighter-purple: rgba(123, 95, 196, 0.1);
+
+            --border-light: rgba(255, 255, 255, 0.08);
+            --nav-bg: rgba(30, 30, 30, 0.95);
+            --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+            --category-clarity: #9d86e9;
+            --category-politics: #60a5fa;
+            --category-confidence: #fb7185;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+        body {
+            background-color: var(--primary-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            min-height: 100vh;
+        }
+        body.loaded { opacity: 1; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+        /* NAV */
+        nav{
+            position: fixed; top: 0; width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            height: 80px;
+        }
+        .nav-container { display:flex; justify-content:space-between; align-items:center; padding:12px 0; height:100%; }
+
+        .logo-img { height: 100px; width:auto; transform: translateX(20%); padding:14px 10px; display:block; min-height:100px; transition: all .3s ease; }
+        .logo-img.fallback{
+            width:200px; height:50px; background: var(--accent-purple); color:#fff;
+            display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px;
+            border-radius:4px; transform: translateX(20%);
+        }
+
+        .nav-links { display:flex; gap:50px; }
+        .nav-link { color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; transition: color .3s ease; }
+        .nav-link:hover { color: var(--accent-purple); }
+        .nav-link-container { position:relative; display:inline-block; }
+        .new-tag{
+            position:absolute; top:-12px; right:-35px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color:#000; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); white-space:nowrap;
+        }
+        .nav-actions{ display:flex; align-items:center; gap:24px; transform: translateX(-20%); }
+        .header-cta{
+            background: var(--accent-purple); color:#fff; padding:8px 20px; border-radius:50px;
+            text-decoration:none; font-weight:600; font-size:14px;
+            transition: all .3s ease; box-shadow: 0 5px 15px rgba(123,95,196,.3);
+        }
+        .header-cta:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(123,95,196,.35); }
+        .sign-in{ color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; }
+        .sign-in:hover{ color: var(--accent-purple); }
+
+        .theme-toggle{
+            background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:16px;
+            width:36px; height:36px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            transition: background-color .3s ease;
+        }
+        .theme-toggle:hover{ background-color: var(--light-gray); }
+
+        .mobile-toggle{
+            display:none;
+            background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:24px;
+            width:40px; height:40px; border-radius:50%;
+            align-items:center; justify-content:center; transition: background-color .3s ease;
+        }
+        .mobile-toggle:hover{ background-color: var(--light-gray); }
+        .mobile-sign-in, .mobile-sign-up { display:none; }
+
+        @media (max-width: 768px){
+            .nav-container{ justify-content:center; position:relative; }
+            .logo{ position:absolute; left:50%; transform: translateX(-50%); display:flex; align-items:center; height:100%; }
+            .logo-img{ height:125px; transform:none; padding:12px 0; }
+            .mobile-toggle{ display:flex; position:absolute; left:20px; }
+            .nav-actions{ transform:none; gap:16px; position:absolute; right:20px; }
+            .nav-actions .sign-in, .nav-actions .header-cta{ display:none; }
+
+            .nav-links{
+                display:none; position:absolute; top:100%; left:0; width:100%;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction:column; padding:20px; gap:20px;
+                border-top: 1px solid var(--border-light);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            .nav-links.active{ display:flex; }
+            .nav-link-container{ display:flex; align-items:center; width:100%; }
+            .new-tag{ position:static; margin-left:8px; }
+            .mobile-sign-in{
+                display:block !important;
+                margin-top:10px;
+                padding:12px 20px;
+                background: var(--primary-white);
+                color: var(--accent-purple);
+                border-radius:8px;
+                text-align:center;
+                font-weight:600;
+                text-decoration:none;
+                border:2px solid var(--accent-purple);
+                transition: all .3s ease;
+            }
+            .mobile-sign-up{
+                display:block !important;
+                margin-top:10px;
+                padding:12px 20px;
+                background: var(--accent-purple);
+                color:#fff;
+                border-radius:8px;
+                text-align:center;
+                font-weight:600;
+                text-decoration:none;
+                border:2px solid var(--accent-purple);
+                transition: all .3s ease;
+            }
+        }
+
+        /* HERO */
+        .tool-hero-section{
+            width:100%;
+            background: var(--hero-bg);
+            padding: 20px 0 30px;
+            margin-top: 110px;
+            position: relative;
+            border-bottom: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+        .tool-hero-section::before{
+            content:'';
+            position:absolute; inset:0;
+            background: linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+            z-index:1;
+        }
+        .dark-mode .tool-hero-section::before{
+            background: linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+        }
+
+        .tool-hero-content{
+            position:relative; z-index:2;
+            max-width:1100px; margin:0 auto; padding: 0 20px 10px;
+            animation: heroFadeUp .45s ease-out;
+        }
+        @keyframes heroFadeUp { from{opacity:0; transform: translateY(18px);} to{opacity:1; transform:none;} }
+
+        .breadcrumb{
+            font-size:10px; text-transform:uppercase; letter-spacing:1px;
+            color: var(--dark-gray);
+            margin-bottom:10px;
+            display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+        }
+        .breadcrumb a{
+            color: var(--text-medium); text-decoration:none !important;
+            font-weight:500; letter-spacing:.5px; transition: color .2s ease;
+        }
+        .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+        .breadcrumb i{ color: var(--dark-gray); opacity:.8; font-size:10px; }
+        .breadcrumb .current{ color: var(--text-dark); font-weight:600; }
+
+        .checklist-name{
+            font-size:20px; font-weight:600; color: var(--accent-purple);
+            text-transform:uppercase; letter-spacing:1.8px;
+            margin-bottom:14px; margin-top:32px; display:block;
+        }
+        .hero-main-heading{
+            font-size:46px; font-weight:600; color: var(--text-dark);
+            line-height:1.1; margin-bottom:20px; max-width:760px;
+        }
+        .hero-subheading{
+            font-size:16px; color: var(--text-medium);
+            line-height:1.6; max-width:860px; margin-bottom:26px;
+        }
+
+        .save-btn{
+            position:absolute; top:16px; right:24px; z-index:5;
+            display:inline-flex; align-items:center; gap:6px;
+            padding:6px 12px; font-size:12px; font-weight:500;
+            border-radius:999px;
+            border:1px solid rgba(123,95,196,0.6);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: var(--accent-purple-dark);
+            cursor:pointer; transition: all .2s ease;
+        }
+        .save-btn:hover{ transform: translateY(-1px); box-shadow: 0 4px 10px rgba(123,95,196,0.18); background:#fff; }
+        .dark-mode .save-btn{ background: rgba(20,20,20,0.9); border-color: rgba(157,134,233,0.6); }
+        .save-btn.saved{ background: var(--accent-purple); color:#fff; border-color: transparent; }
+
+        /* CATEGORY PILLS */
+        .category-pills-title{
+            font-size:12px; font-weight:600; color: var(--text-medium);
+            text-transform:uppercase; letter-spacing:1px;
+            margin-bottom:14px; display:block;
+        }
+        .category-pills-grid{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+        .category-pill{
+            display:inline-flex; align-items:center; gap:8px;
+            padding:6px 12px; border-radius:999px;
+            font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.5px;
+            border:1px solid transparent;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-decoration:none;
+            height:32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all .2s ease;
+            white-space:nowrap;
+            cursor:pointer;
+        }
+        .dark-mode .category-pill{ background: rgba(255,255,255,0.08); box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .category-pill:hover{ transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.08); }
+
+        .category-pill.clarity{
+            color: var(--category-clarity);
+            border-color: rgba(123,95,196,0.22);
+            background: linear-gradient(135deg, rgba(123,95,196,0.10), rgba(123,95,196,0.05));
+        }
+        .category-pill.politics{
+            color: var(--category-politics);
+            border-color: rgba(59,130,246,0.22);
+            background: linear-gradient(135deg, rgba(59,130,246,0.10), rgba(59,130,246,0.05));
+        }
+        .category-pill.confidence{
+            color: var(--category-confidence);
+            border-color: rgba(239,68,68,0.22);
+            background: linear-gradient(135deg, rgba(239,68,68,0.08), rgba(239,68,68,0.04));
+        }
+
+        /* CONTEXT */
+        .context-tips-grid{
+            display:grid; grid-template-columns: 1fr 1fr;
+            gap:32px; width:100%;
+            max-width:1100px; margin: 6px auto 26px;
+            padding: 24px 20px 10px;
+        }
+        .context-card, .tips-card{
+            background: var(--primary-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 28px 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .section-title{
+            font-size:20px; font-weight:600; color: var(--text-dark);
+            margin-bottom:18px; display:flex; align-items:center; gap:10px;
+        }
+        .section-title i { color: var(--accent-purple); }
+        .bullet-list{ list-style:none; }
+        .bullet-list li{
+            color: var(--text-medium);
+            line-height:1.6;
+            margin-bottom:14px;
+            padding-left:26px;
+            position:relative;
+        }
+        .bullet-list li::before{
+            content:"•";
+            position:absolute; left:10px;
+            color: var(--accent-purple);
+            font-size:18px;
+        }
+
+        /* FRAMEWORK */
+        .framework-shell{ max-width:1100px; margin:0 auto; padding: 0 20px 20px; }
+        .framework-header{ margin: 18px 0 16px; }
+        .framework-header h2{
+            font-size:28px; font-weight:800;
+            color: var(--accent-purple-dark);
+            letter-spacing: -0.3px;
+            margin-bottom: 10px;
+        }
+        .framework-header .framework-intro{
+            background: linear-gradient(135deg, rgba(123,95,196,0.07), rgba(123,95,196,0.03));
+            border: 1px solid rgba(123,95,196,0.14);
+            border-radius: 14px;
+            padding: 14px 16px;
+        }
+        .dark-mode .framework-header .framework-intro{
+            background: linear-gradient(135deg, rgba(123,95,196,0.18), rgba(123,95,196,0.10));
+            border-color: rgba(123,95,196,0.24);
+        }
+        .framework-header .framework-intro .mini-title{
+            font-size:12px; font-weight:900; letter-spacing:.8px; text-transform:uppercase;
+            color: var(--accent-purple-dark);
+            margin-bottom:10px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .framework-header .framework-intro .mini-title i{ color: var(--accent-purple); }
+        .framework-header .framework-intro ul{ margin:0; padding:0; list-style:none; }
+        .framework-header .framework-intro li{
+            color: var(--text-medium);
+            margin-bottom:10px;
+            padding-left:22px;
+            position:relative;
+            font-size:13.5px;
+            line-height:1.55;
+        }
+        .framework-header .framework-intro li::before{
+            content:"•";
+            position:absolute; left:8px;
+            color: var(--accent-purple);
+            font-size:18px;
+            top:-1px;
+        }
+        .framework-header .framework-intro .close-note{
+            margin-top:10px;
+            font-size:13.5px;
+            color: var(--text-dark);
+            font-weight:650;
+        }
+
+        .canvas-grid{
+            display:grid; grid-template-columns: 1.05fr 0.95fr;
+            gap:18px; margin-bottom:22px;
+        }
+
+        .panel{
+            background: var(--primary-white);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+            position:relative;
+            overflow:hidden;
+        }
+        .dark-mode .panel{ box-shadow: 0 6px 22px rgba(0,0,0,0.22); }
+        .panel::before{
+            content:'';
+            position:absolute; top:0; left:0; right:0; height:3px;
+            background: linear-gradient(135deg, rgba(123,95,196,0.9), rgba(90,68,150,0.7));
+            opacity:.9;
+        }
+
+        .panel-title-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
+        .panel-title{
+            font-size:14px; font-weight:800;
+            letter-spacing:.7px; text-transform:uppercase;
+            color: var(--accent-purple-dark);
+            display:flex; align-items:center; gap:10px;
+        }
+        .panel-title i { color: var(--accent-purple); font-size:14px; }
+
+        .panel-sub{
+            color: var(--text-medium);
+            font-size:13px;
+            line-height:1.55;
+            margin-bottom:14px;
+        }
+
+        /* FORM REDESIGN */
+        .field-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+        .field{ display:flex; flex-direction:column; gap:8px; }
+        .span-2{ grid-column: span 2; }
+
+        .label-row{
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            gap:10px;
+            min-height: 18px;
+        }
+        .label-text{
+            font-size:12px;
+            font-weight:800;
+            color: var(--text-dark);
+            letter-spacing: 0.1px;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+        .hint-chip{
+            font-size:11px;
+            font-weight:800;
+            color: var(--accent-purple-dark);
+            border: 1px solid rgba(123,95,196,0.22);
+            background: rgba(123,95,196,0.06);
+            padding: 2px 8px;
+            border-radius: 999px;
+            white-space:nowrap;
+            flex-shrink:0;
+        }
+        .dark-mode .hint-chip{
+            border-color: rgba(157,134,233,0.26);
+            background: rgba(123,95,196,0.14);
+            color: var(--accent-purple);
+        }
+
+        .input, .textarea, .select{
+            width:100%;
+            border:1px solid var(--border-light);
+            background: var(--light-gray);
+            color: var(--text-dark);
+            border-radius:12px;
+            padding:11px 12px;
+            font-size:13.5px;
+            outline:none;
+            transition: box-shadow .2s ease, border-color .2s ease, background-color .2s ease;
+        }
+        .dark-mode .input, .dark-mode .textarea, .dark-mode .select{ background: rgba(255,255,255,0.05); }
+
+        .input:focus, .textarea:focus, .select:focus{
+            border-color: rgba(123,95,196,0.55);
+            box-shadow: 0 0 0 4px rgba(123,95,196,0.14);
+            background: rgba(255,255,255,0.9);
+        }
+        .dark-mode .input:focus, .dark-mode .textarea:focus, .dark-mode .select:focus{
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 0 0 4px rgba(123,95,196,0.20);
+        }
+
+        .textarea{ min-height:112px; resize: vertical; }
+
+        .micro-cards{ display:grid; grid-template-columns:1fr; gap:10px; margin-top:10px; }
+        .micro{
+            border:1px solid var(--border-light);
+            background: linear-gradient(135deg, rgba(123,95,196,0.06), rgba(123,95,196,0.02));
+            border-radius:12px;
+            padding:12px;
+        }
+        .dark-mode .micro{ background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.08)); }
+        .micro h4{
+            font-size:13px; font-weight:800; color: var(--text-dark);
+            margin-bottom:6px; display:flex; align-items:center; gap:8px;
+        }
+        .micro h4 i { color: var(--accent-purple); }
+        .micro p{ font-size:12.8px; color: var(--text-medium); line-height:1.55; }
+        .micro code{
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size:12px;
+            background: rgba(0,0,0,0.04);
+            padding:2px 6px;
+            border-radius:8px;
+            color: var(--text-dark);
+        }
+        .dark-mode .micro code{ background: rgba(255,255,255,0.08); }
+
+        .output-box{
+            border: 1px solid rgba(123,95,196,0.18);
+            background: rgba(123,95,196,0.06);
+            border-radius:14px;
+            padding:14px;
+            margin-top:10px;
+        }
+        .dark-mode .output-box{ background: rgba(123,95,196,0.14); border-color: rgba(123,95,196,0.28); }
+
+        .output-title{
+            display:flex; align-items:center; justify-content:space-between; gap:10px;
+            margin-bottom:8px;
+        }
+        .output-title h4{
+            font-size:12px; font-weight:900; letter-spacing:.8px; text-transform:uppercase;
+            color: var(--accent-purple-dark);
+        }
+        .output-content{
+            font-size:13.5px;
+            color: var(--text-dark);
+            line-height:1.55;
+            white-space: pre-wrap;
+        }
+
+        .mini-btn{
+            border: 1px solid rgba(123,95,196,0.28);
+            background: rgba(255,255,255,0.9);
+            color: var(--accent-purple-dark);
+            border-radius: 10px;
+            padding: 9px 12px;
+            font-size: 12.5px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all .2s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .dark-mode .mini-btn{
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(157,134,233,0.32);
+            color: var(--accent-purple);
+        }
+        .mini-btn:hover{ transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.10); }
+        .mini-btn.primary{
+            background: var(--premium-gradient);
+            color:#fff;
+            border:none;
+            box-shadow: 0 10px 24px rgba(123,95,196,0.18);
+        }
+        .mini-btn.primary:hover{ box-shadow: 0 12px 28px rgba(123,95,196,0.28); }
+
+        /* Bottom actions bar */
+        .framework-actions-bottom{
+            margin-top: 16px;
+            display:flex;
+            justify-content:flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 14px 0 4px;
+        }
+
+        /* PROOF PACKET TABLE */
+        .timeline-table{
+            width:100%;
+            border-collapse: collapse;
+            overflow:hidden;
+            border-radius:12px;
+            border:1px solid var(--border-light);
+            background: var(--primary-white);
+        }
+        .timeline-table th, .timeline-table td{
+            text-align:left;
+            padding:10px;
+            border-bottom:1px solid var(--border-light);
+            vertical-align:top;
+            font-size:13px;
+            color: var(--text-medium);
+        }
+        .timeline-table th{
+            font-size:11px;
+            text-transform:uppercase;
+            letter-spacing:.8px;
+            font-weight:800;
+            color: var(--text-dark);
+            background: rgba(123,95,196,0.06);
+        }
+
+        /* CHECKLIST + SCORE */
+        .checklist-body{ max-width:1100px; margin:0 auto; padding:0 20px 20px; }
+        .checklist-section-title{
+            font-size:22px; font-weight:800; color: var(--accent-purple-dark);
+            margin-bottom:10px; margin-top:16px !important;
+            display:flex; align-items:center; gap:10px;
+        }
+        .checklist-intro{ color: var(--text-medium); font-size:14px; margin-bottom:14px; max-width:920px; }
+        .checklist-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:20px; }
+        .checklist-item{
+            background: var(--primary-white);
+            padding:14px 16px;
+            border-radius:10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            border:1px solid var(--border-light);
+            display:flex;
+            gap:12px;
+            align-items:flex-start;
+            transition: transform .2s ease, box-shadow .2s ease;
+            cursor:pointer;
+            min-height:74px;
+        }
+        .checklist-item:hover{ transform: translateY(-2px); box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+        .checklist-item i{ color: var(--accent-purple); font-size:18px; margin-top:3px; flex-shrink:0; }
+        .checklist-text{ flex:1; color: var(--text-medium); font-size:15px; line-height:1.5; }
+
+        .clarity-score-section{ max-width:1100px; margin:22px auto 34px; padding:0 20px; }
+        .presence-snapshot-header{ margin-bottom:14px; text-align:left; }
+        .presence-snapshot-header h2{ font-size:22px; font-weight:800; color: var(--accent-purple-dark); margin-bottom:6px; }
+        .presence-snapshot-header p{ font-size:14px; color: var(--text-medium); line-height:1.5; }
+
+        .clarity-score-bar{
+            display:flex; align-items:stretch; gap:30px;
+            background: var(--primary-white);
+            border-radius:16px;
+            padding:22px 24px 20px;
+            box-shadow: 0 8px 30px rgba(123,95,196,0.12);
+            border:1px solid rgba(123,95,196,0.15);
+        }
+        .clarity-progress-container{ flex:1.4; }
+        .clarity-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+        .clarity-title{ font-size:20px; font-weight:700; color: var(--accent-purple-dark); }
+        .clarity-percentage{ font-size:28px; font-weight:600; color: var(--accent-purple); }
+        .progress-container{ height:10px; background: var(--light-gray); border-radius:5px; overflow:hidden; margin-bottom:6px; }
+        .progress-fill{ height:100%; background: var(--premium-gradient); width:0%; border-radius:5px; transition: width .8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .progress-labels{ display:flex; justify-content:space-between; font-size:12px; color: var(--dark-gray); }
+
+        .presence-dimensions{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; margin-top:14px; }
+        .presence-dimension-pill{
+            border-radius:10px; padding:8px 10px;
+            border:1px solid var(--border-light);
+            background: var(--light-gray);
+            display:flex; justify-content:space-between; align-items:center;
+            font-size:13px; color: var(--text-medium);
+        }
+        .dim-label{ font-weight:800; color: var(--text-dark); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .dim-score{ font-weight:900; color: var(--accent-purple); white-space:nowrap; }
+
+        .actions-container{
+            display:flex; gap:12px; flex-shrink:0;
+            flex-direction:column; justify-content:center; align-items:stretch;
+            max-width:260px;
+        }
+        .action-btn{
+            background: var(--premium-gradient);
+            color:#fff;
+            border:none;
+            padding:10px 18px;
+            font-size:13.5px;
+            border-radius:10px;
+            font-weight:800;
+            cursor:pointer;
+            display:flex; align-items:center; gap:8px;
+            transition: all .3s ease;
+            width:100%;
+            justify-content:center;
+        }
+        .action-btn:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(123,95,196,0.3); }
+        .action-btn.secondary{ background: var(--light-purple); color: var(--accent-purple-dark); }
+        .action-btn.secondary:hover{ background: var(--accent-purple); color:#fff; }
+        .action-btn:disabled{ opacity:.5; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+
+        .smart-summary-section{ max-width:1100px; margin:0 auto 40px; padding:0 20px; display:none; }
+        .smart-summary-section.active{ display:block; animation: slideIn .5s ease; }
+        @keyframes slideIn { from{opacity:0; transform: translateY(20px);} to{opacity:1; transform:none;} }
+
+        .summary-header{ text-align:center; margin-bottom:18px; }
+        .summary-title{ font-size:24px; font-weight:900; color: var(--accent-purple-dark); margin-bottom:6px; }
+        .summary-subtitle{ color: var(--text-medium); font-size:16px; margin-bottom:6px; }
+        .summary-insight{ font-size:14px; color: var(--dark-gray); max-width:820px; margin:0 auto; }
+
+        .section-header{
+            font-size:18px; font-weight:900;
+            margin-bottom:18px;
+            display:flex; align-items:center; gap:10px;
+            padding-bottom:10px;
+            border-bottom:2px solid var(--light-gray);
+        }
+        .section-header.red{ color: var(--danger-red); }
+        .section-header.purple{ color: var(--accent-purple-dark); }
+        .section-header.blue{ color: var(--accent-purple); }
+
+        .red-flags-grid, .next-steps-grid, .resources-grid{
+            display:grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:16px;
+            margin-bottom:28px;
+        }
+
+        .red-flag-card, .next-step-card, .resource-card{
+            background: var(--primary-white);
+            border-radius:12px;
+            padding:18px;
+            position:relative;
+            overflow:hidden;
+            display:flex;
+            flex-direction:column;
+            height:100%;
+        }
+        .red-flag-card{ box-shadow: 0 4px 12px rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.1); }
+        .red-flag-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .next-step-card{ box-shadow: 0 4px 12px rgba(123,95,196,0.08); border:1px solid rgba(123,95,196,0.1); }
+        .next-step-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--premium-gradient); }
+        .resource-card{ box-shadow: 0 4px 12px rgba(123,95,196,0.08); border:1px solid rgba(123,95,196,0.1); transition: all .2s ease; }
+        .resource-card:hover{ transform: translateY(-3px); box-shadow: 0 8px 20px rgba(123,95,196,0.16); }
+        .resource-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--premium-gradient); }
+
+        .flag-icon, .step-icon, .resource-icon{
+            font-size:20px; margin-bottom:12px;
+            width:40px; height:40px; border-radius:10px;
+            display:flex; align-items:center; justify-content:center;
+        }
+        .flag-icon{ color:#ef4444; background: rgba(239,68,68,0.1); }
+        .step-icon, .resource-icon{ color: var(--accent-purple); background: var(--lighter-purple); }
+
+        .flag-title, .step-title, .resource-title{ font-size:15px; font-weight:900; color: var(--text-dark); margin-bottom:8px; }
+        .flag-description, .step-description, .resource-description{ color: var(--text-medium); font-size:13.5px; line-height:1.5; flex-grow:1; }
+        .resource-description{ margin-bottom:12px; }
+        .resource-link{
+            color: var(--accent-purple); font-weight:800; text-decoration:none; font-size:13.5px;
+            display:flex; align-items:center; gap:6px; margin-top:auto;
+        }
+        .resource-link:hover{ text-decoration:underline; }
+
+        /* CLOSE OFF SECTION */
+        .close-off{
+            max-width:1100px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+        .close-card{
+            background: var(--primary-white);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+            position:relative;
+            overflow:hidden;
+        }
+        .close-card::before{
+            content:'';
+            position:absolute; top:0; left:0; right:0; height:3px;
+            background: linear-gradient(135deg, rgba(123,95,196,0.9), rgba(90,68,150,0.7));
+            opacity:.9;
+        }
+        .close-title{
+            display:flex; align-items:center; gap:10px;
+            font-size:16px; font-weight:900; color: var(--accent-purple-dark);
+            margin-bottom:10px;
+        }
+        .close-title i{ color: var(--accent-purple); }
+        .close-grid{
+            display:grid;
+            grid-template-columns: 1fr 1fr;
+            gap:14px;
+        }
+        .close-mini{
+            border:1px solid var(--border-light);
+            border-radius:12px;
+            padding:12px;
+            background: linear-gradient(135deg, rgba(123,95,196,0.05), rgba(123,95,196,0.02));
+        }
+        .dark-mode .close-mini{
+            background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.08));
+        }
+        .close-mini h4{
+            font-size:13px; font-weight:900; color: var(--text-dark);
+            margin-bottom:6px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .close-mini h4 i{ color: var(--accent-purple); }
+        .close-mini p{
+            font-size:13px; color: var(--text-medium); line-height:1.55;
+        }
+
+        /* MY PLAYBOOK */
+        .my-playbook-fab{
+            position:fixed; bottom:24px; right:24px; z-index:1200;
+            background: var(--premium-gradient);
+            color:#fff;
+            padding:10px 16px;
+            border-radius:999px;
+            display:inline-flex; align-items:center; gap:8px;
+            cursor:pointer; font-size:13px; font-weight:800;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            transition: all .25s ease;
+        }
+        .my-playbook-fab:hover{ transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.32); }
+
+        .playbook-sidebar-overlay{
+            position:fixed; inset:0;
+            background: rgba(0,0,0,0.45);
+            z-index:1190;
+            opacity:0; pointer-events:none;
+            transition: opacity .25s ease;
+        }
+        .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+        .playbook-sidebar{
+            position:fixed; top:0; right:-380px;
+            width:340px; max-width:90%;
+            height:100%;
+            background: rgba(255,255,255,0.94);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+            z-index:1191;
+            display:flex; flex-direction:column;
+            border-left: 1px solid var(--border-light);
+            transition: right .25s ease;
+        }
+        .dark-mode .playbook-sidebar{ background: rgba(18,18,18,0.96); box-shadow: -4px 0 22px rgba(0,0,0,0.6); }
+        .playbook-sidebar.open{ right:0; }
+        .playbook-sidebar-header{ padding:20px 20px 14px; border-bottom:1px solid var(--border-light); }
+        .playbook-sidebar-header-title-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+        .playbook-sidebar-header h3{ font-size:18px; font-weight:900; color: var(--text-dark); }
+        .playbook-sidebar-header p{ font-size:13px; color: var(--dark-gray); }
+        .playbook-close-btn{
+            background:none; border:none; color: var(--dark-gray);
+            cursor:pointer; font-size:18px; border-radius:999px;
+            width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+            transition: background-color .2s ease;
+        }
+        .playbook-close-btn:hover{ background: var(--light-gray); }
+        .playbook-sidebar-body{
+            padding:14px 18px 20px; padding-bottom:50px;
+            overflow-y:auto; flex:1;
+            display:flex; flex-direction:column; gap:18px;
+        }
+        .saved-items-empty{ font-size:13px; color: var(--dark-gray); line-height:1.6; }
+        .saved-items-list{ list-style:none; margin:0; padding:0; }
+        .saved-item{
+            padding:10px 8px;
+            border-radius:10px;
+            border:1px solid var(--border-light);
+            background: var(--primary-white);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            margin-bottom:10px;
+            display:flex; flex-direction:column; gap:2px;
+        }
+        .saved-item-title-row{ display:flex; justify-content:space-between; align-items:baseline; gap:6px; }
+        .saved-item-title{ font-size:14px; font-weight:800; color: var(--text-dark); }
+        .saved-item-type{ font-size:11px; text-transform:uppercase; letter-spacing:.6px; color: var(--accent-purple-dark); font-weight:800; }
+        .saved-item-meta{ font-size:12px; color: var(--dark-gray); }
+        .saved-item-link{
+            margin-top:6px;
+            font-size:12px;
+            color: var(--accent-purple);
+            text-decoration:none;
+            font-weight:800;
+            display:inline-flex; align-items:center; gap:4px;
+        }
+        .saved-item-link:hover{ text-decoration:underline; }
+
+        .playbook-quick-links{
+            margin-top: 223px;
+            padding-top:10px;
+            border-top:1px solid var(--border-light);
+        }
+        .quick-links-title{
+            font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:.8px;
+            color: var(--text-medium);
+        }
+        .playbook-quick-links-list{ display:flex; flex-direction:column; gap:10px; margin-top:6px; }
+        .quick-link-pill{
+            width:50%;
+            padding:4px;
+            border-radius:999px;
+            border:1px solid rgba(123,95,196,0.35);
+            background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+            text-decoration:none;
+            color: var(--accent-purple-dark);
+            font-size:13px;
+            font-weight:700;
+            display:flex; align-items:center; gap:8px;
+        }
+        .quick-link-pill:hover{
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+        }
+
+        footer{
+            background: var(--primary-white);
+            padding:10px 0;
+            border-top:1px solid var(--border-light);
+            margin-top:30px;
+            text-align:center;
+            color: var(--text-medium);
+        }
+
+        @media (max-width: 1024px){
+            .context-tips-grid{ grid-template-columns:1fr; gap:24px; }
+            .canvas-grid{ grid-template-columns:1fr; }
+            .red-flags-grid, .next-steps-grid, .resources-grid{ grid-template-columns: repeat(2, 1fr); }
+            .checklist-grid{ grid-template-columns:1fr; }
+            .clarity-score-bar{ flex-direction:column; }
+            .actions-container{ max-width:100%; flex-direction:row; }
+            .close-grid{ grid-template-columns:1fr; }
+        }
+        @media (max-width: 768px){
+            .tool-hero-section{ margin-top:100px; }
+            .hero-main-heading{ font-size:36px; }
+            .save-btn{ right:18px; top:10px; }
+            .field-grid{ grid-template-columns:1fr; }
+            .span-2{ grid-column: span 1; }
+            .red-flags-grid, .next-steps-grid, .resources-grid{ grid-template-columns:1fr; }
+            .actions-container{ flex-direction:column; }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="container nav-container">
+        <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+
+        <a href="index.html" class="logo">
+            <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+        </a>
+
+        <div class="nav-links">
+            <a href="the-lens.html" class="nav-link">The Lens</a>
+            <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+            <div class="nav-link-container">
+                <a href="the-coach.html" class="nav-link">The Coach</a>
+                <span class="new-tag">NEW</span>
+            </div>
+            <a href="the-shift.html" class="nav-link">The Shift</a>
+            <a href="the-pricing.html" class="nav-link">The Pricing</a>
+            <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+            <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="create-account.html" class="header-cta">Sign up</a>
+            <a href="sign-in.html" class="sign-in">Sign in</a>
+            <button class="theme-toggle" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+</nav>
+
+<div class="tool-hero-section">
+    <button class="save-btn" id="saveBtn">
+        <i class="far fa-bookmark"></i>
+        <span>Save item</span>
+    </button>
+
+    <div class="tool-hero-content">
+        <div class="breadcrumb">
+            <a href="index.html"><i class="fas fa-house"></i> Home</a>
+            <i class="fas fa-chevron-right"></i>  
+            <a href="the-toolkit.html">Toolkit</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="category-confidence-presence-influence.html">Confdence, Presence &amp; Influence</a>
+            <i class="fas fa-chevron-right"></i>
+            <span class="current">Credibility and Positioning Framework</span>
+        </div>
+
+        <span class="checklist-name">CREDIBILITY AND POSITIONING FRAMEWORK</span>
+
+        <h1 class="hero-main-heading">Become the obvious safe choice without acting loud</h1>
+
+        <div class="hero-subheading">
+            A practical framework to tighten your credibility story, shape how stakeholders describe you, and build a reusable proof packet for updates, one to ones, and promotion conversations.
+        </div>
+
+        <div class="category-pills-container">
+            <span class="category-pills-title">Related Categories</span>
+            <div class="category-pills-grid">
+                <a href="category-workplace-dynamics-and-politics.html" class="category-pill politics">
+                    <i class="fas fa-users"></i>
+                    <span>Workplace Dynamics and Politics</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="context-tips-grid">
+    <div class="context-card">
+        <h3 class="section-title"><i class="fas fa-compass"></i>When to Use This Framework</h3>
+        <ul class="bullet-list">
+            <li>When you are doing good work but it is not landing as strong credibility.</li>
+            <li>When stakeholders describe you in a way that is too narrow, too junior, or too tactical.</li>
+            <li>When you need to reset perception after a mistake, conflict, or role change.</li>
+            <li>When you want to push for scope, visibility, or promotion without sounding political.</li>
+            <li>When you want a clean proof packet you can reuse rather than re explain yourself every time.</li>
+        </ul>
+    </div>
+
+    <div class="tips-card">
+        <h3 class="section-title"><i class="fas fa-lightbulb"></i>Pro Tips</h3>
+        <ul class="bullet-list">
+            <li>Credibility is memory. If your work is not remembered, it is treated as optional.</li>
+            <li>Positioning is not self promotion. It is helping people place you accurately.</li>
+            <li>Use outcomes, risk control, and stakeholder impact. Avoid adjectives about yourself.</li>
+            <li>Build proof in small weekly deposits. Do not wait for a big reveal moment.</li>
+            <li>Speak like an operator: what changed, what it means, what you did, what is next.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="framework-shell" id="frameworkCanvas">
+    <div class="framework-header">
+        <h2>Credibility and Positioning Canvas</h2>
+
+        <div class="framework-intro">
+            <div class="mini-title"><i class="fas fa-wand-magic-sparkles"></i> How to use this</div>
+            <ul>
+                <li>Start by naming your current role truth and the story others are telling about you.</li>
+                <li>Then map the proof: outcomes, signals of trust, and the risks you reduce for others.</li>
+                <li>Write stakeholder specific positioning lines that sound calm and factual.</li>
+                <li>Turn it into a simple 30 60 90 plan you can execute and report on.</li>
+                <li>Generate outputs you can paste into updates, one to ones, and promotion conversations.</li>
+            </ul>
+            <div class="close-note">Aim for calm clarity, not hype. This framework is designed to make you easy to back.</div>
+        </div>
+    </div>
+
+    <div class="canvas-grid">
+        <!-- 1) Current Position -->
+        <div class="panel">
+            <div class="panel-title-row">
+                <div class="panel-title"><i class="fas fa-crosshairs"></i> 1) Current Position</div>
+            </div>
+            <div class="panel-sub">Lock the baseline. You are not changing who you are. You are tightening what is understood and remembered.</div>
+
+            <div class="field-grid">
+                <div class="field span-2">
+                    <div class="label-row">
+                        <span class="label-text">Your role in one line</span>
+                        <span class="hint-chip" title="Keep it simple and concrete">simple</span>
+                    </div>
+                    <input class="input cp-input" data-dimension="baseline" id="cp_role" placeholder="Example: I lead delivery of X across Y, ensuring Z lands on time and safely.">
+                </div>
+
+                <div class="field">
+                    <div class="label-row">
+                        <span class="label-text">Seniority you want</span>
+                        <span class="hint-chip" title="How you want to be placed">placement</span>
+                    </div>
+                    <select class="select cp-input" data-dimension="baseline" id="cp_level">
+                        <option value="" selected>Select</option>
+                        <option value="Trusted operator">Trusted operator</option>
+                        <option value="Go to problem solver">Go to problem solver</option>
+                        <option value="Owner of outcomes">Owner of outcomes</option>
+                        <option value="Strategic partner">Strategic partner</option>
+                        <option value="Leader of people or programmes">Leader of people or programmes</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="label-row">
+                        <span class="label-text">Time focus</span>
+                        <span class="hint-chip" title="For the plan you build">plan</span>
+                    </div>
+                    <select class="select cp-input" data-dimension="plan" id="cp_horizon">
+                        <option value="" selected>Select</option>
+                        <option value="Next 2 weeks">Next 2 weeks</option>
+                        <option value="Next month">Next month</option>
+                        <option value="Next quarter">Next quarter</option>
+                    </select>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label-row">
+                        <span class="label-text">How people describe you now</span>
+                        <span class="hint-chip" title="Use real words you have heard">real</span>
+                    </div>
+                    <textarea class="textarea cp-input" data-dimension="baseline" id="cp_now" placeholder="Example: reliable, helpful, detailed, but not seen as leading."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label-row">
+                        <span class="label-text">Credibility gap</span>
+                        <span class="hint-chip" title="What is missing in the current story">gap</span>
+                    </div>
+                    <textarea class="textarea cp-input" data-dimension="risks" id="cp_gap" placeholder="Example: impact is not visible, ownership is unclear, decisions look reactive."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label-row">
+                        <span class="label-text">One outcome you must protect</span>
+                        <span class="hint-chip" title="Your anchor outcome">anchor</span>
+                    </div>
+                    <input class="input cp-input" data-dimension="baseline" id="cp_protect" placeholder="Example: delivery quality and trust with key stakeholders.">
+                </div>
+            </div>
+
+            <div class="micro-cards">
+                <div class="micro">
+                    <h4><i class="fas fa-bullseye"></i> The placement rule</h4>
+                    <p>People place you using the last clear evidence they saw. If you do not supply clean evidence, they fill the gap with assumptions.</p>
+                </div>
+                <div class="micro">
+                    <h4><i class="fas fa-volume-low"></i> Quiet strength</h4>
+                    <p>You do not need louder visibility. You need sharper, easier to repeat clarity about impact and ownership.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2) Proof and Credibility Signals -->
+        <div class="panel">
+            <div class="panel-title-row">
+                <div class="panel-title"><i class="fas fa-shield-halved"></i> 2) Proof and Credibility Signals</div>
+            </div>
+            <div class="panel-sub">This is what makes you the safe choice. Focus on outcomes, risk control, and reliability under pressure.</div>
+
+            <div class="field-grid">
+                <div class="field span-2">
+                    <div class="label-row">
+                        <span class="label-text">Top outcomes delivered</span>
+                        <span class="hint-chip" title="What changed because of you">impact</span>
+                    </div>
+                    <textarea class="textarea cp-input" data-dimension="proof" id="pf_outcomes" placeholder="Example: shipped X, reduced Y incidents, improved Z cycle time, stabilised a process, unblocked a dependency."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label-row">
+                        <span class="label-text">Risks you reduce for others</span>
+                        <span class="hint-chip" title="Operational, reputational, delivery">risk</span>
+                    </div>
+                    <textarea class="textarea cp-input" data-dimension="proof" id="pf_risk" placeholder="Example: prevent surprises, protect delivery, spot early warning signals, keep stakeholders aligned, reduce rework."></textarea>
+                </div>
+
+                <div class="field">
+                    <div class="label-row">
+                        <span class="label-text">Trust signals you have</span>
+                        <span class="hint-chip" title="Evidence of trust">trust</span>
+                    </div>
+                    <select class="select cp-input" data-dimension="proof" id="pf_trust">
+                        <option value="" selected>Select</option>
+                        <option value="People ask me to lead or own">People ask me to lead or own</option>
+                        <option value="I handle sensitive work">I handle sensitive work</option>
+                        <option value="I get pulled into critical moments">I get pulled into critical moments</option>
+                        <option value="My updates are used as truth">My updates are used as truth</option>
+                        <option value="I am asked to fix messy situations">I am asked to fix messy situations</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="label-row">
+                        <span class="label-text">Visibility risk</span>
+                        <span class="hint-chip" title="Where your work disappears">blind</span>
+                    </div>
+                    <select class="select cp-input" data-dimension="risks" id="pf_visibility">
+                        <option value="" selected>Select</option>
+                        <option value="Work is done but not communicated">Work is done but not communicated</option>
+                        <option value="Credit is captured by louder voices">Credit is captured by louder voices</option>
+                        <option value="Impact is spread across too many tasks">Impact is spread across too many tasks</option>
+                        <option value="Stakeholders only see issues">Stakeholders only see issues</option>
+                    </select>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label-row">
+                        <span class="label-text">Two proof points with numbers</span>
+                        <span class="hint-chip" title="Any metric counts">numbers</span>
+                    </div>
+                    <textarea class="textarea cp-input" data-dimension="proof" id="pf_numbers" placeholder="Example: reduced cycle time from A to B, avoided C hours of rework, improved reliability by D percent."></textarea>
+                </div>
+            </div>
+
+            <div class="output-box">
+                <div class="output-title">
+                    <h4>Crisp credibility statement</h4>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <button class="mini-btn" onclick="buildCredStatement()"><i class="fas fa-bolt"></i> Build</button>
+                        <button class="mini-btn" onclick="copyText('out_cred')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                </div>
+                <div class="output-content" id="out_cred">Click Build to generate a clean credibility statement from your proof and role.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="canvas-grid">
+        <!-- 3) Stakeholders and Positioning -->
+        <div class="panel">
+            <div class="panel-title-row">
+                <div class="panel-title"><i class="fas fa-users-gear"></i> 3) Stakeholders and Positioning Lines</div>
+            </div>
+            <div class="panel-sub">Positioning is what you want people to repeat. Keep it calm, factual, and anchored in outcomes.</div>
+
+            <div class="field-grid">
+                <div class="field">
+                    <div class="label-row">
+                        <span class="label-text">Primary stakeholder</span>
+                        <span class="hint-chip" title="Name or role">who</span>
+                    </div>
+                    <input class="input cp-input" data-dimension="stakeholders" id="st_primary" placeholder="Example: manager, director, programme lead">
+                </div>
+
+                <div class="field">
+                    <div class="label-row">
+                        <span class="label-text">What they care about</span>
+                        <span class="hint-chip" title="Speed, risk, optics, cost, quality">care</span>
+                    </div>
+                    <input class="input cp-input" data-dimension="stakeholders" id="st_care" placeholder="Example: predictable delivery and no surprises">
+                </div>
+
+                <div class="field span-2">
+                    <div class="label-row">
+                        <span class="label-text">Stakeholders list</span>
+                        <span class="hint-chip" title="Comma separated list">list</span>
+                    </div>
+                    <input class="input cp-input" data-dimension="stakeholders" id="st_list" placeholder="Example: Head of X, Product lead, Finance partner, PMO lead">
+                </div>
+
+                <div class="field span-2">
+                    <div class="label-row">
+                        <span class="label-text">What each stakeholder needs from you</span>
+                        <span class="hint-chip" title="One short line per stakeholder">needs</span>
+                    </div>
+                    <textarea class="textarea cp-input" data-dimension="stakeholders" id="st_needs" placeholder="Example: Head of X needs risk control and clear decisions. Product needs speed with guardrails. Finance needs cost clarity."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label-row">
+                        <span class="label-text">Your boundary line</span>
+                        <span class="hint-chip" title="Calm pushback line">line</span>
+                    </div>
+                    <input class="input cp-input" data-dimension="positioning" id="st_boundary" placeholder="Example: I can deliver by Friday if we confirm scope today and prioritise what matters most.">
+                </div>
+            </div>
+
+            <div class="output-box">
+                <div class="output-title">
+                    <h4>Stakeholder specific positioning lines</h4>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <button class="mini-btn" onclick="buildPositionLines()"><i class="fas fa-bolt"></i> Build</button>
+                        <button class="mini-btn" onclick="copyText('out_position')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                </div>
+                <div class="output-content" id="out_position">Click Build to generate positioning lines for your key stakeholders.</div>
+            </div>
+        </div>
+
+        <!-- 4) 30 60 90 Plan -->
+        <div class="panel">
+            <div class="panel-title-row">
+                <div class="panel-title"><i class="fas fa-calendar-check"></i> 4) 30 60 90 Plan</div>
+            </div>
+            <div class="panel-sub">A simple plan that creates proof. Make it easy to execute and easy to report.</div>
+
+            <div class="field-grid">
+                <div class="field span-2">
+                    <div class="label-row">
+                        <span class="label-text">One strategic focus</span>
+                        <span class="hint-chip" title="What you will be known for">focus</span>
+                    </div>
+                    <input class="input cp-input" data-dimension="plan" id="pl_focus" placeholder="Example: stabilise delivery and improve predictability across X.">
+                </div>
+
+                <div class="field span-2">
+                    <div class="label-row">
+                        <span class="label-text">Week by week actions</span>
+                        <span class="hint-chip" title="Short and practical">actions</span>
+                    </div>
+                    <textarea class="textarea cp-input" data-dimension="plan" id="pl_actions" placeholder="Example: weekly risk review, written recap after decisions, stakeholder pulse check, tighten scope control."></textarea>
+                </div>
+
+                <div class="field">
+                    <div class="label-row">
+                        <span class="label-text">Proof you will create</span>
+                        <span class="hint-chip" title="Artifacts and outcomes">proof</span>
+                    </div>
+                    <input class="input cp-input" data-dimension="plan" id="pl_proof" placeholder="Example: weekly update format, delivery dashboard, decision log">
+                </div>
+
+                <div class="field">
+                    <div class="label-row">
+                        <span class="label-text">Success signal</span>
+                        <span class="hint-chip" title="What changes in the room">signal</span>
+                    </div>
+                    <input class="input cp-input" data-dimension="plan" id="pl_signal" placeholder="Example: I get asked to lead, or my view becomes default">
+                </div>
+            </div>
+
+            <div class="output-box">
+                <div class="output-title">
+                    <h4>30 60 90 plan</h4>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <button class="mini-btn" onclick="buildPlan3090()"><i class="fas fa-bolt"></i> Build</button>
+                        <button class="mini-btn" onclick="copyText('out_plan')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                </div>
+                <div class="output-content" id="out_plan">Click Build to generate a simple 30 60 90 plan.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Proof Packet Builder -->
+    <div class="panel" style="margin-bottom:18px;">
+        <div class="panel-title-row">
+            <div class="panel-title"><i class="fas fa-folder-open"></i> Proof Packet Builder</div>
+        </div>
+        <div class="panel-sub">Collect reusable proof. This becomes your update material, your one to one receipts, and your promotion packet raw material.</div>
+
+        <table class="timeline-table" id="proofTable">
+            <thead>
+                <tr>
+                    <th style="width: 18%;">Date</th>
+                    <th style="width: 36%;">Proof item</th>
+                    <th style="width: 22%;">Result or metric</th>
+                    <th style="width: 24%;">Where it lives</th>
+                </tr>
+            </thead>
+            <tbody id="proofBody">
+                <tr>
+                    <td><input class="input cp-input" data-dimension="proof" placeholder="DD/MM/YYYY"></td>
+                    <td><input class="input cp-input" data-dimension="proof" placeholder="Example: shipped X, fixed Y, resolved Z"></td>
+                    <td><input class="input cp-input" data-dimension="proof" placeholder="Example: reduced rework, avoided incidents"></td>
+                    <td><input class="input cp-input" data-dimension="proof" placeholder="Link or location"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+            <button class="mini-btn" onclick="addProofRow()"><i class="fas fa-plus"></i> Add row</button>
+            <button class="mini-btn" onclick="removeProofRow()"><i class="fas fa-minus"></i> Remove row</button>
+            <button class="mini-btn" onclick="buildProofPacket()"><i class="fas fa-bolt"></i> Build packet</button>
+            <button class="mini-btn" onclick="copyText('out_packet')"><i class="far fa-copy"></i> Copy packet</button>
+        </div>
+
+        <div class="output-box">
+            <div class="output-title">
+                <h4>Proof packet</h4>
+            </div>
+            <div class="output-content" id="out_packet">Add proof items, then click Build packet.</div>
+        </div>
+    </div>
+
+    <!-- Executive Outputs -->
+    <div class="panel">
+        <div class="panel-title-row">
+            <div class="panel-title"><i class="fas fa-file-lines"></i> Executive Outputs</div>
+        </div>
+        <div class="panel-sub">Designed to be copied into an update, a one to one agenda, or a promotion conversation note.</div>
+
+        <div class="output-box">
+            <div class="output-title">
+                <h4>One paragraph positioning summary</h4>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="mini-btn" onclick="copyText('out_summary')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+            </div>
+            <div class="output-content" id="out_summary">Complete the canvas, then click Generate outputs.</div>
+        </div>
+
+        <div class="output-box">
+            <div class="output-title">
+                <h4>Update message template</h4>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="mini-btn" onclick="copyText('out_update')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+            </div>
+            <div class="output-content" id="out_update"> </div>
+        </div>
+
+        <div class="output-box">
+            <div class="output-title">
+                <h4>Promotion conversation opener</h4>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="mini-btn" onclick="copyText('out_opener')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+            </div>
+            <div class="output-content" id="out_opener"> </div>
+        </div>
+    </div>
+
+    <!-- ACTIONS MOVED TO BOTTOM -->
+    <div class="framework-actions-bottom">
+        <button class="mini-btn" onclick="resetCanvas()"><i class="fas fa-rotate-left"></i> Reset</button>
+        <button class="mini-btn" onclick="copyOutputs()"><i class="far fa-copy"></i> Copy outputs</button>
+        <button class="mini-btn primary" onclick="generateOutputs()"><i class="fas fa-wand-magic-sparkles"></i> Generate outputs</button>
+    </div>
+</div>
+
+<!-- QUICK CHECKLIST -->
+<div class="checklist-body" id="checklistText">
+    <h2 class="checklist-section-title"><i class="fas fa-list-check"></i> Quick Coverage Checklist</h2>
+    <div class="checklist-intro">
+        The canvas is the framework. This checklist is the final audit to confirm your credibility story is complete, believable, and easy for others to repeat.
+    </div>
+
+    <div class="checklist-grid">
+        <div class="checklist-item" data-category="baseline">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">My role is stated in one clear line that a stakeholder would recognise as true.</div>
+        </div>
+        <div class="checklist-item" data-category="baseline">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I have named how I am seen now and what is missing from that story.</div>
+        </div>
+
+        <div class="checklist-item" data-category="proof">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I listed outcomes delivered and at least one result with numbers.</div>
+        </div>
+        <div class="checklist-item" data-category="proof">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I can describe the risks I reduce for others in plain language.</div>
+        </div>
+
+        <div class="checklist-item" data-category="stakeholders">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I mapped the key stakeholders and what each needs from me.</div>
+        </div>
+        <div class="checklist-item" data-category="positioning">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">My positioning lines are calm, factual, and anchored to outcomes.</div>
+        </div>
+
+        <div class="checklist-item" data-category="plan">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I have a 30 60 90 plan with actions I can actually execute.</div>
+        </div>
+        <div class="checklist-item" data-category="plan">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I know what proof I will create and how I will report it.</div>
+        </div>
+    </div>
+</div>
+
+<!-- SCORE -->
+<div class="clarity-score-section">
+    <div class="presence-snapshot-header">
+        <h2>Your Credibility and Positioning Snapshot</h2>
+        <p>This score reflects how complete your credibility story is across baseline, proof, stakeholders, and plan. Higher does not mean louder. Higher means clearer and easier to back.</p>
+    </div>
+
+    <div class="clarity-score-bar">
+        <div class="clarity-progress-container">
+            <div class="clarity-header">
+                <div class="clarity-title">Readiness Score</div>
+                <div class="clarity-percentage" id="clarityPercentage">0%</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="progress-labels">
+                <span>Unclear</span><span>Building</span><span>Strong</span>
+            </div>
+
+            <div class="presence-dimensions">
+                <div class="presence-dimension-pill"><span class="dim-label">Baseline</span><span class="dim-score" id="scoreBaseline">0%</span></div>
+                <div class="presence-dimension-pill"><span class="dim-label">Proof</span><span class="dim-score" id="scoreProof">0%</span></div>
+                <div class="presence-dimension-pill"><span class="dim-label">Stakeholders</span><span class="dim-score" id="scoreStakeholders">0%</span></div>
+                <div class="presence-dimension-pill"><span class="dim-label">Plan</span><span class="dim-score" id="scorePlan">0%</span></div>
+            </div>
+        </div>
+
+        <div class="actions-container">
+            <button class="action-btn" onclick="generateSmartSummary()" id="generateBtn" disabled>
+                <i class="fas fa-magic"></i> Generate summary
+            </button>
+            <button class="action-btn secondary" onclick="copyFramework()" id="copyBtn">
+                <i class="far fa-copy"></i> Copy framework
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="smart-summary-section" id="smartSummary">
+    <div class="summary-header">
+        <h2 class="summary-title">Your Smart Positioning Summary</h2>
+        <p class="summary-subtitle">Based on your readiness score of <span id="summaryScore">0%</span></p>
+        <p class="summary-insight">Highlights what is missing, what is most fragile, and the simplest next steps to tighten your credibility without turning it into a performance.</p>
+    </div>
+
+    <h3 class="section-header red"><i class="fas fa-exclamation-triangle"></i> Red Flags</h3>
+    <div class="red-flags-grid" id="redFlagsGrid"></div>
+
+    <h3 class="section-header purple"><i class="fas fa-forward"></i> Next Steps</h3>
+    <div class="next-steps-grid" id="nextStepsGrid"></div>
+
+    <h3 class="section-header blue"><i class="fas fa-tools"></i> Recommended Tools</h3>
+    <div class="resources-grid" id="resourcesGrid"></div>
+</div>
+
+<!-- CLOSE OFF -->
+<div class="close-off">
+    <div class="close-card">
+        <div class="close-title"><i class="fas fa-check-circle"></i> Close off: how to use this in real life</div>
+
+        <div class="close-grid">
+            <div class="close-mini">
+                <h4><i class="fas fa-message"></i> Weekly update rhythm</h4>
+                <p>Send a short update with three parts: what changed, what you did, what is next. Add one proof item each week. Small deposits compound.</p>
+            </div>
+            <div class="close-mini">
+                <h4><i class="fas fa-user-group"></i> One to one script</h4>
+                <p>Use your credibility statement, then ask: what would make my impact more visible to you, and what should I own next to help the team win.</p>
+            </div>
+            <div class="close-mini">
+                <h4><i class="fas fa-star"></i> Promotion readiness</h4>
+                <p>Do not wait for the cycle. Build a proof packet now. When the moment arrives, you will be calm, specific, and easy to support.</p>
+            </div>
+            <div class="close-mini">
+                <h4><i class="fas fa-shield"></i> Perception protection</h4>
+                <p>Keep language neutral. Anchor on outcomes and risk control. The goal is to be trusted, not to win a debate.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MY PLAYBOOK -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+    <div class="playbook-sidebar" id="playbookSidebar">
+        <div class="playbook-sidebar-header">
+            <div class="playbook-sidebar-header-title-row">
+                <h3>My Playbook</h3>
+                <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p>Saved items</p>
+        </div>
+
+        <div class="playbook-sidebar-body">
+            <div id="savedItemsContainer">
+                <p class="saved-items-empty" id="savedItemsEmpty">
+                    You haven’t saved anything yet. Use <strong>Save item</strong> on tools you want quick access to.
+                </p>
+                <ul class="saved-items-list" id="savedItemsList"></ul>
+            </div>
+
+            <div class="playbook-quick-links">
+                <div class="playbook-quick-links-header">
+                    <span class="quick-links-title">Quick links</span>
+                </div>
+                <div class="playbook-quick-links-list">
+                    <a href="dashboard.html" class="quick-link-pill"><i class="fas fa-gauge"></i> The Dashboard</a>
+                    <a href="the-lens.html" class="quick-link-pill"><i class="fas fa-search"></i> The Lens</a>
+                    <a href="the-toolkit.html" class="quick-link-pill"><i class="fas fa-toolbox"></i> The Toolkit</a>
+                    <a href="the-coach.html" class="quick-link-pill"><i class="fas fa-comments"></i> The Coach</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+    <i class="fas fa-book-open"></i>
+    <span>My Playbook</span>
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2025 The Employee Playbook. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
+
+    initializeChecklist();
+    initializeThemeToggle();
+    initializeMobileNav();
+    initializePlaybook();
+
+    bindCanvasListeners();
+    resetDefaultSelectsToBlank();
+    updateFrameworkScore();
+
+    // initialise output boxes without dashes
+    document.getElementById('out_update').textContent = 'Complete the canvas, then click Generate outputs.';
+    document.getElementById('out_opener').textContent = 'Complete the canvas, then click Generate outputs.';
+});
+
+/* MOBILE NAV */
+function initializeMobileNav() {
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (!mobileToggle || !navLinks) return;
+
+    mobileToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('active');
+        const icon = this.querySelector('i');
+        if (icon) { icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); }
+    });
+
+    document.addEventListener('click', function(event) {
+        if (navLinks.classList.contains('active') &&
+            !navLinks.contains(event.target) &&
+            !mobileToggle.contains(event.target)) {
+            navLinks.classList.remove('active');
+            const icon = mobileToggle.querySelector('i');
+            if (icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+        }
+    });
+}
+
+/* THEME */
+function initializeThemeToggle() {
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    if (!themeToggleBtn) return;
+
+    const themeIcon = themeToggleBtn.querySelector('i');
+    const logoImg = document.getElementById('mainLogo');
+
+    function getLogoPath(filename) {
+        if (window.location.protocol === 'file:') {
+            const currentPath = window.location.pathname;
+            const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+            return basePath + 'assets/img/' + filename;
+        } else {
+            return './assets/img/' + filename;
+        }
+    }
+
+    function createFallbackLogo() {
+        if (!logoImg) return;
+        logoImg.classList.add('fallback');
+        const logoText = document.createElement('div');
+        logoText.textContent = 'THE EMPLOYEE PLAYBOOK';
+        logoText.style.fontSize = '14px';
+        logoText.style.fontWeight = '700';
+        logoText.style.letterSpacing = '1px';
+        logoImg.src = '';
+        logoImg.alt = 'The Employee Playbook';
+        logoImg.style.display = 'flex';
+        logoImg.style.alignItems = 'center';
+        logoImg.style.justifyContent = 'center';
+        logoImg.innerHTML = '';
+        logoImg.appendChild(logoText);
+    }
+
+    function updateLogoForTheme(isDarkMode) {
+        if (!logoImg) return;
+        logoImg.classList.remove('fallback');
+        logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+        logoImg.alt = 'The Employee Playbook';
+    }
+
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+    } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        if (isDarkMode) {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+            if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+            updateLogoForTheme(false);
+        } else {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+            if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+            updateLogoForTheme(true);
+        }
+    });
+
+    if (logoImg) {
+        logoImg.addEventListener('error', function() {
+            if (this.src.includes('logo-dark.png')) this.src = getLogoPath('logo.png');
+            else createFallbackLogo();
+        });
+    }
+}
+
+/* Ensure selects start blank unless user chooses */
+function resetDefaultSelectsToBlank(){
+    document.querySelectorAll('select.cp-input').forEach(sel => {
+        if (!sel.dataset.userChanged) sel.value = '';
+    });
+}
+
+/* Bind inputs once */
+function bindCanvasListeners(){
+    document.querySelectorAll('.cp-input').forEach(el => {
+        if (el.dataset.bound === '1') return;
+        el.dataset.bound = '1';
+
+        el.addEventListener('input', () => {
+            el.dataset.userChanged = '1';
+            updateFrameworkScore();
+        });
+        el.addEventListener('change', () => {
+            el.dataset.userChanged = '1';
+            updateFrameworkScore();
+        });
+    });
+}
+
+/* PROOF TABLE */
+function addProofRow() {
+    const body = document.getElementById('proofBody');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td><input class="input cp-input" data-dimension="proof" placeholder="DD/MM/YYYY"></td>
+        <td><input class="input cp-input" data-dimension="proof" placeholder="Example: shipped X, fixed Y, resolved Z"></td>
+        <td><input class="input cp-input" data-dimension="proof" placeholder="Example: reduced rework, avoided incidents"></td>
+        <td><input class="input cp-input" data-dimension="proof" placeholder="Link or location"></td>
+    `;
+    body.appendChild(tr);
+    bindCanvasListeners();
+    updateFrameworkScore();
+}
+
+function removeProofRow() {
+    const body = document.getElementById('proofBody');
+    if (body.children.length > 1) body.removeChild(body.lastElementChild);
+    updateFrameworkScore();
+}
+
+/* CHECKLIST */
+let checkedItems = [];
+let itemCategories = [];
+
+const dimensionConfig = {
+    baseline: ['baseline'],
+    proof: ['proof'],
+    stakeholders: ['stakeholders', 'positioning'],
+    plan: ['plan']
+};
+
+function initializeChecklist() {
+    const checklistContainers = document.querySelectorAll('.checklist-item');
+    checkedItems = new Array(checklistContainers.length).fill(false);
+    itemCategories = [];
+
+    checklistContainers.forEach((container, index) => {
+        const icon = container.querySelector('i');
+        const category = container.getAttribute('data-category');
+        itemCategories[index] = category;
+
+        container.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON') return;
+
+            if (icon.classList.contains('fa-square')) {
+                icon.classList.remove('fa-square');
+                icon.classList.add('fa-check-square');
+                icon.style.color = '#5A4496';
+                checkedItems[index] = true;
+            } else {
+                icon.classList.remove('fa-check-square');
+                icon.classList.add('fa-square');
+                icon.style.color = '#7B5FC4';
+                checkedItems[index] = false;
+            }
+            updateFrameworkScore();
+        });
+    });
+}
+
+/* SCORE */
+function updateFrameworkScore() {
+    const inputs = Array.from(document.querySelectorAll('.cp-input'));
+    const completedInputs = inputs.filter(el => ((el.value || '').toString().trim().length > 0)).length;
+    const checklistCompleted = checkedItems.filter(Boolean).length;
+
+    const totalUnits = inputs.length + checkedItems.length;
+    const completedUnits = completedInputs + checklistCompleted;
+
+    const score = totalUnits ? Math.round((completedUnits / totalUnits) * 100) : 0;
+
+    document.getElementById('clarityPercentage').textContent = score + '%';
+    const fill = document.getElementById('progressFill');
+    fill.style.width = score + '%';
+
+    document.getElementById('generateBtn').disabled = (completedUnits === 0);
+
+    const dimScores = {
+        baseline: { checked: 0, total: 0 },
+        proof: { checked: 0, total: 0 },
+        stakeholders: { checked: 0, total: 0 },
+        plan: { checked: 0, total: 0 }
+    };
+
+    inputs.forEach(el => {
+        const cat = el.getAttribute('data-dimension');
+        Object.keys(dimensionConfig).forEach(dim => {
+            if (dimensionConfig[dim].includes(cat)) {
+                dimScores[dim].total += 1;
+                if (((el.value || '').toString().trim().length > 0)) dimScores[dim].checked += 1;
+            }
+        });
+    });
+
+    itemCategories.forEach((cat, idx) => {
+        Object.keys(dimensionConfig).forEach(dim => {
+            if (dimensionConfig[dim].includes(cat)) {
+                dimScores[dim].total += 1;
+                if (checkedItems[idx]) dimScores[dim].checked += 1;
+            }
+        });
+    });
+
+    const pct = d => d.total ? Math.round((d.checked / d.total) * 100) : 0;
+    document.getElementById('scoreBaseline').textContent = pct(dimScores.baseline) + '%';
+    document.getElementById('scoreProof').textContent = pct(dimScores.proof) + '%';
+    document.getElementById('scoreStakeholders').textContent = pct(dimScores.stakeholders) + '%';
+    document.getElementById('scorePlan').textContent = pct(dimScores.plan) + '%';
+}
+
+/* HELPERS */
+function val(id) {
+    const el = document.getElementById(id);
+    return el ? (el.value || '').trim() : '';
+}
+function cleanLine(text) {
+    return (text || '').replace(/\s+/g, ' ').trim();
+}
+function shorten(text, max) {
+    const t = cleanLine(text);
+    if (!t) return '';
+    return t.length > max ? t.slice(0, max - 1) + '…' : t;
+}
+function copyText(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    navigator.clipboard.writeText(el.textContent || '');
+}
+
+/* BUILDERS */
+function buildCredStatement() {
+    const role = val('cp_role');
+    const protect = val('cp_protect');
+    const outcomes = val('pf_outcomes');
+    const numbers = val('pf_numbers');
+    const risk = val('pf_risk');
+    const trust = val('pf_trust');
+
+    const parts = [];
+    if (role) parts.push(`Role: ${role}.`);
+    if (protect) parts.push(`I protect: ${protect}.`);
+    if (outcomes) parts.push(`Outcomes: ${shorten(outcomes, 190)}`);
+    if (numbers) parts.push(`Proof with numbers: ${shorten(numbers, 140)}`);
+    if (risk) parts.push(`Risk control: ${shorten(risk, 160)}`);
+    if (trust) parts.push(`Trust signal: ${trust}.`);
+
+    const result = parts.length ? parts.join(' ') : 'Add your role and at least one proof item, then build your credibility statement.';
+    document.getElementById('out_cred').textContent = result;
+}
+
+function buildPositionLines() {
+    const role = cleanLine(val('cp_role'));
+    const focus = cleanLine(val('pl_focus'));
+    const outcomes = cleanLine(val('pf_outcomes'));
+    const risk = cleanLine(val('pf_risk'));
+    const primary = cleanLine(val('st_primary'));
+    const care = cleanLine(val('st_care'));
+    const list = cleanLine(val('st_list'));
+    const needs = cleanLine(val('st_needs'));
+    const boundary = cleanLine(val('st_boundary'));
+
+    const baseLine = (() => {
+        const core = [];
+        if (role) core.push(role);
+        if (focus) core.push(`I am focused on ${focus.toLowerCase()}.`);
+        if (risk) core.push(`I reduce risk by ${shorten(risk, 110).toLowerCase()}.`);
+        if (outcomes) core.push(`Recent outcomes include ${shorten(outcomes, 120).toLowerCase()}.`);
+        return core.length ? core.join(' ') : '';
+    })();
+
+    const lines = [];
+    if (primary || care) {
+        lines.push(`Primary stakeholder line`);
+        if (baseLine) lines.push(`• ${baseLine}`);
+        if (care) lines.push(`• For ${primary || 'this stakeholder'}, I optimise for ${care.toLowerCase()}.`);
+        if (boundary) lines.push(`• Boundary line: “${boundary}”`);
+    } else if (baseLine) {
+        lines.push(`Core positioning line`);
+        lines.push(`• ${baseLine}`);
+    } else {
+        lines.push('Add your role and at least one proof item, then build positioning lines.');
+    }
+
+    if (list || needs) {
+        lines.push('');
+        lines.push('Stakeholder list notes');
+        if (list) lines.push(`• Stakeholders: ${list}`);
+        if (needs) lines.push(`• Needs: ${needs}`);
+    }
+
+    document.getElementById('out_position').textContent = lines.join('\n');
+}
+
+function buildPlan3090() {
+    const horizon = val('cp_horizon');
+    const focus = cleanLine(val('pl_focus'));
+    const actions = cleanLine(val('pl_actions'));
+    const proof = cleanLine(val('pl_proof'));
+    const signal = cleanLine(val('pl_signal'));
+
+    const p30 = [];
+    const p60 = [];
+    const p90 = [];
+
+    if (focus) p30.push(`Lock focus: ${focus}`);
+    if (actions) p30.push(`Start weekly actions: ${shorten(actions, 170)}`);
+    if (proof) p30.push(`Create proof artifacts: ${proof}`);
+
+    p60.push(`Tighten the rhythm: consistent updates, clear decisions, no surprises`);
+    if (signal) p60.push(`Watch for success signal: ${signal}`);
+    p60.push(`Convert proof into a short weekly summary that stakeholders can repeat`);
+
+    p90.push(`Be seen as the safe choice for bigger ownership in your area`);
+    p90.push(`Use the proof packet to ask for scope or a next step in level and responsibility`);
+    if (horizon) p90.push(`Align this with your time focus: ${horizon}`);
+
+    const out = [];
+    out.push('30 days');
+    out.push(p30.length ? p30.map(x => `• ${x}`).join('\n') : '• Choose one focus and create one proof item');
+    out.push('');
+    out.push('60 days');
+    out.push(p60.map(x => `• ${x}`).join('\n'));
+    out.push('');
+    out.push('90 days');
+    out.push(p90.map(x => `• ${x}`).join('\n'));
+
+    document.getElementById('out_plan').textContent = out.join('\n');
+}
+
+function buildProofPacket() {
+    const rows = Array.from(document.querySelectorAll('#proofBody tr'));
+    const items = [];
+
+    rows.forEach(r => {
+        const cells = r.querySelectorAll('input');
+        const date = cleanLine(cells[0]?.value || '');
+        const item = cleanLine(cells[1]?.value || '');
+        const metric = cleanLine(cells[2]?.value || '');
+        const link = cleanLine(cells[3]?.value || '');
+        if (date || item || metric || link) items.push({ date, item, metric, link });
+    });
+
+    if (!items.length) {
+        document.getElementById('out_packet').textContent = 'Add at least one proof item, then build your packet.';
+        return;
+    }
+
+    const out = [];
+    out.push('Proof packet');
+    out.push('Use this as your reusable evidence set for updates and one to ones.');
+    out.push('');
+
+    items.slice(0, 12).forEach((it, idx) => {
+        const parts = [];
+        if (it.date) parts.push(it.date);
+        if (it.item) parts.push(it.item);
+        if (it.metric) parts.push(it.metric);
+        if (it.link) parts.push(it.link);
+        out.push(`• ${parts.join(' | ')}`);
+    });
+
+    document.getElementById('out_packet').textContent = out.join('\n');
+}
+
+function generateOutputs() {
+    const role = cleanLine(val('cp_role'));
+    const level = cleanLine(val('cp_level'));
+    const now = cleanLine(val('cp_now'));
+    const gap = cleanLine(val('cp_gap'));
+    const protect = cleanLine(val('cp_protect'));
+
+    const outcomes = cleanLine(val('pf_outcomes'));
+    const numbers = cleanLine(val('pf_numbers'));
+    const risk = cleanLine(val('pf_risk'));
+    const trust = cleanLine(val('pf_trust'));
+    const visibility = cleanLine(val('pf_visibility'));
+
+    const primary = cleanLine(val('st_primary'));
+    const care = cleanLine(val('st_care'));
+    const list = cleanLine(val('st_list'));
+    const needs = cleanLine(val('st_needs'));
+    const boundary = cleanLine(val('st_boundary'));
+
+    const focus = cleanLine(val('pl_focus'));
+    const actions = cleanLine(val('pl_actions'));
+    const proof = cleanLine(val('pl_proof'));
+    const signal = cleanLine(val('pl_signal'));
+
+    // Ensure built blocks are up to date
+    buildCredStatement();
+    buildPositionLines();
+    buildPlan3090();
+    buildProofPacket();
+
+    const summaryParts = [];
+    if (role) summaryParts.push(role + '.');
+    if (level) summaryParts.push(`Positioning aim: ${level}.`);
+    if (protect) summaryParts.push(`I protect ${protect.toLowerCase()}.`);
+    if (outcomes) summaryParts.push(`Outcomes delivered: ${shorten(outcomes, 220)}`);
+    if (numbers) summaryParts.push(`Proof with numbers: ${shorten(numbers, 160)}`);
+    if (risk) summaryParts.push(`Risk control: ${shorten(risk, 180)}`);
+    if (trust) summaryParts.push(`Trust signal: ${trust}.`);
+    if (gap) summaryParts.push(`Gap to close: ${shorten(gap, 180)}`);
+    if (visibility) summaryParts.push(`Visibility risk: ${visibility}.`);
+    if (focus) summaryParts.push(`Next focus: ${focus}.`);
+
+    document.getElementById('out_summary').textContent = summaryParts.length
+        ? summaryParts.join(' ')
+        : 'Add a few inputs, then generate outputs. Start with role and one proof item.';
+
+    const update = [];
+    update.push('Update message template');
+    update.push('');
+    update.push('• What changed:');
+    update.push(`  ${protect ? shorten(protect, 120) : 'Add your protected outcome or the most important priority.'}`);
+    update.push('• What I did:');
+    update.push(`  ${outcomes ? shorten(outcomes, 140) : 'Add one outcome or action that moved the work forward.'}`);
+    update.push('• What is next:');
+    update.push(`  ${focus ? shorten(focus, 140) : 'Add the next focus or decision needed.'}`);
+    if (boundary) {
+        update.push('• Boundary or decision request:');
+        update.push(`  “${boundary}”`);
+    }
+
+    document.getElementById('out_update').textContent = update.join('\n');
+
+    const opener = [];
+    opener.push('Promotion conversation opener');
+    opener.push('');
+    opener.push('• I want to align on scope and level based on the work I am already delivering.');
+    if (level) opener.push(`• I am aiming to be placed as: ${level}.`);
+    if (protect) opener.push(`• I consistently protect: ${protect}.`);
+    if (numbers) opener.push(`• Proof with numbers: ${shorten(numbers, 170)}`);
+    if (risk) opener.push(`• Risk control I provide: ${shorten(risk, 170)}`);
+    if (primary || care) opener.push(`• For ${primary || 'key stakeholders'}, I optimise for ${care ? care.toLowerCase() : 'what matters most to them'}.`);
+    if (signal) opener.push(`• Success signal I am building: ${shorten(signal, 170)}`);
+
+    document.getElementById('out_opener').textContent = opener.join('\n');
+}
+
+function copyOutputs() {
+    const blocks = [
+        'CREDIBILITY STATEMENT\n' + document.getElementById('out_cred').textContent,
+        'POSITIONING LINES\n' + document.getElementById('out_position').textContent,
+        '30 60 90 PLAN\n' + document.getElementById('out_plan').textContent,
+        'PROOF PACKET\n' + document.getElementById('out_packet').textContent,
+        'ONE PARAGRAPH SUMMARY\n' + document.getElementById('out_summary').textContent,
+        'UPDATE TEMPLATE\n' + document.getElementById('out_update').textContent,
+        'PROMOTION OPENER\n' + document.getElementById('out_opener').textContent
+    ];
+    navigator.clipboard.writeText(blocks.join('\n\n============================\n\n'));
+}
+
+function resetCanvas() {
+    document.querySelectorAll('.cp-input').forEach(el => {
+        el.value = '';
+        delete el.dataset.userChanged;
+    });
+
+    // reset proof table to one row
+    const body = document.getElementById('proofBody');
+    body.innerHTML = `
+        <tr>
+            <td><input class="input cp-input" data-dimension="proof" placeholder="DD/MM/YYYY"></td>
+            <td><input class="input cp-input" data-dimension="proof" placeholder="Example: shipped X, fixed Y, resolved Z"></td>
+            <td><input class="input cp-input" data-dimension="proof" placeholder="Example: reduced rework, avoided incidents"></td>
+            <td><input class="input cp-input" data-dimension="proof" placeholder="Link or location"></td>
+        </tr>
+    `;
+
+    // reset checklist
+    document.querySelectorAll('.checklist-item').forEach((container, index) => {
+        const icon = container.querySelector('i');
+        if (!icon) explainingNothing;
+        icon.classList.remove('fa-check-square');
+        icon.classList.add('fa-square');
+        icon.style.color = '#7B5FC4';
+        checkedItems[index] = false;
+    });
+
+    // reset outputs
+    document.getElementById('out_cred').textContent = 'Click Build to generate a clean credibility statement from your proof and role.';
+    document.getElementById('out_position').textContent = 'Click Build to generate positioning lines for your key stakeholders.';
+    document.getElementById('out_plan').textContent = 'Click Build to generate a simple 30 60 90 plan.';
+    document.getElementById('out_packet').textContent = 'Add proof items, then click Build packet.';
+    document.getElementById('out_summary').textContent = 'Complete the canvas, then click Generate outputs.';
+    document.getElementById('out_update').textContent = 'Complete the canvas, then click Generate outputs.';
+    document.getElementById('out_opener').textContent = 'Complete the canvas, then click Generate outputs.';
+
+    // collapse summary
+    document.getElementById('smartSummary').classList.remove('active');
+
+    bindCanvasListeners();
+    resetDefaultSelectsToBlank();
+    updateFrameworkScore();
+}
+
+/* SMART SUMMARY */
+function generateSmartSummary() {
+    const scoreText = document.getElementById('clarityPercentage').textContent || '0%';
+    const score = parseInt(scoreText.replace('%',''), 10) || 0;
+
+    document.getElementById('summaryScore').textContent = score + '%';
+
+    const summarySection = document.getElementById('smartSummary');
+    summarySection.classList.add('active');
+    summarySection.scrollIntoView({ behavior: 'smooth' });
+
+    generateRedFlags(score);
+    generateNextSteps(score);
+    generateRecommendedResources(score);
+}
+
+function collectMissingSignals() {
+    const hasRole = !!val('cp_role');
+    const hasProof = !!val('pf_outcomes') || !!val('pf_numbers') || !!val('pf_risk');
+    const hasStakeholders = !!val('st_list') || !!val('st_primary') || !!val('st_needs');
+    const hasPlan = !!val('pl_focus') || !!val('pl_actions') || !!val('pl_proof');
+
+    return {
+        baselineWeak: !hasRole,
+        proofWeak: !hasProof,
+        stakeholdersWeak: !hasStakeholders,
+        planWeak: !hasPlan
+    };
+}
+
+function generateRedFlags(score) {
+    const grid = document.getElementById('redFlagsGrid');
+    grid.innerHTML = '';
+
+    const missing = collectMissingSignals();
+    const redFlags = [];
+
+    if (missing.baselineWeak) {
+        redFlags.push({
+            title: 'Role baseline is not locked',
+            description: 'If your role line is vague, your impact gets placed as support rather than ownership.',
+            icon: 'fas fa-crosshairs'
+        });
+    }
+    if (missing.proofWeak) {
+        redFlags.push({
+            title: 'Proof is too soft',
+            description: 'Add outcomes plus one metric. Credibility grows when people can repeat concrete results.',
+            icon: 'fas fa-shield-halved'
+        });
+    }
+    if (missing.stakeholdersWeak) {
+        redFlags.push({
+            title: 'Stakeholder positioning is missing',
+            description: 'If you do not tailor the story, people interpret you through their own priorities.',
+            icon: 'fas fa-users-gear'
+        });
+    }
+    if (missing.planWeak) {
+        redFlags.push({
+            title: 'Plan is not creating new proof',
+            description: 'A plan should create evidence weekly. Without proof, perception stays where it is.',
+            icon: 'fas fa-calendar-check'
+        });
+    }
+
+    while (redFlags.length < 3) {
+        redFlags.push({
+            title: 'Clarity is diluted',
+            description: 'Simplify. One focus, one proof item, one stakeholder line. Repeat weekly.',
+            icon: 'fas fa-wave-square'
+        });
+    }
+
+    redFlags.slice(0,3).forEach(flag => {
+        const card = document.createElement('div');
+        card.className = 'red-flag-card';
+        card.innerHTML = `
+            <div class="flag-icon"><i class="${flag.icon}"></i></div>
+            <h4 class="flag-title">${flag.title}</h4>
+            <p class="flag-description">${flag.description}</p>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function generateNextSteps(score) {
+    const grid = document.getElementById('nextStepsGrid');
+    grid.innerHTML = '';
+
+    const missing = collectMissingSignals();
+    const steps = [];
+
+    if (missing.baselineWeak) {
+        steps.push({
+            title: 'Write your role line',
+            description: 'One line that names what you own and what outcome it protects.',
+            icon: 'fas fa-pen-nib'
+        });
+    } else {
+        steps.push({
+            title: 'Tighten your credibility statement',
+            description: 'Build a short statement with outcomes and risk control. Copy it into your updates.',
+            icon: 'fas fa-bolt'
+        });
+    }
+
+    if (missing.proofWeak) {
+        steps.push({
+            title: 'Add one metric',
+            description: 'Any number helps. Time saved, errors reduced, delivery improved, reliability increased.',
+            icon: 'fas fa-chart-line'
+        });
+    } else {
+        steps.push({
+            title: 'Create a proof packet habit',
+            description: 'Add one proof row weekly. Proof is what makes you easy to back.',
+            icon: 'fas fa-folder-open'
+        });
+    }
+
+    if (missing.stakeholdersWeak) {
+        steps.push({
+            title: 'Write stakeholder lines',
+            description: 'For each stakeholder: what they care about, what you deliver, what you need from them.',
+            icon: 'fas fa-user-group'
+        });
+    } else {
+        steps.push({
+            title: 'Use your positioning lines live',
+            description: 'Use one line in the next meeting or update. Repetition builds placement.',
+            icon: 'fas fa-message'
+        });
+    }
+
+    steps.slice(0,3).forEach(step => {
+        const card = document.createElement('div');
+        card.className = 'next-step-card';
+        card.innerHTML = `
+            <div class="step-icon"><i class="${step.icon}"></i></div>
+            <h4 class="step-title">${step.title}</h4>
+            <p class="step-description">${step.description}</p>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function generateRecommendedResources(score) {
+    const grid = document.getElementById('resourcesGrid');
+    grid.innerHTML = '';
+
+    const resources = [
+        {
+            title: 'Stakeholder Mapping Grid',
+            description: 'Plot influence and interest and generate a clean engagement plan so you stop guessing who matters.',
+            icon: 'fas fa-table-cells-large',
+            link: 'stakeholder-mapping-grid.html'
+        },
+        {
+            title: 'Perception Mapping Tool',
+            description: 'Map how you are seen across different groups and spot the fastest perception leverage points.',
+            icon: 'fas fa-eye',
+            link: 'perception-mapping-tool.html'
+        },
+        {
+            title: 'Decision Clarity Framework',
+            description: 'Choose your next move with calm logic when there is pressure, noise, or competing priorities.',
+            icon: 'fas fa-diagram-project',
+            link: 'decision-clarity-framework.html'
+        }
+    ];
+
+    resources.slice(0,3).forEach(r => {
+        const card = document.createElement('div');
+        card.className = 'resource-card';
+        card.innerHTML = `
+            <div class="resource-icon"><i class="${r.icon}"></i></div>
+            <h4 class="resource-title">${r.title}</h4>
+            <p class="resource-description">${r.description}</p>
+            <a href="${r.link}" class="resource-link">Access tool <i class="fas fa-arrow-right"></i></a>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+/* COPY FULL FRAMEWORK (no dash formatting) */
+function copyFramework() {
+    const blocks = [];
+    blocks.push('CREDIBILITY AND POSITIONING FRAMEWORK');
+    blocks.push('=============================');
+    blocks.push('');
+    blocks.push('CURRENT POSITION');
+    blocks.push(`• Role: ${val('cp_role')}`);
+    blocks.push(`• Desired placement: ${val('cp_level')}`);
+    blocks.push(`• How I am seen now: ${val('cp_now')}`);
+    blocks.push(`• Gap: ${val('cp_gap')}`);
+    blocks.push(`• Outcome to protect: ${val('cp_protect')}`);
+    blocks.push('');
+    blocks.push('PROOF AND SIGNALS');
+    blocks.push(`• Outcomes: ${val('pf_outcomes')}`);
+    blocks.push(`• Risks reduced: ${val('pf_risk')}`);
+    blocks.push(`• Trust signal: ${val('pf_trust')}`);
+    blocks.push(`• Visibility risk: ${val('pf_visibility')}`);
+    blocks.push(`• Numbers: ${val('pf_numbers')}`);
+    blocks.push('');
+    blocks.push('STAKEHOLDERS AND POSITIONING');
+    blocks.push(`• Primary stakeholder: ${val('st_primary')}`);
+    blocks.push(`• What they care about: ${val('st_care')}`);
+    blocks.push(`• Stakeholders: ${val('st_list')}`);
+    blocks.push(`• Needs: ${val('st_needs')}`);
+    blocks.push(`• Boundary line: ${val('st_boundary')}`);
+    blocks.push('');
+    blocks.push('30 60 90 PLAN');
+    blocks.push(`• Time focus: ${val('cp_horizon')}`);
+    blocks.push(`• Focus: ${val('pl_focus')}`);
+    blocks.push(`• Actions: ${val('pl_actions')}`);
+    blocks.push(`• Proof: ${val('pl_proof')}`);
+    blocks.push(`• Success signal: ${val('pl_signal')}`);
+    blocks.push('');
+    blocks.push('OUTPUTS');
+    blocks.push(`• Credibility statement: ${document.getElementById('out_cred').textContent}`);
+    blocks.push(`• Positioning lines: ${document.getElementById('out_position').textContent}`);
+    blocks.push(`• Plan: ${document.getElementById('out_plan').textContent}`);
+    blocks.push(`• Proof packet: ${document.getElementById('out_packet').textContent}`);
+
+    navigator.clipboard.writeText(blocks.join('\n'));
+
+    const btn = document.getElementById('copyBtn');
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+    btn.style.background = '#10b981';
+
+    setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+    }, 2000);
+}
+
+/* MY PLAYBOOK */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'credibility-positioning-framework';
+const CURRENT_TOOL_TITLE = 'Credibility and Positioning Framework';
+const CURRENT_TOOL_TYPE = 'Framework';
+
+function getSavedItems() {
+    try {
+        const raw = localStorage.getItem(PLAYBOOK_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (e) { return []; }
+}
+function setSavedItems(items) {
+    try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); } catch (e) {}
+}
+function initializePlaybook() {
+    const overlay = document.getElementById('playbookOverlay');
+    const sidebar = document.getElementById('playbookSidebar');
+    const button = document.getElementById('myPlaybookButton');
+    const closeBtn = document.getElementById('closePlaybook');
+    const saveItemBtn = document.getElementById('saveBtn');
+    if (!overlay || !sidebar || !button || !closeBtn || !saveItemBtn) return;
+
+    renderSavedItems();
+
+    const savedItems = getSavedItems();
+    const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+    updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+    saveItemBtn.addEventListener('click', () => {
+        const items = getSavedItems();
+        const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+        let nowSaved;
+
+        if (index === -1) {
+            const toolLink = window.location.pathname.split('/').pop() || 'credibility-and-positioning-framework.html';
+            items.push({
+                id: CURRENT_TOOL_ID,
+                title: CURRENT_TOOL_TITLE,
+                type: CURRENT_TOOL_TYPE,
+                link: toolLink,
+                savedAt: new Date().toISOString()
+            });
+            nowSaved = true;
+        } else {
+            items.splice(index, 1);
+            nowSaved = false;
+        }
+
+        setSavedItems(items);
+        updateSaveButtonState(saveItemBtn, nowSaved);
+        renderSavedItems();
+    });
+
+    button.addEventListener('click', () => { overlay.classList.add('open'); sidebar.classList.add('open'); });
+    closeBtn.addEventListener('click', () => { overlay.classList.remove('open'); sidebar.classList.remove('open'); });
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) { overlay.classList.remove('open'); sidebar.classList.remove('open'); }
+    });
+}
+function updateSaveButtonState(button, isSaved) {
+    const icon = button.querySelector('i');
+    const label = button.querySelector('span');
+    if (isSaved) {
+        button.classList.add('saved');
+        if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+        if (label) label.textContent = 'Saved';
+    } else {
+        button.classList.remove('saved');
+        if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+        if (label) label.textContent = 'Save item';
+    }
+}
+function renderSavedItems() {
+    const listEl = document.getElementById('savedItemsList');
+    const emptyEl = document.getElementById('savedItemsEmpty');
+    if (!listEl || !emptyEl) return;
+
+    const items = getSavedItems();
+    listEl.innerHTML = '';
+
+    if (!items.length) { emptyEl.style.display = 'block'; return; }
+    emptyEl.style.display = 'none';
+
+    items.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'saved-item';
+        const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+        const dateText = savedDate ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+        li.innerHTML = `
+            <div class="saved-item-title-row">
+                <span class="saved-item-title">${item.title}</span>
+                <span class="saved-item-type">${item.type}</span>
+            </div>
+            <div class="saved-item-meta">${dateText ? `Saved on ${dateText}` : ''}</div>
+            <a class="saved-item-link" href="${item.link}">Open <i class="fas fa-arrow-right"></i></a>
+        `;
+        listEl.appendChild(li);
+    });
+}
+</script>
+
+</body>
+</html>

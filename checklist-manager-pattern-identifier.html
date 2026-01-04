@@ -1,0 +1,3331 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manager Pattern Identifier Checklist | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand)
+    =========================== */
+    :root {
+      --primary-white: #FFFFFF;
+      --light-gray: #F8F9FA;
+      --medium-gray: #E9ECEF;
+      --dark-gray: #6C757D;
+      --text-dark: #212529;
+      --text-medium: #495057;
+
+      --accent-purple: #7B5FC4;
+      --accent-purple-dark: #5A4496;
+      --light-purple: #E6E0F5;
+      --lighter-purple: #F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+      --success-green: #10b981;
+      --warning-orange: #f59e0b;
+      --danger-red: #ef4444;
+      --info-blue: #3b82f6;
+
+      /* Category accents (TEP style) */
+      --cat-burnout: #F59E0B;
+      --cat-clarity: #14B8A6;
+      --cat-manager: #10b981;
+      --cat-politics: #3B82F6;
+      --cat-hr: #8B5CF6;
+      --cat-confidence: #EF4444;
+      --cat-decision: #6366F1;
+      --cat-career: #800020;
+    }
+
+    /* Dark Mode Variables */
+    .dark-mode {
+      --primary-white: #1a1a1a;
+      --light-gray: #2a2a2a;
+      --medium-gray: #3a3a3a;
+      --dark-gray: #888888;
+      --text-dark: #e0e0e0;
+      --text-medium: #b0b0b0;
+
+      --accent-purple: #9d86e9;
+      --accent-purple-dark: #7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.2);
+      --lighter-purple: rgba(123, 95, 196, 0.1);
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+      --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      --cat-career: #B03060;
+    }
+
+    /* ===========================
+       GLOBAL STYLES
+    =========================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      min-height: 100vh;
+    }
+
+    body.loaded { opacity: 1; }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===========================
+       NAVIGATION
+    =========================== */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      height: 80px;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      height: 100%;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      transform: translateX(20%);
+      padding: 14px 10px;
+      transition: all 0.3s ease;
+      display: block;
+      min-height: 100px;
+    }
+
+    .logo-fallback {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 0 14px;
+      border-radius: 10px;
+      background: var(--premium-gradient);
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      transform: translateX(20%);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 50px;
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-size: 17px;
+    }
+
+    .nav-link:hover { color: var(--accent-purple); }
+
+    .nav-link-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .new-tag {
+      position: absolute;
+      top: -12px;
+      right: -35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #000;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index: 10;
+      white-space: nowrap;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      transform: translateX(-20%);
+    }
+
+    .header-cta {
+      background: var(--accent-purple);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
+    }
+
+    .header-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(123, 95, 196, 0.35);
+    }
+
+    .sign-in {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 17px;
+    }
+
+    .sign-in:hover { color: var(--accent-purple); }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .theme-toggle:hover { background-color: var(--light-gray); }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .mobile-toggle:hover { background-color: var(--light-gray); }
+
+    .mobile-sign-in,
+    .mobile-sign-up { display: none; }
+
+    @media (max-width: 768px) {
+      .nav-container { justify-content: center; position: relative; }
+
+      .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+
+      .logo-img { height: 125px; transform: none; padding: 12px 0; }
+      .logo-fallback { transform: none; }
+
+      .mobile-toggle {
+        display: flex;
+        position: absolute;
+        left: 20px;
+        align-items: center;
+      }
+
+      .nav-actions {
+        transform: none;
+        gap: 16px;
+        position: absolute;
+        right: 20px;
+        align-items: center;
+      }
+
+      .nav-actions .sign-in,
+      .nav-actions .header-cta { display: none; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        gap: 20px;
+      }
+
+      .nav-links.active { display: flex; }
+
+      .nav-link-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+      }
+
+      .new-tag { position: static; margin-left: 8px; }
+
+      .mobile-sign-in {
+        display: block !important;
+        margin-top: 10px;
+        padding: 12px 20px;
+        background: var(--primary-white);
+        color: var(--accent-purple);
+        border-radius: 10px;
+        text-align: center;
+        font-weight: 700;
+        text-decoration: none;
+        border: 2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+
+      .mobile-sign-up {
+        display: block !important;
+        margin-top: 10px;
+        padding: 12px 20px;
+        background: var(--accent-purple);
+        color: white;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: 700;
+        text-decoration: none;
+        border: 2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .tool-hero-section {
+      width: 100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+
+    .tool-hero-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(250, 245, 255, 0.85) 0%, rgba(245, 240, 255, 0.6) 50%, rgba(255, 255, 255, 0.25) 100%);
+      z-index: 1;
+    }
+
+    .dark-mode .tool-hero-section::before {
+      background: linear-gradient(135deg, rgba(42, 42, 42, 0.9) 0%, rgba(31, 31, 31, 0.7) 50%, rgba(26, 26, 26, 0.4) 100%);
+    }
+
+    .tool-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 10px;
+      animation: heroFadeUp 0.45s ease-out;
+    }
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .breadcrumb {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dark-gray);
+      margin-bottom: 10px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb a {
+      color: var(--text-medium);
+      text-decoration: none !important;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumb a:hover { color: var(--accent-purple-dark); }
+
+    .breadcrumb i { font-size: 10px; opacity: 0.7; }
+    .breadcrumb .current { color: var(--text-dark); font-weight: 600; }
+
+    .checklist-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      margin: 18px 0 12px;
+      display: block;
+    }
+
+    .hero-main-heading {
+      font-size: 46px;
+      font-weight: 650;
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 18px;
+      max-width: 950px;
+    }
+
+    .hero-subheading {
+      font-size: 16px;
+      color: var(--text-medium);
+      line-height: 1.6;
+      max-width: 920px;
+      margin-bottom: 26px;
+    }
+
+    /* Save button anchored to hero */
+    .save-btn {
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      z-index: 5;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 95, 196, 0.6);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--accent-purple-dark);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .save-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(123, 95, 196, 0.18);
+      background: #ffffff;
+    }
+
+    .dark-mode .save-btn {
+      background: rgba(20, 20, 20, 0.9);
+      border-color: rgba(157, 134, 233, 0.6);
+    }
+
+    .save-btn.saved {
+      background: var(--accent-purple);
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    /* Category Pills (Brand colours) */
+    .category-pills-container { margin-bottom: 10px; }
+    .category-pills-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-medium);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .category-pills-grid {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      text-decoration: none;
+      height: 32px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .dark-mode .category-pill { background: rgba(255, 255, 255, 0.08); }
+
+    .category-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      text-decoration: none;
+    }
+
+    .category-icon { font-size: 12px; opacity: 0.9; flex-shrink: 0; }
+
+    .category-pill.manager {
+      color: var(--cat-manager);
+      border-color: rgba(34, 197, 94, 0.25);
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.10), rgba(34, 197, 94, 0.04));
+    }
+    .dark-mode .category-pill.manager {
+      border-color: rgba(34, 197, 94, 0.45);
+      background: linear-gradient(135deg, rgba(34, 197, 94, 0.20), rgba(34, 197, 94, 0.10));
+    }
+
+    .category-pill.career {
+      color: var(--cat-career);
+      border-color: rgba(128, 0, 32, 0.25);
+      background: linear-gradient(135deg, rgba(128, 0, 32, 0.10), rgba(128, 0, 32, 0.04));
+    }
+    .dark-mode .category-pill.career {
+      border-color: rgba(176, 48, 96, 0.45);
+      background: linear-gradient(135deg, rgba(128, 0, 32, 0.20), rgba(128, 0, 32, 0.10));
+    }
+
+    /* ===========================
+       CONTEXT & PRO TIPS
+    =========================== */
+    .context-tips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 40px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto 50px;
+      padding: 24px 20px 10px;
+      margin-top: 6px;
+    }
+
+    .context-card, .tips-card {
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 28px 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title i { color: var(--accent-purple); }
+
+    .bullet-list { list-style: none; margin: 0; padding: 0; }
+    .bullet-list li {
+      color: var(--text-medium);
+      line-height: 1.65;
+      margin-bottom: 12px;
+      padding-left: 26px;
+      position: relative;
+      font-size: 14.5px;
+      font-weight: 450;
+    }
+    .bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 10px;
+      color: var(--accent-purple);
+      font-size: 18px;
+    }
+
+    /* ===========================
+       CHECKLIST BODY
+    =========================== */
+    .checklist-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 20px;
+    }
+
+    .checklist-section-title {
+      font-size: 26px;
+      font-weight: 750;
+      color: var(--accent-purple-dark);
+      margin: 56px 0 18px;
+    }
+
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+      counter-reset: tepStep;
+    }
+
+    .checklist-item {
+      position: relative;
+      background: var(--primary-white);
+      padding: 14px 16px 14px 52px;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      border: 1px solid var(--border-light);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+      height: 100%;
+      min-height: 72px;
+    }
+
+    .checklist-item::before {
+      counter-increment: tepStep;
+      content: counter(tepStep);
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--accent-purple-dark);
+      background: linear-gradient(135deg, rgba(123, 95, 196, 0.16), rgba(123, 95, 196, 0.06));
+      border: 1px solid rgba(123, 95, 196, 0.22);
+    }
+
+    .dark-mode .checklist-item::before {
+      color: var(--accent-purple);
+      background: linear-gradient(135deg, rgba(123, 95, 196, 0.22), rgba(123, 95, 196, 0.10));
+      border-color: rgba(157, 134, 233, 0.30);
+    }
+
+    .checklist-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+      border-color: rgba(123, 95, 196, 0.25);
+    }
+
+    .checklist-item i {
+      color: var(--accent-purple);
+      font-size: 18px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .checklist-text {
+      flex: 1;
+      color: var(--text-medium);
+      font-size: 14.6px;
+      line-height: 1.55;
+      font-weight: 450;
+    }
+
+    /* ===========================
+       MANAGER PROFILE (LIVE) — MOVED BELOW CHECKLIST
+    =========================== */
+    .manager-profile-section {
+      max-width: 1100px;
+      margin: 10px auto 22px;
+      padding: 0 20px;
+    }
+
+    .manager-profile-card {
+      background: var(--primary-white);
+      border: 1px solid rgba(123, 95, 196, 0.15);
+      border-radius: 16px;
+      padding: 22px 22px 20px;
+      box-shadow: 0 14px 40px rgba(123, 95, 196, 0.10);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .manager-profile-card::before{
+      content:'';
+      position:absolute;
+      top:0; left:0; right:0;
+      height:3px;
+      background: var(--premium-gradient);
+    }
+
+    .profile-header-row{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom: 10px;
+    }
+
+    .profile-title-wrap{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      min-width:0;
+    }
+
+    .profile-title{
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-purple-dark);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      line-height:1.2;
+    }
+
+    .profile-title i{
+      color: var(--accent-purple);
+    }
+
+    .profile-sub{
+      font-size: 13.5px;
+      color: var(--text-medium);
+      font-weight: 450;
+      max-width: 820px;
+    }
+
+    .profile-meta{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      align-items:flex-end;
+      flex-shrink:0;
+    }
+
+    .risk-chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 95, 196, 0.25);
+      background: linear-gradient(135deg, rgba(123, 95, 196, 0.10), rgba(123, 95, 196, 0.04));
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-purple-dark);
+      white-space: nowrap;
+    }
+
+    .risk-dot{
+      width:10px; height:10px;
+      border-radius: 999px;
+      background: var(--warning-orange);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.10);
+    }
+
+    .risk-chip.low { border-color: rgba(16, 185, 129, 0.35); background: linear-gradient(135deg, rgba(16,185,129,0.12), rgba(16,185,129,0.05)); color: #0f766e; }
+    .risk-chip.low .risk-dot{ background: var(--success-green); }
+    .risk-chip.medium { border-color: rgba(245, 158, 11, 0.35); background: linear-gradient(135deg, rgba(245,158,11,0.14), rgba(245,158,11,0.06)); color: #92400e; }
+    .risk-chip.medium .risk-dot{ background: var(--warning-orange); }
+    .risk-chip.high { border-color: rgba(239, 68, 68, 0.35); background: linear-gradient(135deg, rgba(239,68,68,0.14), rgba(239,68,68,0.06)); color: #991b1b; }
+    .risk-chip.high .risk-dot{ background: var(--danger-red); }
+
+    .dark-mode .risk-chip{
+      border-color: rgba(157, 134, 233, 0.30);
+      background: linear-gradient(135deg, rgba(123, 95, 196, 0.22), rgba(123, 95, 196, 0.10));
+      color: var(--accent-purple);
+    }
+
+    .profile-grid{
+      display:grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .profile-panel{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 14px 14px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+    }
+
+    .dark-mode .profile-panel{
+      box-shadow: 0 12px 28px rgba(0,0,0,0.28);
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .panel-title{
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--accent-purple-dark);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom: 10px;
+    }
+
+    .panel-title i{ color: var(--accent-purple); }
+
+    .panel-body{
+      font-size: 13.5px;
+      color: var(--text-medium);
+      line-height: 1.6;
+      font-weight: 450;
+    }
+
+    .micro-list{
+      list-style:none;
+      margin: 10px 0 0;
+      padding:0;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .micro-list li{
+      padding-left: 22px;
+      position:relative;
+    }
+
+    .micro-list li::before{
+      content:"•";
+      position:absolute;
+      left: 8px;
+      top: 0;
+      color: var(--accent-purple);
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    /* === THE USER REQUEST: pills in Manager Profile (Live) all on one line === */
+    #managerProfileLive .profile-pills-row{
+      display: flex;
+      flex-wrap: nowrap;       /* no wrapping */
+      gap: 10px;
+      overflow-x: auto;        /* scroll if needed */
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
+    }
+    #managerProfileLive .profile-pill{
+      flex: 0 0 auto;
+      white-space: nowrap;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 95, 196, 0.28);
+      background: linear-gradient(135deg, rgba(123, 95, 196, 0.10), rgba(123, 95, 196, 0.04));
+      color: var(--accent-purple-dark);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .dark-mode #managerProfileLive .profile-pill{
+      border-color: rgba(157, 134, 233, 0.35);
+      background: linear-gradient(135deg, rgba(123, 95, 196, 0.22), rgba(123, 95, 196, 0.10));
+      color: var(--accent-purple);
+    }
+    #managerProfileLive .profile-pill:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 14px 26px rgba(0,0,0,0.10);
+      background: linear-gradient(135deg, rgba(123, 95, 196, 0.16), rgba(123, 95, 196, 0.06));
+    }
+    #managerProfileLive .pill-tag{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--info-blue);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.10);
+    }
+    #managerProfileLive .profile-pill.high .pill-tag{ background: var(--danger-red); }
+    #managerProfileLive .profile-pill.medium .pill-tag{ background: var(--warning-orange); }
+    #managerProfileLive .profile-pill.low .pill-tag{ background: var(--success-green); }
+
+    .profile-note{
+      margin-top: 12px;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(123,95,196,0.16);
+      background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.03));
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color: var(--text-medium);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .dark-mode .profile-note{
+      border-color: rgba(157,134,233,0.18);
+      background: linear-gradient(135deg, rgba(123,95,196,0.18), rgba(123,95,196,0.08));
+    }
+
+    .profile-note i{
+      color: var(--accent-purple);
+      margin-top: 2px;
+      flex-shrink:0;
+    }
+
+    /* ===========================
+       LEFT STEP SIDEBAR (glide out)
+    =========================== */
+    .step-sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 1185;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    .step-sidebar-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .step-sidebar {
+      position: fixed;
+      top: 0;
+      left: -420px;
+      width: 390px;
+      max-width: 92vw;
+      height: 100%;
+      z-index: 1186;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-right: 1px solid var(--border-light);
+      box-shadow: 6px 0 26px rgba(0,0,0,0.18);
+      transition: left 0.24s ease;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .dark-mode .step-sidebar {
+      background: rgba(18, 18, 18, 0.96);
+      box-shadow: 8px 0 28px rgba(0,0,0,0.55);
+    }
+
+    .step-sidebar.open { left: 0; }
+
+    .step-sidebar-topbar {
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+    }
+
+    .step-sidebar-topbar::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--premium-gradient);
+    }
+
+    .step-top-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .step-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(123, 95, 196, 0.10);
+      border: 1px solid rgba(123, 95, 196, 0.18);
+      width: 100%;
+    }
+
+    .dark-mode .step-chip {
+      background: rgba(123, 95, 196, 0.18);
+      border-color: rgba(157, 134, 233, 0.22);
+    }
+
+    .step-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 12px;
+      color: #fff;
+      background: var(--premium-gradient);
+      flex-shrink: 0;
+      box-shadow: 0 10px 22px rgba(123, 95, 196, 0.22);
+    }
+
+    .step-chip-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .step-chip-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .step-chip-sub {
+      font-size: 12px;
+      color: var(--text-medium);
+      font-weight: 500;
+    }
+
+    .step-close-btn {
+      background: none;
+      border: none;
+      color: var(--dark-gray);
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 999px;
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .step-close-btn:hover { background: var(--light-gray); }
+
+    .step-sidebar-body {
+      padding: 14px 16px 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .step-card {
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 14px 14px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+    }
+
+    .dark-mode .step-card { box-shadow: 0 12px 28px rgba(0,0,0,0.28); }
+
+    .step-card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--accent-purple-dark);
+      margin-bottom: 8px;
+    }
+
+    .step-card-title i { opacity: 0.95; }
+
+    .step-card p,
+    .step-card li {
+      font-size: 13.5px;
+      color: var(--text-medium);
+      line-height: 1.6;
+      font-weight: 450;
+    }
+
+    .step-mini-list {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .step-mini-list li {
+      padding-left: 22px;
+      position: relative;
+    }
+
+    .step-mini-list li::before {
+      content: "•";
+      position: absolute;
+      left: 8px;
+      top: 0;
+      color: var(--accent-purple);
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .step-sidebar-footer {
+      padding: 12px 16px 16px;
+      border-top: 1px solid var(--border-light);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: rgba(255,255,255,0.7);
+    }
+
+    .dark-mode .step-sidebar-footer { background: rgba(18,18,18,0.7); }
+
+    .step-footer-btn {
+      border: none;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 750;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .step-footer-btn.primary {
+      background: var(--premium-gradient);
+      color: #fff;
+      box-shadow: 0 12px 26px rgba(123,95,196,0.22);
+    }
+
+    .step-footer-btn.primary:hover { transform: translateY(-1px); box-shadow: 0 16px 30px rgba(123,95,196,0.28); }
+
+    .step-footer-btn.secondary {
+      background: var(--light-purple);
+      color: var(--accent-purple-dark);
+    }
+
+    .dark-mode .step-footer-btn.secondary {
+      background: rgba(123, 95, 196, 0.22);
+      color: var(--accent-purple);
+    }
+
+    .step-footer-btn.secondary:hover {
+      transform: translateY(-1px);
+      background: rgba(123, 95, 196, 0.18);
+    }
+
+    .step-footer-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* ===========================
+       SCORE SECTION (repurposed)
+    =========================== */
+    .clarity-score-section {
+      max-width: 1100px;
+      margin: 25px auto 40px;
+      padding: 0 20px;
+    }
+
+    .presence-snapshot-header { margin-bottom: 18px; text-align: left; }
+    .presence-snapshot-header h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent-purple-dark);
+      margin-bottom: 6px;
+    }
+    .presence-snapshot-header p {
+      font-size: 14px;
+      color: var(--text-medium);
+      max-width: 1100px;
+      line-height: 1.55;
+      font-weight: 450;
+    }
+
+    .clarity-score-bar {
+      display: flex;
+      align-items: stretch;
+      gap: 30px;
+      background: var(--primary-white);
+      border-radius: 16px;
+      padding: 22px 24px 20px;
+      box-shadow: 0 14px 40px rgba(123, 95, 196, 0.12);
+      border: 1px solid rgba(123, 95, 196, 0.15);
+    }
+
+    .clarity-progress-container { flex: 1.4; }
+
+    .clarity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .clarity-title { font-size: 18px; font-weight: 700; color: var(--accent-purple-dark); }
+    .clarity-percentage { font-size: 28px; font-weight: 600; color: var(--accent-purple); }
+
+    .progress-container {
+      height: 10px;
+      background: var(--light-gray);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .dark-mode .progress-container { background: rgba(255, 255, 255, 0.12); }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--premium-gradient);
+      width: 0%;
+      border-radius: 5px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--dark-gray);
+    }
+
+    .presence-dimensions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .presence-dimension-pill {
+      border-radius: 12px;
+      padding: 8px 10px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--text-medium);
+    }
+
+    .dark-mode .presence-dimension-pill {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .presence-dimension-pill span.label { font-weight: 750; color: var(--text-dark); }
+    .presence-dimension-pill span.score { font-weight: 600; color: var(--accent-purple); }
+
+    .actions-container {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      max-width: 260px;
+    }
+
+    .action-btn {
+      background: var(--premium-gradient);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      font-size: 13.5px;
+      border-radius: 12px;
+      font-weight: 750;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 26px rgba(123, 95, 196, 0.28);
+    }
+
+    .action-btn.secondary {
+      background: var(--light-purple);
+      color: var(--accent-purple-dark);
+    }
+
+    .dark-mode .action-btn.secondary {
+      background: rgba(123, 95, 196, 0.21);
+      color: var(--accent-purple);
+    }
+
+    .action-btn.secondary:hover { background: var(--accent-purple); color: white; }
+    .action-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+
+    .progress-fill.high { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .progress-fill.medium { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .progress-fill.low { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+    /* ===========================
+       SMART SUMMARY
+    =========================== */
+    .smart-summary-section {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      display: none;
+    }
+
+    .smart-summary-section.active {
+      display: block;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .summary-header { text-align: center; margin-bottom: 28px; }
+    .summary-title { font-size: 24px; font-weight: 700; color: var(--accent-purple-dark); margin-bottom: 6px; }
+    .summary-subtitle { color: var(--text-medium); font-size: 15px; margin-bottom: 8px; font-weight: 450; }
+    .summary-insight { font-size: 13.5px; color: var(--dark-gray); max-width: 760px; margin: 0 auto; line-height: 1.6; }
+
+    .section-header {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-gray);
+    }
+
+    .section-header.red { color: var(--danger-red); }
+    .section-header.purple { color: var(--accent-purple-dark); }
+    .section-header.blue { color: var(--accent-purple); }
+
+    .red-flags-grid,
+    .next-steps-grid,
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .red-flag-card,
+    .next-step-card,
+    .resource-card {
+      background: var(--primary-white);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+    }
+
+    .dark-mode .red-flag-card,
+    .dark-mode .next-step-card,
+    .dark-mode .resource-card {
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.32);
+    }
+
+    .red-flag-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+    .next-step-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--premium-gradient); }
+    .resource-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--premium-gradient); }
+
+    .flag-icon, .step-icon, .resource-icon {
+      font-size: 18px;
+      margin-bottom: 14px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .flag-icon { color: #ef4444; background: rgba(239, 68, 68, 0.10); }
+    .step-icon, .resource-icon { color: var(--accent-purple); background: var(--lighter-purple); }
+
+    .flag-title, .step-title, .resource-title { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+    .flag-description, .step-description, .resource-description { color: var(--text-medium); font-size: 13.5px; line-height: 1.55; flex-grow: 1; font-weight: 450; }
+
+    .resource-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .resource-card:hover { transform: translateY(-3px); box-shadow: 0 18px 34px rgba(123, 95, 196, 0.14); }
+
+    .resource-link {
+      color: var(--accent-purple);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 13.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    .resource-link:hover { text-decoration: underline; }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR (Right)
+    =========================== */
+    .my-playbook-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1200;
+      background: var(--premium-gradient);
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 750;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+
+    .my-playbook-fab:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+    }
+
+    .playbook-sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1190;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .playbook-sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+
+    .playbook-sidebar {
+      position: fixed;
+      top: 0;
+      right: -380px;
+      width: 340px;
+      max-width: 90%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index: 1191;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border-light);
+      transition: right 0.25s ease;
+    }
+
+    .dark-mode .playbook-sidebar { background: rgba(18, 18, 18, 0.96); box-shadow: -4px 0 22px rgba(0,0,0,0.6); }
+    .playbook-sidebar.open { right: 0; }
+
+    .playbook-sidebar-header {
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .playbook-sidebar-header-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .playbook-sidebar-header h3 { font-size: 18px; font-weight: 700; color: var(--text-dark); }
+    .playbook-sidebar-header p { font-size: 13px; color: var(--dark-gray); }
+
+    .playbook-close-btn {
+      background: none;
+      border: none;
+      color: var(--dark-gray);
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .playbook-close-btn:hover { background: var(--light-gray); }
+
+    .playbook-sidebar-body {
+      padding: 14px 18px 20px;
+      padding-bottom: 50px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .saved-items-empty { font-size: 13px; color: var(--dark-gray); line-height: 1.6; }
+    .saved-items-list { list-style: none; margin: 0; padding: 0; }
+
+    .saved-item {
+      padding: 10px 10px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .saved-item-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .saved-item-title { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+    .saved-item-type {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent-purple-dark);
+      font-weight: 600;
+    }
+
+    .saved-item-meta { font-size: 12px; color: var(--dark-gray); }
+
+    .saved-item-link {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--accent-purple);
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .saved-item-link:hover { text-decoration: underline; }
+
+    .playbook-quick-links {
+      margin-top: 223px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .quick-links-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-medium);
+    }
+
+    .playbook-quick-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .quick-link-pill {
+      width: 58%;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 95, 196, 0.35);
+      background: linear-gradient(135deg,rgba(123, 95, 196, 0.08),rgba(123, 95, 196, 0.02));
+      text-decoration: none;
+      color: var(--accent-purple-dark);
+      font-size: 13px;
+      font-weight: 650;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .quick-link-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg,rgba(123, 95, 196, 0.16), rgba(123, 95, 196, 0.06));
+    }
+
+    .dark-mode .quick-link-pill {
+      border-color: rgba(157, 134, 233, 0.55);
+      background: linear-gradient(135deg,rgba(123, 95, 196, 0.26),rgba(123, 95, 196, 0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      background: var(--primary-white);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 30px;
+      text-align: center;
+      color: var(--text-medium);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px) {
+      .context-tips-grid { grid-template-columns: 1fr; gap: 24px; }
+      .red-flags-grid, .next-steps-grid, .resources-grid { grid-template-columns: repeat(2, 1fr); }
+      .checklist-grid { grid-template-columns: 1fr; }
+      .clarity-score-bar { flex-direction: column; }
+      .actions-container { max-width: 100%; flex-direction: row; }
+      .profile-grid { grid-template-columns: 1fr; }
+      .profile-meta { align-items: flex-start; }
+    }
+
+    @media (max-width: 768px) {
+      .tool-hero-section { margin-top: 100px; }
+      .hero-main-heading { font-size: 36px; }
+      .clarity-score-bar { padding: 18px; }
+      .actions-container { flex-direction: column; }
+      .red-flags-grid, .next-steps-grid, .resources-grid { grid-template-columns: 1fr; }
+      .save-btn { right: 18px; top: 10px; }
+      .my-playbook-fab { bottom: 18px; right: 18px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-main-heading { font-size: 32px; }
+      .checklist-name { font-size: 13px; }
+      .presence-dimensions { grid-template-columns: 1fr; }
+      .checklist-item { padding-left: 50px; }
+      .checklist-item::before { border-radius: 10px; }
+      .step-sidebar { width: 92vw; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===========================
+     NAVIGATION
+=========================== -->
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo" aria-label="The Employee Playbook">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      <div class="logo-fallback" id="logoFallback">The Employee Playbook</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<div class="tool-hero-section">
+  <button class="save-btn" id="saveBtn">
+    <i class="far fa-bookmark"></i>
+    <span>Save item</span>
+  </button>
+
+  <div class="tool-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-house"></i> Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="the-toolkit.html">Toolkit</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="category-manager-relationship-and-leadership-style.html">Manager Relationship &amp; Leadership Style</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Manager Pattern Identifier Checklist</span>
+    </div>
+
+    <span class="checklist-name">MANAGER PATTERN IDENTIFIER</span>
+
+    <h1 class="hero-main-heading">Identify your manager’s pattern and choose a strategy that protects your energy and reputation</h1>
+
+    <div class="hero-subheading">
+      Improve how you work with your manager by understanding what drives their behaviour so you can tailor your approach, get clearer decisions, and reduce avoidable friction and keep work moving without unnecessary back-and-forth
+    </div>
+
+
+    <div class="category-pills-container">
+      <span class="category-pills-title">Related Categories</span>
+      <div class="category-pills-grid">
+        <a href="category-career-playbook.html" class="category-pill career">
+          <i class="fas fa-briefcase category-icon"></i>
+          <span>Career Playbook</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     CONTEXT & PRO TIPS
+=========================== -->
+<div class="context-tips-grid">
+  <div class="context-card">
+    <h3 class="section-title"><i class="fas fa-calendar-check"></i>When to Use This Checklist</h3>
+    <ul class="bullet-list">
+      <li>When “feedback” keeps shifting and you can’t tell if you’re under-performing or being managed badly.</li>
+      <li>When you feel on edge before 1:1s and you’re spending too much energy anticipating their mood.</li>
+      <li>When you need to decide whether to adapt, escalate, transfer, or plan an exit.</li>
+      <li>When the manager is “nice” publicly but you experience pressure, blame, or ambiguity in private.</li>
+      <li>When you want a factual lens you can revisit without rewriting history.</li>
+    </ul>
+  </div>
+
+  <div class="tips-card">
+    <h3 class="section-title"><i class="fas fa-lightbulb"></i>Pro Tips</h3>
+    <ul class="bullet-list">
+      <li>Tick patterns based on <strong>repetition</strong>, not one bad week.</li>
+      <li>Look for the manager’s <strong>default lever</strong>: control, speed, optics, rules, or avoidance.</li>
+      <li>Risk is about <strong>impact + power</strong>. A difficult style with low power is different to the same style with authority.</li>
+      <li>Use the live profile to choose a strategy that protects <strong>income, credibility, and mental bandwidth</strong>.</li>
+      <li>Re-run this monthly. Patterns become clearer when you track them over time.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===========================
+     CHECKLIST BODY
+=========================== -->
+<div class="checklist-body" id="checklistText">
+  <h2 class="checklist-section-title">Manager Pattern Identifier Checklist</h2>
+
+  <div class="checklist-grid">
+    <!-- Control / Micromanagement -->
+    <div class="checklist-item" data-category="control">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They override decisions after agreeing them, and the “why” changes after the fact.</div>
+    </div>
+    <div class="checklist-item" data-category="control">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They want frequent updates and small approvals, even when you have the competence to deliver.</div>
+    </div>
+    <div class="checklist-item" data-category="control">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They rewrite your work or “improve” it without explaining what success looks like.</div>
+    </div>
+
+    <!-- Chaos / Unstructured -->
+    <div class="checklist-item" data-category="chaos">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">Priorities change mid-week, and you are expected to absorb the fallout.</div>
+    </div>
+    <div class="checklist-item" data-category="chaos">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They say “just get it done” but can’t define quality, scope, or trade-offs.</div>
+    </div>
+    <div class="checklist-item" data-category="chaos">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They book over your focus time and treat urgency as proof of importance.</div>
+    </div>
+
+    <!-- Avoidant / Passive -->
+    <div class="checklist-item" data-category="avoidant">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They avoid decisions until it’s too late, then react sharply when results are messy.</div>
+    </div>
+    <div class="checklist-item" data-category="avoidant">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">Your risks or concerns are minimised, then later used as “you should have flagged this”.</div>
+    </div>
+    <div class="checklist-item" data-category="avoidant">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They disappear during conflict and leave you exposed to stakeholders.</div>
+    </div>
+
+    <!-- Political / Optics -->
+    <div class="checklist-item" data-category="political">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They care more about how things look to seniors than whether delivery is realistic.</div>
+    </div>
+    <div class="checklist-item" data-category="political">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They “manage up” by shifting blame down, or rewriting the narrative after outcomes.</div>
+    </div>
+    <div class="checklist-item" data-category="political">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">You’re asked to do work that protects optics (slides, spin, cover) rather than value.</div>
+    </div>
+
+    <!-- Volatile / Mood-led -->
+    <div class="checklist-item" data-category="volatile">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">Their mood determines how they interpret the same facts (praise one day, criticism the next).</div>
+    </div>
+    <div class="checklist-item" data-category="volatile">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They escalate quickly, interrupt, or use intensity to force agreement.</div>
+    </div>
+    <div class="checklist-item" data-category="volatile">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">You feel you must “perform calm” because any emotion will be used against you.</div>
+    </div>
+
+    <!-- Credit / Undermining -->
+    <div class="checklist-item" data-category="undermining">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They take credit for your work or present your contributions without acknowledgement.</div>
+    </div>
+    <div class="checklist-item" data-category="undermining">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They correct you publicly or question your judgement in front of others.</div>
+    </div>
+    <div class="checklist-item" data-category="undermining">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">They give “feedback” that is personal or vague (tone, attitude, likeability) rather than behavioural.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================================
+     YOUR MANAGER PROFILE (LIVE) — MOVED BELOW CHECKLIST (as requested)
+========================================================== -->
+<section class="manager-profile-section" id="managerProfileLive">
+  <div class="manager-profile-card">
+    <div class="profile-header-row">
+      <div class="profile-title-wrap">
+        <div class="profile-title"><i class="fas fa-fingerprint"></i> Your Manager Profile (Live)</div>
+        <div class="profile-sub">
+          This updates as you tick the checklist. It surfaces likely patterns, the risk level, and the safest operating rules.
+          Click a pill to see the pattern’s “tell”, what it optimises for, and how to protect yourself.
+        </div>
+      </div>
+      <div class="profile-meta">
+        <div class="risk-chip medium" id="riskChip">
+          <span class="risk-dot" id="riskDot"></span>
+          <span id="riskLabel">Risk: building signal</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- pills: forced to one line (scrollable) -->
+    <div class="profile-pills-row" id="profilePillsRow" aria-label="Detected patterns">
+      <!-- Pills injected by JS -->
+    </div>
+
+    <div class="profile-grid">
+      <div class="profile-panel">
+        <div class="panel-title"><i class="fas fa-compass"></i> Working Model</div>
+        <div class="panel-body" id="profileWorkingModel">
+          Tick a few items to generate a grounded profile. The goal is clarity, not labels.
+        </div>
+        <ul class="micro-list" id="profileOperatingRules"></ul>
+      </div>
+
+      <div class="profile-panel">
+        <div class="panel-title"><i class="fas fa-shield-halved"></i> Safest Next Moves</div>
+        <div class="panel-body" id="profileNextMoves">
+          Your next moves will appear here: what to document, what to ask for in writing, and which boundaries matter most.
+        </div>
+        <div class="profile-note" id="profileNote">
+          <i class="fas fa-circle-info"></i>
+          <div>
+            <strong>Protect income first.</strong> If risk is high, stabilise your position (evidence, clarity, allies) before you confront.
+            Strategy beats bravery when power is uneven.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     LEFT STEP SIDEBAR
+=========================== -->
+<div class="step-sidebar-overlay" id="stepOverlay" aria-hidden="true">
+  <aside class="step-sidebar" id="stepSidebar" aria-label="Step details panel">
+    <div class="step-sidebar-topbar">
+      <div class="step-top-row">
+        <div class="step-chip">
+          <div class="step-badge" id="stepBadge">1</div>
+          <div class="step-chip-text">
+            <div class="step-chip-title" id="stepTitle">Step title</div>
+            <div class="step-chip-sub" id="stepSubtitle">Click “Mark complete” if this is true for you.</div>
+          </div>
+        </div>
+        <button class="step-close-btn" id="closeStepSidebar" aria-label="Close step panel">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="step-sidebar-body">
+      <div class="step-card">
+        <div class="step-card-title"><i class="fas fa-bullseye"></i>Focus</div>
+        <p id="stepFocus"></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-title"><i class="fas fa-lightbulb"></i>What this pattern usually signals</div>
+        <ul class="step-mini-list" id="stepStrong"></ul>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-title"><i class="fas fa-triangle-exclamation"></i>Risk if you ignore it</div>
+        <p id="stepSlip"></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-title"><i class="fas fa-bolt"></i>Micro-move</div>
+        <p id="stepMicro"></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-title"><i class="fas fa-quote-right"></i>Try this line</div>
+        <p id="stepLine"></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-title"><i class="fas fa-file-lines"></i>Document this</div>
+        <p id="stepRemote"></p>
+      </div>
+    </div>
+
+    <div class="step-sidebar-footer">
+      <button class="step-footer-btn secondary" id="prevStepBtn"><i class="fas fa-arrow-left"></i> Previous</button>
+      <button class="step-footer-btn secondary" id="nextStepBtn">Next <i class="fas fa-arrow-right"></i></button>
+      <button class="step-footer-btn primary" id="toggleStepCompleteBtn" style="grid-column: 1 / -1;">
+        <i class="fas fa-check"></i> Mark complete
+      </button>
+    </div>
+  </aside>
+</div>
+
+<!-- ===========================
+     SCORE SECTION
+=========================== -->
+<div class="clarity-score-section">
+  <div class="presence-snapshot-header">
+    <h2>Your Pattern Signal Score</h2>
+    <p>
+      This score reflects how many pattern signals you’ve ticked. Higher does not mean “hopeless” — it means you should move with
+      structure: boundaries, evidence, written clarity, and controlled exposure.
+    </p>
+  </div>
+
+  <div class="clarity-score-bar">
+    <div class="clarity-progress-container">
+      <div class="clarity-header">
+        <div class="clarity-title">Pattern Signal Score</div>
+        <div class="clarity-percentage" id="clarityPercentage">0%</div>
+      </div>
+      <div class="progress-container">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-labels">
+        <span>Low signal</span>
+        <span>Mixed</span>
+        <span>High signal</span>
+      </div>
+
+      <div class="presence-dimensions">
+        <div class="presence-dimension-pill">
+          <span class="label">Control / Micromanage</span>
+          <span class="score" id="scoreControl">0%</span>
+        </div>
+        <div class="presence-dimension-pill">
+          <span class="label">Chaos / Urgency</span>
+          <span class="score" id="scoreChaos">0%</span>
+        </div>
+        <div class="presence-dimension-pill">
+          <span class="label">Avoidance</span>
+          <span class="score" id="scoreAvoidant">0%</span>
+        </div>
+        <div class="presence-dimension-pill">
+          <span class="label">Politics / Optics</span>
+          <span class="score" id="scorePolitical">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions-container">
+      <button class="action-btn" onclick="generateSmartSummary()" id="generateBtn" disabled>
+        <i class="fas fa-magic"></i> Generate summary
+      </button>
+      <button class="action-btn secondary" onclick="copyChecklist()" id="copyBtn">
+        <i class="far fa-copy"></i> Copy checklist
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     SMART SUMMARY
+=========================== -->
+<div class="smart-summary-section" id="smartSummary">
+  <div class="summary-header">
+    <h2 class="summary-title">Your Smart Manager Pattern Summary</h2>
+    <p class="summary-subtitle">Based on your Pattern Signal Score of <span id="summaryScore">0%</span></p>
+    <p class="summary-insight">
+      This is a strategy read. It highlights the most likely risk points, the evidence to collect, and the safest moves to protect your reputation and income.
+    </p>
+  </div>
+
+  <h3 class="section-header red">
+    <i class="fas fa-exclamation-triangle"></i> High-Risk Exposures
+  </h3>
+  <div class="red-flags-grid" id="redFlagsGrid"></div>
+
+  <h3 class="section-header purple">
+    <i class="fas fa-forward"></i> Next Moves (Ordered)
+  </h3>
+  <div class="next-steps-grid" id="nextStepsGrid"></div>
+
+  <h3 class="section-header blue">
+    <i class="fas fa-tools"></i> Recommended Tools to Support You
+  </h3>
+  <div class="resources-grid" id="resourcesGrid"></div>
+</div>
+
+<!-- ===========================
+     MY PLAYBOOK SIDEBAR (Right)
+=========================== -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven’t saved anything yet. Use <strong>Save</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <div class="playbook-quick-links-header">
+          <span class="quick-links-title">Quick links</span>
+        </div>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill">
+            <i class="fas fa-gauge"></i> The Dashboard
+          </a>
+          <a href="the-lens.html" class="quick-link-pill">
+            <i class="fas fa-search"></i> The Lens
+          </a>
+          <a href="the-toolkit.html" class="quick-link-pill">
+            <i class="fas fa-toolbox"></i> The Toolkit
+          </a>
+          <a href="the-coach.html" class="quick-link-pill">
+            <i class="fas fa-comments"></i> The Coach
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ===========================
+     JAVASCRIPT
+=========================== -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('loaded');
+
+  initializeChecklist();
+  initializeThemeToggle();
+  initializeMobileNav();
+  initializePlaybook();
+  initializeStepSidebar();
+  updateManagerProfileLive(); // initialise with empty state
+});
+
+/* ===========================
+   MOBILE NAV
+=========================== */
+function initializeMobileNav() {
+  const mobileToggle = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  if (!mobileToggle || !navLinks) return;
+
+  mobileToggle.addEventListener('click', function () {
+    navLinks.classList.toggle('active');
+    const icon = this.querySelector('i');
+    if (icon) {
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-times');
+    }
+  });
+
+  document.addEventListener('click', function(event) {
+    if (navLinks.classList.contains('active') &&
+      !navLinks.contains(event.target) &&
+      !mobileToggle.contains(event.target)) {
+      navLinks.classList.remove('active');
+      const icon = mobileToggle.querySelector('i');
+      if (icon) {
+        icon.classList.add('fa-bars');
+        icon.classList.remove('fa-times');
+      }
+    }
+  });
+}
+
+/* ===========================
+   THEME TOGGLE + LOGO
+=========================== */
+function initializeThemeToggle() {
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  if (!themeToggleBtn) return;
+
+  const themeIcon = themeToggleBtn.querySelector('i');
+  const logoImg = document.getElementById('mainLogo');
+  const logoFallback = document.getElementById('logoFallback');
+
+  function getLogoPath(filename) {
+    if (window.location.protocol === 'file:') {
+      const currentPath = window.location.pathname;
+      const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+      return basePath + 'assets/img/' + filename;
+    } else {
+      return './assets/img/' + filename;
+    }
+  }
+
+  function showFallbackLogo() {
+    if (logoImg) logoImg.style.display = 'none';
+    if (logoFallback) logoFallback.style.display = 'inline-flex';
+  }
+
+  function showImageLogo() {
+    if (logoFallback) logoFallback.style.display = 'none';
+    if (logoImg) logoImg.style.display = 'block';
+  }
+
+  function updateLogoForTheme(isDarkMode) {
+    if (!logoImg) return;
+    showImageLogo();
+    logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+    logoImg.alt = 'The Employee Playbook';
+  }
+
+  const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+  const savedTheme = localStorage.getItem('theme');
+  const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches);
+
+  if (shouldUseDark) {
+    document.body.classList.add('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+    updateLogoForTheme(true);
+  } else {
+    document.body.classList.remove('dark-mode');
+    if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+    updateLogoForTheme(false);
+  }
+
+  themeToggleBtn.addEventListener('click', function() {
+    const isDarkMode = document.body.classList.contains('dark-mode');
+
+    if (isDarkMode) {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+      if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+      updateLogoForTheme(false);
+    } else {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+      if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+      updateLogoForTheme(true);
+    }
+  });
+
+  prefersDarkScheme.addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      if (e.matches) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      }
+    }
+  });
+
+  if (logoImg) {
+    logoImg.addEventListener('error', function() {
+      if (this.src.includes('logo-dark.png')) {
+        this.src = getLogoPath('logo.png');
+      } else {
+        showFallbackLogo();
+      }
+    });
+  }
+}
+
+/* ===========================
+   CHECKLIST LOGIC
+=========================== */
+let checkedItems = [];
+let itemCategories = [];
+
+const dimensionConfig = {
+  control: ['control'],
+  chaos: ['chaos'],
+  avoidant: ['avoidant'],
+  political: ['political'],
+  volatile: ['volatile'],
+  undermining: ['undermining']
+};
+
+function initializeChecklist() {
+  const checklistContainers = document.querySelectorAll('.checklist-item');
+  checkedItems = new Array(checklistContainers.length).fill(false);
+  itemCategories = [];
+
+  checklistContainers.forEach((container, index) => {
+    const icon = container.querySelector('i');
+    const category = container.getAttribute('data-category');
+    itemCategories[index] = category;
+
+    container.addEventListener('click', function() {
+      if (icon.classList.contains('fa-square')) {
+        icon.classList.remove('fa-square');
+        icon.classList.add('fa-check-square');
+        icon.style.color = '#5A4496';
+        checkedItems[index] = true;
+      } else {
+        icon.classList.remove('fa-check-square');
+        icon.classList.add('fa-square');
+        icon.style.color = '#7B5FC4';
+        checkedItems[index] = false;
+      }
+
+      updatePresenceScore();
+      updateManagerProfileLive();
+      openStepSidebar(index);
+    });
+  });
+}
+
+function updatePresenceScore() {
+  const checkedCount = checkedItems.filter(Boolean).length;
+  const totalCount = checkedItems.length;
+  const signalScore = totalCount > 0 ? Math.round((checkedCount / totalCount) * 100) : 0;
+
+  document.getElementById('clarityPercentage').textContent = signalScore + '%';
+  const progressFill = document.getElementById('progressFill');
+  progressFill.style.width = signalScore + '%';
+
+  progressFill.classList.remove('high', 'medium', 'low');
+  if (signalScore >= 75) progressFill.classList.add('high');
+  else if (signalScore >= 40) progressFill.classList.add('medium');
+  else progressFill.classList.add('low');
+
+  document.getElementById('generateBtn').disabled = checkedCount === 0;
+
+  // Category scores
+  const scores = {};
+  Object.keys(dimensionConfig).forEach(k => scores[k] = { checked: 0, total: 0 });
+
+  itemCategories.forEach((category, index) => {
+    Object.keys(dimensionConfig).forEach(dim => {
+      if (dimensionConfig[dim].includes(category)) {
+        scores[dim].total += 1;
+        if (checkedItems[index]) scores[dim].checked += 1;
+      }
+    });
+  });
+
+  const pct = (obj) => obj.total ? Math.round((obj.checked / obj.total) * 100) : 0;
+
+  document.getElementById('scoreControl').textContent = pct(scores.control) + '%';
+  document.getElementById('scoreChaos').textContent = pct(scores.chaos) + '%';
+  document.getElementById('scoreAvoidant').textContent = pct(scores.avoidant) + '%';
+  document.getElementById('scorePolitical').textContent = pct(scores.political) + '%';
+
+  refreshStepCompleteButton();
+}
+
+/* ===========================
+   MANAGER PROFILE (LIVE)
+=========================== */
+const patternLibrary = {
+  control: {
+    name: "Control / Micromanager",
+    levelHint: "medium",
+    focus: "Control masquerades as quality. It often spikes under pressure.",
+    tells: [
+      "Frequent approvals and ‘quick checks’ that become dependency.",
+      "Scope creep through micro-edits and unspoken standards.",
+      "Decision reversals without clear criteria."
+    ],
+    risk: "If you don’t get decisions in writing, you’ll carry blame for shifting expectations.",
+    micro: "Convert verbal alignment into written criteria: outcome, scope, definition of done, and trade-offs.",
+    line: "“To keep this tight, can we confirm the success criteria and who approves what — in writing?”",
+    document: "Decision points, approval chain, revisions requested, and any after-the-fact changes."
+  },
+  chaos: {
+    name: "Chaos / Urgency Merchant",
+    levelHint: "medium",
+    focus: "Speed becomes the identity. Clarity is sacrificed for motion.",
+    tells: [
+      "Priorities change mid-flight with no trade-off decisions.",
+      "Urgency is rewarded, planning is mocked.",
+      "Calendar pressure replaces real prioritisation."
+    ],
+    risk: "Your workload becomes unbounded. You’ll be judged on outcomes you never had the conditions to deliver.",
+    micro: "Force trade-offs: what stops, what slips, and what ‘good enough’ looks like.",
+    line: "“Happy to do this — what’s the trade-off: what should drop or move?”",
+    document: "Weekly priority list, changes, and explicit trade-offs (or lack of them)."
+  },
+  avoidant: {
+    name: "Avoidant / Hands-off Until It’s Bad",
+    levelHint: "medium",
+    focus: "They avoid the discomfort of decisions, then punish the messiness later.",
+    tells: [
+      "Silence instead of direction.",
+      "Risks minimised, then weaponised.",
+      "Disappears during conflict."
+    ],
+    risk: "You’ll be exposed in stakeholder conflict and blamed for lack of ‘alignment’.",
+    micro: "Escalate decisions early with calm structure: options, risk, recommended path.",
+    line: "“I need a decision to protect delivery. Option A/B — my recommendation is A because…”",
+    document: "Requests for decisions, non-response, and consequences when decisions are delayed."
+  },
+  political: {
+    name: "Political / Optics-First",
+    levelHint: "high",
+    focus: "They optimise for narrative and perception, not delivery reality.",
+    tells: [
+      "Upward narrative changes after outcomes.",
+      "Blame management appears quickly.",
+      "You’re pulled into ‘presentation work’ to protect optics."
+    ],
+    risk: "High reputational risk if you are the convenient fall-person. Evidence discipline matters.",
+    micro: "Operate with clean written trails and stakeholder visibility that cannot be rewritten later.",
+    line: "“Just to confirm in writing: decision, owner, and the risks we’re accepting.”",
+    document: "Narrative shifts, emails, meeting notes, risks raised, and who accepted them."
+  },
+  volatile: {
+    name: "Volatile / Mood-led",
+    levelHint: "high",
+    focus: "Emotion is used as pressure. Predictability disappears.",
+    tells: [
+      "Intensity forces agreement.",
+      "Praise/criticism oscillates without behavioural anchors.",
+      "You self-censor to avoid triggering them."
+    ],
+    risk: "High stress + high unpredictability. Your nervous system will carry the cost.",
+    micro: "Short, factual, written follow-ups and limited exposure. Avoid emotional debate.",
+    line: "“I hear you. I’ll summarise the agreed actions in writing so we’re aligned.”",
+    document: "Incidents, tone, interruptions, any threats, and factual summaries sent after."
+  },
+  undermining: {
+    name: "Undermining / Credit Taker",
+    levelHint: "high",
+    focus: "They optimise for status and positioning, often at your expense.",
+    tells: [
+      "Public correction or subtle credibility erosion.",
+      "Credit drift (your work becomes their work).",
+      "Feedback becomes personal rather than behavioural."
+    ],
+    risk: "Career capital leak. If senior stakeholders only see their story, you lose leverage.",
+    micro: "Create clean visibility: written updates with your name attached; stakeholder receipts.",
+    line: "“I’ll send the summary to the group with key decisions and owners so it’s clear.”",
+    document: "Examples of credit drift, public corrections, and any pattern of reputational harm."
+  }
+};
+
+function computePatternScores() {
+  // Count checked per category
+  const counts = {};
+  Object.keys(patternLibrary).forEach(k => counts[k] = 0);
+
+  checkedItems.forEach((checked, idx) => {
+    if (!checked) return;
+    const cat = itemCategories[idx];
+    if (counts[cat] !== undefined) counts[cat] += 1;
+  });
+
+  // Normalise roughly (each category has 3 items in this checklist)
+  const normalised = {};
+  Object.keys(counts).forEach(k => {
+    normalised[k] = Math.min(100, Math.round((counts[k] / 3) * 100));
+  });
+
+  return { counts, normalised };
+}
+
+function deriveRiskLevel(normalised) {
+  // Heuristic: take top two patterns, risk increases if any are high-risk categories with high signal
+  const entries = Object.entries(normalised).sort((a,b) => b[1] - a[1]);
+  const top = entries.slice(0, 2);
+
+  const topScore = top[0] ? top[0][1] : 0;
+  const secondScore = top[1] ? top[1][1] : 0;
+
+  const highRiskCats = new Set(['political', 'volatile', 'undermining']);
+
+  const hasHighRiskCat = top.some(([k,v]) => highRiskCats.has(k) && v >= 34);
+  const lotsOfSignals = (topScore >= 67) || (topScore >= 34 && secondScore >= 34);
+
+  if (hasHighRiskCat && lotsOfSignals) return 'high';
+  if (topScore >= 34) return 'medium';
+  return 'low';
+}
+
+function updateManagerProfileLive() {
+  const pillsRow = document.getElementById('profilePillsRow');
+  const workingModel = document.getElementById('profileWorkingModel');
+  const rulesList = document.getElementById('profileOperatingRules');
+  const nextMoves = document.getElementById('profileNextMoves');
+  const riskChip = document.getElementById('riskChip');
+
+  if (!pillsRow || !workingModel || !rulesList || !nextMoves || !riskChip) return;
+
+  const { normalised } = computePatternScores();
+  const sorted = Object.entries(normalised).sort((a,b) => b[1] - a[1]);
+
+  // Only show patterns with at least one tick (~34% for category, but we can detect via raw: >= 1/3 -> 34)
+  const active = sorted.filter(([k,v]) => v >= 34);
+
+  pillsRow.innerHTML = '';
+
+  if (!active.length) {
+    // Empty state
+    workingModel.textContent = "Tick a few items to generate your profile. You’re looking for repeated patterns, not one-off conflict.";
+    rulesList.innerHTML = '';
+    nextMoves.textContent = "Once signals appear, your next moves will show up here: what to clarify in writing, what to document, and which boundaries matter most.";
+
+    setRiskChip(riskChip, 'medium', 'Risk: building signal');
+    return;
+  }
+
+  // Build pills (one line)
+  active.slice(0, 6).forEach(([key, score]) => {
+    const p = patternLibrary[key];
+    const level = (score >= 67) ? 'high' : (score >= 34 ? 'medium' : 'low');
+
+    const pill = document.createElement('button');
+    pill.type = 'button';
+    pill.className = `profile-pill ${level}`;
+    pill.setAttribute('data-pattern', key);
+    pill.innerHTML = `
+      <span class="pill-tag"></span>
+      <span>${p.name}</span>
+      <span style="opacity:0.75; font-weight:600;">${score}%</span>
+    `;
+    pill.addEventListener('click', () => renderProfileForPattern(key));
+    pillsRow.appendChild(pill);
+  });
+
+  // Risk label based on combined signal
+  const risk = deriveRiskLevel(normalised);
+  const topPattern = active[0][0];
+  const topName = patternLibrary[topPattern].name;
+
+  const label = risk === 'high'
+    ? `Risk: high exposure • likely ${topName}`
+    : risk === 'medium'
+      ? `Risk: moderate exposure • likely ${topName}`
+      : `Risk: contained • likely ${topName}`;
+
+  setRiskChip(riskChip, risk, label);
+
+  // Default render = top pattern
+  renderProfileForPattern(topPattern);
+
+  // Operating rules: blend top 2 patterns
+  const topTwo = active.slice(0,2).map(([k]) => k);
+  const rules = buildOperatingRules(topTwo, risk);
+  rulesList.innerHTML = '';
+  rules.forEach(r => {
+    const li = document.createElement('li');
+    li.textContent = r;
+    rulesList.appendChild(li);
+  });
+
+  // Next moves: based on risk
+  nextMoves.textContent = buildNextMoves(topTwo, risk);
+}
+
+function setRiskChip(el, level, text){
+  el.classList.remove('low','medium','high');
+  el.classList.add(level);
+  el.querySelector('#riskLabel')?.remove?.(); // safety
+  // Just set via inner spans
+  const dot = el.querySelector('.risk-dot');
+  const labelSpan = el.querySelector('span:nth-child(2)') || el.querySelector('span:last-child');
+
+  // We built chip as dot + span; keep structure stable:
+  const spans = el.querySelectorAll('span');
+  if (spans.length >= 2) spans[1].textContent = text;
+}
+
+function renderProfileForPattern(key){
+  const workingModel = document.getElementById('profileWorkingModel');
+  const nextMoves = document.getElementById('profileNextMoves');
+
+  const data = patternLibrary[key];
+  if (!data || !workingModel || !nextMoves) return;
+
+  workingModel.innerHTML = `
+    <strong>${data.name}.</strong> ${data.focus}
+    <div style="margin-top:10px;"></div>
+    <span style="font-weight:700; color: var(--text-dark);">Core tells:</span>
+    <ul class="micro-list" style="margin-top:8px;">
+      ${data.tells.map(t => `<li>${t}</li>`).join('')}
+    </ul>
+    <div style="margin-top:10px;"></div>
+    <span style="font-weight:700; color: var(--text-dark);">Risk:</span> ${data.risk}
+  `;
+
+  // “Safest next moves” panel shows micro + line + document
+  nextMoves.innerHTML = `
+    <div><strong>Micro-move:</strong> ${data.micro}</div>
+    <div style="margin-top:10px;"><strong>Try this line:</strong> ${data.line}</div>
+    <div style="margin-top:10px;"><strong>Document this:</strong> ${data.document}</div>
+  `;
+}
+
+function buildOperatingRules(patternKeys, risk){
+  const base = [
+    "Keep agreements in writing: decision, owner, success criteria, and trade-offs.",
+    "Separate facts from interpretation. Keep your language calm and behavioural.",
+    "Never rely on “verbal alignment” if consequences exist."
+  ];
+
+  const add = [];
+
+  if (patternKeys.includes('control')) add.push("Use approval gates: agree what needs sign-off and what doesn’t, then hold it.");
+  if (patternKeys.includes('chaos')) add.push("Force trade-offs weekly: what stops, what slips, what ‘good enough’ means.");
+  if (patternKeys.includes('avoidant')) add.push("Escalate decisions early with options + recommendation. Silence is a risk signal.");
+  if (patternKeys.includes('political')) add.push("Create narrative-proof trails: circulate decisions and accepted risks to stakeholders.");
+  if (patternKeys.includes('volatile')) add.push("Limit emotional exposure: short meetings, written summaries, and clean boundaries.");
+  if (patternKeys.includes('undermining')) add.push("Build visibility: written updates with your name attached; protect credit drift.");
+
+  if (risk === 'high') {
+    add.push("Stabilise before confrontation: evidence, allies, and documented clarity first.");
+  }
+
+  return [...base, ...add].slice(0, 6);
+}
+
+function buildNextMoves(patternKeys, risk){
+  const moves = [];
+
+  moves.push("Start a simple evidence log: date, situation, request, your response, outcome. Keep it factual.");
+  moves.push("Move key discussions into writing: “To confirm, we agreed X by Y, risks are Z, owner is A.”");
+
+  if (patternKeys.includes('control')) moves.push("Ask for success criteria + approval chain in one message. Reduce moving goalposts.");
+  if (patternKeys.includes('chaos')) moves.push("Introduce a weekly priority list and ask them to choose the top 3. Everything else is a trade-off.");
+  if (patternKeys.includes('avoidant')) moves.push("Escalate decisions with options, risks, and a deadline. Don’t absorb their avoidance.");
+  if (patternKeys.includes('political')) moves.push("Increase stakeholder visibility: send summaries to the group so the narrative can’t be rewritten.");
+  if (patternKeys.includes('volatile')) moves.push("Shorten exposure: fewer live debates, more written structure. Use neutral language and summarise.");
+  if (patternKeys.includes('undermining')) moves.push("Protect credit: circulate artefacts and decisions with your name attached; keep receipts.");
+
+  if (risk === 'high') moves.push("If the pattern is damaging, plan a safe exit route in parallel (internal move, role scope shift, or external search).");
+
+  return moves.slice(0, 5).join(" ");
+}
+
+/* ===========================
+   LEFT STEP SIDEBAR CONTENT
+=========================== */
+const stepData = [
+  // 18 items aligned to checklist items in order
+  // control (1-3)
+  {
+    title: "Decision reversals",
+    focus: "This signals instability in criteria. You need written anchors.",
+    strong: ["They agree verbally, then revisit later with a new ‘why’.", "You’re judged against a moving target.", "Confidence erodes because success is undefined."],
+    slip: "You’ll carry blame for outcomes based on standards you never agreed.",
+    micro: "Send a two-line recap: decision + criteria + owner. Keep it clean.",
+    line: "“Just confirming: we agreed X by Y, success criteria are Z, and owner is A.”",
+    document: "Decision points, who agreed, what changed, and what the impact was."
+  },
+  {
+    title: "Frequent approvals",
+    focus: "This is dependency creation. It can be intentional or unconscious.",
+    strong: ["They insert themselves into small choices.", "Updates become a control mechanism.", "Autonomy shrinks."],
+    slip: "You become slow and over-exposed. Then criticised for speed.",
+    micro: "Propose a light approval map: what needs sign-off, what doesn’t.",
+    line: "“To speed delivery, can we agree what needs your sign-off vs what I can run with?”",
+    document: "Approval requests, delays, and any later criticism about pace."
+  },
+  {
+    title: "Unexplained rewrites",
+    focus: "It’s not ‘quality’ if standards are hidden. Ask for criteria.",
+    strong: ["Edits replace clarity instead of creating it.", "You can’t learn what ‘good’ means.", "Confidence becomes dependent on approval."],
+    slip: "You’ll be told you ‘should know’ — and your performance narrative becomes vulnerable.",
+    micro: "Ask for 3 bullet standards for what ‘great’ looks like.",
+    line: "“So I can deliver this consistently, what are the top 3 standards you want me to follow?”",
+    document: "Edits requested, differences between versions, and criteria (or lack of it)."
+  },
+
+  // chaos (4-6)
+  {
+    title: "Priority changes mid-week",
+    focus: "You need trade-off decisions, not more effort.",
+    strong: ["Work reshuffles without de-scoping.", "You absorb the pressure.", "The manager avoids choosing."],
+    slip: "You burn out and still look ‘slow’ because scope never shrinks.",
+    micro: "Force a top-3 list and park everything else.",
+    line: "“What are the top 3 this week — and what should drop?”",
+    document: "Weekly priorities and every change request with the date."
+  },
+  {
+    title: "‘Just get it done’ ambiguity",
+    focus: "Ambiguity is a risk tool when accountability stays with you.",
+    strong: ["Success is undefined.", "Trade-offs are unspoken.", "Quality is judged after the fact."],
+    slip: "You’ll be criticised for missing expectations you were never given.",
+    micro: "Ask for definition of done: outcome, audience, quality bar.",
+    line: "“Before I start: what does ‘done’ look like — outcome, audience, and quality bar?”",
+    document: "Your clarifying questions and any refusal to define quality."
+  },
+  {
+    title: "Urgency as identity",
+    focus: "Calendar pressure is not prioritisation.",
+    strong: ["Meetings replace thinking time.", "Everything becomes ‘urgent’.", "Your focus is fragmented."],
+    slip: "You’re always behind because the system is designed to keep you reactive.",
+    micro: "Protect focus blocks and set update rhythms.",
+    line: "“I’ll share updates at 11:00 and 16:00 — in between I need focus time to deliver.”",
+    document: "Meeting load, interruptions, and impact on delivery."
+  },
+
+  // avoidant (7-9)
+  {
+    title: "Delayed decisions",
+    focus: "Silence is not neutrality. It creates risk for you.",
+    strong: ["They avoid choosing.", "They want deniability.", "They react late."],
+    slip: "You’re exposed when outcomes are messy — and blamed for ‘not aligning’.",
+    micro: "Send options + recommendation + deadline.",
+    line: "“We need a decision by Thursday to protect delivery. Option A/B — I recommend A.”",
+    document: "Requests for decisions, lack of response, and consequences."
+  },
+  {
+    title: "Risks minimised then weaponised",
+    focus: "This is a credibility trap. Move risk into writing.",
+    strong: ["Your concerns are brushed aside.", "Later: ‘Why didn’t you…?’", "Accountability shifts onto you."],
+    slip: "You’ll be framed as negligent even when you flagged it.",
+    micro: "Write risk + mitigation + decision owner.",
+    line: "“Flagging risk X. Proposed mitigation Y. Please confirm if we’re accepting this risk.”",
+    document: "Risk raised, response, and later narrative shift."
+  },
+  {
+    title: "Disappears in conflict",
+    focus: "You need stakeholder protection and clear escalation routes.",
+    strong: ["They avoid hard conversations.", "You become the face of the conflict.", "Stakeholders pressure you."],
+    slip: "You take reputational hits without authority.",
+    micro: "Ask who owns stakeholder conflict management.",
+    line: "“Who should own stakeholder alignment on this? I can support, but I need clear ownership.”",
+    document: "Stakeholder incidents and manager absence."
+  },
+
+  // political (10-12)
+  {
+    title: "Optics over reality",
+    focus: "When optics win, delivery truth gets punished.",
+    strong: ["Unrealistic commitments made upwards.", "Pressure is pushed down.", "Bad news becomes dangerous."],
+    slip: "You’ll be blamed for reality not matching the story.",
+    micro: "Document constraints and accepted risks early.",
+    line: "“Given X constraint, the risk is Y. Please confirm we’re accepting this.”",
+    document: "Upward commitments, your constraints, and their acknowledgement."
+  },
+  {
+    title: "Blame-shifting narrative",
+    focus: "Protect yourself with visibility and receipts.",
+    strong: ["Story changes after outcomes.", "They reframe decisions.", "Ownership becomes muddy."],
+    slip: "Your reputation can be rewritten in one meeting.",
+    micro: "Circulate factual summaries to the group.",
+    line: "“Sharing a quick summary of decisions, owners, and risks so we’re aligned.”",
+    document: "Meeting notes, emails, and who agreed what."
+  },
+  {
+    title: "Optics work requests",
+    focus: "If you’re asked to ‘cover’, make sure the risk isn’t pinned on you later.",
+    strong: ["Slide-heavy firefighting.", "Spin language appears.", "Reality discussions are avoided."],
+    slip: "You become complicit — and still take blame if it unravels.",
+    micro: "Anchor to facts and decisions, not spin.",
+    line: "“I can draft this. What are the agreed facts and decisions we’re representing?”",
+    document: "Optics instructions and any pressure to misrepresent."
+  },
+
+  // volatile (13-15)
+  {
+    title: "Mood swings",
+    focus: "Unpredictability drives anxiety. Reduce exposure.",
+    strong: ["Same facts get different reactions.", "You can’t calibrate expectations.", "You pre-emptively overwork."],
+    slip: "You’ll burn bandwidth trying to predict emotions.",
+    micro: "Short meetings + written follow-ups.",
+    line: "“I’ll summarise actions in writing so we’re aligned.”",
+    document: "Incidents and factual summaries sent after."
+  },
+  {
+    title: "Intensity to force agreement",
+    focus: "Pressure tactics reduce psychological safety and distort decisions.",
+    strong: ["Interruptions", "Raised voice or sharp tone", "‘Do it now’ energy"],
+    slip: "You agree under pressure, then carry the consequences alone.",
+    micro: "Slow the pace: confirm in writing; ask for time to respond.",
+    line: "“I want to answer properly. I’ll come back with a clear recommendation shortly.”",
+    document: "Tone, interruptions, and any threats or coercion."
+  },
+  {
+    title: "You must ‘perform calm’",
+    focus: "If emotion is punished, keep it factual and structured.",
+    strong: ["Your feelings are framed as ‘attitude’.", "They personalise disagreement.", "Your reality is minimised."],
+    slip: "You’ll self-censor and shrink — which harms performance and confidence.",
+    micro: "Use behavioural language and written anchors.",
+    line: "“To keep this objective: the behaviour I observed was X, impact was Y, request is Z.”",
+    document: "Personal comments, vague feedback, and your written clarifications."
+  },
+
+  // undermining (16-18)
+  {
+    title: "Credit drift",
+    focus: "Protect your career capital with visible ownership.",
+    strong: ["Your work is presented as theirs.", "Your name disappears from outputs.", "You are treated as a delivery engine."],
+    slip: "You lose leverage, and senior stakeholders won’t associate impact with you.",
+    micro: "Send artefacts yourself; put your name on updates.",
+    line: "“Sharing my draft and the decision points for alignment.”",
+    document: "Examples of credit drift and your original artefacts."
+  },
+  {
+    title: "Public correction",
+    focus: "Undermining in public is often strategic. Respond calmly and document.",
+    strong: ["They question your judgement in front of others.", "They ‘joke’ at your expense.", "They frame you as unreliable."],
+    slip: "If left unchallenged, it becomes a social truth in the team.",
+    micro: "Correct facts calmly; follow up in writing.",
+    line: "“Just to clarify the facts: X is correct. I’ll share the detail after the meeting.”",
+    document: "Public incidents and a factual written follow-up."
+  },
+  {
+    title: "Personal / vague feedback",
+    focus: "Vague feedback keeps you controllable. Convert it into behaviours.",
+    strong: ["Tone/attitude feedback without examples.", "Moving expectations.", "Likeability metrics."],
+    slip: "Your performance story becomes subjective and hard to defend.",
+    micro: "Ask for behavioural examples and success criteria.",
+    line: "“Can you share two specific examples and what ‘good’ would look like next time?”",
+    document: "Feedback given, lack of examples, and your request for clarity."
+  }
+];
+
+let currentStepIndex = null;
+
+function initializeStepSidebar() {
+  const overlay = document.getElementById('stepOverlay');
+  const sidebar = document.getElementById('stepSidebar');
+  const closeBtn = document.getElementById('closeStepSidebar');
+
+  const prevBtn = document.getElementById('prevStepBtn');
+  const nextBtn = document.getElementById('nextStepBtn');
+  const toggleCompleteBtn = document.getElementById('toggleStepCompleteBtn');
+
+  if (!overlay || !sidebar || !closeBtn || !prevBtn || !nextBtn || !toggleCompleteBtn) return;
+
+  closeBtn.addEventListener('click', closeStepSidebar);
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeStepSidebar();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeStepSidebar();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentStepIndex === null) return;
+    const nextIndex = Math.max(0, currentStepIndex - 1);
+    openStepSidebar(nextIndex);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (currentStepIndex === null) return;
+    const nextIndex = Math.min(stepData.length - 1, currentStepIndex + 1);
+    openStepSidebar(nextIndex);
+  });
+
+  toggleCompleteBtn.addEventListener('click', () => {
+    if (currentStepIndex === null) return;
+    toggleChecklistItemByIndex(currentStepIndex);
+    refreshStepCompleteButton();
+  });
+}
+
+function openStepSidebar(index) {
+  const overlay = document.getElementById('stepOverlay');
+  const sidebar = document.getElementById('stepSidebar');
+  if (!overlay || !sidebar) return;
+
+  currentStepIndex = index;
+
+  const data = stepData[index] || {};
+  document.getElementById('stepBadge').textContent = (index + 1);
+  document.getElementById('stepTitle').textContent = data.title || 'Step';
+  document.getElementById('stepFocus').textContent = data.focus || '';
+
+  const strongList = document.getElementById('stepStrong');
+  strongList.innerHTML = '';
+  (data.strong || []).forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    strongList.appendChild(li);
+  });
+
+  document.getElementById('stepSlip').textContent = data.slip || '';
+  document.getElementById('stepMicro').textContent = data.micro || '';
+  document.getElementById('stepLine').textContent = data.line || '';
+  document.getElementById('stepRemote').textContent = data.document || '';
+
+  document.getElementById('prevStepBtn').disabled = index === 0;
+  document.getElementById('nextStepBtn').disabled = index === (stepData.length - 1);
+
+  refreshStepCompleteButton();
+
+  overlay.classList.add('open');
+  sidebar.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+}
+
+function closeStepSidebar() {
+  const overlay = document.getElementById('stepOverlay');
+  const sidebar = document.getElementById('stepSidebar');
+  if (!overlay || !sidebar) return;
+
+  overlay.classList.remove('open');
+  sidebar.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+}
+
+function toggleChecklistItemByIndex(index) {
+  const items = document.querySelectorAll('.checklist-item');
+  const target = items[index];
+  if (!target) return;
+
+  const icon = target.querySelector('i');
+  if (!icon) return;
+
+  if (icon.classList.contains('fa-square')) {
+    icon.classList.remove('fa-square');
+    icon.classList.add('fa-check-square');
+    icon.style.color = '#5A4496';
+    checkedItems[index] = true;
+  } else {
+    icon.classList.remove('fa-check-square');
+    icon.classList.add('fa-square');
+    icon.style.color = '#7B5FC4';
+    checkedItems[index] = false;
+  }
+
+  updatePresenceScore();
+  updateManagerProfileLive();
+}
+
+function refreshStepCompleteButton() {
+  const btn = document.getElementById('toggleStepCompleteBtn');
+  if (!btn || currentStepIndex === null) return;
+
+  const isComplete = !!checkedItems[currentStepIndex];
+  btn.innerHTML = isComplete
+    ? '<i class="fas fa-rotate-left"></i> Mark as not true'
+    : '<i class="fas fa-check"></i> Mark complete';
+}
+
+/* ===========================
+   SMART SUMMARY
+=========================== */
+function generateSmartSummary() {
+  const checkedCount = checkedItems.filter(Boolean).length;
+  const totalCount = checkedItems.length;
+  const signalScore = totalCount > 0 ? Math.round((checkedCount / totalCount) * 100) : 0;
+
+  document.getElementById('summaryScore').textContent = signalScore + '%';
+
+  const summarySection = document.getElementById('smartSummary');
+  summarySection.classList.add('active');
+  summarySection.scrollIntoView({ behavior: 'smooth' });
+
+  generateRedFlags();
+  generateNextSteps(signalScore);
+  generateRecommendedResources();
+}
+
+function generateRedFlags() {
+  const redFlagsGrid = document.getElementById('redFlagsGrid');
+  redFlagsGrid.innerHTML = '';
+
+  const { normalised } = computePatternScores();
+  const sorted = Object.entries(normalised).sort((a,b) => b[1] - a[1]);
+  const top = sorted.slice(0, 3).filter(([k,v]) => v >= 34);
+
+  const flags = [];
+
+  if (top.some(([k]) => k === 'political')) {
+    flags.push({
+      title: 'Narrative risk',
+      description: 'Optics-first environments can rewrite ownership after outcomes. Protect yourself with written trails and stakeholder visibility.',
+      icon: 'fas fa-masks-theater'
+    });
+  }
+  if (top.some(([k]) => k === 'volatile')) {
+    flags.push({
+      title: 'Unpredictable pressure',
+      description: 'Mood-driven intensity can force agreement and later blame. Reduce exposure and keep conversations structured.',
+      icon: 'fas fa-bolt'
+    });
+  }
+  if (top.some(([k]) => k === 'undermining')) {
+    flags.push({
+      title: 'Career capital leak',
+      description: 'Credit drift and public correction slowly damage your positioning. Build visible ownership and clean receipts.',
+      icon: 'fas fa-user-slash'
+    });
+  }
+  if (top.some(([k]) => k === 'control')) {
+    flags.push({
+      title: 'Moving goalposts',
+      description: 'Hidden standards create performance vulnerability. Get criteria, approval chains, and decisions in writing.',
+      icon: 'fas fa-sliders'
+    });
+  }
+  if (top.some(([k]) => k === 'chaos')) {
+    flags.push({
+      title: 'Unbounded workload',
+      description: 'Urgency without trade-offs creates a permanent deficit. Force top priorities and de-scope visibly.',
+      icon: 'fas fa-fire'
+    });
+  }
+  if (top.some(([k]) => k === 'avoidant')) {
+    flags.push({
+      title: 'Exposure through silence',
+      description: 'Avoided decisions leave you holding consequences without authority. Escalate decisions early with options and deadlines.',
+      icon: 'fas fa-ghost'
+    });
+  }
+
+  // Ensure 3 cards
+  while (flags.length < 3) {
+    flags.push({
+      title: 'Evidence gap',
+      description: 'If you can’t prove what was agreed, your reality can be overwritten. Start a factual log and summarise in writing.',
+      icon: 'fas fa-file-circle-check'
+    });
+  }
+
+  flags.slice(0, 3).forEach(flag => {
+    const card = document.createElement('div');
+    card.className = 'red-flag-card';
+    card.innerHTML = `
+      <div class="flag-icon"><i class="${flag.icon}"></i></div>
+      <h4 class="flag-title">${flag.title}</h4>
+      <p class="flag-description">${flag.description}</p>
+    `;
+    redFlagsGrid.appendChild(card);
+  });
+}
+
+function generateNextSteps(signalScore) {
+  const nextStepsGrid = document.getElementById('nextStepsGrid');
+  nextStepsGrid.innerHTML = '';
+
+  const { normalised } = computePatternScores();
+  const risk = deriveRiskLevel(normalised);
+
+  let steps = [];
+
+  if (risk === 'high') {
+    steps = [
+      { title: 'Stabilise your position first', description: 'Evidence log + written summaries + controlled exposure. Don’t confront while your story is easy to rewrite.', icon: 'fas fa-shield' },
+      { title: 'Lock decisions and risks in writing', description: 'Decision, owner, success criteria, and accepted trade-offs. Reduce deniability.', icon: 'fas fa-pen-to-square' },
+      { title: 'Build visibility and allies', description: 'Increase stakeholder clarity so you are not isolated if blame shifts.', icon: 'fas fa-people-group' }
+    ];
+  } else if (signalScore >= 40) {
+    steps = [
+      { title: 'Convert ambiguity into criteria', description: 'Ask for success standards and “definition of done” before you begin.', icon: 'fas fa-bullseye' },
+      { title: 'Introduce trade-offs weekly', description: 'If new priorities enter, something must exit. Make it explicit.', icon: 'fas fa-scale-balanced' },
+      { title: 'Start a short evidence log', description: 'Date, situation, request, your response, outcome. Factual only.', icon: 'fas fa-clipboard-list' }
+    ];
+  } else {
+    steps = [
+      { title: 'Track for one month', description: 'Patterns need repetition. Track behaviours and outcomes rather than feelings alone.', icon: 'fas fa-calendar' },
+      { title: 'Choose one boundary', description: 'One operating rule (updates, approvals, scope) that reduces pressure immediately.', icon: 'fas fa-hand' },
+      { title: 'Create a written recap habit', description: 'After 1:1s, send a concise recap: decisions, owners, next steps.', icon: 'fas fa-envelope' }
+    ];
+  }
+
+  steps.forEach(step => {
+    const card = document.createElement('div');
+    card.className = 'next-step-card';
+    card.innerHTML = `
+      <div class="step-icon"><i class="${step.icon}"></i></div>
+      <h4 class="step-title">${step.title}</h4>
+      <p class="step-description">${step.description}</p>
+    `;
+    nextStepsGrid.appendChild(card);
+  });
+}
+
+function generateRecommendedResources() {
+  const resourcesGrid = document.getElementById('resourcesGrid');
+  resourcesGrid.innerHTML = '';
+
+  const { normalised } = computePatternScores();
+  const risk = deriveRiskLevel(normalised);
+
+  const resources = [];
+
+  resources.push({
+    title: 'Evidence & Receipts Builder',
+    description: 'A simple structure for logging incidents, decisions, risks, and outcomes without emotional language.',
+    icon: 'fas fa-folder-open',
+    link: '#'
+  });
+
+  resources.push({
+    title: 'Boundary Strength Checklist',
+    description: 'Define boundaries that are realistic, defensible, and hard to socially punish.',
+    icon: 'fas fa-shield-halved',
+    link: '#'
+  });
+
+  resources.push(risk === 'high'
+    ? {
+      title: 'Office Politics Mapping Tool',
+      description: 'Map influence, narrative control, and who protects who — so you choose moves that survive power dynamics.',
+      icon: 'fas fa-diagram-project',
+      link: '#'
+    }
+    : {
+      title: 'Workload Clarity Checklist',
+      description: 'Turn “just do it” into a clean scope, priority, and trade-off agreement.',
+      icon: 'fas fa-list-check',
+      link: '#'
+    }
+  );
+
+  resources.slice(0, 3).forEach(resource => {
+    const card = document.createElement('div');
+    card.className = 'resource-card';
+    card.innerHTML = `
+      <div class="resource-icon"><i class="${resource.icon}"></i></div>
+      <h4 class="resource-title">${resource.title}</h4>
+      <p class="resource-description">${resource.description}</p>
+      <a href="${resource.link}" class="resource-link">
+        Access resource <i class="fas fa-arrow-right"></i>
+      </a>
+    `;
+    resourcesGrid.appendChild(card);
+  });
+}
+
+/* ===========================
+   COPY CHECKLIST
+=========================== */
+function copyChecklist() {
+  const checklistName = 'MANAGER PATTERN IDENTIFIER';
+  const mainHeading = document.querySelector('.hero-main-heading').textContent;
+  const checklistItems = document.querySelectorAll('.checklist-text');
+
+  let text = checklistName + '\n';
+  text += '=============================\n\n';
+  text += mainHeading + '\n\n';
+  text += 'CHECKLIST:\n';
+  text += '==========\n\n';
+
+  checklistItems.forEach((item, index) => {
+    const isChecked = checkedItems[index] ? '[✓]' : '[ ]';
+    const cleanText = item.textContent.trim();
+    text += `${isChecked} ${index + 1}. ${cleanText}\n`;
+  });
+
+  const checkedCount = checkedItems.filter(Boolean).length;
+  if (checkedCount > 0) {
+    const signalScore = Math.round((checkedCount / checklistItems.length) * 100);
+    text += `\nCURRENT STATUS:\n`;
+    text += `===============\n`;
+    text += `Items checked: ${checkedCount}/${checklistItems.length}\n`;
+    text += `Pattern Signal Score: ${signalScore}%\n`;
+  }
+
+  navigator.clipboard.writeText(text);
+
+  const btn = document.getElementById('copyBtn');
+  const originalHTML = btn.innerHTML;
+  btn.innerHTML = '<i class="fas fa-check"></i> Checklist copied';
+  btn.style.background = '#10b981';
+
+  setTimeout(() => {
+    btn.innerHTML = originalHTML;
+    btn.style.background = '';
+  }, 2000);
+}
+
+/* ===========================
+   MY PLAYBOOK (LOCALSTORAGE)
+=========================== */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'manager-pattern-identifier';
+const CURRENT_TOOL_TITLE = 'Manager Pattern Identifier';
+const CURRENT_TOOL_TYPE = 'Checklist';
+
+function getSavedItems() {
+  try {
+    const raw = localStorage.getItem(PLAYBOOK_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    console.warn('Error reading saved items:', e);
+    return [];
+  }
+}
+
+function setSavedItems(items) {
+  try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+  catch (e) { console.warn('Error saving items:', e); }
+}
+
+function initializePlaybook() {
+  const playbookOverlay = document.getElementById('playbookOverlay');
+  const playbookSidebar = document.getElementById('playbookSidebar');
+  const playbookButton = document.getElementById('myPlaybookButton');
+  const closeBtn = document.getElementById('closePlaybook');
+  const saveItemBtn = document.getElementById('saveBtn');
+
+  if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+  renderSavedItems();
+
+  const savedItems = getSavedItems();
+  const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+  updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+  saveItemBtn.addEventListener('click', () => {
+    const items = getSavedItems();
+    const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+    let nowSaved;
+
+    if (index === -1) {
+      const toolLink = window.location.pathname.split('/').pop() || 'manager-pattern-identifier.html';
+      items.push({
+        id: CURRENT_TOOL_ID,
+        title: CURRENT_TOOL_TITLE,
+        type: CURRENT_TOOL_TYPE,
+        link: toolLink,
+        savedAt: new Date().toISOString()
+      });
+      nowSaved = true;
+    } else {
+      items.splice(index, 1);
+      nowSaved = false;
+    }
+
+    setSavedItems(items);
+    updateSaveButtonState(saveItemBtn, nowSaved);
+    renderSavedItems();
+  });
+
+  playbookButton.addEventListener('click', () => {
+    playbookOverlay.classList.add('open');
+    playbookSidebar.classList.add('open');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    playbookOverlay.classList.remove('open');
+    playbookSidebar.classList.remove('open');
+  });
+
+  playbookOverlay.addEventListener('click', (e) => {
+    if (e.target === playbookOverlay) {
+      playbookOverlay.classList.remove('open');
+      playbookSidebar.classList.remove('open');
+    }
+  });
+}
+
+function updateSaveButtonState(button, isSaved) {
+  if (!button) return;
+  const icon = button.querySelector('i');
+  const label = button.querySelector('span');
+
+  if (isSaved) {
+    button.classList.add('saved');
+    if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+    if (label) label.textContent = 'Saved';
+  } else {
+    button.classList.remove('saved');
+    if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+    if (label) label.textContent = 'Save item';
+  }
+}
+
+function renderSavedItems() {
+  const listEl = document.getElementById('savedItemsList');
+  const emptyEl = document.getElementById('savedItemsEmpty');
+  if (!listEl || !emptyEl) return;
+
+  const items = getSavedItems();
+  listEl.innerHTML = '';
+
+  if (!items.length) {
+    emptyEl.style.display = 'block';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+
+  items.forEach(item => {
+    const li = document.createElement('li');
+    li.className = 'saved-item';
+
+    const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+    const dateText = savedDate
+      ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+      : '';
+
+    li.innerHTML = `
+      <div class="saved-item-title-row">
+        <span class="saved-item-title">${item.title}</span>
+        <span class="saved-item-type">${item.type}</span>
+      </div>
+      <div class="saved-item-meta">
+        ${dateText ? `Saved on ${dateText}` : ''}
+      </div>
+      <a class="saved-item-link" href="${item.link}">
+        Open <i class="fas fa-arrow-right"></i>
+      </a>
+    `;
+    listEl.appendChild(li);
+  });
+}
+</script>
+
+</body>
+</html>

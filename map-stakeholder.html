@@ -1,0 +1,2488 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stakeholder Mapping Grid | The Employee Playbook</title>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS - Updated to remove 800/900 weights -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (Brand)
+    =========================== */
+    :root{
+      --primary-white:#FFFFFF;
+      --light-gray:#F8F9FA;
+      --medium-gray:#E9ECEF;
+      --dark-gray:#6C757D;
+      --text-dark:#212529;
+      --text-medium:#495057;
+
+      --accent-purple:#7B5FC4;
+      --accent-purple-dark:#5A4496;
+      --light-purple:#E6E0F5;
+      --lighter-purple:#F0EBFA;
+
+      --border-light:rgba(0,0,0,0.08);
+      --nav-bg:rgba(255,255,255,0.95);
+      --hero-bg:linear-gradient(135deg,#F9F6FF 0%,#F0EBFA 100%);
+      --premium-gradient:linear-gradient(135deg,#7B5FC4 0%,#5A4496 100%);
+
+      /* Category accents (matching your category-pill file) */
+      --cat-clarity:#7B5FC4;
+      --cat-burnout:#f59e0b;
+      --cat-manager:#10b981;
+      --cat-politics:#3b82f6;
+      --cat-hr:#6D28D9;
+      --cat-confidence:#ef4444;
+      --cat-career:#800020;
+
+      --success-green:#10b981;
+      --warning-orange:#f59e0b;
+      --danger-red:#ef4444;
+      --info-blue:#3b82f6;
+    }
+
+    /* Dark mode */
+    .dark-mode{
+      --primary-white:#1a1a1a;
+      --light-gray:#2a2a2a;
+      --medium-gray:#3a3a3a;
+      --dark-gray:#888888;
+      --text-dark:#e0e0e0;
+      --text-medium:#b0b0b0;
+
+      --accent-purple:#9d86e9;
+      --accent-purple-dark:#7b5fc4;
+      --light-purple:rgba(123,95,196,0.2);
+      --lighter-purple:rgba(123,95,196,0.1);
+
+      --border-light:rgba(255,255,255,0.08);
+      --nav-bg:rgba(30,30,30,0.95);
+      --hero-bg:linear-gradient(135deg,#2a2a2a 0%,#1f1f1f 100%);
+      --premium-gradient:linear-gradient(135deg,#9d86e9 0%,#7b5fc4 100%);
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; font-family:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    body{
+      background:var(--primary-white);
+      color:var(--text-dark);
+      line-height:1.6;
+      overflow-x:hidden;
+      opacity:0;
+      transition:opacity .35s ease;
+      min-height:100vh;
+    }
+    body.loaded{ opacity:1; }
+
+    .container{ max-width:1400px; margin:0 auto; padding:0 20px; }
+
+    /* ===========================
+       NAV
+    =========================== */
+    nav{
+      position:fixed; top:0; width:100%;
+      background:var(--nav-bg);
+      backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
+      z-index:1000;
+      border-bottom:1px solid var(--border-light);
+      box-shadow:0 1px 3px rgba(0,0,0,0.05);
+      height:80px;
+    }
+    .nav-container{ display:flex; justify-content:space-between; align-items:center; padding:12px 0; height:100%; }
+    .logo{ display:inline-flex; align-items:center; height:100%; }
+    .logo-img{
+      height:100px; width:auto; transform:translateX(20%);
+      padding:14px 10px; display:block; min-height:100px;
+    }
+    .logo-fallback{
+      display:none; align-items:center; justify-content:center; height:48px;
+      padding:0 14px; border-radius:10px;
+      background:var(--premium-gradient); color:#fff;
+      font-weight:600; letter-spacing:.8px; font-size:13px; text-transform:uppercase;
+      transform:translateX(20%);
+    }
+    .nav-links{ display:flex; gap:50px; }
+    .nav-link{ color:var(--text-dark); text-decoration:none; font-weight:500; transition:color .3s ease; font-size:17px; }
+    .nav-link:hover{ color:var(--accent-purple); }
+    .nav-link-container{ position:relative; display:inline-block; }
+    .new-tag{
+      position:absolute; top:-12px; right:-35px;
+      background:linear-gradient(135deg,#FFD700,#FFA500);
+      color:#000; font-size:10px; font-weight:600;
+      padding:2px 6px; border-radius:4px;
+      box-shadow:0 2px 4px rgba(0,0,0,0.2); z-index:10; white-space:nowrap;
+    }
+    .nav-actions{ display:flex; align-items:center; gap:24px; transform:translateX(-20%); }
+    .header-cta{
+      background:var(--accent-purple); color:#fff;
+      padding:8px 20px; border-radius:999px;
+      text-decoration:none; font-weight:600; font-size:14px;
+      transition:all .3s ease;
+      box-shadow:0 5px 15px rgba(123,95,196,0.3);
+    }
+    .header-cta:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(123,95,196,0.35); }
+    .sign-in{ color:var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; }
+    .sign-in:hover{ color:var(--accent-purple); }
+    .theme-toggle{
+      background:none; border:none; color:var(--text-dark);
+      cursor:pointer; font-size:16px;
+      width:36px; height:36px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      transition:background-color .3s ease;
+    }
+    .theme-toggle:hover{ background:var(--light-gray); }
+    .mobile-toggle{
+      display:none; background:none; border:none; color:var(--text-dark);
+      cursor:pointer; font-size:24px;
+      width:40px; height:40px; border-radius:50%;
+      align-items:center; justify-content:center;
+      transition:background-color .3s ease;
+    }
+    .mobile-toggle:hover{ background:var(--light-gray); }
+    .mobile-sign-in, .mobile-sign-up{ display:none; }
+
+    @media (max-width:768px){
+      .nav-container{ justify-content:center; position:relative; }
+      .logo{ position:absolute; left:50%; transform:translateX(-50%); height:100%; }
+      .logo-img{ height:125px; transform:none; padding:12px 0; }
+      .logo-fallback{ transform:none; }
+
+      .mobile-toggle{ display:flex; position:absolute; left:20px; }
+      .nav-actions{ transform:none; gap:16px; position:absolute; right:20px; }
+      .nav-actions .sign-in, .nav-actions .header-cta{ display:none; }
+
+      .nav-links{
+        display:none; position:absolute; top:100%; left:0; width:100%;
+        background:var(--nav-bg);
+        backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+        flex-direction:column; padding:20px;
+        border-top:1px solid var(--border-light);
+        box-shadow:0 5px 15px rgba(0,0,0,0.1); gap:20px;
+      }
+      .nav-links.active{ display:flex; }
+      .nav-link-container{ display:flex; align-items:center; justify-content:flex-start; width:100%; }
+      .new-tag{ position:static; margin-left:8px; }
+
+      .mobile-sign-in{
+        display:block !important;
+        margin-top:10px; padding:12px 20px;
+        background:var(--primary-white);
+        color:var(--accent-purple);
+        border-radius:10px; text-align:center;
+        font-weight:600; text-decoration:none;
+        border:2px solid var(--accent-purple);
+      }
+      .mobile-sign-up{
+        display:block !important;
+        margin-top:10px; padding:12px 20px;
+        background:var(--accent-purple);
+        color:#fff; border-radius:10px;
+        text-align:center; font-weight:600; text-decoration:none;
+        border:2px solid var(--accent-purple);
+      }
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .tool-hero-section{
+      width:100%;
+      background:var(--hero-bg);
+      padding:20px 0 22px;
+      margin-top:110px;
+      position:relative;
+      border-bottom:1px solid var(--border-light);
+      overflow:hidden;
+    }
+    .tool-hero-section::before{
+      content:'';
+      position:absolute; inset:0;
+      background:linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+      z-index:1;
+    }
+    .dark-mode .tool-hero-section::before{
+      background:linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+    }
+    .tool-hero-content{
+      position:relative; z-index:2;
+      max-width:1100px; margin:0 auto;
+      padding:0 20px 6px;
+      animation:heroFadeUp .45s ease-out;
+    }
+    @keyframes heroFadeUp{ from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:translateY(0);} }
+
+    .breadcrumb{
+      font-size:10px; text-transform:uppercase; letter-spacing:1px;
+      color:var(--dark-gray);
+      margin-bottom:10px;
+      display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+    }
+    .breadcrumb a{
+      color:var(--text-medium);
+      text-decoration:none !important;
+      font-weight:600; letter-spacing:.6px;
+      transition:color .2s ease;
+    }
+    .breadcrumb a:hover{ color:var(--accent-purple-dark); }
+    .breadcrumb i{ font-size:10px; opacity:.7; }
+    .breadcrumb .current{ color:var(--text-dark); font-weight:600; display:inline-flex; align-items:center; gap:8px; }
+
+    .checklist-name{
+      font-size:14px; font-weight:600; color:var(--accent-purple);
+      text-transform:uppercase; letter-spacing:1.8px;
+      margin:18px 0 12px; display:block;
+    }
+    .hero-main-heading{
+      font-size:44px; font-weight:600; color:var(--text-dark);
+      line-height:1.1; margin-bottom:14px;
+      max-width:760px;
+    }
+    .hero-subheading{
+      font-size:16px; color:var(--text-medium);
+      line-height:1.6; max-width:860px;
+      margin-bottom:18px; font-weight:450;
+    }
+
+    /* Save button anchored to hero */
+    .save-btn{
+      position:absolute; top:16px; right:24px; z-index:5;
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 12px; font-size:12px; font-weight:600;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.6);
+      background:rgba(255,255,255,0.95);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      color:var(--accent-purple-dark);
+      cursor:pointer;
+      transition:all .2s ease;
+    }
+    .save-btn:hover{ transform:translateY(-1px); box-shadow:0 4px 10px rgba(123,95,196,0.18); background:#fff; }
+    .dark-mode .save-btn{ background:rgba(20,20,20,0.9); border-color:rgba(157,134,233,0.6); }
+    .save-btn.saved{ background:var(--accent-purple); color:#fff; border-color:transparent; }
+
+    /* Category pills */
+    .category-pills-container{ margin-top:6px; }
+    .category-pills-title{
+      font-size:12px; font-weight:600; color:var(--text-medium);
+      text-transform:uppercase; letter-spacing:1px;
+      margin-bottom:10px; display:block;
+    }
+    .category-pills-grid{ display:flex; gap:10px; flex-wrap:wrap; }
+    .category-pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 12px; border-radius:999px;
+      font-size:12px; font-weight:600;
+      text-transform:uppercase; letter-spacing:.5px;
+      border:1px solid transparent;
+      background:rgba(255,255,255,0.85);
+      backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+      text-decoration:none; height:34px;
+      box-shadow:0 1px 3px rgba(0,0,0,0.05);
+      transition:all .2s ease; cursor:pointer;
+      white-space:nowrap;
+    }
+    .dark-mode .category-pill{ background:rgba(255,255,255,0.08); }
+    .category-pill:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+
+    .category-icon{ font-size:12px; opacity:.9; flex-shrink:0; }
+
+    .category-pill.politics{
+      color:var(--cat-politics);
+      border-color:rgba(59,130,246,0.25);
+      background:linear-gradient(135deg, rgba(59,130,246,0.10), rgba(59,130,246,0.04));
+    }
+    .dark-mode .category-pill.politics{
+      border-color:rgba(96,165,250,0.45);
+      background:linear-gradient(135deg, rgba(59,130,246,0.20), rgba(59,130,246,0.10));
+    }
+
+    .category-pill.manager{
+      color:var(--cat-manager);
+      border-color:rgba(16,185,129,0.25);
+      background:linear-gradient(135deg, rgba(16,185,129,0.10), rgba(16,185,129,0.04));
+    }
+    .dark-mode .category-pill.manager{
+      border-color:rgba(52,211,153,0.45);
+      background:linear-gradient(135deg, rgba(16,185,129,0.20), rgba(16,185,129,0.10));
+    }
+
+    .category-pill.career{
+      color:var(--cat-career);
+      border-color:rgba(128,0,32,0.25);
+      background:linear-gradient(135deg, rgba(128,0,32,0.10), rgba(128,0,32,0.04));
+    }
+    .dark-mode .category-pill.career{
+      border-color:rgba(176,48,96,0.45);
+      background:linear-gradient(135deg, rgba(128,0,32,0.20), rgba(128,0,32,0.10));
+    }
+
+    /* ===========================
+       MAIN CONTENT
+    =========================== */
+    .page-wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:14px 20px 40px;
+    }
+
+    /* Input card */
+    .input-card{
+      background:var(--primary-white);
+      border:1px solid var(--border-light);
+      border-radius:16px;
+      box-shadow:0 14px 40px rgba(123,95,196,0.10);
+      padding:18px;
+      margin-top:14px;
+    }
+
+    .input-grid{
+      display:grid;
+      grid-template-columns: 0.9fr 360px;
+      gap:14px;
+      align-items:start;
+    }
+
+    .field{
+      background:var(--light-gray);
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:14px;
+      padding:12px;
+    }
+    .dark-mode .field{ border-color:rgba(255,255,255,0.08); }
+
+    .label{
+      display:flex; align-items:center; justify-content:space-between;
+      font-size:12px; font-weight:600;
+      text-transform:uppercase; letter-spacing:.9px;
+      color:var(--text-medium);
+      margin-bottom:8px;
+    }
+    .label .mini{
+      font-weight:600; letter-spacing:.6px;
+      color:var(--dark-gray);
+      text-transform:none;
+      font-size:12px;
+      opacity:.95;
+    }
+
+    textarea, input[type="text"], select{
+      width:100%;
+      background:rgba(255,255,255,0.95);
+      border:1px solid rgba(0,0,0,0.08);
+      border-radius:12px;
+      padding:12px 12px;
+      font-size:14px;
+      color:var(--text-dark);
+      outline:none;
+      transition:border-color .2s ease, box-shadow .2s ease;
+    }
+    .dark-mode textarea, .dark-mode input[type="text"], .dark-mode select{
+      background:rgba(20,20,20,0.65);
+      border-color:rgba(255,255,255,0.12);
+      color:var(--text-dark);
+    }
+    textarea{ min-height:92px; resize:vertical; }
+
+    input[type="range"]{ width:100%; }
+    .range-row{ display:flex; align-items:center; gap:10px; }
+    .range-badge{
+      min-width:38px; height:34px;
+      border-radius:12px;
+      display:inline-flex; align-items:center; justify-content:center;
+      font-weight:600;
+      background:linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+      border:1px solid rgba(123,95,196,0.22);
+      color:var(--accent-purple-dark);
+    }
+
+    .scale-hint{
+      margin-top:8px;
+      display:flex;
+      gap:14px;
+      flex-wrap:nowrap;
+      font-size:12px;
+      color:var(--dark-gray);
+      line-height:1.35;
+      white-space:nowrap;
+    }
+    .scale-hint span{ display:inline-flex; gap:6px; align-items:baseline; }
+    .scale-hint strong{ color:var(--text-medium); font-weight:600; }
+
+    .tip-line{
+      margin-top:10px;
+      font-size:13px;
+      color:var(--text-medium);
+      padding:10px 12px;
+      background:rgba(123,95,196,0.06);
+      border:1px solid rgba(123,95,196,0.12);
+      border-radius:12px;
+    }
+
+    .input-actions{
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      border:none;
+      border-radius:999px;
+      padding:10px 14px;
+      font-weight:650;
+      font-size:13px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition:transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+      white-space:nowrap;
+    }
+    .btn.secondary{
+      background:var(--light-purple);
+      color:var(--accent-purple-dark);
+      border:1px solid rgba(123,95,196,0.20);
+    }
+    .btn.secondary:hover{ transform:translateY(-1px); box-shadow:0 10px 22px rgba(0,0,0,0.10); }
+    .btn.primary{
+      background:var(--premium-gradient);
+      color:#fff;
+      box-shadow:0 12px 26px rgba(123,95,196,0.18);
+    }
+    .btn.primary:hover{ transform:translateY(-1px); box-shadow:0 16px 30px rgba(123,95,196,0.26); }
+
+    /* ===========================
+       MAP HEADER
+    =========================== */
+    .map-shell{
+      margin-top:18px;
+      background:var(--primary-white);
+      border:1px solid var(--border-light);
+      border-radius:18px;
+      box-shadow:0 16px 44px rgba(0,0,0,0.06);
+      overflow:hidden;
+    }
+    .map-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:10px 12px;
+      border-bottom:1px solid var(--border-light);
+      background:rgba(123,95,196,0.04);
+    }
+    .map-title{
+      display:flex; align-items:center; gap:12px;
+      font-size:18px; font-weight:700;
+      color:var(--text-dark);
+      white-space:nowrap;
+    }
+    .map-title .icon-bubble{
+      width:42px; height:42px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple);
+      color:var(--accent-purple);
+      flex-shrink:0;
+    }
+
+    .map-controls{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:1;
+      justify-content:flex-end;
+      flex-wrap:nowrap;
+      min-width:0;
+    }
+    .search{
+      position:relative;
+      flex:1;
+      max-width:520px;
+      min-width:220px;
+    }
+    .search input{
+      padding-left:40px;
+      border-radius:999px;
+      height:42px;
+    }
+    .search i{
+      position:absolute; left:14px; top:50%;
+      transform:translateY(-50%);
+      color:var(--dark-gray);
+      pointer-events:none;
+    }
+
+    .sort{
+      width:150px;
+      flex-shrink:0;
+    }
+    .sort select{
+      height:42px;
+      border-radius:999px;
+      padding:10px 36px 10px 14px;
+      appearance:none;
+      background-image: linear-gradient(45deg, transparent 50%, var(--dark-gray) 50%),
+                        linear-gradient(135deg, var(--dark-gray) 50%, transparent 50%);
+      background-position: calc(100% - 18px) calc(1em + 2px),
+                           calc(100% - 13px) calc(1em + 2px);
+      background-size: 6px 6px, 6px 6px;
+      background-repeat:no-repeat;
+    }
+
+    .map-actions{
+      display:flex;
+      gap:10px;
+      flex-shrink:0;
+      margin-left:6px;
+    }
+    .pill-btn{
+      border-radius:999px;
+      padding:8px 12px;
+      font-weight:600;
+      font-size:13px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      border:1px solid rgba(123,95,196,0.25);
+      background:rgba(123,95,196,0.08);
+      color:var(--accent-purple-dark);
+      cursor:pointer;
+      transition:transform .2s ease, box-shadow .2s ease;
+      min-width:140px;
+      justify-content:center;
+    }
+    .pill-btn:hover{ transform:translateY(-1px); box-shadow:0 12px 24px rgba(0,0,0,0.12); }
+    .pill-btn.danger{
+      border-color:rgba(239,68,68,0.28);
+      background:rgba(239,68,68,0.10);
+      color:#b91c1c;
+      min-width:135px;
+    }
+
+    /* ===========================
+       MAP BODY (grid)
+    =========================== */
+    .map-body{ padding:12px; }
+
+    .legend-row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-bottom:10px;
+    }
+    .legend-box{
+      border:1px solid rgba(123,95,196,0.16);
+      background:linear-gradient(135deg, rgba(123,95,196,0.06), rgba(123,95,196,0.02));
+      border-radius:14px;
+      padding:10px 12px;
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      min-height:58px;
+    }
+    .legend-ico{
+      width:36px; height:36px; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple);
+      color:var(--accent-purple-dark);
+      flex-shrink:0;
+    }
+    .legend-text{
+      font-size:12px;
+      color:var(--text-medium);
+      line-height:1.35;
+      font-weight:450;
+    }
+    .legend-text strong{ font-weight:600; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      transform:scale(0.985);
+      transform-origin: top center;
+    }
+
+    .quad{
+      border:1px solid var(--border-light);
+      border-radius:16px;
+      background:var(--primary-white);
+      box-shadow:0 10px 28px rgba(0,0,0,0.05);
+      overflow:hidden;
+      min-height:220px;
+      display:flex;
+      flex-direction:column;
+    }
+    .quad-head{
+      padding:12px 12px 10px;
+      border-bottom:1px solid var(--border-light);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background:rgba(123,95,196,0.035);
+    }
+    .quad-head-left{
+      display:flex; align-items:center; gap:10px; min-width:0;
+    }
+    .quad-bubble{
+      width:40px; height:40px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple);
+      color:var(--accent-purple);
+      flex-shrink:0;
+    }
+    .quad-title-wrap{ min-width:0; }
+    .quad-title{
+      font-size:16px;
+      font-weight:600;
+      letter-spacing:.2px;
+      color:var(--text-dark);
+      line-height:1.2;
+      cursor:pointer;
+      user-select:none;
+    }
+    .quad-sub{
+      font-size:12px;
+      color:var(--dark-gray);
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      margin-top:4px;
+      font-weight:600;
+      opacity:.95;
+    }
+    .quad-count{
+      font-size:22px;
+      font-weight:600;
+      color:var(--accent-purple-dark);
+      padding:0 6px;
+      flex-shrink:0;
+    }
+    .quad-drop{
+      padding:10px 10px 12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      overflow:auto;
+    }
+    .empty{
+      border:1px dashed rgba(123,95,196,0.25);
+      background:rgba(123,95,196,0.04);
+      border-radius:14px;
+      padding:12px;
+      color:var(--dark-gray);
+      font-size:13px;
+      font-weight:550;
+    }
+
+    /* Stakeholder card */
+    .card{
+      background:var(--primary-white);
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:16px;
+      padding:12px;
+      box-shadow:0 10px 24px rgba(0,0,0,0.06);
+      cursor:grab;
+      user-select:none;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .card:hover{
+      transform:translateY(-1px);
+      box-shadow:0 14px 30px rgba(0,0,0,0.10);
+      border-color:rgba(123,95,196,0.22);
+    }
+    .card:active{ cursor:grabbing; }
+
+    .card-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .card-name{
+      font-size:15px;
+      font-weight:650;
+      color:var(--text-dark);
+      line-height:1.2;
+      margin-bottom:2px;
+      text-transform:none;
+    }
+    .card-role{
+      font-size:13px;
+      color:var(--text-medium);
+      font-weight:500;
+      line-height:1.2;
+    }
+    .card-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-shrink:0;
+    }
+    .rel-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:650;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      border:1px solid rgba(123,95,196,0.22);
+      background:linear-gradient(135deg, rgba(123,95,196,0.10), rgba(123,95,196,0.04));
+      color:var(--accent-purple-dark);
+      white-space:nowrap;
+    }
+    .rel-badge.ally{
+      border-color:rgba(16,185,129,0.25);
+      background:rgba(16,185,129,0.10);
+      color:#047857;
+    }
+    .rel-badge.risk{
+      border-color:rgba(239,68,68,0.26);
+      background:rgba(239,68,68,0.10);
+      color:#b91c1c;
+    }
+    .rel-badge.neutral{
+      border-color:rgba(59,130,246,0.22);
+      background:rgba(59,130,246,0.08);
+      color:#1d4ed8;
+    }
+
+    .icon-btn{
+      width:36px; height:36px;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:rgba(255,255,255,0.9);
+      cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      color:var(--dark-gray);
+      transition:transform .15s ease, box-shadow .15s ease;
+    }
+    .dark-mode .icon-btn{ background:rgba(20,20,20,0.7); border-color:rgba(255,255,255,0.12); }
+    .icon-btn:hover{ transform:translateY(-1px); box-shadow:0 10px 18px rgba(0,0,0,0.12); }
+
+    .score-row{
+      display:flex;
+      gap:10px;
+      margin-top:10px;
+      align-items:center;
+    }
+    .score-pill{
+      flex:0 0 auto;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.20);
+      background:linear-gradient(135deg, rgba(123,95,196,0.09), rgba(123,95,196,0.03));
+      color:var(--accent-purple-dark);
+      font-weight:650;
+      font-size:13px;
+      min-width:72px;
+      justify-content:center;
+    }
+    .score-pill i{ opacity:.95; }
+
+    .card-notes{
+      margin-top:10px;
+      font-size:13px;
+      color:var(--text-medium);
+      line-height:1.45;
+      font-weight:450;
+      min-height:14px;
+    }
+
+    .card-footer{
+      margin-top:10px;
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      color:var(--dark-gray);
+      font-size:12px;
+      font-weight:650;
+    }
+    .mini-stat{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,0.06);
+      background:rgba(0,0,0,0.02);
+    }
+    .dark-mode .mini-stat{ border-color:rgba(255,255,255,0.10); background:rgba(255,255,255,0.05); }
+
+    /* ===========================
+       PLAN + SNAPSHOT
+    =========================== */
+    .below-row{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+      align-items:stretch; /* ✅ make both columns match height */
+    }
+
+    .info-card{
+      border:1px solid var(--border-light);
+      border-radius:18px;
+      background:var(--primary-white);
+      box-shadow:0 12px 34px rgba(0,0,0,0.06);
+      padding:14px;
+      overflow:hidden;
+
+      /* ✅ allow interior to stretch so Snapshot can match Plan height */
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+    }
+    .info-head{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding-bottom:10px;
+      border-bottom:1px solid var(--border-light);
+      margin-bottom:10px;
+      flex:0 0 auto;
+    }
+    .info-title{
+      display:flex; align-items:center; gap:10px;
+      font-size:16px; font-weight:650; color:var(--text-dark);
+    }
+    .info-title .bubble{
+      width:40px; height:40px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple); color:var(--accent-purple);
+    }
+
+    .total-pill{
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.22);
+      background:rgba(123,95,196,0.08);
+      color:var(--accent-purple-dark);
+      font-weight:650;
+      font-size:12px;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      white-space:nowrap;
+      flex-shrink:0;
+    }
+
+    .plan-body{
+      flex:1 1 auto; /* ✅ makes Stakeholder Plan card define column height */
+      display:flex;
+      flex-direction:column;
+    }
+    .plan-body p{
+      font-size:14px;
+      color:var(--text-medium);
+      line-height:1.55;
+      font-weight:450;
+      margin-bottom:10px;
+    }
+    .plan-box{
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:16px;
+      background:var(--light-gray);
+      padding:12px;
+    }
+    .plan-box .plan-h{
+      font-weight:650;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      font-size:12px;
+      color:var(--text-medium);
+      margin-bottom:8px;
+    }
+    .plan-box ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px; }
+    .plan-box li{
+      font-size:13.5px;
+      color:var(--text-medium);
+      padding-left:18px;
+      position:relative;
+      line-height:1.45;
+    }
+    .plan-box li::before{
+      content:"•";
+      position:absolute; left:6px; top:0;
+      color:var(--accent-purple);
+      font-size:16px;
+      line-height:1.1;
+    }
+
+    .snapshot-grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:10px;
+
+      /* ✅ stretch Snapshot section to fill remaining height */
+      flex:1 1 auto;
+      align-content:start;
+      min-height:0;
+    }
+
+    .snapshot-item{
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:16px;
+      background:var(--primary-white);
+      padding:12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      cursor:pointer;
+      transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .snapshot-item:hover{
+      transform:translateY(-1px);
+      box-shadow:0 14px 30px rgba(0,0,0,0.10);
+      border-color:rgba(123,95,196,0.20);
+    }
+    .snap-left{
+      display:flex; align-items:center; gap:10px; min-width:0;
+    }
+    .snap-ico{
+      width:40px; height:40px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple);
+      color:var(--accent-purple);
+      flex-shrink:0;
+    }
+    .snap-txt{ min-width:0; }
+    .snap-name{ font-weight:650; font-size:14.5px; color:var(--text-dark); line-height:1.2; }
+    .snap-sub{ font-size:12px; color:var(--dark-gray); text-transform:uppercase; letter-spacing:.8px; font-weight:600; margin-top:4px; }
+    .snap-count{ font-size:22px; font-weight:650; color:var(--accent-purple-dark); }
+
+    /* ===========================
+       MODAL
+    =========================== */
+    .modal-overlay{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,0.45);
+      z-index:1300;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .2s ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+    .modal-overlay.open{ opacity:1; pointer-events:auto; }
+    .modal{
+      width:min(760px, 96vw);
+      background:rgba(255,255,255,0.96);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,0.22);
+      border-radius:20px;
+      box-shadow:0 24px 70px rgba(0,0,0,0.35);
+      overflow:hidden;
+    }
+    .dark-mode .modal{ background:rgba(20,20,20,0.92); border-color:rgba(255,255,255,0.10); }
+    .modal-head{
+      padding:14px 16px;
+      border-bottom:1px solid var(--border-light);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      position:relative;
+    }
+    .modal-head::before{
+      content:"";
+      position:absolute; left:0; top:0; height:3px; width:100%;
+      background:var(--premium-gradient);
+    }
+    .modal-title{
+      display:flex; align-items:center; gap:10px;
+      font-size:16px; font-weight:650;
+      color:var(--text-dark);
+    }
+    .modal-title .bubble{
+      width:40px; height:40px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      background:var(--lighter-purple); color:var(--accent-purple);
+    }
+    .modal-close{
+      width:40px; height:40px;
+      border-radius:999px;
+      border:1px solid rgba(0,0,0,0.08);
+      background:rgba(255,255,255,0.85);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; color:var(--dark-gray);
+    }
+    .dark-mode .modal-close{ background:rgba(20,20,20,0.7); border-color:rgba(255,255,255,0.12); }
+    .modal-body{
+      padding:14px 16px 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .modal-card{
+      border:1px solid rgba(0,0,0,0.06);
+      border-radius:16px;
+      background:var(--primary-white);
+      padding:12px;
+      box-shadow:0 10px 26px rgba(0,0,0,0.06);
+    }
+    .dark-mode .modal-card{ border-color:rgba(255,255,255,0.10); box-shadow:0 16px 30px rgba(0,0,0,0.35); }
+    .modal-card h4{
+      font-size:12px; letter-spacing:.9px; text-transform:uppercase;
+      color:var(--accent-purple-dark);
+      font-weight:650;
+      display:flex; align-items:center; gap:8px;
+      margin-bottom:8px;
+    }
+    .modal-card p, .modal-card li{
+      font-size:13.5px;
+      color:var(--text-medium);
+      font-weight:450;
+      line-height:1.55;
+    }
+    .modal-card ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+    .modal-card ul li{ padding-left:18px; position:relative; }
+    .modal-card ul li::before{
+      content:"•"; position:absolute; left:6px; top:0;
+      color:var(--accent-purple); font-size:16px; line-height:1.1;
+    }
+    .modal-wide{ grid-column:1 / -1; }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR
+    =========================== */
+    .my-playbook-fab{
+      position:fixed; bottom:24px; right:24px; z-index:1200;
+      background:var(--premium-gradient); color:#fff;
+      padding:10px 16px; border-radius:999px;
+      display:inline-flex; align-items:center; gap:8px;
+      cursor:pointer; font-size:13px; font-weight:650;
+      box-shadow:0 10px 25px rgba(0,0,0,0.25);
+      transition:all .25s ease;
+    }
+    .my-playbook-fab:hover{ transform:translateY(-3px); box-shadow:0 14px 30px rgba(0,0,0,0.32); }
+
+    .playbook-sidebar-overlay{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,0.45);
+      z-index:1190;
+      opacity:0; pointer-events:none;
+      transition:opacity .25s ease;
+    }
+    .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+    .playbook-sidebar{
+      position:fixed; top:0; right:-380px;
+      width:340px; max-width:90%;
+      height:100%;
+      background:rgba(255,255,255,0.94);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:-4px 0 20px rgba(0,0,0,0.25);
+      z-index:1191;
+      display:flex; flex-direction:column;
+      border-left:1px solid var(--border-light);
+      transition:right .25s ease;
+    }
+    .dark-mode .playbook-sidebar{ background:rgba(18,18,18,0.96); box-shadow:-4px 0 22px rgba(0,0,0,0.6); }
+    .playbook-sidebar.open{ right:0; }
+
+    .playbook-sidebar-header{
+      padding:20px 20px 14px;
+      border-bottom:1px solid var(--border-light);
+    }
+    .playbook-sidebar-header-title-row{
+      display:flex; justify-content:space-between; align-items:center;
+      margin-bottom:4px;
+    }
+    .playbook-sidebar-header h3{ font-size:18px; font-weight:700; color:var(--text-dark); }
+    .playbook-sidebar-header p{ font-size:13px; color:var(--dark-gray); }
+
+    .playbook-close-btn{
+      background:none; border:none;
+      color:var(--dark-gray);
+      cursor:pointer; font-size:18px;
+      border-radius:999px; width:28px; height:28px;
+      display:flex; align-items:center; justify-content:center;
+      transition:background-color .2s ease;
+    }
+    .playbook-close-btn:hover{ background:var(--light-gray); }
+
+    .playbook-sidebar-body{
+      padding:14px 18px 20px;
+      padding-bottom:50px;
+      overflow-y:auto;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+    .saved-items-empty{ font-size:13px; color:var(--dark-gray); line-height:1.6; }
+    .saved-items-list{ list-style:none; margin:0; padding:0; }
+    .saved-item{
+      padding:10px;
+      border-radius:12px;
+      border:1px solid var(--border-light);
+      background:var(--primary-white);
+      box-shadow:0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom:10px;
+      display:flex;
+      flex-direction:column;
+      gap:2px;
+    }
+    .saved-item-title-row{ display:flex; justify-content:space-between; align-items:baseline; gap:6px; }
+    .saved-item-title{ font-size:14px; font-weight:650; color:var(--text-dark); }
+    .saved-item-type{
+      font-size:11px; text-transform:uppercase; letter-spacing:.6px;
+      color:var(--accent-purple-dark); font-weight:700;
+    }
+    .saved-item-meta{ font-size:12px; color:var(--dark-gray); }
+    .saved-item-link{
+      margin-top:6px; font-size:12px;
+      color:var(--accent-purple); text-decoration:none;
+      font-weight:650; display:inline-flex; align-items:center; gap:4px;
+    }
+    .saved-item-link:hover{ text-decoration:underline; }
+
+    .playbook-quick-links{
+      margin-top:223px;
+      padding-top:10px;
+      border-top:1px solid var(--border-light);
+    }
+    .quick-links-title{
+      font-size:12px; font-weight:700;
+      text-transform:uppercase; letter-spacing:.8px;
+      color:var(--text-medium);
+    }
+    .playbook-quick-links-list{
+      display:flex; flex-direction:column; gap:10px; margin-top:8px;
+    }
+
+    .quick-link-pill{
+      width:55%;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(123,95,196,0.35);
+      background:linear-gradient(135deg,rgba(123,95,196,0.08),rgba(123,95,196,0.02));
+      text-decoration:none;
+      color:var(--accent-purple-dark);
+      font-size:13px;
+      font-weight:650;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      transition:transform .2s ease, box-shadow .2s ease;
+    }
+    .quick-link-pill:hover{
+      transform:translateY(-1px);
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+      background:linear-gradient(135deg,rgba(123,95,196,0.16),rgba(123,95,196,0.06));
+    }
+    .dark-mode .quick-link-pill{
+      border-color:rgba(157,134,233,0.55);
+      background:linear-gradient(135deg,rgba(123,95,196,0.26),rgba(123,95,196,0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer{
+      background:var(--primary-white);
+      padding:10px 0;
+      border-top:1px solid var(--border-light);
+      margin-top:30px;
+      text-align:center;
+      color:var(--text-medium);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width:1024px){
+      .below-row{ grid-template-columns:1fr; }
+      .input-grid{ grid-template-columns:1fr; }
+      .scale-hint{ flex-wrap:wrap; }
+    }
+    @media (max-width:768px){
+      .tool-hero-section{ margin-top:100px; }
+      .hero-main-heading{ font-size:34px; }
+      .save-btn{ right:18px; top:10px; }
+      .map-head{ flex-wrap:wrap; justify-content:flex-start; }
+      .map-controls{ width:100%; justify-content:space-between; flex-wrap:wrap; }
+      .search{ max-width:none; width:100%; order:1; }
+      .sort{ order:2; width:100%; }
+      .map-actions{ order:3; width:100%; justify-content:flex-end; }
+      .grid{ grid-template-columns:1fr; }
+      .legend-row{ grid-template-columns:1fr; }
+      .modal-body{ grid-template-columns:1fr; }
+      .my-playbook-fab{ bottom:18px; right:18px; }
+      .scale-hint{ flex-wrap:wrap; white-space:normal; }
+      .snapshot-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===========================
+     NAVIGATION
+=========================== -->
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo" aria-label="The Employee Playbook">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      <div class="logo-fallback" id="logoFallback">The Employee Playbook</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<div class="tool-hero-section">
+  <button class="save-btn" id="saveBtn">
+    <i class="far fa-bookmark"></i>
+    <span>Save item</span>
+  </button>
+
+  <div class="tool-hero-content">
+    <div class="breadcrumb">
+      <a href="the-toolkit.html">Toolkit</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="category-workplace-dynamics-and-politics.html">Workplace Dynamics &amp; Politics</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current"></i>Stakeholder Mapping Grid</span>
+    </div>
+
+    <span class="checklist-name">STAKEHOLDER MAPPING GRID</span>
+    <h1 class="hero-main-heading">Map power, interest and influence so you can move with precision</h1>
+    <div class="hero-subheading">
+      Add stakeholders, score their influence and interest (1–5), and drag cards into the right quadrant. 
+    </div>
+
+    <div class="category-pills-container">
+      <span class="category-pills-title">Related Categories</span>
+      <div class="category-pills-grid">
+        <a href="category-manager-relationship-and-leadership-style.html" class="category-pill manager">
+          <!-- ✅ updated icon -->
+          <i class="fas fa-people-arrows"></i>
+          <span>Manager Relationship &amp; Leadership Style</span>
+        </a>
+        <a href="category-career-playbook.html" class="category-pill career">
+          <i class="fas fa-briefcase category-icon"></i>
+          <span>Career Playbook</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- ===========================
+       INPUTS
+  =========================== -->
+  <div class="input-card">
+    <div class="input-grid">
+      <div class="field">
+        <div class="label">Stakeholder name <span class="mini">e.g. "Finance lead"</span></div>
+        <input id="nameInput" type="text" placeholder="Name (or alias)">
+        <div style="height:10px"></div>
+
+        <div class="label">Role / function <span class="mini">optional</span></div>
+        <input id="roleInput" type="text" placeholder="Role, team, function…">
+        <div style="height:10px"></div>
+
+        <div class="label">Notes <span class="mini">What do they care about? What do they respond to? Any sensitivities?</span></div>
+        <textarea id="notesInput" placeholder="What do they care about? What do they respond to? Any sensitivities?"></textarea>
+      </div>
+
+      <div class="field">
+        <div class="label">Relationship</div>
+        <select id="relationshipInput">
+          <option value="neutral" selected>Neutral / unknown</option>
+          <option value="ally">Ally</option>
+          <option value="risk">Risk</option>
+        </select>
+
+        <div style="height:10px"></div>
+
+        <div class="label">Influence</div>
+        <div class="range-row">
+          <span class="range-badge" id="influenceBadge">3</span>
+          <input id="influenceInput" type="range" min="1" max="5" step="1" value="3" aria-label="Influence (1 to 5)">
+        </div>
+        <div class="scale-hint">
+          <span><strong>1</strong> minimal pull</span>
+          <span><strong>3</strong> moderate sway</span>
+          <span><strong>5</strong> can decide / block</span>
+        </div>
+
+        <div style="height:10px"></div>
+
+        <div class="label">Interest</div>
+        <div class="range-row">
+          <span class="range-badge" id="interestBadge">3</span>
+          <input id="interestInput" type="range" min="1" max="5" step="1" value="3" aria-label="Interest (1 to 5)">
+        </div>
+        <div class="scale-hint">
+          <span><strong>1</strong> low concern</span>
+          <span><strong>3</strong> engaged sometimes</span>
+          <span><strong>5</strong> very invested</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-line">
+      Tip: Influence/Interest are 1–5. New stakeholders are auto-placed into the correct quadrant — you can still drag them anywhere.
+    </div>
+
+    <div class="input-actions">
+      <button class="btn secondary" id="examplesBtn"><i class="fas fa-bolt"></i> Add examples</button>
+      <button class="btn secondary" id="resetBtn"><i class="fas fa-rotate-left"></i> Reset fields</button>
+      <button class="btn primary" id="addBtn"><i class="fas fa-plus"></i> Add stakeholder</button>
+    </div>
+  </div>
+
+  <!-- ===========================
+       MAP
+  =========================== -->
+  <div class="map-shell">
+    <div class="map-head">
+      <div class="map-title">
+        <span class="icon-bubble"><i class="fas fa-map"></i></span>
+        <span>Stakeholder Map</span>
+      </div>
+
+      <div class="map-controls">
+        <div class="search">
+          <i class="fas fa-search"></i>
+          <input id="searchInput" type="text" placeholder="Search stakeholders (name, role, notes)…" />
+        </div>
+
+        <div class="sort">
+          <select id="sortSelect" aria-label="Sort stakeholders">
+            <option value="recent" selected>Sort: Recent first</option>
+            <option value="name">Sort: Name A–Z</option>
+            <option value="influence">Sort: Influence high–low</option>
+            <option value="interest">Sort: Interest high–low</option>
+          </select>
+        </div>
+
+        <div class="map-actions">
+          <button class="pill-btn" id="copyPlanBtn"><i class="far fa-copy"></i> Copy plan</button>
+          <button class="pill-btn danger" id="clearAllBtn"><i class="fas fa-trash"></i> Clear all</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-body">
+
+      <div class="legend-row">
+        <div class="legend-box">
+          <div class="legend-ico"><i class="fas fa-crown"></i></div>
+          <div class="legend-text">
+            <strong>Influence:</strong> 1 minimal pull · 3 moderate sway · 5 can decide / block
+          </div>
+        </div>
+        <div class="legend-box">
+          <div class="legend-ico"><i class="fas fa-heart"></i></div>
+          <div class="legend-text">
+            <strong>Interest:</strong> 1 low concern · 3 engaged sometimes · 5 very invested
+          </div>
+        </div>
+      </div>
+
+      <div class="grid" id="grid">
+        <!-- Keep satisfied -->
+        <div class="quad" data-quad="keep_satisfied">
+          <div class="quad-head">
+            <div class="quad-head-left">
+              <div class="quad-bubble"><i class="fas fa-shield"></i></div>
+              <div class="quad-title-wrap">
+                <div class="quad-title" data-open="keep_satisfied">Keep satisfied</div>
+                <div class="quad-sub">High influence · Low interest</div>
+              </div>
+            </div>
+            <div class="quad-count" id="countKeepSatisfied">0</div>
+          </div>
+          <div class="quad-drop" id="dropKeepSatisfied"></div>
+        </div>
+
+        <!-- Manage closely -->
+        <div class="quad" data-quad="manage_closely">
+          <div class="quad-head">
+            <div class="quad-head-left">
+              <div class="quad-bubble"><i class="fas fa-crown"></i></div>
+              <div class="quad-title-wrap">
+                <div class="quad-title" data-open="manage_closely">Manage closely</div>
+                <div class="quad-sub">High influence · High interest</div>
+              </div>
+            </div>
+            <div class="quad-count" id="countManageClosely">0</div>
+          </div>
+          <div class="quad-drop" id="dropManageClosely"></div>
+        </div>
+
+        <!-- Monitor -->
+        <div class="quad" data-quad="monitor">
+          <div class="quad-head">
+            <div class="quad-head-left">
+              <div class="quad-bubble"><i class="fas fa-binoculars"></i></div>
+              <div class="quad-title-wrap">
+                <div class="quad-title" data-open="monitor">Monitor</div>
+                <div class="quad-sub">Low influence · Low interest</div>
+              </div>
+            </div>
+            <div class="quad-count" id="countMonitor">0</div>
+          </div>
+          <div class="quad-drop" id="dropMonitor"></div>
+        </div>
+
+        <!-- Keep informed -->
+        <div class="quad" data-quad="keep_informed">
+          <div class="quad-head">
+            <div class="quad-head-left">
+              <div class="quad-bubble"><i class="fas fa-comment-dots"></i></div>
+              <div class="quad-title-wrap">
+                <div class="quad-title" data-open="keep_informed">Keep informed</div>
+                <div class="quad-sub">Low influence · High interest</div>
+              </div>
+            </div>
+            <div class="quad-count" id="countKeepInformed">0</div>
+          </div>
+          <div class="quad-drop" id="dropKeepInformed"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+       PLAN + SNAPSHOT
+  =========================== -->
+  <div class="below-row">
+    <div class="info-card">
+      <div class="info-head">
+        <div class="info-title">
+          <span class="bubble"><i class="fas fa-bullseye"></i></span>
+          <span>Stakeholder Plan</span>
+        </div>
+      </div>
+
+      <div class="plan-body">
+        <p><strong>Select a stakeholder card</strong> (click) to see the recommended approach.</p>
+        <p>You can also drag cards across the map — this plan updates automatically.</p>
+
+        <div class="plan-box" id="selectedPlanBox">
+          <div class="plan-h">No stakeholder selected</div>
+          <ul>
+            <li>Click any stakeholder card to see a tight recommended approach here.</li>
+            <li>To view quadrant strategy, click the <strong>quadrant heading</strong> (e.g. "Manage closely").</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-head">
+        <div class="info-title">
+          <span class="bubble"><i class="fas fa-chart-pie"></i></span>
+          <span>Map Snapshot</span>
+        </div>
+        <div class="total-pill" id="totalPill">0 TOTAL</div>
+      </div>
+
+      <div class="snapshot-grid" id="snapshotList">
+        <div class="snapshot-item" data-open="manage_closely">
+          <div class="snap-left">
+            <div class="snap-ico"><i class="fas fa-crown"></i></div>
+            <div class="snap-txt">
+              <div class="snap-name">Manage closely</div>
+              <div class="snap-sub">High influence · High interest</div>
+            </div>
+          </div>
+          <div class="snap-count" id="snapManageClosely">0</div>
+        </div>
+
+        <div class="snapshot-item" data-open="keep_satisfied">
+          <div class="snap-left">
+            <div class="snap-ico"><i class="fas fa-shield"></i></div>
+            <div class="snap-txt">
+              <div class="snap-name">Keep satisfied</div>
+              <div class="snap-sub">High influence · Low interest</div>
+            </div>
+          </div>
+          <div class="snap-count" id="snapKeepSatisfied">0</div>
+        </div>
+
+        <div class="snapshot-item" data-open="keep_informed">
+          <div class="snap-left">
+            <div class="snap-ico"><i class="fas fa-comment-dots"></i></div>
+            <div class="snap-txt">
+              <div class="snap-name">Keep informed</div>
+              <div class="snap-sub">Low influence · High interest</div>
+            </div>
+          </div>
+          <div class="snap-count" id="snapKeepInformed">0</div>
+        </div>
+
+        <div class="snapshot-item" data-open="monitor">
+          <div class="snap-left">
+            <div class="snap-ico"><i class="fas fa-binoculars"></i></div>
+            <div class="snap-txt">
+              <div class="snap-name">Monitor</div>
+              <div class="snap-sub">Low influence · Low interest</div>
+            </div>
+          </div>
+          <div class="snap-count" id="snapMonitor">0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-card" style="margin-top:12px;">
+    <div class="info-head">
+      <div class="info-title">
+        <span class="bubble"><i class="fas fa-people-arrows"></i></span>
+        <span>Influence moves and manager-safe tips</span>
+      </div>
+    </div>
+
+    <div class="plan-box">
+      <div class="plan-h">Practical notes</div>
+      <ul>
+        <li><strong>Find the "agenda owner":</strong> the person who decides what gets discussed often matters more than the loudest voice.</li>
+        <li><strong>Pre-brief beats post-brief:</strong> if your manager is "Manage closely" or "Keep satisfied", avoid surprises — share the headline early.</li>
+        <li><strong>Use "decision framing":</strong> define the decision, the criteria, and the trade-offs before the room starts freewheeling.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===========================
+     MODAL
+=========================== -->
+<div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <div class="modal-title" id="modalTitle">
+        <span class="bubble"><i class="fas fa-layer-group"></i></span>
+        <span id="modalTitleText">Quadrant</span>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-card">
+        <h4><i class="fas fa-bullseye"></i> Recommended approach</h4>
+        <p id="modalApproach"></p>
+      </div>
+
+      <div class="modal-card">
+        <h4><i class="fas fa-shield-alt"></i> What to avoid</h4>
+        <p id="modalAvoid"></p>
+      </div>
+
+      <div class="modal-card modal-wide">
+        <h4><i class="fas fa-list-check"></i> Fast moves</h4>
+        <ul id="modalMoves"></ul>
+      </div>
+
+      <div class="modal-card modal-wide">
+        <h4><i class="fas fa-users"></i> Stakeholders in this quadrant</h4>
+        <p id="modalPeople" style="margin-bottom:10px;"></p>
+        <div id="modalPeopleList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     MY PLAYBOOK SIDEBAR
+=========================== -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven't saved anything yet. Use <strong>Save item</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <div class="playbook-quick-links-header">
+          <span class="quick-links-title">Quick links</span>
+        </div>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill"><i class="fas fa-gauge"></i> The Dashboard</a>
+          <a href="the-lens.html" class="quick-link-pill"><i class="fas fa-search"></i> The Lens</a>
+          <a href="the-toolkit.html" class="quick-link-pill"><i class="fas fa-toolbox"></i> The Toolkit</a>
+          <a href="the-coach.html" class="quick-link-pill"><i class="fas fa-comments"></i> The Coach</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
+    initializeMobileNav();
+    initializeThemeToggle();
+    initializePlaybook();
+    initializeStakeholderTool();
+  });
+
+  /* ===========================
+     MOBILE NAV
+  =========================== */
+  function initializeMobileNav() {
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (!mobileToggle || !navLinks) return;
+
+    mobileToggle.addEventListener('click', function () {
+      navLinks.classList.toggle('active');
+      const icon = this.querySelector('i');
+      if (icon) {
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+      }
+    });
+
+    document.addEventListener('click', function(event) {
+      if (navLinks.classList.contains('active') &&
+          !navLinks.contains(event.target) &&
+          !mobileToggle.contains(event.target)) {
+        navLinks.classList.remove('active');
+        const icon = mobileToggle.querySelector('i');
+        if (icon) {
+          icon.classList.add('fa-bars');
+          icon.classList.remove('fa-times');
+        }
+      }
+    });
+  }
+
+  /* ===========================
+     THEME TOGGLE + LOGO
+  =========================== */
+  function initializeThemeToggle() {
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    if (!themeToggleBtn) return;
+
+    const themeIcon = themeToggleBtn.querySelector('i');
+    const logoImg = document.getElementById('mainLogo');
+    const logoFallback = document.getElementById('logoFallback');
+
+    function getLogoPath(filename) {
+      if (window.location.protocol === 'file:') {
+        const currentPath = window.location.pathname;
+        const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+        return basePath + 'assets/img/' + filename;
+      }
+      return './assets/img/' + filename;
+    }
+
+    function showFallbackLogo() {
+      if (logoImg) logoImg.style.display = 'none';
+      if (logoFallback) logoFallback.style.display = 'inline-flex';
+    }
+
+    function showImageLogo() {
+      if (logoFallback) logoFallback.style.display = 'none';
+      if (logoImg) logoImg.style.display = 'block';
+    }
+
+    function updateLogoForTheme(isDarkMode) {
+      if (!logoImg) return;
+      showImageLogo();
+      logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+      logoImg.alt = 'The Employee Playbook';
+    }
+
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const savedTheme = localStorage.getItem('theme');
+    const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches);
+
+    if (shouldUseDark) {
+      document.body.classList.add('dark-mode');
+      if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+      updateLogoForTheme(true);
+    } else {
+      document.body.classList.remove('dark-mode');
+      if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+      updateLogoForTheme(false);
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+      const isDarkMode = document.body.classList.contains('dark-mode');
+      if (isDarkMode) {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme', 'light');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      } else {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      }
+    });
+
+    prefersDarkScheme.addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        if (e.matches) {
+          document.body.classList.add('dark-mode');
+          if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+          updateLogoForTheme(true);
+        } else {
+          document.body.classList.remove('dark-mode');
+          if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+          updateLogoForTheme(false);
+        }
+      }
+    });
+
+    if (logoImg) {
+      logoImg.addEventListener('error', function() {
+        if (this.src.includes('logo-dark.png')) {
+          this.src = getLogoPath('logo.png');
+        } else {
+          showFallbackLogo();
+        }
+      });
+    }
+  }
+
+  /* ===========================
+     STAKEHOLDER TOOL
+  =========================== */
+  const STORAGE_KEY = 'tepStakeholderMap_v1';
+  let stakeholders = [];
+
+  const quadRules = {
+    manage_closely:   (inf, int) => inf >= 4 && int >= 4,
+    keep_satisfied:   (inf, int) => inf >= 4 && int <= 3,
+    keep_informed:    (inf, int) => inf <= 3 && int >= 4,
+    monitor:          (inf, int) => inf <= 3 && int <= 3
+  };
+
+  const quadMeta = {
+    manage_closely: {
+      title: 'Manage closely',
+      icon: 'fas fa-crown',
+      sub: 'High influence · High interest',
+      approach: 'Engage early. Keep them tight to the headline, decisions and risks. Treat them like a co-pilot for outcomes.',
+      avoid: 'Surprises, vague updates, or asking for input after decisions are effectively made.',
+      moves: [
+        'Pre-brief with the headline and your recommended direction.',
+        'Ask what "good" looks like to them (criteria + constraints).',
+        'Give decision options: recommended / alternative / trade-off.',
+        'Confirm next steps in writing within 24 hours.'
+      ]
+    },
+    keep_satisfied: {
+      title: 'Keep satisfied',
+      icon: 'fas fa-shield',
+      sub: 'High influence · Low interest',
+      approach: 'Keep them calm and aligned. Give clean, low-frequency updates focused on outcomes and risk control.',
+      avoid: 'Flooding them with detail, escalating noise, or pulling them into operational debates.',
+      moves: [
+        'Share the headline early when it affects them.',
+        'Summarise impact in 3 bullets: why it matters / risk / decision needed.',
+        'Offer a simple "if you care" appendix rather than long readouts.',
+        'Escalate only when a decision or protection is required.'
+      ]
+    },
+    keep_informed: {
+      title: 'Keep informed',
+      icon: 'fas fa-comment-dots',
+      sub: 'Low influence · High interest',
+      approach: 'Keep them looped in so they don\'t become noise. They can become allies, amplifiers, or early warning signals.',
+      avoid: 'Ignoring them completely (they\'ll fill the vacuum), or giving them authority they don\'t actually hold.',
+      moves: [
+        'Set a simple update rhythm (e.g. weekly digest).',
+        'Ask for "what are you hearing?" to surface early signals.',
+        'Give them small, safe asks (feedback, quick checks).',
+        'Use them to reduce resistance through informal alignment.'
+      ]
+    },
+    monitor: {
+      title: 'Monitor',
+      icon: 'fas fa-binoculars',
+      sub: 'Low influence · Low interest',
+      approach: 'Don\'t over-invest. Watch for signals of change (new priorities, escalation), then re-map.',
+      avoid: 'Spending time persuading people with no leverage or interest.',
+      moves: [
+        'Track for role change, escalation, or new sponsorship.',
+        'Keep comms minimal and factual.',
+        'If they spike in interest, move them into "keep informed".',
+        'If they gain power, reassess quickly.'
+      ]
+    }
+  };
+
+  function initializeStakeholderTool(){
+    const influence = document.getElementById('influenceInput');
+    const interest  = document.getElementById('interestInput');
+    const influenceBadge = document.getElementById('influenceBadge');
+    const interestBadge  = document.getElementById('interestBadge');
+
+    function syncBadges(){
+      influenceBadge.textContent = influence.value;
+      interestBadge.textContent  = interest.value;
+    }
+    influence.addEventListener('input', syncBadges);
+    interest.addEventListener('input', syncBadges);
+    syncBadges();
+
+    stakeholders = readStakeholders();
+    renderAll();
+
+    document.getElementById('resetBtn').addEventListener('click', resetFields);
+    document.getElementById('examplesBtn').addEventListener('click', addExamples);
+    document.getElementById('addBtn').addEventListener('click', addStakeholderFromForm);
+    document.getElementById('copyPlanBtn').addEventListener('click', copyPlan);
+    document.getElementById('clearAllBtn').addEventListener('click', clearAll);
+
+    document.getElementById('searchInput').addEventListener('input', renderAll);
+    document.getElementById('sortSelect').addEventListener('change', renderAll);
+
+    attachDrop('dropManageClosely', 'manage_closely');
+    attachDrop('dropKeepSatisfied', 'keep_satisfied');
+    attachDrop('dropKeepInformed', 'keep_informed');
+    attachDrop('dropMonitor', 'monitor');
+
+    document.querySelectorAll('[data-open]').forEach(el => {
+      el.addEventListener('click', () => openQuadrantModal(el.getAttribute('data-open')));
+    });
+
+    const overlay = document.getElementById('modalOverlay');
+    const close = document.getElementById('modalClose');
+    close.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  }
+
+  function resetFields(){
+    document.getElementById('nameInput').value = '';
+    document.getElementById('roleInput').value = '';
+    document.getElementById('notesInput').value = '';
+    document.getElementById('relationshipInput').value = 'neutral';
+    document.getElementById('influenceInput').value = '3';
+    document.getElementById('interestInput').value  = '3';
+    document.getElementById('influenceBadge').textContent = '3';
+    document.getElementById('interestBadge').textContent  = '3';
+  }
+
+  function addExamples(){
+    const now = Date.now();
+    const examples = [
+      { name:'Your Manager', role:'Line manager', notes:'Wants no surprises. Responds to options + risks + next steps.', influence:5, interest:5, relationship:'neutral' },
+      { name:'Influential Peer', role:'Cross-functional lead', notes:'High informal influence. Can amplify or soften concerns.', influence:3, interest:4, relationship:'ally' },
+      { name:'Finance', role:'Finance / Ops', notes:'Cares about cost, risk and proof. Needs clean assumptions.', influence:4, interest:3, relationship:'risk' }
+    ].map((x, i) => makeStakeholder({
+      ...x,
+      id: `ex_${now}_${i}`,
+      createdAt: new Date(now + i).toISOString(),
+      viewed: rand(2, 12),
+      saved: rand(0, 6)
+    }));
+
+    stakeholders = [...examples, ...stakeholders];
+    persistStakeholders();
+    renderAll();
+  }
+
+  function addStakeholderFromForm(){
+    const name = document.getElementById('nameInput').value.trim();
+    if (!name){
+      pulse(document.getElementById('nameInput'));
+      return;
+    }
+    const role = document.getElementById('roleInput').value.trim();
+    const notes = document.getElementById('notesInput').value.trim();
+    const relationship = document.getElementById('relationshipInput').value;
+    const influence = parseInt(document.getElementById('influenceInput').value, 10);
+    const interest  = parseInt(document.getElementById('interestInput').value, 10);
+
+    const stakeholder = makeStakeholder({
+      id: `sh_${Date.now()}_${Math.random().toString(16).slice(2)}`,
+      name, role, notes, influence, interest, relationship,
+      createdAt: new Date().toISOString(),
+      viewed: 0,
+      saved: 0
+    });
+
+    stakeholders.unshift(stakeholder);
+    persistStakeholders();
+    renderAll();
+    resetFields();
+  }
+
+  function makeStakeholder(s){
+    const quad = deriveQuadrant(s.influence, s.interest);
+    return {
+      id:s.id,
+      name:s.name,
+      role:s.role || '',
+      notes:s.notes || '',
+      influence:Number(s.influence) || 3,
+      interest:Number(s.interest) || 3,
+      relationship:s.relationship || 'neutral',
+      createdAt:s.createdAt || new Date().toISOString(),
+      viewed:Number(s.viewed) || 0,
+      saved:Number(s.saved) || 0,
+      quad
+    };
+  }
+
+  function deriveQuadrant(inf, int){
+    for (const [q, fn] of Object.entries(quadRules)){
+      if (fn(inf, int)) return q;
+    }
+    if (inf >= 4 && int >= 4) return 'manage_closely';
+    if (inf >= 4) return 'keep_satisfied';
+    if (int >= 4) return 'keep_informed';
+    return 'monitor';
+  }
+
+  function attachDrop(dropId, quad){
+    const zone = document.getElementById(dropId);
+    if (!zone) return;
+
+    zone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      zone.style.outline = '2px solid rgba(123,95,196,0.30)';
+      zone.style.outlineOffset = '4px';
+      zone.style.borderRadius = '14px';
+    });
+    zone.addEventListener('dragleave', () => {
+      zone.style.outline = '';
+      zone.style.outlineOffset = '';
+    });
+    zone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      zone.style.outline = '';
+      zone.style.outlineOffset = '';
+
+      const id = e.dataTransfer.getData('text/plain');
+      const idx = stakeholders.findIndex(s => s.id === id);
+      if (idx === -1) return;
+
+      stakeholders[idx].quad = quad;
+      persistStakeholders();
+      renderAll();
+    });
+  }
+
+  function renderAll(){
+    const search = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+    const sortBy = document.getElementById('sortSelect').value;
+
+    let items = [...stakeholders];
+
+    if (search){
+      items = items.filter(s => {
+        const hay = `${s.name} ${s.role} ${s.notes}`.toLowerCase();
+        return hay.includes(search);
+      });
+    }
+
+    items = sortItems(items, sortBy);
+
+    const byQuad = { manage_closely:[], keep_satisfied:[], keep_informed:[], monitor:[] };
+    items.forEach(s => byQuad[s.quad].push(s));
+
+    renderQuad('dropManageClosely', byQuad.manage_closely);
+    renderQuad('dropKeepSatisfied', byQuad.keep_satisfied);
+    renderQuad('dropKeepInformed', byQuad.keep_informed);
+    renderQuad('dropMonitor', byQuad.monitor);
+
+    updateCounts(byQuad);
+    updateSnapshot(byQuad);
+  }
+
+  function sortItems(items, sortBy){
+    if (sortBy === 'name'){
+      return items.sort((a,b) => a.name.localeCompare(b.name));
+    }
+    if (sortBy === 'influence'){
+      return items.sort((a,b) => (b.influence - a.influence) || (new Date(b.createdAt)-new Date(a.createdAt)));
+    }
+    if (sortBy === 'interest'){
+      return items.sort((a,b) => (b.interest - a.interest) || (new Date(b.createdAt)-new Date(a.createdAt)));
+    }
+    return items.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+  }
+
+  function renderQuad(dropId, arr){
+    const zone = document.getElementById(dropId);
+    zone.innerHTML = '';
+
+    if (!arr.length){
+      const empty = document.createElement('div');
+      empty.className = 'empty';
+      empty.textContent = 'Drop stakeholders here…';
+      zone.appendChild(empty);
+      return;
+    }
+
+    arr.forEach(s => {
+      const el = document.createElement('div');
+      el.className = 'card';
+      el.draggable = true;
+      el.dataset.id = s.id;
+
+      el.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', s.id);
+        e.dataTransfer.effectAllowed = 'move';
+      });
+
+      el.addEventListener('click', () => {
+        const idx = stakeholders.findIndex(x => x.id === s.id);
+        if (idx !== -1){
+          stakeholders[idx].viewed = (stakeholders[idx].viewed || 0) + 1;
+          persistStakeholders();
+          s.viewed = stakeholders[idx].viewed;
+          renderAll();
+        }
+        showSelectedPlan(s.id);
+      });
+
+      const relClass = s.relationship === 'ally' ? 'ally' : (s.relationship === 'risk' ? 'risk' : 'neutral');
+      const relText  = s.relationship === 'ally' ? 'ALLY' : (s.relationship === 'risk' ? 'RISK' : 'NEUTRAL');
+
+      el.innerHTML = `
+        <div class="card-top">
+          <div>
+            <div class="card-name">${escapeHtml(s.name)}</div>
+            <div class="card-role">${escapeHtml(s.role || '')}</div>
+          </div>
+          <div class="card-actions">
+            <span class="rel-badge ${relClass}">${relText}</span>
+            <button class="icon-btn" data-del="${escapeHtml(s.id)}" aria-label="Delete stakeholder">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="score-row">
+          <div class="score-pill" title="Influence">
+            <i class="fas fa-crown"></i> ${s.influence}
+          </div>
+          <div class="score-pill" title="Interest">
+            <i class="fas fa-heart"></i> ${s.interest}
+          </div>
+        </div>
+
+        <div class="card-notes">${escapeHtml(s.notes || '—')}</div>
+
+        <div class="card-footer">
+          <span class="mini-stat" title="Viewed"><i class="far fa-eye"></i> ${Number(s.viewed||0)}</span>
+          <span class="mini-stat" title="Saved"><i class="far fa-bookmark"></i> ${Number(s.saved||0)}</span>
+        </div>
+      `;
+
+      el.querySelector('[data-del]').addEventListener('click', (e) => {
+        e.stopPropagation();
+        deleteStakeholder(s.id);
+      });
+
+      zone.appendChild(el);
+    });
+  }
+
+  function updateCounts(byQuad){
+    document.getElementById('countManageClosely').textContent = byQuad.manage_closely.length;
+    document.getElementById('countKeepSatisfied').textContent = byQuad.keep_satisfied.length;
+    document.getElementById('countKeepInformed').textContent = byQuad.keep_informed.length;
+    document.getElementById('countMonitor').textContent = byQuad.monitor.length;
+  }
+
+  function updateSnapshot(byQuad){
+    const total = stakeholders.length;
+    document.getElementById('totalPill').textContent = `${total} TOTAL`;
+
+    document.getElementById('snapManageClosely').textContent = byQuad.manage_closely.length;
+    document.getElementById('snapKeepSatisfied').textContent = byQuad.keep_satisfied.length;
+    document.getElementById('snapKeepInformed').textContent = byQuad.keep_informed.length;
+    document.getElementById('snapMonitor').textContent = byQuad.monitor.length;
+  }
+
+  function deleteStakeholder(id){
+    stakeholders = stakeholders.filter(s => s.id !== id);
+    persistStakeholders();
+    renderAll();
+    const box = document.getElementById('selectedPlanBox');
+    if (box && box.dataset && box.dataset.currentId === id){
+      box.removeAttribute('data-current-id');
+      box.innerHTML = `
+        <div class="plan-h">No stakeholder selected</div>
+        <ul>
+          <li>Click any stakeholder card to see a tight recommended approach here.</li>
+          <li>To view quadrant strategy, click the <strong>quadrant heading</strong> (e.g. "Manage closely").</li>
+        </ul>
+      `;
+    }
+  }
+
+  function showSelectedPlan(id){
+    const s = stakeholders.find(x => x.id === id);
+    if (!s) return;
+
+    const meta = quadMeta[s.quad];
+    const box = document.getElementById('selectedPlanBox');
+    box.dataset.currentId = id;
+
+    const bullets = meta ? meta.moves.slice(0,3) : [];
+
+    box.innerHTML = `
+      <div class="plan-h">${escapeHtml(s.name)} · ${escapeHtml(meta.title)}</div>
+      <ul>
+        <li><strong>Approach:</strong> ${escapeHtml(meta.approach)}</li>
+        <li><strong>Keep it manager-safe:</strong> pre-brief the headline, then confirm in writing.</li>
+        ${bullets.length ? `<li><strong>Fast move:</strong> ${escapeHtml(bullets[0])}</li>` : ''}
+      </ul>
+    `;
+  }
+
+  function openQuadrantModal(quad){
+    const meta = quadMeta[quad];
+    if (!meta) return;
+
+    const overlay = document.getElementById('modalOverlay');
+    document.getElementById('modalTitleText').textContent = meta.title;
+    document.getElementById('modalApproach').textContent = meta.approach;
+    document.getElementById('modalAvoid').textContent = meta.avoid;
+
+    const moves = document.getElementById('modalMoves');
+    moves.innerHTML = '';
+    meta.moves.forEach(m => {
+      const li = document.createElement('li');
+      li.textContent = m;
+      moves.appendChild(li);
+    });
+
+    const inQuad = stakeholders.filter(s => s.quad === quad).sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+    document.getElementById('modalPeople').textContent = inQuad.length
+      ? `You have ${inQuad.length} stakeholder${inQuad.length === 1 ? '' : 's'} here.`
+      : 'No stakeholders in this quadrant yet.';
+
+    const peopleList = document.getElementById('modalPeopleList');
+    peopleList.innerHTML = '';
+    inQuad.forEach(s => {
+      const row = document.createElement('div');
+      row.className = 'modal-card';
+      row.style.boxShadow = 'none';
+      row.style.marginTop = '10px';
+      row.innerHTML = `
+        <h4><i class="fas fa-user"></i> ${escapeHtml(s.name)}</h4>
+        <p style="margin-bottom:8px;">${escapeHtml(s.role || '—')}</p>
+        <p style="margin-bottom:10px;">${escapeHtml(s.notes || '—')}</p>
+        <p style="font-size:12px; color:var(--dark-gray); font-weight:650;">
+          <i class="fas fa-crown"></i> ${s.influence} &nbsp;&nbsp; <i class="fas fa-heart"></i> ${s.interest}
+        </p>
+      `;
+      peopleList.appendChild(row);
+    });
+
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeModal(){
+    const overlay = document.getElementById('modalOverlay');
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  function copyPlan(){
+    const counts = {
+      manage_closely: stakeholders.filter(s => s.quad === 'manage_closely').length,
+      keep_satisfied: stakeholders.filter(s => s.quad === 'keep_satisfied').length,
+      keep_informed: stakeholders.filter(s => s.quad === 'keep_informed').length,
+      monitor: stakeholders.filter(s => s.quad === 'monitor').length
+    };
+
+    const lines = [];
+    lines.push('STAKEHOLDER MAP — PLAN');
+    lines.push('=======================');
+    lines.push(`Total: ${stakeholders.length}`);
+    lines.push(`Manage closely: ${counts.manage_closely}`);
+    lines.push(`Keep satisfied: ${counts.keep_satisfied}`);
+    lines.push(`Keep informed: ${counts.keep_informed}`);
+    lines.push(`Monitor: ${counts.monitor}`);
+    lines.push('');
+    lines.push('DETAIL');
+    lines.push('------');
+
+    const ordered = [...stakeholders].sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+    ordered.forEach(s => {
+      const q = quadMeta[s.quad]?.title || s.quad;
+      lines.push(`- ${s.name} (${s.role || '—'}) · ${q} · Influence ${s.influence} · Interest ${s.interest} · ${s.relationship.toUpperCase()}`);
+      if (s.notes) lines.push(`  Notes: ${s.notes}`);
+    });
+
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
+      const btn = document.getElementById('copyPlanBtn');
+      const old = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+      btn.style.background = 'rgba(16,185,129,0.12)';
+      btn.style.borderColor = 'rgba(16,185,129,0.25)';
+      btn.style.color = '#047857';
+      setTimeout(() => { btn.innerHTML = old; btn.removeAttribute('style'); }, 1400);
+    });
+  }
+
+  function clearAll(){
+    if (!confirm('Clear all stakeholders?')) return;
+    stakeholders = [];
+    persistStakeholders();
+    renderAll();
+    const box = document.getElementById('selectedPlanBox');
+    box.innerHTML = `
+      <div class="plan-h">No stakeholder selected</div>
+      <ul>
+        <li>Click any stakeholder card to see a tight recommended approach here.</li>
+        <li>To view quadrant strategy, click the <strong>quadrant heading</strong> (e.g. "Manage closely").</li>
+      </ul>
+    `;
+  }
+
+  function persistStakeholders(){
+    try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(stakeholders)); }
+    catch(e){ console.warn('Could not save stakeholder map:', e); }
+  }
+
+  function readStakeholders(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+      return parsed.map(makeStakeholder);
+    }catch(e){
+      return [];
+    }
+  }
+
+  function escapeHtml(str){
+    const s = String(str ?? '');
+    return s
+      .replaceAll('&','&amp;')
+      .replaceAll('<','&lt;')
+      .replaceAll('>','&gt;')
+      .replaceAll('"','&quot;')
+      .replaceAll("'","&#039;");
+  }
+
+  function pulse(el){
+    if (!el) return;
+    el.style.boxShadow = '0 0 0 4px rgba(239,68,68,0.18)';
+    el.style.borderColor = 'rgba(239,68,68,0.35)';
+    setTimeout(() => { el.style.boxShadow = ''; el.style.borderColor = ''; }, 700);
+  }
+
+  function rand(min, max){ return Math.floor(Math.random() * (max - min + 1)) + min; }
+
+  /* ===========================
+     MY PLAYBOOK (LOCALSTORAGE)
+  =========================== */
+  const PLAYBOOK_KEY = 'tepSavedItems';
+  const CURRENT_TOOL_ID = 'stakeholder-mapping-grid';
+  const CURRENT_TOOL_TITLE = 'Stakeholder Mapping Grid';
+  const CURRENT_TOOL_TYPE = 'Framework';
+
+  function getSavedItems() {
+    try {
+      const raw = localStorage.getItem(PLAYBOOK_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function setSavedItems(items) {
+    try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+    catch (e) { /* ignore */ }
+  }
+
+  function initializePlaybook() {
+    const playbookOverlay = document.getElementById('playbookOverlay');
+    const playbookSidebar = document.getElementById('playbookSidebar');
+    const playbookButton = document.getElementById('myPlaybookButton');
+    const closeBtn = document.getElementById('closePlaybook');
+    const saveItemBtn = document.getElementById('saveBtn');
+
+    if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+    renderSavedItems();
+
+    const savedItems = getSavedItems();
+    const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+    updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+    saveItemBtn.addEventListener('click', () => {
+      const items = getSavedItems();
+      const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+      let nowSaved;
+
+      if (index === -1) {
+        const toolLink = window.location.pathname.split('/').pop() || 'stakeholder-mapping-grid.html';
+        items.push({
+          id: CURRENT_TOOL_ID,
+          title: CURRENT_TOOL_TITLE,
+          type: CURRENT_TOOL_TYPE,
+          link: toolLink,
+          savedAt: new Date().toISOString()
+        });
+        nowSaved = true;
+      } else {
+        items.splice(index, 1);
+        nowSaved = false;
+      }
+
+      setSavedItems(items);
+      updateSaveButtonState(saveItemBtn, nowSaved);
+      renderSavedItems();
+    });
+
+    playbookButton.addEventListener('click', () => {
+      playbookOverlay.classList.add('open');
+      playbookSidebar.classList.add('open');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      playbookOverlay.classList.remove('open');
+      playbookSidebar.classList.remove('open');
+    });
+
+    playbookOverlay.addEventListener('click', (e) => {
+      if (e.target === playbookOverlay) {
+        playbookOverlay.classList.remove('open');
+        playbookSidebar.classList.remove('open');
+      }
+    });
+  }
+
+  function updateSaveButtonState(button, isSaved) {
+    if (!button) return;
+    const icon = button.querySelector('i');
+    const label = button.querySelector('span');
+
+    if (isSaved) {
+      button.classList.add('saved');
+      if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+      if (label) label.textContent = 'Saved';
+    } else {
+      button.classList.remove('saved');
+      if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+      if (label) label.textContent = 'Save item';
+    }
+  }
+
+  function renderSavedItems() {
+    const listEl = document.getElementById('savedItemsList');
+    const emptyEl = document.getElementById('savedItemsEmpty');
+    if (!listEl || !emptyEl) return;
+
+    const items = getSavedItems();
+    listEl.innerHTML = '';
+
+    if (!items.length) {
+      emptyEl.style.display = 'block';
+      return;
+    }
+
+    emptyEl.style.display = 'none';
+
+    items.forEach(item => {
+      const li = document.createElement('li');
+      li.className = 'saved-item';
+
+      const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+      const dateText = savedDate
+        ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+        : '';
+
+      li.innerHTML = `
+        <div class="saved-item-title-row">
+          <span class="saved-item-title">${escapeHtml(item.title)}</span>
+          <span class="saved-item-type">${escapeHtml(item.type)}</span>
+        </div>
+        <div class="saved-item-meta">
+          ${dateText ? `Saved on ${dateText}` : ''}
+        </div>
+        <a class="saved-item-link" href="${escapeHtml(item.link)}">
+          Open <i class="fas fa-arrow-right"></i>
+        </a>
+      `;
+      listEl.appendChild(li);
+    });
+  }
+</script>
+
+</body>
+</html>

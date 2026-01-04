@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Privacy Policy and Security for The Employee Playbook. Learn how we protect and handle your personal information.">
+    <title>Privacy and Security | The Employee Playbook</title>
+    
+    <!-- Font Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --medium-gray: #E9ECEF;
+            --dark-gray: #6C757D;
+            --text-dark: #212529;
+            --text-medium: #495057;
+            --accent-purple: #7B5FC4;
+            --accent-purple-dark: #5A4496;
+            --light-purple: #E6E0F5;
+            --border-light: rgba(0, 0, 0, 0.08);
+            --hero-gray: #f5f7fa;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --deep-navy: #0A1428;
+            --soft-blue: #EFF5FF;
+            --gradient-primary: linear-gradient(135deg, #7B5FC4 0%, #5A3FB5 100%);
+            --gradient-secondary: linear-gradient(135deg, #E6E0F5 0%, #F0EDFA 100%);
+        }
+
+        .dark-mode {
+            --primary-white: #121212;
+            --light-gray: #1E1E1E;
+            --medium-gray: #2D2D2D;
+            --dark-gray: #8A8A8A;
+            --text-dark: #F5F5F5;
+            --text-medium: #CCCCCC;
+            --accent-purple: #8B6CE6;
+            --accent-purple-dark: #6A4FC4;
+            --light-purple: #E6E0F5;
+            --border-light: rgba(255, 255, 255, 0.08);
+            --hero-gray: #1a1a1a;
+            --nav-bg: rgba(18, 18, 18, 0.95);
+            --deep-navy: #EFF5FF;
+            --soft-blue: #1A2333;
+            --gradient-primary: linear-gradient(135deg, #8B6CE6 0%, #6A4BD6 100%);
+            --gradient-secondary: linear-gradient(135deg, #2D2D2D 0%, #3D3D3D 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            height: 80px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            height: 100%;
+        }
+
+        /* Logo Styles */
+        .logo-img {
+            height: 100px;
+            width: auto;
+            transform: translateX(20%);
+            padding: 14px 10px;
+            transition: all 0.3s ease;
+            display: block;
+            min-height: 100px;
+        }
+
+        .dark-mode .logo-img {
+            content: url('assets/img/logo-dark.png');
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 17px;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-purple);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            transform: translateX(-20%);
+        }
+
+        .sign-in {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 17px;
+        }
+
+        .header-cta {
+            background: var(--accent-purple);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(123, 95, 196, 0.4);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* New Tag for The Coach */
+        .nav-link-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .new-tag {
+            position: absolute;
+            top: -12px;
+            right: -35px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        /* Mobile Sign In Button */
+        .mobile-sign-in {
+            display: none;
+        }
+
+        /* Hero Section - Restored to original */
+        .privacy-hero {
+            background: var(--soft-blue);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding-top: 160px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .privacy-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-secondary);
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        .privacy-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .privacy-hero-title {
+            font-size: 60px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--deep-navy);
+            letter-spacing: -1.5px;
+        }
+
+        .privacy-hero-subtitle {
+            font-size: 22px;
+            color: var(--text-medium);
+            margin-bottom: 44px;
+            line-height: 1.5;
+            max-width: 900px;
+            margin: 0 auto 44px;
+        }
+
+        /* Main Content Layout */
+        .privacy-content {
+            background: var(--primary-white);
+            padding: 80px 0;
+        }
+
+        .privacy-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .privacy-section {
+            margin-bottom: 80px;
+            scroll-margin-top: 120px;
+        }
+
+        .privacy-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .privacy-section-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--deep-navy);
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-purple);
+        }
+
+        .privacy-section-subtitle {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 30px 0 20px;
+            color: var(--accent-purple);
+        }
+
+        .privacy-text {
+            margin-bottom: 20px;
+            color: var(--text-medium);
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        .privacy-list {
+            margin: 25px 0;
+            padding-left: 24px;
+        }
+
+        .privacy-list-item {
+            margin-bottom: 15px;
+            color: var(--text-medium);
+            line-height: 1.6;
+            font-size: 17px;
+        }
+
+        .privacy-list-item strong {
+            color: var(--text-dark);
+        }
+
+        .privacy-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .privacy-table th {
+            background-color: var(--light-purple);
+            color: var(--deep-navy);
+            text-align: left;
+            padding: 18px 20px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .privacy-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-medium);
+            font-size: 15px;
+        }
+
+        .privacy-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .privacy-table tr:nth-child(even) {
+            background-color: var(--light-gray);
+        }
+
+        /* Security Features Grid */
+        .security-features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .security-feature-card {
+            background: var(--light-gray);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .security-feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border-color: var(--accent-purple);
+        }
+
+        .security-feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--light-purple);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: var(--accent-purple);
+            font-size: 22px;
+        }
+
+        .security-feature-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--deep-navy);
+        }
+
+        .security-feature-description {
+            color: var(--text-medium);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* Security Checklist */
+        .security-checklist {
+            background: var(--light-gray);
+            border-radius: 16px;
+            padding: 40px;
+            margin: 50px 0;
+            border: 1px solid var(--border-light);
+        }
+
+        .checklist-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: var(--deep-navy);
+            text-align: center;
+        }
+
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .checklist-icon {
+            color: var(--accent-purple);
+            font-size: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        .checklist-text {
+            color: var(--text-medium);
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        .checklist-text strong {
+            color: var(--text-dark);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin: 80px 0;
+        }
+
+        .faq-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: var(--deep-navy);
+            text-align: center;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .faq-item {
+            background: var(--light-gray);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-2px);
+        }
+
+        .faq-question {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--deep-navy);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .faq-toggle {
+            color: var(--accent-purple);
+            font-size: 14px;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .faq-answer {
+            color: var(--text-medium);
+            line-height: 1.6;
+            font-size: 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            margin-top: 15px;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--light-gray);
+            border-radius: 20px;
+            padding: 50px;
+            margin-top: 80px;
+            text-align: center;
+            border: 1px solid var(--border-light);
+        }
+
+        .contact-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--deep-navy);
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            text-align: center;
+        }
+
+        .contact-label {
+            display: block;
+            font-weight: 600;
+            color: var(--accent-purple);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .contact-value {
+            color: var(--text-medium);
+            font-size: 16px;
+        }
+
+        /* Final CTA - Reduced height by 60% */
+        .final-cta {
+            background: var(--gradient-primary);
+            padding: 40px 0; /* Reduced from 100px 0 (60% reduction) */
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+        }
+
+        .final-cta-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .final-statement {
+            font-size: 36px; /* Slightly reduced for better proportion */
+            font-weight: 700;
+            margin-bottom: 15px; /* Reduced */
+            line-height: 1.2;
+        }
+
+        .cta-note {
+            font-size: 18px; /* Reduced */
+            margin-bottom: 25px; /* Reduced */
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            background: white;
+            color: var(--accent-purple);
+            padding: 14px 35px; /* Slightly reduced */
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px; /* Reduced */
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-white);
+            padding: 40px 0 20px;
+            color: var(--text-medium);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 40px;
+        }
+
+        .footer-about {
+            max-width: 400px;
+            padding-left: 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo-img {
+            height: 100px;
+            width: auto;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .footer-logo-img {
+            content: url('assets/img/logo-dark.png');
+        }
+
+        .footer-description {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .footer-heading {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 10px;
+        }
+
+        .footer-link a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link a:hover {
+            color: var(--accent-purple);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-light);
+            font-size: 14px;
+        }
+
+        .footer-nav-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-newsletter {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+            text-align: center;
+        }
+
+        .footer-newsletter-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .footer-newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-newsletter-input {
+            padding: 12px 16px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 14px;
+            background: var(--primary-white);
+            color: var(--text-dark);
+        }
+
+        .footer-newsletter-button {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-newsletter-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
+        }
+
+        /* Logo Fallback */
+        .logo-fallback {
+            display: none;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .privacy-container {
+                max-width: 900px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .privacy-hero-title {
+                font-size: 48px;
+            }
+
+            .privacy-section-title {
+                font-size: 32px;
+            }
+
+            .security-features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .checklist-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .final-statement {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Mobile Navigation */
+            .nav-container {
+                justify-content: center;
+                position: relative;
+            }
+            
+            .logo {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .logo-img {
+                height: 122px;
+                transform: none;
+                padding: 12px 0;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+                position: absolute;
+                left: 20px;
+            }
+            
+            .header-cta {
+                display: none !important;
+            }
+            
+            .nav-actions {
+                transform: none;
+                gap: 16px;
+                position: absolute;
+                right: 20px;
+            }
+            
+            .nav-actions .sign-in {
+                display: none;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 20px;
+                border-top: 1px solid var(--border-light);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                gap: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-link-container {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+            }
+            
+            .new-tag {
+                position: static;
+                margin-left: 8px;
+                top: auto;
+                right: auto;
+            }
+            
+            .mobile-sign-in {
+                display: block !important;
+                margin-top: 10px;
+                padding: 12px 20px;
+                background: white;
+                color: var(--accent-purple);
+                border-radius: 8px;
+                text-align: center;
+                font-weight: 600;
+                text-decoration: none;
+                border: 2px solid var(--accent-purple);
+            }
+
+            .dark-mode .mobile-sign-in {
+                background: var(--primary-white);
+                color: var(--accent-purple);
+                border: 2px solid var(--accent-purple);
+            }
+
+            /* Hero Adjustments */
+            .privacy-hero-title {
+                font-size: 36px;
+                margin-top: -20px;
+            }
+
+            .privacy-hero-subtitle {
+                font-size: 18px;
+            }
+
+            /* Content Adjustments */
+            section {
+                padding: 60px 0;
+            }
+
+            .privacy-content {
+                padding: 40px 0;
+            }
+
+            .privacy-section {
+                margin-bottom: 60px;
+            }
+
+            .privacy-section-title {
+                font-size: 28px;
+            }
+
+            .privacy-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .security-checklist,
+            .contact-section {
+                padding: 30px 20px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            /* Final CTA Mobile */
+            .final-cta {
+                padding: 30px 0; /* Reduced for mobile */
+                margin-top: 60px;
+            }
+
+            .final-statement {
+                font-size: 24px;
+            }
+
+            .cta-note {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+
+            .cta-button {
+                padding: 12px 30px;
+                font-size: 15px;
+            }
+
+            .footer-nav-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .privacy-hero-title {
+                font-size: 32px;
+            }
+            
+            .privacy-hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .final-statement {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="container nav-container">
+        <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+        
+        <a href="index.html" class="logo">
+            <img src="assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="logo"
+                 onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+            <div class="logo-fallback" id="logo-fallback">THE EMPLOYEE PLAYBOOK</div>
+        </a>
+        
+        <div class="nav-links">
+            <a href="the-lens.html" class="nav-link">The Lens</a>
+            <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+            <div class="nav-link-container">
+                <a href="the-coach.html" class="nav-link">The Coach</a>
+                <span class="new-tag">NEW</span>
+            </div>
+            <a href="the-shift.html" class="nav-link">The Shift</a>
+            <a href="the-pricing.html" class="nav-link">The Pricing</a>
+            <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+        </div>
+        
+        <div class="nav-actions">
+            <a href="create-account.html" class="header-cta">Sign up</a>
+            <a href="sign-in.html" class="sign-in">Sign in</a>
+            <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="privacy-hero">
+    <div class="container privacy-hero-content">
+        <h1 class="privacy-hero-title">Privacy and Security</h1>
+        <p class="privacy-hero-subtitle">We've built The Employee Playbook to be a private, safe system you can rely on. This means your data is never used to profile, penalise or expose you.<br><br>Everything starts with trust. Our Policy is written to give you full transparency and control, clearly setting out how we collect, use and safeguard your information. <br>No hidden clauses, no jargon.</p>
+    </div>
+</section>
+
+<!-- Privacy Content -->
+<section class="privacy-content">
+    <div class="container privacy-container">
+        <!-- Overview -->
+        <div class="privacy-section" id="overview">
+            <h2 class="privacy-section-title">Our Commitment to Your Privacy</h2>
+            <p class="privacy-text">At The Employee Playbook, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our services.</p>
+            <p class="privacy-text">We encourage you to read this policy carefully to understand our practices regarding your personal data and how we will treat it.</p>
+        </div>
+
+        <!-- Data Collection -->
+        <div class="privacy-section" id="collection">
+            <h2 class="privacy-section-title">Information We Collect</h2>
+            
+            <h3 class="privacy-section-subtitle">Personal Information</h3>
+            <p class="privacy-text">We collect personal information that you voluntarily provide to us when you:</p>
+            <ul class="privacy-list">
+                <li class="privacy-list-item">Register for an account</li>
+                <li class="privacy-list-item">Subscribe to our services</li>
+                <li class="privacy-list-item">Complete forms or surveys</li>
+                <li class="privacy-list-item">Contact our support team</li>
+                <li class="privacy-list-item">Participate in our coaching programs</li>
+            </ul>
+            
+            <h3 class="privacy-section-subtitle">Automatically Collected Information</h3>
+            <p class="privacy-text">When you visit our website, we automatically collect certain information about your device and usage patterns, including:</p>
+            <ul class="privacy-list">
+                <li class="privacy-list-item">IP address and location data</li>
+                <li class="privacy-list-item">Browser type and version</li>
+                <li class="privacy-list-item">Pages you visit and time spent</li>
+                <li class="privacy-list-item">Referring website information</li>
+            </ul>
+        </div>
+
+        <!-- Data Usage -->
+        <div class="privacy-section" id="usage">
+            <h2 class="privacy-section-title">How We Use Your Information</h2>
+            <p class="privacy-text">We use the information we collect for various purposes, including:</p>
+            
+            <table class="privacy-table">
+                <thead>
+                    <tr>
+                        <th>Purpose</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Service Delivery</strong></td>
+                        <td>To provide and maintain our services</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Personalization</strong></td>
+                        <td>To customise your experience</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Communication</strong></td>
+                        <td>To send updates and support messages</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Improvement</strong></td>
+                        <td>To analyze usage patterns</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Security</strong></td>
+                        <td>To protect against unauthorized activity</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Data Sharing -->
+        <div class="privacy-section" id="sharing">
+            <h2 class="privacy-section-title">Information Sharing and Disclosure</h2>
+            <p class="privacy-text">We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except in the following circumstances:</p>
+            
+            <ul class="privacy-list">
+                <li class="privacy-list-item"><strong>Service Providers:</strong> We may share information with trusted third-party service providers who assist us in operating our website and services.</li>
+                <li class="privacy-list-item"><strong>Legal Requirements:</strong> We may disclose your information when required by law or to protect our rights.</li>
+                <li class="privacy-list-item"><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets.</li>
+            </ul>
+        </div>
+
+        <!-- Security -->
+        <div class="privacy-section" id="security">
+            <h2 class="privacy-section-title">Data Security</h2>
+            <p class="privacy-text">We implement appropriate technical and organizational security measures to protect your personal information against unauthorised access, alteration, disclosure, or destruction.</p>
+            
+            <div class="security-features-grid">
+                <div class="security-feature-card">
+                    <div class="security-feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="security-feature-title">Data Encryption</h3>
+                    <p class="security-feature-description">All your data is encrypted both when it's being sent and when it's stored on our servers.</p>
+                </div>
+                
+                <div class="security-feature-card">
+                    <div class="security-feature-icon">
+                        <i class="fas fa-user-lock"></i>
+                    </div>
+                    <h3 class="security-feature-title">Access Control</h3>
+                    <p class="security-feature-description">Only authorised team members can access systems, and we use multi-factor authentication for extra security.</p>
+                </div>
+                
+                <div class="security-feature-card">
+                    <div class="security-feature-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="security-feature-title">Secure Infrastructure</h3>
+                    <p class="security-feature-description">Our systems are hosted on secure infrastructure with regular security checks and updates.</p>
+                </div>
+                
+                <div class="security-feature-card">
+                    <div class="security-feature-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 class="security-feature-title">Regular Backups</h3>
+                    <p class="security-feature-description">We automatically backup your data daily so it's protected against accidental loss.</p>
+                </div>
+            </div>
+            
+            <div class="security-checklist">
+                <h3 class="checklist-title">Additional Security Measures</h3>
+                <div class="checklist-grid">
+                    <div class="checklist-item">
+                        <span class="checklist-icon"><i class="fas fa-check-circle"></i></span>
+                        <span class="checklist-text"><strong>Secure architecture:</strong> We never store your passwords in plain text.</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon"><i class="fas fa-check-circle"></i></span>
+                        <span class="checklist-text"><strong>Regular security testing:</strong> We regularly test our systems for vulnerabilities.</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon"><i class="fas fa-check-circle"></i></span>
+                        <span class="checklist-text"><strong>Team training:</strong> All our team members receive regular security training.</span>
+                    </div>
+                    <div class="checklist-item">
+                        <span class="checklist-icon"><i class="fas fa-check-circle"></i></span>
+                        <span class="checklist-text"><strong>Data minimization:</strong> We only collect data we need to provide our services.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Your Rights -->
+        <div class="privacy-section" id="rights">
+            <h2 class="privacy-section-title">Your Rights and Choices</h2>
+            <p class="privacy-text">You have certain rights regarding your personal information, including:</p>
+            
+            <ul class="privacy-list">
+                <li class="privacy-list-item"><strong>Access:</strong> You can request access to the personal information we hold about you.</li>
+                <li class="privacy-list-item"><strong>Correction:</strong> You can request that we correct or update your personal information.</li>
+                <li class="privacy-list-item"><strong>Deletion:</strong> You can request that we delete your personal information.</li>
+                <li class="privacy-list-item"><strong>Opt-out:</strong> You can opt out of marketing communications at any time.</li>
+                <li class="privacy-list-item"><strong>Data Portability:</strong> You can request a copy of your data in a structured format.</li>
+            </ul>
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq-section" id="faq">
+            <h2 class="faq-title">Security FAQ</h2>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Where is my data stored?</span>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Your data is stored in secure data centers located in the United States. We use multiple locations for reliability and performance.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Who can access my data?</span>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Only a small number of authorized team members can access user data, and only when needed to provide support or maintain our services.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do you handle data deletion requests?</span>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can request deletion of your data at any time through your account settings or by contacting our support team.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you share my data with other companies?</span>
+                        <span class="faq-toggle"><i class="fas fa-chevron-down"></i></span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We only share data with service providers that help us deliver our services. These partners are carefully selected.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="contact-section">
+            <h2 class="contact-title">Contact Us</h2>
+            <p class="privacy-text">If you have any questions about our Privacy Policy or security practices, <br>please contact us:</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-label">General Inquiries</span>
+                    <span class="contact-value">Hello@TheEmployeePlaybook.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Security Concerns</span>
+                    <span class="contact-value">Support@TheEmployeePlaybook.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-label">Last Updated</span>
+                    <span class="contact-value">January 1, 2026</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA - Reduced Height -->
+<section class="final-cta">
+    <div class="container final-cta-content">
+        <h2 class="final-statement">Your data security is our priority</h2>
+        <p class="cta-note">Join thousands of professionals who trust us with their career development journey.</p>
+        <a href="create-account.html" class="cta-button">Get Started Securely</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/img/logo.png" alt="The Employee Playbook" class="footer-logo-img" id="footer-logo"
+                             onerror="this.style.display='none'; document.getElementById('footer-logo-fallback').style.display='block';">
+                        <div class="logo-fallback" id="footer-logo-fallback" style="font-size: 28px;">THE EMPLOYEE PLAYBOOK</div>
+                    </a>
+                </div>
+                <p class="footer-description">A private strategy system giving employees clarity and advantage in the moments that matter most.</p>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h3 class="footer-newsletter-title">Stay updated with strategic insights</h3>
+                <form class="footer-newsletter-form">
+                    <input type="email" class="footer-newsletter-input" placeholder="Your email" required>
+                    <button type="submit" class="footer-newsletter-button">Subscribe</button>
+                </form>
+            </div>
+            
+            <div class="footer-nav">
+                <div class="footer-nav-grid">
+                    <div class="footer-nav-section">
+                        <h3 class="footer-heading">The Playbook</h3>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="the-lens.html">The Lens</a></li>
+                            <li class="footer-link"><a href="the-toolkit.html">The Toolkit</a></li>
+                            <li class="footer-link"><a href="the-coach.html">The Coach</a></li>
+                            <li class="footer-link"><a href="the-shift.html">The Shift</a></li>
+                            <li class="footer-link"><a href="the-pricing.html">The Pricing</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-nav-section">
+                        <h3 class="footer-heading">Company</h3>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="about-us.html">About</a></li>
+                            <li class="footer-link"><a href="#">Privacy</a></li>
+                            <li class="footer-link"><a href="terms-and-conditions.html">Terms</a></li>
+                            <li class="footer-link"><a href="#">Security</a></li>
+                            <li class="footer-link"><a href="#">Help Centre</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2023 The Employee Playbook. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('loaded');
+        
+        // Dark mode toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+            
+            const logo = document.getElementById('logo');
+            const footerLogo = document.getElementById('footer-logo');
+            if (document.body.classList.contains('dark-mode')) {
+                logo.src = 'assets/img/logo-dark.png';
+                footerLogo.src = 'assets/img/logo-dark.png';
+            } else {
+                logo.src = 'assets/img/logo.png';
+                footerLogo.src = 'assets/img/logo.png';
+            }
+        });
+
+        // Mobile navigation
+        document.querySelector('.mobile-toggle').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // FAQ functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', function () {
+                const faqItem = this.parentElement;
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 120; // Account for fixed header
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.mobile-toggle i').classList.add('fa-bars');
+                    document.querySelector('.mobile-toggle i').classList.remove('fa-times');
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

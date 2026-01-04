@@ -1,0 +1,2731 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Navigate difficult managers, protect your position, and get the support you need with practical strategies from The Employee Playbook.">
+    <title>Manager Relationship & Leadership Style | The Employee Playbook</title>
+    
+    <!-- Font Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --medium-gray: #E9ECEF;
+            --dark-gray: #6C757D;
+            --text-dark: #212529;
+            --text-medium: #495057;
+            --accent-purple: #7B5FC4;
+            --accent-purple-dark: #5A4496;
+            --light-purple: #E6E0F5;
+            --lighter-purple: #F0EBFA;
+            --border-light: rgba(0, 0, 0, 0.08);
+            --hero-gray: #f5f7fa;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --sidebar-bg: #fafbfc;
+            --chat-bg: #ffffff;
+            --online-green: #10B981;
+            --hero-purple: #5A4496;
+            --user-msg-bg: #7B5FC4;
+            --bot-msg-bg: #F1F3F9;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+            --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+            --premium-card-shadow: 0 6px 20px rgba(123, 95, 196, 0.12);
+            
+            /* Simplified Color Scheme */
+            --neutral-bg: #F8F9FA;
+            --crisis-red: #FF6B6B;
+
+            /* UPDATED: Category colour for Manager Relationship from your spec */
+            --manager-accent: #10b981;
+            --manager-accent-dark: #0da271;
+            --manager-accent-light: rgba(16, 185, 129, 0.08);
+            --manager-accent-hover: rgba(16, 185, 129, 0.15);
+            
+            /* UPDATED: Add gradient backgrounds from your spec */
+            --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(16, 185, 129, 0.04));
+            --pill-manager-border: rgba(16, 185, 129, 0.2);
+            --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(16, 185, 129, 0.08));
+            --pill-manager-hover-border: rgba(16, 185, 129, 0.3);
+        }
+
+        .dark-mode {
+            --primary-white: #121212;
+            --light-gray: #1E1E1E;
+            --medium-gray: #2D2D2D;
+            --dark-gray: #8A8A8A;
+            --text-dark: #F5F5F5;
+            --text-medium: #CCCCCC;
+            --accent-purple: #8B6CE6;
+            --accent-purple-dark: #6A4FC4;
+            --light-purple: #2A1E4A;
+            --lighter-purple: #1E1A2E;
+            --border-light: rgba(255, 255, 255, 0.08);
+            --hero-gray: #1a1a1a;
+            --nav-bg: rgba(18, 18, 18, 0.95);
+            --sidebar-bg: #1a1a1a;
+            --chat-bg: #1e1e1e;
+            --user-msg-bg: #8B6CE6;
+            --bot-msg-bg: #2D2D2D;
+            --shadow: 0 2px 8px rgba(0,0,0,0.2);
+            --premium-card-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            
+            /* Simplified Dark Mode Colors */
+            --neutral-bg: #1E1E1E;
+            --crisis-red: #FF5252;
+
+            /* UPDATED: Dark mode colors for Manager Relationship */
+            --manager-accent: #34d399;
+            --manager-accent-dark: #10b981;
+            --manager-accent-light: rgba(16, 185, 129, 0.15);
+            --manager-accent-hover: rgba(16, 185, 129, 0.2);
+            
+            /* UPDATED: Dark mode gradient backgrounds from your spec */
+            --pill-manager-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.08));
+            --pill-manager-border: rgba(52, 211, 153, 0.3);
+            --pill-manager-hover-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.12));
+            --pill-manager-hover-border: rgba(52, 211, 153, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            height: 80px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            height: 100%;
+        }
+
+        /* Logo Styles */
+        .logo-img {
+            height: 100px;
+            width: auto;
+            transform: translateX(20%);
+            padding: 14px 10px;
+            transition: all 0.3s ease;
+            display: block;
+            min-height: 100px;
+        }
+
+        .dark-mode .logo-img {
+            content: url('assets/img/logo-dark.png');
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 17px;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-purple);
+        }
+
+        .nav-link.active {
+            color: var(--text-dark);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -7px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-purple);
+            border-radius: 2px 2px 0 0;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            transform: translateX(-20%);
+        }
+
+        .sign-in {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 17px;
+        }
+
+        .header-cta {
+            background: var(--accent-purple);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(123, 95, 196, 0.25);
+        }
+
+        .header-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(123, 95, 196, 0.35);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* New Tag for The Coach */
+        .nav-link-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .new-tag {
+            position: absolute;
+            top: -12px;
+            right: -35px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        /* NEW: Mobile CTA Tab */
+        .mobile-cta-tab {
+            display: none;
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%) rotate(-90deg);
+            transform-origin: right bottom;
+            background: var(--accent-purple);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px 8px 0 0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 5px 15px rgba(123, 95, 196, 0.4);
+            z-index: 998;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .mobile-cta-tab:hover {
+            background: var(--accent-purple-dark);
+        }
+
+        /* NEW: MY PLAYBOOK FLOATING BUTTON + SIDEBAR (EXACT COPY FROM WORKLOAD CHECKLIST) */
+        .my-playbook-fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1200;
+            background: var(--premium-gradient);
+            color: #ffffff;
+            padding: 10px 16px;
+            border-radius: 999px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            transition: all 0.25s ease;
+        }
+
+        .my-playbook-fab i {
+            font-size: 15px;
+        }
+
+        .my-playbook-fab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+        }
+
+        .playbook-sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.45);
+            z-index: 1190;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .playbook-sidebar-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .playbook-sidebar {
+            position: fixed;
+            top: 0;
+            right: -380px;
+            width: 340px;
+            max-width: 90%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+            z-index: 1191;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-light);
+            transition: right 0.25s ease;
+        }
+
+        .dark-mode .playbook-sidebar {
+            background: rgba(18, 18, 18, 0.96);
+            box-shadow: -4px 0 22px rgba(0,0,0,0.6);
+        }
+
+        .playbook-sidebar.open {
+            right: 0;
+        }
+
+        .playbook-sidebar-header {
+            padding: 20px 20px 14px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .playbook-sidebar-header-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .playbook-sidebar-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .playbook-sidebar-header p {
+            font-size: 13px;
+            color: var(--dark-gray);
+        }
+
+        .playbook-close-btn {
+            background: none;
+            border: none;
+            color: var(--dark-gray);
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 999px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .playbook-close-btn:hover {
+            background: var(--light-gray);
+        }
+
+        .playbook-sidebar-body {
+            padding: 14px 18px 20px;
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .saved-items-empty {
+            font-size: 13px;
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        .saved-items-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .saved-item {
+            padding: 10px 8px 10px;
+            border-radius: 10px;
+            border: 1px solid var(--border-light);
+            background: var(--primary-white);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .saved-item-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .saved-item-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .saved-item-type {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: var(--accent-purple-dark);
+        }
+
+        .saved-item-meta {
+            font-size: 12px;
+            color: var(--dark-gray);
+        }
+
+        .saved-item-link {
+            margin-top: 6px;
+            font-size: 12px;
+            color: var(--accent-purple);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .saved-item-link:hover {
+            text-decoration: underline;
+        }
+
+        /* QUICK LINKS — CLEAN VERSION */
+        .playbook-quick-links {
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .playbook-quick-links-header {
+            margin-bottom: 4px;
+        }
+
+        .quick-links-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-medium);
+        }
+
+        .playbook-quick-links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        /* Quick Link Pill */
+        .quick-link-pill {
+            width: 50%;
+            padding: 4px 4px;
+            border-radius: 999px;
+            border: 1px solid rgba(123, 95, 196, 0.35);
+            background: linear-gradient(135deg,rgba(123, 95, 196, 0.08),rgba(123, 95, 196, 0.02));
+            text-decoration: none;
+            color: var(--accent-purple-dark);
+            font-size: 13px;
+            font-weight: 500;
+           
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quick-link-pill:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            background: linear-gradient(135deg,rgba(123, 95, 196, 0.16), rgba(123, 95, 196, 0.06));
+        }
+
+        .quick-link-pill i {
+            font-size: 14px;
+        }
+
+        .dark-mode .quick-link-pill {
+            border-color: rgba(157, 134, 233, 0.55);
+            background: linear-gradient(135deg,rgba(123, 95, 196, 0.26),rgba(123, 95, 196, 0.12));
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 80px 30px 30px;
+            display: flex;
+            min-height: calc(100vh - 160px);
+        }
+
+        .content-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--primary-white);
+            padding: 35px 0 20px;
+            color: var(--text-medium);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 70px;
+            margin-bottom: 35px;
+            align-items: start;
+        }
+
+        .footer-about {
+            max-width: 400px;
+            padding-left: 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo-img {
+            height: 100px;
+            width: auto;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .footer-logo-img {
+            content: url('assets/img/logo-dark.png');
+        }
+
+        .footer-description {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .footer-heading {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 18px;
+            color: var(--text-dark);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 8px;
+        }
+
+        .footer-link a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link a:hover {
+            color: var(--accent-purple);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-light);
+            font-size: 14px;
+        }
+
+        .footer-nav {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        .footer-nav-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 35px;
+        }
+
+        .footer-newsletter {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+            text-align: center;
+        }
+
+        .footer-newsletter-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .footer-newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-newsletter-input {
+            padding: 12px 16px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 14px;
+            background: var(--primary-white);
+            color: var(--text-dark);
+        }
+
+        .footer-newsletter-button {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-newsletter-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(123, 95, 196, 0.25);
+        }
+
+        /* Logo Fallback */
+        .logo-fallback {
+            display: none;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        /* ==============================
+           CATEGORY PAGE: MANAGER RELATIONSHIP HERO
+        =============================== */
+        .category-hero {
+            padding: 140px 0 60px;
+            background: var(--primary-white);
+            position: relative;
+            text-align: center;
+        }
+
+        .category-hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Category name in black with green line under */
+        .category-title {
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--manager-accent);
+            border-radius: 2px;
+        }
+
+        .hero-title {
+            font-size: 50px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            margin-top: 40px;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            max-width: 1100px;
+            font-size: 20px;
+            color: var(--text-medium);
+            margin-bottom: 40px;
+            line-height: 1.55;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Hero actions - wider pills with icon and text on one line */
+        .hero-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0px 0;
+        }
+
+        /* UPDATED: Wider interactive focus pills with gradient backgrounds and reduced padding */
+        .focus-pill {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            padding: 12px 12px;
+            border-radius: 12px;
+            background: var(--pill-manager-bg);
+            border: 1px solid var(--pill-manager-border);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            min-width: 0;
+            gap: 12px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .dark-mode .focus-pill {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .focus-pill:hover {
+            background: var(--pill-manager-hover-bg);
+            border-color: var(--pill-manager-hover-border);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.15);
+        }
+
+        .dark-mode .focus-pill:hover {
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.25);
+        }
+
+        .focus-pill:active {
+            transform: translateY(-1px);
+            transition: transform 0.1s ease;
+        }
+
+        .focus-pill.active {
+            background: var(--manager-accent);
+            border-color: var(--manager-accent);
+        }
+
+        .focus-pill.active .pill-icon,
+        .focus-pill.active .pill-text {
+            color: white;
+        }
+
+        /* Focus pill icon */
+        .pill-icon {
+            font-size: 18px;
+            color: var(--manager-accent-dark);
+            margin-bottom: 0;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        /* Focus pill text */
+        .pill-text {
+            font-size: 15px;
+            color: var(--manager-accent-dark);
+            font-weight: 500;
+            text-align: center;
+            line-height: 1.3;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        /* Active indicator dot */
+        .active-dot {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--manager-accent-dark);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .focus-pill.active .active-dot {
+            opacity: 1;
+            background: white;
+        }
+
+        /* Active pill animation */
+        @keyframes pillPulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .focus-pill.active {
+            animation: pillPulse 2s infinite;
+        }
+
+        /* Scroll progress indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--manager-accent-light);
+            z-index: 999;
+            display: none;
+        }
+
+        .scroll-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--manager-accent);
+            transition: width 0.3s ease;
+        }
+
+        /* ==============================
+           CATEGORY SECTIONS
+        =============================== */
+        .category-section {
+            padding: 30px 0;
+            scroll-margin-top: 100px;
+        }
+
+        .section-header-inline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section-kicker {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--manager-accent-dark);
+            margin-bottom: 5px;
+        }
+
+        .section-title {
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.2;
+        }
+
+        .section-intro {
+            max-width: 1100px;
+            font-size: 18px;
+            color: var(--text-medium);
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        /* TWO-COLUMN GRID FOR RECOGNITION + PAIN POINTS */
+        .recognise-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        /* UPDATED: Boxes with green top border and WHITE background */
+        .recognise-box {
+            background: var(--primary-white);
+            border-radius: 16px;
+            padding: 26px 24px;
+            border: 1px solid var(--border-light);
+            border-top: 5px solid var(--manager-accent);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+        }
+
+        .recognise-box h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .recognise-box p {
+            font-size: 14px;
+            color: var(--text-medium);
+            margin-bottom: 12px;
+        }
+
+        .recognise-box ul {
+            padding-left: 18px;
+            margin: 0;
+            font-size: 15px;
+            color: var(--text-medium);
+        }
+
+        .recognise-box ul li {
+            margin-bottom: 6px;
+        }
+
+        /* INSIGHT LIST */
+        .insight-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+
+        .insight-list li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 10px;
+            color: var(--text-medium);
+        }
+
+        .insight-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--manager-accent-dark);
+            font-weight: 900;
+        }
+
+        /* If you're in crisis right now section - MOVED TO ABOVE OVERVIEW */
+        .crisis-section {
+            background: var(--neutral-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+            border: 2px solid var(--crisis-red);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .crisis-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 14px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .crisis-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .crisis-list li {
+            position: relative;
+            padding-left: 26px;
+            margin-bottom: 12px;
+            color: var(--text-medium);
+        }
+
+        .crisis-list li::before {
+            content: "⚠";
+            position: absolute;
+            left: 0;
+            color: var(--crisis-red);
+            font-weight: 700;
+        }
+
+        /* LEADERSHIP STYLE GRID */
+        .style-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        /* UPDATED: Style cards with green accent and WHITE background */
+        .style-card {
+            background: var(--primary-white);
+            border-radius: 16px;
+            padding: 22px 20px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 260px;
+            border-top: 3px solid var(--manager-accent);
+        }
+
+        .style-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--manager-accent-dark);
+            margin-bottom: 6px;
+        }
+
+        .style-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .style-body {
+            font-size: 14px;
+            color: var(--text-medium);
+            flex-grow: 1;
+        }
+
+        .style-body ul {
+            padding-left: 18px;
+        }
+
+        .style-body li {
+            margin-bottom: 6px;
+        }
+
+        .style-footer-tip {
+            margin-top: auto;
+            padding-top: 12px;
+            font-size: 13px;
+            font-style: italic;
+            color: var(--text-medium);
+            border-top: 1px solid var(--border-light);
+            margin-bottom: 0;
+        }
+
+        /* CORE MOVES */
+        .core-moves-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        /* UPDATED: Move cards with green accent and WHITE background */
+        .move-card {
+            background: var(--primary-white);
+            border-radius: 16px;
+            padding: 22px 20px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 240px;
+            border-top: 3px solid var(--manager-accent);
+        }
+
+        .move-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--manager-accent-dark);
+            margin-bottom: 6px;
+        }
+
+        .move-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .move-body {
+            font-size: 14px;
+            color: var(--text-medium);
+            flex-grow: 1;
+        }
+
+        .move-body ul {
+            padding-left: 18px;
+        }
+
+        .move-body li {
+            margin-bottom: 6px;
+        }
+
+        .move-footer-tip {
+            margin-top: auto;
+            padding-top: 12px;
+            font-size: 13px;
+            font-style: italic;
+            color: var(--text-medium);
+            border-top: 1px solid var(--border-light);
+            margin-bottom: 0;
+        }
+
+        /* RECOMMENDED TOOLS - UPDATED: Changed to white background */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 20px;
+        }
+
+        /* UPDATED: Tool cards with green accent and WHITE BACKGROUND */
+        .tool-card {
+            background: var(--primary-white);
+            border-radius: 16px;
+            padding: 22px 20px 18px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            min-height: 380px;
+            border-top: 3px solid var(--manager-accent);
+        }
+
+        .tool-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--manager-accent-dark);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 10px;
+        }
+
+        .tool-pill i {
+            font-size: 11px;
+        }
+
+        .tool-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+        }
+
+        .tool-meta {
+            font-size: 13px;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+        }
+
+        .tool-description {
+            font-size: 14px;
+            color: var(--text-medium);
+            flex-grow: 1;
+        }
+
+        .tool-description ul {
+            padding-left: 18px;
+        }
+
+        .tool-description li {
+            margin-bottom: 6px;
+        }
+
+        .tool-output {
+            font-size: 12px;
+            color: var(--manager-accent-dark);
+            font-weight: 600;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        /* Tool card footer with stats */
+        .tool-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--manager-accent-dark);
+            text-decoration: none;
+        }
+
+        .tool-link i {
+            font-size: 12px;
+        }
+
+        .tool-link:hover {
+            text-decoration: underline;
+        }
+
+        .tool-stats {
+            display: flex;
+            gap: 12px;
+        }
+
+        .tool-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--manager-accent);
+        }
+
+        .tool-stat i {
+            font-size: 13px;
+        }
+
+        /* SCRIPTS & WORDING */
+        .scripts-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0,1fr));
+            gap: 20px;
+        }
+
+        /* UPDATED: Script cards with green accent and WHITE background */
+        .script-card {
+            background: var(--primary-white);
+            border-radius: 16px;
+            padding: 20px 18px 16px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            min-height: 220px;
+            border-top: 3px solid var(--manager-accent);
+        }
+
+        .script-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+            color: var(--dark-gray);
+            margin-bottom: 6px;
+        }
+
+        .script-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .script-use {
+            font-size: 13px;
+            color: var(--text-medium);
+            margin-bottom: 10px;
+            flex-grow: 1;
+        }
+
+        /* Script card footer with stats */
+        .script-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .script-link {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--manager-accent-dark);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .script-link i {
+            font-size: 12px;
+        }
+
+        .script-link:hover {
+            text-decoration: underline;
+        }
+
+        .script-stats {
+            display: flex;
+            gap: 12px;
+        }
+
+        .script-stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--manager-accent);
+        }
+
+        .script-stat i {
+            font-size: 13px;
+        }
+
+        /* Merged overview section style */
+        .merged-overview-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .overview-main {
+            background: var(--primary-white);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid var(--border-light);
+        }
+
+        .overview-main h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .overview-benefits {
+            background: var(--manager-accent-light);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--manager-accent);
+        }
+
+        .overview-benefits h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--manager-accent-dark);
+        }
+
+        .overview-benefits ul {
+            padding-left: 20px;
+            margin: 0;
+            font-size: 15px;
+            color: var(--text-medium);
+        }
+
+        .overview-benefits li {
+            margin-bottom: 10px;
+        }
+
+        /* Micro CTA at bottom of page */
+        .micro-cta {
+            text-align: center;
+            padding: 30px;
+            margin: 30px 0 10px;
+            background: var(--neutral-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+        }
+
+        .micro-cta p {
+            font-size: 18px;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .micro-cta-sub {
+            font-size: 14px;
+            color: var(--text-medium);
+            margin-bottom: 18px;
+        }
+
+        .cta-small {
+            background: var(--accent-purple);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 0 10px;
+            box-shadow: 0 2px 6px rgba(123, 95, 196, 0.2);
+        }
+
+        .cta-small:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(123, 95, 196, 0.3);
+        }
+
+        .cta-link {
+            color: var(--accent-purple);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .cta-link:hover {
+            color: var(--accent-purple-dark);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .style-grid,
+            .core-moves-grid,
+            .tools-grid,
+            .scripts-grid {
+                grid-template-columns: repeat(2, minmax(0,1fr));
+            }
+
+            .merged-overview-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            /* Sidebar adjustment for smaller screens */
+            .playbook-sidebar {
+                width: 350px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .nav-links {
+                gap: 30px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-title {
+                font-size: 2.4rem;
+            }
+
+            .hero-actions {
+                max-width: 900px;
+            }
+            
+            .playbook-sidebar {
+                width: 320px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Mobile Navigation Changes */
+            .nav-container {
+                justify-content: center;
+                position: relative;
+            }
+            
+            .logo {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            /* INCREASED: Mobile header logo size by 25% */
+            .logo-img {
+                height: 122px;
+                transform: none;
+                padding: 12px 0;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+                position: absolute;
+                left: 20px;
+            }
+            
+            .header-cta {
+                display: none;
+            }
+            
+            .nav-actions {
+                transform: none;
+                gap: 16px;
+                position: absolute;
+                right: 20px;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 20px;
+                border-top: 1px solid var(--border-light);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+                gap: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+            
+            /* Move The Coach to the left and New tag next to it */
+            .nav-link-container {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+            }
+            
+            .new-tag {
+                position: static;
+                margin-left: 8px;
+                top: auto;
+                right: auto;
+            }
+            
+            /* Move sign-in button to mobile menu */
+            .nav-actions .sign-in {
+                display: none;
+            }
+            
+            .mobile-sign-in {
+                display: block !important;
+                margin-top: 10px;
+                padding: 12px 20px;
+                background: var(--accent-purple);
+                color: white;
+                border-radius: 8px;
+                text-align: center;
+                font-weight: 600;
+                text-decoration: none;
+            }
+
+            main {
+                flex-direction: column;
+                padding: 80px 15px 15px;
+            }
+
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .category-hero {
+                padding: 120px 0 50px;
+            }
+
+            .hero-title {
+                font-size: 2.1rem;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+                max-width: 95%;
+                margin-bottom: 30px;
+            }
+
+            .recognise-grid,
+            .style-grid,
+            .core-moves-grid,
+            .tools-grid,
+            .scripts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .merged-overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-nav-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 20px;
+            }
+
+            .footer-logo-img {
+                height: 120px;
+            }
+
+            /* NEW: Mobile CTA Tab */
+            .mobile-cta-tab {
+                display: block;
+            }
+
+            .category-section {
+                padding: 30px 0;
+            }
+            
+            /* Adjust hero focus pills for mobile */
+            .hero-actions {
+                flex-direction: column;
+                gap: 10px;
+                max-width: 100%;
+            }
+            
+            .focus-pill {
+                width: 100%;
+                max-width: 320px;
+                padding: 12px;
+                flex-direction: row;
+                justify-content: flex-start;
+                gap: 12px;
+            }
+            
+            .pill-icon {
+                margin-bottom: 0;
+                font-size: 20px;
+            }
+            
+            .pill-text {
+                text-align: left;
+                font-size: 15px;
+                white-space: normal;
+            }
+            
+            .category-title {
+                font-size: 24px;
+            }
+            
+            .scroll-progress {
+                top: 0;
+            }
+
+            .section-intro {
+                max-width: 95%;
+                font-size: 16px;
+            }
+            
+            /* Floating button and sidebar adjustments for mobile */
+            .my-playbook-fab {
+                bottom: 18px;
+                right: 18px;
+                padding: 8px 14px;
+                font-size: 12px;
+            }
+            
+            .playbook-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .playbook-sidebar.open {
+                right: 0;
+            }
+            
+            .quick-link-pill {
+                width: 70%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-img {
+                height: 100px;
+            }
+            
+            .footer-logo-img {
+                height: 100px;
+            }
+            
+            .logo-fallback {
+                font-size: 18px;
+            }
+            
+            .hero-title {
+                font-size: 1.9rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .footer-nav-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+            }
+            
+            .category-title {
+                font-size: 22px;
+            }
+
+            .pill-text {
+                font-size: 14px;
+            }
+
+            .tool-footer,
+            .script-footer {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .tool-stats,
+            .script-stats {
+                margin-top: 5px;
+            }
+            
+            .my-playbook-fab {
+                bottom: 14px;
+                right: 14px;
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+            
+            .my-playbook-fab i {
+                font-size: 13px;
+            }
+            
+            .quick-link-pill {
+                width: 80%;
+            }
+        }
+        
+        /* Mobile Sign In Button */
+        .mobile-sign-in {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Scroll Progress Indicator -->
+<div class="scroll-progress" id="scrollProgress">
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+</div>
+
+<!-- NEW: Mobile CTA Tab -->
+<a href="create-account.html" class="mobile-cta-tab">Sign Up</a>
+
+<!-- ===========================
+     MY PLAYBOOK SIDEBAR (EXACT COPY FROM WORKLOAD CHECKLIST)
+=========================== -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+    <div class="playbook-sidebar" id="playbookSidebar">
+        <div class="playbook-sidebar-header">
+            <div class="playbook-sidebar-header-title-row">
+                <h3>My Playbook</h3>
+                <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p>Saved items</p>
+        </div>
+        <div class="playbook-sidebar-body">
+            <div id="savedItemsContainer">
+                <p class="saved-items-empty" id="savedItemsEmpty">
+                    You haven't saved anything yet. Use <strong>Save item</strong> on tools you want quick access to.
+                </p>
+                <ul class="saved-items-list" id="savedItemsList"></ul>
+            </div>
+
+            <!-- Quick links at bottom -->
+            <div class="playbook-quick-links">
+                <div class="playbook-quick-links-header">
+                    <span class="quick-links-title">Quick links</span>
+                </div>
+                <div class="playbook-quick-links-list">
+                    <a href="dashboard.html" class="quick-link-pill">
+                        <i class="fas fa-gauge"></i> The Dashboard
+                    </a>                    
+                    <a href="the-lens.html" class="quick-link-pill">
+                        <i class="fas fa-search"></i> The Lens
+                    </a>
+                    <a href="the-tools.html" class="quick-link-pill">
+                        <i class="fas fa-toolbox"></i> The Toolkit
+                    </a>
+                    <a href="the-coach.html" class="quick-link-pill">
+                        <i class="fas fa-comments"></i> The Coach
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Floating My Playbook button -->
+<div class="my-playbook-fab" id="myPlaybookButton">
+    <i class="fas fa-book-open"></i>
+    <span>My Playbook</span>
+</div>
+
+<!-- Navigation -->
+<nav>
+    <div class="container nav-container">
+        <!-- FIXED: Added aria-label to mobile toggle button -->
+        <button class="mobile-toggle" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+        
+        <!-- Logo centred for mobile -->
+        <a href="index.html" class="logo">
+            <img src="assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="logo"
+                 onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+            <div class="logo-fallback" id="logo-fallback">THE EMPLOYEE PLAYBOOK</div>
+        </a>
+        
+        <!-- Navigation links with mobile sign-in -->
+        <div class="nav-links">
+            <a href="the-lens.html" class="nav-link">The Lens</a>
+            <a href="the-tools.html" class="nav-link">The Toolkit</a>
+            <div class="nav-link-container">
+                <a href="the-coach.html" class="nav-link">The Coach</a>
+                <span class="new-tag">NEW</span>
+            </div>
+            <a href="the-shift.html" class="nav-link">The Shift</a>
+            <a href="the-pricing.html" class="nav-link">The Pricing</a>
+            <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+        </div>
+        
+        <!-- Desktop actions (hidden on mobile) -->
+        <div class="nav-actions">
+            <a href="create-account.html" class="header-cta">Sign up</a>
+            <a href="sign-in.html" class="sign-in">Sign in</a>
+            <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content Area -->
+<main>
+    <div class="container">
+        <div class="content-wrapper">
+
+            <!-- CATEGORY HERO -->
+            <section class="category-hero">
+                <div class="category-hero-inner">
+                    <!-- Category name in black with green line under -->
+                    <h2 class="category-title">
+                        MANAGER RELATIONSHIP &amp; LEADERSHIP STYLE
+                    </h2>
+
+                    <h1 class="hero-title">
+                        Navigate difficult managers.<br>
+                        Protect your position and progress.
+                    </h1>
+
+                    <p class="hero-subtitle">
+                        When your manager is unclear, inconsistent, micromanaging, or creating a toxic environment, this category gives you the tools to set boundaries, communicate effectively, and build the influence you need to succeed.
+                    </p>
+
+                    <!-- Wider Interactive Focus Pills with Green Gradient -->
+                    <div class="hero-actions">
+                        <a href="#section-covers" class="focus-pill" id="pill-covers">
+                            <span class="active-dot"></span>
+                            <i class="pill-icon fas fa-circle-info"></i>
+                            <span class="pill-text">What this category covers</span>
+                        </a>
+                        <a href="#section-recognise" class="focus-pill" id="pill-recognise">
+                            <span class="active-dot"></span>
+                            <i class="pill-icon fas fa-eye"></i>
+                            <span class="pill-text">You'll recognise it if…</span>
+                        </a>
+                        <a href="#section-styles" class="focus-pill" id="pill-styles">
+                            <span class="active-dot"></span>
+                            <i class="pill-icon fas fa-user-tie"></i>
+                            <span class="pill-text">Common leadership styles</span>
+                        </a>
+                        <a href="#section-tools" class="focus-pill" id="pill-tools">
+                            <span class="active-dot"></span>
+                            <i class="pill-icon fas fa-toolbox"></i>
+                            <span class="pill-text">Recommended tools</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MOVED: If you're in crisis right now section - ABOVE OVERVIEW -->
+            <section class="category-section">
+                <div class="crisis-section">
+                    <h3 class="crisis-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        If you're in crisis right now
+                    </h3>
+                    <p>If you're facing bullying, harassment, or clear misconduct, your priority is safety and documentation:</p>
+                    <ul class="crisis-list">
+                        <li>Start documenting every incident with dates, times, and specifics.</li>
+                        <li>Reach out to HR or a trusted senior leader for guidance.</li>
+                        <li>Use the Boundary Setting Script Builder tool immediately.</li>
+                        <li>Consider seeking external support (career coach, therapist, legal advice).</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- WHAT THIS CATEGORY COVERS (merged with benefits) -->
+            <section id="section-covers" class="category-section">
+                <div class="section-header-inline">
+                    <div>
+                        <div class="section-kicker">
+                            <i class="fas fa-circle-info"></i>
+                            Overview
+                        </div>
+                        <h2 class="section-title">What this category covers</h2>
+                    </div>
+                </div>
+                <p class="section-intro">
+                    Use this category when your relationship with your manager is strained, unclear, or impacting your work and wellbeing. It's built for situations where poor leadership is creating risk, confusion, or career blockers that you need to navigate strategically.
+                </p>
+                
+                <div class="merged-overview-grid">
+                    <div class="overview-main">
+                        <h3>When to use this category</h3>
+                        <ul class="insight-list">
+                            <li>Your manager gives unclear or constantly changing direction.</li>
+                            <li>You're being micromanaged or feel you can't make decisions.</li>
+                            <li>Feedback is inconsistent, harsh, or delivered inappropriately.</li>
+                            <li>You feel your manager doesn't advocate for you or your work.</li>
+                            <li>The relationship feels toxic, with passive-aggressive behaviour or bullying.</li>
+                        </ul>
+                        <p class="route-tip" style="margin-top: 15px;">
+                            If the main issue is workload clarity or priority conflicts, try <strong>Clarity, Priorities &amp; Direction</strong> instead. For broader workplace politics, try <strong>Workplace Dynamics &amp; Politics</strong>.
+                        </p>
+                    </div>
+                    
+                    <div class="overview-benefits">
+                        <h4>What this category helps you do:</h4>
+                        <ul>
+                            <li>Identify your manager's leadership style and adapt your approach.</li>
+                            <li>Set professional boundaries without damaging the relationship.</li>
+                            <li>Communicate effectively with different personality types.</li>
+                            <li>Get clearer direction and more consistent feedback.</li>
+                            <li>Document concerns and protect your position if needed.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TWO BOXES: YOU'LL RECOGNISE IT IF / TYPICAL PAIN POINTS -->
+            <section id="section-recognise" class="category-section">
+                <div class="section-header-inline">
+                    <div>
+                        <div class="section-kicker">
+                            <i class="fas fa-eye"></i>
+                            Signals
+                        </div>
+                        <h2 class="section-title">How you'll recognise this pattern</h2>
+                    </div>
+                </div>
+
+                <div class="recognise-grid">
+                    <div class="recognise-box">
+                        <h3>You'll recognise it if:</h3>
+                        <p>You feel anxious before meetings or dread one-on-ones with your manager.</p>
+                        <ul>
+                            <li>You receive contradictory feedback or constantly moving goalposts.</li>
+                            <li>Your manager takes credit for your work or doesn't advocate for you.</li>
+                            <li>Communication is unclear, passive-aggressive, or dismissive.</li>
+                            <li>You feel micromanaged or, conversely, completely unsupported.</li>
+                            <li>Your manager plays favorites or creates divisions within the team.</li>
+                        </ul>
+                    </div>
+
+                    <div class="recognise-box">
+                        <h3>Typical pain points:</h3>
+                        <p>A difficult manager relationship can derail your work, wellbeing, and career.</p>
+                        <ul>
+                            <li>Unclear expectations leading to impossible-to-meet standards.</li>
+                            <li>Inconsistent feedback that makes improvement difficult.</li>
+                            <li>Lack of advocacy affecting promotions, raises, or recognition.</li>
+                            <li>Emotional drain affecting motivation and job satisfaction.</li>
+                            <li>Risk of being unfairly blamed or scapegoated for issues.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- COMMON LEADERSHIP STYLES -->
+            <section id="section-styles" class="category-section">
+                <div class="section-header-inline">
+                    <div>
+                        <div class="section-kicker">
+                            <i class="fas fa-user-tie"></i>
+                            Patterns
+                        </div>
+                        <h2 class="section-title">Common leadership styles you might encounter</h2>
+                    </div>
+                </div>
+
+                <p class="section-intro">
+                    Understanding your manager's default style helps you adapt your communication and set appropriate expectations. Most managers exhibit a mix of these patterns, often under pressure.
+                </p>
+
+                <div class="style-grid">
+                    <div class="style-card">
+                        <div class="style-label">Style 1</div>
+                        <div class="style-title">The Micromanager</div>
+                        <div class="style-body">
+                            <ul>
+                                <li>Wants control over every detail and decision.</li>
+                                <li>Often anxious about outcomes and appearance.</li>
+                                <li>Struggles to delegate or trust others.</li>
+                                <li>Can be perfectionistic and critical.</li>
+                            </ul>
+                        </div>
+                        <div class="style-footer-tip">
+                            Strategy: Provide frequent updates proactively to build trust. Focus on demonstrating reliability.
+                        </div>
+                    </div>
+
+                    <div class="style-card">
+                        <div class="style-label">Style 2</div>
+                        <div class="style-title">The Absent Manager</div>
+                        <div class="style-body">
+                            <ul>
+                                <li>Hard to reach, provides minimal direction.</li>
+                                <li>Delegates completely without support.</li>
+                                <li>Often distracted by other priorities.</li>
+                                <li>Leaves you to figure things out alone.</li>
+                            </ul>
+                        </div>
+                        <div class="style-footer-tip">
+                            Strategy: Structure your own check-ins. Bring clear options rather than open questions.
+                        </div>
+                    </div>
+
+                    <div class="style-card">
+                        <div class="style-label">Style 3</div>
+                        <div class="style-title">The Inconsistent Manager</div>
+                        <div class="style-body">
+                            <ul>
+                                <li>Changes direction frequently.</li>
+                                <li>Gives contradictory feedback.</li>
+                                <li>Mood and priorities shift often.</li>
+                                <li>Makes it hard to know what "good" looks like.</li>
+                            </ul>
+                        </div>
+                        <div class="style-footer-tip">
+                            Strategy: Document everything. Summarize agreements in writing after each conversation.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- YOUR CORE MOVES -->
+            <section id="section-moves" class="category-section">
+                <div class="section-header-inline">
+                    <div>
+                        <div class="section-kicker">
+                            <i class="fas fa-arrows-alt"></i>
+                            Application
+                        </div>
+                        <h2 class="section-title">Your core moves in this category</h2>
+                    </div>
+                </div>
+
+                <p class="section-intro">
+                    These moves define your strategic approach to managing up. Use them to shape your interactions, protect your position, and gradually improve the relationship dynamic.
+                </p>
+
+                <div class="core-moves-grid">
+                    <div class="move-card">
+                        <div class="move-label">Move 1</div>
+                        <div class="move-title">Observe and adapt</div>
+                        <div class="move-body">
+                            <ul>
+                                <li>Identify your manager's communication style and priorities.</li>
+                                <li>Notice what triggers positive vs. negative responses.</li>
+                                <li>Adapt your approach to match their preferred working style.</li>
+                                <li>Schedule conversations at optimal times (not when they're stressed).</li>
+                            </ul>
+                        </div>
+                        <div class="move-footer-tip">
+                            This isn't about being fake—it's about communicating effectively within existing patterns.
+                        </div>
+                    </div>
+
+                    <div class="move-card">
+                        <div class="move-label">Move 2</div>
+                        <div class="move-title">Set clear boundaries</div>
+                        <div class="move-body">
+                            <ul>
+                                <li>Define what's acceptable and what isn't in professional terms.</li>
+                                <li>Communicate boundaries calmly and consistently.</li>
+                                <li>Use "I" statements to focus on impact, not accusation.</li>
+                                <li>Prepare for boundary testing and maintain consistency.</li>
+                            </ul>
+                        </div>
+                        <div class="move-footer-tip">
+                            Boundaries protect both you and the working relationship—they're not personal attacks.
+                        </div>
+                    </div>
+
+                    <div class="move-card">
+                        <div class="move-label">Move 3</div>
+                        <div class="move-title">Build influence strategically</div>
+                        <div class="move-body">
+                            <ul>
+                                <li>Become consistently reliable in high-visibility areas.</li>
+                                <li>Connect your work to your manager's success metrics.</li>
+                                <li>Build relationships with your manager's peers and superiors.</li>
+                                <li>Document achievements and positive feedback from others.</li>
+                            </ul>
+                        </div>
+                        <div class="move-footer-tip">
+                            Influence creates options—whether to improve the relationship or move beyond it.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RECOMMENDED FROM THE TOOLKIT - UPDATED: White background cards -->
+            <section id="section-tools" class="category-section">
+                <div class="section-header-inline">
+                    <div>
+                        <div class="section-kicker">
+                            <i class="fas fa-toolbox"></i>
+                            Tools
+                        </div>
+                        <h2 class="section-title">Recommended from The Toolkit</h2>
+                    </div>
+                </div>
+
+                <p class="section-intro">
+                    Start with the Communication Style Assessment to understand the dynamic, then move to boundary setting and feedback frameworks. Each tool is designed to give you clear language and strategies for difficult conversations.
+                </p>
+
+                <div class="tools-grid">
+                    <!-- Tool 1 -->
+                    <div class="tool-card">
+                        <div class="tool-pill">
+                            <i class="fas fa-comments"></i>
+                            Assessment
+                        </div>
+                        <div class="tool-title">Communication Style Assessment</div>
+                        <div class="tool-meta">Good for: "I don't know how to talk to my manager effectively."</div>
+                        <div class="tool-description">
+                            <ul>
+                                <li>Identifies your manager's communication preferences and blind spots.</li>
+                                <li>Provides tailored strategies for different leadership styles.</li>
+                                <li>Helps you adjust your approach to get better results.</li>
+                            </ul>
+                            <div class="tool-output">Produces: a personalized communication strategy for your specific manager relationship.</div>
+                        </div>
+                        <div class="tool-footer">
+                            <a href="communication-style-assessment.html" class="tool-link">
+                                Open assessment
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="tool-stats">
+                                <span class="tool-stat"><i class="far fa-eye"></i> 1.5k</span>
+                                <span class="tool-stat"><i class="far fa-bookmark"></i> 421</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tool 2 -->
+                    <div class="tool-card">
+                        <div class="tool-pill">
+                            <i class="fas fa-shield-alt"></i>
+                            Script Builder
+                        </div>
+                        <div class="tool-title">Boundary Setting Script Builder</div>
+                        <div class="tool-meta">Good for: "My manager oversteps, and I need to push back professionally."</div>
+                        <div class="tool-description">
+                            <ul>
+                                <li>Helps you define professional boundaries clearly.</li>
+                                <li>Provides templates for difficult conversations.</li>
+                                <li>Includes de-escalation techniques for tense situations.</li>
+                            </ul>
+                            <div class="tool-output">Produces: clear, professional scripts for setting and maintaining boundaries.</div>
+                        </div>
+                        <div class="tool-footer">
+                            <a href="boundary-setting-script-builder.html" class="tool-link">
+                                Open builder
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="tool-stats">
+                                <span class="tool-stat"><i class="far fa-eye"></i> 1.1k</span>
+                                <span class="tool-stat"><i class="far fa-bookmark"></i> 312</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tool 3 - FIXED: Added missing <div> tag for .tool-title -->
+                    <div class="tool-card">
+                        <div class="tool-pill">
+                            <i class="fas fa-clipboard-list"></i>
+                            Framework
+                        </div>
+                        <div class="tool-title">Manager Feedback Framework</div>
+                        <div class="tool-meta">Good for: "I need to give my manager feedback without damaging our relationship."</div>
+                        <div class="tool-description">
+                            <ul>
+                                <li>Structures feedback around impact, not personality.</li>
+                                <li>Provides safe language for difficult topics.</li>
+                                <li>Includes preparation checklist and follow-up steps.</li>
+                            </ul>
+                            <div class="tool-output">Produces: a structured approach to giving upward feedback professionally and effectively.</div>
+                        </div>
+                        <div class="tool-footer">
+                            <a href="manager-feedback-framework.html" class="tool-link">
+                                Open framework
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="tool-stats">
+                                <span class="tool-stat"><i class="far fa-eye"></i> 945</span>
+                                <span class="tool-stat"><i class="far fa-bookmark"></i> 287</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SCRIPTS & WORDING -->
+            <section id="section-scripts" class="category-section">
+                <div class="section-header-inline">
+                    <div>
+                        <div class="section-kicker">
+                            <i class="fas fa-comments"></i>
+                            Communication
+                        </div>
+                        <h2 class="section-title">Confident scripts for difficult conversations</h2>
+                    </div>
+                </div>
+
+                <div class="scripts-grid">
+                    <!-- Script 1 -->
+                    <div class="script-card">
+                        <div class="script-label">For unclear direction</div>
+                        <div class="script-title">"Clarifying expectations" script</div>
+                        <div class="script-use">
+                            Use when your manager's direction is vague or keeps changing, and you need concrete guidance to proceed.
+                        </div>
+                        <div class="script-footer">
+                            <a href="script-clarifying-expectations.html" class="script-link">
+                                Open script
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="script-stats">
+                                <span class="script-stat"><i class="far fa-eye"></i> 845</span>
+                                <span class="script-stat"><i class="far fa-bookmark"></i> 234</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Script 2 -->
+                    <div class="script-card">
+                        <div class="script-label">For inconsistent feedback</div>
+                        <div class="script-title">"Addressing contradictory feedback" script</div>
+                        <div class="script-use">
+                            Use when you receive conflicting feedback from your manager and need alignment on what success looks like.
+                        </div>
+                        <div class="script-footer">
+                            <a href="script-contradictory-feedback.html" class="script-link">
+                                Open script
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="script-stats">
+                                <span class="script-stat"><i class="far fa-eye"></i> 723</span>
+                                <span class="script-stat"><i class="far fa-bookmark"></i> 198</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Script 3 -->
+                    <div class="script-card">
+                        <div class="script-label">For boundary setting</div>
+                        <div class="script-title">"Professional boundaries" conversation guide</div>
+                        <div class="script-use">
+                            Use when your manager oversteps professional boundaries (after-hours contact, unrealistic demands, etc.).
+                        </div>
+                        <div class="script-footer">
+                            <a href="script-professional-boundaries.html" class="script-link">
+                                Open script
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                            <div class="script-stats">
+                                <span class="script-stat"><i class="far fa-eye"></i> 912</span>
+                                <span class="script-stat"><i class="far fa-bookmark"></i> 267</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MICRO CTA -->
+            <section class="category-section">
+                <div class="micro-cta">
+                    <p>Not sure if this is the right category?</p>
+                    <div class="micro-cta-sub">
+                        If the main issue is about workload, priorities, or direction clarity, try <strong>Clarity, Priorities &amp; Direction</strong> instead. <br>
+                        For broader workplace politics involving multiple people, try <strong>Workplace Dynamics &amp; Politics</strong>.
+                    </div>
+                    <a href="the-lens.html" class="cta-small">Go to The Lens</a>
+                    <a href="the-coach.html" class="cta-link">Talk it through with The Coach</a>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/img/logo.png" alt="The Employee Playbook" class="footer-logo-img" id="footer-logo"
+                             onerror="this.style.display='none'; document.getElementById('footer-logo-fallback').style.display='block';">
+                        <div class="logo-fallback" id="footer-logo-fallback" style="font-size: 28px;">THE EMPLOYEE PLAYBOOK</div>
+                    </a>
+                </div>
+                <p class="footer-description">A private strategy system giving employees clarity and advantage in the moments that matter most.</p>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h3 class="footer-newsletter-title">Stay updated with strategic insights</h3>
+                <form class="footer-newsletter-form">
+                    <input type="email" class="footer-newsletter-input" placeholder="Your email" required>
+                    <button type="submit" class="footer-newsletter-button">Subscribe</button>
+                </form>
+            </div>
+            
+            <div class="footer-nav">
+                <div class="footer-nav-grid">
+                    <div class="footer-nav-section">
+                        <h3 class="footer-heading">The Playbook</h3>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="the-lens.html">The Lens</a></li>
+                            <li class="footer-link"><a href="the-tools.html">The Toolkit</a></li>
+                            <li class="footer-link"><a href="the-coach.html">The Coach</a></li>
+                            <li class="footer-link"><a href="the-shift.html">The Shift</a></li>
+                            <li class="footer-link"><a href="the-pricing.html">The Pricing</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-nav-section">
+                        <h3 class="footer-heading">The Company</h3>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="about-us.html">About</a></li>
+                            <li class="footer-link"><a href="#">Privacy</a></li>
+                            <li class="footer-link"><a href="terms-and-conditions.html">Terms</a></li>
+                            <li class="footer-link"><a href="#">Security</a></li>
+                            <li class="footer-link"><a href="help-centre.html">Help Centre</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2023 The Employee Playbook. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('loaded');
+
+        // Dark mode toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        const logo = document.getElementById('logo');
+        const footerLogo = document.getElementById('footer-logo');
+        if (themeToggle) {
+            const themeIcon = themeToggle.querySelector('i');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                if (themeIcon) {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                }
+                if (logo) logo.src = 'assets/img/logo-dark.png';
+                if (footerLogo) footerLogo.src = 'assets/img/logo-dark.png';
+            }
+            
+            themeToggle.addEventListener('click', function () {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                if (themeIcon) {
+                    themeIcon.classList.toggle('fa-moon');
+                    themeIcon.classList.toggle('fa-sun');
+                }
+                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+                if (logo) logo.src = isDarkMode ? 'assets/img/logo-dark.png' : 'assets/img/logo.png';
+                if (footerLogo) footerLogo.src = isDarkMode ? 'assets/img/logo-dark.png' : 'assets/img/logo.png';
+            });
+        }
+
+        // Mobile navigation toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        if (mobileToggle && navLinks) {
+            mobileToggle.addEventListener('click', function () {
+                navLinks.classList.toggle('active');
+                const icon = this.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                }
+            });
+        }
+
+        // NEW: MY PLAYBOOK FUNCTIONALITY (EXACT COPY FROM WORKLOAD CHECKLIST)
+        const PLAYBOOK_KEY = 'tepSavedItems';
+        
+        function getSavedItems() {
+            try {
+                const raw = localStorage.getItem(PLAYBOOK_KEY);
+                if (!raw) return [];
+                const parsed = JSON.parse(raw);
+                return Array.isArray(parsed) ? parsed : [];
+            } catch (e) {
+                console.warn('Error reading saved items:', e);
+                return [];
+            }
+        }
+
+        function setSavedItems(items) {
+            try {
+                localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items));
+            } catch (e) {
+                console.warn('Error saving items:', e);
+            }
+        }
+
+        function initializePlaybook() {
+            const playbookOverlay = document.getElementById('playbookOverlay');
+            const playbookSidebar = document.getElementById('playbookSidebar');
+            const playbookButton = document.getElementById('myPlaybookButton');
+            const closeBtn = document.getElementById('closePlaybook');
+
+            if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn) return;
+
+            renderSavedItems();
+
+            playbookButton.addEventListener('click', () => {
+                playbookOverlay.classList.add('open');
+                playbookSidebar.classList.add('open');
+            });
+
+            closeBtn.addEventListener('click', () => {
+                playbookOverlay.classList.remove('open');
+                playbookSidebar.classList.remove('open');
+            });
+
+            playbookOverlay.addEventListener('click', (e) => {
+                if (e.target === playbookOverlay) {
+                    playbookOverlay.classList.remove('open');
+                    playbookSidebar.classList.remove('open');
+                }
+            });
+        }
+
+        function renderSavedItems() {
+            const listEl = document.getElementById('savedItemsList');
+            const emptyEl = document.getElementById('savedItemsEmpty');
+            if (!listEl || !emptyEl) return;
+
+            const items = getSavedItems();
+            listEl.innerHTML = '';
+
+            if (!items.length) {
+                emptyEl.style.display = 'block';
+                return;
+            }
+
+            emptyEl.style.display = 'none';
+
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'saved-item';
+                const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+                const dateText = savedDate
+                    ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+                    : '';
+
+                li.innerHTML = `
+                    <div class="saved-item-title-row">
+                        <span class="saved-item-title">${item.title}</span>
+                        <span class="saved-item-type">${item.type}</span>
+                    </div>
+                    <div class="saved-item-meta">
+                        ${dateText ? `Saved on ${dateText}` : ''}
+                    </div>
+                    <a class="saved-item-link" href="${item.link}">
+                        Open <i class="fas fa-arrow-right"></i>
+                    </a>
+                `;
+                listEl.appendChild(li);
+            });
+        }
+
+        // Initialize My Playbook
+        initializePlaybook();
+
+        // Interactive focus pills functionality
+        const focusPills = document.querySelectorAll('.focus-pill');
+        const sections = {
+            'pill-covers': 'section-covers',
+            'pill-recognise': 'section-recognise',
+            'pill-styles': 'section-styles',
+            'pill-tools': 'section-tools'
+        };
+
+        // Scroll progress indicator
+        const scrollProgress = document.getElementById('scrollProgress');
+        const scrollProgressBar = document.getElementById('scrollProgressBar');
+
+        // Function to update active pill based on scroll position
+        function updateActivePill() {
+            // FIXED: Check if both elements exist before using them
+            if (scrollProgress && scrollProgressBar) {
+                const scrollTop = window.pageYOffset;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                scrollProgressBar.style.width = scrollPercent + '%';
+                
+                // Show progress bar when scrolling down
+                if (scrollTop > 100) {
+                    scrollProgress.style.display = 'block';
+                } else {
+                    scrollProgress.style.display = 'none';
+                }
+            }
+
+            // Find which section is currently in view
+            let currentSection = '';
+            const sectionIds = Object.values(sections);
+            const scrollPosition = window.scrollY + 150; // Offset for header
+
+            for (const sectionId of sectionIds) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        currentSection = sectionId;
+                        break;
+                    }
+                }
+            }
+
+            // Update pill active states
+            focusPills.forEach(pill => {
+                pill.classList.remove('active');
+                const pillId = pill.id;
+                const targetSection = sections[pillId];
+                
+                if (targetSection === currentSection) {
+                    pill.classList.add('active');
+                }
+            });
+
+            // If no section is active, activate the first pill when at top
+            // FIXED: Check if focusPills[0] exists before using it
+            if (scrollPosition < 200) {
+                focusPills.forEach(pill => pill.classList.remove('active'));
+                if (focusPills[0]) {
+                    focusPills[0].classList.add('active');
+                }
+            }
+        }
+
+        // Add click handlers to pills with smooth scroll
+        focusPills.forEach(pill => {
+            pill.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = sections[this.id];
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    // Update active state
+                    focusPills.forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Smooth scroll to section
+                    const offset = 100;
+                    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // FIXED: Only push state if the URL hash is different
+                    const currentHash = window.location.hash;
+                    const newHash = `#${targetId}`;
+                    if (currentHash !== newHash) {
+                        history.pushState(null, null, newHash);
+                    }
+                }
+            });
+        });
+
+        // Add keyboard navigation to focus pills
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                const activePill = document.querySelector('.focus-pill.active');
+                if (activePill) {
+                    let nextPill;
+                    const pillsArray = Array.from(focusPills);
+                    const currentIndex = pillsArray.indexOf(activePill);
+                    
+                    if (e.key === 'ArrowRight' && currentIndex < pillsArray.length - 1) {
+                        nextPill = pillsArray[currentIndex + 1];
+                    } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                        nextPill = pillsArray[currentIndex - 1];
+                    }
+                    
+                    if (nextPill) {
+                        e.preventDefault();
+                        nextPill.click();
+                        nextPill.focus();
+                    }
+                }
+            }
+        });
+
+        // Initialize pill states
+        updateActivePill();
+
+        // Update on scroll
+        window.addEventListener('scroll', updateActivePill);
+        window.addEventListener('resize', updateActivePill);
+
+        // Smooth scrolling with offset for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    const offset = 96;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+
+                    if (navLinks && navLinks.classList.contains('active') && mobileToggle) {
+                        navLinks.classList.remove('active');
+                        const icon = mobileToggle.querySelector('i');
+                        if (icon) {
+                            icon.classList.add('fa-bars');
+                            icon.classList.remove('fa-times');
+                        }
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

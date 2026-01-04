@@ -1,0 +1,2210 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills Development Framework | The Employee Playbook</title>
+
+    <!-- ICONS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+    <style>
+        :root {
+            --primary-white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --medium-gray: #E9ECEF;
+            --dark-gray: #6C757D;
+            --text-dark: #212529;
+            --text-medium: #495057;
+
+            --accent-purple: #7B5FC4;
+            --accent-purple-dark: #5A4496;
+            --light-purple: #E6E0F5;
+            --lighter-purple: #F0EBFA;
+
+            --border-light: rgba(0, 0, 0, 0.08);
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+            --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+            --danger-red: #ef4444;
+
+            /* Category colours (as used across your toolkit) */
+            --category-clarity: #7B5FC4;
+            --category-confidence: #ef4444;
+            --category-career: #800020;
+        }
+
+        .dark-mode {
+            --primary-white: #1a1a1a;
+            --light-gray: #2a2a2a;
+            --medium-gray: #3a3a3a;
+            --dark-gray: #888888;
+            --text-dark: #e0e0e0;
+            --text-medium: #b0b0b0;
+
+            --accent-purple: #9d86e9;
+            --accent-purple-dark: #7b5fc4;
+            --light-purple: rgba(123, 95, 196, 0.2);
+            --lighter-purple: rgba(123, 95, 196, 0.1);
+
+            --border-light: rgba(255, 255, 255, 0.08);
+            --nav-bg: rgba(30, 30, 30, 0.95);
+            --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+            --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+            --category-clarity: #9d86e9;
+            --category-confidence: #f87171;
+            --category-career: #fb7185;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+        body {
+            background-color: var(--primary-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            min-height: 100vh;
+        }
+        body.loaded { opacity: 1; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+        /* NAV */
+        nav{
+            position: fixed; top: 0; width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            height: 80px;
+        }
+        .nav-container { display:flex; justify-content:space-between; align-items:center; padding:12px 0; height:100%; }
+
+        .logo-img { height: 100px; width:auto; transform: translateX(20%); padding:14px 10px; display:block; min-height:100px; transition: all .3s ease; }
+        .logo-img.fallback{
+            width:200px; height:50px; background: var(--accent-purple); color:#fff;
+            display:flex; align-items:center; justify-content:center; font-weight:700; font-size:16px;
+            border-radius:4px; transform: translateX(20%);
+        }
+
+        .nav-links { display:flex; gap:50px; }
+        .nav-link { color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; transition: color .3s ease; }
+        .nav-link:hover { color: var(--accent-purple); }
+        .nav-link-container { position:relative; display:inline-block; }
+        .new-tag{
+            position:absolute; top:-12px; right:-35px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color:#000; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); white-space:nowrap;
+        }
+        .nav-actions{ display:flex; align-items:center; gap:24px; transform: translateX(-20%); }
+        .header-cta{
+            background: var(--accent-purple); color:#fff; padding:8px 20px; border-radius:50px;
+            text-decoration:none; font-weight:600; font-size:14px;
+            transition: all .3s ease; box-shadow: 0 5px 15px rgba(123,95,196,.3);
+        }
+        .header-cta:hover{ transform: translateY(-1px); box-shadow: 0 6px 16px rgba(123,95,196,.35); }
+        .sign-in{ color: var(--text-dark); text-decoration:none; font-weight:500; font-size:17px; }
+        .sign-in:hover{ color: var(--accent-purple); }
+
+        .theme-toggle{
+            background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:16px;
+            width:36px; height:36px; border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            transition: background-color .3s ease;
+        }
+        .theme-toggle:hover{ background-color: var(--light-gray); }
+
+        .mobile-toggle{
+            display:none;
+            background:none; border:none; color: var(--text-dark); cursor:pointer; font-size:24px;
+            width:40px; height:40px; border-radius:50%;
+            align-items:center; justify-content:center; transition: background-color .3s ease;
+        }
+        .mobile-toggle:hover{ background-color: var(--light-gray); }
+        .mobile-sign-in, .mobile-sign-up { display:none; }
+
+        @media (max-width: 768px){
+            .nav-container{ justify-content:center; position:relative; }
+            .logo{ position:absolute; left:50%; transform: translateX(-50%); display:flex; align-items:center; height:100%; }
+            .logo-img{ height:125px; transform:none; padding:12px 0; }
+            .mobile-toggle{ display:flex; position:absolute; left:20px; }
+            .nav-actions{ transform:none; gap:16px; position:absolute; right:20px; }
+            .nav-actions .sign-in, .nav-actions .header-cta{ display:none; }
+
+            .nav-links{
+                display:none; position:absolute; top:100%; left:0; width:100%;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction:column; padding:20px; gap:20px;
+                border-top: 1px solid var(--border-light);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            .nav-links.active{ display:flex; }
+            .nav-link-container{ display:flex; align-items:center; width:100%; }
+            .new-tag{ position:static; margin-left:8px; }
+            .mobile-sign-in{
+                display:block !important;
+                margin-top:10px;
+                padding:12px 20px;
+                background: var(--primary-white);
+                color: var(--accent-purple);
+                border-radius:8px;
+                text-align:center;
+                font-weight:600;
+                text-decoration:none;
+                border:2px solid var(--accent-purple);
+                transition: all .3s ease;
+            }
+            .mobile-sign-up{
+                display:block !important;
+                margin-top:10px;
+                padding:12px 20px;
+                background: var(--accent-purple);
+                color:#fff;
+                border-radius:8px;
+                text-align:center;
+                font-weight:600;
+                text-decoration:none;
+                border:2px solid var(--accent-purple);
+                transition: all .3s ease;
+            }
+        }
+
+        /* HERO */
+        .tool-hero-section{
+            width:100%;
+            background: var(--hero-bg);
+            padding: 20px 0 30px;
+            margin-top: 110px;
+            position: relative;
+            border-bottom: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+        .tool-hero-section::before{
+            content:'';
+            position:absolute; inset:0;
+            background: linear-gradient(135deg, rgba(250,245,255,0.85) 0%, rgba(245,240,255,0.6) 50%, rgba(255,255,255,0.25) 100%);
+            z-index:1;
+        }
+        .dark-mode .tool-hero-section::before{
+            background: linear-gradient(135deg, rgba(42,42,42,0.9) 0%, rgba(31,31,31,0.7) 50%, rgba(26,26,26,0.4) 100%);
+        }
+
+        .tool-hero-content{
+            position:relative; z-index:2;
+            max-width:1100px; margin:0 auto; padding: 0 20px 10px;
+            animation: heroFadeUp .45s ease-out;
+        }
+        @keyframes heroFadeUp { from{opacity:0; transform: translateY(18px);} to{opacity:1; transform:none;} }
+
+        .breadcrumb{
+            font-size:10px; text-transform:uppercase; letter-spacing:1px;
+            color: var(--dark-gray);
+            margin-bottom:10px;
+            display:flex; gap:6px; align-items:center; flex-wrap:wrap;
+        }
+        .breadcrumb a{
+            color: var(--text-medium); text-decoration:none !important;
+            font-weight:500; letter-spacing:.5px; transition: color .2s ease;
+        }
+        .breadcrumb a:hover{ color: var(--accent-purple-dark); }
+        .breadcrumb i{ color: var(--dark-gray); opacity:.8; font-size:10px; }
+        .breadcrumb .current{ color: var(--text-dark); font-weight:600; }
+
+        .checklist-name{
+            font-size:20px; font-weight:600; color: var(--accent-purple);
+            text-transform:uppercase; letter-spacing:1.8px;
+            margin-bottom:14px; margin-top:32px; display:block;
+        }
+        .hero-main-heading{
+            font-size:46px; font-weight:600; color: var(--text-dark);
+            line-height:1.1; margin-bottom:20px; max-width:1100px;
+        }
+        .hero-subheading{
+            font-size:16px; color: var(--text-medium);
+            line-height:1.6; max-width:900px; margin-bottom:26px;
+        }
+
+        .save-btn{
+            position:absolute; top:16px; right:24px; z-index:5;
+            display:inline-flex; align-items:center; gap:6px;
+            padding:6px 12px; font-size:12px; font-weight:500;
+            border-radius:999px;
+            border:1px solid rgba(123,95,196,0.6);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: var(--accent-purple-dark);
+            cursor:pointer; transition: all .2s ease;
+        }
+        .save-btn:hover{ transform: translateY(-1px); box-shadow: 0 4px 10px rgba(123,95,196,0.18); background:#fff; }
+        .dark-mode .save-btn{ background: rgba(20,20,20,0.9); border-color: rgba(157,134,233,0.6); }
+        .save-btn.saved{ background: var(--accent-purple); color:#fff; border-color: transparent; }
+
+        /* CATEGORY PILLS */
+        .category-pills-title{
+            font-size:12px; font-weight:600; color: var(--text-medium);
+            text-transform:uppercase; letter-spacing:1px;
+            margin-bottom:14px; display:block;
+        }
+        .category-pills-grid{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+        .category-pill{
+            display:inline-flex; align-items:center; gap:8px;
+            padding:6px 12px; border-radius:999px;
+            font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.5px;
+            border:1px solid transparent;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            text-decoration:none;
+            height:32px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all .2s ease;
+            white-space:nowrap;
+            cursor:pointer;
+        }
+        .dark-mode .category-pill{ background: rgba(255,255,255,0.08); box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .category-pill:hover{ transform: translateY(-1px); box-shadow: 0 3px 8px rgba(0,0,0,0.08); }
+
+        .category-pill.confidence{
+            color: var(--category-confidence);
+            border-color: rgba(239,68,68,0.22);
+            background: linear-gradient(135deg, rgba(239,68,68,0.10), rgba(239,68,68,0.05));
+        }
+        .category-pill.career{
+            color: var(--category-career);
+            border-color: rgba(128,0,32,0.18);
+            background: linear-gradient(135deg, rgba(128,0,32,0.10), rgba(128,0,32,0.05));
+        }
+
+        /* CONTEXT */
+        .context-tips-grid{
+            display:grid; grid-template-columns: 1fr 1fr;
+            gap:32px; width:100%;
+            max-width:1100px; margin: 6px auto 26px;
+            padding: 24px 20px 10px;
+        }
+        .context-card, .tips-card{
+            background: var(--primary-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 28px 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .section-title{
+            font-size:20px; font-weight:600; color: var(--text-dark);
+            margin-bottom:18px; display:flex; align-items:center; gap:10px;
+        }
+        .section-title i { color: var(--accent-purple); }
+        .bullet-list{ list-style:none; }
+        .bullet-list li{
+            color: var(--text-medium);
+            line-height:1.6;
+            margin-bottom:14px;
+            padding-left:26px;
+            position:relative;
+        }
+        .bullet-list li::before{
+            content:"•";
+            position:absolute; left:10px;
+            color: var(--accent-purple);
+            font-size:18px;
+        }
+
+        /* FRAMEWORK */
+        .framework-shell{ max-width:1100px; margin:0 auto; padding: 0 20px 20px; }
+        .framework-header{ margin: 18px 0 16px; }
+        .framework-header h2{
+            font-size:28px; font-weight:700;
+            color: var(--accent-purple-dark);
+            letter-spacing: -0.3px;
+            margin-bottom: 6px;
+        }
+        .framework-header p{
+            color: var(--text-medium);
+            font-size:14px;
+            max-width: 820px;
+        }
+
+        .canvas-grid{
+            display:grid; grid-template-columns: 1.05fr 0.95fr;
+            gap:18px; margin-bottom:22px;
+        }
+
+        .panel{
+            background: var(--primary-white);
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 18px 18px 16px;
+            box-shadow: 0 6px 22px rgba(0,0,0,0.06);
+            position:relative;
+            overflow:hidden;
+        }
+        .dark-mode .panel{ box-shadow: 0 6px 22px rgba(0,0,0,0.22); }
+        .panel::before{
+            content:'';
+            position:absolute; top:0; left:0; right:0; height:3px;
+            background: linear-gradient(135deg, rgba(123,95,196,0.9), rgba(90,68,150,0.7));
+            opacity:.9;
+        }
+
+        .panel-title-row{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
+        .panel-title{
+            font-size:14px; font-weight:600;
+            letter-spacing:.7px; text-transform:uppercase;
+            color: var(--accent-purple-dark);
+            display:flex; align-items:center; gap:10px;
+        }
+        .panel-title i { color: var(--accent-purple); font-size:14px; }
+
+        .panel-sub{
+            color: var(--text-medium);
+            font-size:13px;
+            line-height:1.55;
+            margin-bottom:14px;
+        }
+
+        .field-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+        .field{ display:flex; flex-direction:column; gap:7px; }
+        .span-2{ grid-column: span 2; }
+
+        .label{
+            font-size:12px; font-weight:600;
+            color: var(--text-dark);
+            display:flex; align-items:center; justify-content:space-between; gap:8px;
+        }
+        .label .hint{ font-size:11px; font-weight:600; color: var(--dark-gray); }
+
+        .input, .textarea, .select{
+            width:100%;
+            border:1px solid var(--border-light);
+            background: var(--light-gray);
+            color: var(--text-dark);
+            border-radius:12px;
+            padding:11px 12px;
+            font-size:13.5px;
+            outline:none;
+            transition: box-shadow .2s ease, border-color .2s ease, background-color .2s ease;
+        }
+        .dark-mode .input, .dark-mode .textarea, .dark-mode .select{ background: rgba(255,255,255,0.05); }
+
+        .input:focus, .textarea:focus, .select:focus{
+            border-color: rgba(123,95,196,0.55);
+            box-shadow: 0 0 0 4px rgba(123,95,196,0.14);
+            background: rgba(255,255,255,0.9);
+        }
+        .dark-mode .input:focus, .dark-mode .textarea:focus, .dark-mode .select:focus{
+            background: rgba(255,255,255,0.08);
+            box-shadow: 0 0 0 4px rgba(123,95,196,0.20);
+        }
+
+        .textarea{ min-height:110px; resize: vertical; }
+
+        .micro-cards{ display:grid; grid-template-columns:1fr; gap:10px; margin-top:10px; }
+        .micro{
+            border:1px solid var(--border-light);
+            background: linear-gradient(135deg, rgba(123,95,196,0.06), rgba(123,95,196,0.02));
+            border-radius:12px;
+            padding:12px;
+        }
+        .dark-mode .micro{ background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.08)); }
+        .micro h4{
+            font-size:13px; font-weight:600; color: var(--text-dark);
+            margin-bottom:6px; display:flex; align-items:center; gap:8px;
+        }
+        .micro h4 i { color: var(--accent-purple); }
+        .micro p{ font-size:12.8px; color: var(--text-medium); line-height:1.55; }
+        .micro code{
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-size:12px;
+            background: rgba(0,0,0,0.04);
+            padding:2px 6px;
+            border-radius:8px;
+            color: var(--text-dark);
+        }
+        .dark-mode .micro code{ background: rgba(255,255,255,0.08); }
+
+        .output-box{
+            border: 1px solid rgba(123,95,196,0.18);
+            background: rgba(123,95,196,0.06);
+            border-radius:14px;
+            padding:14px;
+            margin-top:10px;
+        }
+        .dark-mode .output-box{ background: rgba(123,95,196,0.14); border-color: rgba(123,95,196,0.28); }
+
+        .output-title{
+            display:flex; align-items:center; justify-content:space-between; gap:10px;
+            margin-bottom:8px;
+        }
+        .output-title h4{
+            font-size:12px; font-weight:600; letter-spacing:.8px; text-transform:uppercase;
+            color: var(--accent-purple-dark);
+        }
+        .output-content{
+            font-size:13.5px;
+            color: var(--text-dark);
+            line-height:1.55;
+            white-space: pre-wrap;
+        }
+
+        .mini-btn{
+            border: 1px solid rgba(123,95,196,0.28);
+            background: rgba(255,255,255,0.9);
+            color: var(--accent-purple-dark);
+            border-radius: 10px;
+            padding: 9px 12px;
+            font-size: 12.5px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all .2s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .dark-mode .mini-btn{
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(157,134,233,0.32);
+            color: var(--accent-purple);
+        }
+        .mini-btn:hover{ transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.10); }
+        .mini-btn.primary{
+            background: var(--premium-gradient);
+            color:#fff;
+            border:none;
+            box-shadow: 0 10px 24px rgba(123,95,196,0.18);
+        }
+        .mini-btn.primary:hover{ box-shadow: 0 12px 28px rgba(123,95,196,0.28); }
+
+        .framework-actions-bottom{
+            margin-top: 16px;
+            display:flex;
+            justify-content:flex-end;
+            gap: 10px;
+            flex-wrap: wrap;
+            padding: 14px 0 4px;
+        }
+
+        /* TIMELINE */
+        .timeline-table{
+            width:100%;
+            border-collapse: collapse;
+            overflow:hidden;
+            border-radius:12px;
+            border:1px solid var(--border-light);
+            background: var(--primary-white);
+        }
+        .timeline-table th, .timeline-table td{
+            text-align:left;
+            padding:10px;
+            border-bottom:1px solid var(--border-light);
+            vertical-align:top;
+            font-size:13px;
+            color: var(--text-medium);
+        }
+        .timeline-table th{
+            font-size:11px;
+            text-transform:uppercase;
+            letter-spacing:.8px;
+            font-weight:600;
+            color: var(--text-dark);
+            background: rgba(123,95,196,0.06);
+        }
+
+        /* CHECKLIST + SCORE */
+        .checklist-body{ max-width:1100px; margin:0 auto; padding:0 20px 20px; }
+        .checklist-section-title{
+            font-size:22px; font-weight:700; color: var(--accent-purple-dark);
+            margin-bottom:10px; margin-top:16px !important;
+            display:flex; align-items:center; gap:10px;
+        }
+        .checklist-intro{ color: var(--text-medium); font-size:14px; margin-bottom:14px; max-width:900px; }
+        .checklist-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:20px; }
+        .checklist-item{
+            background: var(--primary-white);
+            padding:14px 16px;
+            border-radius:10px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            border:1px solid var(--border-light);
+            display:flex;
+            gap:12px;
+            align-items:flex-start;
+            transition: transform .2s ease, box-shadow .2s ease;
+            cursor:pointer;
+            min-height:74px;
+        }
+        .checklist-item:hover{ transform: translateY(-2px); box-shadow: 0 3px 8px rgba(0,0,0,0.1); }
+        .checklist-item i{ color: var(--accent-purple); font-size:18px; margin-top:3px; flex-shrink:0; }
+        .checklist-text{ flex:1; color: var(--text-medium); font-size:15px; line-height:1.5; }
+
+        .clarity-score-section{ max-width:1100px; margin:22px auto 34px; padding:0 20px; }
+        .presence-snapshot-header{ margin-bottom:14px; text-align:left; }
+        .presence-snapshot-header h2{ font-size:22px; font-weight:700; color: var(--accent-purple-dark); margin-bottom:6px; }
+        .presence-snapshot-header p{ font-size:14px; color: var(--text-medium); line-height:1.5; }
+
+        .clarity-score-bar{
+            display:flex; align-items:stretch; gap:30px;
+            background: var(--primary-white);
+            border-radius:16px;
+            padding:22px 24px 20px;
+            box-shadow: 0 8px 30px rgba(123,95,196,0.12);
+            border:1px solid rgba(123,95,196,0.15);
+        }
+        .clarity-progress-container{ flex:1.4; }
+        .clarity-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+        .clarity-title{ font-size:20px; font-weight:600; color: var(--accent-purple-dark); }
+        .clarity-percentage{ font-size:28px; font-weight:600; color: var(--accent-purple); }
+        .progress-container{ height:10px; background: var(--light-gray); border-radius:5px; overflow:hidden; margin-bottom:6px; }
+        .progress-fill{ height:100%; background: var(--premium-gradient); width:0%; border-radius:5px; transition: width .8s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .progress-labels{ display:flex; justify-content:space-between; font-size:12px; color: var(--dark-gray); }
+
+        .presence-dimensions{ display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:10px; margin-top:14px; }
+        .presence-dimension-pill{
+            border-radius:10px; padding:8px 10px;
+            border:1px solid var(--border-light);
+            background: var(--light-gray);
+            display:flex; justify-content:space-between; align-items:center;
+            font-size:13px; color: var(--text-medium);
+        }
+        .presence-dimension-pill span.label{ font-weight:600; color: var(--text-dark); }
+        .presence-dimension-pill span.score{ font-weight:600; color: var(--accent-purple); }
+
+        .actions-container{
+            display:flex; gap:12px; flex-shrink:0;
+            flex-direction:column; justify-content:center; align-items:stretch;
+            max-width:260px;
+        }
+        .action-btn{
+            background: var(--premium-gradient);
+            color:#fff;
+            border:none;
+            padding:10px 18px;
+            font-size:13.5px;
+            border-radius:10px;
+            font-weight:600;
+            cursor:pointer;
+            display:flex; align-items:center; gap:8px;
+            transition: all .3s ease;
+            width:100%;
+            justify-content:center;
+        }
+        .action-btn:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(123,95,196,0.3); }
+        .action-btn.secondary{ background: var(--light-purple); color: var(--accent-purple-dark); }
+        .action-btn.secondary:hover{ background: var(--accent-purple); color:#fff; }
+        .action-btn:disabled{ opacity:.5; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
+
+        .smart-summary-section{ max-width:1100px; margin:0 auto 60px; padding:0 20px; display:none; }
+        .smart-summary-section.active{ display:block; animation: slideIn .5s ease; }
+        @keyframes slideIn { from{opacity:0; transform: translateY(20px);} to{opacity:1; transform:none;} }
+
+        .summary-header{ text-align:center; margin-bottom:18px; }
+        .summary-title{ font-size:24px; font-weight:600; color: var(--accent-purple-dark); margin-bottom:6px; }
+        .summary-subtitle{ color: var(--text-medium); font-size:16px; margin-bottom:6px; }
+        .summary-insight{ font-size:14px; color: var(--dark-gray); max-width:820px; margin:0 auto; }
+
+        .section-header{
+            font-size:18px; font-weight:600;
+            margin-bottom:18px;
+            display:flex; align-items:center; gap:10px;
+            padding-bottom:10px;
+            border-bottom:2px solid var(--light-gray);
+        }
+        .section-header.red{ color: var(--danger-red); }
+        .section-header.purple{ color: var(--accent-purple-dark); }
+        .section-header.blue{ color: var(--accent-purple); }
+
+        .red-flags-grid, .next-steps-grid, .resources-grid{
+            display:grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap:16px;
+            margin-bottom:28px;
+        }
+
+        .red-flag-card, .next-step-card, .resource-card{
+            background: var(--primary-white);
+            border-radius:12px;
+            padding:18px;
+            position:relative;
+            overflow:hidden;
+            display:flex;
+            flex-direction:column;
+            height:100%;
+        }
+        .red-flag-card{ box-shadow: 0 4px 12px rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.1); }
+        .red-flag-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+        .next-step-card{ box-shadow: 0 4px 12px rgba(123,95,196,0.08); border:1px solid rgba(123,95,196,0.1); }
+        .next-step-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--premium-gradient); }
+        .resource-card{ box-shadow: 0 4px 12px rgba(123,95,196,0.08); border:1px solid rgba(123,95,196,0.1); transition: all .2s ease; }
+        .resource-card:hover{ transform: translateY(-3px); box-shadow: 0 8px 20px rgba(123,95,196,0.16); }
+        .resource-card::before{ content:''; position:absolute; top:0; left:0; right:0; height:3px; background: var(--premium-gradient); }
+
+        .flag-icon, .step-icon, .resource-icon{
+            font-size:20px; margin-bottom:12px;
+            width:40px; height:40px; border-radius:10px;
+            display:flex; align-items:center; justify-content:center;
+        }
+        .flag-icon{ color:#ef4444; background: rgba(239,68,68,0.1); }
+        .step-icon, .resource-icon{ color: var(--accent-purple); background: var(--lighter-purple); }
+
+        .flag-title, .step-title, .resource-title{ font-size:15px; font-weight:600; color: var(--text-dark); margin-bottom:8px; }
+        .flag-description, .step-description, .resource-description{ color: var(--text-medium); font-size:13.5px; line-height:1.5; flex-grow:1; }
+        .resource-description{ margin-bottom:12px; }
+        .resource-link{
+            color: var(--accent-purple); font-weight:600; text-decoration:none; font-size:13.5px;
+            display:flex; align-items:center; gap:6px; margin-top:auto;
+        }
+        .resource-link:hover{ text-decoration:underline; }
+
+        /* MY PLAYBOOK */
+        .my-playbook-fab{
+            position:fixed; bottom:24px; right:24px; z-index:1200;
+            background: var(--premium-gradient);
+            color:#fff;
+            padding:10px 16px;
+            border-radius:999px;
+            display:inline-flex; align-items:center; gap:8px;
+            cursor:pointer; font-size:13px; font-weight:600;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            transition: all .25s ease;
+        }
+        .my-playbook-fab:hover{ transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,0.32); }
+
+        .playbook-sidebar-overlay{
+            position:fixed; inset:0;
+            background: rgba(0,0,0,0.45);
+            z-index:1190;
+            opacity:0; pointer-events:none;
+            transition: opacity .25s ease;
+        }
+        .playbook-sidebar-overlay.open{ opacity:1; pointer-events:auto; }
+
+        .playbook-sidebar{
+            position:fixed; top:0; right:-380px;
+            width:340px; max-width:90%;
+            height:100%;
+            background: rgba(255,255,255,0.94);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+            z-index:1191;
+            display:flex; flex-direction:column;
+            border-left: 1px solid var(--border-light);
+            transition: right .25s ease;
+        }
+        .dark-mode .playbook-sidebar{ background: rgba(18,18,18,0.96); box-shadow: -4px 0 22px rgba(0,0,0,0.6); }
+        .playbook-sidebar.open{ right:0; }
+        .playbook-sidebar-header{ padding:20px 20px 14px; border-bottom:1px solid var(--border-light); }
+        .playbook-sidebar-header-title-row{ display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+        .playbook-sidebar-header h3{ font-size:18px; font-weight:600; color: var(--text-dark); }
+        .playbook-sidebar-header p{ font-size:13px; color: var(--dark-gray); }
+        .playbook-close-btn{
+            background:none; border:none; color: var(--dark-gray);
+            cursor:pointer; font-size:18px; border-radius:999px;
+            width:28px; height:28px; display:flex; align-items:center; justify-content:center;
+            transition: background-color .2s ease;
+        }
+        .playbook-close-btn:hover{ background: var(--light-gray); }
+        .playbook-sidebar-body{
+            padding:14px 18px 20px; padding-bottom:50px;
+            overflow-y:auto; flex:1;
+            display:flex; flex-direction:column; gap:18px;
+        }
+        .saved-items-empty{ font-size:13px; color: var(--dark-gray); line-height:1.6; }
+        .saved-items-list{ list-style:none; margin:0; padding:0; }
+        .saved-item{
+            padding:10px 8px;
+            border-radius:10px;
+            border:1px solid var(--border-light);
+            background: var(--primary-white);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            margin-bottom:10px;
+            display:flex; flex-direction:column; gap:2px;
+        }
+        .saved-item-title-row{ display:flex; justify-content:space-between; align-items:baseline; gap:6px; }
+        .saved-item-title{ font-size:14px; font-weight:600; color: var(--text-dark); }
+        .saved-item-type{ font-size:11px; text-transform:uppercase; letter-spacing:.6px; color: var(--accent-purple-dark); font-weight:600; }
+        .saved-item-meta{ font-size:12px; color: var(--dark-gray); }
+        .saved-item-link{
+            margin-top:6px;
+            font-size:12px;
+            color: var(--accent-purple);
+            text-decoration:none;
+            font-weight:600;
+            display:inline-flex; align-items:center; gap:4px;
+        }
+        .saved-item-link:hover{ text-decoration:underline; }
+
+        .playbook-quick-links{
+            margin-top: 223px;
+            padding-top:10px;
+            border-top:1px solid var(--border-light);
+        }
+        .quick-links-title{
+            font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.8px;
+            color: var(--text-medium);
+        }
+        .playbook-quick-links-list{ display:flex; flex-direction:column; gap:10px; margin-top:6px; }
+        .quick-link-pill{
+            width:50%;
+            padding:4px;
+            border-radius:999px;
+            border:1px solid rgba(123,95,196,0.35);
+            background: linear-gradient(135deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+            text-decoration:none;
+            color: var(--accent-purple-dark);
+            font-size:13px;
+            font-weight:600;
+            display:flex; align-items:center; gap:8px;
+        }
+        .quick-link-pill:hover{
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+            background: linear-gradient(135deg, rgba(123,95,196,0.16), rgba(123,95,196,0.06));
+        }
+
+        footer{
+            background: var(--primary-white);
+            padding:10px 0;
+            border-top:1px solid var(--border-light);
+            margin-top:30px;
+            text-align:center;
+            color: var(--text-medium);
+        }
+
+        @media (max-width: 1024px){
+            .context-tips-grid{ grid-template-columns:1fr; gap:24px; }
+            .canvas-grid{ grid-template-columns:1fr; }
+            .red-flags-grid, .next-steps-grid, .resources-grid{ grid-template-columns: repeat(2, 1fr); }
+            .checklist-grid{ grid-template-columns:1fr; }
+            .clarity-score-bar{ flex-direction:column; }
+            .actions-container{ max-width:100%; flex-direction:row; }
+        }
+        @media (max-width: 768px){
+            .tool-hero-section{ margin-top:100px; }
+            .hero-main-heading{ font-size:36px; }
+            .save-btn{ right:18px; top:10px; }
+            .field-grid{ grid-template-columns:1fr; }
+            .span-2{ grid-column: span 1; }
+            .red-flags-grid, .next-steps-grid, .resources-grid{ grid-template-columns:1fr; }
+            .actions-container{ flex-direction:column; }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <div class="container nav-container">
+        <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+
+        <a href="index.html" class="logo">
+            <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+        </a>
+
+        <div class="nav-links">
+            <a href="the-lens.html" class="nav-link">The Lens</a>
+            <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+            <div class="nav-link-container">
+                <a href="the-coach.html" class="nav-link">The Coach</a>
+                <span class="new-tag">NEW</span>
+            </div>
+            <a href="the-shift.html" class="nav-link">The Shift</a>
+            <a href="the-pricing.html" class="nav-link">The Pricing</a>
+            <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+            <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="create-account.html" class="header-cta">Sign up</a>
+            <a href="sign-in.html" class="sign-in">Sign in</a>
+            <button class="theme-toggle" id="themeToggleBtn"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+</nav>
+
+<div class="tool-hero-section">
+    <button class="save-btn" id="saveBtn">
+        <i class="far fa-bookmark"></i>
+        <span>Save item</span>
+    </button>
+
+    <div class="tool-hero-content">
+        <div class="breadcrumb">
+            <a href="index.html"><i class="fas fa-house"></i> Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="the-toolkit.html">Toolkit</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="category-confidence-presence-influence.html">Confidence, Presence &amp; Influence</a>
+            <i class="fas fa-chevron-right"></i>
+            <span class="current">Skills Development Framework</span>
+        </div>
+
+        <span class="checklist-name">SKILLS DEVELOPMENT FRAMEWORK</span>
+
+        <h1 class="hero-main-heading">Build skills that actually get recognised</h1>
+
+        <div class="hero-subheading">
+            This is a working framework (not “do a course”). Define the skill, build a 30-day practice plan,
+            <br>create proof, and generate a clean message you can use with your manager.
+        </div>
+
+        <div class="category-pills-container">
+            <span class="category-pills-title">Related Categories</span>
+            <div class="category-pills-grid">
+                <a href="category-career-playbook.html" class="category-pill career">
+                    <i class="fas fa-compass"></i>
+                    <span>Career Playbook</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="context-tips-grid">
+    <div class="context-card">
+        <h3 class="section-title"><i class="fas fa-compass"></i>When to Use This Framework</h3>
+        <ul class="bullet-list">
+            <li>When you’re doing “good work” but it’s not translating into progression or visibility.</li>
+            <li>When feedback is vague (“be more strategic”, “show ownership”) and you need a concrete plan.</li>
+            <li>When you’re pivoting roles and need proof you can operate at the next level.</li>
+            <li>When you want a pay rise/promotion case built on evidence, not hope.</li>
+            <li>When you’re under pressure and need growth without burning yourself out.</li>
+        </ul>
+    </div>
+
+    <div class="tips-card">
+        <h3 class="section-title"><i class="fas fa-lightbulb"></i>Pro Tips</h3>
+        <ul class="bullet-list">
+            <li>Define the skill as a <strong>behaviour + outcome</strong> — not a label (“strategic”).</li>
+            <li>Pick one skill and win. Scatter-learning feels productive but rarely changes outcomes.</li>
+            <li>Build proof in normal work: artefacts, decisions, stakeholder outcomes, risk reductions.</li>
+            <li>Ask for feedback in a way people can answer: “Was this clear? What would you change?”</li>
+            <li>Protect your time: skills grow through a small weekly rhythm, not one heroic week.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="framework-shell" id="frameworkCanvas">
+    <div class="framework-header">
+        <h2>Framework Canvas</h2>
+        <p>Complete the canvas and generate a one-page skills plan, a manager message, and a 30-day sprint you can actually run.</p>
+    </div>
+
+    <div class="canvas-grid">
+        <!-- 1) Target & Skill Definition -->
+        <div class="panel">
+            <div class="panel-title-row">
+                <div class="panel-title"><i class="fas fa-bullseye"></i> 1) Target &amp; Skill Definition</div>
+            </div>
+            <div class="panel-sub">Be precise: what role-level outcome are you aiming for, and what does “good” look like in observable terms?</div>
+
+            <div class="field-grid">
+                <div class="field">
+                    <div class="label">Current role <span class="hint">where you are now</span></div>
+                    <input class="input sd-input" data-dimension="target" id="sd_current_role" placeholder="E.g., HR Advisor / Analyst / Project Manager">
+                </div>
+
+                <div class="field">
+                    <div class="label">Target role / level <span class="hint">what you’re moving towards</span></div>
+                    <input class="input sd-input" data-dimension="target" id="sd_target_role" placeholder="E.g., HRBP / Senior Analyst / Lead PM">
+                </div>
+
+                <div class="field">
+                    <div class="label">Time horizon <span class="hint">for progress</span></div>
+                    <select class="select sd-input" data-dimension="target" id="sd_horizon">
+                        <option value="" selected>Select…</option>
+                        <option value="Next 30 days (proof sprint)">Next 30 days (proof sprint)</option>
+                        <option value="Next 90 days (role-level shift)">Next 90 days (role-level shift)</option>
+                        <option value="Next 6 months (promotion case)">Next 6 months (promotion case)</option>
+                        <option value="Next 12 months (career pivot)">Next 12 months (career pivot)</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="label">Primary skill focus <span class="hint">pick one</span></div>
+                    <select class="select sd-input" data-dimension="target" id="sd_skill_focus">
+                        <option value="" selected>Select…</option>
+                        <option value="Stakeholder management & influence">Stakeholder management & influence</option>
+                        <option value="Executive communication (written & verbal)">Executive communication (written & verbal)</option>
+                        <option value="Strategic thinking (options, trade-offs, risk)">Strategic thinking (options, trade-offs, risk)</option>
+                        <option value="Delivery & ownership (end-to-end)">Delivery & ownership (end-to-end)</option>
+                        <option value="Commercial thinking (cost, value, ROI)">Commercial thinking (cost, value, ROI)</option>
+                        <option value="Leadership (alignment, coaching, standards)">Leadership (alignment, coaching, standards)</option>
+                        <option value="Data / insight (analysis to decision)">Data / insight (analysis to decision)</option>
+                        <option value="Role-specific technical skill">Role-specific technical skill</option>
+                    </select>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Skill definition in one line <span class="hint">behaviour + outcome</span></div>
+                    <input class="input sd-input" data-dimension="target" id="sd_skill_definition" placeholder="E.g., “Influence stakeholders to agree priorities and remove blockers so delivery stays predictable.”">
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Success signal <span class="hint">what would others notice?</span></div>
+                    <textarea class="textarea sd-input" data-dimension="target" id="sd_success_signal" placeholder="E.g., I’m asked earlier, my updates drive decisions, stakeholders accept trade-offs, fewer escalations."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Constraints you must respect <span class="hint">time, workload, authority</span></div>
+                    <input class="input sd-input" data-dimension="support" id="sd_constraints" placeholder="E.g., no overtime, fixed deadlines, limited authority, hybrid schedule, childcare.">
+                </div>
+            </div>
+
+            <div class="micro-cards">
+                <div class="micro">
+                    <h4><i class="fas fa-eye"></i> Recognition rule</h4>
+                    <p>Skills “count” when they show up as <strong>observable outcomes</strong>: decisions made, risk reduced, stakeholders aligned, quality improved.</p>
+                </div>
+                <div class="micro">
+                    <h4><i class="fas fa-compass"></i> Level-up lens</h4>
+                    <p>If the target is a higher level, your plan must include <strong>ambiguity</strong>, <strong>trade-offs</strong>, and <strong>influence</strong> — not just harder tasks.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2) Baseline & Gap Scan -->
+        <div class="panel">
+            <div class="panel-title-row">
+                <div class="panel-title"><i class="fas fa-chart-line"></i> 2) Baseline &amp; Gap Scan</div>
+            </div>
+            <div class="panel-sub">This replaces “Decision Quality Filter” in this tool: you’re stress-testing where you are now, what’s missing, and what evidence will prove progress.</div>
+
+            <div class="field-grid">
+                <div class="field span-2">
+                    <div class="label">Current evidence you already have <span class="hint">facts, artefacts, outcomes</span></div>
+                    <textarea class="textarea sd-input" data-dimension="baseline" id="bg_evidence" placeholder="Bullets are fine. Keep it concrete: outputs, wins, stakeholder comments, metrics, examples."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Feedback you’ve heard (even if vague) <span class="hint">themes</span></div>
+                    <textarea class="textarea sd-input" data-dimension="baseline" id="bg_feedback" placeholder="E.g., “Be more strategic”, “Push back”, “More concise”, “Own the narrative”, “Need confidence with seniors”."></textarea>
+                </div>
+
+                <div class="field">
+                    <div class="label">Self-rating <span class="hint">today</span></div>
+                    <select class="select sd-input" data-dimension="baseline" id="bg_rating">
+                        <option value="" selected>Select…</option>
+                        <option value="1/5 (early stage)">1/5 (early stage)</option>
+                        <option value="2/5 (inconsistent)">2/5 (inconsistent)</option>
+                        <option value="3/5 (solid, needs polish)">3/5 (solid, needs polish)</option>
+                        <option value="4/5 (strong, needs visibility)">4/5 (strong, needs visibility)</option>
+                        <option value="5/5 (role-level ready)">5/5 (role-level ready)</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="label">Main failure mode <span class="hint">where it breaks</span></div>
+                    <input class="input sd-input" data-dimension="baseline" id="bg_failure" placeholder="E.g., I over-explain / avoid conflict / don’t pre-align / rush decisions.">
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">The real gap <span class="hint">what needs to change</span></div>
+                    <textarea class="textarea sd-input" data-dimension="baseline" id="bg_gap" placeholder="E.g., Not ‘confidence’ — it’s: I don’t anchor the outcome, so conversations drift and decisions stall."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">3 proof opportunities in the next 4 weeks <span class="hint">normal work</span></div>
+                    <textarea class="textarea sd-input" data-dimension="proof" id="bg_opportunities" placeholder="E.g., lead weekly update with decision asks; write exec summary; run stakeholder alignment; propose trade-off."></textarea>
+                </div>
+            </div>
+
+            <div class="output-box">
+                <div class="output-title">
+                    <h4>Skill statement (auto)</h4>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <button class="mini-btn" onclick="buildSkillStatement()"><i class="fas fa-bolt"></i> Build</button>
+                        <button class="mini-btn" onclick="copyText('sd_skill_statement_out')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                </div>
+                <div class="output-content" id="sd_skill_statement_out">Click “Build” to generate a clean, manager-safe skills statement from your inputs.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="canvas-grid">
+        <!-- 3) Practice Plan -->
+        <div class="panel">
+            <div class="panel-title-row">
+                <div class="panel-title"><i class="fas fa-dumbbell"></i> 3) Practice Plan (30/60/90)</div>
+            </div>
+            <div class="panel-sub">You don’t “learn” a skill — you practise it. Keep it small, consistent, and tied to real work outputs.</div>
+
+            <div class="field-grid">
+                <div class="field">
+                    <div class="label">Weekly time budget <span class="hint">realistic</span></div>
+                    <select class="select sd-input" data-dimension="practice" id="pp_time">
+                        <option value="" selected>Select…</option>
+                        <option value="30–45 mins/week">30–45 mins/week</option>
+                        <option value="1–2 hours/week">1–2 hours/week</option>
+                        <option value="2–4 hours/week">2–4 hours/week</option>
+                        <option value="4+ hours/week">4+ hours/week</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <div class="label">Practice cadence <span class="hint">how often</span></div>
+                    <select class="select sd-input" data-dimension="practice" id="pp_cadence">
+                        <option value="" selected>Select…</option>
+                        <option value="2 x 15 minutes">2 x 15 minutes</option>
+                        <option value="3 x 20 minutes">3 x 20 minutes</option>
+                        <option value="1 x 45 minutes + micro reps">1 x 45 minutes + micro reps</option>
+                        <option value="Daily micro reps (5–10 mins)">Daily micro reps (5–10 mins)</option>
+                    </select>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Smallest practice unit <span class="hint">repeatable rep</span></div>
+                    <input class="input sd-input" data-dimension="practice" id="pp_unit" placeholder="E.g., write a 6-line exec summary; lead 5-minute decision ask; pre-align with 1 stakeholder.">
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Learning inputs <span class="hint">minimum effective</span></div>
+                    <textarea class="textarea sd-input" data-dimension="practice" id="pp_inputs" placeholder="E.g., one short course module + one template + one weekly review. Avoid endless reading."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">On-the-job experiment <span class="hint">real work proof</span></div>
+                    <textarea class="textarea sd-input" data-dimension="practice" id="pp_experiment" placeholder="E.g., take ownership of a small workstream; run alignment; propose trade-offs; present options + recommendation."></textarea>
+                </div>
+
+                <div class="field">
+                    <div class="label">30-day milestone <span class="hint">first proof</span></div>
+                    <input class="input sd-input" data-dimension="practice" id="pp_30" placeholder="E.g., two exec updates + one stakeholder alignment win.">
+                </div>
+
+                <div class="field">
+                    <div class="label">90-day milestone <span class="hint">role shift</span></div>
+                    <input class="input sd-input" data-dimension="practice" id="pp_90" placeholder="E.g., trusted to lead X; consistent senior comms; clearer decisions.">
+                </div>
+            </div>
+
+            <div class="micro-cards">
+                <div class="micro">
+                    <h4><i class="fas fa-repeat"></i> Compounding rule</h4>
+                    <p>Two good reps every week beats one intense weekend. Your goal is <strong>consistency</strong>, not intensity.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4) Proof & Visibility Plan -->
+        <div class="panel">
+            <div class="panel-title-row">
+                <div class="panel-title"><i class="fas fa-eye"></i> 4) Proof &amp; Visibility Plan</div>
+            </div>
+            <div class="panel-sub">Progress that isn’t visible doesn’t convert. Decide who needs to see the skill, and what “proof” looks like.</div>
+
+            <div class="field-grid">
+                <div class="field">
+                    <div class="label">Decision-maker for progression <span class="hint">who matters</span></div>
+                    <input class="input sd-input" data-dimension="proof" id="pv_decider" placeholder="Name / role">
+                </div>
+
+                <div class="field">
+                    <div class="label">Sponsor / advocate <span class="hint">influencer</span></div>
+                    <input class="input sd-input" data-dimension="proof" id="pv_sponsor" placeholder="Name / role">
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Proof artefacts <span class="hint">what can be shared</span></div>
+                    <textarea class="textarea sd-input" data-dimension="proof" id="pv_artefacts" placeholder="E.g., before/after comms, decision logs, stakeholder feedback, delivery metrics, decks, concise updates."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Visibility rhythm <span class="hint">how it will be seen</span></div>
+                    <textarea class="textarea sd-input" data-dimension="proof" id="pv_rhythm" placeholder="E.g., weekly 3-bullet update; fortnightly 15-min check-in; monthly review of proof portfolio."></textarea>
+                </div>
+
+                <div class="field span-2">
+                    <div class="label">Manager ask <span class="hint">clear and easy to say yes to</span></div>
+                    <textarea class="textarea sd-input" data-dimension="support" id="pv_ask" placeholder="E.g., “Can we agree one stretch opportunity + a fortnightly check-in on this skill for 6 weeks?”"></textarea>
+                </div>
+            </div>
+
+            <div class="output-box">
+                <div class="output-title">
+                    <h4>30-day sprint plan (auto)</h4>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                        <button class="mini-btn" onclick="build30DaySprint()"><i class="fas fa-bolt"></i> Build</button>
+                        <button class="mini-btn" onclick="copyText('sd_30day_out')"><i class="far fa-copy"></i> Copy</button>
+                    </div>
+                </div>
+                <div class="output-content" id="sd_30day_out">Click “Build” to generate a structured sprint: week 1–4 with proof outputs.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Proof Portfolio Log -->
+    <div class="panel" style="margin-bottom:18px;">
+        <div class="panel-title-row">
+            <div class="panel-title"><i class="fas fa-folder-open"></i> Proof Portfolio Log (optional, but powerful)</div>
+        </div>
+        <div class="panel-sub">Log small wins. This becomes your pay rise / promotion evidence without last-minute scrambling.</div>
+
+        <table class="timeline-table" id="timelineTable">
+            <thead>
+                <tr>
+                    <th style="width: 16%;">Date</th>
+                    <th style="width: 38%;">What you did (outcome-led)</th>
+                    <th style="width: 26%;">Skill demonstrated</th>
+                    <th style="width: 20%;">Evidence</th>
+                </tr>
+            </thead>
+            <tbody id="timelineBody">
+                <tr>
+                    <td><input class="input sd-input" data-dimension="proof" placeholder="DD/MM/YYYY"></td>
+                    <td><input class="input sd-input" data-dimension="proof" placeholder="Decision, alignment, delivery outcome"></td>
+                    <td><input class="input sd-input" data-dimension="proof" placeholder="E.g., influence / strategy / comms / ownership"></td>
+                    <td>
+                        <select class="select sd-input" data-dimension="proof">
+                            <option value="" selected>Select…</option>
+                            <option value="Email / message">Email / message</option>
+                            <option value="Meeting notes">Meeting notes</option>
+                            <option value="Deck / document">Deck / document</option>
+                            <option value="Metrics / report">Metrics / report</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="display:flex; gap:10px; margin-top:10px; flex-wrap:wrap;">
+            <button class="mini-btn" onclick="addTimelineRow()"><i class="fas fa-plus"></i> Add row</button>
+            <button class="mini-btn" onclick="removeTimelineRow()"><i class="fas fa-minus"></i> Remove row</button>
+        </div>
+    </div>
+
+    <!-- Executive Outputs -->
+    <div class="panel">
+        <div class="panel-title-row">
+            <div class="panel-title"><i class="fas fa-file-lines"></i> Executive Outputs</div>
+        </div>
+        <div class="panel-sub">Designed to be copy/pasted into notes, a message, or a manager conversation.</div>
+
+        <div class="output-box">
+            <div class="output-title">
+                <h4>One-paragraph skills plan</h4>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="mini-btn" onclick="copyText('out_summary')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+            </div>
+            <div class="output-content" id="out_summary">Complete the canvas, then click “Generate outputs”.</div>
+        </div>
+
+        <div class="output-box">
+            <div class="output-title">
+                <h4>Manager message (ask + clarity)</h4>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="mini-btn" onclick="copyText('out_manager')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+            </div>
+            <div class="output-content" id="out_manager">—</div>
+        </div>
+
+        <div class="output-box">
+            <div class="output-title">
+                <h4>Weekly rhythm (minimum effective)</h4>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="mini-btn" onclick="copyText('out_rhythm')"><i class="far fa-copy"></i> Copy</button>
+                </div>
+            </div>
+            <div class="output-content" id="out_rhythm">—</div>
+        </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="framework-actions-bottom">
+        <button class="mini-btn" onclick="resetCanvas()"><i class="fas fa-rotate-left"></i> Reset</button>
+        <button class="mini-btn" onclick="copyOutputs()"><i class="far fa-copy"></i> Copy outputs</button>
+        <button class="mini-btn primary" onclick="generateOutputs()"><i class="fas fa-wand-magic-sparkles"></i> Generate outputs</button>
+    </div>
+</div>
+
+<!-- QUICK CHECKLIST -->
+<div class="checklist-body" id="checklistText">
+    <h2 class="checklist-section-title"><i class="fas fa-list-check"></i> Quick Coverage Checklist</h2>
+    <div class="checklist-intro">The canvas is the framework. This checklist is a final audit to confirm your plan is specific, measurable, and visible (without burning you out).</div>
+
+    <div class="checklist-grid">
+        <div class="checklist-item" data-category="target">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I chose one primary skill and defined it as behaviour + outcome (not a vague label).</div>
+        </div>
+        <div class="checklist-item" data-category="target">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I set a realistic time horizon and a success signal someone else would recognise.</div>
+        </div>
+
+        <div class="checklist-item" data-category="baseline">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I captured concrete baseline evidence (artefacts, outcomes, examples) — not just feelings.</div>
+        </div>
+        <div class="checklist-item" data-category="baseline">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I named the real gap and the failure mode (where I break down under pressure).</div>
+        </div>
+
+        <div class="checklist-item" data-category="practice">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I created a weekly practice rhythm with a smallest repeatable practice unit.</div>
+        </div>
+        <div class="checklist-item" data-category="practice">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I included an on-the-job experiment that will generate proof in normal work.</div>
+        </div>
+
+        <div class="checklist-item" data-category="proof">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I identified who needs to see the skill and what proof artefacts I’ll produce.</div>
+        </div>
+        <div class="checklist-item" data-category="proof">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I set a visibility rhythm (updates / check-ins) so progress converts into recognition.</div>
+        </div>
+
+        <div class="checklist-item" data-category="support">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I wrote a clean manager ask that is specific and easy for them to support.</div>
+        </div>
+        <div class="checklist-item" data-category="support">
+            <i class="far fa-square"></i>
+            <div class="checklist-text">I respected constraints (capacity/time) and avoided a plan that requires constant overtime.</div>
+        </div>
+    </div>
+</div>
+
+<!-- SCORE -->
+<div class="clarity-score-section">
+    <div class="presence-snapshot-header">
+        <h2>Your Skills Plan Readiness Snapshot</h2>
+        <p>This score reflects how complete your plan is (canvas + checklist). It’s a signal of whether your development is structured (and visible) or vague (and easy to ignore).</p>
+    </div>
+
+    <div class="clarity-score-bar">
+        <div class="clarity-progress-container">
+            <div class="clarity-header">
+                <div class="clarity-title">Framework Completion Score</div>
+                <div class="clarity-percentage" id="clarityPercentage">0%</div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <div class="progress-labels">
+                <span>Vague</span><span>Forming</span><span>Ready</span>
+            </div>
+
+            <div class="presence-dimensions">
+                <div class="presence-dimension-pill"><span class="label">Target & Definition</span><span class="score" id="scoreVoice">0%</span></div>
+                <div class="presence-dimension-pill"><span class="label">Baseline & Gap</span><span class="score" id="scoreStructure">0%</span></div>
+                <div class="presence-dimension-pill"><span class="label">Practice Plan</span><span class="score" id="scoreNonverbal">0%</span></div>
+                <div class="presence-dimension-pill"><span class="label">Proof & Support</span><span class="score" id="scoreChallenge">0%</span></div>
+            </div>
+        </div>
+
+        <div class="actions-container">
+            <button class="action-btn" onclick="generateSmartSummary()" id="generateBtn" disabled>
+                <i class="fas fa-magic"></i> Generate summary
+            </button>
+            <button class="action-btn secondary" onclick="copyFramework()" id="copyBtn">
+                <i class="far fa-copy"></i> Copy framework
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="smart-summary-section" id="smartSummary">
+    <div class="summary-header">
+        <h2 class="summary-title">Your Smart Skills Summary</h2>
+        <p class="summary-subtitle">Based on your completion score of <span id="summaryScore">0%</span></p>
+        <p class="summary-insight">Highlights what’s missing, what’s most likely to stall recognition, and the cleanest next steps to convert skill-building into outcomes.</p>
+    </div>
+
+    <h3 class="section-header red"><i class="fas fa-exclamation-triangle"></i> Red Flags in Your Plan</h3>
+    <div class="red-flags-grid" id="redFlagsGrid"></div>
+
+    <h3 class="section-header purple"><i class="fas fa-forward"></i> Next Moves to Make It Real</h3>
+    <div class="next-steps-grid" id="nextStepsGrid"></div>
+
+    <h3 class="section-header blue"><i class="fas fa-tools"></i> Recommended Tools to Support You</h3>
+    <div class="resources-grid" id="resourcesGrid"></div>
+</div>
+
+<!-- MY PLAYBOOK -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+    <div class="playbook-sidebar" id="playbookSidebar">
+        <div class="playbook-sidebar-header">
+            <div class="playbook-sidebar-header-title-row">
+                <h3>My Playbook</h3>
+                <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p>Saved items</p>
+        </div>
+
+        <div class="playbook-sidebar-body">
+            <div id="savedItemsContainer">
+                <p class="saved-items-empty" id="savedItemsEmpty">
+                    You haven’t saved anything yet. Use <strong>Save item</strong> on tools you want quick access to.
+                </p>
+                <ul class="saved-items-list" id="savedItemsList"></ul>
+            </div>
+
+            <div class="playbook-quick-links">
+                <div class="playbook-quick-links-header">
+                    <span class="quick-links-title">Quick links</span>
+                </div>
+                <div class="playbook-quick-links-list">
+                    <a href="dashboard.html" class="quick-link-pill"><i class="fas fa-gauge"></i> The Dashboard</a>
+                    <a href="the-lens.html" class="quick-link-pill"><i class="fas fa-search"></i> The Lens</a>
+                    <a href="the-toolkit.html" class="quick-link-pill"><i class="fas fa-toolbox"></i> The Toolkit</a>
+                    <a href="the-coach.html" class="quick-link-pill"><i class="fas fa-comments"></i> The Coach</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+    <i class="fas fa-book-open"></i>
+    <span>My Playbook</span>
+</div>
+
+<footer>
+    <div class="container">
+        <p>© 2025 The Employee Playbook. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('loaded');
+
+    initializeChecklist();
+    initializeThemeToggle();
+    initializeMobileNav();
+    initializePlaybook();
+
+    bindCanvasListeners();
+    resetDefaultSelectsToBlank();
+    updateFrameworkScore();
+});
+
+/* MOBILE NAV */
+function initializeMobileNav() {
+    const mobileToggle = document.querySelector('.mobile-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (!mobileToggle || !navLinks) return;
+
+    mobileToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('active');
+        const icon = this.querySelector('i');
+        if (icon) { icon.classList.toggle('fa-bars'); icon.classList.toggle('fa-times'); }
+    });
+
+    document.addEventListener('click', function(event) {
+        if (navLinks.classList.contains('active') &&
+            !navLinks.contains(event.target) &&
+            !mobileToggle.contains(event.target)) {
+            navLinks.classList.remove('active');
+            const icon = mobileToggle.querySelector('i');
+            if (icon) { icon.classList.add('fa-bars'); icon.classList.remove('fa-times'); }
+        }
+    });
+}
+
+/* THEME */
+function initializeThemeToggle() {
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    if (!themeToggleBtn) return;
+
+    const themeIcon = themeToggleBtn.querySelector('i');
+    const logoImg = document.getElementById('mainLogo');
+
+    function getLogoPath(filename) {
+        if (window.location.protocol === 'file:') {
+            const currentPath = window.location.pathname;
+            const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+            return basePath + 'assets/img/' + filename;
+        } else {
+            return './assets/img/' + filename;
+        }
+    }
+
+    function createFallbackLogo() {
+        if (!logoImg) return;
+        logoImg.classList.add('fallback');
+        const logoText = document.createElement('div');
+        logoText.textContent = 'THE EMPLOYEE PLAYBOOK';
+        logoText.style.fontSize = '14px';
+        logoText.style.fontWeight = '700';
+        logoText.style.letterSpacing = '1px';
+        logoImg.src = '';
+        logoImg.alt = 'The Employee Playbook';
+        logoImg.style.display = 'flex';
+        logoImg.style.alignItems = 'center';
+        logoImg.style.justifyContent = 'center';
+        logoImg.innerHTML = '';
+        logoImg.appendChild(logoText);
+    }
+
+    function updateLogoForTheme(isDarkMode) {
+        if (!logoImg) return;
+        logoImg.classList.remove('fallback');
+        logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+        logoImg.alt = 'The Employee Playbook';
+    }
+
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+    } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+    }
+
+    themeToggleBtn.addEventListener('click', function() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+        if (isDarkMode) {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+            if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+            updateLogoForTheme(false);
+        } else {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+            if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+            updateLogoForTheme(true);
+        }
+    });
+
+    if (logoImg) {
+        logoImg.addEventListener('error', function() {
+            if (this.src.includes('logo-dark.png')) this.src = getLogoPath('logo.png');
+            else createFallbackLogo();
+        });
+    }
+}
+
+/* Ensure score starts at 0% */
+function resetDefaultSelectsToBlank(){
+    document.querySelectorAll('select.sd-input').forEach(sel => {
+        if (!sel.dataset.userChanged) sel.value = '';
+    });
+}
+
+/* Bind inputs once */
+function bindCanvasListeners(){
+    document.querySelectorAll('.sd-input').forEach(el => {
+        if (el.dataset.bound === '1') return;
+        el.dataset.bound = '1';
+
+        el.addEventListener('input', () => {
+            el.dataset.userChanged = '1';
+            updateFrameworkScore();
+        });
+        el.addEventListener('change', () => {
+            el.dataset.userChanged = '1';
+            updateFrameworkScore();
+        });
+    });
+}
+
+/* TIMELINE */
+function addTimelineRow() {
+    const body = document.getElementById('timelineBody');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td><input class="input sd-input" data-dimension="proof" placeholder="DD/MM/YYYY"></td>
+        <td><input class="input sd-input" data-dimension="proof" placeholder="Decision, alignment, delivery outcome"></td>
+        <td><input class="input sd-input" data-dimension="proof" placeholder="E.g., influence / strategy / comms / ownership"></td>
+        <td>
+            <select class="select sd-input" data-dimension="proof">
+                <option value="" selected>Select…</option>
+                <option value="Email / message">Email / message</option>
+                <option value="Meeting notes">Meeting notes</option>
+                <option value="Deck / document">Deck / document</option>
+                <option value="Metrics / report">Metrics / report</option>
+                <option value="Other">Other</option>
+            </select>
+        </td>
+    `;
+    body.appendChild(tr);
+    bindCanvasListeners();
+    updateFrameworkScore();
+}
+
+function removeTimelineRow() {
+    const body = document.getElementById('timelineBody');
+    if (body.children.length > 1) body.removeChild(body.lastElementChild);
+    updateFrameworkScore();
+}
+
+/* CHECKLIST */
+let checkedItems = [];
+let itemCategories = [];
+
+/* Dimensions for score pills */
+const dimensionConfig = {
+    voice: ['target'],
+    structure: ['baseline'],
+    nonverbal: ['practice'],
+    challenge: ['proof', 'support']
+};
+
+function initializeChecklist() {
+    const checklistContainers = document.querySelectorAll('.checklist-item');
+    checkedItems = new Array(checklistContainers.length).fill(false);
+    itemCategories = [];
+
+    checklistContainers.forEach((container, index) => {
+        const icon = container.querySelector('i');
+        const category = container.getAttribute('data-category');
+        itemCategories[index] = category;
+
+        container.addEventListener('click', function(e) {
+            if (e.target.tagName === 'BUTTON') return;
+
+            if (icon.classList.contains('fa-square')) {
+                icon.classList.remove('fa-square');
+                icon.classList.add('fa-check-square');
+                icon.style.color = '#5A4496';
+                checkedItems[index] = true;
+            } else {
+                icon.classList.remove('fa-check-square');
+                icon.classList.add('fa-square');
+                icon.style.color = '#7B5FC4';
+                checkedItems[index] = false;
+            }
+            updateFrameworkScore();
+        });
+    });
+}
+
+/* SCORE */
+function updateFrameworkScore() {
+    const inputs = Array.from(document.querySelectorAll('.sd-input'));
+    const completedInputs = inputs.filter(el => ((el.value || '').toString().trim().length > 0)).length;
+    const checklistCompleted = checkedItems.filter(Boolean).length;
+
+    const totalUnits = inputs.length + checkedItems.length;
+    const completedUnits = completedInputs + checklistCompleted;
+
+    const score = totalUnits ? Math.round((completedUnits / totalUnits) * 100) : 0;
+
+    document.getElementById('clarityPercentage').textContent = score + '%';
+    const fill = document.getElementById('progressFill');
+    fill.style.width = score + '%';
+
+    document.getElementById('generateBtn').disabled = (completedUnits === 0);
+
+    const dimScores = {
+        voice: { checked: 0, total: 0 },
+        structure: { checked: 0, total: 0 },
+        nonverbal: { checked: 0, total: 0 },
+        challenge: { checked: 0, total: 0 }
+    };
+
+    inputs.forEach(el => {
+        const cat = el.getAttribute('data-dimension');
+        Object.keys(dimensionConfig).forEach(dim => {
+            if (dimensionConfig[dim].includes(cat)) {
+                dimScores[dim].total += 1;
+                if (((el.value || '').toString().trim().length > 0)) dimScores[dim].checked += 1;
+            }
+        });
+    });
+
+    itemCategories.forEach((cat, idx) => {
+        Object.keys(dimensionConfig).forEach(dim => {
+            if (dimensionConfig[dim].includes(cat)) {
+                dimScores[dim].total += 1;
+                if (checkedItems[idx]) dimScores[dim].checked += 1;
+            }
+        });
+    });
+
+    const pct = d => d.total ? Math.round((d.checked / d.total) * 100) : 0;
+    document.getElementById('scoreVoice').textContent = pct(dimScores.voice) + '%';
+    document.getElementById('scoreStructure').textContent = pct(dimScores.structure) + '%';
+    document.getElementById('scoreNonverbal').textContent = pct(dimScores.nonverbal) + '%';
+    document.getElementById('scoreChallenge').textContent = pct(dimScores.challenge) + '%';
+}
+
+/* HELPERS */
+function val(id) {
+    const el = document.getElementById(id);
+    return el ? (el.value || '').trim() : '';
+}
+function shorten(text, max) {
+    const t = (text || '').replace(/\s+/g, ' ').trim();
+    if (!t) return '';
+    return t.length > max ? t.slice(0, max - 1) + '…' : t;
+}
+function copyText(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    navigator.clipboard.writeText(el.textContent || '');
+}
+
+/* BUILDERS */
+function buildSkillStatement() {
+    const currentRole = val('sd_current_role');
+    const targetRole = val('sd_target_role');
+    const horizon = val('sd_horizon');
+    const focus = val('sd_skill_focus');
+    const definition = val('sd_skill_definition');
+    const signal = val('sd_success_signal');
+    const gap = val('bg_gap');
+    const failure = val('bg_failure');
+
+    const lines = [];
+    if (targetRole) lines.push(`Goal: Build role-level capability towards ${targetRole}${currentRole ? ` (from ${currentRole})` : ''}.`);
+    if (horizon) lines.push(`Horizon: ${horizon}.`);
+    if (focus) lines.push(`Skill focus: ${focus}.`);
+    if (definition) lines.push(`Definition: ${definition}`);
+    if (signal) lines.push(`Success signal: ${shorten(signal, 260)}`);
+    if (gap) lines.push(`Gap to close: ${shorten(gap, 220)}`);
+    if (failure) lines.push(`Failure mode to fix: ${failure}.`);
+
+    document.getElementById('sd_skill_statement_out').textContent =
+        lines.length ? lines.join('\n') : 'Add a few inputs (target role + skill definition + success signal) then build your statement.';
+}
+
+function build30DaySprint() {
+    const skill = val('sd_skill_focus') || 'your chosen skill';
+    const unit = val('pp_unit');
+    const experiment = val('pp_experiment');
+    const opportunities = val('bg_opportunities');
+    const artefacts = val('pv_artefacts');
+    const rhythm = val('pv_rhythm');
+
+    const w1 = [];
+    const w2 = [];
+    const w3 = [];
+    const w4 = [];
+
+    w1.push(`Define “good” for ${skill} (behaviour + outcome) and choose your smallest practice unit.`);
+    if (unit) w1.push(`Practice unit: ${unit}`);
+    if (opportunities) w1.push(`Pick one proof opportunity: ${shorten(opportunities, 180)}`);
+    w1.push(`Create a one-page “proof folder” (notes + artefacts).`);
+
+    w2.push(`Run 2–3 reps in real work (small, repeatable).`);
+    if (experiment) w2.push(`On-the-job experiment: ${shorten(experiment, 180)}`);
+    w2.push(`Request one piece of feedback: “What would you change to make this stronger?”`);
+
+    w3.push(`Increase difficulty slightly (same skill, higher stakes).`);
+    if (artefacts) w3.push(`Capture artefact(s): ${shorten(artefacts, 180)}`);
+    w3.push(`Write a short impact line (what changed because of your action).`);
+
+    w4.push(`Consolidate: package proof into a clean summary (3–5 bullets).`);
+    if (rhythm) w4.push(`Visibility rhythm: ${shorten(rhythm, 170)}`);
+    w4.push(`Book a 15-minute manager check-in to align on next stretch opportunity.`);
+
+    document.getElementById('sd_30day_out').textContent =
+`WEEK 1 — SETUP
+- ${w1.join('\n- ')}
+
+WEEK 2 — REPS
+- ${w2.join('\n- ')}
+
+WEEK 3 — PROOF
+- ${w3.join('\n- ')}
+
+WEEK 4 — CONVERT
+- ${w4.join('\n- ')}`;
+}
+
+/* OUTPUTS */
+function generateOutputs() {
+    const currentRole = val('sd_current_role');
+    const targetRole = val('sd_target_role');
+    const horizon = val('sd_horizon');
+    const focus = val('sd_skill_focus');
+    const definition = val('sd_skill_definition');
+    const signal = val('sd_success_signal');
+    const constraints = val('sd_constraints');
+
+    const evidence = val('bg_evidence');
+    const feedback = val('bg_feedback');
+    const gap = val('bg_gap');
+
+    const time = val('pp_time');
+    const cadence = val('pp_cadence');
+    const unit = val('pp_unit');
+    const experiment = val('pp_experiment');
+    const m30 = val('pp_30');
+    const m90 = val('pp_90');
+
+    const decider = val('pv_decider');
+    const sponsor = val('pv_sponsor');
+    const artefacts = val('pv_artefacts');
+    const visibility = val('pv_rhythm');
+    const ask = val('pv_ask');
+
+    /* One-paragraph plan */
+    const parts = [];
+    if (targetRole || focus) parts.push(`Objective: build ${focus || 'a key role-level skill'}${targetRole ? ` towards ${targetRole}` : ''}${currentRole ? ` (currently ${currentRole})` : ''}.`);
+    if (horizon) parts.push(`Timeframe: ${horizon}.`);
+    if (definition) parts.push(`Definition: ${shorten(definition, 200)}`);
+    if (signal) parts.push(`Success signal: ${shorten(signal, 200)}`);
+    if (gap) parts.push(`Gap: ${shorten(gap, 170)}`);
+    if (time || cadence) parts.push(`Practice rhythm: ${[time, cadence].filter(Boolean).join(', ')}${unit ? ` using “${shorten(unit, 120)}”` : ''}.`);
+    if (experiment) parts.push(`On-the-job proof: ${shorten(experiment, 180)}`);
+    if (constraints) parts.push(`Constraints respected: ${constraints}.`);
+    document.getElementById('out_summary').textContent = parts.join(' ');
+
+    /* Manager message */
+    const msgLines = [];
+    msgLines.push(`Hi — I’m focusing on strengthening ${focus || 'a role-level skill'} over the next ${horizon ? horizon.toLowerCase() : '30–90 days'} so it shows up in observable outcomes.`);
+    if (definition) msgLines.push(`Specifically: ${shorten(definition, 220)}`);
+    if (ask) msgLines.push(`Ask: ${ask}`);
+    else msgLines.push(`Ask: could we agree one stretch opportunity that forces reps on this skill, plus a short check-in every 2 weeks for the next 6 weeks?`);
+    if (artefacts) msgLines.push(`I’ll share proof artefacts as I go: ${shorten(artefacts, 200)}`);
+    if (visibility) msgLines.push(`Visibility rhythm: ${shorten(visibility, 180)}`);
+    document.getElementById('out_manager').textContent = msgLines.join('\n');
+
+    /* Weekly rhythm */
+    const rhythmLines = [];
+    rhythmLines.push(`Weekly time budget: ${time || 'set a realistic slot'}.`);
+    rhythmLines.push(`Cadence: ${cadence || '2–3 short reps + one review'}.`);
+    if (unit) rhythmLines.push(`Practice unit: ${unit}`);
+    if (m30) rhythmLines.push(`30-day milestone: ${m30}`);
+    if (m90) rhythmLines.push(`90-day milestone: ${m90}`);
+    if (decider || sponsor) rhythmLines.push(`Visibility: keep ${[decider, sponsor].filter(Boolean).join(' / ')} in the loop with outcomes, not effort.`);
+    if (feedback) rhythmLines.push(`Feedback prompt to use: “Was this clear and decision-ready? What would you change?”`);
+    document.getElementById('out_rhythm').textContent = rhythmLines.join('\n');
+
+    buildSkillStatement();
+    build30DaySprint();
+}
+
+function copyOutputs() {
+    const blocks = [
+        'SKILLS DEVELOPMENT FRAMEWORK',
+        '============================',
+        '',
+        'ONE-PARAGRAPH SKILLS PLAN\n' + document.getElementById('out_summary').textContent,
+        'MANAGER MESSAGE\n' + document.getElementById('out_manager').textContent,
+        'WEEKLY RHYTHM\n' + document.getElementById('out_rhythm').textContent,
+        'SKILL STATEMENT\n' + document.getElementById('sd_skill_statement_out').textContent,
+        '30-DAY SPRINT\n' + document.getElementById('sd_30day_out').textContent
+    ];
+    navigator.clipboard.writeText(blocks.join('\n\n'));
+}
+
+function resetCanvas() {
+    document.querySelectorAll('.sd-input').forEach(el => {
+        el.value = '';
+        delete el.dataset.userChanged;
+    });
+
+    document.querySelectorAll('.checklist-item').forEach((container, index) => {
+        const icon = container.querySelector('i');
+        if (!icon) return;
+        icon.classList.remove('fa-check-square');
+        icon.classList.add('fa-square');
+        icon.style.color = '#7B5FC4';
+        checkedItems[index] = false;
+    });
+
+    document.getElementById('sd_skill_statement_out').textContent = 'Click “Build” to generate a clean, manager-safe skills statement from your inputs.';
+    document.getElementById('sd_30day_out').textContent = 'Click “Build” to generate a structured sprint: week 1–4 with proof outputs.';
+    document.getElementById('out_summary').textContent = 'Complete the canvas, then click “Generate outputs”.';
+    document.getElementById('out_manager').textContent = '—';
+    document.getElementById('out_rhythm').textContent = '—';
+
+    document.getElementById('smartSummary').classList.remove('active');
+
+    resetDefaultSelectsToBlank();
+    updateFrameworkScore();
+}
+
+/* SMART SUMMARY */
+function generateSmartSummary() {
+    const scoreText = document.getElementById('clarityPercentage').textContent || '0%';
+    const score = parseInt(scoreText.replace('%',''), 10) || 0;
+
+    document.getElementById('summaryScore').textContent = score + '%';
+
+    const summarySection = document.getElementById('smartSummary');
+    summarySection.classList.add('active');
+    summarySection.scrollIntoView({ behavior: 'smooth' });
+
+    generateRedFlags(score);
+    generateNextSteps(score);
+    generateRecommendedResources(score);
+}
+
+function collectMissingSignals() {
+    const hasTarget = !!val('sd_target_role') || !!val('sd_skill_focus') || !!val('sd_skill_definition');
+    const hasSignal = !!val('sd_success_signal');
+
+    const hasBaseline = !!val('bg_evidence') || !!val('bg_gap') || !!val('bg_failure');
+
+    const hasPractice = !!val('pp_unit') || !!val('pp_experiment') || !!val('pp_time') || !!val('pp_cadence');
+
+    const hasProof = !!val('pv_artefacts') || !!val('bg_opportunities') || !!val('pv_rhythm');
+    const hasSupport = !!val('pv_ask') || !!val('sd_constraints');
+
+    return {
+        targetWeak: !(hasTarget && hasSignal),
+        baselineWeak: !hasBaseline,
+        practiceWeak: !hasPractice,
+        proofWeak: !hasProof,
+        supportWeak: !hasSupport
+    };
+}
+
+function generateRedFlags(score) {
+    const grid = document.getElementById('redFlagsGrid');
+    grid.innerHTML = '';
+
+    const missing = collectMissingSignals();
+    const redFlags = [];
+
+    if (missing.targetWeak) {
+        redFlags.push({
+            title: 'Skill is not defined tightly enough',
+            description: 'If the skill is vague, feedback stays vague and progress stays invisible. Define behaviour + outcome + success signal.',
+            icon: 'fas fa-bullseye'
+        });
+    }
+    if (missing.baselineWeak) {
+        redFlags.push({
+            title: 'No baseline evidence to prove progress',
+            description: 'Without concrete “before” examples, you can’t show growth. Capture artefacts, outcomes, and a few proof points.',
+            icon: 'fas fa-file-circle-check'
+        });
+    }
+    if (missing.practiceWeak) {
+        redFlags.push({
+            title: 'No repeatable practice unit',
+            description: 'Courses don’t create capability by themselves. You need a smallest rep you can repeat weekly in real work.',
+            icon: 'fas fa-repeat'
+        });
+    }
+    if (missing.proofWeak) {
+        redFlags.push({
+            title: 'Proof is not engineered',
+            description: 'If nobody sees it, it doesn’t convert. Choose proof opportunities and outputs that can be shared.',
+            icon: 'fas fa-eye'
+        });
+    }
+    if (missing.supportWeak) {
+        redFlags.push({
+            title: 'Plan risks burnout or stalls without support',
+            description: 'If constraints aren’t respected (or you don’t ask for stretch opportunities), the plan becomes effort with no leverage.',
+            icon: 'fas fa-triangle-exclamation'
+        });
+    }
+
+    while (redFlags.length < 3) {
+        redFlags.push({
+            title: 'Too many moving parts',
+            description: 'If it feels busy, shrink it: one skill, one practice unit, one proof opportunity, one cadence.',
+            icon: 'fas fa-wave-square'
+        });
+    }
+
+    redFlags.slice(0,3).forEach(flag => {
+        const card = document.createElement('div');
+        card.className = 'red-flag-card';
+        card.innerHTML = `
+            <div class="flag-icon"><i class="${flag.icon}"></i></div>
+            <h4 class="flag-title">${flag.title}</h4>
+            <p class="flag-description">${flag.description}</p>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function generateNextSteps(score) {
+    const grid = document.getElementById('nextStepsGrid');
+    grid.innerHTML = '';
+
+    const missing = collectMissingSignals();
+    const steps = [];
+
+    if (missing.targetWeak) {
+        steps.push({
+            title: 'Write the “skill as outcome” sentence',
+            description: 'Define the skill as behaviour + outcome and set a success signal others would recognise.',
+            icon: 'fas fa-pen-nib'
+        });
+    } else {
+        steps.push({
+            title: 'Choose one proof opportunity this week',
+            description: 'Pick one normal-work moment where the skill can show up and be captured as evidence.',
+            icon: 'fas fa-bolt'
+        });
+    }
+
+    if (missing.practiceWeak) {
+        steps.push({
+            title: 'Create a smallest practice unit',
+            description: 'Decide one rep you can repeat weekly (exec summary, decision ask, pre-align, options deck).',
+            icon: 'fas fa-dumbbell'
+        });
+    } else {
+        steps.push({
+            title: 'Increase reps, not complexity',
+            description: 'Keep the same skill and run more reps. Compounding beats overengineering.',
+            icon: 'fas fa-repeat'
+        });
+    }
+
+    if (missing.proofWeak) {
+        steps.push({
+            title: 'Build a proof folder and log wins',
+            description: 'Start the Proof Portfolio Log. Capture artefacts, outcomes, and feedback as you go.',
+            icon: 'fas fa-folder-open'
+        });
+    } else {
+        steps.push({
+            title: 'Convert: schedule a manager check-in',
+            description: 'Share proof + ask for one next stretch opportunity. Make the recognition path explicit.',
+            icon: 'fas fa-user-check'
+        });
+    }
+
+    steps.slice(0,3).forEach(step => {
+        const card = document.createElement('div');
+        card.className = 'next-step-card';
+        card.innerHTML = `
+            <div class="step-icon"><i class="${step.icon}"></i></div>
+            <h4 class="step-title">${step.title}</h4>
+            <p class="step-description">${step.description}</p>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function generateRecommendedResources(score) {
+    const grid = document.getElementById('resourcesGrid');
+    grid.innerHTML = '';
+
+    const resources = [
+        {
+            title: 'Credibility & Positioning Framework',
+            description: 'Package your strengths and proof so your value is easy to understand at a higher level.',
+            icon: 'fas fa-crown',
+            link: 'credibility-and-positioning-framework.html'
+        },
+        {
+            title: 'Performance Review Prep Checklist',
+            description: 'Turn proof into a structured case: outcomes, scope, impact, and next-level readiness.',
+            icon: 'fas fa-clipboard-check',
+            link: 'performance-review-prep-checklist.html'
+        },
+        {
+            title: 'Negotiation Framework',
+            description: 'Use when converting skills + proof into a pay rise or promotion conversation.',
+            icon: 'fas fa-handshake',
+            link: 'negotiation-framework.html'
+        }
+    ];
+
+    resources.slice(0,3).forEach(r => {
+        const card = document.createElement('div');
+        card.className = 'resource-card';
+        card.innerHTML = `
+            <div class="resource-icon"><i class="${r.icon}"></i></div>
+            <h4 class="resource-title">${r.title}</h4>
+            <p class="resource-description">${r.description}</p>
+            <a href="${r.link}" class="resource-link">Access tool <i class="fas fa-arrow-right"></i></a>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+/* COPY */
+function copyFramework() {
+    const blocks = [];
+    blocks.push('SKILLS DEVELOPMENT FRAMEWORK');
+    blocks.push('=============================');
+    blocks.push('');
+    blocks.push('1) TARGET & SKILL DEFINITION');
+    blocks.push(`- Current role: ${val('sd_current_role')}`);
+    blocks.push(`- Target role: ${val('sd_target_role')}`);
+    blocks.push(`- Horizon: ${val('sd_horizon')}`);
+    blocks.push(`- Skill focus: ${val('sd_skill_focus')}`);
+    blocks.push(`- Definition: ${val('sd_skill_definition')}`);
+    blocks.push(`- Success signal: ${val('sd_success_signal')}`);
+    blocks.push(`- Constraints: ${val('sd_constraints')}`);
+    blocks.push('');
+    blocks.push('2) BASELINE & GAP');
+    blocks.push(`- Evidence: ${val('bg_evidence')}`);
+    blocks.push(`- Feedback themes: ${val('bg_feedback')}`);
+    blocks.push(`- Rating: ${val('bg_rating')}`);
+    blocks.push(`- Failure mode: ${val('bg_failure')}`);
+    blocks.push(`- Gap: ${val('bg_gap')}`);
+    blocks.push(`- Proof opportunities: ${val('bg_opportunities')}`);
+    blocks.push('');
+    blocks.push('3) PRACTICE PLAN');
+    blocks.push(`- Weekly time budget: ${val('pp_time')}`);
+    blocks.push(`- Cadence: ${val('pp_cadence')}`);
+    blocks.push(`- Practice unit: ${val('pp_unit')}`);
+    blocks.push(`- Learning inputs: ${val('pp_inputs')}`);
+    blocks.push(`- On-the-job experiment: ${val('pp_experiment')}`);
+    blocks.push(`- 30-day milestone: ${val('pp_30')}`);
+    blocks.push(`- 90-day milestone: ${val('pp_90')}`);
+    blocks.push('');
+    blocks.push('4) PROOF & VISIBILITY');
+    blocks.push(`- Decision-maker: ${val('pv_decider')}`);
+    blocks.push(`- Sponsor: ${val('pv_sponsor')}`);
+    blocks.push(`- Proof artefacts: ${val('pv_artefacts')}`);
+    blocks.push(`- Visibility rhythm: ${val('pv_rhythm')}`);
+    blocks.push(`- Manager ask: ${val('pv_ask')}`);
+    blocks.push('');
+    blocks.push('EXECUTIVE OUTPUTS');
+    blocks.push(`- One-paragraph plan: ${document.getElementById('out_summary').textContent}`);
+    blocks.push(`- Manager message: ${document.getElementById('out_manager').textContent}`);
+    blocks.push(`- Weekly rhythm: ${document.getElementById('out_rhythm').textContent}`);
+    blocks.push(`- Skill statement: ${document.getElementById('sd_skill_statement_out').textContent}`);
+    blocks.push(`- 30-day sprint: ${document.getElementById('sd_30day_out').textContent}`);
+
+    navigator.clipboard.writeText(blocks.join('\n'));
+
+    const btn = document.getElementById('copyBtn');
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+    btn.style.background = '#10b981';
+
+    setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+    }, 2000);
+}
+
+/* MY PLAYBOOK */
+const PLAYBOOK_KEY = 'tepSavedItems';
+const CURRENT_TOOL_ID = 'skills-development-framework';
+const CURRENT_TOOL_TITLE = 'Skills Development Framework';
+const CURRENT_TOOL_TYPE = 'Framework';
+
+function getSavedItems() {
+    try {
+        const raw = localStorage.getItem(PLAYBOOK_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+    } catch (e) { return []; }
+}
+function setSavedItems(items) {
+    try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); } catch (e) {}
+}
+function initializePlaybook() {
+    const overlay = document.getElementById('playbookOverlay');
+    const sidebar = document.getElementById('playbookSidebar');
+    const button = document.getElementById('myPlaybookButton');
+    const closeBtn = document.getElementById('closePlaybook');
+    const saveItemBtn = document.getElementById('saveBtn');
+    if (!overlay || !sidebar || !button || !closeBtn || !saveItemBtn) return;
+
+    renderSavedItems();
+
+    const savedItems = getSavedItems();
+    const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+    updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+    saveItemBtn.addEventListener('click', () => {
+        const items = getSavedItems();
+        const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+        let nowSaved;
+
+        if (index === -1) {
+            const toolLink = window.location.pathname.split('/').pop() || 'skills-development-framework.html';
+            items.push({
+                id: CURRENT_TOOL_ID,
+                title: CURRENT_TOOL_TITLE,
+                type: CURRENT_TOOL_TYPE,
+                link: toolLink,
+                savedAt: new Date().toISOString()
+            });
+            nowSaved = true;
+        } else {
+            items.splice(index, 1);
+            nowSaved = false;
+        }
+
+        setSavedItems(items);
+        updateSaveButtonState(saveItemBtn, nowSaved);
+        renderSavedItems();
+    });
+
+    button.addEventListener('click', () => { overlay.classList.add('open'); sidebar.classList.add('open'); });
+    closeBtn.addEventListener('click', () => { overlay.classList.remove('open'); sidebar.classList.remove('open'); });
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) { overlay.classList.remove('open'); sidebar.classList.remove('open'); }
+    });
+}
+function updateSaveButtonState(button, isSaved) {
+    const icon = button.querySelector('i');
+    const label = button.querySelector('span');
+    if (isSaved) {
+        button.classList.add('saved');
+        if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+        if (label) label.textContent = 'Saved';
+    } else {
+        button.classList.remove('saved');
+        if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+        if (label) label.textContent = 'Save item';
+    }
+}
+function renderSavedItems() {
+    const listEl = document.getElementById('savedItemsList');
+    const emptyEl = document.getElementById('savedItemsEmpty');
+    if (!listEl || !emptyEl) return;
+
+    const items = getSavedItems();
+    listEl.innerHTML = '';
+
+    if (!items.length) { emptyEl.style.display = 'block'; return; }
+    emptyEl.style.display = 'none';
+
+    items.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'saved-item';
+        const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+        const dateText = savedDate ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '';
+        li.innerHTML = `
+            <div class="saved-item-title-row">
+                <span class="saved-item-title">${item.title}</span>
+                <span class="saved-item-type">${item.type}</span>
+            </div>
+            <div class="saved-item-meta">${dateText ? `Saved on ${dateText}` : ''}</div>
+            <a class="saved-item-link" href="${item.link}">Open <i class="fas fa-arrow-right"></i></a>
+        `;
+        listEl.appendChild(li);
+    });
+}
+</script>
+
+</body>
+</html>

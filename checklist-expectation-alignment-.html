@@ -1,0 +1,2723 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expectations Alignment Guide | The Employee Playbook</title>
+
+  <!-- THEME PRELOAD (prevents flash + keeps toggle consistent) -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('theme'); // "dark" | "light" | null
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const useDark = saved ? saved === 'dark' : prefersDark;
+        document.body.classList.toggle('dark-mode', useDark);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <style>
+    /* =========================================================
+       CATEGORY SYSTEM (CANONICAL 9) — NOTE
+       Burnout & Capacity — Light #F59E0B / Dark #D97706 — fas fa-battery-half
+       Workload Clarity & Direction — Light #14B8A6 / Dark #0F766E — fas fa-compass
+       Manager Behaviour — Light #22C55E / Dark #16A34A — fas fa-people-arrows-left-right
+       Workplace Dynamics & Politics — Light #3B82F6 / Dark #2563EB — fas fa-chess
+       Team Issues — Light #EC4899 / Dark #DB2777 — fas fa-people-group
+       Boundaries & Overextension — Light #F97316 / Dark #EA580C — fas fa-hand
+       HR & Performance — Light #6D28D9 / Dark #8B5CF6 — fas fa-clipboard-check
+       Confidence & Influence — Light #EF4444 / Dark #DC2626 — fas fa-bullseye
+       Decision Making & Career Path — Light #800020 / Dark #B03060 — fas fa-route
+    ========================================================== */
+
+    /* ===========================
+       ROOT VARIABLES (Brand)
+    =========================== */
+    :root {
+      --primary-white: #FFFFFF;
+      --light-gray: #F8F9FA;
+      --medium-gray: #E9ECEF;
+      --dark-gray: #6C757D;
+      --text-dark: #212529;
+      --text-medium: #495057;
+
+      --accent-purple: #7B5FC4;
+      --accent-purple-dark: #5A4496;
+      --light-purple: #E6E0F5;
+      --lighter-purple: #F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+
+      --success-green: #10b981;
+      --warning-orange: #f59e0b;
+      --danger-red: #ef4444;
+      --info-blue: #3b82f6;
+
+      /* Canonical 9 category accents (LIGHT mode values) */
+      --cat-clarity: #7B5FC4;
+      --cat-burnout: #f59e0b;
+      --cat-manager: #10b981;
+      --cat-politics: #3b82f6;
+      --cat-hr: #6D28D9;
+      --cat-confidence: #ef4444;
+      --cat-career: #800020;
+      --cat-sos: #dc2626;
+    }
+
+    /* Dark Mode Variables */
+    .dark-mode {
+      --primary-white: #1a1a1a;
+      --light-gray: #2a2a2a;
+      --medium-gray: #3a3a3a;
+      --dark-gray: #888888;
+      --text-dark: #e0e0e0;
+      --text-medium: #b0b0b0;
+
+      --accent-purple: #9d86e9;
+      --accent-purple-dark: #7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.2);
+      --lighter-purple: rgba(123, 95, 196, 0.1);
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.95);
+      --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      /* Canonical 9 category accents (DARK mode values) */
+      --cat-clarity: #7B5FC4;
+      --cat-burnout: #f59e0b;
+      --cat-manager: #10b981;
+      --cat-politics: #3b82f6;
+      --cat-hr: #8B5CF6;
+      --cat-confidence: #ef4444;
+      --cat-career: #800020;
+      --cat-sos: #dc2626;
+    }
+
+    /* ===========================
+       GLOBAL STYLES
+    =========================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      min-height: 100vh;
+    }
+
+    body.loaded { opacity: 1; }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===========================
+       NAVIGATION  (EXEMPT FROM WEIGHT CHANGES)
+    =========================== */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      height: 80px;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      height: 100%;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      transform: translateX(20%);
+      padding: 14px 10px;
+      transition: all 0.3s ease;
+      display: block;
+      min-height: 100px;
+    }
+
+    .logo-fallback {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      height: 48px;
+      padding: 0 14px;
+      border-radius: 10px;
+      background: var(--premium-gradient);
+      color: #fff;
+      font-weight: 800; /* NAV EXEMPT */
+      letter-spacing: 0.8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      transform: translateX(20%);
+    }
+
+    .nav-links { display: flex; gap: 50px; }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500; /* NAV EXEMPT */
+      transition: color 0.3s ease;
+      font-size: 17px;
+    }
+
+    .nav-link:hover { color: var(--accent-purple); }
+
+    .nav-link-container { position: relative; display: inline-block; }
+
+    .new-tag {
+      position: absolute;
+      top: -12px;
+      right: -35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #000;
+      font-size: 10px;
+      font-weight: 800; /* TAG EXEMPT */
+      padding: 2px 6px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index: 10;
+      white-space: nowrap;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      transform: translateX(-20%);
+    }
+
+    .header-cta {
+      background: var(--accent-purple);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600; /* NAV EXEMPT */
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
+    }
+
+    .header-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(123, 95, 196, 0.35);
+    }
+
+    .sign-in {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500; /* NAV EXEMPT */
+      font-size: 17px;
+    }
+
+    .sign-in:hover { color: var(--accent-purple); }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .theme-toggle:hover { background-color: var(--light-gray); }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .mobile-toggle:hover { background-color: var(--light-gray); }
+
+    .mobile-sign-in,
+    .mobile-sign-up { display: none; }
+
+    @media (max-width: 768px) {
+      .nav-container { justify-content: center; position: relative; }
+
+      .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+
+      .logo-img { height: 125px; transform: none; padding: 12px 0; }
+      .logo-fallback { transform: none; }
+
+      .mobile-toggle {
+        display: flex;
+        position: absolute;
+        left: 20px;
+        align-items: center;
+      }
+
+      .nav-actions {
+        transform: none;
+        gap: 16px;
+        position: absolute;
+        right: 20px;
+        align-items: center;
+      }
+
+      .nav-actions .sign-in,
+      .nav-actions .header-cta { display: none; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        gap: 20px;
+      }
+
+      .nav-links.active { display: flex; }
+
+      .nav-link-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+      }
+
+      .new-tag { position: static; margin-left: 8px; }
+
+      .mobile-sign-in {
+        display: block !important;
+        margin-top: 10px;
+        padding: 12px 20px;
+        background: var(--primary-white);
+        color: var(--accent-purple);
+        border-radius: 10px;
+        text-align: center;
+        font-weight: 700; /* NAV EXEMPT */
+        text-decoration: none;
+        border: 2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+
+      .mobile-sign-up {
+        display: block !important;
+        margin-top: 10px;
+        padding: 12px 20px;
+        background: var(--accent-purple);
+        color: white;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: 700; /* NAV EXEMPT */
+        text-decoration: none;
+        border: 2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+    }
+
+    /* ===========================
+       HERO (EXEMPT FROM WEIGHT CHANGES)
+    =========================== */
+    .tool-hero-section {
+      width: 100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+
+    .tool-hero-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(250, 245, 255, 0.85) 0%, rgba(245, 240, 255, 0.6) 50%, rgba(255, 255, 255, 0.25) 100%);
+      z-index: 1;
+    }
+
+    .dark-mode .tool-hero-section::before {
+      background: linear-gradient(135deg, rgba(42, 42, 42, 0.9) 0%, rgba(31, 31, 31, 0.7) 50%, rgba(26, 26, 26, 0.4) 100%);
+    }
+
+    .tool-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 10px;
+      animation: heroFadeUp 0.45s ease-out;
+    }
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .breadcrumb {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dark-gray);
+      margin-bottom: 10px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb a {
+      color: var(--text-medium);
+      text-decoration: none !important;
+      font-weight: 600; /* HERO EXEMPT */
+      letter-spacing: 0.6px;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumb a:hover { color: var(--accent-purple-dark); }
+
+    .breadcrumb i { font-size: 10px; opacity: 0.7; }
+    .breadcrumb .current { color: var(--text-dark); font-weight: 600; } /* HERO EXEMPT */
+
+    .checklist-name {
+      font-size: 14px;
+      font-weight: 700; /* HERO EXEMPT */
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      margin: 18px 0 12px;
+      display: block;
+    }
+
+    .hero-main-heading {
+      font-size: 46px;
+      font-weight: 650; /* HERO EXEMPT */
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 18px;
+      max-width: 860px;
+    }
+
+    .hero-subheading {
+      font-size: 16px;
+      color: var(--text-medium);
+      line-height: 1.6;
+      max-width: 880px;
+      margin-bottom: 26px;
+    }
+
+    /* Save button anchored to hero (EXEMPT) */
+    .save-btn {
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      z-index: 5;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600; /* HERO EXEMPT */
+      border-radius: 999px;
+      border: 1px solid rgba(123, 95, 196, 0.6);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--accent-purple-dark);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .save-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(123, 95, 196, 0.18);
+      background: #ffffff;
+    }
+
+    .dark-mode .save-btn {
+      background: rgba(20, 20, 20, 0.9);
+      border-color: rgba(157, 134, 233, 0.6);
+    }
+
+    .save-btn.saved {
+      background: var(--accent-purple);
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    /* Category Pills */
+    .category-pills-container { margin-bottom: 10px; }
+    .category-pills-title {
+      font-size: 12px;
+      font-weight: 600; /* HERO EXEMPT */
+      color: var(--text-medium);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .category-pills-grid {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600; /* HERO EXEMPT */
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      text-decoration: none;
+      height: 32px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .dark-mode .category-pill { background: rgba(255, 255, 255, 0.08); }
+
+    .category-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      text-decoration: none;
+    }
+
+    .category-icon { font-size: 12px; opacity: 0.9; flex-shrink: 0; }
+
+    /* Canonical category pill colours */
+    .category-pill.burnout {
+      color: var(--cat-burnout);
+      border-color: color-mix(in srgb, var(--cat-burnout) 30%, transparent);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--cat-burnout) 14%, transparent), color-mix(in srgb, var(--cat-burnout) 6%, transparent));
+    }
+    .category-pill.clarity {
+      color: var(--cat-clarity);
+      border-color: color-mix(in srgb, var(--cat-clarity) 30%, transparent);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--cat-clarity) 14%, transparent), color-mix(in srgb, var(--cat-clarity) 6%, transparent));
+    }
+    .category-pill.manager {
+      color: var(--cat-manager);
+      border-color: color-mix(in srgb, var(--cat-manager) 30%, transparent);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--cat-manager) 14%, transparent), color-mix(in srgb, var(--cat-manager) 6%, transparent));
+    }
+    .category-pill.politics {
+      color: var(--cat-politics);
+      border-color: color-mix(in srgb, var(--cat-politics) 30%, transparent);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--cat-politics) 14%, transparent), color-mix(in srgb, var(--cat-politics) 6%, transparent));
+    }
+    .category-pill.team {
+      color: var(--cat-team);
+      border-color: color-mix(in srgb, var(--cat-team) 30%, transparent);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--cat-team) 14%, transparent), color-mix(in srgb, var(--cat-team) 6%, transparent));
+    }
+    .category-pill.boundaries {
+      color: var(--cat-boundaries);
+      border-color: color-mix(in srgb, var(--cat-boundaries) 30%, transparent);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--cat-boundaries) 14%, transparent), color-mix(in srgb, var(--cat-boundaries) 6%, transparent));
+    }
+    .category-pill.hr {
+      color: var(--cat-hr);
+      border-color: color-mix(in srgb, var(--cat-hr) 30%, transparent);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--cat-hr) 14%, transparent), color-mix(in srgb, var(--cat-hr) 6%, transparent));
+    }
+    .category-pill.confidence {
+      color: var(--cat-confidence);
+      border-color: color-mix(in srgb, var(--cat-confidence) 30%, transparent);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--cat-confidence) 14%, transparent), color-mix(in srgb, var(--cat-confidence) 6%, transparent));
+    }
+    .category-pill.decision {
+      color: var(--cat-decision);
+      border-color: color-mix(in srgb, var(--cat-decision) 30%, transparent);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--cat-decision) 14%, transparent), color-mix(in srgb, var(--cat-decision) 6%, transparent));
+    }
+
+    /* ===========================
+       CONTEXT & PRO TIPS
+    =========================== */
+    .context-tips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 40px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto 50px;
+      padding: 24px 20px 10px;
+      margin-top: 6px;
+    }
+
+    .context-card, .tips-card {
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 28px 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700; /* title */
+      color: var(--text-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title i { color: var(--accent-purple); }
+
+    .bullet-list { list-style: none; margin: 0; padding: 0; }
+    .bullet-list li {
+      color: var(--text-medium);
+      line-height: 1.65;
+      margin-bottom: 12px;
+      padding-left: 26px;
+      position: relative;
+      font-size: 14.5px;
+      font-weight: 450;
+    }
+    .bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 10px;
+      color: var(--accent-purple);
+      font-size: 18px;
+    }
+
+    /* ===========================
+       CHECKLIST BODY
+    =========================== */
+    .checklist-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 20px;
+    }
+
+    .checklist-section-title {
+      font-size: 26px;
+      font-weight: 700; /* title */
+      color: var(--accent-purple-dark);
+      margin: 56px 0 18px;
+    }
+
+    .checklist-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+      counter-reset: tepStep;
+    }
+
+    .checklist-item {
+      position: relative;
+      background: var(--primary-white);
+      padding: 14px 16px 14px 52px;
+      border-radius: 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      border: 1px solid var(--border-light);
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: pointer;
+      height: 100%;
+      min-height: 72px;
+    }
+
+    .checklist-item::before {
+      counter-increment: tepStep;
+      content: counter(tepStep);
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600; /* was 800 */
+      font-size: 12px;
+      color: var(--accent-purple-dark);
+      background: linear-gradient(135deg, rgba(123, 95, 196, 0.16), rgba(123, 95, 196, 0.06));
+      border: 1px solid rgba(123, 95, 196, 0.22);
+    }
+
+    .dark-mode .checklist-item::before {
+      color: var(--accent-purple);
+      background: linear-gradient(135deg, rgba(123, 95, 196, 0.22), rgba(123, 95, 196, 0.10));
+      border-color: rgba(157, 134, 233, 0.30);
+    }
+
+    .checklist-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+      border-color: rgba(123, 95, 196, 0.25);
+    }
+
+    .checklist-item i {
+      color: var(--accent-purple);
+      font-size: 18px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .checklist-text {
+      flex: 1;
+      color: var(--text-medium);
+      font-size: 14.6px;
+      line-height: 1.55;
+      font-weight: 450;
+    }
+
+    /* ===========================
+       LEFT STEP SIDEBAR (glide out)
+    =========================== */
+    .step-sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.35);
+      z-index: 1185;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    .step-sidebar-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .step-sidebar {
+      position: fixed;
+      top: 0;
+      left: -420px;
+      width: 390px;
+      max-width: 92vw;
+      height: 100%;
+      z-index: 1186;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-right: 1px solid var(--border-light);
+      box-shadow: 6px 0 26px rgba(0,0,0,0.18);
+      transition: left 0.24s ease;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .dark-mode .step-sidebar {
+      background: rgba(18, 18, 18, 0.96);
+      box-shadow: 8px 0 28px rgba(0,0,0,0.55);
+    }
+
+    .step-sidebar.open { left: 0; }
+
+    .step-sidebar-topbar {
+      padding: 18px 18px 14px;
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+    }
+
+    .step-sidebar-topbar::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--premium-gradient);
+    }
+
+    .step-top-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .step-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: rgba(123, 95, 196, 0.10);
+      border: 1px solid rgba(123, 95, 196, 0.18);
+      width: 100%;
+    }
+
+    .dark-mode .step-chip {
+      background: rgba(123, 95, 196, 0.18);
+      border-color: rgba(157, 134, 233, 0.22);
+    }
+
+    .step-badge {
+      width: 32px;
+      height: 32px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600; /* was 900 */
+      font-size: 12px;
+      color: #fff;
+      background: var(--premium-gradient);
+      flex-shrink: 0;
+      box-shadow: 0 10px 22px rgba(123, 95, 196, 0.22);
+    }
+
+    .step-chip-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .step-chip-title {
+      font-size: 14px;
+      font-weight: 700; /* was 800 (title) */
+      color: var(--text-dark);
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .step-chip-sub {
+      font-size: 12px;
+      color: var(--text-medium);
+      font-weight: 500;
+    }
+
+    .step-close-btn {
+      background: none;
+      border: none;
+      color: var(--dark-gray);
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 999px;
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .step-close-btn:hover { background: var(--light-gray); }
+
+    .step-sidebar-body {
+      padding: 14px 16px 18px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .step-card {
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 14px 14px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.05);
+    }
+
+    .dark-mode .step-card { box-shadow: 0 12px 28px rgba(0,0,0,0.28); }
+
+    .step-card-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 700; /* was 900 (title) */
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--accent-purple-dark);
+      margin-bottom: 8px;
+    }
+
+    .step-card p,
+    .step-card li {
+      font-size: 13.5px;
+      color: var(--text-medium);
+      line-height: 1.6;
+      font-weight: 450;
+    }
+
+    .step-mini-list {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .step-mini-list li {
+      padding-left: 22px;
+      position: relative;
+    }
+
+    .step-mini-list li::before {
+      content: "•";
+      position: absolute;
+      left: 8px;
+      top: 0;
+      color: var(--accent-purple);
+      font-size: 16px;
+      line-height: 1.2;
+    }
+
+    .step-sidebar-footer {
+      padding: 12px 16px 16px;
+      border-top: 1px solid var(--border-light);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: rgba(255,255,255,0.7);
+    }
+
+    .dark-mode .step-sidebar-footer { background: rgba(18,18,18,0.7); }
+
+    .step-footer-btn {
+      border: none;
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-weight: 750;
+      font-size: 13px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .step-footer-btn.primary {
+      background: var(--premium-gradient);
+      color: #fff;
+      box-shadow: 0 12px 26px rgba(123,95,196,0.22);
+    }
+
+    .step-footer-btn.primary:hover { transform: translateY(-1px); box-shadow: 0 16px 30px rgba(123,95,196,0.28); }
+
+    .step-footer-btn.secondary {
+      background: var(--light-purple);
+      color: var(--accent-purple-dark);
+    }
+
+    .dark-mode .step-footer-btn.secondary {
+      background: rgba(123, 95, 196, 0.22);
+      color: var(--accent-purple);
+    }
+
+    .step-footer-btn.secondary:hover {
+      transform: translateY(-1px);
+      background: rgba(123, 95, 196, 0.18);
+    }
+
+    .step-footer-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    /* ===========================
+       CLARITY SCORE (Alignment)
+    =========================== */
+    .clarity-score-section {
+      max-width: 1100px;
+      margin: 25px auto 40px;
+      padding: 0 20px;
+    }
+
+    .presence-snapshot-header { margin-bottom: 18px; text-align: left; }
+    .presence-snapshot-header h2 {
+      font-size: 22px;
+      font-weight: 700; /* title */
+      color: var(--accent-purple-dark);
+      margin-bottom: 6px;
+    }
+    .presence-snapshot-header p {
+      font-size: 14px;
+      color: var(--text-medium);
+      max-width: 1100px;
+      line-height: 1.55;
+      font-weight: 450;
+    }
+
+    .clarity-score-bar {
+      display: flex;
+      align-items: stretch;
+      gap: 30px;
+      background: var(--primary-white);
+      border-radius: 16px;
+      padding: 22px 24px 20px;
+      box-shadow: 0 14px 40px rgba(123, 95, 196, 0.12);
+      border: 1px solid rgba(123, 95, 196, 0.15);
+    }
+
+    .clarity-progress-container { flex: 1.4; }
+
+    .clarity-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .clarity-title { font-size: 18px; font-weight: 750; color: var(--accent-purple-dark); }
+    .clarity-percentage { font-size: 28px; font-weight: 600; color: var(--accent-purple); } /* was 900 */
+
+    .progress-container {
+      height: 10px;
+      background: var(--light-gray);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .dark-mode .progress-container { background: rgba(255, 255, 255, 0.12); }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--premium-gradient);
+      width: 0%;
+      border-radius: 5px;
+      transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .progress-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--dark-gray);
+    }
+
+    .presence-dimensions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .presence-dimension-pill {
+      border-radius: 12px;
+      padding: 6px 12px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--text-medium);
+    }
+
+    .dark-mode .presence-dimension-pill {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .presence-dimension-pill span.label { font-weight: 700; color: var(--text-dark); }
+    .presence-dimension-pill span.score { font-weight: 700; color: var(--accent-purple); }
+
+    .actions-container {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      max-width: 260px;
+    }
+
+    .action-btn {
+      background: var(--premium-gradient);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      font-size: 13.5px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 26px rgba(123, 95, 196, 0.28);
+    }
+
+    .action-btn.secondary {
+      background: var(--light-purple);
+      color: var(--accent-purple-dark);
+    }
+
+    .dark-mode .action-btn.secondary {
+      background: rgba(123, 95, 196, 0.21);
+      color: var(--accent-purple);
+    }
+
+    .action-btn.secondary:hover { background: var(--accent-purple); color: white; }
+    .action-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
+
+    .progress-fill.high { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+    .progress-fill.medium { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+    .progress-fill.low { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+
+    /* ===========================
+       SMART SUMMARY
+    =========================== */
+    .smart-summary-section {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      display: none;
+    }
+
+    .smart-summary-section.active {
+      display: block;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .summary-header { text-align: center; margin-bottom: 28px; }
+    .summary-title { font-size: 24px; font-weight: 700; color: var(--accent-purple-dark); margin-bottom: 6px; } /* was 850 */
+    .summary-subtitle { color: var(--text-medium); font-size: 15px; margin-bottom: 8px; font-weight: 450; }
+    .summary-insight { font-size: 13.5px; color: var(--dark-gray); max-width: 760px; margin: 0 auto; line-height: 1.6; }
+
+    .section-header {
+      font-size: 18px;
+      font-weight: 700; /* was 850 */
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-gray);
+    }
+
+    .section-header.red { color: var(--danger-red); }
+    .section-header.purple { color: var(--accent-purple-dark); }
+    .section-header.blue { color: var(--accent-purple); }
+
+    .red-flags-grid,
+    .next-steps-grid,
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .red-flag-card,
+    .next-step-card,
+    .resource-card {
+      background: var(--primary-white);
+      border-radius: 14px;
+      padding: 18px;
+      border: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.06);
+    }
+
+    .dark-mode .red-flag-card,
+    .dark-mode .next-step-card,
+    .dark-mode .resource-card {
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 18px 34px rgba(0,0,0,0.32);
+    }
+
+    .red-flag-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
+    .next-step-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--premium-gradient); }
+    .resource-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--premium-gradient); }
+
+    .flag-icon, .step-icon, .resource-icon {
+      font-size: 18px;
+      margin-bottom: 14px;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .flag-icon { color: #ef4444; background: rgba(239, 68, 68, 0.10); }
+    .step-icon, .resource-icon { color: var(--accent-purple); background: var(--lighter-purple); }
+
+    .flag-title, .step-title, .resource-title { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; } /* was 850 */
+    .flag-description, .step-description, .resource-description { color: var(--text-medium); font-size: 13.5px; line-height: 1.55; flex-grow: 1; font-weight: 450; }
+
+    .resource-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .resource-card:hover { transform: translateY(-3px); box-shadow: 0 18px 34px rgba(123, 95, 196, 0.14); }
+
+    .resource-link {
+      color: var(--accent-purple);
+      font-weight: 600; /* was 800 */
+      text-decoration: none;
+      font-size: 13.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+    }
+
+    .resource-link:hover { text-decoration: underline; }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR (Right)
+    =========================== */
+    .my-playbook-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1200;
+      background: var(--premium-gradient);
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 750;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+
+    .my-playbook-fab:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+    }
+
+    .playbook-sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1190;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .playbook-sidebar-overlay.open { opacity: 1; pointer-events: auto; }
+
+    .playbook-sidebar {
+      position: fixed;
+      top: 0;
+      right: -380px;
+      width: 340px;
+      max-width: 90%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index: 1191;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border-light);
+      transition: right 0.25s ease;
+    }
+
+    .dark-mode .playbook-sidebar { background: rgba(18, 18, 18, 0.96); box-shadow: -4px 0 22px rgba(0,0,0,0.6); }
+    .playbook-sidebar.open { right: 0; }
+
+    .playbook-sidebar-header {
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .playbook-sidebar-header-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .playbook-sidebar-header h3 { font-size: 18px; font-weight: 700; color: var(--text-dark); } /* was 900 */
+    .playbook-sidebar-header p { font-size: 13px; color: var(--dark-gray); }
+
+    .playbook-close-btn {
+      background: none;
+      border: none;
+      color: var(--dark-gray);
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+
+    .playbook-close-btn:hover { background: var(--light-gray); }
+
+    .playbook-sidebar-body {
+      padding: 14px 18px 20px;
+      padding-bottom: 50px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .saved-items-empty { font-size: 13px; color: var(--dark-gray); line-height: 1.6; }
+
+    .saved-items-list { list-style: none; margin: 0; padding: 0; }
+
+    .saved-item {
+      padding: 10px 10px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .saved-item-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .saved-item-title { font-size: 14px; font-weight: 850; color: var(--text-dark); }
+    .saved-item-type {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent-purple-dark);
+      font-weight: 600; /* was 900 */
+    }
+
+    .saved-item-meta { font-size: 12px; color: var(--dark-gray); }
+
+    .saved-item-link {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--accent-purple);
+      text-decoration: none;
+      font-weight: 850;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .saved-item-link:hover { text-decoration: underline; }
+
+    .playbook-quick-links {
+      margin-top: 223px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .quick-links-title {
+      font-size: 12px;
+      font-weight: 700; /* was 900 (title) */
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-medium);
+    }
+
+    .playbook-quick-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .quick-link-pill {
+      width: 58%;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 95, 196, 0.35);
+      background: linear-gradient(135deg,rgba(123, 95, 196, 0.08),rgba(123, 95, 196, 0.02));
+      text-decoration: none;
+      color: var(--accent-purple-dark);
+      font-size: 13px;
+      font-weight: 650;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .quick-link-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg,rgba(123, 95, 196, 0.16), rgba(123, 95, 196, 0.06));
+    }
+
+    .dark-mode .quick-link-pill {
+      border-color: rgba(157, 134, 233, 0.55);
+      background: linear-gradient(135deg,rgba(123, 95, 196, 0.26),rgba(123, 95, 196, 0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      background: var(--primary-white);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 30px;
+      text-align: center;
+      color: var(--text-medium);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1024px) {
+      .context-tips-grid { grid-template-columns: 1fr; gap: 24px; }
+      .red-flags-grid, .next-steps-grid, .resources-grid { grid-template-columns: repeat(2, 1fr); }
+      .checklist-grid { grid-template-columns: 1fr; }
+      .clarity-score-bar { flex-direction: column; }
+      .actions-container { max-width: 100%; flex-direction: row; }
+    }
+
+    @media (max-width: 768px) {
+      .tool-hero-section { margin-top: 100px; }
+      .hero-main-heading { font-size: 36px; }
+      .clarity-score-bar { padding: 18px; }
+      .actions-container { flex-direction: column; }
+      .red-flags-grid, .next-steps-grid, .resources-grid { grid-template-columns: 1fr; }
+      .save-btn { right: 18px; top: 10px; }
+      .my-playbook-fab { bottom: 18px; right: 18px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-main-heading { font-size: 32px; }
+      .checklist-name { font-size: 13px; }
+      .presence-dimensions { grid-template-columns: 1fr; }
+      .checklist-item { padding-left: 50px; }
+      .checklist-item::before { border-radius: 10px; }
+      .step-sidebar { width: 92vw; }
+    }
+  </style>
+
+  <!-- JS is intentionally NOT placed under the footer (per your instruction) -->
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('loaded');
+
+      initializeChecklist();
+      initializeThemeToggle();
+      initializeMobileNav();
+      initializePlaybook();
+      initializeStepSidebar();
+    });
+
+    /* ===========================
+       MOBILE NAV
+    =========================== */
+    function initializeMobileNav() {
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      if (!mobileToggle || !navLinks) return;
+
+      mobileToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('active');
+        const icon = this.querySelector('i');
+        if (icon) {
+          icon.classList.toggle('fa-bars');
+          icon.classList.toggle('fa-times');
+        }
+      });
+
+      document.addEventListener('click', function(event) {
+        if (navLinks.classList.contains('active') &&
+            !navLinks.contains(event.target) &&
+            !mobileToggle.contains(event.target)) {
+          navLinks.classList.remove('active');
+          const icon = mobileToggle.querySelector('i');
+          if (icon) {
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+          }
+        }
+      });
+    }
+
+    /* ===========================
+       THEME TOGGLE + LOGO
+    =========================== */
+    function initializeThemeToggle() {
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      if (!themeToggleBtn) return;
+
+      const themeIcon = themeToggleBtn.querySelector('i');
+      const logoImg = document.getElementById('mainLogo');
+      const logoFallback = document.getElementById('logoFallback');
+
+      function getLogoPath(filename) {
+        if (window.location.protocol === 'file:') {
+          const currentPath = window.location.pathname;
+          const basePath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+          return basePath + 'assets/img/' + filename;
+        } else {
+          return './assets/img/' + filename;
+        }
+      }
+
+      function showFallbackLogo() {
+        if (logoImg) logoImg.style.display = 'none';
+        if (logoFallback) logoFallback.style.display = 'inline-flex';
+      }
+
+      function showImageLogo() {
+        if (logoFallback) logoFallback.style.display = 'none';
+        if (logoImg) logoImg.style.display = 'block';
+      }
+
+      function updateLogoForTheme(isDarkMode) {
+        if (!logoImg) return;
+        showImageLogo();
+        logoImg.src = isDarkMode ? getLogoPath('logo-dark.png') : getLogoPath('logo.png');
+        logoImg.alt = 'The Employee Playbook';
+      }
+
+      const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+      const savedTheme = localStorage.getItem('theme');
+
+      const shouldUseDark = savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches);
+
+      if (shouldUseDark) {
+        document.body.classList.add('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+        updateLogoForTheme(true);
+      } else {
+        document.body.classList.remove('dark-mode');
+        if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+        updateLogoForTheme(false);
+      }
+
+      themeToggleBtn.addEventListener('click', function() {
+        const isDarkMode = document.body.classList.contains('dark-mode');
+
+        if (isDarkMode) {
+          document.body.classList.remove('dark-mode');
+          localStorage.setItem('theme', 'light');
+          if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+          updateLogoForTheme(false);
+        } else {
+          document.body.classList.add('dark-mode');
+          localStorage.setItem('theme', 'dark');
+          if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+          updateLogoForTheme(true);
+        }
+      });
+
+      prefersDarkScheme.addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+          if (e.matches) {
+            document.body.classList.add('dark-mode');
+            if (themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); }
+            updateLogoForTheme(true);
+          } else {
+            document.body.classList.remove('dark-mode');
+            if (themeIcon) { themeIcon.classList.remove('fa-sun'); themeIcon.classList.add('fa-moon'); }
+            updateLogoForTheme(false);
+          }
+        }
+      });
+
+      if (logoImg) {
+        logoImg.addEventListener('error', function() {
+          if (this.src.includes('logo-dark.png')) {
+            this.src = getLogoPath('logo.png');
+          } else {
+            showFallbackLogo();
+          }
+        });
+      }
+    }
+
+    /* ===========================
+       CHECKLIST LOGIC
+    =========================== */
+    let checkedItems = [];
+    let itemCategories = [];
+
+    // Dimensions tuned for expectations alignment
+    const dimensionConfig = {
+      scope: ['scope', 'outcomes'],
+      standards: ['standards', 'quality'],
+      cadence: ['cadence', 'comms'],
+      accountability: ['ownership', 'risk', 'stakeholders']
+    };
+
+    function initializeChecklist() {
+      const checklistContainers = document.querySelectorAll('.checklist-item');
+      checkedItems = new Array(checklistContainers.length).fill(false);
+      itemCategories = [];
+
+      checklistContainers.forEach((container, index) => {
+        const icon = container.querySelector('i');
+        const category = container.getAttribute('data-category');
+        itemCategories[index] = category;
+
+        container.addEventListener('click', function() {
+          if (icon.classList.contains('fa-square')) {
+            icon.classList.remove('fa-square');
+            icon.classList.add('fa-check-square');
+            icon.style.color = '#5A4496';
+            checkedItems[index] = true;
+          } else {
+            icon.classList.remove('fa-check-square');
+            icon.classList.add('fa-square');
+            icon.style.color = '#7B5FC4';
+            checkedItems[index] = false;
+          }
+
+          updateAlignmentScore();
+          openStepSidebar(index);
+        });
+      });
+    }
+
+    function updateAlignmentScore() {
+      const checkedCount = checkedItems.filter(Boolean).length;
+      const totalCount = checkedItems.length;
+      const alignmentScore = totalCount > 0 ? Math.round((checkedCount / totalCount) * 100) : 0;
+
+      document.getElementById('clarityPercentage').textContent = alignmentScore + '%';
+      const progressFill = document.getElementById('progressFill');
+      progressFill.style.width = alignmentScore + '%';
+
+      progressFill.classList.remove('high', 'medium', 'low');
+      if (alignmentScore >= 75) progressFill.classList.add('high');
+      else if (alignmentScore >= 40) progressFill.classList.add('medium');
+      else progressFill.classList.add('low');
+
+      document.getElementById('generateBtn').disabled = checkedCount === 0;
+
+      const dimensionScores = {
+        scope: { checked: 0, total: 0 },
+        standards: { checked: 0, total: 0 },
+        cadence: { checked: 0, total: 0 },
+        accountability: { checked: 0, total: 0 }
+      };
+
+      itemCategories.forEach((category, index) => {
+        Object.keys(dimensionConfig).forEach(dim => {
+          if (dimensionConfig[dim].includes(category)) {
+            dimensionScores[dim].total += 1;
+            if (checkedItems[index]) dimensionScores[dim].checked += 1;
+          }
+        });
+      });
+
+      const scopeScore = dimensionScores.scope.total ? Math.round((dimensionScores.scope.checked / dimensionScores.scope.total) * 100) : 0;
+      const standardsScore = dimensionScores.standards.total ? Math.round((dimensionScores.standards.checked / dimensionScores.standards.total) * 100) : 0;
+      const cadenceScore = dimensionScores.cadence.total ? Math.round((dimensionScores.cadence.checked / dimensionScores.cadence.total) * 100) : 0;
+      const accountabilityScore = dimensionScores.accountability.total ? Math.round((dimensionScores.accountability.checked / dimensionScores.accountability.total) * 100) : 0;
+
+      document.getElementById('scoreVoice').textContent = scopeScore + '%';
+      document.getElementById('scoreStructure').textContent = standardsScore + '%';
+      document.getElementById('scoreNonverbal').textContent = cadenceScore + '%';
+      document.getElementById('scoreChallenge').textContent = accountabilityScore + '%';
+
+      refreshStepCompleteButton();
+    }
+
+    /* ===========================
+       LEFT STEP SIDEBAR CONTENT
+    =========================== */
+    const stepData = [
+      {
+        title: "Name the real outcome",
+        focus: "Most misalignment starts because people are discussing activity, not the outcome that activity must produce.",
+        strong: ["You can state the outcome in one sentence.", "The outcome includes a ‘done means done’ signal.", "It’s clear whether this is decision, delivery, alignment, or diagnosis."],
+        slip: "‘Let’s sync’ becomes the outcome. Everyone leaves with a different interpretation of ‘what good looks like’.",
+        micro: "Write: Outcome = [Decision / Delivery / Alignment / Diagnosis] + [by when] + [what must be true].",
+        line: "“To be clear, the outcome I’m driving for is X — and ‘done’ looks like Y.”",
+        remote: "Put the outcome in the meeting invite and re-state it in the first 30 seconds."
+      },
+      {
+        title: "Define what’s in and out",
+        focus: "Scope isn’t a list. It’s boundaries: what you’re responsible for — and what you are not.",
+        strong: ["You can name 2–3 in-scope items.", "You can name 2–3 out-of-scope items.", "People stop ‘adding’ silently after the meeting."],
+        slip: "Scope expands through casual asks and ‘while you’re there…’.",
+        micro: "Ask for a ‘not doing’ list. It’s the fastest way to stop scope creep without sounding difficult.",
+        line: "“Just to confirm: we’re doing A and B — we’re not doing C in this phase. Correct?”",
+        remote: "Summarise scope in chat after the call so it’s timestamped and searchable."
+      },
+      {
+        title: "Clarify decision rights",
+        focus: "When decision rights are vague, politics fills the gap.",
+        strong: ["You know who decides, who recommends, and who must be consulted.", "You know what happens if there’s disagreement.", "You can move without waiting for permission theatre."],
+        slip: "Multiple people behave like the decision-maker. The project stalls or gets reversed later.",
+        micro: "Use a simple D/R/C/I: Decider, Recommender, Consulted, Informed.",
+        line: "“Who is the final decider on this, and what input do you want from me before you decide?”",
+        remote: "If it’s messy, ask for a follow-up in writing: one line on who decides."
+      },
+      {
+        title: "Agree quality and standard",
+        focus: "Quality is the hidden expectation that causes most ‘not quite’ feedback loops.",
+        strong: ["You have examples of what ‘good’ looks like.", "You know the minimum acceptable standard.", "You know where perfection is wasteful."],
+        slip: "You deliver what you think is high quality — they wanted ‘fast and usable’.",
+        micro: "Ask for one example artefact, or a screenshot of what ‘good’ means to them.",
+        line: "“When you say ‘high quality’, do you mean accuracy, polish, stakeholder-ready, or all three?”",
+        remote: "Share a quick draft early (even rough) to force the standard to become visible."
+      },
+      {
+        title: "Lock the success criteria",
+        focus: "Success criteria turns subjective feedback into measurable agreement.",
+        strong: ["There are 2–4 criteria max.", "Each criterion is observable.", "You know how success will be evaluated."],
+        slip: "Feedback stays vague: ‘needs work’, ‘not there yet’, ‘not strategic enough’.",
+        micro: "Convert feedback language into criteria: ‘strategic’ becomes ‘includes trade-offs + recommendation’.",
+        line: "“What would make you say ‘yes’ immediately when you see it?”",
+        remote: "Document success criteria in the meeting notes and send a two-line recap."
+      },
+      {
+        title: "Set timelines and non-negotiables",
+        focus: "Deadlines fail when people confuse ‘desired’ with ‘required’.",
+        strong: ["You know what is fixed vs flexible.", "You know who is impacted by delay.", "You can negotiate trade-offs calmly."],
+        slip: "You accept an impossible deadline, then get blamed for the miss later.",
+        micro: "Ask: If we keep the deadline, what changes: scope, quality, or resourcing?",
+        line: "“If the date is fixed, we’ll need to adjust either scope or standard. Which lever do you want to pull?”",
+        remote: "Use calendar holds for dependencies — it makes timelines real, not aspirational."
+      },
+      {
+        title: "Confirm communication cadence",
+        focus: "Cadence prevents surprise. Surprise creates blame.",
+        strong: ["There’s a weekly (or fortnightly) rhythm.", "Updates have a consistent format.", "Escalations don’t feel like drama."],
+        slip: "Silence is interpreted as ‘nothing is happening’ or ‘they’re not on top of it’.",
+        micro: "Use a 3-part update: Progress / Risks / Decisions needed.",
+        line: "“Would you prefer a weekly short update — Progress, Risks, Decisions — so nothing surprises you?”",
+        remote: "If leaders don’t read long notes, keep updates to 6 lines max."
+      },
+      {
+        title: "Define escalation rules",
+        focus: "Escalation is not failure. It’s governance. But you need the rules.",
+        strong: ["You know what triggers escalation.", "You know who gets pulled in.", "You escalate early, not late."],
+        slip: "You wait too long to raise risk — then it becomes a ‘why didn’t you tell me?’ moment.",
+        micro: "Set a threshold: if X happens, I escalate within 24 hours.",
+        line: "“If we hit X risk, do you want me to escalate immediately or come with options first?”",
+        remote: "Escalate with options, not emotion: 1) situation 2) impact 3) choices."
+      },
+      {
+        title: "Map stakeholders and sensitivities",
+        focus: "Stakeholders decide what ‘good’ means. If you don’t map them, you get ambushed.",
+        strong: ["You know who cares and why.", "You know who can block quietly.", "You know what story each stakeholder needs."],
+        slip: "You ship something ‘done’ and it gets rejected by someone you weren’t told mattered.",
+        micro: "Ask: Who will be disappointed if this is wrong? That’s your real stakeholder list.",
+        line: "“Who needs to be comfortable with this before it goes out — and what do they care about most?”",
+        remote: "Use a simple table: Stakeholder / What they want / Risk if unhappy."
+      },
+      {
+        title: "Surface constraints and dependencies",
+        focus: "Constraints are invisible until they become your ‘excuse’. Make them visible early.",
+        strong: ["You’ve named dependencies explicitly.", "You know what you’re waiting on.", "You’ve defined what happens if dependencies slip."],
+        slip: "You keep ‘hoping’ dependencies arrive — and the plan collapses late.",
+        micro: "Convert dependencies into dates and owners: ‘Waiting on X by Y from Z’.",
+        line: "“This is dependent on X by Friday. If it doesn’t land, the earliest delivery shifts to Tuesday.”",
+        remote: "Put dependencies in the meeting notes with owners’ names. It changes behaviour."
+      },
+      {
+        title: "Agree what ‘support’ means",
+        focus: "Many managers say ‘let me know how I can help’ and then penalise you for asking.",
+        strong: ["Support is defined: access, decisions, blockers removed, resources, cover.", "You know how quickly you can get support.", "You’re not handling everything alone."],
+        slip: "You do heroic work, then get judged for not ‘managing stakeholders’.",
+        micro: "Ask for one support commitment: ‘Can you unblock X within 24 hours if I escalate?’",
+        line: "“If I hit a blocker, what’s the fastest route to get a decision from you?”",
+        remote: "Agree a channel: email for decisions, chat for quick alignment, meeting for trade-offs."
+      },
+      {
+        title: "Create a written alignment snapshot",
+        focus: "If it isn’t written, it isn’t real. The goal isn’t bureaucracy — it’s protection.",
+        strong: ["You have a written recap.", "It’s short and scannable.", "It confirms scope, standard, timeline, and decision rights."],
+        slip: "Everything is ‘understood’ verbally, then rewritten later by someone else’s memory.",
+        micro: "Send a 6-line recap within 2 hours. Keep it calm, factual, and non-emotive.",
+        line: "“Quick recap so we stay aligned: Outcome… Scope… Standard… Timeline… Cadence… Escalation…”",
+        remote: "Put the recap in a place it can’t be lost: ticket, doc, email thread, or meeting notes."
+      }
+    ];
+
+    let currentStepIndex = null;
+
+    function initializeStepSidebar() {
+      const overlay = document.getElementById('stepOverlay');
+      const sidebar = document.getElementById('stepSidebar');
+      const closeBtn = document.getElementById('closeStepSidebar');
+
+      const prevBtn = document.getElementById('prevStepBtn');
+      const nextBtn = document.getElementById('nextStepBtn');
+      const toggleCompleteBtn = document.getElementById('toggleStepCompleteBtn');
+
+      if (!overlay || !sidebar || !closeBtn || !prevBtn || !nextBtn || !toggleCompleteBtn) return;
+
+      closeBtn.addEventListener('click', closeStepSidebar);
+
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeStepSidebar();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeStepSidebar();
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentStepIndex === null) return;
+        const nextIndex = Math.max(0, currentStepIndex - 1);
+        openStepSidebar(nextIndex);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (currentStepIndex === null) return;
+        const nextIndex = Math.min(stepData.length - 1, currentStepIndex + 1);
+        openStepSidebar(nextIndex);
+      });
+
+      toggleCompleteBtn.addEventListener('click', () => {
+        if (currentStepIndex === null) return;
+        toggleChecklistItemByIndex(currentStepIndex);
+        refreshStepCompleteButton();
+      });
+    }
+
+    function openStepSidebar(index) {
+      const overlay = document.getElementById('stepOverlay');
+      const sidebar = document.getElementById('stepSidebar');
+
+      if (!overlay || !sidebar) return;
+
+      currentStepIndex = index;
+
+      const data = stepData[index] || {};
+      document.getElementById('stepBadge').textContent = (index + 1);
+      document.getElementById('stepTitle').textContent = data.title || 'Step';
+      document.getElementById('stepFocus').textContent = data.focus || '';
+
+      const strongList = document.getElementById('stepStrong');
+      strongList.innerHTML = '';
+      (data.strong || []).forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        strongList.appendChild(li);
+      });
+
+      document.getElementById('stepSlip').textContent = data.slip || '';
+      document.getElementById('stepMicro').textContent = data.micro || '';
+      document.getElementById('stepLine').textContent = data.line || '';
+      document.getElementById('stepRemote').textContent = data.remote || '';
+
+      document.getElementById('prevStepBtn').disabled = index === 0;
+      document.getElementById('nextStepBtn').disabled = index === (stepData.length - 1);
+
+      refreshStepCompleteButton();
+
+      overlay.classList.add('open');
+      sidebar.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeStepSidebar() {
+      const overlay = document.getElementById('stepOverlay');
+      const sidebar = document.getElementById('stepSidebar');
+      if (!overlay || !sidebar) return;
+
+      overlay.classList.remove('open');
+      sidebar.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+
+    function toggleChecklistItemByIndex(index) {
+      const items = document.querySelectorAll('.checklist-item');
+      const target = items[index];
+      if (!target) return;
+
+      const icon = target.querySelector('i');
+      if (!icon) return;
+
+      if (icon.classList.contains('fa-square')) {
+        icon.classList.remove('fa-square');
+        icon.classList.add('fa-check-square');
+        icon.style.color = '#5A4496';
+        checkedItems[index] = true;
+      } else {
+        icon.classList.remove('fa-check-square');
+        icon.classList.add('fa-square');
+        icon.style.color = '#7B5FC4';
+        checkedItems[index] = false;
+      }
+
+      updateAlignmentScore();
+    }
+
+    function refreshStepCompleteButton() {
+      const btn = document.getElementById('toggleStepCompleteBtn');
+      if (!btn || currentStepIndex === null) return;
+
+      const isComplete = !!checkedItems[currentStepIndex];
+      btn.innerHTML = isComplete
+        ? '<i class="fas fa-rotate-left"></i> Mark as not true'
+        : '<i class="fas fa-check"></i> Mark complete';
+    }
+
+    /* ===========================
+       SMART SUMMARY
+    =========================== */
+    function generateSmartSummary() {
+      const checkedCount = checkedItems.filter(Boolean).length;
+      const totalCount = checkedItems.length;
+      const alignmentScore = totalCount > 0 ? Math.round((checkedCount / totalCount) * 100) : 0;
+
+      document.getElementById('summaryScore').textContent = alignmentScore + '%';
+
+      const summarySection = document.getElementById('smartSummary');
+      summarySection.classList.add('active');
+      summarySection.scrollIntoView({ behavior: 'smooth' });
+
+      generateRedFlags();
+      generateNextSteps(alignmentScore);
+      generateRecommendedResources();
+    }
+
+    function generateRedFlags() {
+      const redFlagsGrid = document.getElementById('redFlagsGrid');
+      redFlagsGrid.innerHTML = '';
+
+      const unchecked = {};
+      checkedItems.forEach((checked, index) => {
+        if (!checked) {
+          const cat = itemCategories[index];
+          unchecked[cat] = (unchecked[cat] || 0) + 1;
+        }
+      });
+
+      const redFlags = [];
+
+      if (unchecked.scope || unchecked.outcomes) {
+        redFlags.push({
+          title: 'Outcome and scope are too loose',
+          description: 'When the outcome isn’t explicit, you’ll get “that’s not what I meant” feedback — and it will be treated as your miss.',
+          icon: 'fas fa-compass'
+        });
+      }
+      if (unchecked.standards || unchecked.quality) {
+        redFlags.push({
+          title: 'Quality expectations are implicit',
+          description: 'You’re exposed to endless iteration because “good” hasn’t been defined in observable terms.',
+          icon: 'fas fa-award'
+        });
+      }
+      if (unchecked.cadence || unchecked.comms) {
+        redFlags.push({
+          title: 'Surprise risk is high',
+          description: 'Without a cadence, silence gets interpreted. Interpretation turns into narratives — and narratives turn into politics.',
+          icon: 'fas fa-bell'
+        });
+      }
+      if (unchecked.ownership || unchecked.risk || unchecked.stakeholders) {
+        redFlags.push({
+          title: 'Accountability is unclear',
+          description: 'If decision rights and escalation rules aren’t named, blame routes itself to the person closest to the work — you.',
+          icon: 'fas fa-shield-halved'
+        });
+      }
+
+      if (redFlags.length === 0) {
+        redFlags.push({
+          title: 'No major alignment red flags',
+          description: 'This looks like written clarity, not wishful thinking. Your risk is low — your leverage is higher.',
+          icon: 'fas fa-check-circle'
+        });
+      }
+
+      while (redFlags.length < 3) {
+        redFlags.push({
+          title: 'Hidden stakeholders still possible',
+          description: 'Even well-run work gets blocked by one unseen stakeholder. Treat stakeholder mapping as insurance.',
+          icon: 'fas fa-people-group'
+        });
+      }
+
+      redFlags.slice(0, 3).forEach(flag => {
+        const card = document.createElement('div');
+        card.className = 'red-flag-card';
+        card.innerHTML = `
+          <div class="flag-icon"><i class="${flag.icon}"></i></div>
+          <h4 class="flag-title">${flag.title}</h4>
+          <p class="flag-description">${flag.description}</p>
+        `;
+        redFlagsGrid.appendChild(card);
+      });
+    }
+
+    function generateNextSteps(score) {
+      const nextStepsGrid = document.getElementById('nextStepsGrid');
+      nextStepsGrid.innerHTML = '';
+
+      let steps = [];
+
+      if (score >= 75) {
+        steps = [
+          { title: 'Send a 6-line recap today', description: 'Turn alignment into a written artefact. Keep it calm: outcome, scope, standard, timeline, cadence, escalation.', icon: 'fas fa-file-signature' },
+          { title: 'Stress test one assumption', description: 'Ask one “what would make this a no?” question and remove ambiguity before it turns into rework.', icon: 'fas fa-magnifying-glass' },
+          { title: 'Lock decision rights explicitly', description: 'Confirm who decides and the decision format. This prevents later reversals framed as “new information”.', icon: 'fas fa-gavel' }
+        ];
+      } else if (score >= 40) {
+        steps = [
+          { title: 'Pick 2 gaps to close first', description: 'Don’t try to fix everything. Close (1) decision rights and (2) quality standard — they reduce the most risk fast.', icon: 'fas fa-bullseye' },
+          { title: 'Introduce a weekly update rhythm', description: 'Progress / Risks / Decisions needed. It keeps you out of “why didn’t you say earlier?” territory.', icon: 'fas fa-calendar-check' },
+          { title: 'Map the stakeholder blockers', description: 'Name who can say no, what they care about, and how you’ll pre-align them.', icon: 'fas fa-chess' }
+        ];
+      } else {
+        steps = [
+          { title: 'Stop operating on guesswork', description: 'Use the checklist as a script. Ask the questions. Document the answers. Alignment is your protection layer.', icon: 'fas fa-stop' },
+          { title: 'Reduce scope or raise support', description: 'If expectations are heavy, you need either scope reduction or explicit managerial support — not heroics.', icon: 'fas fa-hand' },
+          { title: 'Escalate early, with options', description: 'State the situation, impact, and 2–3 choices. Avoid emotion. Use structure.', icon: 'fas fa-shield-halved' }
+        ];
+      }
+
+      steps.forEach(step => {
+        const card = document.createElement('div');
+        card.className = 'next-step-card';
+        card.innerHTML = `
+          <div class="step-icon"><i class="${step.icon}"></i></div>
+          <h4 class="step-title">${step.title}</h4>
+          <p class="step-description">${step.description}</p>
+        `;
+        nextStepsGrid.appendChild(card);
+      });
+    }
+
+    function generateRecommendedResources() {
+      const resourcesGrid = document.getElementById('resourcesGrid');
+      resourcesGrid.innerHTML = '';
+
+      const resources = [
+        {
+          title: 'Alignment Recap Template (6 lines)',
+          description: 'A copy/paste structure to document outcome, scope, standard, timeline, cadence, and escalation without sounding formal or defensive.',
+          icon: 'fas fa-file-lines',
+          link: '#'
+        },
+        {
+          title: 'Stakeholder Map Mini-Grid',
+          description: 'Identify who can block, what they care about, and what proof they need before approving.',
+          icon: 'fas fa-people-group',
+          link: '#'
+        },
+        {
+          title: 'Escalation Script Pack',
+          description: 'Calm, senior-sounding language for raising risk early — with options — without triggering defensiveness.',
+          icon: 'fas fa-shield-halved',
+          link: '#'
+        }
+      ];
+
+      resources.forEach(resource => {
+        const card = document.createElement('div');
+        card.className = 'resource-card';
+        card.innerHTML = `
+          <div class="resource-icon"><i class="${resource.icon}"></i></div>
+          <h4 class="resource-title">${resource.title}</h4>
+          <p class="resource-description">${resource.description}</p>
+          <a href="${resource.link}" class="resource-link">
+            Access resource <i class="fas fa-arrow-right"></i>
+          </a>
+        `;
+        resourcesGrid.appendChild(card);
+      });
+    }
+
+    /* ===========================
+       COPY CHECKLIST
+    =========================== */
+    function copyChecklist() {
+      const checklistName = 'EXPECTATIONS ALIGNMENT GUIDE';
+      const mainHeading = document.querySelector('.hero-main-heading').textContent;
+      const checklistItems = document.querySelectorAll('.checklist-text');
+
+      let text = checklistName + '\n';
+      text += '=============================\n\n';
+      text += mainHeading + '\n\n';
+      text += 'NUMBERED CHECKLIST:\n';
+      text += '===================\n\n';
+
+      checklistItems.forEach((item, index) => {
+        const isChecked = checkedItems[index] ? '[✓]' : '[ ]';
+        const cleanText = item.textContent.trim();
+        text += `${isChecked} ${index + 1}. ${cleanText}\n`;
+      });
+
+      const checkedCount = checkedItems.filter(Boolean).length;
+      if (checkedCount > 0) {
+        const score = Math.round((checkedCount / checklistItems.length) * 100);
+        text += `\nCURRENT STATUS:\n`;
+        text += `===============\n`;
+        text += `Items checked: ${checkedCount}/${checklistItems.length}\n`;
+        text += `Alignment Clarity Score: ${score}%\n`;
+      }
+
+      navigator.clipboard.writeText(text);
+
+      const btn = document.getElementById('copyBtn');
+      const originalHTML = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-check"></i> Checklist copied';
+      btn.style.background = '#10b981';
+
+      setTimeout(() => {
+        btn.innerHTML = originalHTML;
+        btn.style.background = '';
+      }, 2000);
+    }
+
+    /* ===========================
+       MY PLAYBOOK (LOCALSTORAGE)
+    =========================== */
+    const PLAYBOOK_KEY = 'tepSavedItems';
+    const CURRENT_TOOL_ID = 'expectations-alignment-guide';
+    const CURRENT_TOOL_TITLE = 'Expectations Alignment Guide';
+    const CURRENT_TOOL_TYPE = 'Guide';
+
+    function getSavedItems() {
+      try {
+        const raw = localStorage.getItem(PLAYBOOK_KEY);
+        if (!raw) return [];
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        console.warn('Error reading saved items:', e);
+        return [];
+      }
+    }
+
+    function setSavedItems(items) {
+      try { localStorage.setItem(PLAYBOOK_KEY, JSON.stringify(items)); }
+      catch (e) { console.warn('Error saving items:', e); }
+    }
+
+    function initializePlaybook() {
+      const playbookOverlay = document.getElementById('playbookOverlay');
+      const playbookSidebar = document.getElementById('playbookSidebar');
+      const playbookButton = document.getElementById('myPlaybookButton');
+      const closeBtn = document.getElementById('closePlaybook');
+      const saveItemBtn = document.getElementById('saveBtn');
+
+      if (!playbookOverlay || !playbookSidebar || !playbookButton || !closeBtn || !saveItemBtn) return;
+
+      renderSavedItems();
+
+      const savedItems = getSavedItems();
+      const isAlreadySaved = savedItems.some(item => item.id === CURRENT_TOOL_ID);
+      updateSaveButtonState(saveItemBtn, isAlreadySaved);
+
+      saveItemBtn.addEventListener('click', () => {
+        const items = getSavedItems();
+        const index = items.findIndex(item => item.id === CURRENT_TOOL_ID);
+        let nowSaved;
+
+        if (index === -1) {
+          const toolLink = window.location.pathname.split('/').pop() || 'expectations-alignment-guide.html';
+          items.push({
+            id: CURRENT_TOOL_ID,
+            title: CURRENT_TOOL_TITLE,
+            type: CURRENT_TOOL_TYPE,
+            link: toolLink,
+            savedAt: new Date().toISOString()
+          });
+          nowSaved = true;
+        } else {
+          items.splice(index, 1);
+          nowSaved = false;
+        }
+
+        setSavedItems(items);
+        updateSaveButtonState(saveItemBtn, nowSaved);
+        renderSavedItems();
+      });
+
+      playbookButton.addEventListener('click', () => {
+        playbookOverlay.classList.add('open');
+        playbookSidebar.classList.add('open');
+      });
+
+      closeBtn.addEventListener('click', () => {
+        playbookOverlay.classList.remove('open');
+        playbookSidebar.classList.remove('open');
+      });
+
+      playbookOverlay.addEventListener('click', (e) => {
+        if (e.target === playbookOverlay) {
+          playbookOverlay.classList.remove('open');
+          playbookSidebar.classList.remove('open');
+        }
+      });
+    }
+
+    function updateSaveButtonState(button, isSaved) {
+      if (!button) return;
+      const icon = button.querySelector('i');
+      const label = button.querySelector('span');
+
+      if (isSaved) {
+        button.classList.add('saved');
+        if (icon) { icon.classList.remove('far'); icon.classList.add('fas'); }
+        if (label) label.textContent = 'Saved';
+      } else {
+        button.classList.remove('saved');
+        if (icon) { icon.classList.remove('fas'); icon.classList.add('far'); }
+        if (label) label.textContent = 'Save item';
+      }
+    }
+
+    function renderSavedItems() {
+      const listEl = document.getElementById('savedItemsList');
+      const emptyEl = document.getElementById('savedItemsEmpty');
+      if (!listEl || !emptyEl) return;
+
+      const items = getSavedItems();
+      listEl.innerHTML = '';
+
+      if (!items.length) {
+        emptyEl.style.display = 'block';
+        return;
+      }
+
+      emptyEl.style.display = 'none';
+
+      items.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'saved-item';
+
+        const savedDate = item.savedAt ? new Date(item.savedAt) : null;
+        const dateText = savedDate
+          ? savedDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+          : '';
+
+        li.innerHTML = `
+          <div class="saved-item-title-row">
+            <span class="saved-item-title">${item.title}</span>
+            <span class="saved-item-type">${item.type}</span>
+          </div>
+          <div class="saved-item-meta">
+            ${dateText ? `Saved on ${dateText}` : ''}
+          </div>
+          <a class="saved-item-link" href="${item.link}">
+            Open <i class="fas fa-arrow-right"></i>
+          </a>
+        `;
+        listEl.appendChild(li);
+      });
+    }
+  </script>
+</head>
+
+<body>
+
+<!-- ===========================
+     NAVIGATION
+=========================== -->
+<nav>
+  <div class="container nav-container">
+    <button class="mobile-toggle" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+
+    <a href="index.html" class="logo" aria-label="The Employee Playbook">
+      <img src="./assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo">
+      <div class="logo-fallback" id="logoFallback">The Employee Playbook</div>
+    </a>
+
+    <div class="nav-links">
+      <a href="the-lens.html" class="nav-link">The Lens</a>
+      <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+      <div class="nav-link-container">
+        <a href="the-coach.html" class="nav-link">The Coach</a>
+        <span class="new-tag">NEW</span>
+      </div>
+      <a href="the-shift.html" class="nav-link">The Shift</a>
+      <a href="the-pricing.html" class="nav-link">The Pricing</a>
+      <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+      <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+    </div>
+
+    <div class="nav-actions">
+      <a href="create-account.html" class="header-cta">Sign up</a>
+      <a href="sign-in.html" class="sign-in">Sign in</a>
+      <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===========================
+     HERO
+=========================== -->
+<div class="tool-hero-section">
+  <button class="save-btn" id="saveBtn">
+    <i class="far fa-bookmark"></i>
+    <span>Save</span>
+  </button>
+
+  <div class="tool-hero-content">
+    <div class="breadcrumb">
+      <a href="index.html"><i class="fas fa-house"></i> Home</a>
+      <i class="fas fa-chevron-right"></i> 
+      <a href="the-toolkit.html">Toolkit</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="workload-clarity-and-direction.html">Clarity, Priorities &amp; Direction</a>
+      <i class="fas fa-chevron-right"></i>
+      <span class="current">Expectations Alignment Guide</span>
+    </div>
+
+    <span class="checklist-name">EXPECTATIONS ALIGNMENT GUIDE</span>
+
+    <h1 class="hero-main-heading">Align expectations before they become performance risk</h1>
+
+    <div class="hero-subheading">
+      This is your “anti-ambiguity” tool. Use it to turn vague asks into clear agreements: what success looks like, who decides, what’s fixed, what’s flexible, and what happens when reality hits.
+      The goal isn’t to sound formal — it’s to stop avoidable blame, rework, and politics.
+    </div>
+
+    <div class="category-pills-container">
+      <span class="category-pills-title">Related Categories</span>
+      <div class="category-pills-grid">
+        <a href="category-confidence-presence-influence.html" class="category-pill confidence">
+          <i class="fas fa-bullseye category-icon"></i>
+          <span>Confidence, Presence &amp; Influence</span>
+        </a>
+        <a href="category-hr-and-formal-processes.html" class="category-pill hr">
+          <i class="fas fa-file-contract category-icon"></i>
+          <span>HR &amp; Formal Processes</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     CONTEXT & PRO TIPS
+=========================== -->
+<div class="context-tips-grid">
+  <div class="context-card">
+    <h3 class="section-title"><i class="fas fa-calendar-check"></i>When to Use This Guide</h3>
+    <ul class="bullet-list">
+      <li>You’ve been given a “vague” task and you can feel the trap: unclear scope, unclear success criteria, unclear deadlines.</li>
+      <li>Your manager says “use your judgement” but later judges you against rules they never stated.</li>
+      <li>You’re starting a new role / new stakeholder set and you need fast clarity without over-asking.</li>
+      <li>You sense shifting priorities or a change in tone and you want to protect your position.</li>
+      <li>You’re about to commit to a deadline and you need trade-offs agreed before you take the hit.</li>
+    </ul>
+  </div>
+
+  <div class="tips-card">
+    <h3 class="section-title"><i class="fas fa-lightbulb"></i>Pro Tips</h3>
+    <ul class="bullet-list">
+      <li>Ask questions like a strategist, not a novice: calm, direct, and focused on outcomes.</li>
+      <li>Never ask ten questions at once. Pick the 2–3 that remove the most risk.</li>
+      <li>Write your alignment recap. “If it isn’t written, it isn’t real.”</li>
+      <li>Use trade-off language (“scope/standard/timeline”) — it reduces emotion and increases respect.</li>
+      <li>Where it’s political: keep your recap factual. No blame. No heat. Just clarity.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===========================
+     CHECKLIST BODY
+=========================== -->
+<div class="checklist-body" id="checklistText">
+  <h2 class="checklist-section-title">Your Expectations Alignment Checklist</h2>
+
+  <div class="checklist-grid">
+    <div class="checklist-item" data-category="outcomes">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">
+        I can state the real outcome in one sentence (decision/delivery/alignment/diagnosis), including what “done” means.
+      </div>
+    </div>
+
+    <div class="checklist-item" data-category="scope">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">
+        I know what is explicitly in scope and what is explicitly out of scope for this piece of work.
+      </div>
+    </div>
+
+    <div class="checklist-item" data-category="ownership">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">
+        Decision rights are clear (who decides, who recommends, who must be consulted, who is informed).
+      </div>
+    </div>
+
+    <div class="checklist-item" data-category="quality">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">
+        The quality bar is defined (minimum acceptable vs stakeholder-ready polish), ideally with an example.
+      </div>
+    </div>
+
+    <div class="checklist-item" data-category="standards">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">
+        Success criteria are explicit (2–4 max) and observable, not vague adjectives.
+      </div>
+    </div>
+
+    <div class="checklist-item" data-category="risk">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">
+        Fixed vs flexible constraints are clear (date, scope, standard, resource) and trade-offs are agreed.
+      </div>
+    </div>
+
+    <div class="checklist-item" data-category="cadence">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">
+        Communication cadence is set (weekly/fortnightly) with a simple update format (Progress/Risks/Decisions).
+      </div>
+    </div>
+
+    <div class="checklist-item" data-category="risk">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">
+        Escalation rules are agreed (what triggers escalation, who gets pulled in, and how quickly).
+      </div>
+    </div>
+
+    <div class="checklist-item" data-category="stakeholders">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">
+        Stakeholders are mapped (who can block, what they care about, what proof they need).
+      </div>
+    </div>
+
+    <div class="checklist-item" data-category="ownership">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">
+        Dependencies are explicit (what I’m waiting on, by when, and what happens if it slips).
+      </div>
+    </div>
+
+    <div class="checklist-item" data-category="comms">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">
+        “Support” is defined (what I can expect from my manager when blockers appear).
+      </div>
+    </div>
+
+    <div class="checklist-item" data-category="comms">
+      <i class="far fa-square"></i>
+      <div class="checklist-text">
+        I have a written alignment snapshot (short recap) that confirms the agreement without sounding defensive.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     LEFT STEP SIDEBAR
+=========================== -->
+<div class="step-sidebar-overlay" id="stepOverlay" aria-hidden="true">
+  <aside class="step-sidebar" id="stepSidebar" aria-label="Step details panel">
+    <div class="step-sidebar-topbar">
+      <div class="step-top-row">
+        <div class="step-chip">
+          <div class="step-badge" id="stepBadge">1</div>
+          <div class="step-chip-text">
+            <div class="step-chip-title" id="stepTitle">Step title</div>
+            <div class="step-chip-sub" id="stepSubtitle">Click “Mark complete” if this is true for you.</div>
+          </div>
+        </div>
+        <button class="step-close-btn" id="closeStepSidebar" aria-label="Close step panel">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="step-sidebar-body">
+      <div class="step-card">
+        <div class="step-card-title"><i class="fas fa-bullseye"></i>Focus</div>
+        <p id="stepFocus"></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-title"><i class="fas fa-lightbulb"></i>What strong looks like</div>
+        <ul class="step-mini-list" id="stepStrong"></ul>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-title"><i class="fas fa-triangle-exclamation"></i>Common slip</div>
+        <p id="stepSlip"></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-title"><i class="fas fa-bolt"></i>Micro-move</div>
+        <p id="stepMicro"></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-title"><i class="fas fa-quote-right"></i>Try this line</div>
+        <p id="stepLine"></p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-card-title"><i class="fas fa-video"></i>Remote note</div>
+        <p id="stepRemote"></p>
+      </div>
+    </div>
+
+    <div class="step-sidebar-footer">
+      <button class="step-footer-btn secondary" id="prevStepBtn"><i class="fas fa-arrow-left"></i> Previous</button>
+      <button class="step-footer-btn secondary" id="nextStepBtn">Next <i class="fas fa-arrow-right"></i></button>
+      <button class="step-footer-btn primary" id="toggleStepCompleteBtn" style="grid-column: 1 / -1;">
+        <i class="fas fa-check"></i> Mark complete
+      </button>
+    </div>
+  </aside>
+</div>
+
+<!-- ===========================
+     ALIGNMENT SCORE
+=========================== -->
+<div class="clarity-score-section">
+  <div class="presence-snapshot-header">
+    <h2>Your Alignment Clarity Score</h2>
+    <p>
+      This score reflects how protected you are from ambiguity: scope drift, hidden standards, shifting timelines, unclear decision rights, and surprise stakeholder rejection.
+      A high score means you’re working with explicit agreements. A lower score is not a failure — it’s a signal that the “rules of the game” aren’t written yet.
+    </p>
+  </div>
+
+  <div class="clarity-score-bar">
+    <div class="clarity-progress-container">
+      <div class="clarity-header">
+        <div class="clarity-title">Alignment Clarity Score</div>
+        <div class="clarity-percentage" id="clarityPercentage">0%</div>
+      </div>
+      <div class="progress-container">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-labels">
+        <span>High ambiguity risk</span>
+        <span>Mixed</span>
+        <span>Protected clarity</span>
+      </div>
+
+      <div class="presence-dimensions">
+        <div class="presence-dimension-pill">
+          <span class="label">Scope &amp; Outcomes</span>
+          <span class="score" id="scoreVoice">0%</span>
+        </div>
+        <div class="presence-dimension-pill">
+          <span class="label">Quality &amp; Standards</span>
+          <span class="score" id="scoreStructure">0%</span>
+        </div>
+        <div class="presence-dimension-pill">
+          <span class="label">Cadence &amp; Comms</span>
+          <span class="score" id="scoreNonverbal">0%</span>
+        </div>
+        <div class="presence-dimension-pill">
+          <span class="label">Ownership &amp; Risk</span>
+          <span class="score" id="scoreChallenge">0%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions-container">
+      <button class="action-btn" onclick="generateSmartSummary()" id="generateBtn" disabled>
+        <i class="fas fa-magic"></i> Generate summary
+      </button>
+      <button class="action-btn secondary" onclick="copyChecklist()" id="copyBtn">
+        <i class="far fa-copy"></i> Copy checklist
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     SMART SUMMARY
+=========================== -->
+<div class="smart-summary-section" id="smartSummary">
+  <div class="summary-header">
+    <h2 class="summary-title">Your Smart Alignment Summary</h2>
+    <p class="summary-subtitle">Based on your Alignment Clarity Score of <span id="summaryScore">0%</span></p>
+    <p class="summary-insight">
+      This is a positioning tool. It highlights the exact places ambiguity can be turned into written agreement — which reduces rework, protects your reputation, and keeps you out of political traps.
+    </p>
+  </div>
+
+  <h3 class="section-header red">
+    <i class="fas fa-exclamation-triangle"></i> Red Flags in Your Alignment Pattern
+  </h3>
+  <div class="red-flags-grid" id="redFlagsGrid"></div>
+
+  <h3 class="section-header purple">
+    <i class="fas fa-forward"></i> Next Moves to Lock Alignment
+  </h3>
+  <div class="next-steps-grid" id="nextStepsGrid"></div>
+
+  <h3 class="section-header blue">
+    <i class="fas fa-tools"></i> Recommended Tools to Support You
+  </h3>
+  <div class="resources-grid" id="resourcesGrid"></div>
+</div>
+
+<!-- ===========================
+     MY PLAYBOOK SIDEBAR (Right)
+=========================== -->
+<div class="playbook-sidebar-overlay" id="playbookOverlay">
+  <div class="playbook-sidebar" id="playbookSidebar">
+    <div class="playbook-sidebar-header">
+      <div class="playbook-sidebar-header-title-row">
+        <h3>My Playbook</h3>
+        <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <p>Saved items</p>
+    </div>
+    <div class="playbook-sidebar-body">
+      <div id="savedItemsContainer">
+        <p class="saved-items-empty" id="savedItemsEmpty">
+          You haven’t saved anything yet. Use <strong>Save</strong> on tools you want quick access to.
+        </p>
+        <ul class="saved-items-list" id="savedItemsList"></ul>
+      </div>
+
+      <div class="playbook-quick-links">
+        <div class="playbook-quick-links-header">
+          <span class="quick-links-title">Quick links</span>
+        </div>
+        <div class="playbook-quick-links-list">
+          <a href="dashboard.html" class="quick-link-pill">
+            <i class="fas fa-gauge"></i> The Dashboard
+          </a>
+          <a href="the-lens.html" class="quick-link-pill">
+            <i class="fas fa-search"></i> The Lens
+          </a>
+          <a href="the-toolkit.html" class="quick-link-pill">
+            <i class="fas fa-toolbox"></i> The Toolkit
+          </a>
+          <a href="the-coach.html" class="quick-link-pill">
+            <i class="fas fa-comments"></i> The Coach
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="my-playbook-fab" id="myPlaybookButton">
+  <i class="fas fa-book-open"></i>
+  <span>My Playbook</span>
+</div>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <p>© 2025 The Employee Playbook. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

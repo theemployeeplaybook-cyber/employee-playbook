@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="The Toolkit: frameworks, guides, planners, assessments, checklists, playbooks, scripts, templates and maps for high-stakes workplace moments. Not legal advice." />
+  <title>The Toolkit | The Employee Playbook</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary-white: #FFFFFF;
+      --light-gray: #F8F9FA;
+      --medium-gray: #E9ECEF;
+      --dark-gray: #6C757D;
+
+      --text-dark: #212529;
+      --text-medium: #495057;
+
+      --accent-purple: #7B5FC4;
+      --accent-purple-dark: #5A4496;
+
+      --light-purple: #E6E0F5;
+      --lighter-purple: #F0EBFA;
+
+      --border-light: rgba(0, 0, 0, 0.08);
+      --hero-gray: #f5f7fa;
+      --nav-bg: rgba(255, 255, 255, 0.95);
+
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+      --premium-card-shadow: 0 6px 20px rgba(123, 95, 196, 0.12);
+      --gradient-primary: linear-gradient(135deg, #7B5FC4 0%, #5A3FB5 100%);
+      --gradient-secondary: linear-gradient(135deg, #E6E0F5 0%, #F0EDFA 100%);
+
+      --deep-navy: #0A1428;
+
+      --cat-clarity: #7B5FC4;
+      --cat-burnout: #f59e0b;
+      --cat-manager: #10b981;
+      --cat-politics: #3b82f6;
+      --cat-hr: #6D28D9;
+      --cat-confidence: #ef4444;
+      --cat-career: #800020;
+      --cat-sos: #dc2626;
+
+      --btn-radius: 14px;
+      --pill-radius: 999px;
+      --chat-radius: 50%;
+    }
+
+    .dark-mode {
+      --primary-white: #121212;
+      --light-gray: #1E1E1E;
+      --medium-gray: #2D2D2D;
+      --dark-gray: #8A8A8A;
+
+      --text-dark: #F5F5F5;
+      --text-medium: #CCCCCC;
+
+      --accent-purple: #8B6CE6;
+      --accent-purple-dark: #6A4FC4;
+
+      --light-purple: #2A1E4A;
+      --lighter-purple: #1E1A2E;
+
+      --border-light: rgba(255, 255, 255, 0.08);
+      --hero-gray: #1a1a1a;
+      --nav-bg: rgba(18, 18, 18, 0.95);
+
+      --shadow: 0 2px 8px rgba(0,0,0,0.2);
+      --premium-card-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+
+      --deep-navy: #EFF5FF;
+      --gradient-primary: linear-gradient(135deg, #8B6CE6 0%, #6A4BD6 100%);
+      --gradient-secondary: linear-gradient(135deg, #2D2D2D 0%, #3D3D3D 100%);
+
+      --cat-clarity: #9d86e9;
+      --cat-burnout: #fbbf24;
+      --cat-manager: #34d399;
+      --cat-politics: #60a5fa;
+      --cat-hr: #8B5CF6;
+      --cat-confidence: #f87171;
+      --cat-career: #B03060;
+      --cat-sos: #f87171;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      opacity: 0;
+    }
+    body.loaded { opacity: 1; }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 28px; }
+    section { padding: 80px 0; }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      height: 80px;
+    }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; height: 100%; }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      transform: translateX(20%);
+      padding: 14px 10px;
+      transition: all 0.3s ease;
+      display: block;
+      min-height: 100px;
+    }
+    .dark-mode .logo-img { content: url("assets/img/logo-dark.png"); }
+
+    .nav-links { display: flex; gap: 50px; }
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-size: 17px;
+      position: relative;
+      padding-bottom: 6px;
+    }
+    .nav-link:hover { color: var(--accent-purple); }
+    .nav-link.active { color: var(--text-dark); font-weight: 600; }
+    .nav-link.active::after{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      bottom:0;
+      height:3px;
+      border-radius:999px;
+      background: var(--accent-purple);
+    }
+
+    .nav-actions { display: flex; align-items: center; gap: 18px; transform: translateX(-20%); }
+    .sign-in { color: var(--text-dark); text-decoration: none; font-weight: 500; font-size: 16px; }
+
+    .header-cta {
+      background: var(--accent-purple);
+      color: white;
+      padding: 10px 20px;
+      border-radius: var(--pill-radius);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
+    }
+    .header-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(123, 95, 196, 0.35); }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--btn-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+    .theme-toggle:hover { background-color: var(--light-gray); }
+
+    .mobile-toggle { display: none; background: none; border: none; color: var(--text-dark); cursor: pointer; font-size: 24px; width: 40px; height: 40px; border-radius: var(--btn-radius); align-items: center; justify-content: center; transition: background-color 0.3s ease; }
+    .mobile-toggle:hover { background-color: var(--light-gray); }
+
+    .nav-link-container { position: relative; display: inline-block; }
+    .new-tag {
+      position: absolute;
+      top: -12px;
+      right: -35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #000;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 6px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index: 10;
+      white-space: nowrap;
+    }
+    .logo-fallback { display: none; font-size: 24px; font-weight: 700; color: var(--text-dark); text-decoration: none; }
+    .mobile-sign-up, .mobile-sign-in { display: none; }
+
+    .hero {
+      background: var(--hero-gray);
+      min-height: calc(100vh - 80px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      margin-top: 80px;
+      padding: 0;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-content { width: 100%; padding: 86px 30px 18px; text-align: center; position: relative; z-index: 1; }
+
+    .hero-headline {
+      font-size: 84px;
+      font-weight: 700;
+      line-height: 1.25;
+      max-width: 800px;
+      margin: 20px auto 18px;
+      letter-spacing: -1px;
+    }
+    .hero-line { display: block; width: 100%; }
+    .hero-line.top { white-space: nowrap; } /* ensures "Find the right response" stays on one line */
+
+    .hero-line.bottom {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+    }
+    .with-our { display: inline-block; white-space: nowrap; }
+
+    .flashing-words {
+      font-size: 84px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin: 0;
+      letter-spacing: -1px;
+      min-height: 1.25em;
+      position: relative;
+      height: 105px;
+      width: 360px;
+      text-align: left;
+    }
+    .flashing-word {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      animation: flashWords 15s infinite;
+      color: var(--accent-purple-dark);
+    }
+    .flashing-word:nth-child(1) { animation-delay: 0s; }
+    .flashing-word:nth-child(2) { animation-delay: 2s; }
+    .flashing-word:nth-child(3) { animation-delay: 4s; }
+    .flashing-word:nth-child(4) { animation-delay: 6s; }
+    .flashing-word:nth-child(5) { animation-delay: 8s; }
+    .flashing-word:nth-child(6) { animation-delay: 10s; }
+    .flashing-word:nth-child(7) { animation-delay: 12s; }
+
+    @keyframes flashWords {
+      0%, 12% { opacity: 0; }
+      2%, 10% { opacity: 1; }
+    }
+
+    .hero-subhead {
+      font-size: 22px;
+      color: var(--text-medium);
+      line-height: 1.6;
+      max-width: 980px;
+      margin: 0 auto 10px;
+      font-weight: 500;
+    }
+    .hero-note { font-size: 16px; color: var(--dark-gray); font-weight: 500; margin-top: 8px; }
+
+    .tool-types-banner {
+      background: var(--light-purple);
+      padding: 10px 0;
+      overflow: hidden;
+      width: 100%;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      border-top: 1px solid var(--border-light);
+      position: relative;
+      z-index: 1;
+    }
+    .tool-types-banner-content {
+      white-space: nowrap;
+      padding-left: 100%;
+      display: inline-block;
+      animation: scrollBanner 130s linear infinite;
+      font-size: 17px;
+      color: #000000;
+      font-weight: 500;
+      letter-spacing: 0.15px;
+    }
+    .dark-mode .tool-types-banner-content { color: #FFFFFF; }
+    .tool-types-banner:hover .tool-types-banner-content { animation-play-state: paused; }
+
+    .banner-highlight {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      margin: 0 12px;
+      border-radius: var(--pill-radius);
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(0,0,0,0.08);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-weight: 700;
+      color: var(--text-dark);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.06);
+    }
+    .dark-mode .banner-highlight {
+      background: rgba(18,18,18,0.55);
+      border-color: rgba(255,255,255,0.12);
+      color: var(--text-dark);
+    }
+
+    @keyframes scrollBanner { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+    .section-header { text-align: center; margin-bottom: 40px; }
+    .section-title { font-size: 44px; font-weight: 800; margin-bottom: 14px; letter-spacing: -0.8px; display: inline-flex; align-items: center; justify-content: center; gap: 12px; }
+    .section-subtitle { font-size: 18px; color: var(--text-medium); max-width: 860px; margin: 0 auto; }
+
+    .quick-find { background: var(--primary-white); padding: 68px 0 44px; }
+    .quick-find-wrap {
+      max-width: 1220px;
+      margin: 0 auto;
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 18px;
+      box-shadow: var(--premium-card-shadow);
+      padding: 22px;
+    }
+    .quick-find-top {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: var(--gradient-secondary);
+      border: 1px solid var(--border-light);
+    }
+    .search-icon {
+      width: 44px; height: 44px;
+      border-radius: 999px;
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-purple);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+      flex: 0 0 auto;
+    }
+    .search-input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 16px;
+      color: var(--text-dark);
+      padding: 10px 6px;
+      font-weight: 500;
+    }
+    .search-input::placeholder { color: var(--dark-gray); font-weight: 500; }
+
+    .chip-row {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 2px 2px;
+      scroll-snap-type: x mandatory;
+    }
+    .chip-row::-webkit-scrollbar { height: 0px; }
+    .chip {
+      flex: 0 0 auto;
+      scroll-snap-align: start;
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      color: var(--text-dark);
+      padding: 8px 12px;
+      border-radius: var(--pill-radius);
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .chip i { color: var(--accent-purple); font-size: 13px; }
+    .chip:hover { transform: translateY(-1px); box-shadow: 0 10px 20px rgba(0,0,0,0.07); }
+    .chip.active {
+      background: var(--gradient-primary);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 14px 28px rgba(123,95,196,0.20);
+    }
+    .chip.active i { color: #fff; }
+
+    .quick-results { margin-top: 16px; display: none; border-top: 1px solid var(--border-light); padding-top: 16px; }
+    .quick-results.active { display: block; }
+    .results-title { font-size: 14px; font-weight: 900; color: var(--text-medium); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; text-align: left; }
+    .results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .result-card { border: 1px solid var(--border-light); border-radius: 14px; padding: 14px; background: var(--primary-white); display: flex; gap: 12px; align-items: flex-start; transition: all 0.25s ease; }
+    .result-card:hover { transform: translateY(-2px); box-shadow: 0 14px 26px rgba(0,0,0,0.08); }
+    .result-ic { width: 44px; height: 44px; border-radius: 12px; background: var(--light-purple); color: var(--accent-purple); display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+    .result-title { font-weight: 900; font-size: 14px; margin-bottom: 4px; }
+    .result-meta { font-size: 12px; color: var(--text-medium); margin-bottom: 10px; font-weight: 600; }
+    .result-actions a { font-size: 12px; font-weight: 900; color: var(--accent-purple); text-decoration: none; }
+    .result-actions a:hover { text-decoration: underline; }
+
+    .helps { background: var(--light-gray); padding: 78px 0; }
+    .helps-grid{ display:grid; grid-template-columns: repeat(4, 1fr); gap: 18px; max-width: 1280px; margin: 0 auto; }
+    .helps-card{ background: var(--primary-white); border-radius: 18px; border: 1px solid var(--border-light); box-shadow: 0 10px 26px rgba(0,0,0,0.06); padding: 22px; display:flex; flex-direction:column; min-height: 250px; }
+    .helps-head{ display:grid; grid-template-columns: 56px 1fr; gap: 12px; align-items:center; margin-bottom: 10px; min-height: 64px; }
+    .helps-ic{ width: 56px; height: 56px; border-radius: 16px; background: rgba(123,95,196,0.10); border: 1px solid rgba(123,95,196,0.22); display:flex; align-items:center; justify-content:center; color: var(--accent-purple); font-size: 18px; flex: 0 0 auto; }
+    .helps-title{ font-size: 20px; font-weight: 800; line-height: 1.2; }
+    .helps-desc{ color: var(--text-medium); font-size: 15px; font-weight: 500; margin-top: 8px; line-height: 1.6; flex: 1; }
+    .helps-extra{ margin-top: 14px; display: grid; gap: 8px; color: var(--text-dark); font-size: 14px; font-weight: 500; }
+    .helps-extra div{ display:flex; gap: 10px; align-items:flex-start; }
+    .helps-extra i{ color: var(--accent-purple); margin-top: 3px; }
+
+    .real { background: var(--primary-white); padding: 84px 0 68px; }
+    .real-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 1280px; margin: 0 auto; }
+    .real-card{ border: 1px solid var(--border-light); border-radius: 18px; background: var(--primary-white); box-shadow: var(--premium-card-shadow); padding: 22px; display:flex; flex-direction:column; min-height: 320px; }
+    .real-problem{ font-size: 18px; font-weight: 900; line-height: 1.25; margin-bottom: 10px; letter-spacing: -0.2px; }
+    .real-body{ color: var(--text-medium); font-size: 14px; font-weight: 500; line-height: 1.6; margin-bottom: 16px; flex: 0 0 auto; min-height: 70px; }
+
+    /* Suggested tools layout: label left, tools start on next line left */
+    .real-row{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: auto;
+      align-items: flex-start;
+    }
+    .real-label{
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-medium);
+      white-space: nowrap;
+    }
+    .real-tools{
+      display:flex;
+      flex-direction:column;
+      gap: 12px;
+      color: var(--text-dark);
+      align-items: flex-start;
+      text-align: left;
+    }
+    .real-tools a{
+      color: var(--accent-purple);
+      text-decoration: none;
+      font-weight: 700;      /* -100 */
+      font-size: 16px;       /* +2 */
+      line-height: 1.25;
+    }
+    .real-tools a:hover{ text-decoration: underline; }
+
+    .featured { background: var(--primary-white); padding: 80px 0; }
+    .featured-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+
+    .tool-card {
+      background: var(--primary-white);
+      border-radius: 18px;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--premium-card-shadow);
+      padding: 16px;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      min-height: 360px;
+      position: relative;
+      overflow: hidden;
+    }
+    .tool-card:hover { transform: translateY(-6px); box-shadow: 0 18px 48px rgba(0,0,0,0.10); }
+
+    .tool-top { display: flex; flex-direction: column; gap: 10px; margin-bottom: 6px; position: relative; z-index: 1; }
+
+    .tool-category-label{
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      line-height: 1.2;
+      max-width: 100%;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 30px;
+      color: var(--text-medium);
+    }
+    /* Colour-coded category names in "Tools you can rely on when it matters" */
+    .tool-card[data-cat="clarity"] .tool-category-label { color: var(--cat-clarity); }
+    .tool-card[data-cat="burnout"] .tool-category-label { color: var(--cat-burnout); }
+    .tool-card[data-cat="manager"] .tool-category-label { color: var(--cat-manager); }
+
+    .tool-name {
+      text-align: center;
+      font-size: 18px;
+      font-weight: 950;
+      line-height: 1.25;
+      margin-top: 2px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 68px;
+      padding: 0 6px;
+    }
+
+    .tool-desc {
+      color: var(--text-medium);
+      font-size: 14px;
+      margin: 4px 0 0;
+      position: relative;
+      z-index: 1;
+      font-weight: 500;
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 88px;
+    }
+
+    .tool-review {
+      position: relative;
+      z-index: 1;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-top: 12px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .stars { display: inline-flex; gap: 4px; font-size: 12px; color: var(--accent-purple); opacity: 0.95; white-space: nowrap; }
+    .review-text { font-size: 13px; line-height: 1.45; color: var(--text-medium); font-weight: 500; flex: 1; }
+    .review-meta { font-size: 12px; color: var(--dark-gray); font-weight: 700; margin-top: 4px; }
+
+    .tool-footer {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+      padding-top: 12px;
+    }
+    .tool-buttons { display: flex; align-items: center; }
+    .tool-buttons a {
+      text-align: center;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 13px;
+      padding: 10px 30px;
+      border-radius: var(--pill-radius);
+      transition: all 0.25s ease;
+      display: inline-block;
+      min-width: 120px;
+    }
+    .btn-primary { background: var(--accent-purple); color: white; box-shadow: 0 12px 22px rgba(123,95,196,0.22); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 28px rgba(123,95,196,0.30); }
+
+    .tool-stats { display: inline-flex; flex-direction: row; align-items: center; gap: 12px; white-space: nowrap; margin-left: auto; }
+    .tool-stat { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; color: var(--text-medium); }
+    .tool-stat i { color: var(--accent-purple); }
+
+    .categories { background: var(--light-gray); padding: 80px 0 60px; }
+    .category-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 22px; }
+    .category-card {
+      background: var(--primary-white);
+      border-radius: 18px;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+      padding: 18px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .category-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.10); }
+    .category-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent-purple); opacity: 0.95; }
+
+    /* Ensure all category paragraphs start at the same vertical position */
+    .category-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; position: relative; z-index: 1; min-height: 92px; }
+
+    .category-left { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
+    .category-ic {
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      background: var(--gradient-secondary);
+      border: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--accent-purple);
+      flex: 0 0 auto;
+    }
+    .category-title { font-size: 18px; font-weight: 950; line-height: 1.2; }
+    .category-mini { font-size: 13px; color: var(--text-medium); font-weight: 700; margin-top: 6px; }
+    .category-desc {
+      color: var(--text-medium);
+      font-size: 14px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+      font-weight: 500;
+      flex: 1;
+      min-height: 64px;
+    }
+    .category-action { margin-top: auto; position: relative; z-index: 1; }
+    .category-action a { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-weight: 950; font-size: 14px; color: var(--accent-purple); }
+    .category-action a:hover { text-decoration: underline; }
+
+    .cat-clarity::before { background: var(--cat-clarity); }
+    .cat-burnout::before { background: var(--cat-burnout); }
+    .cat-manager::before { background: var(--cat-manager); }
+    .cat-politics::before { background: var(--cat-politics); }
+    .cat-hr::before { background: var(--cat-hr); }
+    .cat-confidence::before { background: var(--cat-confidence); }
+    .cat-career::before { background: var(--cat-career); }
+    .cat-sos::before { background: var(--cat-sos); }
+
+    .cat-clarity .category-ic { color: var(--cat-clarity); background: rgba(123,95,196,0.10); border-color: rgba(123,95,196,0.22); }
+    .cat-burnout .category-ic { color: var(--cat-burnout); background: rgba(245,158,11,0.10); border-color: rgba(245,158,11,0.22); }
+    .cat-manager .category-ic { color: var(--cat-manager); background: rgba(16,185,129,0.10); border-color: rgba(16,185,129,0.22); }
+    .cat-politics .category-ic { color: var(--cat-politics); background: rgba(59,130,246,0.10); border-color: rgba(59,130,246,0.22); }
+    .cat-hr .category-ic { color: var(--cat-hr); background: rgba(109,40,217,0.10); border-color: rgba(109,40,217,0.22); }
+    .cat-confidence .category-ic { color: var(--cat-confidence); background: rgba(239,68,68,0.10); border-color: rgba(239,68,68,0.22); }
+    .cat-career .category-ic { color: var(--cat-career); background: rgba(128,0,32,0.10); border-color: rgba(128,0,32,0.22); }
+    .cat-sos .category-ic { color: var(--cat-sos); background: rgba(220,38,38,0.10); border-color: rgba(220,38,38,0.22); }
+
+    .cat-clarity .category-action a { color: var(--cat-clarity); }
+    .cat-burnout .category-action a { color: var(--cat-burnout); }
+    .cat-manager .category-action a { color: var(--cat-manager); }
+    .cat-politics .category-action a { color: var(--cat-politics); }
+    .cat-hr .category-action a { color: var(--cat-hr); }
+    .cat-confidence .category-action a { color: var(--cat-confidence); }
+    .cat-career .category-action a { color: var(--cat-career); }
+    .cat-sos .category-action a { color: var(--cat-sos); }
+
+    .signup-cta { background: var(--hero-gray); padding: 0 0 80px; position: relative; }
+    .signup-cta-card {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid var(--border-light);
+      border-radius: 18px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.08);
+      overflow: hidden;
+      position: relative;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .dark-mode .signup-cta-card { background: rgba(18,18,18,0.55); }
+
+    .signup-cta-inner {
+      position: relative;
+      z-index: 1;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .signup-cta-title { font-size: 22px; font-weight: 950; line-height: 1.2; }
+    .signup-cta-sub { color: var(--text-medium); font-size: 14px; font-weight: 500; margin-top: 6px; max-width: 720px; }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--accent-purple);
+      color: white;
+      padding: 12px 20px;
+      border-radius: var(--pill-radius);
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(123, 95, 196, 0.3);
+    }
+    .cta-button:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(123, 95, 196, 0.4); }
+
+    .secondary-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,0.65);
+      color: var(--text-dark);
+      padding: 12px 18px;
+      border-radius: var(--pill-radius);
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 14px;
+      border: 1px solid var(--border-light);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+    }
+    .dark-mode .secondary-button { background: rgba(18,18,18,0.55); }
+    .secondary-button:hover { transform: translateY(-2px); box-shadow: 0 12px 26px rgba(0,0,0,0.10); }
+
+    footer {
+      background-color: var(--primary-white);
+      padding: 40px 0 20px;
+      color: var(--text-medium);
+      border-top: 1px solid var(--border-light);
+    }
+    .footer-content { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 80px; margin-bottom: 40px; align-items: start; }
+    .footer-about { max-width: 400px; padding-left: 20px; }
+    .footer-logo { display: flex; align-items: center; margin-bottom: 10px; }
+    .footer-logo-img { height: 100px; width: auto; padding: 8px 0; transition: all 0.3s ease; display: block; min-height: 100px; }
+    .dark-mode .footer-logo-img { content: url("assets/img/logo-dark.png"); }
+    .footer-description { margin-bottom: 10px; line-height: 1.6; }
+    .footer-heading { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: var(--text-dark); }
+    .footer-links { list-style: none; }
+    .footer-link { margin-bottom: 10px; }
+    .footer-link a { color: var(--text-medium); text-decoration: none; transition: color 0.3s ease; }
+    .footer-link a:hover { color: var(--accent-purple); }
+    .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid var(--border-light); font-size: 14px; }
+    .footer-nav { background-color: transparent; padding: 0; border-radius: 0; box-shadow: none; margin: 0; }
+    .footer-nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    .footer-newsletter { margin-top: 0; padding-top: 0; border-top: none; text-align: center; }
+    .footer-newsletter-title { font-size: 18px; font-weight: 700; margin-bottom: 15px; color: var(--text-dark); }
+    .footer-newsletter-form { display: flex; flex-direction: column; gap: 10px; max-width: 300px; margin: 0 auto; }
+    .footer-newsletter-input { padding: 12px 16px; border: 1px solid var(--medium-gray); border-radius: var(--pill-radius); font-size: 14px; background: var(--primary-white); color: var(--text-dark); }
+    .footer-newsletter-button { background: var(--accent-purple); color: white; border: none; padding: 12px 20px; border-radius: var(--pill-radius); font-weight: 900; cursor: pointer; font-size: 14px; transition: all 0.3s ease; }
+    .footer-newsletter-button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3); }
+
+    .chat-widget { position: fixed; bottom: 30px; right: 30px; z-index: 1000; }
+    .chat-toggle { width: 60px; height: 60px; background: var(--accent-purple); color: white; border-radius: var(--chat-radius); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 5px 15px rgba(123, 95, 196, 0.4); transition: all 0.3s ease; border: none; font-size: 22px; }
+    .chat-toggle:hover { transform: scale(1.06); box-shadow: 0 8px 20px rgba(123, 95, 196, 0.5); }
+    .chat-container { position: absolute; bottom: 80px; right: 0; width: 320px; height: 460px; background: var(--primary-white); border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); display: none; flex-direction: column; overflow: hidden; border: 1px solid var(--border-light); }
+    .chat-container.active { display: flex; }
+    .chat-header { background: var(--accent-purple); color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .chat-title { font-weight: 800; font-size: 18px; }
+    .chat-close { background: none; border: none; color: white; cursor: pointer; font-size: 18px; }
+    .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; }
+    .message { max-width: 100%; padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.4; }
+    .message-bot { background: var(--light-gray); color: var(--text-dark); align-self: flex-start; border-bottom-left-radius: 6px; }
+    .message-user { background: var(--accent-purple); color: white; align-self: flex-end; border-bottom-right-radius: 6px; max-width: 80%; }
+    .chat-input-container { padding: 15px; border-top: 1px solid var(--border-light); }
+    .chat-form { display: flex; flex-direction: column; gap: 10px; }
+    .chat-input { padding: 12px 16px; border: 1px solid var(--medium-gray); border-radius: var(--pill-radius); font-size: 14px; background: var(--primary-white); color: var(--text-dark); }
+    .chat-send { background: var(--accent-purple); color: white; border: none; padding: 12px 20px; border-radius: var(--pill-radius); font-weight: 900; cursor: pointer; font-size: 14px; transition: all 0.3s ease; }
+    .chat-send:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3); }
+
+    .mobile-create-account-tab {
+      display: none;
+      position: fixed;
+      top: 15%;
+      right: 0;
+      background: var(--accent-purple);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px 0 0 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 24px;
+      z-index: 999;
+      box-shadow: -2px 4px 12px rgba(123, 95, 196, 0.4);
+      transition: all 0.3s ease;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+    .mobile-create-account-tab:hover { transform: translateX(-3px); box-shadow: -3px 6px 16px rgba(123, 95, 196, 0.5); background: var(--accent-purple-dark); }
+    .dark-mode .mobile-create-account-tab { border: 2px solid var(--primary-white); }
+
+    .create-account-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1001;
+      align-items: center;
+      justify-content: center;
+    }
+    .create-account-modal.active { display: flex; }
+    .modal-content {
+      background: var(--primary-white);
+      width: 90%;
+      max-width: 400px;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      animation: modalSlideIn 0.3s ease-out;
+      border: 1px solid var(--border-light);
+    }
+    @keyframes modalSlideIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .modal-title { font-size: 24px; font-weight: 900; color: var(--deep-navy); }
+    .close-modal { background: none; border: none; font-size: 24px; color: var(--dark-gray); cursor: pointer; width: 40px; height: 40px; border-radius: var(--btn-radius); display: flex; align-items: center; justify-content: center; transition: background-color 0.3s ease; }
+    .close-modal:hover { background-color: var(--light-gray); }
+    .modal-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-label { font-weight: 700; color: var(--text-dark); }
+    .form-input { padding: 12px 16px; border: 1px solid var(--medium-gray); border-radius: var(--pill-radius); font-size: 16px; background: var(--primary-white); color: var(--text-dark); transition: border-color 0.3s ease; }
+    .form-input:focus { outline: none; border-color: var(--accent-purple); }
+    .submit-btn { background: var(--gradient-primary); color: white; border: none; padding: 14px 20px; border-radius: var(--pill-radius); font-weight: 900; font-size: 16px; cursor: pointer; transition: all 0.3s ease; margin-top: 10px; }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3); }
+    .modal-footer { margin-top: 20px; text-align: center; font-size: 14px; color: var(--text-medium); }
+    .modal-footer a { color: var(--accent-purple); text-decoration: none; font-weight: 800; }
+
+    .cookie-popup-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .cookie-popup-overlay.active { opacity: 1; visibility: visible; }
+    .cookie-popup {
+      background: var(--primary-white);
+      padding: 26px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      max-width: 520px;
+      width: 90%;
+      border: 1px solid var(--border-light);
+      transform: translateY(20px);
+      transition: transform 0.5s ease;
+    }
+    .cookie-popup-overlay.active .cookie-popup { transform: translateY(0); }
+    .cookie-content { display: flex; flex-direction: column; gap: 16px; text-align: center; }
+    .cookie-text { font-size: 15px; color: var(--text-medium); line-height: 1.5; font-weight: 500; }
+    .cookie-text a { color: var(--accent-purple); text-decoration: none; font-weight: 900; }
+    .cookie-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .cookie-button { padding: 12px 18px; border-radius: var(--pill-radius); font-weight: 900; font-size: 14px; cursor: pointer; transition: all 0.3s ease; border: 1px solid var(--border-light); background: var(--light-gray); color: var(--text-dark); }
+    .cookie-accept { background: var(--accent-purple); color: #fff; border: none; }
+    .cookie-accept:hover { background: var(--accent-purple-dark); }
+
+    @media (max-width: 1200px) {
+      .featured-grid { grid-template-columns: repeat(2, 1fr); }
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .helps-grid { grid-template-columns: repeat(2, 1fr); }
+      .real-grid { grid-template-columns: 1fr; }
+      .results-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 992px) {
+      .hero-headline { font-size: 64px; }
+      .flashing-words { font-size: 64px; height: 80px; width: 280px; }
+      .footer-content { grid-template-columns: 1fr; gap: 50px; }
+      .nav-links { gap: 30px; }
+    }
+    @media (max-width: 768px) {
+      .hero-line.top { white-space: normal; }
+      .container { padding: 0 20px; }
+      .mobile-create-account-tab { display: flex; }
+
+      .nav-container { justify-content: center; position: relative; }
+      .logo { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; height: 100%; text-decoration: none; }
+      .logo-img { height: 125px; transform: none; padding: 12px 0; display: flex; align-items: center; }
+      .mobile-toggle { display: flex; position: absolute; left: 20px; align-items: center; }
+      .nav-actions { transform: none; gap: 14px; position: absolute; right: 20px; align-items: center; }
+      .nav-actions .sign-in { display: none; }
+      .nav-actions .header-cta { display: none; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        gap: 20px;
+      }
+      .nav-links.active { display: flex; }
+
+      .nav-link-container { display: flex; align-items: center; justify-content: flex-start; width: 100%; }
+      .new-tag { position: static; margin-left: 8px; }
+
+      .mobile-sign-in {
+        display: block !important;
+        margin-top: 10px;
+        padding: 10px 16px;
+        background: white;
+        color: var(--accent-purple);
+        border-radius: var(--pill-radius);
+        text-align: center;
+        font-weight: 900;
+        text-decoration: none;
+        border: 2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+      .mobile-sign-in:hover { background: var(--light-gray); transform: translateY(-2px); }
+      .dark-mode .mobile-sign-in { background: var(--primary-white); color: var(--accent-purple); border: 2px solid var(--accent-purple); }
+
+      .mobile-sign-up {
+        display: block !important;
+        margin-top: 10px;
+        padding: 10px 16px;
+        background: var(--accent-purple);
+        color: white;
+        border-radius: var(--pill-radius);
+        text-align: center;
+        font-weight: 900;
+        text-decoration: none;
+        border: 2px solid var(--accent-purple);
+        transition: all 0.3s ease;
+      }
+      .mobile-sign-up:hover { background: var(--accent-purple-dark); transform: translateY(-2px); }
+
+      .hero-content { padding: 66px 20px 14px; }
+      .hero-headline { font-size: 46px; }
+      .hero-line.bottom { gap: 10px; }
+      .flashing-words { font-size: 46px; height: 62px; width: 210px; }
+      .hero-subhead { font-size: 18px; }
+      .tool-types-banner-content { font-size: 14px; }
+
+      .tool-footer { flex-wrap: wrap; row-gap: 10px; }
+      .tool-stats { width: 100%; justify-content: flex-start; margin-left: 0; }
+
+      .chat-container { width: 90vw; height: 450px; right: 5vw; }
+      .chat-toggle { width: 56px; height: 56px; font-size: 20px; }
+    }
+    @media (max-width: 480px) {
+      .logo-img { height: 100px; }
+      .footer-logo-img { height: 100px; }
+      .hero-headline { font-size: 40px; }
+      .flashing-words { font-size: 40px; width: 190px; }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#" class="mobile-create-account-tab" id="createAccountTab" aria-label="Create account">
+    <i class="fas fa-user-plus"></i>
+  </a>
+
+  <div class="create-account-modal" id="createAccountModal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-label="Create account">
+      <div class="modal-header">
+        <h2 class="modal-title">Create Account</h2>
+        <button class="close-modal" id="closeModal" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <form class="modal-form">
+        <div class="form-group">
+          <label class="form-label" for="name">Full Name</label>
+          <input type="text" id="name" class="form-input" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input type="password" id="password" class="form-input" placeholder="Create a password" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Create Account</button>
+      </form>
+
+      <div class="modal-footer">
+        <p>Already have an account? <a href="sign-in.html">Sign In</a></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cookie-popup-overlay" id="cookiePopupOverlay">
+    <div class="cookie-popup">
+      <div class="cookie-content">
+        <div class="cookie-text">
+          We use cookies to enhance your experience and analyse site traffic. By clicking "Accept", you consent to our use of cookies.
+          <a href="#">Learn more</a>
+        </div>
+        <div class="cookie-buttons">
+          <button class="cookie-button cookie-settings" type="button">Settings</button>
+          <button class="cookie-button cookie-accept" type="button">Accept</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav>
+    <div class="container nav-container">
+      <button class="mobile-toggle" aria-label="Menu"><i class="fas fa-bars"></i></button>
+
+      <a href="index.html" class="logo" aria-label="Home">
+        <img src="assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="logo"
+          onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+        <div class="logo-fallback" id="logo-fallback">THE EMPLOYEE PLAYBOOK</div>
+      </a>
+
+      <div class="nav-links">
+        <a href="the-lens.html" class="nav-link">The Lens</a>
+        <a href="the-toolkit.html" class="nav-link active">The Toolkit</a>
+        <div class="nav-link-container">
+          <a href="the-coach.html" class="nav-link">The Coach</a>
+          <span class="new-tag">NEW</span>
+        </div>
+        <a href="the-shift.html" class="nav-link">The Shift</a>
+        <a href="the-pricing.html" class="nav-link">The Pricing</a>
+
+        <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+        <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="create-account.html" class="header-cta">Sign up</a>
+        <a href="sign-in.html" class="sign-in">Sign in</a>
+        <button class="theme-toggle" aria-label="Toggle theme"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero" aria-label="Hero">
+    <div class="hero-content">
+      <h1 class="hero-headline" aria-label="Find the right response with our tools">
+        <span class="hero-line top">Find the right response</span>
+        <span class="hero-line bottom">
+          <span class="with-our">with our</span>
+
+          <span class="flashing-words" aria-label="Rotating tool names">
+            <span class="flashing-word">Toolkit</span>
+            <span class="flashing-word">Lens</span>
+            <span class="flashing-word">Coach</span>
+            <span class="flashing-word">Scripts</span>
+            <span class="flashing-word">Templates</span>
+            <span class="flashing-word">Playbooks</span>
+            <span class="flashing-word">Planners</span>
+          </span>
+        </span>
+      </h1>
+
+      <p class="hero-subhead">
+        Practical outcomes in plain language when the stakes are high. Access the tools to choose your wording, protect your position, and decide your next move.
+      </p>
+
+      <div class="hero-note">Not legal advice. Just the clarity you wish you had sooner.</div>
+    </div>
+
+    <div class="tool-types-banner" aria-label="Tool types banner">
+      <div class="tool-types-banner-content">
+        Frameworks &nbsp;&nbsp;•&nbsp;&nbsp; Guides &nbsp;&nbsp;•&nbsp;&nbsp; Planners &nbsp;&nbsp;•&nbsp;&nbsp; Assessments &nbsp;&nbsp;•&nbsp;&nbsp; Checklists &nbsp;&nbsp;•&nbsp;&nbsp; Playbooks &nbsp;&nbsp;•&nbsp;&nbsp; Scripts &nbsp;&nbsp;•&nbsp;&nbsp; Templates &nbsp;&nbsp;•&nbsp;&nbsp; Maps
+        &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+        <span class="banner-highlight">Built for real workplace dynamics</span>
+        &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+        Frameworks &nbsp;&nbsp;•&nbsp;&nbsp; Guides &nbsp;&nbsp;•&nbsp;&nbsp; Planners &nbsp;&nbsp;•&nbsp;&nbsp; Assessments &nbsp;&nbsp;•&nbsp;&nbsp; Checklists &nbsp;&nbsp;•&nbsp;&nbsp; Playbooks &nbsp;&nbsp;•&nbsp;&nbsp; Scripts &nbsp;&nbsp;•&nbsp;&nbsp; Templates &nbsp;&nbsp;•&nbsp;&nbsp; Maps
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-find" aria-label="Quick find">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Find what you need, fast</h2>
+        <p class="section-subtitle">Search the Toolkit, or swipe the tool types to narrow suggestions instantly.</p>
+      </div>
+
+      <div class="quick-find-wrap">
+        <div class="quick-find-top">
+          <div class="search-icon"><i class="fas fa-search"></i></div>
+          <input id="toolSearch" class="search-input" type="text" placeholder="Try: “micromanagement”, “burnout”, “follow up”, “documentation”, “boundary”" />
+        </div>
+
+        <div class="chip-row" aria-label="Tool type chips">
+          <button class="chip" data-filter="Framework"><i class="fas fa-diagram-project"></i> Frameworks</button>
+          <button class="chip" data-filter="Guide"><i class="fas fa-compass"></i> Guides</button>
+          <button class="chip" data-filter="Planner"><i class="fas fa-calendar-check"></i> Planners</button>
+          <button class="chip" data-filter="Assessment"><i class="fas fa-clipboard-list"></i> Assessments</button>
+          <button class="chip" data-filter="Checklist"><i class="fas fa-check-double"></i> Checklists</button>
+          <button class="chip" data-filter="Playbook"><i class="fas fa-book-open"></i> Playbooks</button>
+          <button class="chip" data-filter="Script"><i class="fas fa-comment-dots"></i> Scripts</button>
+          <button class="chip" data-filter="Template"><i class="fas fa-file-lines"></i> Templates</button>
+          <button class="chip" data-filter="Map"><i class="fas fa-map"></i> Maps</button>
+        </div>
+
+        <div class="quick-results" id="quickResults">
+          <div class="results-title" id="resultsTitle">Suggestions</div>
+          <div class="results-grid" id="resultsGrid"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="helps" aria-label="What the Toolkit helps you do">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">What the Toolkit helps you do</h2>
+        <p class="section-subtitle">When work gets political, vague, or intense, you get a safer, clearer way through.</p>
+      </div>
+
+      <div class="helps-grid">
+        <div class="helps-card">
+          <div class="helps-head">
+            <div class="helps-ic"><i class="fas fa-compass"></i></div>
+            <div class="helps-title">Turn “I’m not sure” into a plan</div>
+          </div>
+          <div class="helps-desc">
+            Get a clear sequence: what to ask, what to document, and what to do next, without guessing.
+          </div>
+          <div class="helps-extra">
+            <div><i class="fas fa-check"></i> A clean next step (not ten options).</div>
+            <div><i class="fas fa-check"></i> Language you can actually use today.</div>
+          </div>
+        </div>
+
+        <div class="helps-card">
+          <div class="helps-head">
+            <div class="helps-ic"><i class="fas fa-shield-halved"></i></div>
+            <div class="helps-title">Stay protected and credible</div>
+          </div>
+          <div class="helps-desc">
+            Use wording and structures that are calm, manager-safe, and hard to twist later.
+          </div>
+          <div class="helps-extra">
+            <div><i class="fas fa-check"></i> Strong follow-ups that don’t sound defensive.</div>
+            <div><i class="fas fa-check"></i> Evidence habits that hold up under scrutiny.</div>
+          </div>
+        </div>
+
+        <div class="helps-card">
+          <div class="helps-head">
+            <div class="helps-ic"><i class="fas fa-network-wired"></i></div>
+            <div class="helps-title">Spot patterns before they bite</div>
+          </div>
+          <div class="helps-desc">
+            Frameworks reveal what’s really happening underneath the noise, so you respond to the pattern, not the mood.
+          </div>
+          <div class="helps-extra">
+            <div><i class="fas fa-check"></i> See power moves early.</div>
+            <div><i class="fas fa-check"></i> Choose a response that protects leverage.</div>
+          </div>
+        </div>
+
+        <div class="helps-card">
+          <div class="helps-head">
+            <div class="helps-ic"><i class="fas fa-chess"></i></div>
+            <div class="helps-title">Respond strategically, not emotionally</div>
+          </div>
+          <div class="helps-desc">
+            Take action that protects your wellbeing and your reputation at the same time, without overreacting.
+          </div>
+          <div class="helps-extra">
+            <div><i class="fas fa-check"></i> Keep your tone steady.</div>
+            <div><i class="fas fa-check"></i> Keep your position intact.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="real" aria-label="How to use the Toolkit in real situations">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">How to Use the Toolkit in Real Situations</h2>
+        <p class="section-subtitle">Start with the problem you’re facing. Then follow a simple path: check your reality, choose your wording, and decide your next move — without guessing.</p>
+      </div>
+
+      <div class="real-grid">
+        <div class="real-card">
+          <div class="real-problem">“I’m being watched, questioned, and corrected, constantly.”</div>
+          <div class="real-body">You need to reduce noise, regain breathing room, and put boundaries in writing without escalating the dynamic.</div>
+          <div class="real-row">
+            <div class="real-label">Suggested tools</div>
+            <div class="real-tools">
+              <a href="manager-communication-framework.html">Manager Communication Framework</a>
+              <a href="workload-negotiation-script-builder.html">Workload Negotiation Script Builder</a>
+              <a href="category-manager.html">Manager Relationship tools</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="real-card">
+          <div class="real-problem">“Everything is urgent, and I’m drowning.”</div>
+          <div class="real-body">You need a rational plan: what pauses, what gets renegotiated, and how to say it without sounding unreliable.</div>
+          <div class="real-row">
+            <div class="real-label">Suggested tools</div>
+            <div class="real-tools">
+              <a href="overload-reduction-planner.html">Overload Reduction Planner</a>
+              <a href="overload-reduction-planner.html">Burnout Risk Snapshot</a>
+              <a href="category-burnout.html">Burnout &amp; Capacity tools</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="real-card">
+          <div class="real-problem">“HR is involved and I don’t want to say the wrong thing.”</div>
+          <div class="real-body">You need clean documentation, neutral wording, and a clear trail that protects you if the situation gets formal.</div>
+          <div class="real-row">
+            <div class="real-label">Suggested tools</div>
+            <div class="real-tools">
+              <a href="category-hr.html">HR &amp; Formal Processes tools</a>
+              <a href="category-sos.html">SOS scripts (stabilise fast)</a>
+              <a href="workload-negotiation-script-builder.html">Script Builder (neutral follow-up)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured" id="featured-tools" aria-label="Featured tools">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Tools you can rely on when it matters</h2>
+        <p class="section-subtitle">Four examples of the Toolkit experience: structured, practical, ready to use.</p>
+      </div>
+
+      <div class="featured-grid">
+        <div class="tool-card" data-cat="burnout" data-title="Overload Reduction Planner" data-type="Planner" data-tags="burnout capacity workload renegotiate" data-link="overload-reduction-planner.html">
+          <div class="tool-top">
+            <div class="tool-category-label">Expectation, Burnout &amp; Capacity</div>
+            <div class="tool-name">Overload Reduction Planner</div>
+          </div>
+          <div class="tool-desc">Turn “too much” into a rational plan: what to pause, what to renegotiate, and how to phrase it safely.</div>
+          <div class="tool-review" aria-label="User review">
+            <div class="stars" aria-label="Five stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <div class="review-text">“This helped me reduce my workload without sounding defensive. The plan structure is excellent.”</div>
+            <div class="review-meta">Aisha, UK tech</div>
+          </div>
+          <div class="tool-footer">
+            <div class="tool-buttons"><a class="btn-primary" href="overload-reduction-planner.html">Open</a></div>
+            <div class="tool-stats" aria-label="Viewed and saved">
+              <div class="tool-stat"><i class="fas fa-eye"></i> 3.4k</div>
+              <div class="tool-stat"><i class="fas fa-bookmark"></i> 612</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-card" data-cat="burnout" data-title="Burnout Risk Snapshot" data-type="Assessment" data-tags="burnout signals risk snapshot" data-link="overload-reduction-planner.html">
+          <div class="tool-top">
+            <div class="tool-category-label">Expectation, Burnout &amp; Capacity</div>
+            <div class="tool-name">Burnout Risk Snapshot</div>
+          </div>
+          <div class="tool-desc">A fast signal check to quantify risk, pinpoint what is driving it, and decide the safest next step.</div>
+          <div class="tool-review" aria-label="User review">
+            <div class="stars" aria-label="Five stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <div class="review-text">“It gave me a clear risk score and the exact next step. No waffle. Very grounding.”</div>
+            <div class="review-meta">James, NHS</div>
+          </div>
+          <div class="tool-footer">
+            <div class="tool-buttons"><a class="btn-primary" href="overload-reduction-planner.html">Open</a></div>
+            <div class="tool-stats" aria-label="Viewed and saved">
+              <div class="tool-stat"><i class="fas fa-eye"></i> 2.8k</div>
+              <div class="tool-stat"><i class="fas fa-bookmark"></i> 487</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-card" data-cat="manager" data-title="Manager Communication Framework" data-type="Framework" data-tags="manager communication tone feedback" data-link="manager-communication-framework.html">
+          <div class="tool-top">
+            <div class="tool-category-label">Manager Relationship &amp; Leadership Style</div>
+            <div class="tool-name">Manager Communication Framework</div>
+          </div>
+          <div class="tool-desc">Identify how your manager processes information and power, then adapt your language so it lands cleanly.</div>
+          <div class="tool-review" aria-label="User review">
+            <div class="stars" aria-label="Five stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <div class="review-text">“The messaging examples instantly changed how I frame updates. My manager finally listened.”</div>
+            <div class="review-meta">Priya, finance</div>
+          </div>
+          <div class="tool-footer">
+            <div class="tool-buttons"><a class="btn-primary" href="manager-communication-framework.html">Open</a></div>
+            <div class="tool-stats" aria-label="Viewed and saved">
+              <div class="tool-stat"><i class="fas fa-eye"></i> 4.1k</div>
+              <div class="tool-stat"><i class="fas fa-bookmark"></i> 903</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tool-card" data-cat="clarity" data-title="Workload Negotiation Script Builder" data-type="Script" data-tags="workload negotiate boundaries email" data-link="workload-negotiation-script-builder.html">
+          <div class="tool-top">
+            <div class="tool-category-label">Clarity, Priorities &amp; Direction</div>
+            <div class="tool-name">Workload Negotiation Script Builder</div>
+          </div>
+          <div class="tool-desc">Generate a message that reduces load without triggering defensiveness, with optional versions for email and meetings.</div>
+          <div class="tool-review" aria-label="User review">
+            <div class="stars" aria-label="Five stars">
+              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <div class="review-text">“I copied it, sent it, and got agreement on priority changes the same day. Huge relief.”</div>
+            <div class="review-meta">Tom, professional services</div>
+          </div>
+          <div class="tool-footer">
+            <div class="tool-buttons"><a class="btn-primary" href="workload-negotiation-script-builder.html">Open</a></div>
+            <div class="tool-stats" aria-label="Viewed and saved">
+              <div class="tool-stat"><i class="fas fa-eye"></i> 5.7k</div>
+              <div class="tool-stat"><i class="fas fa-bookmark"></i> 1.3k</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories" id="categories" aria-label="Toolkit categories">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Browse by category</h2>
+        <p class="section-subtitle">Choose your lane, then pick the exact tool.</p>
+      </div>
+
+      <div class="category-grid">
+        <div class="category-card cat-clarity">
+          <div class="category-head">
+            <div class="category-left">
+              <div class="category-ic"><i class="fas fa-bullseye"></i></div>
+              <div>
+                <div class="category-title">Clarity, Priorities &amp; Direction</div>
+                <div class="category-mini">Decisions • Scope • Priorities</div>
+              </div>
+            </div>
+          </div>
+          <div class="category-desc">When everything is urgent, structure the work, expose constraints, and get decisions on record.</div>
+          <div class="category-action"><a href="category-clarity, priorities-and-direction.html"><i class="fas fa-arrow-right"></i> Explore tools</a></div>
+        </div>
+
+        <div class="category-card cat-burnout">
+          <div class="category-head">
+            <div class="category-left">
+              <div class="category-ic"><i class="fas fa-fire"></i></div>
+              <div>
+                <div class="category-title">Expectation, Burnout &amp; Capacity</div>
+                <div class="category-mini">Load • Limits • Recovery</div>
+              </div>
+            </div>
+          </div>
+          <div class="category-desc">Capacity plans, overload reduction, early warning signals, and recovery prioritisation.</div>
+          <div class="category-action"><a href="category-burnout.html"><i class="fas fa-arrow-right"></i> Explore tools</a></div>
+        </div>
+
+        <div class="category-card cat-manager">
+          <div class="category-head">
+            <div class="category-left">
+              <div class="category-ic"><i class="fas fa-handshake"></i></div>
+              <div>
+                <div class="category-title">Manager Relationship &amp; Leadership Style</div>
+                <div class="category-mini">Patterns • Leverage • Boundaries</div>
+              </div>
+            </div>
+          </div>
+          <div class="category-desc">Decode manager patterns, respond strategically, and protect your position without unnecessary friction.</div>
+          <div class="category-action"><a href="category-manager.html"><i class="fas fa-arrow-right"></i> Explore tools</a></div>
+        </div>
+
+        <div class="category-card cat-politics">
+          <div class="category-head">
+            <div class="category-left">
+              <div class="category-ic"><i class="fas fa-users"></i></div>
+              <div>
+                <div class="category-title">Workplace Dynamics and Politics</div>
+                <div class="category-mini">Stakeholders • Power • Perception</div>
+              </div>
+            </div>
+          </div>
+          <div class="category-desc">Map influence, read incentives, and position yourself clearly in complex organisational dynamics.</div>
+          <div class="category-action"><a href="category-politics.html"><i class="fas fa-arrow-right"></i> Explore tools</a></div>
+        </div>
+
+        <div class="category-card cat-hr">
+          <div class="category-head">
+            <div class="category-left">
+              <div class="category-ic"><i class="fas fa-file-contract"></i></div>
+              <div>
+                <div class="category-title">HR and Formal Processes</div>
+                <div class="category-mini">Evidence • Process • Protection</div>
+              </div>
+            </div>
+          </div>
+          <div class="category-desc">Procedural checklists, documentation structure, and escalation pathways that stand up under scrutiny.</div>
+          <div class="category-action"><a href="category-hr.html"><i class="fas fa-arrow-right"></i> Explore tools</a></div>
+        </div>
+
+        <div class="category-card cat-confidence">
+          <div class="category-head">
+            <div class="category-left">
+              <div class="category-ic"><i class="fas fa-chart-line"></i></div>
+              <div>
+                <div class="category-title">Confidence, Presence &amp; Influence</div>
+                <div class="category-mini">Messaging • Credibility • Impact</div>
+              </div>
+            </div>
+          </div>
+          <div class="category-desc">Build authority signals, sharpen your delivery, and use language that holds its shape.</div>
+          <div class="category-action"><a href="category-confidence.html"><i class="fas fa-arrow-right"></i> Explore tools</a></div>
+        </div>
+
+        <div class="category-card cat-career">
+          <div class="category-head">
+            <div class="category-left">
+              <div class="category-ic"><i class="fas fa-briefcase"></i></div>
+              <div>
+                <div class="category-title">Career Playbook</div>
+                <div class="category-mini">Moves • Momentum • Positioning</div>
+              </div>
+            </div>
+          </div>
+          <div class="category-desc">Career strategy tools: positioning, options, decision-making, and smart next moves.</div>
+          <div class="category-action"><a href="category-career.html"><i class="fas fa-arrow-right"></i> Explore tools</a></div>
+        </div>
+
+        <div class="category-card cat-sos">
+          <div class="category-head">
+            <div class="category-left">
+              <div class="category-ic"><i class="fas fa-triangle-exclamation"></i></div>
+              <div>
+                <div class="category-title">SOS</div>
+                <div class="category-mini">Urgent scripts • Stabilise fast</div>
+              </div>
+            </div>
+          </div>
+          <div class="category-desc">When it is escalating quickly: immediate actions, wording, and documentation essentials.</div>
+          <div class="category-action"><a href="category-sos.html"><i class="fas fa-arrow-right"></i> Open SOS</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="signup-cta" aria-label="Sign up CTA">
+    <div class="container">
+      <div class="signup-cta-card">
+        <div class="signup-cta-inner">
+          <div>
+            <div class="signup-cta-title">Get the full Toolkit, and save what matters.</div>
+            <div class="signup-cta-sub">Create an account to unlock saved tools, faster navigation, and a cleaner path back to the exact resources you used.</div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="cta-button" href="create-account.html"><i class="fas fa-user-plus"></i> Create account</a>
+            <a class="secondary-button" href="sign-in.html"><i class="fas fa-right-to-bracket"></i> Sign in</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <div class="footer-logo">
+            <a href="index.html" aria-label="Home">
+              <img src="assets/img/logo.png" alt="The Employee Playbook" class="footer-logo-img" id="footer-logo"
+                onerror="this.style.display='none'; document.getElementById('footer-logo-fallback').style.display='block';">
+              <div class="logo-fallback" id="footer-logo-fallback" style="font-size: 28px;">THE EMPLOYEE PLAYBOOK</div>
+            </a>
+          </div>
+          <p class="footer-description">A private strategy system giving employees clarity and advantage in the moments that matter most.</p>
+        </div>
+
+        <div class="footer-newsletter">
+          <h3 class="footer-newsletter-title">Stay updated with strategic insights</h3>
+          <form class="footer-newsletter-form">
+            <input type="email" class="footer-newsletter-input" placeholder="Your email" required>
+            <button type="submit" class="footer-newsletter-button">Subscribe</button>
+          </form>
+        </div>
+
+        <div class="footer-nav">
+          <div class="footer-nav-grid">
+            <div class="footer-nav-section">
+              <h3 class="footer-heading">The Playbook</h3>
+              <ul class="footer-links">
+                <li class="footer-link"><a href="the-lens.html">The Lens</a></li>
+                <li class="footer-link"><a href="the-toolkit.html">The Toolkit</a></li>
+                <li class="footer-link"><a href="the-coach.html">The Coach</a></li>
+                <li class="footer-link"><a href="the-shift.html">The Shift</a></li>
+                <li class="footer-link"><a href="the-pricing.html">The Pricing</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-nav-section">
+              <h3 class="footer-heading">The Company</h3>
+              <ul class="footer-links">
+                <li class="footer-link"><a href="profile.html">Profile</a></li>
+                <li class="footer-link"><a href="about-us.html">About</a></li>
+                <li class="footer-link"><a href="#privacy.html">Privacy</a></li>
+                <li class="footer-link"><a href="terms-and-conditions.html">Terms</a></li>
+                <li class="footer-link"><a href="help-centre.html">Help Centre</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 The Employee Playbook. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="chat-widget">
+    <button class="chat-toggle" aria-label="Open chat">
+      <i class="fas fa-comment"></i>
+    </button>
+    <div class="chat-container" aria-label="Chat">
+      <div class="chat-header">
+        <div class="chat-title">Send us a message</div>
+        <button class="chat-close" aria-label="Close chat"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="chat-messages">
+        <div class="message message-bot">👋 Hi there! We would love to hear from you.</div>
+      </div>
+      <div class="chat-input-container">
+        <form class="chat-form" id="chatForm">
+          <input type="text" class="chat-input" placeholder="Your Name" required>
+          <input type="email" class="chat-input" placeholder="Your Email" required>
+          <textarea class="chat-input" rows="3" placeholder="Message" required></textarea>
+          <button type="submit" class="chat-send">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.body.classList.add('loaded');
+
+      const createAccountTab = document.getElementById('createAccountTab');
+      const createAccountModal = document.getElementById('createAccountModal');
+      const closeModal = document.getElementById('closeModal');
+
+      createAccountTab.addEventListener('click', function (e) {
+        e.preventDefault();
+        createAccountModal.classList.add('active');
+        createAccountModal.setAttribute('aria-hidden', 'false');
+      });
+      closeModal.addEventListener('click', function () {
+        createAccountModal.classList.remove('active');
+        createAccountModal.setAttribute('aria-hidden', 'true');
+      });
+      createAccountModal.addEventListener('click', function (e) {
+        if (e.target === createAccountModal) {
+          createAccountModal.classList.remove('active');
+          createAccountModal.setAttribute('aria-hidden', 'true');
+        }
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && createAccountModal.classList.contains('active')) {
+          createAccountModal.classList.remove('active');
+          createAccountModal.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      document.querySelector('.modal-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('Account creation would be processed here in a real implementation');
+        createAccountModal.classList.remove('active');
+        createAccountModal.setAttribute('aria-hidden', 'true');
+      });
+
+      const cookiePopupOverlay = document.getElementById('cookiePopupOverlay');
+      const cookieAccept = document.querySelector('.cookie-accept');
+
+      setTimeout(() => {
+        if (!localStorage.getItem('cookiesAccepted')) cookiePopupOverlay.classList.add('active');
+      }, 2000);
+
+      cookieAccept.addEventListener('click', function () {
+        localStorage.setItem('cookiesAccepted', 'true');
+        cookiePopupOverlay.classList.remove('active');
+      });
+
+      const themeToggle = document.querySelector('.theme-toggle');
+      const themeIcon = themeToggle.querySelector('i');
+      const currentTheme = localStorage.getItem('theme') || 'light';
+
+      if (currentTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      }
+
+      themeToggle.addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+        const isDarkMode = document.body.classList.contains('dark-mode');
+
+        themeIcon.classList.toggle('fa-moon');
+        themeIcon.classList.toggle('fa-sun');
+
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+
+        const logo = document.getElementById('logo');
+        const footerLogo = document.getElementById('footer-logo');
+        if (logo && footerLogo) {
+          if (isDarkMode) {
+            logo.src = 'assets/img/logo-dark.png';
+            footerLogo.src = 'assets/img/logo-dark.png';
+          } else {
+            logo.src = 'assets/img/logo.png';
+            footerLogo.src = 'assets/img/logo.png';
+          }
+        }
+      });
+
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      mobileToggle.addEventListener('click', function () {
+        navLinks.classList.toggle('active');
+        const icon = this.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+      });
+
+      const chatToggle = document.querySelector('.chat-toggle');
+      const chatContainer = document.querySelector('.chat-container');
+      const chatClose = document.querySelector('.chat-close');
+      const chatForm = document.getElementById('chatForm');
+
+      chatToggle.addEventListener('click', function () {
+        chatContainer.classList.toggle('active');
+      });
+      chatClose.addEventListener('click', function () {
+        chatContainer.classList.remove('active');
+      });
+
+      chatForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const chatMessages = document.querySelector('.chat-messages');
+        const userMessage = document.createElement('div');
+        userMessage.classList.add('message', 'message-user');
+        userMessage.textContent = "Thanks. We'll get back to you soon.";
+        chatMessages.appendChild(userMessage);
+        this.reset();
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      });
+
+      const tools = [
+        { title: "Overload Reduction Planner", type: "Planner", tags: ["workload", "capacity", "burnout", "renegotiate"], link: "overload-reduction-planner.html", icon: "fa-sliders" },
+        { title: "Burnout Risk Snapshot", type: "Assessment", tags: ["burnout", "signals", "risk", "snapshot"], link: "overload-reduction-planner.html", icon: "fa-clipboard-check" },
+        { title: "Manager Communication Framework", type: "Framework", tags: ["manager", "communication", "tone", "feedback"], link: "manager-communication-framework.html", icon: "fa-signal" },
+        { title: "Workload Negotiation Script Builder", type: "Script", tags: ["workload", "negotiate", "boundaries", "email"], link: "workload-negotiation-script-builder.html", icon: "fa-comment-dots" }
+      ];
+
+      const searchInput = document.getElementById('toolSearch');
+      const chips = Array.from(document.querySelectorAll('.chip'));
+      const quickResults = document.getElementById('quickResults');
+      const resultsGrid = document.getElementById('resultsGrid');
+      const resultsTitle = document.getElementById('resultsTitle');
+
+      let activeType = null;
+
+      function normalise(s) { return (s || "").toLowerCase().trim(); }
+
+      function renderResults(items, label) {
+        resultsGrid.innerHTML = "";
+        resultsTitle.textContent = label;
+
+        if (!items.length) {
+          resultsGrid.innerHTML = `
+            <div class="result-card" style="grid-column: 1 / -1;">
+              <div class="result-ic"><i class="fas fa-magnifying-glass"></i></div>
+              <div>
+                <div class="result-title">No matches yet</div>
+                <div class="result-meta">Try a different keyword, or clear the tool type filter.</div>
+              </div>
+            </div>
+          `;
+          quickResults.classList.add('active');
+          return;
+        }
+
+        items.slice(0, 6).forEach(t => {
+          const card = document.createElement('div');
+          card.className = "result-card";
+          card.innerHTML = `
+            <div class="result-ic"><i class="fas ${t.icon}"></i></div>
+            <div style="min-width:0;">
+              <div class="result-title">${t.title}</div>
+              <div class="result-meta">${t.type} • ${t.tags.slice(0, 3).join(" • ")}</div>
+              <div class="result-actions"><a href="${t.link}">Open tool <i class="fas fa-arrow-right" style="font-size:11px;"></i></a></div>
+            </div>
+          `;
+          resultsGrid.appendChild(card);
+        });
+
+        quickResults.classList.add('active');
+      }
+
+      function filterTools() {
+        const q = normalise(searchInput.value);
+        const labelBits = [];
+
+        let filtered = tools.slice();
+
+        if (activeType) {
+          filtered = filtered.filter(t => t.type === activeType);
+          labelBits.push(activeType + "s");
+        }
+
+        if (q.length) {
+          filtered = filtered.filter(t => {
+            const hay = normalise([t.title, t.type, ...(t.tags || [])].join(" "));
+            return hay.includes(q);
+          });
+          labelBits.push(`“${q}”`);
+        }
+
+        if (!activeType && !q.length) {
+          quickResults.classList.remove('active');
+          return;
+        }
+
+        const label = labelBits.length ? `Suggestions for ${labelBits.join(" • ")}` : "Suggestions";
+        renderResults(filtered, label);
+      }
+
+      chips.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter');
+
+          if (btn.classList.contains('active')) {
+            btn.classList.remove('active');
+            activeType = null;
+          } else {
+            chips.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            activeType = filter;
+          }
+          filterTools();
+        });
+      });
+
+      searchInput.addEventListener('input', filterTools);
+    });
+  </script>
+
+  <script defer src="/_vercel/speed-insights/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Terms & Conditions for The Employee Playbook. Strategic guidance, not legal advice.">
+    <title>Terms & Conditions | The Employee Playbook</title>
+    
+    <!-- Font Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --medium-gray: #E9ECEF;
+            --dark-gray: #6C757D;
+            --text-dark: #212529;
+            --text-medium: #495057;
+            --accent-purple: #7B5FC4;
+            --accent-purple-dark: #5A4496;
+            --light-purple: #E6E0F5;
+            --border-light: rgba(0, 0, 0, 0.08);
+            --hero-gray: #f5f7fa;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --deep-navy: #0A1428;
+            --soft-blue: #EFF5FF;
+            --gradient-primary: linear-gradient(135deg, #7B5FC4 0%, #5A3FB5 100%);
+            --gradient-secondary: linear-gradient(135deg, #E6E0F5 0%, #F0EDFA 100%);
+            --warning-bg: #FFF3E0;
+            --warning-border: #FFB74D;
+            --warning-text: #E65100;
+        }
+
+        .dark-mode {
+            --primary-white: #121212;
+            --light-gray: #1E1E1E;
+            --medium-gray: #2D2D2D;
+            --dark-gray: #8A8A8A;
+            --text-dark: #F5F5F5;
+            --text-medium: #CCCCCC;
+            --accent-purple: #8B6CE6;
+            --accent-purple-dark: #6A4FC4;
+            --light-purple: #E6E0F5;
+            --border-light: rgba(255, 255, 255, 0.08);
+            --hero-gray: #1a1a1a;
+            --nav-bg: rgba(18, 18, 18, 0.95);
+            --deep-navy: #EFF5FF;
+            --soft-blue: #1A2333;
+            --gradient-primary: linear-gradient(135deg, #8B6CE6 0%, #6A4BD6 100%);
+            --gradient-secondary: linear-gradient(135deg, #2D2D2D 0%, #3D3D3D 100%);
+            --warning-bg: #332A1D;
+            --warning-border: #8B6CE6;
+            --warning-text: #FFB74D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            height: 80px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            height: 100%;
+        }
+
+        /* Logo Styles */
+        .logo-img {
+            height: 100px;
+            width: auto;
+            transform: translateX(20%);
+            padding: 14px 10px;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .logo-img {
+            content: url('assets/img/logo-dark.png');
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 17px;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-purple);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            transform: translateX(-20%);
+        }
+
+        .sign-in {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 17px;
+        }
+
+        .header-cta {
+            background: var(--accent-purple);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(123, 95, 196, 0.4);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* New Tag for The Coach */
+        .nav-link-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .new-tag {
+            position: absolute;
+            top: -12px;
+            right: -35px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        /* Mobile Sign In Button */
+        .mobile-sign-in {
+            display: none;
+        }
+
+        /* Legal Content */
+        .legal-content {
+            padding: 160px 0 80px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .legal-header {
+            margin-bottom: 50px;
+        }
+
+        .legal-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            color: var(--deep-navy);
+        }
+
+        .legal-subtitle {
+            font-size: 18px;
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        .warning-box {
+            background-color: var(--warning-bg);
+            border-left: 4px solid var(--warning-border);
+            padding: 24px;
+            margin-bottom: 40px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-title {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--warning-text);
+        }
+
+        .warning-text {
+            color: var(--text-medium);
+            line-height: 1.6;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--accent-purple);
+        }
+
+        .section-content {
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        .section-content p {
+            margin-bottom: 16px;
+        }
+
+        .bullet-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .bullet-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            color: var(--text-medium);
+        }
+
+        .bullet-list li:before {
+            content: "•";
+            color: var(--accent-purple);
+            font-weight: bold;
+            position: absolute;
+            left: 8px;
+        }
+
+        .acceptance-box {
+            background-color: var(--light-gray);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 50px;
+            border: 1px solid var(--border-light);
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-container input {
+            margin-top: 4px;
+        }
+
+        .checkbox-container label {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .accept-button {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
+        }
+
+        .accept-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(123, 95, 196, 0.4);
+        }
+
+        .accept-button:disabled {
+            background-color: var(--dark-gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-white);
+            padding: 40px 0 20px;
+            color: var(--text-medium);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 40px;
+            align-items: start;
+        }
+
+        .footer-about {
+            max-width: 400px;
+            padding-left: 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        /* Footer Logo - DOUBLED SIZE */
+        .footer-logo-img {
+            height: 100px; /* Doubled from 100px */
+            width: auto;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .footer-logo-img {
+            content: url('assets/img/logo-dark.png');
+        }
+
+        .footer-description {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .footer-heading {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 10px;
+        }
+
+        .footer-link a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link a:hover {
+            color: var(--accent-purple);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-light);
+            font-size: 14px;
+        }
+
+        .footer-nav {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        .footer-nav-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-newsletter {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+            text-align: center;
+        }
+
+        .footer-newsletter-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .footer-newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-newsletter-input {
+            padding: 12px 16px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 14px;
+            background: var(--primary-white);
+            color: var(--text-dark);
+        }
+
+        .footer-newsletter-button {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-newsletter-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
+        }
+
+        /* Logo Fallback */
+        .logo-fallback {
+            display: none;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .legal-title {
+                font-size: 36px;
+            }
+
+            .nav-links {
+                gap: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Mobile Navigation Changes */
+            .nav-container {
+                justify-content: center;
+                position: relative;
+            }
+            
+            .logo {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            /* INCREASED: Mobile header logo size by 25% */
+            .logo-img {
+                height: 122px; /* Increased from 100px to 125px (25% increase) */
+                transform: none;
+                padding: 12px 0;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+                position: absolute;
+                left: 20px;
+            }
+            
+            /* Show the Sign Up button in mobile view and position it on the right */
+            .header-cta {
+                display: block !important;
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+            
+            .nav-actions {
+                transform: none;
+                gap: 16px;
+                position: absolute;
+                right: 20px;
+            }
+            
+            /* Hide the desktop Sign In button in mobile view */
+            .nav-actions .sign-in {
+                display: none;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 20px;
+                border-top: 1px solid var(--border-light);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                gap: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+            
+            /* Move The Coach to the left and New tag next to it */
+            .nav-link-container {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+            }
+            
+            .new-tag {
+                position: static;
+                margin-left: 8px;
+                top: auto;
+                right: auto;
+            }
+            
+            /* Make the Sign In button in hamburger menu white */
+            .mobile-sign-in {
+                display: block !important;
+                margin-top: 10px;
+                padding: 12px 20px;
+                background: white;
+                color: var(--accent-purple);
+                border-radius: 8px;
+                text-align: center;
+                font-weight: 600;
+                text-decoration: none;
+                border: 2px solid var(--accent-purple);
+            }
+
+            .dark-mode .mobile-sign-in {
+                background: var(--primary-white);
+                color: var(--accent-purple);
+                border: 2px solid var(--accent-purple);
+            }
+
+            .legal-title {
+                font-size: 32px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-nav-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-newsletter-form {
+                flex-direction: column;
+            }
+            
+            /* Footer Changes */
+            .footer-nav-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+            
+            /* Mobile Logo Adjustments */
+            .footer-logo-img {
+                height: 120px; /* Doubled for mobile (was 60px) */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-img {
+                height: 100px; /* Adjusted for very small screens */
+            }
+            
+            .footer-logo-img {
+                height: 100px; /* Adjusted for very small screens */
+            }
+            
+            .logo-fallback {
+                font-size: 18px;
+            }
+            
+            .legal-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="container nav-container">
+        <!-- Hamburger menu on the left for mobile -->
+        <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+        
+        <!-- Logo centered for mobile -->
+        <a href="index.html" class="logo">
+            <img src="assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="logo"
+                 onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+            <div class="logo-fallback" id="logo-fallback">THE EMPLOYEE PLAYBOOK</div>
+        </a>
+        
+        <!-- Navigation links with mobile sign-in -->
+        <div class="nav-links">
+            <a href="the-lens.html" class="nav-link">The Lens</a>
+            <a href="the-tools.html" class="nav-link">The Toolkit</a>
+            <div class="nav-link-container">
+                <a href="the-coach.html" class="nav-link">The Coach</a>
+                <span class="new-tag">NEW</span>
+            </div>
+            <a href="the-shift.html" class="nav-link">The Shift</a>
+            <a href="the-pricing.html" class="nav-link">The Pricing</a>
+            <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+        </div>
+        
+        <!-- Desktop actions (hidden on mobile) -->
+        <div class="nav-actions">
+            <a href="create-account.html" class="header-cta">Sign me up</a>
+            <a href="sign-in.html" class="sign-in">Sign in</a>
+            <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+</nav>
+
+<!-- Legal Content -->
+<section class="legal-content">
+    <div class="container">
+        <div class="legal-header">
+            <h1 class="legal-title">Terms & Conditions</h1>
+            <p class="legal-subtitle">Last updated: December 2023</p>
+        </div>
+
+        <div class="warning-box">
+            <h2 class="warning-title">PLEASE READ CAREFULLY BEFORE USING THIS SERVICE</h2>
+            <p class="warning-text">The Employee Playbook provides strategic guidance, not legal or medical advice. Decisions are your own. We accept no liability for outcomes based on the use of this service.</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">1. Important Notice</h2>
+            <div class="section-content">
+                <p>The Employee Playbook is a strategic guidance platform designed to help professionals navigate workplace situations with greater clarity and confidence. By accessing or using our service, you acknowledge and agree to the following fundamental principles:</p>
+                
+                <ul class="bullet-list">
+                    <li>We provide strategic guidance, not legal advice or representation</li>
+                    <li>We do not replace union support or qualified legal counsel</li>
+                    <li>You are solely responsible for decisions made based on our guidance</li>
+                    <li>Our content is guidance-only, based on best practice insight</li>
+                    <li>No liability is accepted for outcomes resulting from use of this service</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">2. Use of Platform</h2>
+            <div class="section-content">
+                <p>The Employee Playbook is designed to provide strategic guidance and professional development resources for workplace situations. By accessing or using our platform, you acknowledge and agree to the following:</p>
+                
+                <ul class="bullet-list">
+                    <li>All content is provided for informational and educational purposes only</li>
+                    <li>No guarantee of success or specific outcome is provided or implied</li>
+                    <li>Content may include AI-generated materials alongside editorial oversight</li>
+                    <li>You are solely responsible for decisions made based on our guidance</li>
+                    <li>We reserve the right to modify or discontinue any aspect of the service</li>
+                    <li>Your use of the platform must comply with all applicable laws and regulations</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">3. Not a Legal, Union, or Representative Service</h2>
+            <div class="section-content">
+                <p>The Employee Playbook is not a substitute for professional legal advice, union representation, or formal advocacy services.</p>
+                
+                <ul class="bullet-list">
+                    <li>We do not act on your behalf in any employment, legal, or tribunal matter</li>
+                    <li>We do not provide formal representation or advocacy services</li>
+                    <li>Our guidance should not be considered a replacement for qualified legal counsel</li>
+                    <li>We do not provide emergency or crisis intervention services</li>
+                    <li>We are not a union and do not provide collective bargaining services</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">4. Confidentiality & Data Policy</h2>
+            <div class="section-content">
+                <p>We respect your privacy and are committed to protecting your personal information.</p>
+                
+                <ul class="bullet-list">
+                    <li>We do not store conversations unless explicitly stated for paid advisory services</li>
+                    <li>All data is handled in accordance with our Privacy Policy</li>
+                    <li>You retain ownership of any personal information you provide</li>
+                    <li>We implement reasonable security measures but cannot guarantee absolute security</li>
+                    <li>We may use anonymized data for service improvement and analytics</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">5. No Responsibility for Employer Actions</h2>
+            <div class="section-content">
+                <p>Employers may interpret your actions differently than anticipated. Users must independently assess risks associated with implementing any guidance.</p>
+                
+                <ul class="bullet-list">
+                    <li>We cannot predict or control how employers will respond to your actions</li>
+                    <li>Workplace dynamics vary significantly across organizations and industries</li>
+                    <li>You should consider your specific context before implementing any strategies</li>
+                    <li>We are not responsible for any employment consequences you may experience</li>
+                    <li>You assume all risk associated with applying our guidance in your workplace</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">6. Urgent Risk Guidance</h2>
+            <div class="section-content">
+                <p>If your situation involves potential legal, financial, or mental health risks, seek qualified professional support immediately.</p>
+                
+                <ul class="bullet-list">
+                    <li>For legal matters: Consult a qualified employment attorney</li>
+                    <li>For mental health concerns: Contact appropriate healthcare providers</li>
+                    <li>For emergency situations: Use appropriate emergency services</li>
+                    <li>For union matters: Contact your union representative directly</li>
+                    <li>For discrimination or harassment: Follow your organization's official procedures</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">7. Liability Limitation</h2>
+            <div class="section-content">
+                <p>To the maximum extent permitted by law, we disclaim responsibility for any direct or indirect loss resulting from the use of this platform.</p>
+                
+                <ul class="bullet-list">
+                    <li>We are not liable for any employment decisions or outcomes</li>
+                    <li>We are not responsible for financial losses or career impacts</li>
+                    <li>We do not guarantee the accuracy or completeness of any information</li>
+                    <li>Your use of the service is at your own risk</li>
+                    <li>Our total liability shall not exceed the amount paid for services in the preceding 12 months</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">8. Intellectual Property & Usage Limits</h2>
+            <div class="section-content">
+                <p>All content, features, and functionality of The Employee Playbook are owned by us and are protected by international copyright, trademark, and other intellectual property laws.</p>
+                
+                <ul class="bullet-list">
+                    <li>You may not reproduce, distribute, or create derivative works without permission</li>
+                    <li>Content is licensed for personal, non-commercial use only</li>
+                    <li>We reserve all rights not expressly granted in these terms</li>
+                    <li>Unauthorized use may result in termination of your access</li>
+                    <li>You may not use our content to train AI models or competing services</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">9. Termination of Use</h2>
+            <div class="section-content">
+                <p>We reserve the right to terminate or suspend access to our service immediately, without prior notice, for conduct that we believe violates these Terms or is harmful to other users.</p>
+                
+                <ul class="bullet-list">
+                    <li>We may terminate accounts for violation of these terms</li>
+                    <li>Termination may occur for abusive or harmful behavior</li>
+                    <li>We may discontinue service with reasonable notice</li>
+                    <li>Upon termination, your right to use the service will immediately cease</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">10. Jurisdiction</h2>
+            <div class="section-content">
+                <p>These Terms shall be governed by and construed in accordance with the laws of England and Wales. Any disputes relating to these terms will be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+                
+                <ul class="bullet-list">
+                    <li>These terms are governed by English law</li>
+                    <li>Disputes will be resolved in English courts</li>
+                    <li>If any provision is found invalid, the remainder remains in effect</li>
+                    <li>We may update these terms with notice to users</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="acceptance-box">
+            <div class="checkbox-container">
+                <input type="checkbox" id="terms-acceptance">
+                <label for="terms-acceptance">I have read, understood, and agree to be bound by these Terms & Conditions. I understand that The Employee Playbook provides strategic guidance only and does not constitute legal advice or representation.</label>
+            </div>
+            <button class="accept-button" id="accept-button" disabled>Accept Terms & Continue</button>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/img/logo.png" alt="The Employee Playbook" class="footer-logo-img" id="footer-logo"
+                             onerror="this.style.display='none'; document.getElementById('footer-logo-fallback').style.display='block';">
+                        <div class="logo-fallback" id="footer-logo-fallback" style="font-size: 28px;">THE EMPLOYEE PLAYBOOK</div>
+                    </a>
+                </div>
+                <p class="footer-description">A private strategy system giving employees clarity and advantage in the moments that matter most.</p>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h3 class="footer-newsletter-title">Stay updated with strategic insights</h3>
+                <form class="footer-newsletter-form">
+                    <input type="email" class="footer-newsletter-input" placeholder="Your email" required>
+                    <button type="submit" class="footer-newsletter-button">Subscribe</button>
+                </form>
+            </div>
+            
+            <div class="footer-nav">
+                <div class="footer-nav-grid">
+                    <div class="footer-nav-section">
+                        <h3 class="footer-heading">The Playbook</h3>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="the-lens.html">The Lens</a></li>
+                            <li class="footer-link"><a href="the-tools.html">The Toolkit</a></li>
+                            <li class="footer-link"><a href="the-coach.html">The Coach</a></li>
+                            <li class="footer-link"><a href="the-shift.html">The Shift</a></li>
+                            <li class="footer-link"><a href="the-pricing.html">The Pricing</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-nav-section">
+                        <h3 class="footer-heading">Company</h3>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="about-us.html">About</a></li>
+                            <li class="footer-link"><a href="#">Privacy</a></li>
+                            <li class="footer-link"><a href="terms-and-conditions.html">Terms</a></li>
+                            <li class="footer-link"><a href="#">Security</a></li>
+                            <li class="footer-link"><a href="#">Help Centre</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2023 The Employee Playbook. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mark page as loaded to prevent FOUC
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('loaded');
+        
+        // Dark mode toggle
+        document.querySelector('.theme-toggle').addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+            
+            // Update logo for dark mode
+            const logo = document.getElementById('logo');
+            const footerLogo = document.getElementById('footer-logo');
+            if (document.body.classList.contains('dark-mode')) {
+                logo.src = 'assets/img/logo-dark.png';
+                footerLogo.src = 'assets/img/logo-dark.png';
+            } else {
+                logo.src = 'assets/img/logo.png';
+                footerLogo.src = 'assets/img/logo.png';
+            }
+        });
+
+        // Mobile navigation toggle
+        document.querySelector('.mobile-toggle').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Terms acceptance toggle
+        const checkbox = document.getElementById('terms-acceptance');
+        const acceptButton = document.getElementById('accept-button');
+        
+        checkbox.addEventListener('change', function() {
+            acceptButton.disabled = !this.checked;
+        });
+        
+        acceptButton.addEventListener('click', function() {
+            if (!this.disabled) {
+                alert('Thank you for accepting our Terms & Conditions. You may now continue to use our service.');
+                // In a real implementation, you would redirect or enable service access
+                window.location.href = 'index.html';
+            }
+        });
+
+        // Smooth scrolling with offset for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 96; // 80px header + 16px extra spacing
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.mobile-toggle i').classList.add('fa-bars');
+                    document.querySelector('.mobile-toggle i').classList.remove('fa-times');
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
