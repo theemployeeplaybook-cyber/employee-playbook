@@ -1,0 +1,2182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get real-time strategic guidance for workplace challenges. Navigate office politics, difficult conversations, and career decisions with confidence.">
+    <title>The Coach | Real-Time Strategic Guidance | The Employee Playbook</title>
+    
+    <!-- Font Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --medium-gray: #E9ECEF;
+            --dark-gray: #6C757D;
+            --text-dark: #212529;
+            --text-medium: #495057;
+            --accent-purple: #7B5FC4;
+            --accent-purple-dark: #5A4496;
+            --light-purple: #E6E0F5;
+            --border-light: rgba(0, 0, 0, 0.08);
+            --hero-gray: #f5f7fa;
+            --nav-bg: rgba(255, 255, 255, 0.95);
+            --deep-navy: #0A1428;
+            --soft-blue: #EFF5FF;
+            --gradient-primary: linear-gradient(135deg, #7B5FC4 0%, #5A3FB5 100%);
+            --gradient-secondary: linear-gradient(135deg, #E6E0F5 0%, #F0EDFA 100%);
+        }
+
+        .dark-mode {
+            --primary-white: #121212;
+            --light-gray: #1E1E1E;
+            --medium-gray: #2D2D2D;
+            --dark-gray: #8A8A8A;
+            --text-dark: #F5F5F5;
+            --text-medium: #CCCCCC;
+            --accent-purple: #8B6CE6;
+            --accent-purple-dark: #6A4FC4;
+            --light-purple: #E6E0F5;
+            --border-light: rgba(255, 255, 255, 0.08);
+            --hero-gray: #1a1a1a;
+            --nav-bg: rgba(18, 18, 18, 0.95);
+            --deep-navy: #EFF5FF;
+            --soft-blue: #1A2333;
+            --gradient-primary: linear-gradient(135deg, #8B6CE6 0%, #6A4BD6 100%);
+            --gradient-secondary: linear-gradient(135deg, #2D2D2D 0%, #3D3D3D 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--primary-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        body.loaded {
+            opacity: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+            height: 80px;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            height: 100%;
+        }
+
+        /* Logo Styles */
+        .logo-img {
+            height: 100px;
+            width: auto;
+            transform: translateX(20%);
+            padding: 14px 10px;
+            transition: all 0.3s ease;
+            display: block;
+            min-height: 100px;
+        }
+
+        .dark-mode .logo-img {
+            content: url('assets/img/logo-dark.png');
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+        }
+
+        .nav-link {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 17px;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Active page indicator - Purple underline */
+        .nav-link.active {
+            color: var(black);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-purple);
+            border-radius: 2px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            transform: translateX(-20%);
+        }
+
+        .sign-in {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 17px;
+        }
+
+        .header-cta {
+            background: var(--accent-purple);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(123, 95, 196, 0.4);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-toggle:hover {
+            background-color: var(--light-gray);
+        }
+
+        /* New Tag for The Coach */
+        .nav-link-container {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .new-tag {
+            position: absolute;
+            top: -12px;
+            right: -35px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #000;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        /* Mobile Sign In Button */
+        .mobile-sign-in {
+            display: none;
+        }
+
+        /* Mobile Sign Up Button */
+        .mobile-sign-up {
+            display: none;
+        }
+
+        /* Hero Section */
+        .coach-hero {
+            background: var(--soft-blue);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding-top: 160px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coach-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-secondary);
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        .coach-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .coach-hero-title {
+            font-size: 70px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--deep-navy);
+            letter-spacing: -1.5px;
+        }
+
+        .coach-hero-subtitle {
+            font-size: 22px;
+            color: var(--text-medium);
+            margin-bottom: 44px;
+            line-height: 1.5;
+            max-width: 900px;
+            margin: 0 auto 44px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 18px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 17px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(123, 95, 196, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(123, 95, 196, 0.4);
+        }
+
+        .secondary-cta {
+            display: inline-block;
+            background: transparent;
+            color: var(--accent-purple);
+            padding: 16px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-purple);
+            margin-left: 20px;
+        }
+
+        .secondary-cta:hover {
+            background: rgba(123, 95, 196, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Benefits Grid */
+        .benefits-section {
+            background: var(--primary-white);
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .benefits-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .benefits-title {
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            color: var(--deep-navy);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .benefit-card {
+            background: var(--light-gray);
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+            height: 100%;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .benefit-card-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--light-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-purple);
+            font-size: 32px;
+        }
+
+        .benefit-card h4 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .benefit-card p {
+            color: var(--text-medium);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Features Pills */
+        .features-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .feature-pill {
+            background: var(--light-purple);
+            border-radius: 50px;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--accent-purple-dark);
+            font-size: 15px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .feature-pill .check-icon {
+            color: var(--accent-purple);
+            font-size: 16px;
+        }
+
+        /* Chat UI */
+        .chat-ui {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--deep-navy);
+            z-index: 1000;
+            flex-direction: column;
+            transition: left 1.2s ease;
+        }
+
+        .chat-ui.open {
+            left: 0;
+        }
+
+        .chat-container {
+            background: var(--primary-white);
+            border-radius: 16px;
+            margin: 30px;
+            height: calc(100% - 80px);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+
+        .chat-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            background: var(--primary-white);
+            border-radius: 16px 16px 0 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .chat-title-section {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .chat-title-section h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0;
+            transition: color 0.3s ease;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--dark-gray);
+            transition: color 0.3s ease;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10B981;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        .chat-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .chat-action-btn {
+            background: none;
+            border: none;
+            color: var(--text-medium);
+            cursor: pointer;
+            font-size: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .chat-action-btn:hover {
+            background: var(--light-gray);
+            color: var(--accent-purple);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px 30px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            min-height: 0;
+        }
+
+        .message {
+            max-width: 100%;
+            padding: 0;
+            font-size: 15px;
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message-coach {
+            align-self: flex-start;
+        }
+
+        .message-user {
+            align-self: flex-end;
+        }
+
+        .message-bubble {
+            padding: 12px 18px;
+            border-radius: 18px;
+            position: relative;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            width: 100%;
+        }
+
+        .message-coach .message-bubble {
+            background: var(--light-gray);
+            color: var(--text-dark);
+            border-bottom-left-radius: 6px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .message-user .message-bubble {
+            background: var(--accent-purple);
+            color: white;
+            border-bottom-right-radius: 6px;
+        }
+
+        .message-meta {
+            font-size: 11px;
+            color: var(--dark-gray);
+            margin-top: 4px;
+            padding: 0 4px;
+            transition: color 0.3s ease;
+        }
+
+        .message-user .message-meta {
+            text-align: right;
+        }
+
+        .chat-input-container {
+            padding: 20px 30px;
+            border-top: 1px solid var(--border-light);
+            background: var(--primary-white);
+            border-radius: 0 0 16px 16px;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .chat-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .chat-input-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 14px 18px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 16px;
+            font-size: 15px;
+            background: var(--primary-white);
+            color: var(--text-dark);
+            resize: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+            min-height: 50px;
+            max-height: 120px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 3px rgba(123, 95, 196, 0.1);
+        }
+
+        .chat-input::placeholder {
+            color: var(--dark-gray);
+        }
+
+        .chat-actions-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .privacy-notice {
+            font-size: 12px;
+            color: var(--dark-gray);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .privacy-icon {
+            color: var(--accent-purple);
+        }
+
+        .chat-send {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(123, 95, 196, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            height: fit-content;
+        }
+
+        .chat-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(123, 95, 196, 0.4);
+        }
+
+        .chat-send:disabled {
+            background: var(--dark-gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Thinking Animation */
+        .thinking-animation {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 0;
+        }
+
+        .thinking-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-purple);
+            opacity: 0.6;
+            animation: thinkingPulse 1.5s infinite ease-in-out;
+        }
+
+        .thinking-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .thinking-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes thinkingPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* User Typing Animation */
+        .typing-animation {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 0;
+            align-self: flex-end;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: white;
+            opacity: 0.6;
+            animation: typingPulse 1.5s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Close Button */
+        .close-chat {
+            background: none;
+            border: none;
+            color: var(--text-medium);
+            cursor: pointer;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .close-chat:hover {
+            background: var(--light-gray);
+            color: var(--accent-purple);
+        }
+
+        /* Disclaimer Modal */
+        .disclaimer-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .disclaimer-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .disclaimer-content {
+            background: var(--primary-white);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+
+        .disclaimer-modal.show .disclaimer-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .disclaimer-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--deep-navy);
+            transition: color 0.3s ease;
+        }
+
+        .disclaimer-text {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: var(--text-medium);
+            transition: color 0.3s ease;
+        }
+
+        .disclaimer-text strong {
+            font-weight: 700;
+            color: var(--deep-navy);
+        }
+
+        .disclaimer-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .disclaimer-checkbox input {
+            margin-top: 4px;
+        }
+
+        .disclaimer-checkbox label {
+            font-size: 14px;
+            color: var(--text-medium);
+            line-height: 1.5;
+            transition: color 0.3s ease;
+        }
+
+        .terms-link {
+            color: var(--accent-purple);
+            text-decoration: none;
+        }
+
+        .terms-link:hover {
+            text-decoration: underline;
+        }
+
+        .disclaimer-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .disclaimer-btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .disclaimer-btn.accept {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+        }
+
+        .disclaimer-btn.accept:hover {
+            background: var(--accent-purple-dark);
+        }
+
+        .disclaimer-btn.accept:disabled {
+            background: var(--dark-gray);
+            cursor: not-allowed;
+        }
+
+        .disclaimer-btn.decline {
+            background: var(--light-gray);
+            color: var(--text-medium);
+            border: 1px solid var(--medium-gray);
+        }
+
+        .disclaimer-btn.decline:hover {
+            background: var(--medium-gray);
+        }
+
+        /* Sign In Prompt */
+        .signin-prompt {
+            display: none;
+            background: var(--light-gray);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            color: var(--text-dark);
+            border: 1px solid var(--border-light);
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .signin-prompt h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .signin-prompt p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .signin-btn {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .signin-btn:hover {
+            background: var(--accent-purple-dark);
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: var(--soft-blue);
+            text-align: center;
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-secondary);
+            opacity: 0.7;
+            z-index: 0;
+        }
+
+        .final-cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .final-statement {
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.3;
+            color: var(--deep-navy);
+        }
+
+        .cta-note {
+            font-size: 18px;
+            color: var(--text-medium);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-white);
+            padding: 40px 0 20px;
+            color: var(--text-medium);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 40px;
+            align-items: start;
+        }
+
+        .footer-about {
+            max-width: 400px;
+            padding-left: 20px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        /* Footer Logo - DOUBLED SIZE */
+        .footer-logo-img {
+            height: 100px;
+            width: auto;
+            padding: 8px 0;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .footer-logo-img {
+            content: url('assets/img/logo-dark.png');
+        }
+
+        .footer-description {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .footer-heading {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-link {
+            margin-bottom: 10px;
+        }
+
+        .footer-link a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link a:hover {
+            color: var(--accent-purple);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-light);
+            font-size: 14px;
+        }
+
+        .footer-nav {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            margin: 0;
+        }
+
+        .footer-nav-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .footer-newsletter {
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+            text-align: center;
+        }
+
+        .footer-newsletter-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .footer-newsletter-form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .footer-newsletter-input {
+            padding: 12px 16px;
+            border: 1px solid var(--medium-gray);
+            border-radius: 8px;
+            font-size: 14px;
+            background: var(--primary-white);
+            color: var(--text-dark);
+        }
+
+        .footer-newsletter-button {
+            background: var(--accent-purple);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-newsletter-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
+        }
+
+        /* Logo Fallback */
+        .logo-fallback {
+            display: none;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        /* Mobile Coach Tab - HIDDEN on desktop, VISIBLE on mobile only */
+        .mobile-coach-tab {
+            display: none; /* Hidden by default for desktop */
+            position: fixed;
+            left: 0;
+            top: 75%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-purple-dark) 100%);
+            color: white;
+            padding: 14px 18px;
+            border-radius: 0 12px 12px 0;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 5px 20px rgba(123, 95, 196, 0.4);
+            transition: all 0.3s ease;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .mobile-coach-tab:hover {
+            padding-left: 22px;
+            box-shadow: 0 8px 25px rgba(123, 95, 196, 0.5);
+        }
+
+        .tab-text {
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .tab-icon {
+            font-size: 18px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .coach-hero-title {
+                font-size: 48px;
+            }
+
+            .benefits-title {
+                font-size: 36px;
+            }
+
+            .nav-links {
+                gap: 30px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* ADDED: Move hero content up significantly for mobile */
+            .coach-hero {
+                padding-top: 120px; /* Reduced from 160px to move content up */
+                min-height: 90vh; /* Reduced min-height to make content appear higher */
+            }
+            
+            .coach-hero-content {
+                margin-top: -30px; /* Additional adjustment to move content up */
+            }
+
+            /* Mobile Navigation Changes */
+            .nav-container {
+                justify-content: center;
+                position: relative;
+            }
+            
+            .logo {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            /* INCREASED: Mobile header logo size by 25% */
+            .logo-img {
+                height: 122px;
+                transform: none;
+                padding: 12px 0;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+                position: absolute;
+                left: 20px;
+            }
+            
+            /* REMOVED: Hide the Sign Up button in mobile view */
+            .header-cta {
+                display: none !important;
+            }
+            
+            .nav-actions {
+                transform: none;
+                gap: 16px;
+                position: absolute;
+                right: 20px;
+            }
+            
+            /* Hide the desktop Sign In button in mobile view */
+            .nav-actions .sign-in {
+                display: none;
+            }
+            
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: var(--nav-bg);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 20px;
+                border-top: 1px solid var(--border-light);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                gap: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+            
+            /* Move The Coach to the left and New tag next to it */
+            .nav-link-container {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+            }
+            
+            .new-tag {
+                position: static;
+                margin-left: 8px;
+                top: auto;
+                right: auto;
+            }
+            
+            /* CHANGED: Remove purple underline and make active page title purple in mobile menu */
+            .nav-link.active::after {
+                display: none; /* Remove the purple underline */
+            }
+            
+            .nav-link.active {
+                color: var(--accent-purple); /* Make active page title purple */
+                font-weight: 600;
+            }
+
+            /* Make the Sign In button in hamburger menu white */
+            .mobile-sign-in {
+                display: block !important;
+                margin-top: 10px;
+                padding: 12px 20px;
+                background: white;
+                color: var(--accent-purple);
+                border-radius: 8px;
+                text-align: center;
+                font-weight: 600;
+                text-decoration: none;
+                border: 2px solid var(--accent-purple);
+            }
+
+            .dark-mode .mobile-sign-in {
+                background: var(--primary-white);
+                color: var(--accent-purple);
+                border: 2px solid var(--accent-purple);
+            }
+
+            /* ADDED: Sign Up button in hamburger menu */
+            .mobile-sign-up {
+                display: block !important;
+                margin-top: 10px;
+                padding: 12px 20px;
+                background: var(--accent-purple);
+                color: white;
+                border-radius: 8px;
+                text-align: center;
+                font-weight: 600;
+                text-decoration: none;
+                border: 2px solid var(--accent-purple);
+            }
+
+            .mobile-sign-up:hover {
+                background: var(--accent-purple-dark);
+            }
+
+            /* CHANGED: Increase Hero headline size by 25% for mobile and move it higher */
+            .coach-hero-title {
+                font-size: 45px;
+            }
+
+            .coach-hero-subtitle {
+                font-size: 20px;
+                margin-top: 20px; /* ADDED: Blank line between H1 and subtitle */
+                margin-bottom: 20px; /* ADDED: Blank line between subtitle and tab */
+            }
+
+            /* ADDED: Show mobile coach tab ONLY on mobile - MOVED 20% LOWER */
+            .mobile-coach-tab {
+                display: flex;
+                top: 80%; /* MOVED 20% LOWER: Changed from 60% to 80% */
+                /* CHANGED: Make coach tab 5% bigger */
+                padding: 15px 19px; /* Increased by 5% from 14px 18px */
+            }
+
+            .tab-text {
+                font-size: 15.75px; /* Increased by 5% from 15px */
+            }
+
+            .tab-icon {
+                font-size: 18.9px; /* Increased by 5% from 18px */
+            }
+
+            /* REMOVED: Remove the CTA buttons in mobile view */
+            .cta-buttons {
+                display: none;
+            }
+
+            /* REDUCED: Reduce section titles to match benefits-title size */
+            .benefits-title {
+                font-size: 36px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .benefit-card {
+                padding: 30px 20px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-nav-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-newsletter-form {
+                flex-direction: column;
+            }
+            
+            /* Footer Changes */
+            .footer-nav-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+            
+            /* Mobile Logo Adjustments */
+            .footer-logo-img {
+                height: 120px;
+            }
+            
+            /* REDUCED: Final statement size for mobile */
+            .final-statement {
+                font-size: 28px;
+            }
+            
+            .features-pills {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            /* Chat UI Mobile Adjustments */
+            .chat-container {
+                margin: 10px;
+                height: calc(100% - 20px);
+            }
+            
+            .chat-header, .chat-messages, .chat-input-container {
+                padding: 15px 20px;
+            }
+            
+            .chat-input-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .chat-send {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* ADDED: Move hero content up even more for small screens */
+            .coach-hero {
+                padding-top: 110px; /* Further reduced for small screens */
+                min-height: 85vh; /* Further reduced min-height */
+            }
+            
+            .coach-hero-content {
+                margin-top: -25px; /* Slightly less adjustment for small screens */
+            }
+
+            .logo-img {
+                height: 100px;
+            }
+            
+            .footer-logo-img {
+                height: 100px;
+            }
+            
+            .logo-fallback {
+                font-size: 18px;
+            }
+            
+            /* CHANGED: Increase Hero headline size by 25% for mobile and move it higher */
+            .coach-hero-title {
+                font-size: 45px;
+            }
+            
+            .coach-hero-subtitle {
+                font-size: 18px;
+                margin-top: 20px; /* ADDED: Blank line between H1 and subtitle */
+                margin-bottom: 20px; /* ADDED: Blank line between subtitle and tab */
+            }
+            
+            /* ADDED: Mobile coach tab position for very small screens */
+            .mobile-coach-tab {
+                top: 80%; /* MOVED 20% LOWER: Changed from 60% to 80% */
+                /* CHANGED: Make coach tab 5% bigger for small screens too */
+                padding: 15px 19px; /* Increased by 5% from 14px 18px */
+            }
+            
+            /* REDUCED: Further reduce final statement size for very small mobile */
+            .final-statement {
+                font-size: 24px;
+            }
+            
+            .benefit-card-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="container nav-container">
+        <!-- Hamburger menu on the left for mobile -->
+        <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+        
+        <!-- Logo centered for mobile -->
+        <a href="index.html" class="logo">
+            <img src="assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="logo"
+                 onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+            <div class="logo-fallback" id="logo-fallback">THE EMPLOYEE PLAYBOOK</div>
+        </a>
+        
+        <!-- Navigation links with mobile sign-in -->
+        <div class="nav-links">
+            <a href="the-lens.html" class="nav-link">The Lens</a>
+            <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+            <!-- The Coach is BACK in the navigation -->
+            <div class="nav-link-container">
+                <a href="the-coach.html" class="nav-link active">The Coach</a>
+                <span class="new-tag">NEW</span>
+            </div>
+            <a href="the-shift.html" class="nav-link">The Shift</a>
+            <a href="the-pricing.html" class="nav-link">The Pricing</a>
+            <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+            <!-- ADDED: Sign Up button in hamburger menu -->
+            <a href="create-account.html" class="mobile-sign-up">Sign Up</a>
+        </div>
+        
+        <!-- Desktop actions (hidden on mobile) -->
+        <div class="nav-actions">
+            <!-- CHANGED: Text changed from "Sign me up" to "Sign up" -->
+            <a href="create-account.html" class="header-cta">Sign up</a>
+            <a href="sign-in.html" class="sign-in">Sign in</a>
+            <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="coach-hero">
+    <div class="container coach-hero-content">
+        <h1 class="coach-hero-title">When the pressure spikes, clarity is power</h1>
+        <!-- ADDED: Blank line between H1 and subtitle for mobile -->
+        <p class="coach-hero-subtitle">The Coach is your private space to untangle complex situations and find your way forward with confidence</p>
+        <!-- ADDED: Blank line between subtitle and CTA buttons for mobile -->
+        <div class="cta-buttons">
+            <a href="#benefits" class="cta-button">Learn How It Works</a>
+            <a href="#" class="secondary-cta" id="openChatCta">Try The Coach Now →</a>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="benefits-section" id="benefits">
+    <div class="container benefits-content">
+        <h3 class="benefits-title">Your confidential sounding board for workplace challenges</h3>
+        
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-card-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h4>Get unstuck in real time</h4>
+                <p>When you're facing a difficult conversation, political challenge, or career crossroads</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-card-icon">
+                    <i class="fas fa-chess-board"></i>
+                </div>
+                <h4>Navigate office politics</h4>
+                <p>With strategic frameworks that help you maintain integrity while building influence</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-card-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h4>Turn tension into opportunity</h4>
+                <p>By learning to handle conflicts, negotiations, and difficult stakeholders</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h4>Build career momentum</h4>
+                <p>With actionable steps that position you for recognition, promotion, and growth</p>
+            </div>
+        </div>
+
+        <!-- Features Pills -->
+        <div class="features-pills">
+            <div class="feature-pill">
+                <i class="fas fa-check check-icon"></i>
+                <span>Completely confidential</span>
+            </div>
+            <div class="feature-pill">
+                <i class="fas fa-check check-icon"></i>
+                <span>Real-time strategic guidance</span>
+            </div>
+            <div class="feature-pill">
+                <i class="fas fa-check check-icon"></i>
+                <span>Actionable frameworks</span>
+            </div>
+            <div class="feature-pill">
+                <i class="fas fa-check check-icon"></i>
+                <span>No tracking or storage</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mobile Coach Tab (only visible on mobile) -->
+<div class="mobile-coach-tab" id="mobileCoachTab">
+    <div class="tab-icon">
+        <i class="fas fa-comments"></i>
+    </div>
+    <div class="tab-text">The Coach</div>
+</div>
+
+<!-- Chat UI -->
+<div class="chat-ui" id="chatUI">
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="chat-title-section">
+                <h1>The Coach</h1>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span>Available</span>
+                </div>
+            </div>
+            <div class="chat-actions">
+                <button class="chat-action-btn" title="New session" id="newSessionBtn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button class="close-chat" id="closeChat" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+            <div class="message message-coach">
+                <div class="message-bubble">
+                    Hey there! <span class="hand-wave">👋</span>I'm here to be your confidential sounding board for those workplace situations. The ones you can't discuss with colleagues or HR.<br><br>
+                    What's on your mind today? You can ask me anything about difficult conversations, office politics, career strategy, or anything else that's weighing on you.
+                </div>
+                <div class="message-meta">The Coach • Just now</div>
+            </div>
+        </div>
+        
+        <!-- Sign In Prompt -->
+        <div class="signin-prompt" id="signinPrompt">
+            <h3>Continue Your Conversation</h3>
+            <p>You've reached the limit for guest messages. Sign in to continue your conversation with The Coach.</p>
+            <button class="signin-btn" id="signinBtn">Sign In to Continue</button>
+        </div>
+        
+        <div class="chat-input-container">
+            <form class="chat-form" id="chatForm">
+                <div class="chat-input-row">
+                    <textarea class="chat-input" id="chatInput" placeholder="Describe your situation or ask a question..." rows="2" required></textarea>
+                    <button type="submit" class="chat-send" id="chatSend">
+                        <i class="fas fa-paper-plane"></i>
+                        Send
+                    </button>
+                </div>
+                <div class="chat-actions-row">
+                    <div class="privacy-notice">
+                        <i class="fas fa-lock privacy-icon"></i>
+                        This conversation is private and secure. Your data is never shared.
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Disclaimer Modal -->
+<div class="disclaimer-modal" id="disclaimerModal">
+    <div class="disclaimer-content">
+        <h2 class="disclaimer-title">Important Guidance Disclaimer</h2>
+        <div class="disclaimer-text">
+            <p><strong>The Coach offers strategic guidance only. It is not legal, financial or psychological advice.</strong></p>
+            <p>Conversations are confidential and not tied to your identity.</p>
+            <p>By using The Coach, you accept this guidance at your own discretion and agree to our <a href="terms-and-conditions.html" class="terms-link">Terms & Conditions</a>. The Employee Playbook is not responsible for decisions made based on its guidance.</p>
+        </div>
+        <div class="disclaimer-checkbox">
+            <input type="checkbox" id="disclaimerCheck">
+            <label for="disclaimerCheck">I have read and understand the disclaimer and agree to the <a href="terms-and-conditions.html" class="terms-link">Terms & Conditions</a></label>
+        </div>
+        <div class="disclaimer-actions">
+            <button class="disclaimer-btn decline" id="declineDisclaimer">Decline</button>
+            <button class="disclaimer-btn accept" id="acceptDisclaimer" disabled>Accept & Continue</button>
+        </div>
+    </div>
+</div>
+
+<!-- Final CTA -->
+<section class="final-cta">
+    <div class="container final-cta-content">
+        <h2 class="final-statement">Get real-time guidance for your toughest workplace challenges.</h2>
+        <p class="cta-note">Join professionals who navigate complex situations with confidence and strategic clarity.</p>
+        <a href="create-account.html" class="cta-button">Start Your Free Trial</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <a href="index.html">
+                        <img src="assets/img/logo.png" alt="The Employee Playbook" class="footer-logo-img" id="footer-logo"
+                             onerror="this.style.display='none'; document.getElementById('footer-logo-fallback').style.display='block';">
+                        <div class="logo-fallback" id="footer-logo-fallback" style="font-size: 28px;">THE EMPLOYEE PLAYBOOK</div>
+                    </a>
+                </div>
+                <p class="footer-description">A private strategy system giving employees clarity and advantage in the moments that matter most.</p>
+            </div>
+            
+            <div class="footer-newsletter">
+                <h3 class="footer-newsletter-title">Stay updated with strategic insights</h3>
+                <form class="footer-newsletter-form">
+                    <input type="email" class="footer-newsletter-input" placeholder="Your email" required>
+                    <button type="submit" class="footer-newsletter-button">Subscribe</button>
+                </form>
+            </div>
+            
+            <div class="footer-nav">
+                <div class="footer-nav-grid">
+                    <div class="footer-nav-section">
+                        <h3 class="footer-heading">The Playbook</h3>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="the-lens.html">The Lens</a></li>
+                            <li class="footer-link"><a href="the-toolkit.html">The Toolkit</a></li>
+                            <li class="footer-link"><a href="the-coach.html">The Coach</a></li>
+                            <li class="footer-link"><a href="the-shift.html">The Shift</a></li>
+                            <li class="footer-link"><a href="the-pricing.html">The Pricing</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-nav-section">
+                        <h3 class="footer-heading">Company</h3>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="about-us.html">About</a></li>
+                            <li class="footer-link"><a href="#">Privacy</a></li>
+                            <li class="footer-link"><a href="terms-and-conditions.html">Terms</a></li>
+                            <li class="footer-link"><a href="#">Security</a></li>
+                            <li class="footer-link"><a href="#">Help Centre</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2025 The Employee Playbook. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mark page as loaded to prevent FOUC
+    document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.add('loaded');
+        
+        // Dark mode toggle
+        document.querySelector('.theme-toggle').addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+            
+            // Update logo for dark mode
+            const logo = document.getElementById('logo');
+            const footerLogo = document.getElementById('footer-logo');
+            if (document.body.classList.contains('dark-mode')) {
+                logo.src = 'assets/img/logo-dark.png';
+                footerLogo.src = 'assets/img/logo-dark.png';
+            } else {
+                logo.src = 'assets/img/logo.png';
+                footerLogo.src = 'assets/img/logo.png';
+            }
+        });
+
+        // Mobile navigation toggle
+        document.querySelector('.mobile-toggle').addEventListener('click', function () {
+            document.querySelector('.nav-links').classList.toggle('active');
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Smooth scrolling with offset for fixed header
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 96; // 80px header + 16px extra spacing
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.mobile-toggle i').classList.add('fa-bars');
+                    document.querySelector('.mobile-toggle i').classList.remove('fa-times');
+                }
+            });
+        });
+
+        // Coach Chat Functionality
+        // State variables
+        let messageCount = 0;
+        let disclaimerAccepted = false;
+        let userContext = {};
+        let isTyping = false;
+        let typingTimeout;
+
+        // Tab functionality - Mobile ONLY
+        document.getElementById('mobileCoachTab').addEventListener('click', function() {
+            // Open the chat UI with sliding animation
+            document.getElementById('chatUI').classList.add('open');
+            
+            // Show disclaimer after 2 seconds
+            setTimeout(() => {
+                if (!disclaimerAccepted) {
+                    const disclaimerModal = document.getElementById('disclaimerModal');
+                    disclaimerModal.classList.add('show');
+                }
+            }, 2000);
+        });
+
+        // Open chat from CTA
+        document.getElementById('openChatCta').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('chatUI').classList.add('open');
+            
+            // Show disclaimer after 2 seconds
+            setTimeout(() => {
+                if (!disclaimerAccepted) {
+                    const disclaimerModal = document.getElementById('disclaimerModal');
+                    disclaimerModal.classList.add('show');
+                }
+            }, 2000);
+        });
+
+        // Close chat functionality
+        document.getElementById('closeChat').addEventListener('click', function() {
+            document.getElementById('chatUI').classList.remove('open');
+            // Also close disclaimer if open
+            document.getElementById('disclaimerModal').classList.remove('show');
+        });
+
+        // New session button functionality - clear chat
+        document.getElementById('newSessionBtn').addEventListener('click', function() {
+            const chatMessages = document.getElementById('chatMessages');
+            chatMessages.innerHTML = `
+                <div class="message message-coach">
+                    <div class="message-bubble">
+                        Hey there! <span class="hand-wave">👋</span>I'm here to be your confidential sounding board for those workplace situations. The ones you can't discuss with colleagues or HR.<br><br>
+                        What's on your mind today? You can ask me anything about difficult conversations, office politics, career strategy, or anything else that's weighing on you.
+                    </div>
+                    <div class="message-meta">The Coach • Just now</div>
+                </div>
+            `;
+            
+            // Reset message count and enable chat
+            messageCount = 0;
+            document.getElementById('chatSend').disabled = false;
+            document.getElementById('signinPrompt').style.display = 'none';
+        });
+
+        // Disclaimer checkbox
+        document.getElementById('disclaimerCheck').addEventListener('change', function() {
+            document.getElementById('acceptDisclaimer').disabled = !this.checked;
+        });
+
+        // Accept disclaimer
+        document.getElementById('acceptDisclaimer').addEventListener('click', function() {
+            disclaimerAccepted = true;
+            document.getElementById('disclaimerModal').classList.remove('show');
+            // Enable the chat input after accepting disclaimer
+            document.getElementById('chatSend').disabled = false;
+        });
+
+        // Decline disclaimer
+        document.getElementById('declineDisclaimer').addEventListener('click', function() {
+            document.getElementById('chatUI').classList.remove('open');
+            document.getElementById('disclaimerModal').classList.remove('show');
+            window.location.href = 'index.html';
+        });
+
+        // Sign in button
+        document.getElementById('signinBtn').addEventListener('click', function() {
+            window.location.href = 'sign-in.html';
+        });
+
+        // Chat functionality
+        const chatForm = document.getElementById('chatForm');
+        const chatInput = document.getElementById('chatInput');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatSend = document.getElementById('chatSend');
+        const signinPrompt = document.getElementById('signinPrompt');
+        
+        // Initially disable chat until disclaimer is accepted
+        chatSend.disabled = true;
+        
+        // Auto-resize textarea
+        chatInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = (this.scrollHeight) + 'px';
+            
+            // Show typing animation
+            if (!isTyping) {
+                showTypingAnimation();
+                isTyping = true;
+            }
+            
+            // Clear existing timeout
+            clearTimeout(typingTimeout);
+            
+            // Set new timeout to remove typing animation
+            typingTimeout = setTimeout(() => {
+                removeTypingAnimation();
+                isTyping = false;
+            }, 1000);
+        });
+
+        // Handle Enter key to submit (but allow Shift+Enter for new line)
+        chatInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                chatForm.dispatchEvent(new Event('submit'));
+            }
+        });
+        
+        // Chat form submission
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Remove typing animation if active
+            if (isTyping) {
+                removeTypingAnimation();
+                isTyping = false;
+                clearTimeout(typingTimeout);
+            }
+            
+            // Check if disclaimer has been accepted
+            if (!disclaimerAccepted) {
+                document.getElementById('disclaimerModal').classList.add('show');
+                return;
+            }
+            
+            // Check message limit
+            if (messageCount >= 2) {
+                signinPrompt.style.display = 'block';
+                chatSend.disabled = true;
+                return;
+            }
+            
+            const userMessage = chatInput.value.trim();
+            if (!userMessage) return;
+            
+            // Add user message to chat
+            addMessage(userMessage, 'user');
+            messageCount++;
+            
+            // Update user context based on message
+            updateUserContext(userMessage);
+            
+            // Clear input and reset height
+            chatInput.value = '';
+            chatInput.style.height = 'auto';
+            
+            // Show thinking animation
+            showThinkingAnimation();
+            
+            // Simulate coach response after delay
+            setTimeout(() => {
+                removeThinkingAnimation();
+                
+                if (messageCount <= 2) {
+                    // Give personalized response for first two messages
+                    addMessage(getPersonalizedResponse(userMessage), 'coach');
+                }
+                
+                // Check if we've reached the message limit
+                if (messageCount >= 2) {
+                    setTimeout(() => {
+                        signinPrompt.style.display = 'block';
+                        chatSend.disabled = true;
+                    }, 1000);
+                }
+            }, 1500);
+        });
+        
+        // Update user context based on their message
+        function updateUserContext(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Detect topic
+            if (lowerMessage.includes('manager') || lowerMessage.includes('boss') || lowerMessage.includes('supervisor')) {
+                userContext.topic = 'management';
+            } else if (lowerMessage.includes('team') || lowerMessage.includes('colleague') || lowerMessage.includes('coworker')) {
+                userContext.topic = 'team';
+            } else if (lowerMessage.includes('promotion') || lowerMessage.includes('raise') || lowerMessage.includes('career')) {
+                userContext.topic = 'career growth';
+            } else if (lowerMessage.includes('conflict') || lowerMessage.includes('disagreement') || lowerMessage.includes('tension')) {
+                userContext.topic = 'conflict';
+            } else if (lowerMessage.includes('politics') || lowerMessage.includes('influence') || lowerMessage.includes('network')) {
+                userContext.topic = 'office politics';
+            }
+            
+            // Detect emotion
+            if (lowerMessage.includes('frustrat') || lowerMessage.includes('angry') || lowerMessage.includes('upset')) {
+                userContext.emotion = 'frustrated';
+            } else if (lowerMessage.includes('stress') || lowerMessage.includes('overwhelm') || lowerMessage.includes('anxious')) {
+                userContext.emotion = 'stressed';
+            } else if (lowerMessage.includes('confus') || lowerMessage.includes('unsure') || lowerMessage.includes('uncertain')) {
+                userContext.emotion = 'confused';
+            } else if (lowerMessage.includes('disappoint') || lowerMessage.includes('let down')) {
+                userContext.emotion = 'disappointed';
+            }
+        }
+        
+        // Get personalised response based on user context
+        function getPersonalizedResponse(userMessage) {
+            const responses = [];
+            
+            // First response - acknowledge and ask follow-up
+            if (messageCount === 1) {
+                if (userContext.topic === 'management') {
+                    responses.push("I understand you're dealing with a management situation. What specifically has your manager done or said that's causing concern?");
+                } else if (userContext.topic === 'team') {
+                    responses.push("Team dynamics can be challenging. Tell me more about what's happening with your colleagues.");
+                } else if (userContext.topic === 'career growth') {
+                    responses.push("Career advancement is important. What specifically are you hoping to achieve with your promotion or growth goals?");
+                } else if (userContext.topic === 'conflict') {
+                    responses.push("Conflict situations require careful navigation. What's the main issue you're facing in this disagreement?");
+                } else if (userContext.topic === 'office politics') {
+                    responses.push("Office politics can be complex. What specific situation are you trying to navigate?");
+                } else {
+                    responses.push("Thank you for sharing. What's the most important aspect of this situation for you right now?");
+                }
+            } 
+            // Second response - more personalised follow-up
+            else if (messageCount === 2) {
+                if (userContext.emotion === 'frustrated') {
+                    responses.push("I can hear the frustration in your situation. When we feel this way, it's helpful to identify what's within our control. What one action could you take that would move things forward positively?");
+                } else if (userContext.emotion === 'stressed') {
+                    responses.push("This sounds stressful. Let's break this down - what's the immediate priority that needs attention right now?");
+                } else if (userContext.emotion === 'confused') {
+                    responses.push("When things feel unclear, it helps to focus on what you do know. What aspects of this situation feel most certain to you?");
+                } else if (userContext.emotion === 'disappointed') {
+                    responses.push("Disappointment is tough. What would need to happen for you to feel better about this situation?");
+                } else {
+                    responses.push("Based on what you've shared, let's explore more on what specific action would move you forward. What feels like the most immediate priority right now?");
+                }
+            }
+            
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+        
+        // Add message to chat
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', `message-${sender}`);
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.classList.add('message-bubble');
+            bubbleDiv.textContent = text;
+            
+            const metaDiv = document.createElement('div');
+            metaDiv.classList.add('message-meta');
+            
+            const now = new Date();
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            
+            if (sender === 'coach') {
+                metaDiv.textContent = `The Coach • ${timeString}`;
+            } else {
+                metaDiv.textContent = `You • ${timeString}`;
+            }
+            
+            messageDiv.appendChild(bubbleDiv);
+            messageDiv.appendChild(metaDiv);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Show thinking animation
+        function showThinkingAnimation() {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', 'message-coach');
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.classList.add('message-bubble');
+            
+            const thinkingDiv = document.createElement('div');
+            thinkingDiv.classList.add('thinking-animation');
+            
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('thinking-dot');
+                thinkingDiv.appendChild(dot);
+            }
+            
+            bubbleDiv.appendChild(thinkingDiv);
+            messageDiv.appendChild(bubbleDiv);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Remove thinking animation
+        function removeThinkingAnimation() {
+            const messages = chatMessages.querySelectorAll('.message');
+            const lastMessage = messages[messages.length - 1];
+            if (lastMessage && lastMessage.querySelector('.thinking-animation')) {
+                lastMessage.remove();
+            }
+        }
+        
+        // Show typing animation
+        function showTypingAnimation() {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message', 'message-user');
+            
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.classList.add('message-bubble');
+            bubbleDiv.style.background = 'var(--accent-purple)';
+            
+            const typingDiv = document.createElement('div');
+            typingDiv.classList.add('typing-animation');
+            
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('typing-dot');
+                typingDiv.appendChild(dot);
+            }
+            
+            bubbleDiv.appendChild(typingDiv);
+            messageDiv.appendChild(bubbleDiv);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Remove typing animation
+        function removeTypingAnimation() {
+            const messages = chatMessages.querySelectorAll('.message');
+            const lastMessage = messages[messages.length - 1];
+            if (lastMessage && lastMessage.querySelector('.typing-animation')) {
+                lastMessage.remove();
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

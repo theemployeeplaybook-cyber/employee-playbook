@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Pricing | The Employee Playbook</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <!-- THEME PRELOAD (prevents flash + keeps toggle consistent) -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('theme'); // "dark" | "light" | null
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const useDark = saved ? saved === 'dark' : prefersDark;
+        if (useDark) document.documentElement.classList.add('dark-mode');
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-white: #FFFFFF;
+      --light-gray: #F8F9FA;
+      --medium-gray: #E9ECEF;
+      --dark-gray: #6C757D;
+      --text-dark: #212529;
+      --text-medium: #495057;
+      --accent-purple: #7B5FC4;
+      --accent-purple-dark: #5A4496;
+      --light-purple: #E6E0F5;
+      --lighter-purple: #F0EBFA;
+      --border-light: rgba(0, 0, 0, 0.08);
+      --hero-gray: #f5f7fa;
+      --nav-bg: rgba(255, 255, 255, 0.95);
+      --sidebar-bg: #fafbfc;
+      --chat-bg: #ffffff;
+      --online-green: #10B981;
+      --hero-purple: #5A4496;
+      --user-msg-bg: #7B5FC4;
+      --bot-msg-bg: #F1F3F9;
+      --shadow: 0 2px 8px rgba(0,0,0,0.08);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+      --premium-card-shadow: 0 6px 20px rgba(123, 95, 196, 0.12);
+      --neutral-bg: #F8F9FA;
+      --crisis-red: #FF6B6B;
+      --success-green: #10B981;
+      --warning-yellow: #F59E0B;
+
+      /* kept but no longer used for sticky compare headers */
+      --sticky-offset: 92px;
+    }
+
+    .dark-mode {
+      --primary-white: #121212;
+      --light-gray: #1E1E1E;
+      --medium-gray: #2D2D2D;
+      --dark-gray: #8A8A8A;
+      --text-dark: #F5F5F5;
+      --text-medium: #CCCCCC;
+      --accent-purple: #8B6CE6;
+      --accent-purple-dark: #6A4FC4;
+      --light-purple: #2A1E4A;
+      --lighter-purple: #1E1A2E;
+      --border-light: rgba(255, 255, 255, 0.08);
+      --hero-gray: #1a1a1a;
+      --nav-bg: rgba(18, 18, 18, 0.95);
+      --sidebar-bg: #1a1a1a;
+      --chat-bg: #1e1e1e;
+      --user-msg-bg: #8B6CE6;
+      --bot-msg-bg: #2D2D2D;
+      --shadow: 0 2px 8px rgba(0,0,0,0.2);
+      --premium-card-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      --neutral-bg: #1E1E1E;
+      --crisis-red: #FF5252;
+      --success-green: #10B981;
+      --warning-yellow: #F59E0B;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      opacity: 0;
+    }
+    body.loaded { opacity: 1; }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 80px 0; }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      height: 80px;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      height: 100%;
+    }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      transform: translateX(20%);
+      padding: 14px 10px;
+      transition: all 0.3s ease;
+      display: block;
+      min-height: 100px;
+    }
+    .dark-mode .logo-img { content: url("assets/img/logo-dark.png"); }
+
+    .nav-links { display: flex; gap: 50px; }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      font-size: 17px;
+      position: relative;
+    }
+    .nav-link:hover { color: var(--accent-purple); }
+    .nav-link.active { color: var(--text-dark); }
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--accent-purple);
+      border-radius: 2px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      transform: translateX(-20%);
+    }
+
+    .sign-in {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 17px;
+    }
+
+    .header-cta {
+      background: var(--accent-purple);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
+    }
+    .header-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(123, 95, 196, 0.35); }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+    .theme-toggle:hover { background-color: var(--light-gray); }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+    .mobile-toggle:hover { background-color: var(--light-gray); }
+
+    .nav-link-container { position: relative; display: inline-block; }
+    .new-tag {
+      position: absolute;
+      top: -12px;
+      right: -35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #000;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index: 10;
+      white-space: nowrap;
+    }
+
+    .mobile-sign-in { display: none; }
+    .mobile-create-account { display: none; }
+
+    /* Create Account Tab (mobile) */
+    .mobile-create-account-tab {
+      display: none;
+      position: fixed;
+      top: 15%;
+      right: 0;
+      background: var(--accent-purple);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px 0 0 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 24px;
+      z-index: 999;
+      box-shadow: -2px 4px 12px rgba(123, 95, 196, 0.4);
+      transition: all 0.3s ease;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+    .mobile-create-account-tab:hover {
+      transform: translateX(-3px);
+      box-shadow: -3px 6px 16px rgba(123, 95, 196, 0.5);
+      background: var(--accent-purple-dark);
+    }
+    .dark-mode .mobile-create-account-tab { border: 2px solid var(--primary-white); }
+
+    /* Create Account Modal */
+    .create-account-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1001;
+      align-items: center;
+      justify-content: center;
+    }
+    .create-account-modal.active { display: flex; }
+
+    .modal-content {
+      background: var(--primary-white);
+      width: 90%;
+      max-width: 400px;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      animation: modalSlideIn 0.3s ease-out;
+    }
+    @keyframes modalSlideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .modal-title { font-size: 24px; font-weight: 700; color: var(--text-dark); }
+    .close-modal {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--dark-gray);
+      cursor: pointer;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+    .close-modal:hover { background-color: var(--light-gray); }
+
+    .modal-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-label { font-weight: 500; color: var(--text-dark); }
+    .form-input {
+      padding: 12px 16px;
+      border: 1px solid var(--medium-gray);
+      border-radius: 8px;
+      font-size: 16px;
+      background: var(--primary-white);
+      color: var(--text-dark);
+      transition: border-color 0.3s ease;
+    }
+    .form-input:focus { outline: none; border-color: var(--accent-purple); }
+    .submit-btn {
+      background: var(--accent-purple);
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+    .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3); }
+    .modal-footer { margin-top: 20px; text-align: center; font-size: 14px; color: var(--text-medium); }
+    .modal-footer a { color: var(--accent-purple); text-decoration: none; font-weight: 500; }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      padding: 120px 30px 60px;
+      display: flex;
+      min-height: calc(100vh - 160px);
+    }
+    .content-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+
+    /* PRICING HEADER */
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding-top: 120px;
+    }
+    .pricing-title {
+      font-size: 80px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text-dark);
+      line-height: 1.1;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .pricing-subtitle {
+      font-size: 20px;
+      color: var(--text-medium);
+      max-width: 1200px;
+      margin: 0 auto 0px;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 150px; /* +50px */
+    }
+
+    /* ===========================
+       PRICING TABLE (REFINED)
+       - Main page scroll only
+       - No sticky/floating compare headers
+       - Billing toggle above table
+       - Premium, compact buttons
+    =========================== */
+
+    .pricing-cards { display:block; margin-bottom: 40px; }
+
+    .pc-shell{
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      box-shadow: var(--premium-card-shadow);
+      overflow: hidden;
+    }
+
+    .pc-topbar{
+      display:flex;
+      align-items:center;
+      justify-content: flex-end;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border-light);
+      background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.00));
+      gap: 12px;
+    }
+    .dark-mode .pc-topbar{
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.00));
+    }
+
+    .billing-toggle{
+      position: relative;
+      display:inline-flex;
+      align-items:center;
+      height: 46px;
+      padding: 4px;
+      border-radius: 999px;
+      background: var(--light-gray);
+      border: 1px solid var(--border-light);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.06);
+      user-select:none;
+    }
+    .billing-toggle .slider{
+      position:absolute;
+      top:4px; bottom:4px;
+      left:4px;
+      width: calc(50% - 4px);
+      border-radius: 999px;
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.10);
+      transition: transform .22s ease;
+    }
+    .billing-toggle .slider.annual{ transform: translateX(100%); }
+    .billing-toggle button{
+      border:none;
+      background: transparent;
+      height: 38px;
+      min-width: 112px;
+      padding: 0 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor:pointer;
+      z-index: 1;
+      color: var(--text-dark);
+      transition: color .18s ease;
+    }
+    .billing-toggle button[aria-selected="true"]{ color: var(--accent-purple); }
+
+    /* ✅ main page scroll only */
+    .pc-scroll{
+      max-height: none !important;
+      overflow-y: visible !important;
+      overflow-x: auto; /* horizontal only if needed */
+      background: var(--primary-white);
+    }
+
+    .pc-table{
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 1040px;
+    }
+
+    .pc-table th,
+    .pc-table td{
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border-light);
+      vertical-align: middle;
+      text-align: center;
+      background: var(--primary-white);
+    }
+
+    /* remove sticky headers + sticky left (no floating) */
+    .pc-table thead th{
+      position: static;
+      top: auto;
+      z-index: auto;
+      background: var(--primary-white);
+    }
+    .pc-sticky-left{
+      position: static;
+      left: auto;
+      z-index: auto;
+      background: var(--primary-white);
+    }
+    .pc-corner{ z-index: auto !important; }
+
+    .pc-feature-col{
+      text-align: left !important;
+      width: 34%;
+      min-width: 280px;
+    }
+
+    .pc-feature-head-title{
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-medium);
+      letter-spacing: 0.2px;
+    }
+
+    .pc-feature-head-sub{
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--dark-gray);
+    }
+
+    .pc-planhead{ padding: 14px 14px 16px; }
+
+    .pc-planbar{
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: stretch;
+      background: var(--primary-white);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.04);
+      position: relative;
+    }
+
+    .pc-planname{
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.2;
+      text-align: left;
+    }
+
+    .pc-planprice{
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--text-dark);
+      text-align: left;
+      display:flex;
+      align-items: baseline;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .pc-planprice small{
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--dark-gray);
+    }
+
+    .pc-planprice.featured{
+      background: var(--premium-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* tier differentiation */
+    .pc-planbar.featured{
+      border: 2px solid var(--accent-purple);
+      box-shadow: 0 18px 38px rgba(123, 95, 196, 0.14);
+      background: linear-gradient(180deg, rgba(123,95,196,0.08), rgba(123,95,196,0.02));
+    }
+    .pc-planbar.edge{
+      border: 1px solid rgba(90, 68, 150, 0.25);
+      background: linear-gradient(180deg, rgba(90,68,150,0.06), rgba(0,0,0,0));
+    }
+
+    .pc-badge{
+      position:absolute;
+      top: -12px;
+      right: 12px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #000;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 999px;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
+      white-space: nowrap;
+    }
+
+    /* Column shading for line-by-line compare */
+    .pc-table tbody tr:not(.pc-section) td:nth-child(3){
+      background: rgba(123,95,196,0.04); /* Core */
+    }
+    .pc-table tbody tr:not(.pc-section) td:nth-child(4){
+      background: rgba(90,68,150,0.03); /* Edge */
+    }
+
+    .pc-table tbody tr:not(.pc-section):hover td{
+      background: var(--light-gray);
+    }
+    .pc-table tbody tr:not(.pc-section):hover td:nth-child(3){
+      background: rgba(123,95,196,0.07);
+    }
+    .pc-table tbody tr:not(.pc-section):hover td:nth-child(4){
+      background: rgba(90,68,150,0.06);
+    }
+
+    .pc-section td{
+      background: var(--neutral-bg) !important;
+      color: var(--text-dark);
+      font-weight: 600;
+      text-align: left;
+    }
+    .pc-section td:not(.pc-feature-col){ text-align: center; }
+
+    .pc-feature-name{ font-weight: 500; color: var(--text-dark); }
+
+    .pc-val{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 22px;
+    }
+
+    .pc-ok{ color: var(--success-green); font-size: 14px; }
+    .pc-no{ color: var(--dark-gray); font-size: 14px; }
+    .pc-star{ color: var(--accent-purple); font-size: 14px; }
+
+    /* badges */
+    .enhanced {
+      color: var(--accent-purple);
+      font-weight: 700;
+      background: var(--lighter-purple);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    .limited {
+      color: var(--warning-yellow);
+      font-weight: 600;
+      background: rgba(245, 158, 11, 0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+    .full {
+      color: var(--success-green);
+      font-weight: 600;
+      background: rgba(16, 185, 129, 0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+
+    /* Plan buttons (smaller pill like GoCardless) */
+    .plan-button{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 40px;
+      padding: 0 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap;
+    }
+    .plan-button.primary{
+      background: var(--accent-purple);
+      color: #fff;
+      border: 1px solid var(--accent-purple);
+      box-shadow: 0 10px 20px rgba(123, 95, 196, 0.22);
+    }
+    .plan-button.secondary{
+      background: rgba(123,95,196,0.10);
+      color: var(--text-dark);
+      border: 1px solid rgba(123,95,196,0.22);
+    }
+    .plan-button.outline{
+      background: transparent;
+      color: var(--text-dark);
+      border: 1px solid rgba(0,0,0,0.12);
+    }
+    .dark-mode .plan-button.outline{ border: 1px solid rgba(255,255,255,0.16); }
+    .plan-button:hover{ transform: translateY(-1px); box-shadow: 0 14px 26px rgba(0,0,0,0.10); }
+
+    /* FAQ (more compact + persuasive) */
+    .faq-section { margin-top: 60px; }
+    .faq-title { font-size: 36px; font-weight: 700; margin-bottom: 26px; color: var(--text-dark); text-align: center; }
+    .faq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .faq-item {
+      background: var(--primary-white);
+      border-radius: 12px;
+      padding: 18px 18px;
+      box-shadow: var(--premium-card-shadow);
+      border: 1px solid var(--border-light);
+    }
+    .faq-question {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .faq-question i { color: var(--accent-purple); }
+    .faq-answer { font-size: 14px; color: var(--text-medium); line-height: 1.55; }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary-white);
+      padding: 40px 0 20px;
+      color: var(--text-medium);
+      border-top: 1px solid var(--border-light);
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 80px;
+      margin-bottom: 40px;
+      align-items: start;
+    }
+    .footer-about { max-width: 400px; padding-left: 20px; }
+    .footer-logo { display: flex; align-items: center; margin-bottom: 10px; }
+    .footer-logo-img {
+      height: 100px;
+      width: auto;
+      padding: 8px 0;
+      transition: all 0.3s ease;
+      display: block;
+      min-height: 100px;
+    }
+    .dark-mode .footer-logo-img { content: url("assets/img/logo-dark.png"); }
+    .footer-description { margin-bottom: 10px; line-height: 1.6; }
+    .footer-heading { font-size: 18px; font-weight: 600; margin-bottom: 20px; color: var(--text-dark); }
+    .footer-links { list-style: none; }
+    .footer-link { margin-bottom: 10px; }
+    .footer-link a { color: var(--text-medium); text-decoration: none; transition: color 0.3s ease; }
+    .footer-link a:hover { color: var(--accent-purple); }
+    .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid var(--border-light); font-size: 14px; }
+    .footer-nav { background-color: transparent; padding: 0; border-radius: 0; box-shadow: none; margin: 0; }
+    .footer-nav-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+    .footer-newsletter { margin-top: 0; padding-top: 0; border-top: none; text-align: center; }
+    .footer-newsletter-title { font-size: 18px; font-weight: 600; margin-bottom: 15px; color: var(--text-dark); }
+    .footer-newsletter-form { display: flex; flex-direction: column; gap: 10px; max-width: 300px; margin: 0 auto; }
+    .footer-newsletter-input {
+      padding: 12px 16px;
+      border: 1px solid var(--medium-gray);
+      border-radius: 8px;
+      font-size: 14px;
+      background: var(--primary-white);
+      color: var(--text-dark);
+    }
+    .footer-newsletter-button {
+      background: var(--accent-purple);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    .footer-newsletter-button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3); }
+
+    /* Responsive */
+    @media (max-width: 1200px) { .faq-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 992px) {
+      .nav-links { gap: 30px; }
+      .footer-content { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-create-account-tab { display: flex; }
+
+      /* Mobile navigation changes */
+      .nav-container { justify-content: center; position: relative; }
+      .logo { position: absolute; left: 50%; transform: translateX(-50%); display: flex; align-items: center; height: 100%; }
+      .logo-img { height: 125px; transform: none; padding: 12px 0; display: flex; align-items: center; }
+      .mobile-toggle { display: flex; position: absolute; left: 20px; align-items: center; }
+      .nav-actions { transform: none; gap: 16px; position: absolute; right: 20px; align-items: center; }
+      .nav-actions .sign-in { display: none; }
+      .nav-actions .header-cta { display: none; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--nav-bg);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        gap: 20px;
+      }
+      .nav-links.active { display: flex; }
+      .nav-link.active { color: var(--accent-purple); }
+      .nav-link.active::after { display: none; }
+      .nav-link-container { display: flex; align-items: center; justify-content: flex-start; width: 100%; }
+      .new-tag { position: static; margin-left: 8px; top: auto; right: auto; }
+      .mobile-sign-in {
+        display: block !important;
+        margin-top: 10px;
+        padding: 12px 20px;
+        background: white;
+        color: var(--accent-purple);
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 600;
+        text-decoration: none;
+        border: 2px solid var(--accent-purple);
+      }
+      .mobile-create-account {
+        display: block !important;
+        margin-top: 10px;
+        padding: 12px 20px;
+        background: var(--accent-purple);
+        color: white;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 600;
+        text-decoration: none;
+        border: 2px solid var(--accent-purple);
+        box-shadow: 0 2px 6px rgba(123, 95, 196, 0.2);
+      }
+
+      main { padding: 100px 15px 40px; }
+      .content-wrapper { gap: 40px; }
+      .pricing-header { padding-top: 100px; margin-bottom: 20px; }
+      .pricing-title { font-size: 42px; line-height: 1.2; margin-bottom: 15px; }
+      .pricing-subtitle { font-size: 18px; line-height: 1.5; margin-bottom: 40px; }
+
+      .pc-table th, .pc-table td { padding: 14px 14px; font-size: 14px; }
+      .pc-planprice { font-size: 28px; }
+      .faq-title { font-size: 28px; margin-bottom: 20px; }
+      .faq-item { padding: 16px; }
+      .faq-question { font-size: 15px; }
+
+      .footer-content { grid-template-columns: 1fr; gap: 40px; }
+      .footer-nav-grid { grid-template-columns: 1fr 1fr; gap: 30px; order: 1; }
+      .footer-logo-img { height: 120px; }
+
+      .billing-toggle button{ min-width: 98px; }
+    }
+
+    @media (max-width: 480px) {
+      .logo-img { height: 100px; }
+      .footer-logo-img { height: 100px; }
+      .pricing-title { font-size: 36px; }
+      .pricing-subtitle { font-size: 16px; }
+      .footer-nav-grid { grid-template-columns: 1fr; gap: 20px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Create Account Tab (Mobile) -->
+  <a href="#" class="mobile-create-account-tab" id="createAccountTab">
+    <i class="fas fa-user-plus"></i>
+  </a>
+
+  <!-- Create Account Modal -->
+  <div class="create-account-modal" id="createAccountModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Create Account</h2>
+        <button class="close-modal" id="closeModal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <form class="modal-form">
+        <div class="form-group">
+          <label class="form-label" for="name">Full Name</label>
+          <input type="text" id="name" class="form-input" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email</label>
+          <input type="email" id="email" class="form-input" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input type="password" id="password" class="form-input" placeholder="Create a password" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Create Account</button>
+      </form>
+
+      <div class="modal-footer">
+        <p>Already have an account? <a href="sign-in.html">Sign In</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container nav-container">
+      <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+
+      <a href="index.html" class="logo">
+        <img src="assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="logo">
+      </a>
+
+      <div class="nav-links">
+        <a href="the-lens.html" class="nav-link">The Lens</a>
+        <a href="the-toolkit.html" class="nav-link">The Toolkit</a>
+        <div class="nav-link-container">
+          <a href="the-coach.html" class="nav-link">The Coach</a>
+          <span class="new-tag">NEW</span>
+        </div>
+        <a href="the-shift.html" class="nav-link">The Shift</a>
+        <a href="the-pricing.html" class="nav-link active">The Pricing</a>
+        <a href="sign-in.html" class="mobile-sign-in">Sign In</a>
+        <a href="create-account.html" class="mobile-create-account">Create Account</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="create-account.html" class="header-cta">Sign up</a>
+        <a href="sign-in.html" class="sign-in">Sign in</a>
+        <button class="theme-toggle"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      <div class="content-wrapper">
+
+        <div class="pricing-header">
+          <h1 class="pricing-title">Be informed. Be prepared. <br>Turn insight into action</h1>
+          <p class="pricing-subtitle">
+            You get peace of mind from knowing what matters, what to do next, and how to avoid common mistakes<br>
+            Every tier gives you practical knowledge you can use, and<br>
+            higher tiers unlock deeper guidance and more strategic tools when you need them
+          </p>
+        </div>
+
+        <!-- Pricing Table -->
+        <div class="pricing-cards" id="pricing-cards">
+          <div class="pc-shell">
+
+            <!-- Billing toggle (no floating/sticky) -->
+            <div class="pc-topbar">
+              <div class="billing-toggle" role="tablist" aria-label="Billing period">
+                <div class="slider" id="billingSlider" aria-hidden="true"></div>
+                <button type="button" data-period="monthly" aria-selected="true">Monthly</button>
+                <button type="button" data-period="annual" aria-selected="false">Annual</button>
+              </div>
+            </div>
+
+            <div class="pc-scroll" role="region" aria-label="Plan comparison">
+              <table class="pc-table" aria-describedby="pc-caption">
+                <thead>
+                  <tr>
+                    <th class="pc-feature-col pc-corner">
+                      <div class="pc-feature-head-title">Compare plans</div>
+                      <div class="pc-feature-head-sub">Scroll to compare features</div>
+                    </th>
+
+                    <th class="pc-planhead pc-plan-essentials">
+                      <div class="pc-planbar">
+                        <div class="pc-planname">Essentials</div>
+                        <div class="pc-planprice" data-monthly="£0" data-annual="£0">
+                          <span class="amt">£0</span><small class="per">/mo</small>
+                        </div>
+                        <a href="create-account.html" class="plan-button outline">Get started</a>
+                      </div>
+                    </th>
+
+                    <th class="pc-planhead pc-plan-core">
+                      <div class="pc-planbar featured">
+                        <span class="pc-badge">MOST POPULAR</span>
+                        <div class="pc-planname">Core</div>
+                        <div class="pc-planprice featured" data-monthly="£9" data-annual="£88">
+                          <span class="amt">£9</span><small class="per">/mo</small>
+                        </div>
+                        <a href="create-account.html" class="plan-button primary">Get started</a>
+                      </div>
+                    </th>
+
+                    <th class="pc-planhead pc-plan-edge">
+                      <div class="pc-planbar edge">
+                        <div class="pc-planname">Strategic Edge</div>
+                        <div class="pc-planprice" data-monthly="£16" data-annual="£160">
+                          <span class="amt">£16</span><small class="per">/mo</small>
+                        </div>
+                        <a href="create-account.html" class="plan-button secondary">Get started</a>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <!-- Essential Tools -->
+                  <tr class="pc-section">
+                    <td class="pc-feature-col">Essential Tools</td>
+                    <td></td><td></td><td></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">The Lens</td>
+                    <td><span class="pc-val"><i class="fas fa-check pc-ok"></i><span class="limited">Limited</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Burnout Reset</td>
+                    <td><span class="pc-val"><i class="fas fa-check pc-ok"></i><span class="limited">Limited</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Templates Library</td>
+                    <td><span class="pc-val"><i class="fas fa-check pc-ok"></i><span class="limited">Limited</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Speak Up Guide</td>
+                    <td><span class="pc-val"><i class="fas fa-check pc-ok"></i><span class="limited">Limited</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Script Library</td>
+                    <td><span class="pc-val"><i class="fas fa-check pc-ok"></i><span class="limited">Limited</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                  </tr>
+
+                  <!-- Advanced Strategic Tools -->
+                  <tr class="pc-section">
+                    <td class="pc-feature-col">Advanced Strategic Tools</td>
+                    <td></td><td></td><td></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">The Coach (AI)</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="limited">Limited</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="limited">Limited</span></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Office Politics Mapping</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-star pc-star"></i><span class="enhanced">Advanced</span></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">The Edge Briefing (Monthly)</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Crisis &amp; Escalation Strategy</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Exit &amp; Reputation Protection Plan</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Power in Silence Framework</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Influence Toolkit</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Career Transition Toolkit</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i></span></td>
+                  </tr>
+
+                  <!-- Playbooks (last; top-tier offerings) -->
+                  <tr class="pc-section">
+                    <td class="pc-feature-col">Playbooks</td>
+                    <td></td><td></td><td></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Priority Reset</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i><span class="full">Full</span></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Strategic Silence</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Influence Without Conflict</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Difficult People</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Micromanagement to Autonomy</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i></span></td>
+                  </tr>
+
+                  <tr>
+                    <td class="pc-feature-col pc-feature-name">Career Advancement</td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-times pc-no"></i></span></td>
+                    <td><span class="pc-val"><i class="fas fa-check-circle pc-ok"></i></span></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+          <h2 class="faq-title">Frequently Asked Questions</h2>
+
+          <div class="faq-grid">
+            <div class="faq-item">
+              <h3 class="faq-question"><i class="fas fa-circle-info"></i> Is there a free trial?</h3>
+              <p class="faq-answer">No trial. Essentials is free and gives you a starting point; paid tiers unlock the depth and the strategic tools.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-question"><i class="fas fa-shield-halved"></i> Can I cancel?</h3>
+              <p class="faq-answer">Yes — with <strong>30 days’ notice</strong>. You keep access during the notice period so you can close loops properly.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-question"><i class="fas fa-wand-magic-sparkles"></i> Which tier should I choose?</h3>
+              <p class="faq-answer"><strong>Core</strong> is the best all-rounder. <strong>Strategic Edge</strong> is for Playbooks and higher-leverage strategy when the stakes rise.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-question"><i class="fas fa-envelope-open-text"></i> How often is the Edge Briefing?</h3>
+              <p class="faq-answer">Monthly — concise, practical, and focused on what changes outcomes fastest.</p>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-question"><i class="fas fa-credit-card"></i> Do you offer annual billing discounts?</h3>
+              <p class="faq-answer">Yes. Switch to annual to lock in the lower rate (£88 for Core, £160 for Strategic Edge).</p>
+            </div>
+
+            <div class="faq-item">
+              <h3 class="faq-question"><i class="fas fa-scale-balanced"></i> Is this legal advice?</h3>
+              <p class="faq-answer">No. It’s practical workplace strategy to help you think clearly and act calmly. For legal advice, speak to a qualified professional.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <div class="footer-logo">
+            <a href="index.html">
+              <img src="assets/img/logo.png" alt="The Employee Playbook" class="footer-logo-img" id="footer-logo">
+            </a>
+          </div>
+          <p class="footer-description">A private strategy system giving employees clarity and advantage in the moments that matter most.</p>
+        </div>
+
+        <div class="footer-newsletter">
+          <h3 class="footer-newsletter-title">Stay updated with strategic insights</h3>
+          <form class="footer-newsletter-form">
+            <input type="email" class="footer-newsletter-input" placeholder="Your email" required>
+            <button type="submit" class="footer-newsletter-button">Subscribe</button>
+          </form>
+        </div>
+
+        <div class="footer-nav">
+          <div class="footer-nav-grid">
+            <div class="footer-nav-section">
+              <h3 class="footer-heading">The Playbook</h3>
+              <ul class="footer-links">
+                <li class="footer-link"><a href="the-lens.html">The Lens</a></li>
+                <li class="footer-link"><a href="the-toolkit.html">The Toolkit</a></li>
+                <li class="footer-link"><a href="the-coach.html">The Coach</a></li>
+                <li class="footer-link"><a href="the-shift.html">The Shift</a></li>
+                <li class="footer-link"><a href="the-pricing.html">The Pricing</a></li>
+              </ul>
+            </div>
+
+            <div class="footer-nav-section">
+              <h3 class="footer-heading">The Company</h3>
+              <ul class="footer-links">
+                <li class="footer-link"><a href="profile.html">Profile</a></li>
+                <li class="footer-link"><a href="about-us.html">About</a></li>
+                <li class="footer-link"><a href="privacy.html">Privacy</a></li>
+                <li class="footer-link"><a href="terms-and-conditions.html">Terms</a></li>
+                <li class="footer-link"><a href="help-centre.html">Help Centre</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 The Employee Playbook. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.body.classList.add('loaded');
+
+      // Dark mode toggle
+      const themeToggle = document.querySelector('.theme-toggle');
+      const themeIcon = themeToggle ? themeToggle.querySelector('i') : null;
+
+      const currentTheme = localStorage.getItem('theme') || 'light';
+      if (currentTheme === 'dark') {
+        document.documentElement.classList.add('dark-mode');
+        if (themeIcon) {
+          themeIcon.classList.remove('fa-moon');
+          themeIcon.classList.add('fa-sun');
+        }
+      }
+
+      if (themeToggle) {
+        themeToggle.addEventListener('click', function () {
+          document.documentElement.classList.toggle('dark-mode');
+          const isDarkMode = document.documentElement.classList.contains('dark-mode');
+
+          if (themeIcon) {
+            themeIcon.classList.toggle('fa-moon');
+            themeIcon.classList.toggle('fa-sun');
+          }
+
+          localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+
+          const logo = document.getElementById('logo');
+          const footerLogo = document.getElementById('footer-logo');
+          if (logo && footerLogo) {
+            if (isDarkMode) {
+              logo.src = 'assets/img/logo-dark.png';
+              footerLogo.src = 'assets/img/logo-dark.png';
+            } else {
+              logo.src = 'assets/img/logo.png';
+              footerLogo.src = 'assets/img/logo.png';
+            }
+          }
+        });
+      }
+
+      // Mobile nav
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      if (mobileToggle) {
+        mobileToggle.addEventListener('click', function () {
+          document.querySelector('.nav-links').classList.toggle('active');
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+          }
+        });
+      }
+
+      // Create Account Modal
+      const createAccountModal = document.getElementById('createAccountModal');
+      const closeModal = document.getElementById('closeModal');
+      const createAccountTab = document.getElementById('createAccountTab');
+
+      if (createAccountTab && createAccountModal) {
+        createAccountTab.addEventListener('click', function (e) {
+          e.preventDefault();
+          createAccountModal.classList.add('active');
+        });
+      }
+
+      if (closeModal && createAccountModal) {
+        closeModal.addEventListener('click', function () {
+          createAccountModal.classList.remove('active');
+        });
+
+        createAccountModal.addEventListener('click', function (e) {
+          if (e.target === createAccountModal) {
+            createAccountModal.classList.remove('active');
+          }
+        });
+      }
+
+      // Billing toggle (monthly/annual)
+      const slider = document.getElementById('billingSlider');
+      const billingBtns = document.querySelectorAll('.billing-toggle button');
+      const priceEls = document.querySelectorAll('.pc-planprice');
+      function setBilling(mode){
+        const annual = mode === 'annual';
+        billingBtns.forEach(b => b.setAttribute('aria-selected', String(b.dataset.period === mode)));
+        if (slider) slider.classList.toggle('annual', annual);
+
+        priceEls.forEach(el => {
+          const m = el.getAttribute('data-monthly') || '£0';
+          const a = el.getAttribute('data-annual') || '£0';
+          const amt = el.querySelector('.amt');
+          const per = el.querySelector('.per');
+          if (amt) amt.textContent = annual ? a : m;
+          if (per) per.textContent = annual ? '/yr' : '/mo';
+        });
+      }
+      billingBtns.forEach(btn => btn.addEventListener('click', () => setBilling(btn.dataset.period)));
+      setBilling('monthly');
+    });
+  </script>
+
+</body>
+</html>
