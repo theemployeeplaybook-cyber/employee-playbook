@@ -181,17 +181,10 @@
 
     .form-input::placeholder{ color:var(--dark-gray); }
 
-    /* ==========================
-       ✅ CSS-ONLY "PASSWORD" MASK
-       (Works even if JS is blocked)
-    ========================== */
-
-    /* This input is type="text", but visually masked like a password in Chrome/Edge/Safari */
+    /* ✅ CSS-only password mask */
     .secure-input{
-      -webkit-text-security: disc; /* masked */
+      -webkit-text-security: disc;
     }
-
-    /* When checkbox is checked, show real text */
     .reveal-toggle:checked ~ .password-row .secure-input{
       -webkit-text-security: none;
     }
@@ -200,7 +193,6 @@
       position:relative;
     }
 
-    /* Keep the checkbox invisible but present for CSS */
     .reveal-toggle{
       position:absolute;
       opacity:0;
@@ -232,7 +224,6 @@
       padding:8px 11px;
     }
 
-    /* Eye button is actually a LABEL toggling the checkbox */
     .toggle-label{
       width:44px;
       display:inline-flex;
@@ -252,7 +243,6 @@
       color:var(--accent-purple);
     }
 
-    /* Swap icon when checked */
     .reveal-toggle:not(:checked) ~ .password-row .icon-eye-slash { display:none; }
     .reveal-toggle:checked ~ .password-row .icon-eye { display:none; }
 
@@ -445,18 +435,14 @@
           <input type="email" id="email" class="form-input" placeholder="your.email@example.com" required>
         </div>
 
-        <!-- ✅ Password: CSS-only reveal -->
         <div class="form-group password-wrap">
           <label for="password" class="form-label">Password</label>
 
-          <!-- hidden checkbox controls reveal -->
           <input type="checkbox" id="pwReveal" class="reveal-toggle">
 
           <div class="password-row">
-            <!-- type=text + masked -->
             <input type="text" id="password" class="form-input secure-input" placeholder="Create a secure password" required autocomplete="new-password">
 
-            <!-- label toggles checkbox -->
             <label for="pwReveal" class="toggle-label" aria-label="Toggle password visibility" title="Show/hide password">
               <i class="fa-solid fa-eye icon-eye"></i>
               <i class="fa-solid fa-eye-slash icon-eye-slash"></i>
@@ -466,7 +452,6 @@
           <div id="passwordStrength" class="password-strength"></div>
         </div>
 
-        <!-- ✅ Confirm password: CSS-only reveal -->
         <div class="form-group password-wrap">
           <label for="confirmPassword" class="form-label">Confirm Password</label>
 
@@ -510,7 +495,7 @@
     </div>
   </div>
 
-  <!-- REQUIRED: Supabase + your shared client -->
+  <!-- ✅ Load Supabase ONCE + your client ONCE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/supabaseClient.js"></script>
 
@@ -656,7 +641,6 @@
             ? 'That email is already registered. Try signing in instead.'
             : (error.message || 'Something went wrong. Please try again.');
           showStatus(msg, 'error');
-          setLoading(false);
           return;
         }
 
@@ -683,16 +667,13 @@
           }, 900);
         }
       } catch (err) {
+        console.error(err);
         showStatus('Unexpected error. Please try again.', 'error');
       } finally {
         setLoading(false);
       }
     });
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="assets/supabaseClient.js"></script>
-  <script src="assets/auth.js"></script>
 
 </body>
 </html>
-
