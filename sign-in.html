@@ -335,11 +335,11 @@
       function getPostLoginRedirect() {
         const params = new URLSearchParams(window.location.search);
 
-        // support BOTH keys: returnTo (from accessControl.js) and next (older)
+        // support BOTH keys: returnTo (new) and next (older)
         const returnTo = params.get('returnTo');
         const next = params.get('next');
 
-        // storage (support BOTH keys)
+        // support BOTH storage keys
         const storedReturnTo = localStorage.getItem('returnTo');
         const storedNext = localStorage.getItem('tep_post_login_redirect');
 
@@ -366,13 +366,11 @@
 
           if (error) {
             setStatus('error', error.message || 'Sign-in failed. Please check your details.');
-            setLoading(false);
             return;
           }
 
           if (!data || !data.session) {
             setStatus('error', 'Signed in, but no session was returned. Check your Supabase auth settings.');
-            setLoading(false);
             return;
           }
 
