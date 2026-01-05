@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Create Account | The Employee Playbook</title>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <!-- Favicon (match your site structure) -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
   <!-- Font Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -105,20 +106,19 @@
       flex-shrink:0;
     }
 
-    /* RIGHT COLUMN — compact spacing */
     .right-column{
       flex:1;
-      padding:22px 26px 18px; /* reduced */
+      padding:22px 26px 18px;
       display:flex;
       flex-direction:column;
     }
 
     .logo-container{
       text-align:center;
-      margin-bottom:12px; /* reduced */
+      margin-bottom:12px;
     }
 
-    .logo-img{ height:58px; width:auto; } /* slightly reduced */
+    .logo-img{ height:58px; width:auto; }
 
     .logo-fallback{
       display:none;
@@ -130,11 +130,11 @@
     }
 
     .form-header{
-      margin-bottom:12px; /* reduced */
+      margin-bottom:12px;
     }
 
     .form-header h2{
-      font-size:20px; /* slightly reduced */
+      font-size:20px;
       font-weight:600;
       color:var(--text-dark);
       margin-bottom:4px;
@@ -142,18 +142,18 @@
 
     .form-header p{
       color:var(--dark-gray);
-      font-size:13px; /* slightly reduced */
+      font-size:13px;
     }
 
     .form-row{
       display:flex;
-      gap:10px;            /* reduced */
-      margin-bottom:4px;   /* reduced */
+      gap:10px;
+      margin-bottom:4px;
     }
 
     .form-group{
       flex:1;
-      margin-bottom:7px;   /* reduced */
+      margin-bottom:7px;
     }
 
     .form-label{
@@ -166,7 +166,7 @@
 
     .form-input{
       width:100%;
-      padding:8px 11px; /* reduced */
+      padding:8px 11px;
       border:1px solid var(--medium-gray);
       border-radius:5px;
       font-size:14px;
@@ -178,7 +178,7 @@
     .form-input:focus{
       outline:none;
       border-color:var(--accent-purple);
-      box-shadow:0 0 0 2px rgba(123,95,196,0.35); /* softer than full purple */
+      box-shadow:0 0 0 2px rgba(123,95,196,0.35);
     }
 
     .form-input::placeholder{ color:var(--dark-gray); }
@@ -213,7 +213,7 @@
       display:flex;
       align-items:flex-start;
       gap:8px;
-      margin-bottom:6px; /* reduced */
+      margin-bottom:6px;
     }
 
     .checkbox-input{
@@ -240,13 +240,13 @@
       background:var(--accent-purple);
       color:white;
       border:none;
-      padding:10px; /* reduced */
+      padding:10px;
       border-radius:5px;
       font-weight:600;
       cursor:pointer;
       font-size:14px;
       transition:all 0.2s ease;
-      margin:6px 0 10px; /* reduced */
+      margin:6px 0 10px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -283,7 +283,7 @@
 
     .auth-footer{
       text-align:center;
-      padding-top:10px; /* reduced */
+      padding-top:10px;
       border-top:1px solid var(--medium-gray);
       margin-top:auto;
     }
@@ -301,7 +301,6 @@
 
     .auth-footer a:hover{ text-decoration:underline; }
 
-    /* Mobile Optimizations */
     @media (max-width:768px){
       body{ padding:15px; }
 
@@ -332,7 +331,6 @@
       .submit-button{ padding:12px; font-size:15px; }
     }
 
-    /* Ensure no scroll on desktop */
     @media (min-width:769px){
       body{ overflow:hidden; }
     }
@@ -413,7 +411,7 @@
         <div class="form-checkbox">
           <input type="checkbox" id="terms" class="checkbox-input" required>
           <label for="terms" class="checkbox-label">
-            I agree to the <a href="#" onclick="return false;">Terms of Service</a> and <a href="#" onclick="return false;">Privacy Policy</a>
+            I agree to the <a href="terms-and-conditions.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a>
           </label>
         </div>
 
@@ -436,19 +434,14 @@
     </div>
   </div>
 
-  <!-- Supabase (Browser-safe with publishable key) -->
+  <!-- REQUIRED: Supabase + your shared client -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    // ✅ Your project URL
-    const SUPABASE_URL = "https://zcoqexviygopxosnmzmc.supabase.co";
-
-    // ✅ Your publishable key (safe for browser use)
-    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_-_8KI2P1CKm559Zhv9Imbg_FB-QM6Xn";
-
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-  </script>
+  <script src="assets/supabaseClient.js"></script>
 
   <script>
+    // Use shared Supabase client (created in assets/supabaseClient.js)
+    const supabase = window.supabaseClient;
+
     // Password toggle functionality
     const passwordToggle = document.getElementById('passwordToggle');
     const passwordInput = document.getElementById('password');
@@ -540,12 +533,24 @@
       }
     }
 
+    function getNextTarget() {
+      const params = new URLSearchParams(window.location.search);
+      const next = params.get('next');
+      const stored = localStorage.getItem('tep_post_login_redirect');
+      return next || stored || 'the-toolkit.html';
+    }
+
     // Form submit -> Supabase Auth signUp
     const createAccountForm = document.getElementById('createAccountForm');
 
     createAccountForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       clearStatus();
+
+      if (!supabase || !supabase.auth) {
+        showStatus('Supabase client not found. Check assets/supabaseClient.js is loading correctly.', 'error');
+        return;
+      }
 
       const firstName = document.getElementById('firstName').value.trim();
       const lastName = document.getElementById('lastName').value.trim();
@@ -585,14 +590,13 @@
               first_name: firstName,
               last_name: lastName,
               newsletter_opt_in: newsletterOptIn
-            }
-            // If you want a fixed post-confirm redirect, you can set:
-            // emailRedirectTo: "https://theemployeeplaybook.com/sign-in.html"
+            },
+            // Helps Supabase know where to send the user after email confirmation:
+            emailRedirectTo: window.location.origin + '/sign-in.html'
           }
         });
 
         if (error) {
-          // Common helpful messages
           const msg = (error.message || '').toLowerCase().includes('already registered')
             ? 'That email is already registered. Try signing in instead.'
             : (error.message || 'Something went wrong. Please try again.');
@@ -601,19 +605,28 @@
           return;
         }
 
-        // Supabase often requires email confirmation (depending on your auth settings)
+        // Depending on your Supabase auth settings, session may be null until email confirmed
         const needsEmailConfirm = !data?.session;
 
         if (needsEmailConfirm) {
           showStatus('Account created. Check your email to confirm, then sign in.', 'success');
+
+          // Preserve next so sign-in can return them to the intended page
+          const nextTarget = getNextTarget();
+          const encoded = encodeURIComponent(nextTarget);
+          localStorage.setItem('tep_post_login_redirect', nextTarget);
+
           setTimeout(() => {
-            window.location.href = 'sign-in.html?check_email=1';
+            window.location.href = 'sign-in.html?check_email=1&next=' + encoded;
           }, 1400);
         } else {
-          // If email confirmations are OFF, you may get a session immediately
           showStatus('Account created. Redirecting…', 'success');
+
+          const nextTarget = getNextTarget();
+          localStorage.removeItem('tep_post_login_redirect');
+
           setTimeout(() => {
-            window.location.href = 'index.html';
+            window.location.href = nextTarget;
           }, 900);
         }
       } catch (err) {
