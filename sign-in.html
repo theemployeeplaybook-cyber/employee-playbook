@@ -63,9 +63,9 @@
       background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
     }
 
-    .login-header { text-align: center; margin-bottom: 25px; }
+    .login-header { text-align: center; margin-bottom: 18px; }
 
-    .logo-container { display: flex; justify-content: center; margin-bottom: 20px; }
+    .logo-container { display: flex; justify-content: center; margin-bottom: 18px; }
 
     .logo { height: 70px; width: auto; }
 
@@ -178,7 +178,7 @@
 
     .signup-link {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 18px;
       font-size: 13px;
       color: var(--dark-gray);
     }
@@ -193,7 +193,7 @@
 
     .status {
       display: none;
-      margin-top: 10px;
+      margin: 10px 0 0;
       padding: 10px 12px;
       border-radius: 8px;
       font-size: 13px;
@@ -221,11 +221,6 @@
       .logo { height: 60px; }
       .login-title { font-size: 22px; }
       .login-subtitle { font-size: 13px; }
-    }
-
-    @media (max-width: 360px) {
-      .login-container { padding: 20px 18px; }
-      .logo { height: 55px; }
     }
 
     @keyframes fadeIn {
@@ -288,7 +283,7 @@
     </form>
   </div>
 
-  <!-- ✅ Load Supabase ONCE + your client ONCE -->
+  <!-- Load Supabase ONCE + your client ONCE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/supabaseClient.js"></script>
 
@@ -307,7 +302,6 @@
         icon.classList.toggle('fa-eye-slash');
       });
 
-      // Shared Supabase client
       const supabaseClient = window.supabaseClient;
 
       const statusBox = document.getElementById('statusBox');
@@ -334,19 +328,84 @@
 
       function getPostLoginRedirect() {
         const params = new URLSearchParams(window.location.search);
-
-        // support BOTH keys: returnTo (new) and next (older)
         const returnTo = params.get('returnTo');
         const next = params.get('next');
-
-        // support BOTH storage keys
         const storedReturnTo = localStorage.getItem('returnTo');
         const storedNext = localStorage.getItem('tep_post_login_redirect');
-
         return returnTo || next || storedReturnTo || storedNext || 'the-toolkit.html';
       }
 
-      // Form submit (Supabase auth)
+      function cleanUrl(removeKeys = []) {
+        const url = new URL(window.location.href);
+        removeKeys.forEach(k => url.searchParams.delete(k));
+        window.history.replaceState({}, document.title, url.toString());
+      }
+
+      // 1) Show friendly “state” messages (from your redirects)
+      (function showQueryMessages(){
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.get('check_email') === '1') {
+          setStatus('success', 'Account created. Please confirm your email, then sign in.');
+        } else if (params.get('reset') === '1') {
+          setStatus('success', 'Password updated. You can sign in now.');
+          cleanUrl(['reset']);
+        } else if (params.get('confirmed') === '1') {
+          setStatus('success', 'Email confirmed. You can sign in now.');
+          cleanUrl(['confirmed']);
+        } else if (params.get('error_description')) {
+          setStatus('error', params.get('error_description'));
+        }
+      })();
+
+      // 2) Handle Supabase email-link callbacks (signup + recovery) on this page
+      //    Supabase links often arrive with: ?type=signup|recovery&token_hash=...
+      (async function handleEmailLinkCallback(){
+        const params = new URLSearchParams(window.location.search);
+        const type = params.get('type'); // 'signup' | 'recovery' | 'magiclink' etc
+        const token_hash = params.get('token_hash');
+
+        if (!type || !token_hash) return;
+
+        if (!supabaseClient || !supabaseClient.auth) {
+          setStatus('error', 'Auth client not ready. Please refresh the page.');
+          return;
+        }
+
+        setLoading(true);
+
+        try {
+          const { data, error } = await supabaseClient.auth.verifyOtp({ type, token_hash });
+
+          if (error) {
+            setStatus('error', error.message || 'This link is invalid or has expired.');
+            return;
+          }
+
+          // If it’s a password recovery link, send them to the update-password page
+          if (type === 'recovery') {
+            setStatus('success', 'Link verified. Redirecting to set a new password…');
+            // keep the URL clean before redirect
+            cleanUrl(['type', 'token_hash']);
+            setTimeout(() => {
+              window.location.href = 'update-password.html';
+            }, 700);
+            return;
+          }
+
+          // For email confirmation (signup), keep them on TEP and let them sign in
+          setStatus('success', 'Email confirmed successfully. You can sign in now.');
+          cleanUrl(['type', 'token_hash']);
+
+        } catch (e) {
+          console.error(e);
+          setStatus('error', 'Something went wrong verifying your link. Please request a new one.');
+        } finally {
+          setLoading(false);
+        }
+      })();
+
+      // 3) Normal sign-in
       document.getElementById('loginForm').addEventListener('submit', async function (e) {
         e.preventDefault();
         setStatus('', '');
@@ -365,7 +424,10 @@
           const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
 
           if (error) {
-            setStatus('error', error.message || 'Sign-in failed. Please check your details.');
+            const msg = (error.message || '').toLowerCase().includes('email not confirmed')
+              ? 'Please confirm your email first. Check your inbox (and spam).'
+              : (error.message || 'Sign-in failed. Please check your details.');
+            setStatus('error', msg);
             return;
           }
 
@@ -376,11 +438,9 @@
 
           setStatus('success', 'Signed in successfully. Redirecting…');
 
-          // Clear both possible storage keys
           localStorage.removeItem('returnTo');
           localStorage.removeItem('tep_post_login_redirect');
 
-          // Go back to the page they wanted
           window.location.href = getPostLoginRedirect();
 
         } catch (err) {
