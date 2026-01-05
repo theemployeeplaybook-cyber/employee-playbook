@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
@@ -288,24 +288,26 @@
     </form>
   </div>
 
-  <!-- REQUIRED: Supabase + your shared client -->
+  <!-- ✅ Load Supabase ONCE + your client ONCE -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/supabaseClient.js"></script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       // Password toggle
-      document.getElementById('passwordToggle').addEventListener('click', function () {
-        const passwordInput = document.getElementById('password');
+      const toggleBtn = document.getElementById('passwordToggle');
+      const passwordInput = document.getElementById('password');
+
+      toggleBtn.addEventListener('click', function () {
         const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
         passwordInput.setAttribute('type', type);
+
         const icon = this.querySelector('i');
         icon.classList.toggle('fa-eye');
         icon.classList.toggle('fa-eye-slash');
       });
 
-      // Grab your shared Supabase client
-      // Your assets/supabaseClient.js should set: window.supabaseClient = supabase.createClient(...)
+      // Shared Supabase client
       const supabaseClient = window.supabaseClient;
 
       const statusBox = document.getElementById('statusBox');
@@ -331,15 +333,17 @@
       }
 
       function getPostLoginRedirect() {
-        // 1) If tool page sent you here like: sign-in.html?next=tool-page.html
         const params = new URLSearchParams(window.location.search);
+
+        // support BOTH keys: returnTo (from accessControl.js) and next (older)
+        const returnTo = params.get('returnTo');
         const next = params.get('next');
 
-        // 2) Or if accessControl stored it
-        const stored = localStorage.getItem('tep_post_login_redirect');
+        // storage (support BOTH keys)
+        const storedReturnTo = localStorage.getItem('returnTo');
+        const storedNext = localStorage.getItem('tep_post_login_redirect');
 
-        // 3) Fallback
-        return next || stored || 'the-toolkit.html';
+        return returnTo || next || storedReturnTo || storedNext || 'the-toolkit.html';
       }
 
       // Form submit (Supabase auth)
@@ -374,24 +378,22 @@
 
           setStatus('success', 'Signed in successfully. Redirecting…');
 
-          // Clean up stored redirect once used
-          const redirectTo = getPostLoginRedirect();
+          // Clear both possible storage keys
+          localStorage.removeItem('returnTo');
           localStorage.removeItem('tep_post_login_redirect');
 
           // Go back to the page they wanted
-          window.location.href = redirectTo;
+          window.location.href = getPostLoginRedirect();
 
         } catch (err) {
+          console.error(err);
           setStatus('error', 'Something went wrong. Please try again.');
+        } finally {
           setLoading(false);
         }
       });
     });
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="assets/supabaseClient.js"></script>
-  <script src="assets/auth.js"></script>
 
 </body>
 </html>
-
