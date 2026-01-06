@@ -156,28 +156,18 @@
             color: var(--accent-purple);
         }
 
-        /* Active page indicator - Purple underline */
-        .nav-link.active {
-            color: var(--text-dark);
+        .nav-link.active { color: var(--text-dark); }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-purple);
+            border-radius: 2px;
         }
-
-        /* Active page indicator - Black text for desktop with purple underline */
-        @media (min-width: 769px) {
-            .nav-link.active {
-                color: var(--text-dark);
-            }
-            
-            .nav-link.active::after {
-                content: '';
-                position: absolute;
-                bottom: -3px;
-                left: 0;
-                width: 100%;
-                height: 2px;
-                background-color: var(--accent-purple);
-                border-radius: 2px;
-            }
-        }
+        
 
         .nav-actions {
             display: flex;
@@ -2392,5 +2382,4 @@
 </script>
 
 </body>
-
 </html>
