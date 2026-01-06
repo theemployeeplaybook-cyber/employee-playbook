@@ -1,13 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="The Toolkit: frameworks, guides, planners, assessments, checklists, playbooks, scripts, templates and maps for high-stakes workplace moments. Not legal advice." />
   <title>The Toolkit | The Employee Playbook</title>
 
+  <!-- THEME PRELOAD (prevents flash + nav shift across pages) -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('theme'); // "dark" | "light" | null
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const useDark = saved ? saved === 'dark' : prefersDark;
+        if (useDark) document.documentElement.classList.add('dark-mode');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Fonts (preconnect + preload reduces layout shift) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
@@ -56,6 +70,7 @@
       --chat-radius: 50%;
     }
 
+    /* Dark mode now applies on <html> (preloaded) */
     .dark-mode {
       --primary-white: #121212;
       --light-gray: #1E1E1E;
@@ -93,7 +108,9 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-    html { scroll-behavior: smooth; }
+
+    /* Key: consistent scrollbar across pages = less nav “jump” */
+    html { scroll-behavior: smooth; overflow-y: scroll; }
 
     body {
       background-color: var(--primary-white);
@@ -101,9 +118,7 @@
       line-height: 1.6;
       overflow-x: hidden;
       transition: background-color 0.3s ease, color 0.3s ease;
-      opacity: 0;
     }
-    body.loaded { opacity: 1; }
 
     .container { max-width: 1400px; margin: 0 auto; padding: 0 28px; }
     section { padding: 80px 0; }
@@ -132,7 +147,7 @@
       display: block;
       min-height: 100px;
     }
-    .dark-mode .logo-img { content: url("assets/img/logo-dark.png"); }
+    .logo-fallback { display: none; font-size: 24px; font-weight: 700; color: var(--text-dark); text-decoration: none; }
 
     .nav-links { display: flex; gap: 50px; }
     .nav-link {
@@ -142,7 +157,7 @@
       transition: color 0.3s ease;
       font-size: 17px;
       position: relative;
-      padding-bottom: 6px;
+      padding-bottom: 2px;
     }
     .nav-link:hover { color: var(--accent-purple); }
     .nav-link.active { color: var(--text-dark); font-weight: 500; }
@@ -207,15 +222,18 @@
       z-index: 10;
       white-space: nowrap;
     }
-    .logo-fallback { display: none; font-size: 24px; font-weight: 700; color: var(--text-dark); text-decoration: none; }
     .mobile-sign-up, .mobile-sign-in { display: none; }
 
+    /* =========================
+       HERO (CENTRED)
+       ========================= */
     .hero {
       background: var(--hero-gray);
       min-height: calc(100vh - 80px);
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;            /* NEW: hard centre */
       text-align: center;
       margin-top: 80px;
       padding: 0;
@@ -223,22 +241,35 @@
       position: relative;
       overflow: hidden;
     }
-    .hero-content { width: 100%; padding: 86px 30px 18px; text-align: center; position: relative; z-index: 1; }
+    .hero-content {
+      width: 100%;
+      max-width: 1100px;             /* NEW: keeps everything truly centred and consistent */
+      padding: 86px 30px 18px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      margin: 0 auto;                /* NEW */
+      display: flex;                 /* NEW */
+      flex-direction: column;        /* NEW */
+      align-items: center;           /* NEW */
+      justify-content: center;       /* NEW */
+    }
 
     .hero-headline {
       font-size: 84px;
       font-weight: 700;
       line-height: 1.25;
-      max-width: 800px;
+      max-width: 980px;
       margin: 20px auto 18px;
       letter-spacing: -1px;
+      text-align: center;
     }
     .hero-line { display: block; width: 100%; }
-    .hero-line.top { white-space: nowrap; } /* ensures "Find the right response" stays on one line */
+    .hero-line.top { white-space: nowrap; }
 
     .hero-line.bottom {
       display: flex;
-      align-items: flex-start;
+      align-items: center;           /* NEW: centre baseline */
       justify-content: center;
       gap: 18px;
       flex-wrap: nowrap;
@@ -256,7 +287,7 @@
       position: relative;
       height: 105px;
       width: 360px;
-      text-align: left;
+      text-align: center;            /* NEW */
     }
     .flashing-word {
       position: absolute;
@@ -266,6 +297,7 @@
       opacity: 0;
       animation: flashWords 15s infinite;
       color: var(--accent-purple-dark);
+      text-align: center;            /* NEW */
     }
     .flashing-word:nth-child(1) { animation-delay: 0s; }
     .flashing-word:nth-child(2) { animation-delay: 2s; }
@@ -287,8 +319,9 @@
       max-width: 980px;
       margin: 0 auto 10px;
       font-weight: 500;
+      text-align: center;
     }
-    .hero-note { font-size: 16px; color: var(--dark-gray); font-weight: 500; margin-top: 8px; }
+    .hero-note { font-size: 16px; color: var(--dark-gray); font-weight: 500; margin-top: 8px; text-align: center; }
 
     .tool-types-banner {
       background: var(--light-purple);
@@ -452,7 +485,6 @@
     .real-problem{ font-size: 18px; font-weight: 900; line-height: 1.25; margin-bottom: 10px; letter-spacing: -0.2px; }
     .real-body{ color: var(--text-medium); font-size: 14px; font-weight: 500; line-height: 1.6; margin-bottom: 16px; flex: 0 0 auto; min-height: 70px; }
 
-    /* Suggested tools layout: label left, tools start on next line left */
     .real-row{
       display: flex;
       flex-direction: column;
@@ -479,8 +511,8 @@
     .real-tools a{
       color: var(--accent-purple);
       text-decoration: none;
-      font-weight: 700;      /* -100 */
-      font-size: 16px;       /* +2 */
+      font-weight: 700;
+      font-size: 16px;
       line-height: 1.25;
     }
     .real-tools a:hover{ text-decoration: underline; }
@@ -519,7 +551,6 @@
       min-height: 30px;
       color: var(--text-medium);
     }
-    /* Colour-coded category names in "Tools you can rely on when it matters" */
     .tool-card[data-cat="clarity"] .tool-category-label { color: var(--cat-clarity); }
     .tool-card[data-cat="burnout"] .tool-category-label { color: var(--cat-burnout); }
     .tool-card[data-cat="manager"] .tool-category-label { color: var(--cat-manager); }
@@ -618,7 +649,6 @@
     .category-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,0.10); }
     .category-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--accent-purple); opacity: 0.95; }
 
-    /* Ensure all category paragraphs start at the same vertical position */
     .category-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; position: relative; z-index: 1; min-height: 92px; }
 
     .category-left { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
@@ -751,7 +781,6 @@
     .footer-about { max-width: 400px; padding-left: 20px; }
     .footer-logo { display: flex; align-items: center; margin-bottom: 10px; }
     .footer-logo-img { height: 100px; width: auto; padding: 8px 0; transition: all 0.3s ease; display: block; min-height: 100px; }
-    .dark-mode .footer-logo-img { content: url("assets/img/logo-dark.png"); }
     .footer-description { margin-bottom: 10px; line-height: 1.6; }
     .footer-heading { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: var(--text-dark); }
     .footer-links { list-style: none; }
@@ -894,6 +923,7 @@
       .flashing-words { font-size: 64px; height: 80px; width: 280px; }
       .footer-content { grid-template-columns: 1fr; gap: 50px; }
       .nav-links { gap: 30px; }
+      .hero-content { max-width: 980px; }
     }
     @media (max-width: 768px) {
       .hero-line.top { white-space: normal; }
@@ -959,10 +989,10 @@
       }
       .mobile-sign-up:hover { background: var(--accent-purple-dark); transform: translateY(-2px); }
 
-      .hero-content { padding: 66px 20px 14px; }
+      .hero-content { padding: 66px 20px 14px; max-width: 680px; }
       .hero-headline { font-size: 46px; }
-      .hero-line.bottom { gap: 10px; }
-      .flashing-words { font-size: 46px; height: 62px; width: 210px; }
+      .hero-line.bottom { gap: 10px; flex-wrap: wrap; white-space: normal; }
+      .flashing-words { font-size: 46px; height: 62px; width: 240px; }
       .hero-subhead { font-size: 18px; }
       .tool-types-banner-content { font-size: 14px; }
 
@@ -976,7 +1006,7 @@
       .logo-img { height: 100px; }
       .footer-logo-img { height: 100px; }
       .hero-headline { font-size: 40px; }
-      .flashing-words { font-size: 40px; width: 190px; }
+      .flashing-words { font-size: 40px; width: 210px; }
     }
   </style>
 </head>
@@ -1273,7 +1303,7 @@
               <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
             </div>
             <div class="review-text">“This helped me reduce my workload without sounding defensive. The plan structure is excellent.”</div>
-            <div class="review-meta">Aisha, UK tech</div>
+            <div class="review-meta">Aisha, Technology</div>
           </div>
           <div class="tool-footer">
             <div class="tool-buttons"><a class="btn-primary" href="overload-reduction-planner.html">Open</a></div>
@@ -1295,7 +1325,7 @@
               <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
             </div>
             <div class="review-text">“It gave me a clear risk score and the exact next step. No waffle. Very grounding.”</div>
-            <div class="review-meta">James, NHS</div>
+            <div class="review-meta">James, Public Services</div>
           </div>
           <div class="tool-footer">
             <div class="tool-buttons"><a class="btn-primary" href="overload-reduction-planner.html">Open</a></div>
@@ -1317,7 +1347,7 @@
               <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
             </div>
             <div class="review-text">“The messaging examples instantly changed how I frame updates. My manager finally listened.”</div>
-            <div class="review-meta">Priya, finance</div>
+            <div class="review-meta">Priya, Finance</div>
           </div>
           <div class="tool-footer">
             <div class="tool-buttons"><a class="btn-primary" href="manager-communication-framework.html">Open</a></div>
@@ -1339,7 +1369,7 @@
               <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
             </div>
             <div class="review-text">“I copied it, sent it, and got agreement on priority changes the same day. Huge relief.”</div>
-            <div class="review-meta">Tom, professional services</div>
+            <div class="review-meta">Tom, Professional Services</div>
           </div>
           <div class="tool-footer">
             <div class="tool-buttons"><a class="btn-primary" href="workload-negotiation-script-builder.html">Open</a></div>
@@ -1573,8 +1603,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      document.body.classList.add('loaded');
-
       const createAccountTab = document.getElementById('createAccountTab');
       const createAccountModal = document.getElementById('createAccountModal');
       const closeModal = document.getElementById('closeModal');
@@ -1622,34 +1650,24 @@
 
       const themeToggle = document.querySelector('.theme-toggle');
       const themeIcon = themeToggle.querySelector('i');
-      const currentTheme = localStorage.getItem('theme') || 'light';
 
-      if (currentTheme === 'dark') {
-        document.body.classList.add('dark-mode');
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-      }
-
-      themeToggle.addEventListener('click', function () {
-        document.body.classList.toggle('dark-mode');
-        const isDarkMode = document.body.classList.contains('dark-mode');
-
-        themeIcon.classList.toggle('fa-moon');
-        themeIcon.classList.toggle('fa-sun');
-
-        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+      function syncThemeUI() {
+        const isDarkMode = document.documentElement.classList.contains('dark-mode');
+        themeIcon.classList.toggle('fa-moon', !isDarkMode);
+        themeIcon.classList.toggle('fa-sun', isDarkMode);
 
         const logo = document.getElementById('logo');
         const footerLogo = document.getElementById('footer-logo');
-        if (logo && footerLogo) {
-          if (isDarkMode) {
-            logo.src = 'assets/img/logo-dark.png';
-            footerLogo.src = 'assets/img/logo-dark.png';
-          } else {
-            logo.src = 'assets/img/logo.png';
-            footerLogo.src = 'assets/img/logo.png';
-          }
-        }
+        if (logo) logo.src = isDarkMode ? 'assets/img/logo-dark.png' : 'assets/img/logo.png';
+        if (footerLogo) footerLogo.src = isDarkMode ? 'assets/img/logo-dark.png' : 'assets/img/logo.png';
+      }
+      syncThemeUI();
+
+      themeToggle.addEventListener('click', function () {
+        document.documentElement.classList.toggle('dark-mode');
+        const isDarkMode = document.documentElement.classList.contains('dark-mode');
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        syncThemeUI();
       });
 
       const mobileToggle = document.querySelector('.mobile-toggle');
@@ -1788,5 +1806,3 @@
   <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
-
-
