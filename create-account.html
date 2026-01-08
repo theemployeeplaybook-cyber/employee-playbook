@@ -661,6 +661,9 @@
     const modalNoEmail = document.getElementById('modalNoEmail');
     const modalHelpBox = document.getElementById('modalHelpBox');
 
+    // ✅ track whether modal was opened due to successful signup
+    let shouldRedirectOnModalClose = false;
+
     function setLoading(isLoading) {
       submitBtn.disabled = !!isLoading;
       if (isLoading) {
@@ -741,30 +744,38 @@
       nextModal.classList.add('show');
       nextModal.setAttribute('aria-hidden', 'false');
 
+      // ✅ if they dismiss the modal, send them to sign-in
+      shouldRedirectOnModalClose = true;
+
       // lock scroll (optional but feels premium)
       document.body.style.overflow = 'hidden';
     }
 
-    function closeModal(){
+    function closeModal({ redirect = true } = {}){
       nextModal.classList.remove('show');
       nextModal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+
+      // ✅ NEW: when user clicks off / closes, go to sign-in
+      if (redirect && shouldRedirectOnModalClose) {
+        window.location.href = modalGoSignIn.href || 'sign-in.html';
+      }
     }
 
-    // Close button
-    closeNextModal.addEventListener('click', closeModal);
+    // Close button -> redirect to sign in
+    closeNextModal.addEventListener('click', () => closeModal({ redirect: true }));
 
-    // Click anywhere outside card closes
+    // Click anywhere outside card -> redirect to sign in
     nextModal.addEventListener('click', (e) => {
-      if (e.target === nextModal) closeModal();
+      if (e.target === nextModal) closeModal({ redirect: true });
     });
 
-    // Esc closes
+    // Esc -> redirect to sign in
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && nextModal.classList.contains('show')) closeModal();
+      if (e.key === 'Escape' && nextModal.classList.contains('show')) closeModal({ redirect: true });
     });
 
-    // "Didn't get the email?"
+    // "Didn't get the email?" (no redirect)
     modalNoEmail.addEventListener('click', () => {
       modalHelpBox.classList.toggle('show');
     });
