@@ -63,20 +63,21 @@
       display:flex;
       min-height:620px;
       max-height:88vh;
+      position:relative; /* ✅ for modal stacking context */
     }
 
     /* LEFT */
     .left-column{
       flex:1.15;
       background:rgba(123,95,196,0.10);
-      padding:70px 50px 30px; /* ✅ slightly reduced top/bottom */
+      padding:70px 50px 30px;
       display:flex;
       flex-direction:column;
       justify-content:flex-start;
     }
 
     .left-column h1{
-      font-size:30px; /* ✅ smaller */
+      font-size:30px;
       font-weight:700;
       letter-spacing:-0.02em;
       line-height:1.12;
@@ -118,31 +119,29 @@
       flex-shrink:0;
     }
 
-    /* RIGHT (compressed) */
+    /* RIGHT */
     .right-column{
       flex:1;
-      padding:18px 46px 14px; /* ✅ reduced top/bottom */
+      padding:18px 46px 14px;
       display:flex;
       flex-direction:column;
     }
 
-    /* ✅ logo bigger */
     .brand-row{
       display:flex;
       justify-content:center;
       align-items:center;
-      margin-bottom:8px; /* ✅ tighter */
+      margin-bottom:8px;
     }
 
-    .logo-img{ height:77px; width:auto; } /* ✅ bigger */
+    .logo-img{ height:77px; width:auto; }
     .logo-fallback{ display:none; font-weight:800; letter-spacing:.08em; font-size:14px; }
 
     .form-header{
       margin-top:0px;
-      margin-bottom:8px; /* ✅ tighter */
+      margin-bottom:8px;
     }
 
-    /* ✅ "Create your account" smaller */
     .form-header h2{
       font-size:25px;
       font-weight:700;
@@ -157,71 +156,6 @@
       line-height:1.35;
     }
 
-    /* Pop-up (hidden until after submit success) */
-    .next-steps-pop{
-      border:1px solid rgba(123,95,196,0.22);
-      background:rgba(123,95,196,0.06);
-      border-radius:var(--radius-14);
-      padding:10px 12px;     /* ✅ tighter */
-      margin:6px 0 10px;     /* ✅ tighter */
-      display:none;
-    }
-    .next-steps-pop.show{
-      display:block;
-      animation:popIn .18s ease-out;
-    }
-    @keyframes popIn{
-      from{ transform:translateY(-6px); opacity:0; }
-      to{ transform:translateY(0); opacity:1; }
-    }
-    .next-steps-title{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight:700;
-      color:var(--text-dark);
-      font-size:14px;
-      margin-bottom:6px;
-    }
-    .next-steps-title i{ color:var(--accent-purple); }
-    .next-steps-pop ol{
-      margin-left:18px;
-      color:var(--text-medium);
-      font-size:13px;
-      line-height:1.5;
-    }
-    .next-steps-pop li{ margin-bottom:3px; }
-    .next-steps-note{
-      margin-top:6px;
-      color:var(--text-muted);
-      font-size:12.5px;
-      line-height:1.35;
-    }
-    .next-steps-actions{
-      margin-top:8px;
-      display:flex;
-      gap:14px;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-    .link-btn{
-      color:var(--accent-purple);
-      text-decoration:none;
-      font-weight:700;
-      font-size:12.5px;
-    }
-    .link-btn:hover{ text-decoration:underline; }
-    .muted-btn{
-      background:transparent;
-      border:none;
-      padding:0;
-      color:var(--text-muted);
-      font-weight:700;
-      font-size:12.5px;
-      cursor:pointer;
-    }
-    .muted-btn:hover{ text-decoration:underline; color:var(--text-dark); }
-
     /* Status */
     .inline-status{
       display:none;
@@ -232,16 +166,16 @@
       border:1px solid var(--panel-border);
       background:#fafafa;
       color:var(--text-medium);
-      margin:6px 0 8px; /* ✅ tighter */
+      margin:6px 0 8px;
     }
     .inline-status.show{ display:block; }
     .inline-status.success{ border-color:rgba(31,143,74,0.25); background:rgba(31,143,74,0.06); color:var(--success); }
     .inline-status.error{ border-color:rgba(192,57,43,0.25); background:rgba(192,57,43,0.06); color:var(--danger); }
     .inline-status.info{ border-color:rgba(47,111,214,0.22); background:rgba(47,111,214,0.06); color:var(--info); }
 
-    /* Form (compressed) */
+    /* Form */
     .form-row{ display:flex; gap:12px; }
-    .form-group{ flex:1; margin-bottom:8px; } /* ✅ tighter */
+    .form-group{ flex:1; margin-bottom:8px; }
 
     .form-label{
       display:block;
@@ -253,7 +187,7 @@
 
     .form-input{
       width:100%;
-      padding:9px 12px; /* ✅ slightly tighter */
+      padding:9px 12px;
       border:1px solid var(--panel-border);
       border-radius:var(--radius-10);
       font-size:14.5px;
@@ -321,7 +255,7 @@
     .reveal-toggle:checked ~ .password-row .icon-eye { display:none; }
 
     .password-strength{
-      margin-top:4px; /* ✅ tighter */
+      margin-top:4px;
       font-size:12.5px;
       display:flex;
       align-items:center;
@@ -332,7 +266,7 @@
     .password-strength.medium{ color:var(--warning); }
     .password-strength.strong{ color:var(--success); }
 
-    /* ✅ reduce space between password + confirm password blocks */
+    /* reduce space between password + confirm */
     .form-group.password-wrap{ margin-bottom:6px; }
     .form-group.password-wrap + .form-group.password-wrap{ margin-top:-4px; }
 
@@ -340,7 +274,7 @@
       display:flex;
       align-items:flex-start;
       gap:10px;
-      margin:8px 0 6px; /* ✅ tighter */
+      margin:8px 0 6px;
     }
     .checkbox-input{ margin-top:3px; accent-color:var(--accent-purple); }
     .checkbox-label{
@@ -356,13 +290,13 @@
       background:var(--accent-purple);
       color:white;
       border:none;
-      padding:11px 14px; /* ✅ slightly tighter */
+      padding:11px 14px;
       border-radius:var(--radius-12);
       font-weight:800;
       cursor:pointer;
       font-size:15px;
       transition:all .15s ease;
-      margin:8px 0 10px; /* ✅ tighter */
+      margin:8px 0 10px;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -382,7 +316,7 @@
 
     .auth-footer{
       text-align:center;
-      padding-top:10px; /* ✅ tighter */
+      padding-top:10px;
       border-top:1px solid var(--panel-border);
       margin-top:auto;
     }
@@ -390,17 +324,164 @@
     .auth-footer a{ color:var(--accent-purple); text-decoration:none; font-weight:800; }
     .auth-footer a:hover{ text-decoration:underline; }
 
+    /* =========================
+       ✅ MODAL: What happens next
+    ========================== */
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:9999;
+      background:rgba(10, 10, 10, 0.22); /* soft dim */
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .modal-overlay.show{ display:flex; }
+
+    .modal-card{
+      width:100%;
+      max-width:520px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.38);
+      background:rgba(255,255,255,0.72); /* ✅ frosted */
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow:0 18px 50px rgba(0,0,0,0.18);
+      overflow:hidden;
+      animation: modalIn .16s ease-out;
+    }
+    @keyframes modalIn{
+      from{ transform: translateY(10px) scale(0.99); opacity:0; }
+      to{ transform: translateY(0) scale(1); opacity:1; }
+    }
+
+    .modal-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 16px 10px;
+      border-bottom:1px solid rgba(0,0,0,0.06);
+    }
+    .modal-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:800;
+      font-size:15px;
+      color:var(--text-dark);
+      line-height:1.2;
+    }
+    .modal-title i{ color:var(--accent-purple); }
+
+    .modal-close{
+      border:none;
+      background:transparent;
+      cursor:pointer;
+      color:rgba(55,53,47,0.65);
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:all .15s ease;
+      flex-shrink:0;
+    }
+    .modal-close:hover{
+      background:rgba(123,95,196,0.10);
+      color:var(--accent-purple);
+    }
+
+    .modal-body{
+      padding:12px 16px 14px;
+    }
+
+    .modal-body ol{
+      margin:0 0 10px 18px;
+      color:var(--text-medium);
+      font-size:13.5px;
+      line-height:1.55;
+    }
+    .modal-body li{ margin:0 0 4px 0; }
+
+    .modal-note{
+      color:var(--text-muted);
+      font-size:12.5px;
+      line-height:1.4;
+      margin-bottom:12px;
+    }
+    .modal-note strong{ color:var(--text-dark); font-weight:800; }
+
+    .modal-actions{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding-top:6px;
+    }
+
+    .primary-link{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:rgba(123,95,196,0.95);
+      color:#fff;
+      font-weight:800;
+      text-decoration:none;
+      font-size:13px;
+      box-shadow:0 10px 18px rgba(123,95,196,0.18);
+      transition:all .15s ease;
+      border:1px solid rgba(255,255,255,0.18);
+    }
+    .primary-link:hover{
+      transform:translateY(-1px);
+      background:rgba(106,79,176,0.98);
+      box-shadow:0 14px 26px rgba(123,95,196,0.24);
+    }
+
+    .secondary-btn{
+      border:none;
+      background:transparent;
+      color:var(--accent-purple);
+      font-weight:800;
+      font-size:13px;
+      cursor:pointer;
+      padding:10px 8px;
+    }
+    .secondary-btn:hover{ text-decoration:underline; }
+
+    .micro-help{
+      margin-top:10px;
+      display:none;
+      border:1px solid rgba(47,111,214,0.20);
+      background:rgba(47,111,214,0.06);
+      color:var(--info);
+      border-radius:12px;
+      padding:10px 12px;
+      font-size:12.8px;
+      line-height:1.45;
+    }
+    .micro-help.show{ display:block; }
+
     @media (max-width:980px){
       .auth-container{ flex-direction:column; max-height:none; }
       .left-column{ padding:36px 24px; }
-      .left-column h1{ font-size:32px; } /* ✅ smaller on mobile */
+      .left-column h1{ font-size:32px; }
       .right-column{ padding:18px 18px; }
     }
     @media (max-width:520px){
       body{ padding:12px; }
       .form-row{ flex-direction:column; gap:0; }
       .form-header h2{ font-size:22px; }
-      .logo-img{ height:50px; }
+      .logo-img{ height:56px; }
+      .modal-card{ max-width: 94vw; }
     }
   </style>
 </head>
@@ -436,27 +517,6 @@
       <div class="form-header">
         <h2>Create your account</h2>
         <p>Enter your details to get started</p>
-      </div>
-
-      <!-- Pop-up card: hidden until user submits successfully -->
-      <div class="next-steps-pop" id="nextStepsPop" aria-label="What happens next">
-        <div class="next-steps-title">
-          <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
-          What happens next
-        </div>
-        <ol id="nextStepsList">
-          <li>Create your account.</li>
-          <li>We’ll email a secure verification link to confirm it’s really you.</li>
-          <li>Open the link, then come back and sign in.</li>
-        </ol>
-        <div class="next-steps-note" id="nextStepsNote">
-          If you don’t see the email within a few minutes, check spam/junk.
-        </div>
-
-        <div class="next-steps-actions">
-          <a class="link-btn" id="goSignIn" href="sign-in.html">Go to Sign In</a>
-          <button class="muted-btn" id="helpNoEmail" type="button">Didn’t get the email?</button>
-        </div>
       </div>
 
       <div id="formStatus" class="inline-status" role="status" aria-live="polite"></div>
@@ -537,6 +597,48 @@
     </div>
   </div>
 
+  <!-- ✅ Modal Overlay -->
+  <div class="modal-overlay" id="nextModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-label="What happens next">
+      <div class="modal-head">
+        <div class="modal-title">
+          <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
+          What happens next
+        </div>
+        <button class="modal-close" id="closeNextModal" type="button" aria-label="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <ol>
+          <li>Create your account.</li>
+          <li>We’ll email a secure verification link to confirm it’s really you.</li>
+          <li>Open the link, then come back and sign in.</li>
+        </ol>
+
+        <div class="modal-note" id="modalEmailNote">
+          We’ve sent a verification link to <strong>your email</strong>. If you don’t see it within a few minutes, check spam/junk.
+        </div>
+
+        <div class="modal-actions">
+          <a class="primary-link" id="modalGoSignIn" href="sign-in.html">
+            Go to Sign In <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <button class="secondary-btn" id="modalNoEmail" type="button">Didn’t get the email?</button>
+        </div>
+
+        <div class="micro-help" id="modalHelpBox">
+          If the email hasn’t arrived:
+          <br><strong>1)</strong> Check spam/junk
+          <br><strong>2)</strong> Wait 2–3 minutes
+          <br><strong>3)</strong> Try signing in (you may be prompted to confirm your email)
+          <br>If it still doesn’t arrive, use a different email or contact support.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="assets/supabaseClient.js"></script>
@@ -546,14 +648,18 @@
     const supabaseClient = window.supabaseClient;
 
     const formStatus = document.getElementById('formStatus');
-    const nextStepsPop = document.getElementById('nextStepsPop');
-    const nextStepsNote = document.getElementById('nextStepsNote');
-    const goSignIn = document.getElementById('goSignIn');
-    const helpNoEmail = document.getElementById('helpNoEmail');
 
     const submitBtn = document.getElementById('submitBtn');
     const submitText = document.getElementById('submitText');
     const submitIcon = document.getElementById('submitIcon');
+
+    // Modal elements
+    const nextModal = document.getElementById('nextModal');
+    const closeNextModal = document.getElementById('closeNextModal');
+    const modalEmailNote = document.getElementById('modalEmailNote');
+    const modalGoSignIn = document.getElementById('modalGoSignIn');
+    const modalNoEmail = document.getElementById('modalNoEmail');
+    const modalHelpBox = document.getElementById('modalHelpBox');
 
     function setLoading(isLoading) {
       submitBtn.disabled = !!isLoading;
@@ -573,15 +679,6 @@
     function clearStatus() {
       formStatus.textContent = '';
       formStatus.className = 'inline-status';
-    }
-
-    function hideNextSteps() {
-      nextStepsPop.classList.remove('show');
-    }
-    function showNextSteps(email) {
-      nextStepsNote.innerHTML = `We’ve sent a verification link to <strong>${escapeHtml(email)}</strong>. If you don’t see it within a few minutes, check spam/junk.`;
-      nextStepsPop.classList.add('show');
-      nextStepsPop.scrollIntoView({ behavior:'smooth', block:'nearest' });
     }
 
     function escapeHtml(str){
@@ -631,7 +728,50 @@
       };
     }
 
+    // =========================
+    // ✅ Modal open/close behaviour
+    // =========================
+    function openNextModal(email, nextTarget){
+      modalEmailNote.innerHTML =
+        `We’ve sent a verification link to <strong>${escapeHtml(email)}</strong>. If you don’t see it within a few minutes, check spam/junk.`;
+
+      modalGoSignIn.href = 'sign-in.html?check_email=1&next=' + encodeURIComponent(nextTarget) + '&email=' + encodeURIComponent(email);
+
+      modalHelpBox.classList.remove('show');
+      nextModal.classList.add('show');
+      nextModal.setAttribute('aria-hidden', 'false');
+
+      // lock scroll (optional but feels premium)
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(){
+      nextModal.classList.remove('show');
+      nextModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    // Close button
+    closeNextModal.addEventListener('click', closeModal);
+
+    // Click anywhere outside card closes
+    nextModal.addEventListener('click', (e) => {
+      if (e.target === nextModal) closeModal();
+    });
+
+    // Esc closes
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nextModal.classList.contains('show')) closeModal();
+    });
+
+    // "Didn't get the email?"
+    modalNoEmail.addEventListener('click', () => {
+      modalHelpBox.classList.toggle('show');
+    });
+
+    // =========================
     // Password indicators
+    // =========================
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
     const passwordStrength = document.getElementById('passwordStrength');
@@ -676,24 +816,14 @@
       }
     }
 
-    helpNoEmail.addEventListener('click', () => {
-      showStatus(
-        "If the email hasn’t arrived:<br>" +
-        "<span style='color:var(--text-medium);font-weight:600;'>" +
-        "1) Check spam/junk.<br>" +
-        "2) Wait 2–3 minutes.<br>" +
-        "3) Try signing in — if your email isn’t confirmed yet, you may be prompted accordingly.<br>" +
-        "If it still doesn’t arrive, use a different email or contact support.</span>",
-        "info"
-      );
-    });
-
+    // =========================
+    // Submit
+    // =========================
     const createAccountForm = document.getElementById('createAccountForm');
 
     createAccountForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       clearStatus();
-      nextStepsPop.classList.remove('show');
 
       if (!supabaseClient || !supabaseClient.auth) {
         showStatus(
@@ -755,13 +885,14 @@
         const needsEmailConfirm = !data?.session;
 
         if (needsEmailConfirm) {
-          showNextSteps(email);
+          // ✅ show frosted modal AFTER submission success
+          openNextModal(email, nextTarget);
+
           showStatus(
             "Account created.<br><span style='color:var(--text-medium);font-weight:600;'>Please confirm your email to continue.</span>",
             "success"
           );
 
-          goSignIn.href = 'sign-in.html?check_email=1&next=' + encodeURIComponent(nextTarget) + '&email=' + encodeURIComponent(email);
         } else {
           showStatus("Welcome — your account is ready.<br><span style='color:var(--text-medium);font-weight:600;'>Redirecting you now…</span>", "success");
           localStorage.removeItem('tep_post_login_redirect');
