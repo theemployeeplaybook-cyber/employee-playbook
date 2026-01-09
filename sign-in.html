@@ -222,6 +222,69 @@
       color: var(--info);
     }
 
+    /* ✅ Forgot password inline panel */
+    .forgot-panel{
+      display:none;
+      border: 1px solid rgba(123, 95, 196, 0.18);
+      background: rgba(123, 95, 196, 0.06);
+      border-radius: 10px;
+      padding: 12px 12px;
+      margin-top: -6px;
+    }
+    .forgot-panel.show{ display:block; }
+    .forgot-title{
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+    .forgot-title i{ color: var(--accent); }
+    .forgot-hint{
+      font-size: 12.5px;
+      color: var(--dark-gray);
+      line-height:1.35;
+      margin-bottom: 10px;
+    }
+    .forgot-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .mini-btn{
+      border:none;
+      background: var(--accent);
+      color:#fff;
+      font-weight: 700;
+      border-radius: 8px;
+      padding: 10px 12px;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      box-shadow: 0 3px 8px rgba(123, 95, 196, 0.18);
+      transition: all .2s;
+      font-size: 13px;
+    }
+    .mini-btn:hover{
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(123, 95, 196, 0.22);
+    }
+    .mini-btn:disabled{ opacity:.7; cursor:not-allowed; transform:none; }
+    .mini-link{
+      border:none;
+      background: transparent;
+      color: var(--accent);
+      font-weight: 700;
+      cursor:pointer;
+      font-size: 13px;
+      padding: 8px 6px;
+    }
+    .mini-link:hover{ text-decoration: underline; }
+
     @media (max-width: 480px) {
       body { padding: 15px; }
       .login-container { padding: 25px 20px; max-width: 100%; }
@@ -276,7 +339,24 @@
           <input type="checkbox" id="remember" class="remember-checkbox" checked>
           <label for="remember" class="remember-label">Remember me</label>
         </div>
-        <a href="forgot-password.html" class="forgot-password">Forgot password?</a>
+
+        <!-- ✅ now opens inline reset (still supports your separate page if you want) -->
+        <a href="#" class="forgot-password" id="forgotLink">Forgot password?</a>
+      </div>
+
+      <!-- ✅ Inline reset panel -->
+      <div class="forgot-panel" id="forgotPanel">
+        <div class="forgot-title"><i class="fa-solid fa-key"></i> Reset your password</div>
+        <div class="forgot-hint">
+          We’ll email a secure reset link. If your account exists, it will arrive within a few minutes.
+        </div>
+        <div class="forgot-actions">
+          <button type="button" class="mini-btn" id="sendResetBtn">
+            <span id="sendResetText">Send reset link</span>
+            <i class="fa-solid fa-paper-plane" id="sendResetIcon"></i>
+          </button>
+          <button type="button" class="mini-link" id="cancelResetBtn">Cancel</button>
+        </div>
       </div>
 
       <button type="submit" class="login-button" id="loginBtn">
@@ -315,6 +395,14 @@
       const loginBtn = document.getElementById('loginBtn');
       const emailEl = document.getElementById('email');
 
+      // Forgot panel elements
+      const forgotLink = document.getElementById('forgotLink');
+      const forgotPanel = document.getElementById('forgotPanel');
+      const sendResetBtn = document.getElementById('sendResetBtn');
+      const sendResetText = document.getElementById('sendResetText');
+      const sendResetIcon = document.getElementById('sendResetIcon');
+      const cancelResetBtn = document.getElementById('cancelResetBtn');
+
       function setStatus(type, msg) {
         statusBox.className = 'status ' + (type || '');
         statusBox.innerHTML = msg || '';
@@ -331,6 +419,17 @@
         } else {
           label.textContent = 'Sign In';
           icon.className = 'fas fa-arrow-right';
+        }
+      }
+
+      function setResetLoading(isLoading){
+        sendResetBtn.disabled = !!isLoading;
+        if (isLoading) {
+          sendResetText.textContent = 'Sending…';
+          sendResetIcon.className = 'fa-solid fa-circle-notch fa-spin';
+        } else {
+          sendResetText.textContent = 'Send reset link';
+          sendResetIcon.className = 'fa-solid fa-paper-plane';
         }
       }
 
@@ -394,6 +493,10 @@
         };
       }
 
+      // ✅ Remember me => session persistence
+      // (Supabase v2 uses setSession only; persistence is handled by client; we can reduce friction by not trying to override here.
+      // Keeping checkbox purely UI is fine for now.)
+
       // ✅ 0) If already signed in, bounce them to destination
       (async function redirectIfAlreadySignedIn(){
         if (!supabaseClient || !supabaseClient.auth) return;
@@ -402,9 +505,7 @@
           if (data && data.session) {
             window.location.href = getPostLoginRedirect();
           }
-        } catch (e) {
-          // silent
-        }
+        } catch (e) { /* silent */ }
       })();
 
       // 1) Show friendly “state” messages (from your redirects)
@@ -438,7 +539,7 @@
       //    Supabase links often arrive with: ?type=signup|recovery&token_hash=...
       (async function handleEmailLinkCallback(){
         const params = new URLSearchParams(window.location.search);
-        const type = params.get('type'); // 'signup' | 'recovery' | 'magiclink' etc
+        const type = params.get('type'); // 'signup' | 'recovery' | etc
         const token_hash = params.get('token_hash');
 
         if (!type || !token_hash) return;
@@ -460,7 +561,6 @@
             return;
           }
 
-          // If it’s a password recovery link, send them to the update-password page
           if (type === 'recovery') {
             setStatus('success', "Link verified.<br><span style='color:var(--dark-gray);font-weight:600;'>Redirecting to set a new password…</span>");
             cleanUrl(['type', 'token_hash']);
@@ -468,7 +568,6 @@
             return;
           }
 
-          // For email confirmation (signup), keep them here and let them sign in
           setStatus('success', 'Email confirmed successfully. You can sign in now.');
           cleanUrl(['type', 'token_hash']);
 
@@ -481,6 +580,64 @@
           setLoading(false);
         }
       })();
+
+      // ✅ Forgot password inline panel (premium + simple)
+      forgotLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        forgotPanel.classList.toggle('show');
+      });
+
+      cancelResetBtn.addEventListener('click', () => {
+        forgotPanel.classList.remove('show');
+      });
+
+      sendResetBtn.addEventListener('click', async () => {
+        setStatus('', '');
+        const email = (emailEl.value || '').trim();
+
+        if (!email) {
+          setStatus('error', "Enter your email address above, then try again.");
+          emailEl.focus();
+          return;
+        }
+
+        if (!supabaseClient || !supabaseClient.auth) {
+          setStatus('error',
+            "We couldn’t initialise password reset.<br><span style='color:var(--dark-gray);font-weight:600;'>Please refresh and try again.</span>"
+          );
+          return;
+        }
+
+        setResetLoading(true);
+
+        try {
+          const redirectTo = window.location.origin + '/update-password.html';
+
+          const { error } = await supabaseClient.auth.resetPasswordForEmail(email, { redirectTo });
+
+          // Always show success-style message (don’t leak if account exists)
+          if (error) {
+            // still keep it premium + calm
+            setStatus('info',
+              "If an account exists for that email, we’ve sent a secure reset link.<br><span style='color:var(--dark-gray);font-weight:600;'>Please check your inbox (and spam/junk).</span>"
+            );
+          } else {
+            setStatus('success',
+              `If an account exists for <strong>${escapeHtml(email)}</strong>, we’ve sent a secure reset link.<br><span style='color:var(--dark-gray);font-weight:600;'>Please check your inbox (and spam/junk).</span>`
+            );
+          }
+
+          forgotPanel.classList.remove('show');
+
+        } catch (e) {
+          console.error(e);
+          setStatus('error',
+            "Something went wrong.<br><span style='color:var(--dark-gray);font-weight:600;'>Please try again.</span>"
+          );
+        } finally {
+          setResetLoading(false);
+        }
+      });
 
       // 3) Normal sign-in
       document.getElementById('loginForm').addEventListener('submit', async function (e) {
@@ -517,7 +674,6 @@
 
           setStatus('success', "Signed in successfully.<br><span style='color:var(--dark-gray);font-weight:600;'>Redirecting…</span>");
 
-          // ✅ redirect first, then clear (so redirect still works if next uses storage)
           const dest = getPostLoginRedirect();
 
           localStorage.removeItem('returnTo');
