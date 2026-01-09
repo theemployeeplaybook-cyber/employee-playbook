@@ -120,7 +120,7 @@
         .mobile-create-account-tab {
             display: none;
             position: fixed;
-            top: 15%; /* Changed from 20% to 15% */
+            top: 15%;
             right: 0;
             background: var(--accent-purple);
             color: white;
@@ -146,141 +146,6 @@
 
         .dark-mode .mobile-create-account-tab {
             border: 2px solid var(--primary-white);
-        }
-
-        /* NEW: Create Account Modal */
-        .create-account-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1001;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .create-account-modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--primary-white);
-            width: 90%;
-            max-width: 400px;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            position: relative;
-            animation: modalSlideIn 0.3s ease-out;
-        }
-
-        @keyframes modalSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--deep-navy);
-        }
-
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--dark-gray);
-            cursor: pointer;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .close-modal:hover {
-            background-color: var(--light-gray);
-        }
-
-        .modal-form {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .form-label {
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-
-        .form-input {
-            padding: 12px 16px;
-            border: 1px solid var(--medium-gray);
-            border-radius: 8px;
-            font-size: 16px;
-            background: var(--primary-white);
-            color: var(--text-dark);
-            transition: border-color 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent-purple);
-        }
-
-        .submit-btn {
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(123, 95, 196, 0.3);
-        }
-
-        .modal-footer {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 14px;
-            color: var(--text-medium);
-        }
-
-        .modal-footer a {
-            color: var(--accent-purple);
-            text-decoration: none;
-            font-weight: 500;
         }
 
         /* Navigation - Copied from The Lens */
@@ -405,6 +270,7 @@
             align-items: center;
             justify-content: center;
             transition: background-color 0.3s ease;
+            z-index: 1001;
         }
 
         .mobile-toggle:hover {
@@ -2763,6 +2629,7 @@
             .nav-container {
                 justify-content: center;
                 position: relative;
+                padding: 0 20px;
             }
             
             .logo {
@@ -2807,8 +2674,8 @@
             
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 100%;
+                position: fixed;
+                top: 80px;
                 left: 0;
                 width: 100%;
                 background: var(--nav-bg);
@@ -2819,6 +2686,7 @@
                 border-top: 1px solid var(--border-light);
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
                 gap: 20px;
+                z-index: 999;
             }
 
             .nav-links.active {
@@ -3147,10 +3015,9 @@
 <body>
 
 <!-- NEW: Create Account Tab for Mobile -->
-<a href="#" class="mobile-create-account-tab" id="createAccountTab">
+<a href="create-account.html" class="mobile-create-account-tab" id="createAccountTab">
     <i class="fas fa-user-plus"></i>
 </a>
-
 
 <!-- Cookie Popup Overlay -->
 <div class="cookie-popup-overlay" id="cookiePopupOverlay">
@@ -3158,7 +3025,7 @@
         <div class="cookie-content">
             <div class="cookie-text">
                 We use cookies to enhance your experience and analyse site traffic. By clicking "Accept", you consent to our use of cookies. 
-                <a href="#">Learn more</a>
+                <a href="privacy-and-security.html">Learn more</a>
             </div>
             <div class="cookie-buttons">
                 <button class="cookie-button cookie-settings">Settings</button>
@@ -4153,7 +4020,7 @@
                         <ul class="footer-links">
                             <li class="footer-link"><a href="profile.html">Profile</a></li>
                             <li class="footer-link"><a href="about-us.html">About</a></li>
-                            <li class="footer-link"><a href="#privacy.html">Privacy</a></li>
+                            <li class="footer-link"><a href="privacy-and-security.html">Privacy</a></li>
                             <li class="footer-link"><a href="terms-and-conditions.html">Terms</a></li>
                             <li class="footer-link"><a href="help-centre.html">Help Centre</a></li>
                         </ul>
@@ -4198,45 +4065,6 @@
     // Mark page as loaded to prevent FOUC
     document.addEventListener('DOMContentLoaded', function() {
         document.body.classList.add('loaded');
-        
-        // Create Account Modal Functionality
-        const createAccountTab = document.getElementById('createAccountTab');
-        const createAccountModal = document.getElementById('createAccountModal');
-        const closeModal = document.getElementById('closeModal');
-        
-        // Open modal when tab is clicked
-        createAccountTab.addEventListener('click', function(e) {
-            e.preventDefault();
-            createAccountModal.classList.add('active');
-        });
-        
-        // Close modal when X button is clicked
-        closeModal.addEventListener('click', function() {
-            createAccountModal.classList.remove('active');
-        });
-        
-        // Close modal when clicking outside the form
-        createAccountModal.addEventListener('click', function(e) {
-            if (e.target === createAccountModal) {
-                createAccountModal.classList.remove('active');
-            }
-        });
-        
-        // Close modal with ESC key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && createAccountModal.classList.contains('active')) {
-                createAccountModal.classList.remove('active');
-            }
-        });
-        
-        // Handle form submission
-        const modalForm = document.querySelector('.modal-form');
-        modalForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            // In a real implementation, you would handle form submission here
-            alert('Account creation would be processed here in a real implementation');
-            createAccountModal.classList.remove('active');
-        });
         
         // Cookie popup functionality
         const cookiePopupOverlay = document.getElementById('cookiePopupOverlay');
@@ -4328,9 +4156,6 @@
             };
             localStorage.setItem('cookiePreferences', JSON.stringify(preferences));
             localStorage.setItem('cookiesAccepted', 'true');
-            
-            // In a real implementation, you would update the actual cookies here
-            // based on the user's preferences
         }
         
         // Dark mode toggle
@@ -4368,15 +4193,48 @@
             }
         });
 
-        // Mobile navigation toggle
-        document.querySelector('.mobile-toggle').addEventListener('click', function () {
-            document.querySelector('.nav-links').classList.toggle('active');
+        // FIXED: Mobile navigation toggle - Enhanced to work properly
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileToggle.addEventListener('click', function (e) {
+            e.stopPropagation(); // Prevent event bubbling
+            navLinks.classList.toggle('active');
             const icon = this.querySelector('i');
             icon.classList.toggle('fa-bars');
             icon.classList.toggle('fa-times');
+            
+            // Close other open elements when opening mobile menu
+            if (navLinks.classList.contains('active')) {
+                // Close chat widget if open
+                document.querySelector('.chat-container').classList.remove('active');
+                // Close cookie modals if open
+                cookiePopupOverlay.classList.remove('active');
+                cookieSettingsModal.classList.remove('active');
+            }
         });
 
-        // Form close functionality - FIXED VERSION
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-links') && !e.target.closest('.mobile-toggle')) {
+                navLinks.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        // Form close functionality
         const formClose = document.getElementById('formClose');
         const createAccountForm = document.getElementById('createAccountForm');
 
@@ -4389,10 +4247,8 @@
             button.addEventListener('click', function(e) {
                 if (this.getAttribute('href') === 'create-account.html') {
                     e.preventDefault();
-                    // Show the form instead of navigating
                     createAccountForm.style.display = 'block';
-        // Scroll to the form
-        createAccountForm.scrollIntoView({ behavior: 'smooth' });
+                    createAccountForm.scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
@@ -4408,9 +4264,9 @@
                     window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                     
                     // Close mobile menu if open
-                    document.querySelector('.nav-links').classList.remove('active');
-                    document.querySelector('.mobile-toggle i').classList.add('fa-bars');
-                    document.querySelector('.mobile-toggle i').classList.remove('fa-times');
+                    navLinks.classList.remove('active');
+                    mobileToggle.querySelector('i').classList.add('fa-bars');
+                    mobileToggle.querySelector('i').classList.remove('fa-times');
                 }
             });
         });
@@ -4421,12 +4277,28 @@
         const chatClose = document.querySelector('.chat-close');
         const chatForm = document.getElementById('chatForm');
 
-        chatToggle.addEventListener('click', function() {
+        chatToggle.addEventListener('click', function(e) {
+            e.stopPropagation(); // Prevent event bubbling
             chatContainer.classList.toggle('active');
+            
+            // Close mobile menu if open when opening chat
+            if (chatContainer.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
         });
 
         chatClose.addEventListener('click', function() {
             chatContainer.classList.remove('active');
+        });
+
+        // Close chat when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.chat-container') && !e.target.closest('.chat-toggle')) {
+                chatContainer.classList.remove('active');
+            }
         });
 
         chatForm.addEventListener('submit', function(e) {
@@ -4587,11 +4459,20 @@
                 }
             });
         });
+
+        // Close mobile menu on ESC key press
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                navLinks.classList.remove('active');
+                const icon = mobileToggle.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
     });
 </script>
 
 <script defer src="/_vercel/speed-insights/script.js"></script>
-
 
 </body>
 </html>
