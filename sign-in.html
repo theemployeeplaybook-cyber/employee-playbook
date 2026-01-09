@@ -28,6 +28,7 @@
       --shadow-hover: 0 4px 15px rgba(0,0,0,0.12);
       --danger: #c0392b;
       --success: #1f7a4f;
+      --info: #2f6fd6;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
@@ -214,6 +215,12 @@
       background: rgba(31, 122, 79, 0.08);
       color: var(--success);
     }
+    .status.info {
+      display: block;
+      border-color: rgba(47, 111, 214, 0.22);
+      background: rgba(47, 111, 214, 0.06);
+      color: var(--info);
+    }
 
     @media (max-width: 480px) {
       body { padding: 15px; }
@@ -306,10 +313,11 @@
 
       const statusBox = document.getElementById('statusBox');
       const loginBtn = document.getElementById('loginBtn');
+      const emailEl = document.getElementById('email');
 
       function setStatus(type, msg) {
         statusBox.className = 'status ' + (type || '');
-        statusBox.textContent = msg || '';
+        statusBox.innerHTML = msg || '';
         statusBox.style.display = msg ? 'block' : 'none';
       }
 
@@ -341,12 +349,79 @@
         window.history.replaceState({}, document.title, url.toString());
       }
 
+      function escapeHtml(str){
+        return String(str || '').replace(/[&<>"']/g, (m) => ({
+          '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'
+        }[m]));
+      }
+
+      // ✅ Premium error mapper
+      function premiumAuthErrorMessage(error) {
+        const raw = (error && error.message) ? String(error.message) : '';
+        const msg = raw.toLowerCase();
+
+        if (msg.includes('email not confirmed')) {
+          return {
+            type: 'info',
+            html: "Please confirm your email before signing in.<br><span style='color:var(--dark-gray);font-weight:600;'>Open the verification link we emailed you, then return here.</span>"
+          };
+        }
+
+        if (msg.includes('invalid login credentials') || msg.includes('invalid') || msg.includes('credentials')) {
+          return {
+            type: 'error',
+            html: "Email or password doesn’t match.<br><span style='color:var(--dark-gray);font-weight:600;'>Try again — or reset your password if you’ve forgotten it.</span>"
+          };
+        }
+
+        if (msg.includes('too many requests') || msg.includes('rate limit')) {
+          return {
+            type: 'error',
+            html: "Too many attempts in a short time.<br><span style='color:var(--dark-gray);font-weight:600;'>Please wait a moment and try again.</span>"
+          };
+        }
+
+        if (msg.includes('fetch') || msg.includes('network') || msg.includes('failed to fetch')) {
+          return {
+            type: 'error',
+            html: "We couldn’t reach the service just now.<br><span style='color:var(--dark-gray);font-weight:600;'>Check your connection and try again.</span>"
+          };
+        }
+
+        return {
+          type: 'error',
+          html: (raw ? escapeHtml(raw) : "Sign-in failed. Please try again.")
+        };
+      }
+
+      // ✅ 0) If already signed in, bounce them to destination
+      (async function redirectIfAlreadySignedIn(){
+        if (!supabaseClient || !supabaseClient.auth) return;
+        try {
+          const { data } = await supabaseClient.auth.getSession();
+          if (data && data.session) {
+            window.location.href = getPostLoginRedirect();
+          }
+        } catch (e) {
+          // silent
+        }
+      })();
+
       // 1) Show friendly “state” messages (from your redirects)
       (function showQueryMessages(){
         const params = new URLSearchParams(window.location.search);
 
+        // Prefill email if provided
+        const emailParam = params.get('email');
+        if (emailParam && emailEl) emailEl.value = emailParam;
+
         if (params.get('check_email') === '1') {
-          setStatus('success', 'Account created. Please confirm your email, then sign in.');
+          const shownEmail = emailParam ? `<strong>${escapeHtml(emailParam)}</strong>` : 'your inbox';
+          setStatus('success',
+            `Check your email to verify your account (${shownEmail}).<br><span style="color:var(--dark-gray);font-weight:600;">Open the secure link, then come back and sign in.</span>`
+          );
+          // keep next param; remove check_email only
+          cleanUrl(['check_email']);
         } else if (params.get('reset') === '1') {
           setStatus('success', 'Password updated. You can sign in now.');
           cleanUrl(['reset']);
@@ -354,7 +429,8 @@
           setStatus('success', 'Email confirmed. You can sign in now.');
           cleanUrl(['confirmed']);
         } else if (params.get('error_description')) {
-          setStatus('error', params.get('error_description'));
+          setStatus('error', escapeHtml(params.get('error_description')));
+          cleanUrl(['error_description']);
         }
       })();
 
@@ -375,31 +451,32 @@
         setLoading(true);
 
         try {
-          const { data, error } = await supabaseClient.auth.verifyOtp({ type, token_hash });
+          const { error } = await supabaseClient.auth.verifyOtp({ type, token_hash });
 
           if (error) {
-            setStatus('error', error.message || 'This link is invalid or has expired.');
+            setStatus('error',
+              "This link is invalid or has expired.<br><span style='color:var(--dark-gray);font-weight:600;'>Please request a new one.</span>"
+            );
             return;
           }
 
           // If it’s a password recovery link, send them to the update-password page
           if (type === 'recovery') {
-            setStatus('success', 'Link verified. Redirecting to set a new password…');
-            // keep the URL clean before redirect
+            setStatus('success', "Link verified.<br><span style='color:var(--dark-gray);font-weight:600;'>Redirecting to set a new password…</span>");
             cleanUrl(['type', 'token_hash']);
-            setTimeout(() => {
-              window.location.href = 'update-password.html';
-            }, 700);
+            setTimeout(() => window.location.href = 'update-password.html', 650);
             return;
           }
 
-          // For email confirmation (signup), keep them on TEP and let them sign in
+          // For email confirmation (signup), keep them here and let them sign in
           setStatus('success', 'Email confirmed successfully. You can sign in now.');
           cleanUrl(['type', 'token_hash']);
 
         } catch (e) {
           console.error(e);
-          setStatus('error', 'Something went wrong verifying your link. Please request a new one.');
+          setStatus('error',
+            "Something went wrong verifying your link.<br><span style='color:var(--dark-gray);font-weight:600;'>Please request a new one.</span>"
+          );
         } finally {
           setLoading(false);
         }
@@ -412,7 +489,9 @@
         setLoading(true);
 
         if (!supabaseClient || !supabaseClient.auth) {
-          setStatus('error', 'Supabase client not found. Check assets/supabaseClient.js is loading correctly.');
+          setStatus('error',
+            "We couldn’t initialise sign-in.<br><span style='color:var(--dark-gray);font-weight:600;'>Please refresh and try again.</span>"
+          );
           setLoading(false);
           return;
         }
@@ -424,28 +503,33 @@
           const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
 
           if (error) {
-            const msg = (error.message || '').toLowerCase().includes('email not confirmed')
-              ? 'Please confirm your email first. Check your inbox (and spam).'
-              : (error.message || 'Sign-in failed. Please check your details.');
-            setStatus('error', msg);
+            const mapped = premiumAuthErrorMessage(error);
+            setStatus(mapped.type, mapped.html);
             return;
           }
 
           if (!data || !data.session) {
-            setStatus('error', 'Signed in, but no session was returned. Check your Supabase auth settings.');
+            setStatus('error',
+              "Signed in, but no session was returned.<br><span style='color:var(--dark-gray);font-weight:600;'>Please check your Supabase auth settings.</span>"
+            );
             return;
           }
 
-          setStatus('success', 'Signed in successfully. Redirecting…');
+          setStatus('success', "Signed in successfully.<br><span style='color:var(--dark-gray);font-weight:600;'>Redirecting…</span>");
+
+          // ✅ redirect first, then clear (so redirect still works if next uses storage)
+          const dest = getPostLoginRedirect();
 
           localStorage.removeItem('returnTo');
           localStorage.removeItem('tep_post_login_redirect');
 
-          window.location.href = getPostLoginRedirect();
+          window.location.href = dest;
 
         } catch (err) {
           console.error(err);
-          setStatus('error', 'Something went wrong. Please try again.');
+          setStatus('error',
+            "Something went wrong.<br><span style='color:var(--dark-gray);font-weight:600;'>Please try again.</span>"
+          );
         } finally {
           setLoading(false);
         }
