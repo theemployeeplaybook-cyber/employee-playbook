@@ -157,7 +157,7 @@
       line-height:1.35;
     }
 
-    /* Toast status (single-line preference) */
+    /* Toast status */
     .toast{
       position:fixed;
       top:16px;
@@ -176,7 +176,6 @@
       -webkit-backdrop-filter: blur(10px);
       box-shadow:0 18px 50px rgba(0,0,0,0.14);
       color:var(--text-medium);
-
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
@@ -226,6 +225,22 @@
       width:1px;
       height:1px;
     }
+
+    /* NEW: label + input inline */
+    .inline-pw-row{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    .inline-pw-label{
+      flex:0 0 210px;              /* tweak width here if you want tighter/looser */
+      margin:0;                    /* override form-label default margin */
+      font-weight:800;
+      font-size:13px;
+      color:var(--text-dark);
+      line-height:1.25;
+    }
+
     .password-row{
       display:flex;
       width:100%;
@@ -234,6 +249,8 @@
       overflow:hidden;
       background:var(--primary-white);
       transition:all .15s ease;
+      flex:1;
+      min-width:0;
     }
     .password-row:focus-within{
       border-color:rgba(123,95,196,0.55);
@@ -245,6 +262,7 @@
       box-shadow:none !important;
       flex:1;
       padding:9px 12px;
+      min-width:0;
     }
     .toggle-label{
       width:46px;
@@ -266,18 +284,9 @@
     .reveal-toggle:not(:checked) ~ .password-row .icon-eye-slash { display:none; }
     .reveal-toggle:checked ~ .password-row .icon-eye { display:none; }
 
-    /* Guidance + Strength */
-    .pw-guidance{
-      margin-top:6px;
-      font-size:12.5px;
-      line-height:1.35;
-      color:var(--text-muted);
-      font-weight:600;
-    }
-    .pw-guidance strong{ color:var(--text-dark); font-weight:800; }
-
+    /* Strength */
     .pw-strength{
-      margin-top:6px;
+      margin-top:8px;
       display:flex;
       flex-direction:column;
       gap:6px;
@@ -291,16 +300,9 @@
       color:var(--text-muted);
       font-weight:700;
     }
-    .pw-strength-row span{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      min-width: 0;
-    }
     .pw-strength-pill{
       display:inline-flex;
       align-items:center;
-      gap:8px;
       padding:4px 10px;
       border-radius:999px;
       border:1px solid rgba(0,0,0,0.10);
@@ -410,9 +412,7 @@
     .auth-footer a{ color:var(--accent-purple); text-decoration:none; font-weight:800; }
     .auth-footer a:hover{ text-decoration:underline; }
 
-    /* =========================
-       MODAL BASE
-    ========================== */
+    /* MODALS */
     .modal-overlay{
       position:fixed;
       inset:0;
@@ -482,10 +482,7 @@
       color:var(--accent-purple);
     }
 
-    .modal-body{
-      padding:12px 16px 14px;
-    }
-
+    .modal-body{ padding:12px 16px 14px; }
     .modal-body ol{
       margin:0 0 10px 18px;
       color:var(--text-medium);
@@ -635,6 +632,13 @@
       .left-column h1{ font-size:32px; }
       .right-column{ padding:18px 18px; }
     }
+
+    /* NEW: stack the password label above input on small screens */
+    @media (max-width:680px){
+      .inline-pw-row{ flex-direction:column; align-items:stretch; gap:8px; }
+      .inline-pw-label{ flex:0 0 auto; width:100%; }
+    }
+
     @media (max-width:520px){
       body{ padding:12px; }
       .form-row{ flex-direction:column; gap:0; }
@@ -702,33 +706,32 @@
           <input type="email" id="email" class="form-input" placeholder="your.email@example.com" required>
         </div>
 
+        <!-- PASSWORD (label inline) -->
         <div class="form-group password-wrap">
-          <label for="password" class="form-label">Password</label>
+          <div class="inline-pw-row">
+            <label for="password" class="inline-pw-label">Password (Minimum 8 characters)</label>
 
-          <input type="checkbox" id="pwReveal" class="reveal-toggle">
+            <input type="checkbox" id="pwReveal" class="reveal-toggle">
 
-          <div class="password-row">
-            <input
-              type="text"
-              id="password"
-              class="form-input secure-input"
-              placeholder="Password (minimum 8 characters)"
-              required
-              autocomplete="new-password"
-              minlength="8"
-              maxlength="72"
-            >
-            <label for="pwReveal" class="toggle-label" aria-label="Toggle password visibility" title="Show/hide password">
-              <i class="fa-solid fa-eye icon-eye"></i>
-              <i class="fa-solid fa-eye-slash icon-eye-slash"></i>
-            </label>
+            <div class="password-row">
+              <input
+                type="text"
+                id="password"
+                class="form-input secure-input"
+                placeholder="Password (minimum 8 characters)"
+                required
+                autocomplete="new-password"
+                minlength="8"
+                maxlength="72"
+              >
+              <label for="pwReveal" class="toggle-label" aria-label="Toggle password visibility" title="Show/hide password">
+                <i class="fa-solid fa-eye icon-eye"></i>
+                <i class="fa-solid fa-eye-slash icon-eye-slash"></i>
+              </label>
+            </div>
           </div>
 
-          <div class="pw-guidance" id="pwGuidance">
-            Password (minimum <strong>8</strong> characters)
-          </div>
-
-          <!-- NEW: strength + meter -->
+          <!-- strength + meter -->
           <div class="pw-strength" aria-live="polite">
             <div class="pw-strength-row">
               <span>Password strength</span>
@@ -743,26 +746,29 @@
           </div>
         </div>
 
+        <!-- CONFIRM PASSWORD (label inline) -->
         <div class="form-group password-wrap">
-          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <div class="inline-pw-row">
+            <label for="confirmPassword" class="inline-pw-label">Confirm Password</label>
 
-          <input type="checkbox" id="cpwReveal" class="reveal-toggle">
+            <input type="checkbox" id="cpwReveal" class="reveal-toggle">
 
-          <div class="password-row">
-            <input
-              type="text"
-              id="confirmPassword"
-              class="form-input secure-input"
-              placeholder="Confirm your password"
-              required
-              autocomplete="new-password"
-              minlength="8"
-              maxlength="72"
-            >
-            <label for="cpwReveal" class="toggle-label" aria-label="Toggle confirm password visibility" title="Show/hide password">
-              <i class="fa-solid fa-eye icon-eye"></i>
-              <i class="fa-solid fa-eye-slash icon-eye-slash"></i>
-            </label>
+            <div class="password-row">
+              <input
+                type="text"
+                id="confirmPassword"
+                class="form-input secure-input"
+                placeholder="Confirm your password"
+                required
+                autocomplete="new-password"
+                minlength="8"
+                maxlength="72"
+              >
+              <label for="cpwReveal" class="toggle-label" aria-label="Toggle confirm password visibility" title="Show/hide password">
+                <i class="fa-solid fa-eye icon-eye"></i>
+                <i class="fa-solid fa-eye-slash icon-eye-slash"></i>
+              </label>
+            </div>
           </div>
         </div>
 
@@ -789,10 +795,7 @@
         </button>
 
         <div class="auth-footer">
-          <p>Already have an account?
-            <!-- UPDATED: always goes to sign-in.html -->
-            <a href="sign-in.html">Sign in</a>
-          </p>
+          <p>Already have an account? <a href="sign-in.html">Sign in</a></p>
         </div>
       </form>
     </div>
@@ -822,7 +825,6 @@
         </div>
 
         <div class="modal-actions">
-          <!-- UPDATED: set via JS and guaranteed to route to sign-in.html -->
           <a class="primary-link" id="modalGoSignIn" href="sign-in.html">
             Go to Sign In <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -967,9 +969,7 @@
       return "We couldn’t create your account — please try again.";
     }
 
-    // =========================
-    // Password strength (NEW)
-    // =========================
+    // Password strength
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('confirmPassword');
 
@@ -994,27 +994,16 @@
       if (hasDigit) variety++;
       if (hasSymbol) variety++;
 
-      // Simple, predictable scoring (no false precision)
       let score = 0;
-
-      // length contributes most
       if (len >= 8) score += 30;
       if (len >= 12) score += 20;
       if (len >= 16) score += 10;
-
-      // variety
       score += variety * 10;
 
-      // penalty for very short
       if (len < 8) score = Math.max(5, len * 3);
-
-      // cap
       score = Math.min(100, score);
 
-      // labels
-      let label = 'Weak';
-      let level = 'weak';
-      let hint = 'Use 12+ characters and add variety (numbers/symbols).';
+      let label = 'Weak', level = 'weak', hint = 'Use 12+ characters and add variety (numbers/symbols).';
 
       if (len < 8){
         label = 'Weak'; level='weak'; hint='Minimum is 8 characters.';
@@ -1041,19 +1030,14 @@
 
       pwStrengthHint.textContent = s.hint;
     }
-
     passwordInput.addEventListener('input', renderStrength);
-    // run once on load (in case browser autofills)
     renderStrength();
 
-    // =========================
-    // Next modal open/close
-    // =========================
+    // Next modal
     function openNextModal(email, nextTarget){
       modalEmailNote.innerHTML =
         `We’ve sent a verification link to <strong>${escapeHtml(email)}</strong>. If you don’t see it within a few minutes, check spam/junk.`;
 
-      // GUARANTEE sign-in page
       const signInUrl = new URL('sign-in.html', window.location.origin);
       signInUrl.searchParams.set('check_email','1');
       signInUrl.searchParams.set('next', nextTarget);
@@ -1075,7 +1059,6 @@
       document.body.style.overflow = '';
 
       if (redirect && shouldRedirectOnModalClose) {
-        // GUARANTEE sign-in page
         window.location.href = modalGoSignIn.href || (new URL('sign-in.html', window.location.origin)).toString();
       }
     }
@@ -1085,7 +1068,6 @@
 
     modalGoSignIn.addEventListener('click', (e) => {
       e.preventDefault();
-      // GUARANTEE sign-in page
       const href = modalGoSignIn.getAttribute('href');
       window.location.href = href || (new URL('sign-in.html', window.location.origin)).toString();
     });
@@ -1094,9 +1076,7 @@
       modalHelpBox.classList.toggle('show');
     });
 
-    // =========================
-    // Policy modal open/close
-    // =========================
+    // Policy modal
     function openPolicyModal(which){
       activePolicy = which;
 
@@ -1176,9 +1156,7 @@
       }
     });
 
-    // =========================
     // Submit
-    // =========================
     const createAccountForm = document.getElementById('createAccountForm');
 
     createAccountForm.addEventListener('submit', async (e) => {
@@ -1213,7 +1191,6 @@
         const nextTarget = getNextTarget();
         localStorage.setItem('tep_post_login_redirect', nextTarget);
 
-        // GUARANTEE sign-in redirect (relative, same origin)
         const signInRedirect = new URL('sign-in.html', window.location.origin);
         signInRedirect.searchParams.set('confirmed', '1');
         signInRedirect.searchParams.set('next', nextTarget);
@@ -1249,7 +1226,6 @@
         if (needsEmailConfirm) {
           openNextModal(email, nextTarget);
         } else {
-          // Logged in instantly (rare, depending on settings)
           localStorage.removeItem('tep_post_login_redirect');
           window.location.href = nextTarget;
         }
