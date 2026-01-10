@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
@@ -191,10 +191,9 @@
       color:var(--text-dark);
     }
 
-    /* CHANGE #3: reduce height of all input boxes by ~5% (padding reduced) */
     .form-input{
       width:100%;
-      padding:8.5px 10px; /* was 9px 10px */
+      padding:9px 10px;
       border:1px solid var(--panel-border);
       border-radius:var(--radius-10);
       font-size:14.5px;
@@ -265,14 +264,12 @@
       border-color:rgba(123,95,196,0.55);
       box-shadow:0 0 0 4px rgba(123,95,196,0.14);
     }
-
-    /* CHANGE #3 (continued): reduce password input padding too */
     .password-row .form-input{
       border:none;
       border-radius:0;
       box-shadow:none !important;
       flex:1;
-      padding:8.5px 12px; /* was 9px 12px */
+      padding:9px 12px;
       min-width:0;
     }
 
@@ -370,6 +367,7 @@
       font-weight:500;
     }
 
+    /* Only show this on strong */
     .pw-strong-note{
       display:none;
       margin-top:2px;
@@ -383,30 +381,19 @@
     .form-checkbox{
       display:flex;
       align-items:flex-start;
-      margin-top:5px;
+      margin-top:10px;
       gap:10px;
       margin:8px 0 6px;
     }
     .checkbox-input{ margin-top:5px; accent-color:var(--accent-purple); }
     .checkbox-label{
       font-size:12.5px;
+      margin-top:10px;
       color:var(--text-medium);
       line-height:1.45;
     }
     .checkbox-label a{ color:var(--accent-purple); text-decoration:none; font-weight:700; }
     .checkbox-label a:hover{ text-decoration:underline; }
-
-    /* CHANGE #1: move ONLY the terms sentence down by 3px */
-    .terms-label{
-      position:relative;
-      top:3px;
-    }
-
-    /* CHANGE #2: nudge "Confirm Password" down so it visually centres with the input box */
-    .confirm-inline-label .pw-title{
-      position:relative;
-      top:2px;
-    }
 
     .submit-button{
       width:100%;
@@ -721,8 +708,8 @@
       </div>
 
       <div class="form-header">
-        <h2>Create your account</h2>
-        <p>Enter your details to get started</p>
+        <h2>Create your account<br></h2>
+
       </div>
 
       <form class="auth-form" id="createAccountForm">
@@ -791,8 +778,7 @@
         <!-- CONFIRM PASSWORD -->
         <div class="form-group password-wrap">
           <div class="inline-pw-row">
-            <!-- CHANGE #2: added class confirm-inline-label -->
-            <label for="confirmPassword" class="inline-pw-label confirm-inline-label">
+            <label for="confirmPassword" class="inline-pw-label">
               <span class="pw-title">Confirm Password</span>
               <span class="pw-min">&nbsp;</span>
             </label>
@@ -820,8 +806,7 @@
 
         <div class="form-checkbox">
           <input type="checkbox" id="terms" class="checkbox-input" required>
-          <!-- CHANGE #1: added class terms-label -->
-          <label for="terms" class="checkbox-label terms-label">
+          <label for="terms" class="checkbox-label">
             I agree to the
             <a href="#" id="openTermsLink">Terms of Service</a>
             and
@@ -1026,7 +1011,9 @@
       return "We couldn’t create your account — please try again.";
     }
 
-    // Password strength
+    // =========================
+    // Password strength (simple + reliable)
+    // =========================
     function computeStrength(pw){
       const p = String(pw || '');
       const len = p.length;
@@ -1082,6 +1069,7 @@
 
       pwStrengthHint.textContent = s.hint;
 
+      // Show "unique" note only on strong
       if (s.level === 'strong') pwStrongNote.classList.add('show');
       else pwStrongNote.classList.remove('show');
     }
@@ -1089,7 +1077,9 @@
     passwordInput.addEventListener('input', renderStrength);
     renderStrength();
 
+    // =========================
     // Next modal open/close
+    // =========================
     function openNextModal(email, nextTarget){
       modalEmailNote.innerHTML =
         `We’ve sent a verification link to <strong>${escapeHtml(email)}</strong>. If you don’t see it within a few minutes, check spam/junk.`;
@@ -1122,6 +1112,7 @@
     closeNextModal.addEventListener('click', () => closeNextModalFn({ redirect: true }));
     nextModal.addEventListener('click', (e) => { if (e.target === nextModal) closeNextModalFn({ redirect: true }); });
 
+    // Ensure clicking "Go to Sign In" always goes to sign-in page
     modalGoSignIn.addEventListener('click', (e) => {
       e.preventDefault();
       window.location.href = modalGoSignIn.href || 'sign-in.html';
@@ -1131,7 +1122,9 @@
       modalHelpBox.classList.toggle('show');
     });
 
+    // =========================
     // Policy modal open/close
+    // =========================
     function openPolicyModal(which){
       activePolicy = which;
 
@@ -1208,7 +1201,9 @@
       }
     });
 
+    // =========================
     // Submit
+    // =========================
     createAccountForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       clearToast();
