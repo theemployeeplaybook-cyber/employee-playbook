@@ -1,0 +1,3386 @@
+<!-- ✅ FINAL: Team Tension Heatmap (Phase 1 Launch-Ready, Single File)
+     ✅ Uses your Capacity Checklist baseline infrastructure:
+     (1) TRUE HARD LOCK: inert on #toolMain + global event capture block when locked
+     (2) Post-login header: initials chip + Log out (desktop + mobile) + active 2px underline under Toolkit
+     (3) Clean Print/PDF (print CSS hides nav/overlays/buttons/FAB/sidebar)
+     (4) Unsaved / Last saved feedback (timestamp)
+     (5) Fixed sticky disabled bug: explicit enable/disable via syncActionButtons()
+     (6) Accessibility: grid cells keyboard togglable + mobile menu aria-expanded
+     (7) Safe DB assumptions: graceful fallbacks + optional table checks (no hard fails)
+     (8) Telemetry: logs tool_opened/tool_saved/tool_printed/tool_cleared safely
+-->
+
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Tension Heatmap | The Employee Playbook</title>
+
+  <!-- Basic metadata -->
+  <meta name="description" content="Team Tension Heatmap — map tension hotspots, generate a report, and save progress securely to your account. Not legal advice." />
+  <meta name="robots" content="index,follow" />
+
+  <!-- ICONS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- FONTS (max weight 700 per your rule) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+
+  <!-- THEME PRELOAD (prevents flash; CSS expects body.dark-mode) -->
+  <script>
+    (function () {
+      try {
+        const saved = localStorage.getItem('theme'); // "dark" | "light" | null
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const useDark = saved ? saved === 'dark' : prefersDark;
+        if (useDark) document.documentElement.classList.add('preload-dark');
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Supabase project config (YOU maintain keys in this file) -->
+  <script src="assets/supabase-config.js"></script>
+
+  <style>
+    /* ===========================
+       ROOT VARIABLES (From Homepage + Canonical Category Colours)
+    =========================== */
+    :root {
+      --primary-white: #FFFFFF;
+      --light-gray: #F8F9FA;
+      --medium-gray: #E9ECEF;
+      --dark-gray: #6C757D;
+      --text-dark: #212529;
+      --text-medium: #495057;
+      --accent-purple: #7B5FC4;
+      --accent-purple-dark: #5A4496;
+      --light-purple: #E6E0F5;
+      --lighter-purple: #F0EBFA;
+      --border-light: rgba(0, 0, 0, 0.08);
+      --nav-bg: rgba(255, 255, 255, 0.96);
+      --hero-bg: linear-gradient(135deg, #F9F6FF 0%, #F0EBFA 100%);
+      --premium-gradient: linear-gradient(135deg, #7B5FC4 0%, #5A4496 100%);
+      --success-green: #10b981;
+      --warning-orange: #f59e0b;
+      --danger-red: #ef4444;
+      --info-blue: #3b82f6;
+
+      /* Canonical category tokens */
+      --category-clarity: #7B5FC4;
+      --category-burnout: #f59e0b;
+      --category-manager: #10b981;
+      --category-politics: #3b82f6;
+      --category-hr: #6D28D9;
+      --category-confidence: #ef4444;
+      --category-career: #800020;
+
+      /* Heatmap */
+      --heat-0-bg: rgba(16, 185, 129, 0.10);
+      --heat-0-bd: rgba(16, 185, 129, 0.22);
+      --heat-0-tx: #059669;
+
+      --heat-1-bg: rgba(59, 130, 246, 0.10);
+      --heat-1-bd: rgba(59, 130, 246, 0.22);
+      --heat-1-tx: #2563eb;
+
+      --heat-2-bg: rgba(245, 158, 11, 0.12);
+      --heat-2-bd: rgba(245, 158, 11, 0.25);
+      --heat-2-tx: #b45309;
+
+      --heat-3-bg: rgba(239, 68, 68, 0.12);
+      --heat-3-bd: rgba(239, 68, 68, 0.25);
+      --heat-3-tx: #dc2626;
+    }
+
+    /* Dark Mode Variables */
+    .dark-mode {
+      --primary-white: #1a1a1a;
+      --light-gray: #2a2a2a;
+      --medium-gray: #3a3a3a;
+      --dark-gray: #888888;
+      --text-dark: #e0e0e0;
+      --text-medium: #b0b0b0;
+      --accent-purple: #9d86e9;
+      --accent-purple-dark: #7b5fc4;
+      --light-purple: rgba(123, 95, 196, 0.20);
+      --lighter-purple: rgba(123, 95, 196, 0.10);
+      --border-light: rgba(255, 255, 255, 0.08);
+      --nav-bg: rgba(30, 30, 30, 0.96);
+      --hero-bg: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      --premium-gradient: linear-gradient(135deg, #9d86e9 0%, #7b5fc4 100%);
+
+      --heat-0-bg: rgba(16, 185, 129, 0.18);
+      --heat-0-bd: rgba(16, 185, 129, 0.30);
+      --heat-0-tx: #34d399;
+
+      --heat-1-bg: rgba(59, 130, 246, 0.18);
+      --heat-1-bd: rgba(59, 130, 246, 0.30);
+      --heat-1-tx: #60a5fa;
+
+      --heat-2-bg: rgba(245, 158, 11, 0.20);
+      --heat-2-bd: rgba(245, 158, 11, 0.34);
+      --heat-2-tx: #fbbf24;
+
+      --heat-3-bg: rgba(239, 68, 68, 0.20);
+      --heat-3-bd: rgba(239, 68, 68, 0.34);
+      --heat-3-tx: #f87171;
+    }
+
+    /* ===========================
+       GLOBAL STYLES
+    =========================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    html { scroll-behaviour: smooth; }
+
+    body {
+      background-color: var(--primary-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+      opacity: 0;
+      transition: opacity 0.35s ease, background-color 0.25s ease, color 0.25s ease;
+      min-height: 100vh;
+    }
+
+    html.preload-dark body { background-color: #1a1a1a; color: #e0e0e0; }
+    body.loaded { opacity: 1; }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ===========================
+       NAVIGATION (POST-LOGIN HEADER) — NO BLUR
+    =========================== */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--nav-bg);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-light);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: background-color 0.25s ease, border-color 0.25s ease;
+      height: 80px;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      height: 100%;
+    }
+
+    .logo { display: block; text-decoration: none; }
+
+    .logo-img {
+      height: 100px;
+      width: auto;
+      transform: translateX(20%);
+      padding: 14px 10px;
+      transition: all 0.25s ease;
+      display: block;
+      min-height: 100px;
+    }
+
+    .logo-fallback {
+      display: none;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 50px;
+      transform: translateX(-28px);
+    }
+
+    .nav-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      font-size: 17px;
+      position: relative;
+    }
+
+    .nav-link:hover { color: var(--accent-purple); }
+
+    .nav-link.active { color: var(--text-dark); }
+
+    /* ✅ Active line under Toolkit: 2px height */
+    .nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent-purple);
+      border-radius: 2px 2px 0 0;
+    }
+
+    .nav-link-container { position: relative; display: inline-block; }
+
+    .new-tag {
+      position: absolute;
+      top: -12px;
+      right: -35px;
+      background: linear-gradient(135deg, #FFD700, #FFA500);
+      color: #000;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      z-index: 10;
+      white-space: nowrap;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transform: translateX(calc(-30% - 15px));
+    }
+
+    .user-initials {
+      width: 38px;
+      height: 38px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      color: var(--text-dark);
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      transition: all 0.2s ease;
+      user-select: none;
+      flex: 0 0 auto;
+    }
+
+    .user-initials:hover {
+      transform: translateY(-1px);
+      border-color: rgba(123, 95, 196, 0.35);
+      box-shadow: 0 8px 18px rgba(123, 95, 196, 0.12);
+      color: var(--accent-purple);
+    }
+
+    .dark-mode .user-initials {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+      color: var(--text-dark);
+    }
+
+    .logout-link {
+      display: none;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-medium);
+      text-decoration: none;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border-light);
+      background: rgba(255,255,255,0.7);
+      transition: all .18s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .logout-link:hover {
+      transform: translateY(-1px);
+      border-color: rgba(123, 95, 196, 0.35);
+      color: var(--accent-purple-dark);
+      box-shadow: 0 8px 18px rgba(123, 95, 196, 0.10);
+    }
+    .dark-mode .logout-link {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+      color: var(--text-medium);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 16px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+    .theme-toggle:hover { background-color: var(--light-gray); }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-dark);
+      cursor: pointer;
+      font-size: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease;
+    }
+    .mobile-toggle:hover { background-color: var(--light-gray); }
+
+    .mobile-profile {
+      display: none;
+      margin-top: 10px;
+      padding: 12px 20px;
+      background: var(--accent-purple);
+      color: white;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .mobile-cta-tab {
+      display: none;
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%) rotate(-90deg);
+      transform-origin: right bottom;
+      background: var(--accent-purple);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px 8px 0 0;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 5px 15px rgba(123, 95, 196, 0.4);
+      z-index: 998;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .mobile-cta-tab:hover { background: var(--accent-purple-dark); }
+
+    @media (max-width: 992px) {
+      .nav-links { gap: 30px; }
+      .nav-actions { gap: 12px; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-container { justify-content: center; position: relative; }
+
+      .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+
+      .logo-img {
+        height: 125px;
+        transform: none;
+        padding: 12px 0;
+      }
+
+      .mobile-toggle {
+        display: flex;
+        position: absolute;
+        left: 20px;
+        align-items: center;
+      }
+
+      .nav-actions {
+        transform: none;
+        gap: 12px;
+        position: absolute;
+        right: 20px;
+        align-items: center;
+      }
+
+      .nav-actions .user-initials { display: none; }
+      .nav-actions .logout-link { display: none !important; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--nav-bg);
+        flex-direction: column;
+        padding: 20px;
+        border-top: 1px solid var(--border-light);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        gap: 20px;
+        transform: none;
+      }
+
+      .nav-links.active { display: flex; }
+      .nav-link-container { display: flex; width: 100%; }
+      .new-tag { position: static; margin-left: 8px; }
+
+      .mobile-profile { display: block !important; }
+      .mobile-cta-tab { display: block; }
+    }
+
+    /* ===========================
+       HERO SECTION
+    =========================== */
+    .tool-hero-section {
+      width: 100%;
+      background: var(--hero-bg);
+      padding: 20px 0 30px;
+      margin-top: 110px;
+      position: relative;
+      border-bottom: 1px solid var(--border-light);
+      overflow: hidden;
+    }
+
+    .tool-hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 100%;
+      background: linear-gradient(135deg, rgba(250, 245, 255, 0.85) 0%, rgba(245, 240, 255, 0.6) 50%, rgba(255, 255, 255, 0.25) 100%);
+      z-index: 1;
+    }
+
+    .dark-mode .tool-hero-section::before {
+      background: linear-gradient(135deg, rgba(42, 42, 42, 0.92) 0%, rgba(31, 31, 31, 0.76) 50%, rgba(26, 26, 26, 0.45) 100%);
+    }
+
+    .tool-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 10px;
+      animation: heroFadeUp 0.45s ease-out;
+    }
+
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .breadcrumb {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--dark-gray);
+      margin-bottom: 10px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb a {
+      color: var(--text-medium);
+      text-decoration: none !important;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      transition: color 0.18s ease;
+    }
+
+    .breadcrumb a:hover { color: var(--accent-purple-dark); }
+    .breadcrumb i { color: var(--dark-gray); opacity: 0.8; }
+    .breadcrumb .current { color: var(--text-dark); font-weight: 600; }
+
+    /* Save item button (hero) — NO BLUR */
+    .save-btn {
+      position: absolute;
+      top: 16px;
+      right: 24px;
+      z-index: 5;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 95, 196, 0.6);
+      background: rgba(255, 255, 255, 0.96);
+      color: var(--accent-purple-dark);
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .save-btn i { font-size: 13px; }
+
+    .save-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(123, 95, 196, 0.18);
+      background: #ffffff;
+    }
+
+    .dark-mode .save-btn {
+      background: rgba(20, 20, 20, 0.92);
+      border-color: rgba(157, 134, 233, 0.6);
+      color: var(--accent-purple);
+    }
+
+    .save-btn.saved {
+      background: var(--accent-purple);
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    .checklist-name {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--accent-purple);
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      margin-bottom: 14px;
+      margin-top: 32px;
+      display: block;
+    }
+
+    /* Heading weights rule: headings 700, subheadings 600, body <=500 */
+    .hero-main-heading {
+      font-size: 46px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.1;
+      margin-bottom: 18px;
+      max-width: 1100px;
+    }
+
+    .hero-subheading {
+      font-size: 16px;
+      color: var(--text-medium);
+      line-height: 1.6;
+      font-weight: 500;
+      max-width: 980px;
+      margin-bottom: 24px;
+    }
+
+    /* ===========================
+       CATEGORY PILLS (NO BLUR)
+    =========================== */
+    .category-pills-container { margin-bottom: 18px; }
+
+    .category-pills-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-medium);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .category-pills-grid {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      height: 32px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: all 0.18s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .category-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+      text-decoration: none;
+    }
+
+    .category-pill.politics {
+      color: var(--category-politics);
+      border-color: rgba(59, 130, 246, 0.20);
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.08), rgba(59, 130, 246, 0.04));
+    }
+
+    .dark-mode .category-pill.politics {
+      color: #60a5fa;
+      border-color: rgba(96, 165, 250, 0.32);
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.18), rgba(59, 130, 246, 0.10));
+    }
+
+    .category-icon { font-size: 11px; opacity: 0.85; flex-shrink: 0; }
+
+    /* ===========================
+       CONTEXT & PRO TIPS
+    =========================== */
+    .context-tips-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 40px;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto 46px;
+      padding: 24px 20px 10px;
+      margin-top: 6px;
+    }
+
+    .context-card, .tips-card {
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 28px 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .dark-mode .context-card,
+    .dark-mode .tips-card { box-shadow: 0 2px 8px rgba(0,0,0,0.22); }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+
+    .section-title i { color: var(--accent-purple); }
+
+    .bullet-list { list-style: none; margin: 0; padding: 0; }
+
+    .bullet-list li {
+      color: var(--text-medium);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      padding-left: 26px;
+      position: relative;
+      font-weight: 500;
+    }
+
+    .bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 10px;
+      color: var(--accent-purple);
+      font-size: 18px;
+    }
+
+    /* ===========================
+       MAIN TOOL BODY
+    =========================== */
+    .tool-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 20px;
+    }
+
+    .tool-section-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent-purple-dark);
+      margin-bottom: 14px;
+      margin-top: 56px !important;
+    }
+
+    .tool-section-subtitle {
+      color: var(--text-medium);
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 18px;
+      line-height: 1.6;
+      max-width: 980px;
+    }
+
+    .card {
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 14px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 8px 30px rgba(123, 95, 196, 0.10);
+    }
+
+    .dark-mode .card {
+      box-shadow: 0 8px 30px rgba(123, 95, 196, 0.22);
+      border-color: rgba(255,255,255,0.10);
+    }
+
+    /* ===========================
+       HEATMAP
+    =========================== */
+    .heatmap-wrap {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 18px;
+    }
+
+    .heatmap {
+      overflow: hidden;
+    }
+
+    .heatmap-scroll {
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .heatmap-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 10px;
+      min-width: 880px;
+    }
+
+    .heatmap-th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-medium);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 0 4px;
+      white-space: nowrap;
+    }
+
+    .heatmap-rowlabel {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      padding: 0 4px;
+      white-space: nowrap;
+    }
+
+    .cell-btn {
+      width: 100%;
+      min-width: 120px;
+      height: 44px;
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      color: var(--text-dark);
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 12px;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+      outline: none;
+    }
+
+    .cell-btn:focus-visible {
+      box-shadow: 0 0 0 3px rgba(123, 95, 196, 0.22), 0 1px 4px rgba(0,0,0,0.06);
+      border-color: rgba(123, 95, 196, 0.35);
+    }
+
+    .cell-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+    }
+
+    .dark-mode .cell-btn:hover { box-shadow: 0 8px 18px rgba(0,0,0,0.28); }
+
+    .cell-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .cell-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.18);
+      flex: 0 0 auto;
+    }
+
+    .cell-label {
+      font-size: 13px;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .cell-score {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-medium);
+      flex: 0 0 auto;
+    }
+
+    /* Heat levels */
+    .heat-0 { background: var(--heat-0-bg); border-color: var(--heat-0-bd); }
+    .heat-0 .cell-dot { background: var(--heat-0-tx); }
+    .heat-0 .cell-label { color: var(--heat-0-tx); }
+
+    .heat-1 { background: var(--heat-1-bg); border-color: var(--heat-1-bd); }
+    .heat-1 .cell-dot { background: var(--heat-1-tx); }
+    .heat-1 .cell-label { color: var(--heat-1-tx); }
+
+    .heat-2 { background: var(--heat-2-bg); border-color: var(--heat-2-bd); }
+    .heat-2 .cell-dot { background: var(--heat-2-tx); }
+    .heat-2 .cell-label { color: var(--heat-2-tx); }
+
+    .heat-3 { background: var(--heat-3-bg); border-color: var(--heat-3-bd); }
+    .heat-3 .cell-dot { background: var(--heat-3-tx); }
+    .heat-3 .cell-label { color: var(--heat-3-tx); }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+      align-items: center;
+    }
+
+    .legend-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      color: var(--text-medium);
+      user-select: none;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.25);
+    }
+
+    .legend-pill.l0 { background: var(--heat-0-bg); border-color: var(--heat-0-bd); color: var(--heat-0-tx); }
+    .legend-pill.l0 .legend-dot { background: var(--heat-0-tx); }
+
+    .legend-pill.l1 { background: var(--heat-1-bg); border-color: var(--heat-1-bd); color: var(--heat-1-tx); }
+    .legend-pill.l1 .legend-dot { background: var(--heat-1-tx); }
+
+    .legend-pill.l2 { background: var(--heat-2-bg); border-color: var(--heat-2-bd); color: var(--heat-2-tx); }
+    .legend-pill.l2 .legend-dot { background: var(--heat-2-tx); }
+
+    .legend-pill.l3 { background: var(--heat-3-bg); border-color: var(--heat-3-bd); color: var(--heat-3-tx); }
+    .legend-pill.l3 .legend-dot { background: var(--heat-3-tx); }
+
+    /* Side panel */
+    .panel-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .panel-title i { color: var(--accent-purple); }
+
+    .mini {
+      color: var(--text-medium);
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+      margin-bottom: 12px;
+    }
+
+    .metric {
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .metric .k {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: var(--text-medium);
+      font-weight: 600;
+    }
+
+    .metric .v {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    .metric .s {
+      font-size: 12px;
+      color: var(--dark-gray);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .hotspots {
+      margin-top: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .hotspot {
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      padding: 10px 12px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    .dark-mode .hotspot { box-shadow: 0 1px 4px rgba(0,0,0,0.20); }
+
+    .hotspot-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .hotspot-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.35;
+    }
+
+    .hotspot-badge {
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 999px;
+      padding: 4px 10px;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      color: var(--text-medium);
+      white-space: nowrap;
+    }
+
+    .hotspot-desc {
+      font-size: 12px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.55;
+    }
+
+    .badge-0 { background: var(--heat-0-bg); border-color: var(--heat-0-bd); color: var(--heat-0-tx); }
+    .badge-1 { background: var(--heat-1-bg); border-color: var(--heat-1-bd); color: var(--heat-1-tx); }
+    .badge-2 { background: var(--heat-2-bg); border-color: var(--heat-2-bd); color: var(--heat-2-tx); }
+    .badge-3 { background: var(--heat-3-bg); border-color: var(--heat-3-bd); color: var(--heat-3-tx); }
+
+    /* Notes */
+    .notes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-medium);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+
+    .field input, .field textarea {
+      width: 100%;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 12px 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-dark);
+      background: var(--primary-white);
+      outline: none;
+      transition: box-shadow 0.16s ease, border-color 0.16s ease;
+    }
+
+    .field textarea { min-height: 110px; resize: vertical; }
+
+    .field input:focus, .field textarea:focus {
+      border-color: rgba(123, 95, 196, 0.35);
+      box-shadow: 0 0 0 3px rgba(123, 95, 196, 0.18);
+    }
+
+    .hint {
+      font-size: 12px;
+      color: var(--dark-gray);
+      font-weight: 500;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    /* ===========================
+       ACTIONS (same baseline behaviour)
+    =========================== */
+    .actions-container {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: stretch;
+      max-width: 280px;
+    }
+
+    .action-bar {
+      max-width: 1100px;
+      margin: 22px auto 36px;
+      padding: 0 20px;
+    }
+
+    .action-wrap {
+      display: flex;
+      align-items: stretch;
+      gap: 18px;
+      background: var(--primary-white);
+      border-radius: 16px;
+      padding: 18px 18px;
+      box-shadow: 0 8px 30px rgba(123, 95, 196, 0.12);
+      border: 1px solid rgba(123, 95, 196, 0.15);
+    }
+
+    .dark-mode .action-wrap {
+      box-shadow: 0 8px 30px rgba(123, 95, 196, 0.25);
+      border: 1px solid rgba(123, 95, 196, 0.35);
+    }
+
+    .summary-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .summary-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .summary-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-purple-dark);
+      line-height: 1.2;
+    }
+
+    .risk-chip {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      border: 1px solid var(--border-light);
+      background: var(--light-gray);
+      color: var(--text-medium);
+    }
+
+    .risk-low { background: var(--heat-0-bg); border-color: var(--heat-0-bd); color: var(--heat-0-tx); }
+    .risk-mod { background: var(--heat-1-bg); border-color: var(--heat-1-bd); color: var(--heat-1-tx); }
+    .risk-high { background: var(--heat-2-bg); border-color: var(--heat-2-bd); color: var(--heat-2-tx); }
+    .risk-critical { background: var(--heat-3-bg); border-color: var(--heat-3-bd); color: var(--heat-3-tx); }
+
+    .summary-text {
+      font-size: 14px;
+      color: var(--text-medium);
+      font-weight: 500;
+      line-height: 1.6;
+      max-width: 860px;
+    }
+
+    .progress-line {
+      height: 10px;
+      background: var(--light-gray);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--border-light);
+    }
+
+    .dark-mode .progress-line { background: rgba(255,255,255,0.10); }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: var(--premium-gradient);
+    }
+
+    .action-btn {
+      background: var(--premium-gradient);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      font-size: 13.5px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .action-btn i { font-size: 14px; }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(123, 95, 196, 0.28);
+    }
+
+    .action-btn.secondary {
+      background: var(--light-purple);
+      color: var(--accent-purple-dark);
+      border: 1px solid rgba(123, 95, 196, 0.20);
+    }
+
+    .dark-mode .action-btn.secondary {
+      background: rgba(123, 95, 196, 0.21);
+      color: var(--accent-purple);
+      border-color: rgba(157, 134, 233, 0.22);
+    }
+
+    .action-btn.secondary:hover { background: var(--accent-purple); color: white; }
+
+    .action-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .save-progress-status {
+      font-size: 12px;
+      color: var(--dark-gray);
+      text-align: center;
+      margin-top: -6px;
+      min-height: 18px;
+      user-select: none;
+      font-weight: 500;
+    }
+
+    /* ===========================
+       REPORT
+    =========================== */
+    .report {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      display: none;
+    }
+
+    .report.active {
+      display: block;
+      animation: slideIn 0.5s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .report-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .report-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-purple-dark);
+      margin-bottom: 6px;
+    }
+
+    .report-subtitle {
+      color: var(--text-medium);
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .report-insight {
+      font-size: 13px;
+      color: var(--dark-gray);
+      font-weight: 500;
+      max-width: 760px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .section-header {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 18px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--light-gray);
+      color: var(--accent-purple-dark);
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .report-card {
+      background: var(--primary-white);
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid var(--border-light);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-height: 120px;
+    }
+
+    .dark-mode .report-card { box-shadow: 0 2px 8px rgba(0,0,0,0.24); }
+
+    .report-card .t {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .report-card .d {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-medium);
+      line-height: 1.55;
+    }
+
+    /* ===========================
+       MY PLAYBOOK FAB + SIDEBAR (NO BLUR)
+    =========================== */
+    .my-playbook-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 1200;
+      background: var(--premium-gradient);
+      color: #ffffff;
+      padding: 10px 16px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: all 0.22s ease;
+    }
+
+    .my-playbook-fab i { font-size: 15px; }
+
+    .my-playbook-fab:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.32);
+    }
+
+    .playbook-sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 1190;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+    }
+
+    .playbook-sidebar-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .playbook-sidebar {
+      position: fixed;
+      top: 0;
+      right: -380px;
+      width: 340px;
+      max-width: 90%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: -4px 0 20px rgba(0,0,0,0.25);
+      z-index: 1191;
+      display: flex;
+      flex-direction: column;
+      border-left: 1px solid var(--border-light);
+      transition: right 0.22s ease;
+    }
+
+    .dark-mode .playbook-sidebar {
+      background: rgba(18, 18, 18, 0.96);
+      box-shadow: -4px 0 22px rgba(0,0,0,0.6);
+    }
+
+    .playbook-sidebar.open { right: 0; }
+
+    .playbook-sidebar-header {
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .playbook-sidebar-header-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .playbook-sidebar-header h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .playbook-sidebar-header p {
+      font-size: 13px;
+      color: var(--dark-gray);
+      font-weight: 500;
+    }
+
+    .playbook-close-btn {
+      background: none;
+      border: none;
+      color: var(--dark-gray);
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.16s ease;
+    }
+
+    .playbook-close-btn:hover { background: var(--light-gray); }
+
+    .playbook-sidebar-body {
+      padding: 14px 18px 20px;
+      padding-bottom: 50px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .saved-items-empty {
+      font-size: 13px;
+      color: var(--dark-gray);
+      line-height: 1.6;
+      font-weight: 500;
+    }
+
+    .saved-items-list { list-style: none; margin: 0; padding: 0; }
+
+    .saved-item {
+      padding: 10px 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--border-light);
+      background: var(--primary-white);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .saved-item-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .saved-item-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .saved-item-type {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent-purple-dark);
+      font-weight: 700;
+    }
+
+    .saved-item-meta {
+      font-size: 12px;
+      color: var(--dark-gray);
+      font-weight: 500;
+    }
+
+    .saved-item-link {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--accent-purple);
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .saved-item-link:hover { text-decoration: underline; }
+
+    .playbook-quick-links {
+      margin-top: 223px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .quick-links-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-medium);
+    }
+
+    .playbook-quick-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .quick-link-pill {
+      width: 50%;
+      padding: 4px 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(123, 95, 196, 0.35);
+      background: linear-gradient(135deg,rgba(123, 95, 196, 0.08),rgba(123, 95, 196, 0.02));
+      text-decoration: none;
+      color: var(--accent-purple-dark);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quick-link-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+      background: linear-gradient(135deg,rgba(123, 95, 196, 0.16), rgba(123, 95, 196, 0.06));
+    }
+
+    .quick-link-pill i { font-size: 14px; }
+
+    .dark-mode .quick-link-pill {
+      border-color: rgba(157, 134, 233, 0.55);
+      background: linear-gradient(135deg,rgba(123, 95, 196, 0.26),rgba(123, 95, 196, 0.12));
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      background: var(--primary-white);
+      padding: 10px 0;
+      border-top: 1px solid var(--border-light);
+      margin-top: 30px;
+      text-align: center;
+      color: var(--text-medium);
+      font-weight: 500;
+    }
+
+    /* ===========================
+       AUTH LOCK (tool gated behind sign-in) — keep overlay subtle, no blur
+    =========================== */
+    .auth-lock-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+    }
+
+    .auth-lock-overlay.active { display: flex; }
+
+    .auth-lock-card {
+      width: min(560px, 100%);
+      background: var(--primary-white);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      padding: 22px 22px 18px;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+    }
+
+    .dark-mode .auth-lock-card {
+      background: rgba(18,18,18,0.96);
+      border-color: rgba(255,255,255,0.10);
+    }
+
+    .auth-lock-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .auth-lock-title i { color: var(--accent-purple); }
+
+    .auth-lock-text {
+      font-size: 14px;
+      color: var(--text-medium);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+
+    .auth-lock-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .auth-lock-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .auth-lock-btn.primary { background: var(--premium-gradient); color: #fff; }
+    .auth-lock-btn.secondary { background: var(--light-purple); color: var(--accent-purple-dark); }
+
+    .dark-mode .auth-lock-btn.secondary {
+      background: rgba(123, 95, 196, 0.21);
+      color: var(--accent-purple);
+    }
+
+    body.auth-locked .tool-hero-section,
+    body.auth-locked .context-tips-grid,
+    body.auth-locked .tool-body,
+    body.auth-locked .action-bar,
+    body.auth-locked #report,
+    body.auth-locked footer,
+    body.auth-locked .my-playbook-fab {
+      filter: none;
+      opacity: 1;
+      user-select: none;
+    }
+
+    /* ===========================
+       PRINT CSS (Phase 1 Clean PDF)
+    =========================== */
+    @media print {
+      nav,
+      .my-playbook-fab,
+      .playbook-sidebar-overlay,
+      .mobile-cta-tab,
+      .save-btn,
+      .actions-container,
+      .auth-lock-overlay {
+        display: none !important;
+      }
+
+      body {
+        background: #fff !important;
+        color: #000 !important;
+        opacity: 1 !important;
+      }
+
+      .tool-hero-section {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+      }
+
+      .tool-hero-section::before { display: none !important; }
+      .card, .report-card, .hotspot { box-shadow: none !important; }
+      footer { border-top: 1px solid #ddd !important; }
+      .report.active { display: block !important; }
+      .heatmap-table { min-width: 0 !important; }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .context-tips-grid { grid-template-columns: 1fr; gap: 24px; }
+      .heatmap-wrap { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+      .notes-grid { grid-template-columns: 1fr; }
+      .action-wrap { flex-direction: column; }
+      .actions-container { max-width: 100%; flex-direction: row; flex-wrap: wrap; }
+    }
+
+    @media (max-width: 768px) {
+      .tool-hero-section { margin-top: 100px; }
+      .context-tips-grid { padding: 20px 20px 10px; margin-top: 5px; }
+      .context-card, .tips-card { padding: 24px; }
+      .section-title { font-size: 18px; white-space: normal; }
+      .hero-main-heading { font-size: 36px; }
+      .hero-subheading { font-size: 16px; max-width: 100%; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .actions-container { flex-direction: column; align-items: stretch; }
+      .save-btn { right: 18px; top: 10px; }
+      .my-playbook-fab { bottom: 18px; right: 18px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-main-heading { font-size: 32px; }
+      .checklist-name { font-size: 18px; }
+      .report-title { font-size: 22px; }
+      .section-header { font-size: 16px; }
+      .risk-chip { font-size: 11px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Mobile My Playbook tab -->
+  <a href="#" class="mobile-cta-tab" id="mobileMyPlaybookTab">My Playbook</a>
+
+  <!-- ===========================
+       NAVIGATION (POST-LOGIN)
+  =========================== -->
+  <nav>
+    <div class="container nav-container">
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <a href="index.html" class="logo" aria-label="Home">
+        <img src="assets/img/logo.png" alt="The Employee Playbook" class="logo-img" id="mainLogo"
+             onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';">
+        <div class="logo-fallback" id="logo-fallback">THE EMPLOYEE PLAYBOOK</div>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="the-lens.html" class="nav-link">The Lens</a>
+        <a href="the-toolkit.html" class="nav-link active">The Toolkit</a>
+        <div class="nav-link-container">
+          <a href="the-coach.html" class="nav-link">The Coach</a>
+          <span class="new-tag">NEW</span>
+        </div>
+        <a href="the-shift.html" class="nav-link">The Shift</a>
+        <a href="the-pricing.html" class="nav-link">The Pricing</a>
+
+        <a href="profile.html" class="mobile-profile" id="mobileProfileBtn">Profile</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="sign-in.html" class="user-initials" id="userInitialsBtn" aria-label="Open profile">…</a>
+        <a class="logout-link" id="logoutBtn" href="#" aria-label="Log out">Log out</a>
+        <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle theme">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ✅ HARD LOCK WRAPPER (inert toggled when locked) -->
+  <main id="toolMain">
+
+    <!-- ===========================
+         HERO
+    =========================== -->
+    <div class="tool-hero-section">
+      <button class="save-btn" id="saveBtn" type="button">
+        <i class="far fa-bookmark"></i>
+        <span>Save item</span>
+      </button>
+
+      <div class="tool-hero-content">
+        <div class="breadcrumb">
+          <a href="the-toolkit.html">Toolkit</a>
+          <i class="fas fa-chevron-right"></i>
+          <span>Workplace Dynamics &amp; Politics</span>
+          <i class="fas fa-chevron-right"></i>
+          <span class="current">Team Tension Heatmap</span>
+        </div>
+
+        <span class="checklist-name">TEAM TENSION HEATMAP</span>
+
+        <h1 class="hero-main-heading">Map the hotspots → reduce the blow-ups</h1>
+
+        <div class="hero-subheading">
+          Use this heatmap to pinpoint where friction is building — across topics and stakeholders.
+          Click a cell to set tension level (None → Mild → Moderate → High). Generate a report with priority actions and
+          conversation scripts. Not legal advice.
+        </div>
+
+        <div class="category-pills-container">
+          <span class="category-pills-title">Category</span>
+
+          <div class="category-pills-grid">
+            <a href="category-workplace-dynamics-and-politics.html" class="category-pill politics">
+              <i class="fas fa-people-arrows category-icon"></i>
+              <span>Workplace Dynamics &amp; Politics</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================
+         CONTEXT & PRO TIPS
+    =========================== -->
+    <div class="context-tips-grid">
+      <div class="context-card">
+        <h3 class="section-title"><i class="fas fa-compass"></i>When to Use This Heatmap</h3>
+        <ul class="bullet-list">
+          <li>When the team feels “off” but nobody can name why</li>
+          <li>When small issues keep turning into big reactions</li>
+          <li>Before a difficult conversation or reset meeting</li>
+          <li>When you suspect tension is uneven (one relationship is the real issue)</li>
+          <li>When you want an evidence-based approach — not “vibes”</li>
+          <li>When you need to prioritise: what to tackle first</li>
+        </ul>
+      </div>
+
+      <div class="tips-card">
+        <h3 class="section-title"><i class="fas fa-lightbulb"></i>Pro Tips</h3>
+        <ul class="bullet-list">
+          <li>Rate “impact + frequency”, not your mood on a bad day</li>
+          <li>High tension + low clarity = fastest route to conflict</li>
+          <li>Start with one hotspot. Fixing everything at once fails</li>
+          <li>If a “High” cell is about respect or trust, go slower and gather examples</li>
+          <li>Use the notes to capture facts: who, what, when, impact</li>
+          <li>Re-score after 2 weeks — the goal is trend change</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===========================
+         TOOL BODY
+    =========================== -->
+    <div class="tool-body">
+      <h2 class="tool-section-title">Your Heatmap</h2>
+      <p class="tool-section-subtitle">
+        Click each cell to set a tension level. Focus on the relationships you interact with most.
+        If something is “High”, add a short fact-based note so your report is grounded.
+      </p>
+
+      <div class="heatmap-wrap">
+        <!-- Heatmap table -->
+        <div class="card heatmap">
+          <div class="panel-title"><i class="fas fa-fire-flame-curved"></i>Heatmap grid</div>
+          <div class="mini">Levels cycle on click: <strong style="font-weight:600;">None → Mild → Moderate → High</strong>. Keyboard: focus a cell and press Enter / Space.</div>
+
+          <div class="heatmap-scroll">
+            <table class="heatmap-table" aria-label="Team tension heatmap">
+              <thead>
+                <tr>
+                  <th class="heatmap-th">Topic</th>
+                  <th class="heatmap-th">Manager</th>
+                  <th class="heatmap-th">Key Peer</th>
+                  <th class="heatmap-th">Another Peer</th>
+                  <th class="heatmap-th">Cross-functional</th>
+                  <th class="heatmap-th">Team overall</th>
+                </tr>
+              </thead>
+              <tbody id="heatmapBody">
+                <!-- Rows injected by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="legend" aria-label="Heat legend">
+            <div class="legend-pill l0"><span class="legend-dot"></span> None (0)</div>
+            <div class="legend-pill l1"><span class="legend-dot"></span> Mild (1)</div>
+            <div class="legend-pill l2"><span class="legend-dot"></span> Moderate (2)</div>
+            <div class="legend-pill l3"><span class="legend-dot"></span> High (3)</div>
+          </div>
+        </div>
+
+        <!-- Side panel -->
+        <div class="card">
+          <div class="panel-title"><i class="fas fa-chart-simple"></i>Overview</div>
+          <div class="mini">These metrics update live. Your top hotspots are the best “first fix”.</div>
+
+          <div class="metrics">
+            <div class="metric">
+              <div class="k">Overall heat</div>
+              <div class="v" id="overallHeat">0%</div>
+              <div class="s" id="overallHeatHint">Start scoring cells</div>
+            </div>
+            <div class="metric">
+              <div class="k">High cells</div>
+              <div class="v" id="highCount">0</div>
+              <div class="s" id="highHint">High means: act now</div>
+            </div>
+            <div class="metric">
+              <div class="k">Moderate+</div>
+              <div class="v" id="modPlusCount">0</div>
+              <div class="s" id="modPlusHint">These drive friction</div>
+            </div>
+            <div class="metric">
+              <div class="k">Priority</div>
+              <div class="v" id="priorityLabel">Low</div>
+              <div class="s" id="priorityHint">Based on hotspots</div>
+            </div>
+          </div>
+
+          <div class="panel-title" style="margin-top:10px;"><i class="fas fa-bullseye"></i>Top hotspots</div>
+          <div class="mini">Highest tension pairs first (topic + stakeholder).</div>
+          <div class="hotspots" id="hotspots">
+            <!-- hotspots injected -->
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px;">
+        <div class="panel-title"><i class="fas fa-pen"></i>Notes (optional but powerful)</div>
+        <div class="mini">Keep it factual. Example: “In Monday’s stand-up, X cut me off twice; decisions were reversed later; delivery slipped by 1 day.”</div>
+
+        <div class="notes-grid">
+          <div class="field">
+            <label for="contextInput">Situation context</label>
+            <input id="contextInput" type="text" placeholder="What’s going on in the background? (re-org, deadline, role changes…)" />
+            <div class="hint">Short and neutral. This helps you avoid misattribution.</div>
+          </div>
+
+          <div class="field">
+            <label for="patternInput">Pattern you’re noticing</label>
+            <input id="patternInput" type="text" placeholder="What keeps repeating? (missed handovers, power plays, unclear decisions…)" />
+            <div class="hint">Patterns are more useful than one-off incidents.</div>
+          </div>
+
+          <div class="field" style="grid-column:1 / -1;">
+            <label for="evidenceText">Evidence notes</label>
+            <textarea id="evidenceText" placeholder="Bullet the facts: who / what / when / impact. Keep it short."></textarea>
+            <div class="hint">If you plan a formal route later, evidence quality matters. Keep dates and impact.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================
+         ACTION BAR
+    =========================== -->
+    <div class="action-bar">
+      <div class="action-wrap">
+        <div class="summary-panel">
+          <div class="summary-title-row">
+            <div class="summary-title">Tension Risk Snapshot</div>
+            <div class="risk-chip" id="riskChip">Low</div>
+          </div>
+
+          <div class="progress-line" aria-label="Overall heat bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+
+          <div class="summary-text" id="snapshotText">
+            Score some cells to generate a report. Aim: reduce “High” cells first — then stabilise “Moderate” cells.
+          </div>
+        </div>
+
+        <div class="actions-container">
+          <button class="action-btn" onclick="generateReport()" id="generateBtn" disabled>
+            <i class="fas fa-file-lines"></i> Generate Report
+          </button>
+
+          <button class="action-btn secondary" onclick="printToolPDF()" id="printBtn">
+            <i class="fas fa-print"></i> Print / Save PDF
+          </button>
+
+          <button class="action-btn secondary" onclick="clearAllTool()" id="clearBtn" disabled>
+            <i class="fas fa-eraser"></i> Clear All
+          </button>
+
+          <!-- ✅ Cloud save: MANUAL ONLY -->
+          <button class="action-btn secondary" id="saveProgressBtn" disabled>
+            <i class="fas fa-cloud-arrow-up"></i> Save Progress
+          </button>
+          <div class="save-progress-status" id="saveProgressStatus"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===========================
+         REPORT
+    =========================== -->
+    <div class="report" id="report">
+      <div class="report-header">
+        <h2 class="report-title">Your Team Tension Report</h2>
+        <p class="report-subtitle">
+          Overall heat: <span id="rHeat">0%</span> • Priority: <span id="rPriority">Low</span> • High cells: <span id="rHigh">0</span>
+        </p>
+        <p class="report-insight" id="rInsight">
+          This report is designed to help you act in the right order: stabilise, clarify, then rebuild trust.
+        </p>
+      </div>
+
+      <h3 class="section-header"><i class="fas fa-triangle-exclamation"></i>What to tackle first</h3>
+      <div class="grid-3" id="rHotspotCards"></div>
+
+      <h3 class="section-header"><i class="fas fa-screwdriver-wrench"></i>Immediate actions (next 7 days)</h3>
+      <div class="grid-3" id="rActions"></div>
+
+      <h3 class="section-header"><i class="fas fa-comments"></i>Conversation scripts</h3>
+      <div class="grid-3" id="rScripts"></div>
+
+      <h3 class="section-header"><i class="fas fa-shield-heart"></i>Behaviour lens (optional)</h3>
+      <div class="grid-3" id="rLens"></div>
+    </div>
+
+    <!-- ===========================
+         MY PLAYBOOK SIDEBAR
+    =========================== -->
+    <div class="playbook-sidebar-overlay" id="playbookOverlay">
+      <div class="playbook-sidebar" id="playbookSidebar">
+        <div class="playbook-sidebar-header">
+          <div class="playbook-sidebar-header-title-row">
+            <h3>My Playbook</h3>
+            <button class="playbook-close-btn" id="closePlaybook" aria-label="Close My Playbook" type="button">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <p>Saved items</p>
+        </div>
+
+        <div class="playbook-sidebar-body">
+          <div id="savedItemsContainer">
+            <p class="saved-items-empty" id="savedItemsEmpty">
+              You haven't saved anything yet. Use <strong style="font-weight:600;">Save item</strong> on tools you want quick access to.
+            </p>
+            <ul class="saved-items-list" id="savedItemsList"></ul>
+          </div>
+
+          <div class="playbook-quick-links">
+            <div class="playbook-quick-links-header">
+              <span class="quick-links-title">Quick links</span>
+            </div>
+            <div class="playbook-quick-links-list">
+              <a href="dashboard.html" class="quick-link-pill">
+                <i class="fas fa-gauge"></i> The Dashboard
+              </a>
+              <a href="the-lens.html" class="quick-link-pill">
+                <i class="fas fa-search"></i> The Lens
+              </a>
+              <a href="the-toolkit.html" class="quick-link-pill">
+                <i class="fas fa-toolbox"></i> The Toolkit
+              </a>
+              <a href="the-coach.html" class="quick-link-pill">
+                <i class="fas fa-comments"></i> The Coach
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating My Playbook button -->
+    <div class="my-playbook-fab" id="myPlaybookButton" role="button" tabindex="0" aria-label="Open My Playbook">
+      <i class="fas fa-book-open"></i>
+      <span>My Playbook</span>
+    </div>
+
+    <!-- ===========================
+         FOOTER
+    =========================== -->
+    <footer>
+      <div class="container">
+        <p>© 2025 The Employee Playbook. All rights reserved.</p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ===========================
+       AUTH LOCK OVERLAY (gates tool behind sign-in)
+  =========================== -->
+  <div class="auth-lock-overlay" id="authLockOverlay" aria-hidden="true">
+    <div class="auth-lock-card" role="dialog" aria-modal="true" aria-label="Sign in required">
+      <div class="auth-lock-title">
+        <i class="fas fa-lock"></i>
+        Sign in required
+      </div>
+      <div class="auth-lock-text">
+        This tool is available to signed-in members so your progress can be saved securely.
+        Sign in to unlock the heatmap and report.
+      </div>
+      <div class="auth-lock-actions">
+        <a class="auth-lock-btn primary" href="./sign-in.html">
+          <i class="fas fa-right-to-bracket"></i> Sign in
+        </a>
+        <a class="auth-lock-btn secondary" href="the-pricing.html">
+          <i class="fas fa-gem"></i> View plans
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===========================
+       JAVASCRIPT (page logic)
+  =========================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('loaded');
+
+      // Apply preload theme properly to body
+      try {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const useDark = saved ? saved === 'dark' : prefersDark;
+        if (useDark) document.body.classList.add('dark-mode');
+        document.documentElement.classList.remove('preload-dark');
+      } catch (e) {}
+
+      initializeHeatmap();
+      initializeThemeToggle();
+      initializeMobileNav();
+      initializePlaybook();
+      wireHeaderMyPlaybookHooks();
+      wireFabKeyboard();
+      wireNotes();
+      updateAllUI();
+    });
+
+    /* ===========================
+       PHASE 1: UNSAVED / LAST SAVED UI
+    =========================== */
+    window.__tep_unsaved = false;
+
+    function fmtGB(ts) {
+      try {
+        return new Date(ts).toLocaleString('en-GB', {
+          day: '2-digit', month: 'short', year: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        });
+      } catch (e) {
+        return '';
+      }
+    }
+
+    function setSaveStatus(text, type = "info") {
+      const el = document.getElementById("saveProgressStatus");
+      if (!el) return;
+      el.textContent = text || "";
+      el.style.color =
+        type === "ok" ? "var(--success-green)" :
+        type === "err" ? "var(--danger-red)" :
+        "var(--dark-gray)";
+    }
+
+    function markUnsaved() {
+      window.__tep_unsaved = true;
+      const last = localStorage.getItem("tep_last_saved_team_tension_heatmap");
+      const suffix = last ? ` • Last saved: ${fmtGB(last)}` : "";
+      setSaveStatus("Unsaved changes" + suffix, "info");
+    }
+
+    function markSaved(nowIso) {
+      window.__tep_unsaved = false;
+      const stamp = nowIso || new Date().toISOString();
+      localStorage.setItem("tep_last_saved_team_tension_heatmap", stamp);
+      setSaveStatus(`Saved • ${fmtGB(stamp)}`, "ok");
+    }
+
+    function markLoaded() {
+      window.__tep_unsaved = false;
+      const last = localStorage.getItem("tep_last_saved_team_tension_heatmap");
+      const suffix = last ? ` • Last saved: ${fmtGB(last)}` : "";
+      setSaveStatus("Loaded your saved progress" + suffix, "ok");
+    }
+
+    function markNeutral() {
+      const last = localStorage.getItem("tep_last_saved_team_tension_heatmap");
+      if (last) setSaveStatus(`Last saved: ${fmtGB(last)}`, "info");
+      else setSaveStatus("", "info");
+    }
+
+    /* ===========================
+       MOBILE NAV (with aria-expanded)
+    =========================== */
+    function initializeMobileNav() {
+      const mobileToggle = document.querySelector('.mobile-toggle');
+      const navLinks = document.querySelector('.nav-links');
+
+      if (mobileToggle && navLinks) {
+        mobileToggle.addEventListener('click', function () {
+          const isOpen = navLinks.classList.toggle('active');
+          this.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
+          const icon = this.querySelector('i');
+          if (icon) {
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+          }
+        });
+      }
+
+      document.addEventListener('click', function(event) {
+        if (!navLinks || !mobileToggle) return;
+        if (navLinks.classList.contains('active') &&
+            !navLinks.contains(event.target) &&
+            !mobileToggle.contains(event.target)) {
+          navLinks.classList.remove('active');
+          mobileToggle.setAttribute("aria-expanded", "false");
+          const icon = mobileToggle.querySelector('i');
+          if (icon) {
+            icon.classList.add('fa-bars');
+            icon.classList.remove('fa-times');
+          }
+        }
+      });
+    }
+
+    /* ===========================
+       THEME TOGGLE (stable)
+    =========================== */
+    function initializeThemeToggle() {
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      if (!themeToggleBtn) return;
+
+      const themeIcon = themeToggleBtn.querySelector('i');
+      const logoImg = document.getElementById('mainLogo');
+
+      function updateIcon(isDark) {
+        if (!themeIcon) return;
+        themeIcon.classList.toggle('fa-moon', !isDark);
+        themeIcon.classList.toggle('fa-sun', isDark);
+      }
+
+      function updateLogo(isDark) {
+        if (!logoImg) return;
+        logoImg.src = isDark ? 'assets/img/logo-dark.png' : 'assets/img/logo.png';
+      }
+
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const isDarkInitial = saved ? saved === 'dark' : prefersDark;
+      updateIcon(isDarkInitial);
+      updateLogo(isDarkInitial);
+
+      themeToggleBtn.addEventListener('click', function() {
+        const isDarkMode = document.body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+        updateIcon(isDarkMode);
+        updateLogo(isDarkMode);
+      });
+
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      mq.addEventListener('change', (e) => {
+        if (localStorage.getItem('theme')) return;
+        const shouldDark = e.matches;
+        document.body.classList.toggle('dark-mode', shouldDark);
+        updateIcon(shouldDark);
+        updateLogo(shouldDark);
+      });
+
+      if (logoImg) {
+        logoImg.addEventListener('error', function() {
+          if (this.src.includes('logo-dark.png')) {
+            this.src = 'assets/img/logo.png';
+          } else {
+            this.style.display = 'none';
+            const fb = document.getElementById('logo-fallback');
+            if (fb) fb.style.display = 'block';
+          }
+        });
+      }
+    }
+
+    /* ===========================
+       HEATMAP MODEL
+    =========================== */
+    const TOPICS = [
+      { id: "role_clarity", label: "Role clarity & ownership" },
+      { id: "decision", label: "Decision-making & authority" },
+      { id: "communication", label: "Communication & tone" },
+      { id: "workload", label: "Workload & fairness" },
+      { id: "trust", label: "Trust & reliability" },
+      { id: "respect", label: "Respect & micro-aggressions" },
+      { id: "change", label: "Change & uncertainty" },
+      { id: "quality", label: "Quality & standards" }
+    ];
+
+    const STAKEHOLDERS = [
+      { id: "manager", label: "Manager" },
+      { id: "peer1", label: "Key Peer" },
+      { id: "peer2", label: "Another Peer" },
+      { id: "xf", label: "Cross-functional" },
+      { id: "team", label: "Team overall" }
+    ];
+
+    // 0..3 (None..High)
+    window.__heatmap = {}; // { topicId: { stakeholderId: level } }
+    window.__notes = { context: "", pattern: "", evidence: "" };
+
+    const LEVELS = [
+      { n: 0, label: "None", cls: "heat-0" },
+      { n: 1, label: "Mild", cls: "heat-1" },
+      { n: 2, label: "Moderate", cls: "heat-2" },
+      { n: 3, label: "High", cls: "heat-3" }
+    ];
+
+    function ensureModel() {
+      TOPICS.forEach(t => {
+        if (!window.__heatmap[t.id]) window.__heatmap[t.id] = {};
+        STAKEHOLDERS.forEach(s => {
+          if (typeof window.__heatmap[t.id][s.id] !== "number") window.__heatmap[t.id][s.id] = 0;
+        });
+      });
+    }
+
+    function levelMeta(n) {
+      return LEVELS[Math.max(0, Math.min(3, n))];
+    }
+
+    function cellText(n) {
+      const m = levelMeta(n);
+      return m.label;
+    }
+
+    function setCell(topicId, stakeholderId, level) {
+      ensureModel();
+      window.__heatmap[topicId][stakeholderId] = Math.max(0, Math.min(3, Number(level) || 0));
+    }
+
+    function getCell(topicId, stakeholderId) {
+      ensureModel();
+      return window.__heatmap[topicId]?.[stakeholderId] ?? 0;
+    }
+
+    function countNonZero() {
+      ensureModel();
+      let c = 0;
+      TOPICS.forEach(t => {
+        STAKEHOLDERS.forEach(s => {
+          if (getCell(t.id, s.id) > 0) c++;
+        });
+      });
+      return c;
+    }
+
+    function computeStats() {
+      ensureModel();
+      const totalCells = TOPICS.length * STAKEHOLDERS.length;
+      let sum = 0;
+      let high = 0;
+      let modPlus = 0;
+
+      TOPICS.forEach(t => {
+        STAKEHOLDERS.forEach(s => {
+          const v = getCell(t.id, s.id);
+          sum += v;
+          if (v === 3) high++;
+          if (v >= 2) modPlus++;
+        });
+      });
+
+      const maxSum = totalCells * 3;
+      const pct = maxSum ? Math.round((sum / maxSum) * 100) : 0;
+
+      let priority = "Low";
+      if (high >= 3 || pct >= 55) priority = "Critical";
+      else if (high >= 1 || pct >= 35 || modPlus >= 6) priority = "High";
+      else if (pct >= 18 || modPlus >= 3) priority = "Moderate";
+
+      return { totalCells, sum, maxSum, pct, high, modPlus, priority };
+    }
+
+    function getHotspots(limit = 5) {
+      ensureModel();
+      const arr = [];
+      TOPICS.forEach(t => {
+        STAKEHOLDERS.forEach(s => {
+          const v = getCell(t.id, s.id);
+          if (v > 0) {
+            arr.push({
+              topicId: t.id,
+              topic: t.label,
+              stakeholderId: s.id,
+              stakeholder: s.label,
+              level: v
+            });
+          }
+        });
+      });
+      arr.sort((a, b) => b.level - a.level || a.topic.localeCompare(b.topic));
+      return arr.slice(0, limit);
+    }
+
+    function riskClass(priority) {
+      if (priority === "Critical") return "risk-critical";
+      if (priority === "High") return "risk-high";
+      if (priority === "Moderate") return "risk-mod";
+      return "risk-low";
+    }
+
+    function snapshotTextFrom(stats) {
+      if (stats.priority === "Critical") {
+        return "You have multiple high-tension hotspots. Stabilise first: reduce triggers, clarify decisions, and document patterns before escalation.";
+      }
+      if (stats.priority === "High") {
+        return "Tension is concentrated in a few places. Pick the top hotspot, set a boundary/expectation, and check for decision clarity.";
+      }
+      if (stats.priority === "Moderate") {
+        return "Some friction is present. Small alignment fixes (roles, handovers, meeting rules) will likely reduce it quickly.";
+      }
+      return "Low tension overall. Use this as a monitoring tool and re-score after key changes (deadline, restructure, new manager).";
+    }
+
+    /* ===========================
+       HEATMAP RENDER
+    =========================== */
+    function initializeHeatmap() {
+      ensureModel();
+      const tbody = document.getElementById("heatmapBody");
+      if (!tbody) return;
+
+      tbody.innerHTML = "";
+
+      TOPICS.forEach((t) => {
+        const tr = document.createElement("tr");
+
+        const tdLabel = document.createElement("td");
+        tdLabel.className = "heatmap-rowlabel";
+        tdLabel.textContent = t.label;
+        tr.appendChild(tdLabel);
+
+        STAKEHOLDERS.forEach((s) => {
+          const td = document.createElement("td");
+
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "cell-btn heat-0";
+          btn.setAttribute("data-topic", t.id);
+          btn.setAttribute("data-stakeholder", s.id);
+          btn.setAttribute("aria-label", `${t.label} with ${s.label}`);
+          btn.setAttribute("aria-pressed", "false");
+          btn.setAttribute("tabindex", "0");
+
+          btn.innerHTML = `
+            <span class="cell-left">
+              <span class="cell-dot" aria-hidden="true"></span>
+              <span class="cell-label">None</span>
+            </span>
+            <span class="cell-score">0</span>
+          `;
+
+          const onToggle = () => {
+            if (document.body.classList.contains("auth-locked")) return;
+
+            const current = getCell(t.id, s.id);
+            const next = (current + 1) % 4;
+            setCell(t.id, s.id, next);
+            updateCellButton(btn, next);
+            updateAllUI();
+            markUnsaved();
+          };
+
+          btn.addEventListener("click", onToggle);
+          btn.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              onToggle();
+            }
+          });
+
+          td.appendChild(btn);
+          tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
+      });
+
+      // Apply any existing model values (e.g., after restore)
+      syncHeatmapUI();
+    }
+
+    function updateCellButton(btn, level) {
+      const meta = levelMeta(level);
+      btn.classList.remove("heat-0", "heat-1", "heat-2", "heat-3");
+      btn.classList.add(meta.cls);
+
+      const labelEl = btn.querySelector(".cell-label");
+      const scoreEl = btn.querySelector(".cell-score");
+
+      if (labelEl) labelEl.textContent = cellText(level);
+      if (scoreEl) scoreEl.textContent = String(level);
+
+      btn.setAttribute("aria-pressed", level > 0 ? "true" : "false");
+    }
+
+    function syncHeatmapUI() {
+      ensureModel();
+      document.querySelectorAll(".cell-btn").forEach(btn => {
+        const t = btn.getAttribute("data-topic");
+        const s = btn.getAttribute("data-stakeholder");
+        if (!t || !s) return;
+        const v = getCell(t, s);
+        updateCellButton(btn, v);
+      });
+    }
+
+    function syncActionButtons(isLocked) {
+      const generateBtn = document.getElementById('generateBtn');
+      const clearBtn = document.getElementById('clearBtn');
+      const printBtn = document.getElementById('printBtn');
+      const saveProgressBtn = document.getElementById('saveProgressBtn');
+
+      const scored = countNonZero();
+
+      if (generateBtn) generateBtn.disabled = !!isLocked || scored === 0;
+      if (clearBtn) clearBtn.disabled = !!isLocked || scored === 0;
+      if (printBtn) printBtn.disabled = !!isLocked;
+      if (saveProgressBtn) {
+        if (isLocked) saveProgressBtn.disabled = true;
+      }
+    }
+    window.syncActionButtons = syncActionButtons;
+
+    function updateAllUI() {
+      const stats = computeStats();
+      const hotspots = getHotspots(5);
+
+      // Overview metrics
+      const overallHeat = document.getElementById("overallHeat");
+      const overallHeatHint = document.getElementById("overallHeatHint");
+      const highCount = document.getElementById("highCount");
+      const highHint = document.getElementById("highHint");
+      const modPlusCount = document.getElementById("modPlusCount");
+      const priorityLabel = document.getElementById("priorityLabel");
+      const priorityHint = document.getElementById("priorityHint");
+
+      if (overallHeat) overallHeat.textContent = `${stats.pct}%`;
+      if (overallHeatHint) overallHeatHint.textContent = stats.pct === 0 ? "Start scoring cells" : "Higher = more friction";
+      if (highCount) highCount.textContent = String(stats.high);
+      if (highHint) highHint.textContent = stats.high === 0 ? "No High hotspots" : "High means: act now";
+      if (modPlusCount) modPlusCount.textContent = String(stats.modPlus);
+      if (priorityLabel) priorityLabel.textContent = stats.priority;
+      if (priorityHint) priorityHint.textContent = stats.priority === "Low" ? "Monitor and stabilise" : "Use the report to prioritise";
+
+      // Hotspots list
+      const hs = document.getElementById("hotspots");
+      if (hs) {
+        hs.innerHTML = "";
+        if (!hotspots.length) {
+          const div = document.createElement("div");
+          div.className = "hotspot";
+          div.innerHTML = `
+            <div class="hotspot-top">
+              <div class="hotspot-title">No hotspots yet</div>
+              <span class="hotspot-badge badge-0">None</span>
+            </div>
+            <div class="hotspot-desc">Score a few cells to surface priorities.</div>
+          `;
+          hs.appendChild(div);
+        } else {
+          hotspots.forEach(h => {
+            const div = document.createElement("div");
+            div.className = "hotspot";
+            const meta = levelMeta(h.level);
+            div.innerHTML = `
+              <div class="hotspot-top">
+                <div class="hotspot-title">${h.topic} • ${h.stakeholder}</div>
+                <span class="hotspot-badge badge-${h.level}">${meta.label}</span>
+              </div>
+              <div class="hotspot-desc">${hotspotMicroAdvice(h.topicId, h.level)}</div>
+            `;
+            hs.appendChild(div);
+          });
+        }
+      }
+
+      // Snapshot bar
+      const chip = document.getElementById("riskChip");
+      const fill = document.getElementById("progressFill");
+      const snap = document.getElementById("snapshotText");
+
+      if (chip) {
+        chip.className = `risk-chip ${riskClass(stats.priority)}`;
+        chip.textContent = stats.priority;
+      }
+      if (fill) fill.style.width = `${stats.pct}%`;
+      if (snap) snap.textContent = snapshotTextFrom(stats);
+
+      // Sync action buttons but don't fight lock module
+      const locked = document.body.classList.contains("auth-locked");
+      syncActionButtons(locked);
+    }
+
+    function hotspotMicroAdvice(topicId, level) {
+      const l = level;
+      const intensity =
+        l === 3 ? "Immediate" :
+        l === 2 ? "Priority" :
+        "Watch";
+
+      const map = {
+        role_clarity: `${intensity}: clarify ownership and handovers. Agree “who decides / who executes / by when”.`,
+        decision: `${intensity}: lock a decision method (DRI, RACI-lite). Reduce reversals and side-deals.`,
+        communication: `${intensity}: set meeting rules (no interruptions, summarise decisions, use neutral language).`,
+        workload: `${intensity}: surface fairness issues with evidence: capacity, deadlines, dependencies.`,
+        trust: `${intensity}: rebuild reliability with small commitments + follow-through. Document agreements.`,
+        respect: `${intensity}: slow down. Collect examples. Address behaviour, not character. Consider support if persistent.`,
+        change: `${intensity}: clarify what’s known/unknown. Reduce ambiguity. Confirm priorities weekly.`,
+        quality: `${intensity}: agree “definition of done” and standards. Remove subjective criticism loops.`
+      };
+      return map[topicId] || `${intensity}: focus on clarity, agreements, and impact.`;
+    }
+
+    /* ===========================
+       NOTES
+    =========================== */
+    function wireNotes() {
+      const c = document.getElementById("contextInput");
+      const p = document.getElementById("patternInput");
+      const e = document.getElementById("evidenceText");
+
+      const onChange = () => {
+        if (document.body.classList.contains("auth-locked")) return;
+        window.__notes = {
+          context: c?.value || "",
+          pattern: p?.value || "",
+          evidence: e?.value || ""
+        };
+        markUnsaved();
+      };
+
+      if (c) c.addEventListener("input", onChange);
+      if (p) p.addEventListener("input", onChange);
+      if (e) e.addEventListener("input", onChange);
+    }
+
+    function applyNotes(n) {
+      const c = document.getElementById("contextInput");
+      const p = document.getElementById("patternInput");
+      const e = document.getElementById("evidenceText");
+      if (c) c.value = n?.context || "";
+      if (p) p.value = n?.pattern || "";
+      if (e) e.value = n?.evidence || "";
+      window.__notes = {
+        context: n?.context || "",
+        pattern: n?.pattern || "",
+        evidence: n?.evidence || ""
+      };
+    }
+
+    /* ===========================
+       REPORT
+    =========================== */
+    function generateReport() {
+      const locked = document.body.classList.contains("auth-locked");
+      if (locked) return;
+
+      const stats = computeStats();
+      const hotspots = getHotspots(3);
+
+      const report = document.getElementById("report");
+      if (!report) return;
+
+      document.getElementById("rHeat").textContent = `${stats.pct}%`;
+      document.getElementById("rPriority").textContent = stats.priority;
+      document.getElementById("rHigh").textContent = String(stats.high);
+
+      const insight = document.getElementById("rInsight");
+      if (insight) {
+        const noteLine = (window.__notes?.context || window.__notes?.pattern) ? "Your notes suggest there is useful context — use it to reduce misinterpretation." : "Add a short context note if you want a sharper plan.";
+        insight.textContent = `${snapshotTextFrom(stats)} ${noteLine}`;
+      }
+
+      // Hotspot cards
+      const hsWrap = document.getElementById("rHotspotCards");
+      if (hsWrap) {
+        hsWrap.innerHTML = "";
+        const rows = hotspots.length ? hotspots : [{ topic:"No hotspots yet", stakeholder:"—", level:0, topicId:"role_clarity" }];
+        rows.forEach(h => {
+          const meta = levelMeta(h.level || 0);
+          const card = document.createElement("div");
+          card.className = "report-card";
+          card.innerHTML = `
+            <div class="t">${h.topic} • ${h.stakeholder}</div>
+            <div class="d"><span class="hotspot-badge badge-${h.level || 0}">${meta.label}</span> ${hotspotMicroAdvice(h.topicId || "role_clarity", h.level || 0)}</div>
+          `;
+          hsWrap.appendChild(card);
+        });
+      }
+
+      // Actions
+      const actionsWrap = document.getElementById("rActions");
+      if (actionsWrap) {
+        actionsWrap.innerHTML = "";
+        const actions = immediateActions(stats, hotspots);
+        actions.forEach(a => {
+          const card = document.createElement("div");
+          card.className = "report-card";
+          card.innerHTML = `<div class="t">${a.title}</div><div class="d">${a.desc}</div>`;
+          actionsWrap.appendChild(card);
+        });
+      }
+
+      // Scripts
+      const scriptsWrap = document.getElementById("rScripts");
+      if (scriptsWrap) {
+        scriptsWrap.innerHTML = "";
+        const scripts = conversationScripts(stats, hotspots);
+        scripts.forEach(s => {
+          const card = document.createElement("div");
+          card.className = "report-card";
+          card.innerHTML = `<div class="t">${s.title}</div><div class="d">${s.desc}</div>`;
+          scriptsWrap.appendChild(card);
+        });
+      }
+
+      // Behaviour lens
+      const lensWrap = document.getElementById("rLens");
+      if (lensWrap) {
+        lensWrap.innerHTML = "";
+        const lens = behaviourLens(stats);
+        lens.forEach(l => {
+          const card = document.createElement("div");
+          card.className = "report-card";
+          card.innerHTML = `<div class="t">${l.title}</div><div class="d">${l.desc}</div>`;
+          lensWrap.appendChild(card);
+        });
+      }
+
+      report.classList.add("active");
+      report.scrollIntoView({ behavior: "smooth" });
+      markUnsaved(); // report generation isn't persisted unless you save
+    }
+
+    function immediateActions(stats, hotspots) {
+      const top = hotspots[0];
+      const base = [
+        {
+          title: "Stabilise the environment",
+          desc: "Reduce friction triggers for 7 days: fewer ambiguous asks, confirm decisions in writing, and stop last-minute reversals."
+        },
+        {
+          title: "Clarify one agreement",
+          desc: "Pick one hotspot and agree: ownership, deadline, and how decisions are made. Keep it small and enforceable."
+        },
+        {
+          title: "Collect evidence cleanly",
+          desc: "Capture facts (who/what/when/impact). Avoid labels. Evidence reduces gaslighting and improves credibility."
+        }
+      ];
+
+      if (stats.priority === "Critical") {
+        base[0].desc = "Create immediate containment: reduce exposure to triggers, minimise live debates, and move to written confirmations for decisions.";
+        base.push({
+          title: "Escalation threshold",
+          desc: "If a High hotspot involves respect/bullying patterns, define your escalation line (HR, skip-level, formal note) before it worsens."
+        });
+        return base.slice(0, 3);
+      }
+
+      if (top && top.level >= 2) {
+        base[1].desc = `Start with: ${top.topic} • ${top.stakeholder}. Agree one rule and test it for 10 working days.`;
+      }
+
+      return base.slice(0, 3);
+    }
+
+    function conversationScripts(stats, hotspots) {
+      const top = hotspots[0];
+      const target = top ? `${top.topic} with ${top.stakeholder}` : "the main friction area";
+      const scripts = [
+        {
+          title: "Reset the working agreement",
+          desc:
+            `I want to reduce friction around ${target}. Can we agree one simple rule for the next 10 working days — ` +
+            `who owns what, how we make decisions, and how we handle handovers — and then review what changed?`
+        },
+        {
+          title: "Name impact without blame",
+          desc:
+            `When we hit tension around ${target}, I notice delays and extra rework. ` +
+            `I’m not trying to blame anyone — I want us to agree a cleaner process so delivery is smoother and less stressful. ` +
+            `What’s one change you’d be willing to try this week?`
+        },
+        {
+          title: "Stop the ambiguity loop",
+          desc:
+            `To avoid crossed wires on ${target}, can we confirm decisions in writing after meetings? ` +
+            `One line: what we decided, who’s doing what, and by when. If anything changes, we capture it the same way.`
+        }
+      ];
+
+      // If Critical: swap in firmer scripts (short + enforceable)
+      if (stats.priority === "Critical") {
+        return [
+          {
+            title: "Containment (short + firm)",
+            desc:
+              `I’m not comfortable continuing with the current level of friction around ${target}. ` +
+              `For the next two weeks, I’m moving to written confirmations for decisions and handovers so there’s no confusion. ` +
+              `If the pattern continues, I’ll need to escalate for support.`
+          },
+          {
+            title: "Respect boundary (behaviour-focused)",
+            desc:
+              `I’m happy to discuss hard topics, but I need the conversation to stay respectful. ` +
+              `If I’m interrupted, spoken over, or the tone becomes personal, I’ll pause and we’ll pick it up in writing or with a third party present.`
+          },
+          {
+            title: "Evidence-based reset",
+            desc:
+              `To fix this properly, I’m going to document examples (date / what happened / impact). ` +
+              `Let’s use those examples to agree new rules for how we work — not opinions or assumptions.`
+          }
+        ];
+      }
+
+      // If you have a clear top hotspot and it's Moderate+,
+      // make the first script more specific.
+      if (top && top.level >= 2) {
+        scripts[0].desc =
+          `I want to reduce friction around ${top.topic} with ${top.stakeholder}. ` +
+          `Can we agree one rule for 10 working days: what “good” looks like, who owns what, and how we confirm decisions? ` +
+          `Then we review whether the tension drops.`;
+      }
+
+      return scripts;
+    }
+
+    function behaviourLens(stats) {
+      // Light-touch pattern lens (not diagnosis). Helps users choose the right tactic.
+      const lens = [];
+
+      // Higher overall tension → more likely stress/threat response
+      if (stats.priority === "Critical" || stats.high >= 2) {
+        lens.push({
+          title: "Threat response may be driving behaviour",
+          desc:
+            "When stress is high, people default to control, defensiveness, or blame. Your best lever is structure: written decisions, clear roles, and fewer live debates."
+        });
+        lens.push({
+          title: "Watch for power dynamics",
+          desc:
+            "If tension clusters around decision-making or respect, this can signal status games. Avoid arguing ‘who’s right’; focus on process rules and evidence."
+        });
+        lens.push({
+          title: "Protect your nervous system",
+          desc:
+            "If interactions spike your stress, reduce exposure: shorter meetings, agendas, and follow-ups in writing. Stabilise first, then solve."
+        });
+        return lens;
+      }
+
+      if (stats.priority === "High" || stats.modPlus >= 5) {
+        lens.push({
+          title: "Different assumptions about ‘good work’",
+          desc:
+            "Friction often comes from mismatched standards (quality, speed, tone). Align on a ‘definition of done’ and decision rules to reduce interpretation battles."
+        });
+        lens.push({
+          title: "Clarity gap = conflict fuel",
+          desc:
+            "If roles/ownership and decisions score high, people fill gaps with narratives. Replace narratives with clear agreements and written confirmations."
+        });
+        lens.push({
+          title: "Feedback style mismatch",
+          desc:
+            "Direct vs diplomatic styles can look like rudeness or avoidance. Agree norms: how to raise issues, how to disagree, and how to close decisions."
+        });
+        return lens;
+      }
+
+      if (stats.priority === "Moderate") {
+        lens.push({
+          title: "This looks fixable with small agreements",
+          desc:
+            "Moderate tension usually responds to 1–2 process tweaks: meeting rules, handovers, clearer ownership, and fewer last-minute changes."
+        });
+        lens.push({
+          title: "Assume misalignment before malice",
+          desc:
+            "At this level, it’s often timing, workload, or unclear expectations — not bad intent. Use curiosity + structure to reset."
+        });
+        lens.push({
+          title: "Track trend not perfection",
+          desc:
+            "Re-score in 10–14 days. A drop from High → Moderate is progress; lock in what caused it."
+        });
+        return lens;
+      }
+
+      // Low
+      lens.push({
+        title: "Healthy baseline (monitor only)",
+        desc:
+          "Low tension doesn’t mean ‘no problems’ — it means your system is working. Use the heatmap before big changes (deadlines, restructure, new joins)."
+      });
+      lens.push({
+        title: "Prevent future flare-ups",
+        desc:
+          "Keep short written decision summaries and clear handovers. Good systems stop small issues becoming personal."
+      });
+      lens.push({
+        title: "Use hotspots as early signals",
+        desc:
+          "If one cell rises repeatedly, treat it as a leading indicator. Address it early, while it’s still a simple process fix."
+      });
+      return lens;
+    }
+
+    /* ===========================
+       PRINT
+    =========================== */
+    function printToolPDF() {
+      try {
+        window.print();
+        safeTelemetry("tool_printed", { tool_id: TOOL_ID });
+      } catch (e) {}
+    }
+
+    /* ===========================
+       CLEAR ALL
+    =========================== */
+    function clearAllTool() {
+      if (document.body.classList.contains("auth-locked")) return;
+
+      // Reset model
+      window.__heatmap = {};
+      ensureModel();
+      syncHeatmapUI();
+
+      // Reset notes
+      applyNotes({ context: "", pattern: "", evidence: "" });
+
+      // Hide report
+      const report = document.getElementById("report");
+      if (report) report.classList.remove("active");
+
+      updateAllUI();
+      markUnsaved();
+      safeTelemetry("tool_cleared", { tool_id: TOOL_ID });
+    }
+
+    /* ===========================
+       AUTH + HARD LOCK + SUPABASE SAVE
+       (matches your baseline behaviour)
+    =========================== */
+    const TOOL_ID = "team_tension_heatmap";
+    const TOOL_VERSION = "phase1-v1";
+
+    let supabase = null;
+    let currentUser = null;
+
+    function initSupabase() {
+      try {
+        if (!window.supabase) return null;
+        const url = window.TEP_SUPABASE_URL;
+        const key = window.TEP_SUPABASE_ANON_KEY;
+        if (!url || !key) return null;
+        return window.supabase.createClient(url, key);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function setLocked(isLocked) {
+      const overlay = document.getElementById("authLockOverlay");
+      if (overlay) {
+        overlay.classList.toggle("active", !!isLocked);
+        overlay.setAttribute("aria-hidden", isLocked ? "false" : "true");
+      }
+
+      document.body.classList.toggle("auth-locked", !!isLocked);
+
+      const main = document.getElementById("toolMain");
+      if (main) {
+        // TRUE HARD LOCK: inert + global event capture will block as well
+        if (isLocked) main.setAttribute("inert", "");
+        else main.removeAttribute("inert");
+      }
+
+      // Ensure buttons reflect lock state
+      syncActionButtons(!!isLocked);
+
+      // If locked, show neutral status
+      if (isLocked) markNeutral();
+    }
+
+    // Global event capture block when locked (TRUE HARD LOCK)
+    (function hardLockEventBlock() {
+      const block = (e) => {
+        if (!document.body.classList.contains("auth-locked")) return;
+        // allow clicks on the lock overlay itself (sign-in buttons)
+        const overlay = document.getElementById("authLockOverlay");
+        if (overlay && overlay.contains(e.target)) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+      };
+
+      ["click", "mousedown", "mouseup", "pointerdown", "pointerup", "touchstart", "touchend", "keydown", "input", "change"].forEach(evt => {
+        document.addEventListener(evt, block, true);
+      });
+    })();
+
+    async function getSessionUser() {
+      try {
+        const { data } = await supabase.auth.getUser();
+        return data?.user || null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function initialsFromName(nameOrEmail) {
+      const s = (nameOrEmail || "").trim();
+      if (!s) return "…";
+      const parts = s.split(/\s+/).filter(Boolean);
+      if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+      if (s.includes("@")) return s[0].toUpperCase();
+      return (s[0] + (s[1] || "")).toUpperCase();
+    }
+
+    async function loadProfileAndHeader(user) {
+      const initialsBtn = document.getElementById("userInitialsBtn");
+      const logoutBtn = document.getElementById("logoutBtn");
+      const mobileProfileBtn = document.getElementById("mobileProfileBtn");
+
+      if (!user) {
+        if (initialsBtn) initialsBtn.textContent = "…";
+        if (logoutBtn) logoutBtn.style.display = "none";
+        if (mobileProfileBtn) mobileProfileBtn.style.display = "none";
+        return;
+      }
+
+      // Default from email, then attempt profile lookup for full_name
+      let display = user.email || "";
+      try {
+        const { data, error } = await supabase
+          .from("profiles")
+          .select("full_name")
+          .eq("id", user.id)
+          .maybeSingle();
+
+        if (!error && data?.full_name) display = data.full_name;
+      } catch (e) {}
+
+      const ini = initialsFromName(display);
+
+      if (initialsBtn) {
+        initialsBtn.textContent = ini;
+        initialsBtn.href = "profile.html";
+      }
+      if (logoutBtn) logoutBtn.style.display = "inline-flex";
+      if (mobileProfileBtn) mobileProfileBtn.style.display = "block";
+    }
+
+    async function restoreToolState(userId) {
+      // Prefer Supabase tool_states; fallback to localStorage
+      let restored = null;
+
+      if (supabase && userId) {
+        try {
+          const { data, error } = await supabase
+            .from("tool_states")
+            .select("state")
+            .eq("user_id", userId)
+            .eq("tool_id", TOOL_ID)
+            .maybeSingle();
+
+          if (!error && data?.state) restored = data.state;
+        } catch (e) {}
+      }
+
+      if (!restored) {
+        try {
+          const raw = localStorage.getItem(`tep_state_${TOOL_ID}`);
+          if (raw) restored = JSON.parse(raw);
+        } catch (e) {}
+      }
+
+      if (restored) {
+        try {
+          window.__heatmap = restored.heatmap || {};
+          window.__notes = restored.notes || { context: "", pattern: "", evidence: "" };
+
+          ensureModel();
+          syncHeatmapUI();
+          applyNotes(window.__notes);
+
+          // Show report if they previously generated it (optional)
+          const report = document.getElementById("report");
+          if (report && restored.reportActive) {
+            report.classList.add("active");
+          }
+
+          updateAllUI();
+          markLoaded();
+          return true;
+        } catch (e) {}
+      }
+
+      markNeutral();
+      return false;
+    }
+
+    function getCurrentStatePayload() {
+      return {
+        tool_id: TOOL_ID,
+        tool_version: TOOL_VERSION,
+        saved_at: new Date().toISOString(),
+        heatmap: window.__heatmap,
+        notes: window.__notes,
+        reportActive: document.getElementById("report")?.classList.contains("active") || false
+      };
+    }
+
+    async function saveProgress() {
+      if (document.body.classList.contains("auth-locked")) return;
+
+      const payload = getCurrentStatePayload();
+
+      // Always local fallback
+      try {
+        localStorage.setItem(`tep_state_${TOOL_ID}`, JSON.stringify(payload));
+      } catch (e) {}
+
+      // If no supabase/user, just mark saved locally
+      if (!supabase || !currentUser?.id) {
+        markSaved(payload.saved_at);
+        safeTelemetry("tool_saved", { tool_id: TOOL_ID, mode: "local_only" });
+        return;
+      }
+
+      // Supabase upsert
+      try {
+        const { error } = await supabase
+          .from("tool_states")
+          .upsert(
+            {
+              user_id: currentUser.id,
+              tool_id: TOOL_ID,
+              tool_version: TOOL_VERSION,
+              state: payload
+            },
+            { onConflict: "user_id,tool_id" }
+          );
+
+        if (error) throw error;
+
+        markSaved(payload.saved_at);
+        safeTelemetry("tool_saved", { tool_id: TOOL_ID, mode: "cloud" });
+      } catch (e) {
+        // Keep local save; surface gentle error
+        setSaveStatus("Saved locally • Cloud save failed", "err");
+        safeTelemetry("tool_saved", { tool_id: TOOL_ID, mode: "cloud_failed" });
+      }
+    }
+
+    function wireSaveProgress() {
+      const btn = document.getElementById("saveProgressBtn");
+      if (!btn) return;
+      btn.addEventListener("click", async () => {
+        btn.disabled = true;
+        setSaveStatus("Saving…", "info");
+        await saveProgress();
+        syncActionButtons(document.body.classList.contains("auth-locked"));
+      });
+    }
+
+    async function bootAuthAndState() {
+      supabase = initSupabase();
+
+      // If supabase not available, lock + allow local use only? (your baseline locks tool)
+      if (!supabase) {
+        setLocked(true);
+        return;
+      }
+
+      currentUser = await getSessionUser();
+
+      if (!currentUser) {
+        setLocked(true);
+        await loadProfileAndHeader(null);
+        return;
+      }
+
+      setLocked(false);
+      await loadProfileAndHeader(currentUser);
+      await restoreToolState(currentUser.id);
+
+      wireLogout();
+      wireSaveProgress();
+      wireSaveItem();
+      safeTelemetry("tool_opened", { tool_id: TOOL_ID, version: TOOL_VERSION });
+    }
+
+    function wireLogout() {
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (!logoutBtn) return;
+      logoutBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        try {
+          await supabase.auth.signOut();
+        } catch (err) {}
+        setLocked(true);
+        await loadProfileAndHeader(null);
+        currentUser = null;
+      });
+    }
+
+    /* ===========================
+       SAVE ITEM (My Playbook bookmark) — hero button
+    =========================== */
+    function wireSaveItem() {
+      const btn = document.getElementById("saveBtn");
+      if (!btn) return;
+
+      btn.addEventListener("click", async () => {
+        if (document.body.classList.contains("auth-locked")) return;
+
+        // Toggle style immediately
+        btn.classList.toggle("saved");
+
+        const payload = {
+          title: "Team Tension Heatmap",
+          type: "Tool",
+          href: "team-tension-heatmap.html",
+          saved_at: new Date().toISOString()
+        };
+
+        // Save to local for sidebar
+        try {
+          const key = "tep_saved_items";
+          const existing = JSON.parse(localStorage.getItem(key) || "[]");
+          const already = existing.some(i => i?.href === payload.href);
+          const next = already
+            ? existing.filter(i => i?.href !== payload.href)
+            : [payload, ...existing].slice(0, 50);
+
+          localStorage.setItem(key, JSON.stringify(next));
+        } catch (e) {}
+
+        // Optional: if you have a Supabase saved_items table, you can also persist there
+        // (kept silent if table doesn't exist)
+        try {
+          if (supabase && currentUser?.id) {
+            await supabase
+              .from("saved_items")
+              .upsert(
+                {
+                  user_id: currentUser.id,
+                  href: payload.href,
+                  title: payload.title,
+                  item_type: payload.type,
+                  meta: { tool_id: TOOL_ID }
+                },
+                { onConflict: "user_id,href" }
+              );
+          }
+        } catch (e) {}
+
+        // Refresh sidebar UI
+        renderSavedItems();
+      });
+    }
+
+    /* ===========================
+       MY PLAYBOOK SIDEBAR
+    =========================== */
+    function initializePlaybook() {
+      const overlay = document.getElementById("playbookOverlay");
+      const sidebar = document.getElementById("playbookSidebar");
+      const closeBtn = document.getElementById("closePlaybook");
+      const fab = document.getElementById("myPlaybookButton");
+      const tab = document.getElementById("mobileMyPlaybookTab");
+
+      const open = () => {
+        if (overlay) overlay.classList.add("open");
+        if (sidebar) sidebar.classList.add("open");
+        renderSavedItems();
+      };
+      const close = () => {
+        if (overlay) overlay.classList.remove("open");
+        if (sidebar) sidebar.classList.remove("open");
+      };
+
+      if (fab) fab.addEventListener("click", open);
+      if (tab) tab.addEventListener("click", (e) => { e.preventDefault(); open(); });
+      if (closeBtn) closeBtn.addEventListener("click", close);
+
+      if (overlay) {
+        overlay.addEventListener("click", (e) => {
+          // clicking the dimmed overlay closes, not clicks inside the sidebar
+          if (sidebar && sidebar.contains(e.target)) return;
+          close();
+        });
+      }
+    }
+
+    function wireHeaderMyPlaybookHooks() {
+      // No-op hook point in case you add header triggers later
+    }
+
+    function wireFabKeyboard() {
+      const fab = document.getElementById("myPlaybookButton");
+      if (!fab) return;
+      fab.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          fab.click();
+        }
+      });
+    }
+
+    function getSavedItemsLocal() {
+      try {
+        return JSON.parse(localStorage.getItem("tep_saved_items") || "[]");
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function renderSavedItems() {
+      const empty = document.getElementById("savedItemsEmpty");
+      const list = document.getElementById("savedItemsList");
+      if (!list) return;
+
+      const items = getSavedItemsLocal();
+      list.innerHTML = "";
+
+      if (!items.length) {
+        if (empty) empty.style.display = "block";
+        return;
+      }
+      if (empty) empty.style.display = "none";
+
+      items.forEach(item => {
+        const li = document.createElement("li");
+        li.className = "saved-item";
+        li.innerHTML = `
+          <div class="saved-item-title-row">
+            <div class="saved-item-title">${escapeHtml(item.title || "Saved item")}</div>
+            <div class="saved-item-type">${escapeHtml(item.type || "Item")}</div>
+          </div>
+          <div class="saved-item-meta">${item.saved_at ? `Saved ${fmtGB(item.saved_at)}` : ""}</div>
+          <a class="saved-item-link" href="${escapeAttr(item.href || "#")}">
+            Open <i class="fas fa-arrow-up-right-from-square"></i>
+          </a>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    /* ===========================
+       TELEMETRY (fails silently)
+    =========================== */
+    function safeTelemetry(event, meta = {}) {
+      try {
+        // Optional: if you add activity_log table later
+        // This function intentionally fails silently
+        if (!supabase || !currentUser?.id) return;
+
+        supabase.from("activity_log").insert({
+          user_id: currentUser.id,
+          event,
+          meta
+        }).then(() => {}).catch(() => {});
+      } catch (e) {}
+    }
+
+    /* ===========================
+       UTIL
+    =========================== */
+    function escapeHtml(str) {
+      return String(str || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+    function escapeAttr(str) { return escapeHtml(str).replaceAll("`", "&#096;"); }
+
+    /* ===========================
+       START AUTH BOOT
+    =========================== */
+    // Ensure save button state is correct once locked/unlocked
+    bootAuthAndState();
+
+    // Keep buttons sane even if auth loads slowly
+    syncActionButtons(true);
+    markNeutral();
+
+  </script>
+
+  <!-- Supabase JS -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</body>
+</html>
